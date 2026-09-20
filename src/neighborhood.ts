@@ -55,8 +55,10 @@ export interface NeighborhoodHouse {
 
 export type NeighborhoodMaterialKey =
   | "siding"
+  | "referenceSiding"
   | "brick"
   | "roof"
+  | "referenceRoof"
   | "concrete"
   | "referenceConcrete"
   | "wood"
@@ -65,6 +67,8 @@ export type NeighborhoodMaterialKey =
   | "bark"
   | "trim"
   | "glass"
+  | "referenceGlass"
+  | "interior"
   | "metal"
   | "leaf";
 export type NeighborhoodMaterials = Partial<
@@ -80,6 +84,7 @@ export interface NeighborhoodOptions {
 type UV = [number, number];
 type V = [number, number, number];
 type Face = 0 | 1 | 2 | 3;
+type Opening = { left: number; right: number; bottom: number; top: number };
 const CELL = 512;
 const HALF_PI = Math.PI / 2;
 const HOUSE_COLORS = [
@@ -107,6 +112,52 @@ function seeded(id: string | number) {
 }
 function tinted(hex: number, amount: number) {
   return new T.Color(hex).multiplyScalar(amount).getHex();
+}
+
+/** Subtract a rectangular opening from a convex facade piece, keeping actual holes in the shell. */
+function withoutOpening(polygon: UV[], opening: Opening): UV[][] {
+  if (
+    Math.max(...polygon.map((p) => p[0])) <= opening.left ||
+    Math.min(...polygon.map((p) => p[0])) >= opening.right ||
+    Math.max(...polygon.map((p) => p[1])) <= opening.bottom ||
+    Math.min(...polygon.map((p) => p[1])) >= opening.top
+  )
+    return [polygon];
+  const clip = (points: UV[], distance: (p: UV) => number) => {
+    const result: UV[] = [];
+    if (points.length < 3) return result;
+    let previous = points[points.length - 1],
+      pd = distance(previous);
+    for (const point of points) {
+      const d = distance(point);
+      if (d >= 0 !== pd >= 0) {
+        const t = pd / (pd - d);
+        result.push([
+          previous[0] + (point[0] - previous[0]) * t,
+          previous[1] + (point[1] - previous[1]) * t,
+        ]);
+      }
+      if (d >= 0) result.push(point);
+      previous = point;
+      pd = d;
+    }
+    return result;
+  };
+  const edges = [
+    (p: UV) => p[0] - opening.left,
+    (p: UV) => opening.right - p[0],
+    (p: UV) => p[1] - opening.bottom,
+    (p: UV) => opening.top - p[1],
+  ];
+  const result: UV[][] = [];
+  let remainder = polygon;
+  for (const edge of edges) {
+    if (remainder.length < 3) break;
+    const outside = clip(remainder, (p) => -edge(p));
+    if (outside.length >= 3) result.push(outside);
+    remainder = clip(remainder, edge);
+  }
+  return result;
 }
 
 /** One compact static buffer per spatial cell/material, with meter-scaled UVs. */
@@ -240,6 +291,27 @@ function defaultMaterial(key: NeighborhoodMaterialKey): T.MeshStandardMaterial {
       vertexColors: true,
     });
   }
+  if (key === "referenceGlass")
+    return new T.MeshPhysicalMaterial({
+      color: 0xffffff,
+      roughness: 0.13,
+      metalness: 0,
+      clearcoat: 1,
+      clearcoatRoughness: 0.07,
+      ior: 1.52,
+      envMapIntensity: 0.75,
+      transparent: true,
+      opacity: 0.3,
+      depthWrite: false,
+      vertexColors: true,
+    });
+  if (key === "interior")
+    return new T.MeshStandardMaterial({
+      color: 0xffffff,
+      roughness: 0.94,
+      envMapIntensity: 0.06,
+      vertexColors: true,
+    });
   if (key === "glass")
     return new T.MeshPhysicalMaterial({
       color: 0xffffff,
@@ -438,7 +510,13 @@ export function buildNeighborhood(
     const concreteKey: NeighborhoodMaterialKey = reference
       ? "referenceConcrete"
       : "concrete";
+    const roofMaterial: NeighborhoodMaterialKey = reference
+      ? "referenceRoof"
+      : "roof";
     const raisedRanch = reference?.style === "raised-ranch";
+    const openings = new Map<Face, Opening[]>();
+    const deferredStone: (() => void)[] = [];
+    let recessedWindows = 0;
     const genericYard = !reference?.suppressGenericYard;
     const co = Math.cos(house.heading),
       si = Math.sin(house.heading);
@@ -471,7 +549,7 @@ export function buildNeighborhood(
     // An explicit siding paint color must not inherit a random brick facade.
     const wallMaterial: NeighborhoodMaterialKey =
       reference?.wallColor !== undefined || reference?.style
-        ? "siding"
+        ? "referenceSiding"
         : genericWallMaterial;
     const wallTint =
       reference?.wallColor ??
@@ -498,26 +576,28 @@ export function buildNeighborhood(
     const entryBase = raisedRanch
       ? house.base + Math.min(0.65, (foundationTop - house.base) * 0.4)
       : house.base;
-    localBox(
-      0,
-      (house.low + foundationTop) / 2,
-      0,
-      house.width + 0.05,
-      foundationTop - house.low,
-      house.depth + 0.05,
-      concreteKey,
-      0xb8b6a9,
-    );
-    localBox(
-      0,
-      (foundationTop + roofBase) / 2,
-      0,
-      house.width,
-      roofBase - foundationTop,
-      house.depth,
-      wallMaterial,
-      wallTint,
-    );
+    if (!reference)
+      localBox(
+        0,
+        (house.low + foundationTop) / 2,
+        0,
+        house.width + 0.05,
+        foundationTop - house.low,
+        house.depth + 0.05,
+        concreteKey,
+        0xb8b6a9,
+      );
+    if (!reference)
+      localBox(
+        0,
+        (foundationTop + roofBase) / 2,
+        0,
+        house.width,
+        roofBase - foundationTop,
+        house.depth,
+        wallMaterial,
+        wallTint,
+      );
     for (const x of [-halfW, halfW])
       for (const z of [-halfD, halfD])
         localBox(
@@ -592,7 +672,7 @@ export function buildNeighborhood(
           : !utility && (large || random() < 0.29);
     const ridgeEnd = hip ? Math.max(0.2, d - w * 0.8) : d;
     const slope = Math.hypot(w, rise);
-    const roofBatch = getBatch("roof", house.x, house.z);
+    const roofBatch = getBatch(roofMaterial, house.x, house.z);
     const rp = (x: number, y: number, z: number) => point(x, roofBase + y, z);
     // u follows eaves/ridge; v climbs the slope, so slate courses face correctly.
     roofBatch.quad(
@@ -604,13 +684,42 @@ export function buildNeighborhood(
       slope,
       roofTint,
     );
-    roofBatch.quad(
+    if (reference) {
+      // Shingle laps follow physical slope distance, not per-house UV stretching.
+      // Their narrow relief is deliberately independent of any photographed roof dimensions.
+      const laps = getBatch(roofMaterial, house.x, house.z, false);
+      for (let along = 0.27; along < slope - 0.16; along += 0.27) {
+        const t = along / slope,
+          t2 = Math.min(1, (along + 0.018) / slope);
+        const end = d + (ridgeEnd - d) * t,
+          end2 = d + (ridgeEnd - d) * t2;
+        for (const side of [-1, 1]) {
+          const a = rp(side * w * (1 - t), rise * t + 0.009, -end),
+            b = rp(side * w * (1 - t), rise * t + 0.009, end);
+          const c = rp(side * w * (1 - t2), rise * t2 + 0.011, end2),
+            e = rp(side * w * (1 - t2), rise * t2 + 0.011, -end2);
+          if (side < 0)
+            laps.quad(a, b, c, e, end * 2, 0.018, tinted(roofTint, 0.81));
+          else laps.quad(e, c, b, a, end * 2, 0.018, tinted(roofTint, 0.81));
+        }
+      }
+    }
+    roofBatch.triangle(
       rp(0, rise, -ridgeEnd),
       rp(0, rise, ridgeEnd),
       rp(w, 0, d),
+      [0, slope],
+      [d * 2, slope],
+      [d * 2, 0],
+      roofTint,
+    );
+    roofBatch.triangle(
+      rp(0, rise, -ridgeEnd),
+      rp(w, 0, d),
       rp(w, 0, -d),
-      d * 2,
-      slope,
+      [0, slope],
+      [d * 2, 0],
+      [0, 0],
       roofTint,
     );
     if (hip) {
@@ -638,7 +747,7 @@ export function buildNeighborhood(
             rp(x, 0.035, z),
             rp(0, rise + 0.035, Math.sign(z) * ridgeEnd),
             0.12,
-            "roof",
+            roofMaterial,
             roofTint,
           );
     } else {
@@ -666,12 +775,42 @@ export function buildNeighborhood(
       for (const z of [-d, d])
         for (const x of [-w, w])
           beam(rp(x, -0.04, z), rp(0, rise - 0.04, z), 0.14, "trim", trimTint);
+      if (reference) {
+        const seams = getBatch(wallMaterial, house.x, house.z, false);
+        for (let y = 0.18; y < rise - 0.16; y += 0.18) {
+          const x0 = halfW * (1 - y / (rise - 0.09)),
+            x1 = halfW * (1 - (y + 0.008) / (rise - 0.09));
+          for (const sign of [-1, 1]) {
+            const z = sign * (halfD + 0.006);
+            if (sign > 0)
+              seams.quad(
+                rp(-x0, y, z),
+                rp(x0, y, z),
+                rp(x1, y + 0.008, z),
+                rp(-x1, y + 0.008, z),
+                x0 * 2,
+                0.008,
+                tinted(wallTint, 0.92),
+              );
+            else
+              seams.quad(
+                rp(x0, y, z),
+                rp(-x0, y, z),
+                rp(-x1, y + 0.008, z),
+                rp(x1, y + 0.008, z),
+                x0 * 2,
+                0.008,
+                tinted(wallTint, 0.92),
+              );
+          }
+        }
+      }
     }
     beam(
       rp(0, rise + 0.04, -ridgeEnd),
       rp(0, rise + 0.04, ridgeEnd),
       0.14,
-      "roof",
+      roofMaterial,
       roofTint,
     );
     for (const x of [-w, w]) {
@@ -686,18 +825,80 @@ export function buildNeighborhood(
         trimTint,
         false,
       );
+      // Small open gutter channel: lower trough, outer lip and a shaded interior.
       localBox(
-        x + Math.sign(x) * 0.06,
-        roofBase - 0.1,
+        x + Math.sign(x) * 0.065,
+        roofBase - 0.145,
         0,
-        0.13,
-        0.1,
+        0.15,
+        0.035,
         d * 2,
         "metal",
-        0xb6b5ab,
+        trimTint,
+        false,
+      );
+      localBox(
+        x + Math.sign(x) * 0.13,
+        roofBase - 0.09,
+        0,
+        0.032,
+        0.095,
+        d * 2,
+        "metal",
+        trimTint,
+        false,
+      );
+      localBox(
+        x + Math.sign(x) * 0.07,
+        roofBase - 0.122,
+        0,
+        0.095,
+        0.008,
+        d * 2 - 0.04,
+        "metal",
+        0x53564e,
         false,
       );
       const z = (random() > 0.5 ? 1 : -1) * (halfD - 0.25);
+      if (reference) {
+        const pipeX = Math.sign(x) * (halfW + 0.075),
+          foot = point(pipeX, 0, z);
+        const footY = options.heightAt(foot[0], foot[2]) + 0.14;
+        beam(
+          point(x, roofBase - 0.18, z),
+          point(pipeX, roofBase - 0.52, z),
+          0.069,
+          "metal",
+          trimTint,
+        );
+        beam(
+          point(pipeX, roofBase - 0.52, z),
+          point(pipeX, footY + 0.19, z),
+          0.069,
+          "metal",
+          trimTint,
+        );
+        beam(
+          point(pipeX, footY + 0.19, z),
+          point(pipeX + Math.sign(x) * 0.24, footY, z),
+          0.071,
+          "metal",
+          trimTint,
+        );
+        for (let yy = footY + 0.55; yy < roofBase - 0.6; yy += 1.6)
+          localBox(
+            pipeX,
+            yy,
+            z,
+            0.085,
+            0.035,
+            0.092,
+            "metal",
+            tinted(trimTint, 0.81),
+            false,
+          );
+        continue;
+      }
       localBox(
         x,
         house.base + house.wallHeight / 2 - 0.15,
@@ -818,6 +1019,35 @@ export function buildNeighborhood(
         shadows,
       );
     };
+    const faceSurface = (
+      face: Face,
+      polygon: UV[],
+      offset: (y: number) => number,
+      key: NeighborhoodMaterialKey,
+      tint: number,
+      shadows = true,
+    ) => {
+      let pieces = [polygon];
+      for (const opening of openings.get(face) ?? [])
+        pieces = pieces.flatMap((piece) => withoutOpening(piece, opening));
+      const out = getBatch(key, house.x, house.z, shadows);
+      for (const piece of pieces)
+        for (let i = 1; i < piece.length - 1; i++) {
+          const a = piece[0],
+            b = piece[i],
+            c = piece[i + 1];
+          const uv = (p: UV): UV => (key === "siding" ? [p[1], p[0]] : p);
+          out.triangle(
+            facePoint(face, a[0], a[1], offset(a[1])),
+            facePoint(face, b[0], b[1], offset(b[1])),
+            facePoint(face, c[0], c[1], offset(c[1])),
+            uv(a),
+            uv(b),
+            uv(c),
+            tint,
+          );
+        }
+    };
     const frontage = faceWidth(front);
     const genericGarage =
       utility || (!large && frontage > 9.5 && random() < 0.19);
@@ -898,16 +1128,18 @@ export function buildNeighborhood(
         top: number,
       ) => {
         if (top <= bottom) return;
-        faceBox(
+        faceSurface(
           front,
-          centerU,
-          (bottom + top) / 2,
-          0.049,
-          width,
-          top - bottom,
-          0.006,
+          [
+            [centerU - width / 2, bottom],
+            [centerU + width / 2, bottom],
+            [centerU + width / 2, top],
+            [centerU - width / 2, top],
+          ],
+          () => 0.052,
           concreteKey,
           0x74766e,
+          false,
         );
         for (let y = bottom + 0.016; y < top - 0.025;) {
           const height = Math.min(0.23 + stoneRandom() * 0.16, top - y - 0.012);
@@ -932,31 +1164,22 @@ export function buildNeighborhood(
             const tint = [
               0x9a9c94, 0x858b86, 0xa7a99f, 0x92978e, 0x7b827c, 0xaba99f,
             ][Math.floor(stoneRandom() * 6)];
-            for (let i = 1; i < outline.length - 1; i++) {
-              const a = outline[0],
-                b = outline[i],
-                c = outline[i + 1];
-              stone.triangle(
-                facePoint(front, a[0], a[1], out),
-                facePoint(front, b[0], b[1], out),
-                facePoint(front, c[0], c[1], out),
-                a,
-                b,
-                c,
-                tint,
-              );
-            }
+            faceSurface(front, outline, () => out, concreteKey, tint, false);
             u += span + 0.018;
           }
           y += height + 0.018;
         }
       };
-      stonePanel(0, frontage, house.low, foundationTop);
-      stonePanel(
-        doorU,
-        Math.min(2.65, frontage * 0.26),
-        foundationTop,
-        roofBase - 0.18,
+      deferredStone.push(() =>
+        stonePanel(0, frontage, house.low, foundationTop),
+      );
+      deferredStone.push(() =>
+        stonePanel(
+          doorU,
+          Math.min(2.65, frontage * 0.26),
+          foundationTop,
+          roofBase - 0.18,
+        ),
       );
       detailFeatures++;
     }
@@ -972,6 +1195,190 @@ export function buildNeighborhood(
       shutters = false,
     ) => {
       detailFeatures++;
+      if (reference && y + wh / 2 < roofBase - 0.025) {
+        // Preserve the old random sequence: detailing must not change later facade choices.
+        random();
+        const curtains = random() < 0.65;
+        const detailRandom = seeded(
+          `${house.id}:recess:${face}:${u.toFixed(3)}:${y.toFixed(3)}`,
+        );
+        const opening = {
+          left: u - ww / 2,
+          right: u + ww / 2,
+          bottom: y - wh / 2,
+          top: y + wh / 2,
+        };
+        if (!openings.has(face)) openings.set(face, []);
+        openings.get(face)!.push(opening);
+        recessedWindows++;
+        const interior = getBatch("interior", house.x, house.z, false);
+        const corners: UV[] = [
+          [opening.left, opening.bottom],
+          [opening.right, opening.bottom],
+          [opening.right, opening.top],
+          [opening.left, opening.top],
+        ];
+        for (let edge = 0; edge < 4; edge++) {
+          const a = corners[edge],
+            b = corners[(edge + 1) % 4];
+          interior.quad(
+            facePoint(face, a[0], a[1], 0.025),
+            facePoint(face, b[0], b[1], 0.025),
+            facePoint(face, b[0], b[1], -0.3),
+            facePoint(face, a[0], a[1], -0.3),
+            Math.hypot(b[0] - a[0], b[1] - a[1]),
+            0.325,
+            edge === 2 ? 0x292d2c : 0x4b514e,
+          );
+        }
+        faceBox(
+          face,
+          u,
+          y,
+          -0.307,
+          ww,
+          wh,
+          0.008,
+          "interior",
+          [0x151b19, 0x202321, 0x272923][Math.floor(detailRandom() * 3)],
+        );
+        if (curtains) {
+          const fabricWidth = ww * (0.17 + detailRandom() * 0.12);
+          for (const side of [-1, 1]) {
+            const begin =
+              side < 0
+                ? opening.left + 0.025
+                : opening.right - fabricWidth - 0.025;
+            const folds = Math.max(3, Math.ceil(fabricWidth / 0.045));
+            for (let fold = 0; fold < folds; fold++) {
+              const x0 = begin + (fabricWidth * fold) / folds,
+                x1 = begin + (fabricWidth * (fold + 1)) / folds;
+              const z0 = -0.235 + (fold % 2) * 0.019,
+                z1 = -0.235 + ((fold + 1) % 2) * 0.019;
+              interior.quad(
+                facePoint(face, x0, opening.bottom + 0.025, z0),
+                facePoint(face, x1, opening.bottom + 0.025, z1),
+                facePoint(face, x1, opening.top - 0.015, z1),
+                facePoint(face, x0, opening.top - 0.015, z0),
+                x1 - x0,
+                wh - 0.04,
+                fold % 2 ? 0x909184 : 0x777b70,
+              );
+            }
+          }
+        }
+        faceBox(
+          face,
+          u,
+          y,
+          -0.05,
+          ww - 0.014,
+          wh - 0.014,
+          0.006,
+          "referenceGlass",
+          0xb7c1bb,
+        );
+        for (const sign of [-1, 1]) {
+          faceBox(
+            face,
+            u + sign * (ww / 2 + 0.048),
+            y,
+            0.055,
+            0.095,
+            wh + 0.22,
+            0.16,
+            "trim",
+            trimTint,
+            true,
+          );
+          faceBox(
+            face,
+            u,
+            y + sign * (wh / 2 + 0.065),
+            0.055,
+            ww + 0.22,
+            0.105,
+            0.16,
+            "trim",
+            trimTint,
+            true,
+          );
+          faceBox(
+            face,
+            u + sign * (ww / 2 - 0.028),
+            y,
+            -0.018,
+            0.047,
+            wh,
+            0.025,
+            "trim",
+            tinted(trimTint, 0.93),
+          );
+          faceBox(
+            face,
+            u,
+            y + sign * (wh / 2 - 0.024),
+            -0.018,
+            ww,
+            0.046,
+            0.025,
+            "trim",
+            tinted(trimTint, 0.93),
+          );
+        }
+        faceBox(face, u, y, -0.011, ww, 0.045, 0.025, "trim", trimTint);
+        faceBox(face, u, y, -0.025, 0.024, wh, 0.02, "trim", trimTint);
+        faceBox(
+          face,
+          u,
+          y - wh / 2 - 0.11,
+          0.075,
+          ww + 0.32,
+          0.09,
+          0.29,
+          "trim",
+          trimTint,
+          true,
+        );
+        // Restrained drip cap and sill underside give real highlights/shadows at close range.
+        faceBox(
+          face,
+          u,
+          y + wh / 2 + 0.145,
+          0.085,
+          ww + 0.3,
+          0.025,
+          0.23,
+          "metal",
+          tinted(trimTint, 0.91),
+        );
+        if (shutters && ww < 1.5)
+          for (const side of [-1, 1]) {
+            const sx = u + side * (ww / 2 + 0.29);
+            faceBox(
+              face,
+              sx,
+              y,
+              0.055,
+              0.28,
+              wh + 0.18,
+              0.09,
+              "trim",
+              shutterTint,
+            );
+            for (let yy = y - wh / 2 + 0.05; yy < y + wh / 2; yy += 0.105)
+              getBatch("trim", house.x, house.z, false).quad(
+                facePoint(face, sx - 0.105, yy, 0.107),
+                facePoint(face, sx + 0.105, yy, 0.107),
+                facePoint(face, sx + 0.105, yy + 0.052, 0.117),
+                facePoint(face, sx - 0.105, yy + 0.052, 0.117),
+                0.21,
+                0.053,
+                tinted(shutterTint, 1.06),
+              );
+          }
+        return;
+      }
       faceBox(face, u, y, 0.026, ww + 0.25, wh + 0.24, 0.1, "wood", 0x373d38);
       faceBox(
         face,
@@ -1146,9 +1553,46 @@ export function buildNeighborhood(
         [bayU + bayWidth * 0.3, 0.72],
         [bayU + bayWidth / 2, 0.055],
       ];
-      const glass = getBatch("glass", house.x, house.z, false),
+      if (reference) {
+        if (!openings.has(front)) openings.set(front, []);
+        openings.get(front)!.push({
+          left: bayU - bayWidth / 2,
+          right: bayU + bayWidth / 2,
+          bottom,
+          top,
+        });
+        faceBox(
+          front,
+          bayU,
+          bayY,
+          -0.32,
+          bayWidth,
+          bayHeight,
+          0.008,
+          "interior",
+          0x202724,
+        );
+        for (const side of [-1, 1])
+          faceBox(
+            front,
+            bayU + side * bayWidth * 0.35,
+            bayY,
+            0.35,
+            0.27,
+            bayHeight - 0.07,
+            0.012,
+            "interior",
+            0x777c70,
+          );
+      }
+      const glass = getBatch(
+          reference ? "referenceGlass" : "glass",
+          house.x,
+          house.z,
+          false,
+        ),
         apron = getBatch(wallMaterial, house.x, house.z);
-      const cap = getBatch("roof", house.x, house.z);
+      const cap = getBatch(roofMaterial, house.x, house.z);
       for (let i = 0; i < outline.length - 1; i++) {
         const a = outline[i],
           b = outline[i + 1],
@@ -1160,7 +1604,7 @@ export function buildNeighborhood(
           facePoint(front, a[0], top, a[1]),
           span,
           bayHeight,
-          0x7b94a0,
+          reference ? 0xb7c1bb : 0x7b94a0,
         );
         apron.quad(
           facePoint(front, a[0], bottom - 0.36, a[1]),
@@ -1350,7 +1794,7 @@ export function buildNeighborhood(
           trimTint,
           false,
         );
-        const out = getBatch("roof", house.x, house.z);
+        const out = getBatch(roofMaterial, house.x, house.z);
         const topQuad = (a: V, b: V, c: V, d: V) => {
           if (
             (b[2] - a[2]) * (c[0] - a[0]) - (b[0] - a[0]) * (c[2] - a[2]) >=
@@ -1729,8 +2173,8 @@ export function buildNeighborhood(
         : 0.68;
       const left = centerU - gableWidth / 2,
         right = centerU + gableWidth / 2;
-      const canopy = getBatch("roof", house.x, house.z);
-      const gable = getBatch("siding", house.x, house.z);
+      const canopy = getBatch(roofMaterial, house.x, house.z);
+      const gable = getBatch(wallMaterial, house.x, house.z);
       const frontOut = projection + 0.12,
         backOut = -0.16;
       canopy.quad(
@@ -1936,7 +2380,7 @@ export function buildNeighborhood(
         true,
       );
       // Small pitched canopy, within the accepted decorative yard clearance.
-      const canopy = getBatch("roof", house.x, house.z);
+      const canopy = getBatch(roofMaterial, house.x, house.z);
       canopy.quad(
         facePoint(front, doorU - deckWidth / 2 - 0.22, canopyY + 0.27, -0.15),
         facePoint(front, doorU - deckWidth / 2 - 0.22, canopyY + 0.05, 1.98),
@@ -2234,7 +2678,75 @@ export function buildNeighborhood(
           );
       }
     }
-    if (reference)
+    if (reference) {
+      // Emit the reference shell last, around its actual openings. There is no
+      // opaque full-size wall or foundation box behind recessed glazing.
+      for (let fi = 0; fi < 4; fi++) {
+        const face = fi as Face,
+          half = faceWidth(face) / 2;
+        faceSurface(
+          face,
+          [
+            [-half, house.low],
+            [half, house.low],
+            [half, foundationTop],
+            [-half, foundationTop],
+          ],
+          () => 0.025,
+          concreteKey,
+          0xb8b6a9,
+        );
+        if (wallMaterial === "referenceSiding") {
+          const sidingRandom = seeded(`${house.id}:siding-courses`),
+            course = 0.18;
+          for (
+            let bottom = foundationTop;
+            bottom < roofBase - 0.001;
+            bottom += course
+          ) {
+            const top = Math.min(roofBase, bottom + course),
+              lip = Math.min(0.008, (top - bottom) * 0.2);
+            const tint = tinted(wallTint, 0.995 + sidingRandom() * 0.01);
+            faceSurface(
+              face,
+              [
+                [-half, bottom],
+                [half, bottom],
+                [half, bottom + lip],
+                [-half, bottom + lip],
+              ],
+              (y) => (0.018 * (y - bottom)) / lip,
+              wallMaterial,
+              tinted(tint, 0.95),
+            );
+            faceSurface(
+              face,
+              [
+                [-half, bottom + lip],
+                [half, bottom + lip],
+                [half, top],
+                [-half, top],
+              ],
+              (y) => (0.018 * (top - y)) / (top - bottom - lip),
+              wallMaterial,
+              tint,
+            );
+          }
+        } else
+          faceSurface(
+            face,
+            [
+              [-half, foundationTop],
+              [half, foundationTop],
+              [half, roofBase],
+              [-half, roofBase],
+            ],
+            () => 0,
+            wallMaterial,
+            wallTint,
+          );
+      }
+      for (const emitStone of deferredStone) emitStone();
       referenceFacades.push({
         id: house.id,
         style: reference.style ?? "generic",
@@ -2258,6 +2770,11 @@ export function buildNeighborhood(
         dormers: hasDormers,
         chimney: hasChimney,
         genericYard,
+        recessedWindows,
+        windowRecessMeters: 0.3,
+        sidingCourseMeters: wallMaterial === "referenceSiding" ? 0.18 : null,
+        detailApproximation:
+          "Window spacing, cavity depth, curtains, siding/shingle courses and gutter profiles are procedural construction detail, not surveyed observations. Explicit source colors and major facade overrides remain authoritative.",
         colors: {
           wall: wallTint,
           trim: trimTint,
@@ -2266,6 +2783,7 @@ export function buildNeighborhood(
           roof: roofTint,
         },
       });
+    }
   }
 
   let triangleCount = 0;
@@ -2277,7 +2795,11 @@ export function buildNeighborhood(
         options.materials?.[batch.material] ??
         (batch.material === "referenceConcrete"
           ? options.materials?.concrete
-          : undefined);
+          : batch.material === "referenceSiding"
+            ? options.materials?.siding
+            : batch.material === "referenceRoof"
+              ? options.materials?.roof
+              : undefined);
       material = supplied?.clone() ?? defaultMaterial(batch.material);
       // Three's Material.copy does not copy shader hooks. Preserve shared
       // ground-scale color variation on the local vertex-colored yard clone.
@@ -2289,12 +2811,55 @@ export function buildNeighborhood(
         batch.material === "referenceConcrete" &&
         material instanceof T.MeshStandardMaterial
       ) {
-        // The shared scan has a tan albedo. Reference masonry uses a local
-        // neutral clone while preserving its physical normal/roughness detail;
-        // the original material and shared texture ownership stay unchanged.
+        // The shared floor scan adds tan color and directional surface detail.
+        // Use neutral reference masonry; retain detail only from an explicitly
+        // supplied reference material. Shared source resources remain unchanged.
         material.name = "Reference gray concrete";
         material.map = null;
         material.color.set(0xffffff);
+        if (!options.materials?.referenceConcrete) {
+          material.normalMap = null;
+          material.roughnessMap = null;
+          material.roughness = 0.94;
+        }
+      }
+      if (
+        batch.material === "referenceSiding" &&
+        material instanceof T.MeshStandardMaterial
+      ) {
+        material.name = "Reference painted lap siding";
+        material.color.set(0xffffff);
+        material.map = null;
+        material.normalMap = null;
+        material.roughnessMap = null;
+        material.roughness = 0.76;
+        material.envMapIntensity = 0.2;
+      }
+      if (
+        batch.material === "referenceRoof" &&
+        material instanceof T.MeshStandardMaterial
+      ) {
+        material.name = "Reference roof shingles";
+        material.color.set(0xffffff);
+        material.normalScale.setScalar(0.28);
+        material.roughnessMap = null;
+        material.roughness = 0.94;
+        material.envMapIntensity = 0.18;
+        const originalCompile = material.onBeforeCompile,
+          originalKey = material.customProgramCacheKey();
+        material.onBeforeCompile = (shader, renderer) => {
+          originalCompile.call(material!, shader, renderer);
+          shader.fragmentShader = shader.fragmentShader.replace(
+            "#include <map_fragment>",
+            T.ShaderChunk.map_fragment.replace(
+              "diffuseColor *= sampledDiffuseColor;",
+              `float shingleGrain = pow(max(dot(sampledDiffuseColor.rgb,vec3(0.2126,0.7152,0.0722)),0.001),0.35);
+            diffuseColor *= vec4(vec3(0.70 + shingleGrain * 0.40),sampledDiffuseColor.a);`,
+            ),
+          );
+        };
+        material.customProgramCacheKey = () =>
+          `${originalKey}|reference-roof-neutral-v1`;
       }
       if (
         material instanceof T.MeshStandardMaterial ||

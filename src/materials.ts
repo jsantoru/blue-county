@@ -41,11 +41,10 @@ export function createSurfaceMaterials() {
     });
     return material;
   };
-  const grass = pbr("lawn", 1.4, 0xe0e5cf, 0.42);
-  grass.normalScale.setScalar(0.18);
+  const grass = pbr("lawn", 1.4, 0xdce9d8, 0.32);
   grass.envMapIntensity = 0.16;
   const asphalt = pbr("asphalt", 3, 0xaab0b2, 0.34);
-  const gravel = pbr("gravel", 2.25, 0xc0b6a5, 0.8);
+  const gravel = pbr("gravel", 2.25, 0xabaea6, 0.65);
   const bark = pbr("bark", 1, 0xb1a593, 0.9);
   const roof = pbr("roof", 3, 0xacb2b6, 0.85);
   const brick = pbr("brick", 1, 0xd3c6b6, 0.7);
@@ -54,7 +53,9 @@ export function createSurfaceMaterials() {
   const wood = siding.clone();
   wood.name = "Painted porch wood";
   wood.color.set(0x918374);
-  // Low-frequency variation complements the close-up scans and hides a kilometer-wide tiled lawn.
+  // Triangular stochastic sampling shares offsets across all PBR channels. It
+  // breaks recognizable repeating crack/grass patterns without changing scale,
+  // rotating tangent-space normals, or introducing atlas seams.
   const macro = (material: T.MeshStandardMaterial, ground: boolean) => {
     material.onBeforeCompile = (shader) => {
       shader.vertexShader =
@@ -70,28 +71,68 @@ export function createSurfaceMaterials() {
           vec2 i=floor(p),f=fract(p); f=f*f*(3.0-2.0*f);
           return mix(mix(sceneryHash(i),sceneryHash(i+vec2(1.,0.)),f.x),
                      mix(sceneryHash(i+vec2(0.,1.)),sceneryHash(i+vec2(1.,1.)),f.x),f.y);
+        }
+        vec2 sceneryOffset(vec2 p) {
+          return vec2(sceneryHash(p),sceneryHash(p+vec2(17.7,63.1)))*19.;
+        }
+        vec4 scenerySample(sampler2D source, vec2 uv) {
+          vec2 cell=mat2(1.,0.,-.57735027,1.15470054)*(uv*.42);
+          vec2 id=floor(cell), f=fract(cell), a=id, b=id+vec2(1.,0.), c=id+vec2(0.,1.);
+          vec3 weights=vec3(1.-f.x-f.y,f.x,f.y);
+          if(f.x+f.y>1.) {
+            a=id+vec2(1.); b=id+vec2(0.,1.); c=id+vec2(1.,0.);
+            weights=vec3(f.x+f.y-1.,1.-f.x,1.-f.y);
+          }
+          weights=weights*weights*weights;
+          weights/=max(dot(weights,vec3(1.)),.0001);
+          vec2 dx=dFdx(uv), dy=dFdy(uv);
+          return textureGrad(source,uv+sceneryOffset(a),dx,dy)*weights.x
+               + textureGrad(source,uv+sceneryOffset(b),dx,dy)*weights.y
+               + textureGrad(source,uv+sceneryOffset(c),dx,dy)*weights.z;
         }\n` + shader.fragmentShader;
       shader.fragmentShader = shader.fragmentShader.replace(
         "#include <map_fragment>",
-        `#include <map_fragment>
+        `#ifdef USE_MAP
+          diffuseColor *= scenerySample(map,vMapUv);
+        #endif
         float surfacePatch = sceneryNoise(vSceneryPosition.xz * ${ground ? "0.018" : "0.18"});
         float detail = sceneryNoise(vSceneryPosition.xz * ${ground ? "0.10" : "1.45"});
         diffuseColor.rgb *= ${
           ground
-            ? "mix(vec3(0.76,0.84,0.67),vec3(1.10,1.06,0.87),surfacePatch)*mix(0.94,1.05,detail)"
-            : "mix(0.78,1.14,surfacePatch)*mix(0.92,1.04,detail)"
+            ? "mix(vec3(0.70,0.88,0.67),vec3(1.05,1.08,0.93),surfacePatch)*mix(0.91,1.06,detail)"
+            : "mix(0.87,1.12,surfacePatch)*mix(0.96,1.04,detail)"
         };`,
       );
-      if (ground)
-        shader.fragmentShader = shader.fragmentShader.replace(
-          "#include <roughnessmap_fragment>",
-          "#include <roughnessmap_fragment>\nroughnessFactor = max(roughnessFactor, 0.94);",
-        );
+      shader.fragmentShader = shader.fragmentShader.replace(
+        "#include <normal_fragment_maps>",
+        `#ifdef USE_NORMALMAP_TANGENTSPACE
+          vec3 mapN=scenerySample(normalMap,vNormalMapUv).xyz*2.-1.;
+          mapN.xy*=normalScale;
+          normal=normalize(tbn*mapN);
+        #endif`,
+      );
+      shader.fragmentShader = shader.fragmentShader.replace(
+        "#include <roughnessmap_fragment>",
+        `float roughnessFactor=roughness;
+        #ifdef USE_ROUGHNESSMAP
+          roughnessFactor*=scenerySample(roughnessMap,vRoughnessMapUv).g;
+        #endif
+        roughnessFactor=${ground ? "max(roughnessFactor,.94)" : "clamp(roughnessFactor*mix(.92,1.08,surfacePatch),.66,.97)"};`,
+      );
     };
-    material.customProgramCacheKey = () => `scenery-macro-${ground}`;
+    material.customProgramCacheKey = () =>
+      `scenery-stochastic-pbr-v2-${ground}`;
   };
   macro(grass, true);
   macro(asphalt, false);
+  gravel.onBeforeCompile = (shader) => {
+    shader.fragmentShader = shader.fragmentShader.replace(
+      "#include <map_fragment>",
+      `#include <map_fragment>
+       diffuseColor.rgb=mix(diffuseColor.rgb,vec3(dot(diffuseColor.rgb,vec3(.2126,.7152,.0722))),.55);`,
+    );
+  };
+  gravel.customProgramCacheKey = () => "neutral-verge-aggregate-v1";
   return {
     ready,
     grass,

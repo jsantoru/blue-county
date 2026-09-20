@@ -8,6 +8,7 @@ import { Vegetation } from "./vegetation";
 import { buildNeighborhood, type NeighborhoodHouse } from "./neighborhood";
 import { buildRoadside } from "./roadside";
 import { buildBeverlyDetails } from "./beverly-details";
+import { BeverlyMicrodetail } from "./beverly-microdetail";
 /** Matches the terrain mesh's diagonal exactly, including its outermost vertices. */
 export function heightAt(map: MapData, x: number, z: number) {
   const g = map.terrain;
@@ -278,6 +279,7 @@ export class Environment {
   cameraObstacles: T.Object3D[] = [];
   materials = createSurfaceMaterials();
   vegetation?: Vegetation;
+  microdetail?: BeverlyMicrodetail;
   private houses: NeighborhoodHouse[] = [];
   constructor(
     public map: MapData,
@@ -582,6 +584,16 @@ export class Environment {
     this.root.add(this.vegetation.root);
     if (map.beverlySurvey)
       this.root.add(buildBeverlyDetails(map, (x, z) => heightAt(map, x, z)));
+    if (map.beverlySurvey) {
+      this.microdetail = new BeverlyMicrodetail(
+        map,
+        (x, z) => heightAt(map, x, z),
+        {
+          referenceCanopies: this.vegetation.root.userData.referenceCanopies,
+        },
+      );
+      this.root.add(this.microdetail.root);
+    }
     if (!this.test)
       this.root.add(
         buildRoadside(map, (x, z) => heightAt(map, x, z), this.materials),
@@ -755,12 +767,15 @@ export class Environment {
   }
   update(time: number, camera: T.Camera) {
     this.vegetation?.update(time, camera);
+    this.microdetail?.update(time, camera);
   }
   setQuality(quality: "low" | "medium" | "high") {
     this.vegetation?.setQuality(quality);
+    this.microdetail?.setQuality(quality);
   }
   dispose() {
     this.vegetation?.dispose();
+    this.microdetail?.dispose();
     this.materials.dispose();
     for (const c of this.colliders) this.world.removeCollider(c, true);
     this.colliders = [];

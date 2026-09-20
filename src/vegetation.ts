@@ -119,11 +119,14 @@ function insidePolygon(x: number, z: number, points: [number, number][]) {
   }
   return inside;
 }
-function horizontalRadius(geometry: T.BufferGeometry) {
+function horizontalRadius(geometry: T.BufferGeometry, aspect = 1) {
   const positions = geometry.getAttribute("position");
   let radius = 0;
   for (let i = 0; i < positions.count; i++)
-    radius = Math.max(radius, Math.hypot(positions.getX(i), positions.getZ(i)));
+    radius = Math.max(
+      radius,
+      Math.hypot(positions.getX(i) * aspect, positions.getZ(i)),
+    );
   return radius || 1;
 }
 
@@ -311,6 +314,7 @@ class CardBuilder {
   positions: number[] = [];
   normals: number[] = [];
   uvs: number[] = [];
+  colors: number[] = [];
   indices: number[] = [];
   add(
     center: T.Vector3,
@@ -321,6 +325,7 @@ class CardBuilder {
     roll: number,
     crownY: number,
     orientation?: T.Quaternion,
+    shape?: { fold?: number; shade?: number; normalOrigin?: T.Vector3 },
   ) {
     const q =
         orientation ??
@@ -328,24 +333,61 @@ class CardBuilder {
       base = this.positions.length / 3;
     const u = new T.Vector3(width / 2, 0, 0).applyQuaternion(q),
       v = new T.Vector3(0, height / 2, 0).applyQuaternion(q);
-    for (const [a, b] of [
-      [-1, -1],
-      [1, -1],
-      [1, 1],
-      [-1, 1],
-    ]) {
+    const fold = shape?.fold ?? 0,
+      sheetNormal = new T.Vector3().crossVectors(u, v).normalize();
+    const corners = fold
+      ? [
+          [-1, -1],
+          [0, -1],
+          [1, -1],
+          [-1, 1],
+          [0, 1],
+          [1, 1],
+        ]
+      : [
+          [-1, -1],
+          [1, -1],
+          [1, 1],
+          [-1, 1],
+        ];
+    for (const [a, b] of corners) {
       const p = center.clone().addScaledVector(u, a).addScaledVector(v, b);
+      if (fold)
+        p.addScaledVector(
+          sheetNormal,
+          (1 - Math.abs(a)) * width * fold * (1 + b * 0.18),
+        );
       // Broadly outward/upward normals make a cohesive lit canopy rather than dark crossed planes.
-      const normal = new T.Vector3(
-        p.x,
-        (p.y - crownY) * 0.7 + 2,
-        p.z,
-      ).normalize();
+      const normal = shape?.normalOrigin
+        ? p
+            .clone()
+            .sub(shape.normalOrigin)
+            .multiplyScalar(0.65)
+            .add(new T.Vector3(p.x * 0.25, 1.3, p.z * 0.25))
+            .normalize()
+        : new T.Vector3(p.x, (p.y - crownY) * 0.7 + 2, p.z).normalize();
       this.positions.push(p.x, p.y, p.z);
       this.normals.push(normal.x, normal.y, normal.z);
       this.uvs.push((a + 1) / 2, (b + 1) / 2);
+      const shade = shape?.shade ?? 1;
+      this.colors.push(shade, shade, shade);
     }
-    this.indices.push(base, base + 1, base + 2, base, base + 2, base + 3);
+    if (fold)
+      this.indices.push(
+        base,
+        base + 1,
+        base + 4,
+        base,
+        base + 4,
+        base + 3,
+        base + 1,
+        base + 2,
+        base + 5,
+        base + 1,
+        base + 5,
+        base + 4,
+      );
+    else this.indices.push(base, base + 1, base + 2, base, base + 2, base + 3);
   }
   geometry() {
     const geometry = new T.BufferGeometry();
@@ -358,6 +400,10 @@ class CardBuilder {
       new T.Float32BufferAttribute(this.normals, 3),
     );
     geometry.setAttribute("uv", new T.Float32BufferAttribute(this.uvs, 2));
+    geometry.setAttribute(
+      "color",
+      new T.Float32BufferAttribute(this.colors, 3),
+    );
     geometry.setIndex(this.indices);
     geometry.computeBoundingSphere();
     return geometry;
@@ -368,177 +414,301 @@ function treeGeometry(species: Species, distant = false): TreeGeometry {
   const random = seeded(4420 + species * 121),
     wood: T.BufferGeometry[] = [],
     cards = new CardBuilder();
-  const branch = (
-    a: T.Vector3,
-    b: T.Vector3,
-    baseRadius: number,
-    endRadius: number,
-    sides = 7,
-  ) => {
-    const direction = b.clone().sub(a),
-      length = direction.length(),
-      geometry = new T.CylinderGeometry(
-        endRadius,
-        baseRadius,
-        length,
-        distant ? Math.min(5, sides) : sides,
-        1,
-      );
-    const uv = geometry.getAttribute("uv");
-    for (let i = 0; i < uv.count; i++)
-      uv.setXY(
-        i,
-        (uv.getX(i) * TAU * (baseRadius + endRadius)) / 2,
-        uv.getY(i) * length,
-      );
-    geometry.applyQuaternion(
-      new T.Quaternion().setFromUnitVectors(up, direction.normalize()),
-    );
-    geometry.translate((a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2);
-    wood.push(geometry);
-  };
-  if (species === 2) {
-    branch(new T.Vector3(), new T.Vector3(0.1, 14.5, -0.1), 0.29, 0.025, 8);
-    for (let layer = 0; layer < 11; layer++) {
-      const y = 2.8 + layer * 1.035,
-        radius = 3.05 * Math.pow(1 - layer / 11.5, 0.87);
-      for (let arm = 0; arm < 7; arm++) {
-        const a = (arm / 7) * TAU + layer * 0.47 + (random() - 0.5) * 0.24,
-          x = Math.sin(a),
-          z = Math.cos(a);
-        const reach = radius * (0.8 + random() * 0.24),
-          droop = -0.3 + random() * 0.24;
-        if (!distant)
-          branch(
-            new T.Vector3(0, y, 0),
-            new T.Vector3(x * reach, y + droop, z * reach),
-            0.072 * (1 - layer / 14),
-            0.012,
-            5,
-          );
-        // Small angled needle sprays follow individual boughs; no canopy-sized upright sheets.
-        for (let tuft = 0; tuft < 3; tuft++) {
-          const along = 0.25 + tuft * 0.3,
-            spread = 0.68 + random() * 0.31;
-          const center = new T.Vector3(
-            x * reach * along,
-            y + droop * along + 0.15 + (random() - 0.5) * 0.17,
-            z * reach * along,
-          );
-          const orientation = new T.Quaternion().setFromUnitVectors(
-            up,
-            new T.Vector3(x, 0.2 + random() * 0.45, z).normalize(),
-          );
-          const size = Math.max(0.52, (1.18 - layer * 0.043) * spread);
-          for (let spray = 0; spray < 2; spray++) {
-            const twist = new T.Quaternion().setFromAxisAngle(
-              up,
-              (spray ? 0.8 : -0.65) + (random() - 0.5) * 0.4,
-            );
-            if (!distant || tuft !== 0)
-              cards.add(
-                center,
-                size * 1.08,
-                size * 1.7,
-                0,
-                0,
-                0,
-                y,
-                orientation.clone().multiply(twist),
-              );
-          }
+  // Connected rings form bent, tapered limbs without the caps and seams of
+  // intersecting cylinders. The same centerline is used by both LODs.
+  const stem = (points: T.Vector3[], radii: number[], sides = 6) => {
+    const positions: number[] = [],
+      normals: number[] = [],
+      uvs: number[] = [],
+      indices: number[] = [];
+    const count = distant ? Math.min(5, sides) : sides;
+    let length = 0;
+    for (let ring = 0; ring < points.length; ring++) {
+      const p = points[ring];
+      if (ring) length += p.distanceTo(points[ring - 1]);
+      const tangent = points[Math.min(points.length - 1, ring + 1)]
+        .clone()
+        .sub(points[Math.max(0, ring - 1)])
+        .normalize();
+      const rotation = new T.Quaternion().setFromUnitVectors(up, tangent);
+      for (let side = 0; side <= count; side++) {
+        const angle = (side / count) * TAU;
+        const normal = new T.Vector3(
+          Math.sin(angle),
+          0,
+          Math.cos(angle),
+        ).applyQuaternion(rotation);
+        const uneven =
+          1 +
+          0.065 * Math.sin(angle * 3 + p.y * 2.7) +
+          0.035 * Math.cos(angle * 5 - p.y);
+        const vertex = p.clone().addScaledVector(normal, radii[ring] * uneven);
+        positions.push(vertex.x, vertex.y, vertex.z);
+        normals.push(normal.x, normal.y, normal.z);
+        uvs.push((side / count) * TAU * radii[0], length);
+        if (ring && side < count) {
+          const a = (ring - 1) * (count + 1) + side,
+            b = ring * (count + 1) + side;
+          indices.push(a, a + 1, b, a + 1, b + 1, b);
         }
       }
     }
-    for (let tip = 0; tip < 4; tip++)
+    const geometry = new T.BufferGeometry();
+    geometry.setAttribute(
+      "position",
+      new T.Float32BufferAttribute(positions, 3),
+    );
+    geometry.setAttribute("normal", new T.Float32BufferAttribute(normals, 3));
+    geometry.setAttribute("uv", new T.Float32BufferAttribute(uvs, 2));
+    geometry.setIndex(indices);
+    wood.push(geometry);
+  };
+  const vec = (x: number, y: number, z: number) => new T.Vector3(x, y, z);
+  if (species === 2) {
+    stem(
+      [
+        vec(0, 0, 0),
+        vec(0.04, 0.65, -0.04),
+        vec(-0.1, 3.5, 0.08),
+        vec(0.16, 7.2, -0.06),
+        vec(0.02, 11.1, -0.17),
+        vec(0.17, 14.6, -0.1),
+      ],
+      [0.38, 0.29, 0.25, 0.18, 0.09, 0.018],
+      9,
+    );
+    // Spiral/irregular attachment heights remove the conspicuous horizontal
+    // whorls. Lower boughs droop, then curl upward; upper shoots are more erect.
+    const boughs = 48;
+    for (let bough = 0; bough < boughs; bough++) {
+      const t = bough / boughs,
+        y = 2.9 + t * 10.85 + (random() - 0.5) * 0.56;
+      const angle = bough * 2.39996 + (random() - 0.5) * 0.8;
+      const envelope = 3.24 * Math.pow(1 - t * 0.96, 0.83);
+      const reach = envelope * (0.73 + random() * 0.3),
+        droop = (0.3 + random() * 0.48) * (1 - t);
+      const root = vec(0.04 * Math.sin(y), y, (-0.045 * y) / 14);
+      const middle = vec(
+        Math.sin(angle) * reach * 0.52,
+        y - droop,
+        Math.cos(angle) * reach * 0.52,
+      );
+      const tip = vec(
+        Math.sin(angle + 0.13) * reach,
+        y - droop * 0.45 + 0.14 + random() * 0.34,
+        Math.cos(angle + 0.13) * reach,
+      );
+      if (!distant || bough % 8 === 0)
+        stem(
+          [root, middle, tip],
+          [0.078 * (1 - t * 0.77), 0.041 * (1 - t * 0.75), 0.006],
+          distant ? 3 : 5,
+        );
+      for (let tuft = 0; tuft < 4; tuft++) {
+        const along = 0.23 + tuft * 0.225;
+        const center = root
+          .clone()
+          .multiplyScalar((1 - along) ** 2)
+          .addScaledVector(middle, 2 * along * (1 - along))
+          .addScaledVector(tip, along * along);
+        const lateral = (random() - 0.5) * (0.4 + reach * 0.2);
+        center.x += Math.cos(angle) * lateral;
+        center.z -= Math.sin(angle) * lateral;
+        center.y += (random() - 0.5) * 0.36;
+        const size = (0.88 + random() * 0.38) * (1 - t * 0.54);
+        for (let spray = 0; spray < 2; spray++) {
+          const bearing =
+            angle + (spray ? -0.65 : 0.65) + (random() - 0.5) * 0.7;
+          const lift = spray
+            ? -0.5 + t * 0.8 + random() * 0.85
+            : 0.38 + random() * 0.9;
+          const orientation = new T.Quaternion().setFromUnitVectors(
+            up,
+            vec(
+              Math.sin(bearing) * 0.8,
+              lift,
+              Math.cos(bearing) * 0.8,
+            ).normalize(),
+          );
+          orientation.multiply(
+            new T.Quaternion().setFromAxisAngle(up, (random() - 0.5) * 1.8),
+          );
+          const shade = 0.82 + random() * 0.24,
+            fold = 0.14 + random() * 0.07;
+          if (!distant || spray === (bough + tuft) % 2)
+            cards.add(
+              center,
+              size * (distant ? 1.26 : 1.08),
+              size * (distant ? 1.92 : 1.68),
+              0,
+              0,
+              0,
+              y,
+              orientation,
+              {
+                fold: distant ? 0 : fold,
+                shade,
+                normalOrigin: vec(root.x, center.y - 0.25, root.z),
+              },
+            );
+        }
+      }
+    }
+    for (let tip = 0; tip < 5; tip++)
       cards.add(
-        new T.Vector3(0, 14.15, 0),
-        0.55,
-        1.1,
-        (tip * Math.PI) / 4,
-        0.12,
-        0,
-        13,
+        vec(0.12, 14.15 + tip * 0.055, -0.1),
+        0.5,
+        1.15,
+        tip * 2.399,
+        0.15,
+        -0.12,
+        13.7,
+        undefined,
+        { fold: distant ? 0 : 0.13, shade: 0.94 },
       );
   } else {
     const tall = species === 1,
-      crownY = tall ? 9 : 7.3,
-      radius = tall ? 3.3 : 4.65,
-      crownHeight = tall ? 3.5 : 2.6;
-    branch(
-      new T.Vector3(),
-      new T.Vector3(0.15, 5.8, -0.13),
-      tall ? 0.34 : 0.47,
-      0.17,
+      crownY = tall ? 9.4 : 7.85,
+      crownHeight = tall ? 3.55 : 2.65,
+      radius = tall ? 3.15 : 4.35;
+    stem(
+      [
+        vec(0, 0, 0),
+        vec(0.06, 0.55, -0.05),
+        vec(-0.11, 2.3, 0.12),
+        vec(0.19, 4.2, 0.09),
+        vec(0.34, 6.6, -0.18),
+      ],
+      [tall ? 0.47 : 0.59, tall ? 0.35 : 0.45, 0.32, 0.23, 0.09],
       9,
     );
     if (!distant)
-      for (let root = 0; root < 5; root++) {
-        const a = (root / 5) * TAU;
-        branch(
-          new T.Vector3(Math.sin(a) * 0.62, 0.04, Math.cos(a) * 0.62),
-          new T.Vector3(0, 1, 0),
-          0.17,
-          0.12,
-          5,
+      for (let root = 0; root < 3; root++) {
+        const a = root * 2.3 + 0.42;
+        stem(
+          [
+            vec(Math.sin(a) * 0.67, 0.015, Math.cos(a) * 0.67),
+            vec(Math.sin(a) * 0.35, 0.22, Math.cos(a) * 0.35),
+            vec(0.02, 0.92, 0),
+          ],
+          [0.12, 0.16, 0.08],
+          4,
         );
       }
-    for (let arm = 0; arm < 13; arm++) {
-      const angle = arm * 2.399 + random() * 0.4,
-        reach = radius * (0.45 + random() * 0.4),
-        y = 4.3 + arm * (tall ? 0.34 : 0.24);
-      const a = new T.Vector3(0, y - 1.6, 0),
-        b = new T.Vector3(
-          Math.sin(angle) * reach,
-          y + 1.65,
-          Math.cos(angle) * reach,
+    const lobes = tall ? 11 : 13;
+    for (let lobe = 0; lobe < lobes; lobe++) {
+      const h = 1 - (2 * (lobe + 0.7)) / (lobes + 0.5),
+        ring = Math.sqrt(Math.max(0.05, 1 - h * h));
+      const angle = lobe * 2.399 + (random() - 0.5) * 0.48;
+      const reach = radius * ring * (0.66 + random() * 0.3);
+      const center = vec(
+        Math.sin(angle) * reach,
+        crownY + h * crownHeight * 0.83 + (random() - 0.5) * 0.6,
+        Math.cos(angle) * reach,
+      );
+      const lobeRadius = 1.12 + random() * 0.4;
+      const junction = vec(0.05, 2.8 + random() * 1.5, 0.08),
+        elbow = vec(center.x * 0.28, 4.7 + random() * 0.7, center.z * 0.24);
+      const fork = vec(center.x * 0.7, center.y - 0.68, center.z * 0.67);
+      if (lobe < 10 && (!distant || lobe % 3 === 0)) {
+        stem(
+          distant ? [junction, center] : [junction, elbow, fork, center],
+          distant ? [0.17, 0.025] : [0.19 - lobe * 0.009, 0.12, 0.057, 0.014],
+          distant ? 3 : 5,
         );
-      if (!distant || arm % 3 === 0) branch(a, b, 0.17 - arm * 0.007, 0.035, 6);
-      const end = b
-        .clone()
-        .add(
-          new T.Vector3(
-            Math.sin(angle + 0.55) * 1.1,
-            0.75,
-            Math.cos(angle + 0.55) * 1.1,
-          ),
-        );
-      if (!distant) branch(b.clone().lerp(a, 0.28), end, 0.052, 0.014, 5);
-    }
-    const clusters = tall ? 42 : 48;
-    for (let cluster = 0; cluster < clusters; cluster++) {
-      const angle = cluster * 2.399,
-        h = 1 - (2 * (cluster + 0.5)) / clusters,
-        ring = Math.sqrt(Math.max(0, 1 - h * h));
-      const r = 0.72 + random() * 0.3,
-        center = new T.Vector3(
-          Math.sin(angle) * radius * ring * r,
-          crownY + h * crownHeight,
-          Math.cos(angle) * radius * ring * r,
-        );
-      const size = 2.05 + random() * 0.65;
-      for (let card = 0; card < 3; card++) {
-        const pitch = (random() - 0.5) * 1.6,
-          roll = (random() - 0.5) * 0.9;
-        if (!distant || cluster % 2 === 0)
+        if (!distant)
+          stem(
+            [
+              fork,
+              vec(
+                center.x + Math.cos(angle) * 0.68,
+                center.y + 0.55,
+                center.z - Math.sin(angle) * 0.68,
+              ),
+            ],
+            [0.04, 0.009],
+            4,
+          );
+      }
+      // Overlapping lobes plus a modest interior layer make a full crown. The
+      // folded, rotated sprays have no shared billboard plane or fan direction.
+      const sprays = tall ? 13 : 14;
+      for (let spray = 0; spray < sprays; spray++) {
+        const v = 1 - (2 * (spray + 0.5)) / sprays,
+          ringRadius = Math.sqrt(Math.max(0, 1 - v * v));
+        const a = spray * 2.399 + lobe * 0.67 + (random() - 0.5) * 0.45;
+        const offset = lobeRadius * (0.58 + random() * 0.5);
+        const p = center
+          .clone()
+          .add(
+            vec(
+              Math.sin(a) * ringRadius * offset,
+              v * offset * 0.88,
+              Math.cos(a) * ringRadius * offset,
+            ),
+          );
+        const width = 1.66 + random() * 0.55,
+          yaw = a + (random() - 0.5) * 1.7,
+          pitch = (random() - 0.5) * 2.2,
+          roll = (random() - 0.5) * 1.6;
+        const shade = 0.85 + random() * 0.24,
+          fold = 0.1 + random() * 0.12;
+        if (!distant || spray % 3 === 0)
           cards.add(
-            center,
-            size,
-            size * 0.88,
-            angle + (card * Math.PI) / 3,
+            p,
+            width * (distant ? 1.2 : 1),
+            width * 0.82 * (distant ? 1.2 : 1),
+            yaw,
             pitch,
             roll,
             crownY,
+            undefined,
+            { fold: distant ? 0 : fold, shade, normalOrigin: center },
           );
       }
+    }
+    const inner = tall ? 20 : 28;
+    for (let i = 0; i < inner; i++) {
+      const a = i * 2.399,
+        r = radius * Math.sqrt(random()) * 0.64;
+      const center = vec(
+        Math.sin(a) * r,
+        crownY + (random() - 0.5) * crownHeight * 1.75,
+        Math.cos(a) * r,
+      );
+      const width = 1.8 + random() * 0.5,
+        pitch = (random() - 0.5) * 1.9;
+      if (!distant || i % 3 === 0)
+        cards.add(
+          center,
+          width * (distant ? 1.2 : 1),
+          width * 0.84,
+          a,
+          pitch,
+          0.28,
+          crownY,
+          undefined,
+          {
+            fold: distant ? 0 : 0.16,
+            shade: 0.78 + random() * 0.12,
+            normalOrigin: vec(0, crownY - 0.7, 0),
+          },
+        );
+      else random();
     }
   }
   const trunk = mergeGeometries(wood, false)!;
   for (const part of wood) part.dispose();
+  const leaves = cards.geometry();
+  // Keep the original placement clearance envelope despite the richer geometry.
+  const nominalRadius = species === 0 ? 5.7 : species === 1 ? 4.45 : 3.8;
+  const correction = nominalRadius / horizontalRadius(leaves);
+  trunk.scale(correction, 1, correction);
+  leaves.scale(correction, 1, correction);
   trunk.computeBoundingSphere();
-  return { trunk, leaves: cards.geometry() };
+  leaves.computeBoundingSphere();
+  return { trunk, leaves };
 }
-
 function shrubGeometry(): T.BufferGeometry {
   const cards = new CardBuilder(),
     random = seeded(716);
@@ -1147,7 +1317,7 @@ export class Vegetation {
     const leafMaterial = this.foliageMaterial(leaves, 0.42),
       pineMaterial = this.foliageMaterial(needles, 0.3, false, true),
       grassMaterial = this.foliageMaterial(grass, 0.42, true);
-    pineMaterial.color.setRGB(0.73, 0.83, 0.92);
+    pineMaterial.color.setRGB(0.73, 0.83, 0.78);
     this.materials.push(bark, leafMaterial, pineMaterial, grassMaterial);
     const templates = ([0, 1, 2] as Species[]).map((species) =>
         treeGeometry(species),
@@ -1171,11 +1341,15 @@ export class Vegetation {
     this.geometries.push(shrubs, grassGeometry);
     for (const template of [...templates, ...distantTemplates])
       this.geometries.push(template.trunk, template.leaves);
+    // Eight aspect variants share each mesh/draw call. Normalizing against the
+    // transformed crown keeps every observed radius exact, rather than changing
+    // survey data to gain tree-to-tree variation. Heights remain approximations.
+    const aspects = Array.from({ length: 8 }, (_, i) => 0.84 + (i * 0.29) / 7);
     const templateRadii = templates.map((template) =>
-        horizontalRadius(template.leaves),
+        aspects.map((aspect) => horizontalRadius(template.leaves, aspect)),
       ),
       distantRadii = distantTemplates.map((template) =>
-        horizontalRadius(template.leaves),
+        aspects.map((aspect) => horizontalRadius(template.leaves, aspect)),
       );
     const dummy = new T.Object3D(),
       tint = new T.Color();
@@ -1184,21 +1358,27 @@ export class Vegetation {
       geometry: T.BufferGeometry,
       material: T.Material,
       foliage: boolean,
-      canopyRadius?: number,
+      canopyRadii?: number[],
     ) => {
       const mesh = new T.InstancedMesh(geometry, material, plants.length);
       mesh.receiveShadow = true;
       plants.forEach((plant, i) => {
         dummy.position.set(plant.x, plant.y, plant.z);
         dummy.rotation.set(0, plant.yaw, 0);
-        const referenceScale =
-          plant.radiusMeters === undefined
-            ? undefined
-            : plant.radiusMeters / (canopyRadius ?? 1);
+        const variant = Math.min(7, Math.floor(plant.tone * 8));
+        const targetRadius =
+          plant.radiusMeters ??
+          plant.scale *
+            (plant.species === 0 ? 5.7 : plant.species === 1 ? 4.45 : 3.8);
+        const crownScale = canopyRadii
+          ? targetRadius / canopyRadii[variant]
+          : undefined;
         dummy.scale.set(
-          referenceScale ?? plant.scale * (1 + plant.tone * 0.09),
-          plant.scale,
-          referenceScale ?? plant.scale,
+          crownScale === undefined
+            ? plant.scale * (1 + plant.tone * 0.09)
+            : crownScale * aspects[variant],
+          plant.scale * (canopyRadii ? 0.9 + plant.tone * 0.2 : 1),
+          crownScale ?? plant.scale,
         );
         dummy.updateMatrix();
         mesh.setMatrixAt(i, dummy.matrix);
@@ -1294,6 +1474,7 @@ export class Vegetation {
       roughness: 1,
       metalness: 0,
       color: 0xffffff,
+      vertexColors: true,
     });
     material.alphaToCoverage = true;
     material.forceSinglePass = true;
@@ -1320,7 +1501,7 @@ export class Vegetation {
       );
       shader.fragmentShader = shader.fragmentShader.replace(
         "#include <emissivemap_fragment>",
-        `#include <emissivemap_fragment>\ntotalEmissiveRadiance += diffuseColor.rgb * ${grass ? ".16" : conifer ? ".05" : ".085"};`,
+        `#include <emissivemap_fragment>\ntotalEmissiveRadiance += diffuseColor.rgb * ${grass ? ".16" : conifer ? ".035" : ".075"};`,
       );
       if (conifer)
         shader.fragmentShader = shader.fragmentShader.replace(
@@ -1337,8 +1518,8 @@ export class Vegetation {
       grass
         ? "neighborhood-grass-v3"
         : conifer
-          ? "neighborhood-conifer-v3"
-          : "neighborhood-foliage-v3";
+          ? "neighborhood-conifer-v4"
+          : "neighborhood-foliage-v4";
     return material;
   }
 

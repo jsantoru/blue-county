@@ -313,6 +313,80 @@ describe("Beverly reference data", () => {
 });
 
 describe("reference rendering boundaries", () => {
+  it("leaves real openings behind recessed glazing instead of an opaque facade box", () => {
+    const house: NeighborhoodHouse = {
+      id: "window-aperture",
+      x: 0,
+      z: 0,
+      width: 12,
+      depth: 12,
+      heading: 0,
+      base: 0.5,
+      low: -0.1,
+      wallHeight: 4,
+      roadPosition: [0, 0, 30],
+      roadWidth: 6,
+      reference: {
+        style: "raised-ranch",
+        frontFace: 0,
+        stories: 1,
+        garageDoors: 0,
+        porch: false,
+        dormers: false,
+        chimney: false,
+        suppressGenericYard: true,
+      },
+    };
+    const group = buildNeighborhood([house], {
+      heightAt: () => 0,
+      roadClearance: () => 100,
+    });
+    try {
+      group.updateMatrixWorld(true);
+      const opaque: THREE.Object3D[] = [];
+      const samplePoints: THREE.Vector3[] = [];
+      group.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) return;
+        if (!object.name.includes(":referenceGlass:")) {
+          opaque.push(object);
+          return;
+        }
+        const p = object.geometry.getAttribute("position"),
+          normal = object.geometry.getAttribute("normal");
+        for (let i = 0; i < p.count; i += 3) {
+          if (normal.getZ(i) < 0.9) continue;
+          const point = new THREE.Vector3();
+          for (let j = 0; j < 3; j++)
+            point.add(new THREE.Vector3().fromBufferAttribute(p, i + j));
+          point.divideScalar(3);
+          if (point.z > 5.8 && Math.abs(point.x) < 5.7 && point.y > 2)
+            samplePoints.push(point);
+        }
+      });
+      expect(samplePoints.length).toBeGreaterThan(2);
+      for (const point of samplePoints) {
+        const ray = new THREE.Raycaster(
+          point.clone().add(new THREE.Vector3(0, 0, 1)),
+          new THREE.Vector3(0, 0, -1),
+          0,
+          2,
+        );
+        const hit = ray.intersectObjects(opaque, false)[0];
+        expect(
+          hit,
+          "window should have a visible room backplane",
+        ).toBeDefined();
+        expect(
+          hit.point.z,
+          "wall must not fill the window aperture",
+        ).toBeLessThan(5.84);
+        expect(hit.point.z).toBeGreaterThan(5.65);
+      }
+    } finally {
+      disposeGroup(group);
+    }
+  });
+
   it("connects porch-free reference doors to sloped terrain without adding a yard path", () => {
     const terrain = (x: number, z: number) => 0.04 * x - 0.04 * (z - 6);
     for (const style of ["ranch", "raised-ranch"] as const) {
@@ -386,7 +460,7 @@ describe("reference rendering boundaries", () => {
     }
   });
 
-  it("keeps reference concrete gray while preserving shared scan detail and generic materials", () => {
+  it("keeps reference concrete gray without changing shared scans or generic materials", () => {
     const albedo = new THREE.Texture(),
       normal = new THREE.Texture(),
       roughness = new THREE.Texture();
@@ -440,8 +514,9 @@ describe("reference rendering boundaries", () => {
       for (const mesh of reference) {
         expect(mesh.material).not.toBe(supplied);
         expect(mesh.material.map).toBeNull();
-        expect(mesh.material.normalMap).toBe(normal);
-        expect(mesh.material.roughnessMap).toBe(roughness);
+        // The floor scan's grooves must not become vertical foundation stripes.
+        expect(mesh.material.normalMap).toBeNull();
+        expect(mesh.material.roughnessMap).toBeNull();
         expect(mesh.material.color.getHex()).toBe(0xffffff);
         const color = mesh.geometry.getAttribute("color");
         for (let i = 0; i < color.count; i++) {
@@ -452,6 +527,8 @@ describe("reference rendering boundaries", () => {
       expect(generic.material.map).toBe(albedo);
       expect(generic.material.color.getHex()).toBe(0xcec9ba);
       expect(supplied.map).toBe(albedo);
+      expect(supplied.normalMap).toBe(normal);
+      expect(supplied.roughnessMap).toBe(roughness);
       expect(supplied.color.getHex()).toBe(0xcec9ba);
     } finally {
       disposeGroup(group);
@@ -546,7 +623,7 @@ describe("reference rendering boundaries", () => {
           group.traverse((object) => {
             if (
               !(object instanceof THREE.Mesh) ||
-              !object.name.includes(":glass:")
+              !/:(glass|referenceGlass):/.test(object.name)
             )
               return;
             const p = object.geometry.getAttribute("position");

@@ -2,7 +2,9 @@
 
 A locally playable arcade driving slice starring your actual dark blue 1968 Oldsmobile 442 convertible with the wheel and controls on the US driver's left. Free Drive starts on Beverly Drive, roughly 24m from the verified house address point. No exact driveway connection was available, so Home is a right-hand roadside spawn facing the eastern West Ridge Road exit.
 
-![Beverly Drive in the updated game](docs/beverly-home.png)
+![Beverly Drive in the updated game](docs/beverly-detail-home.png)
+
+The latest detail pass adds irregular tree crowns, recessed windows and curtains, physical siding and roof detail, fine verge grass and gravel, and revised daylight with filtered contact shading. [Compare the two passes](docs/detail-comparison.html) or read [the detail notes](docs/detail-pass.md).
 
 ## Launch on Windows
 
@@ -61,6 +63,7 @@ $env:GAME_URL='http://127.0.0.1:5180'
 npm run test:browser     # system Edge; synthetic pad, actual game/race physics
 npm run test:visual      # real rendered scenery, quality presets, independent RAF metrics
 npm run test:beverly     # surveyed neighborhood loop, reference views and moving frame sample
+npm run test:detail      # latest detail pass, all presets, resize and environment rebuild checks
 ```
 
 Tests compare acceleration, proportional throttle, braking, turning and boosted wall collision at simulated 30/60/120 fps rendering with fixed 60Hz physics. Tolerances are 0.15m position and 0.2m/s speed, not a cross-machine determinism promise. Ordered gates reject reverse travel, out-of-order crossings, teleport progress and duplicate rewards. Full mapped-route physics tests complete all 777 crossings over three laps, including all four racers with traffic and no racer recoveries. See `docs/verification.md`, the JSON reports and browser screenshots for measured environment and results.

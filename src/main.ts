@@ -113,29 +113,50 @@ renderer.setPixelRatio(1);
 renderer.setSize(innerWidth, innerHeight);
 renderer.outputColorSpace = T.SRGBColorSpace;
 renderer.toneMapping = T.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.05;
+renderer.toneMappingExposure = 1.0;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = T.PCFShadowMap;
 const scene = new T.Scene();
-scene.fog = new T.Fog(0xbdc9c6, 220, 1250);
+scene.fog = new T.Fog(0xbdcbd0, 210, 1280);
 const camera = new T.PerspectiveCamera(62, innerWidth / innerHeight, 0.2, 2200);
-const hemi = new T.HemisphereLight(0xc9e0ef, 0x5b6551, 0.7);
+const hemi = new T.HemisphereLight(0xc7ddec, 0x52604a, 0.62);
 scene.add(hemi);
-const sun = new T.DirectionalLight(0xffe5bd, 2.65);
+const sun = new T.DirectionalLight(0xffedd5, 2.6);
 sun.position.set(100, 140, -80);
 sun.castShadow = true;
-sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.mapSize.set(4096, 4096);
 sun.shadow.camera.left = -65;
 sun.shadow.camera.right = 65;
 sun.shadow.camera.top = 65;
 sun.shadow.camera.bottom = -65;
 sun.shadow.camera.near = 1;
 sun.shadow.camera.far = 350;
-sun.shadow.bias = -0.0003;
-sun.shadow.normalBias = 0.028;
-sun.shadow.radius = 2;
+sun.shadow.bias = -0.00015;
+sun.shadow.normalBias = 0.025;
+sun.shadow.radius = 3;
 scene.add(sun, sun.target);
 const atmosphere = new Atmosphere(scene, renderer);
+const shadowRight = new T.Vector3()
+  .crossVectors(new T.Vector3(0, 1, 0), atmosphere.sunDirection)
+  .normalize();
+const shadowUp = new T.Vector3()
+  .crossVectors(atmosphere.sunDirection, shadowRight)
+  .normalize();
+function placeSun(target: T.Vector3) {
+  // Quantize in the light's plane so foliage shadows do not crawl across the
+  // asphalt every time the chase camera/car moves a fraction of a texel.
+  const texel =
+    (sun.shadow.camera.right - sun.shadow.camera.left) / sun.shadow.mapSize.x;
+  const x = target.dot(shadowRight),
+    y = target.dot(shadowUp);
+  sun.target.position
+    .copy(target)
+    .addScaledVector(shadowRight, Math.round(x / texel) * texel - x)
+    .addScaledVector(shadowUp, Math.round(y / texel) * texel - y);
+  sun.position
+    .copy(sun.target.position)
+    .addScaledVector(atmosphere.sunDirection, 180);
+}
 const presentation = new Presentation(renderer, camera);
 scene.add(effects.root);
 const routeMarkers = new T.Group();
@@ -192,8 +213,8 @@ function setQuality() {
     for (const material of materials) material.needsUpdate = true;
   }
   sun.shadow.mapSize.set(
-    quality === "high" ? 2048 : 1024,
-    quality === "high" ? 2048 : 1024,
+    quality === "high" ? 4096 : 1024,
+    quality === "high" ? 4096 : 1024,
   );
   sun.shadow.map?.dispose();
   sun.shadow.map = null;
@@ -806,10 +827,7 @@ function updateCamera(dt: number) {
     camera.lookAt(inspectionView.target);
     camera.fov = 52;
     camera.updateProjectionMatrix();
-    sun.position
-      .copy(inspectionView.target)
-      .addScaledVector(atmosphere.sunDirection, 180);
-    sun.target.position.copy(inspectionView.target);
+    placeSun(inspectionView.target);
     return;
   }
   const p = visuals[0].position,
@@ -883,8 +901,7 @@ function updateCamera(dt: number) {
       camera.fov) *
     Math.min(1, dt * 4);
   camera.updateProjectionMatrix();
-  sun.position.copy(p).addScaledVector(atmosphere.sunDirection, 180);
-  sun.target.position.copy(p);
+  placeSun(p);
 }
 function drawMinimap() {
   const canvas = $<HTMLCanvasElement>("minimap-canvas");
