@@ -344,7 +344,7 @@ manifest = {'schemaVersion': 1, 'name': result['name'], 'retrievedAt': retrieval
     'cacheSha256': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(SOURCE.glob('*')) if p.is_file()}}
 from beverly_build import apply_survey
 apply_survey(result, manifest, point)
-roads, buildings = result['roads'], result['buildings']
+roads, buildings, home = result['roads'], result['buildings'], result['home']
 write('warwick.json', result)
 write('manifest.json', manifest)
 

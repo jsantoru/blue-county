@@ -23,6 +23,8 @@ export interface NeighborhoodReference {
   garageFace?: 0 | 1 | 2 | 3;
   garageDoors?: number;
   porch?: boolean;
+  /** Secondary wings share one entrance with the main house. */
+  entrance?: boolean;
   dormers?: boolean;
   chimney?: boolean;
   /** Small entry portico, or a taller projection across the entry/right facade. */
@@ -38,6 +40,7 @@ export interface NeighborhoodReference {
 /** Root-approved oriented envelope. Placement and road-clearance colliders remain in roads.ts. */
 export interface NeighborhoodHouse {
   id: string | number;
+  appearanceId?: string | number;
   x: number;
   z: number;
   width: number;
@@ -505,7 +508,7 @@ export function buildNeighborhood(
     )
       continue;
     builtHouses++;
-    const random = seeded(house.id);
+    const random = seeded(house.appearanceId ?? house.id);
     const reference = house.reference;
     const concreteKey: NeighborhoodMaterialKey = reference
       ? "referenceConcrete"
@@ -1111,6 +1114,7 @@ export function buildNeighborhood(
       : house.base;
     const doorU =
       garage && !utility && garageFace === front ? frontage * 0.22 : 0;
+    const entrance = !utility && reference?.entrance !== false;
     const baySide = !utility ? reference?.bayWindow : undefined;
     const bayWidth = Math.min(2.95, frontage * 0.24);
     const bayU = (baySide === "left" ? -1 : 1) * frontage * 0.265;
@@ -1514,7 +1518,8 @@ export function buildNeighborhood(
                 ? 1.23 + floor * (house.wallHeight - 0.95 - 1.23)
                 : 1.55);
           if (
-            (face === front &&
+            (entrance &&
+              face === front &&
               floor === 0 &&
               Math.abs(u - doorU) < 1.35 &&
               (!reference || windowY - windowHeight / 2 < entryBase + 2.35)) ||
@@ -1879,7 +1884,7 @@ export function buildNeighborhood(
             );
         }
       }
-    if (!utility) {
+    if (entrance) {
       faceBox(
         front,
         doorU,
@@ -2152,7 +2157,7 @@ export function buildNeighborhood(
     };
     const doorOutside = facePoint(front, doorU, 0, 1.9);
     const frontGable =
-      !utility && reference?.frontGable && clear(doorOutside, 2.4)
+      entrance && reference?.frontGable && clear(doorOutside, 2.4)
         ? reference.frontGable
         : undefined;
     if (frontGable) {
@@ -2293,7 +2298,7 @@ export function buildNeighborhood(
       detailFeatures++;
     }
     const porch =
-      !utility &&
+      entrance &&
       !frontGable &&
       (reference?.porch ?? (!large && random() < 0.61)) &&
       clear(doorOutside, 2.4);
@@ -2418,7 +2423,7 @@ export function buildNeighborhood(
           concreteKey,
           0xd1cec0,
         );
-    } else if (reference && !frontGable && !utility) {
+    } else if (reference && !frontGable && entrance) {
       // A disabled porch does not remove physical access to an elevated door.
       // This compact landing/flight is approximate entrance geometry, without
       // inventing a garden or a path to the street. Solid risers extend below
@@ -2503,7 +2508,7 @@ export function buildNeighborhood(
       genericYard &&
       !frontGable &&
       reference?.porch !== false &&
-      !utility &&
+      entrance &&
       !large
     ) {
       const pad = facePoint(front, doorU, 0, 0.65);

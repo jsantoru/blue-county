@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "inspectedDate": "2026-09-20",
+  "method": "Only ordinary exterior listing photographs actually viewed support these overrides. Capture dates are unknown; listing dates are historical context. No listing photographs are game assets.",
+  "facades": [
+    {
+      "address": "12 Beverly Dr",
+      "number": 12,
+      "sourcePage": "https://www.zillow.com/homedetails/12-Beverly-Dr-Warwick-NY-10990/31868909_zpid/",
+      "imageUrl": "https://photos.zillowstatic.com/fp/a4579b1a9f089a931a124100328d5445-cc_ft_960.jpg",
+      "corroboratingImageUrl": "https://ssl.cdn-redfin.com/photo/121/bigphoto/104/3871104_2.jpg",
+      "listingContext": "2023-10-23; MLS H6274652 / GSMLS 3871104",
+      "captureDate": null,
+      "confidence": "High for broad visible form and bay location; moderate for colors; current condition unverified.",
+      "reference": {
+        "wallColor": 14475742,
+        "trimColor": 15724517,
+        "shutterColor": 9082264,
+        "doorColor": 14144956,
+        "roofColor": 6909032,
+        "bayWindow": "right"
+      },
+      "unsupportedObservedDetails": [
+        "Wide front-facing gable over the viewer-right bay and an adjoining lower entry roof; existing large-gable preset includes unsupported tall columns, so it is not enabled.",
+        "Gray block/stone entry steps and low retaining edges are visible, but exact shapes and positions remain unmeasured."
+      ]
+    },
+    {
+      "address": "20 Beverly Dr",
+      "number": 20,
+      "sourcePage": "https://www.zillow.com/homedetails/20-Beverly-Dr-Warwick-NY-10990/31868887_zpid/",
+      "imageUrl": "https://photos.zillowstatic.com/fp/53a82dd0e5dea713556aff938806acda-cc_ft_960.jpg",
+      "listingContext": "2019-01-08; MLS H4900885",
+      "captureDate": null,
+      "confidence": "High for siding arrangement, brick lower level and red shutters; moderate for colors; current condition unverified.",
+      "reference": {
+        "wallColor": 15328713,
+        "trimColor": 15921116,
+        "shutterColor": 10303790,
+        "doorColor": 8861998,
+        "roofColor": 5725778
+      },
+      "unsupportedObservedDetails": [
+        "Broad viewer-left front gable and yellow shake-textured panel with angled side trim; current gable presets do not match its placement/form.",
+        "Lower front brick cladding; stoneLower is an irregular stone treatment and is not an appropriate replacement.",
+        "The back deck described in listing text is not visible in the inspected front photograph; no rear geometry added."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "href": "http://orthos.its.ny.gov/arcgis/rest/directories/arcgisoutput/wms/2013_MapServer/_ags_mapa19983196a9e42a890b91197428ab5ea.jpg",
+  "width": 1100,
+  "height": 1042,
+  "extent": {
+    "xmin": -8278462.464793595,
+    "ymin": 5054240.478811175,
+    "xmax": -8278361.317379866,
+    "ymax": 5054336.292997634,
+    "spatialReference": {
+      "wkid": 102100,
+      "latestWkid": 3857
+    }
+  },
+  "scale": 347.53515739647094,
+  "source": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2013/MapServer/export?f=json&bbox=-8278462.459768675%2C5054240.478811174%2C-8278361.322404784%2C5054336.292997633&bboxSR=3857&imageSR=3857&size=1100%2C1042&format=jpg&transparent=false&dpi=96",
+  "service": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2013/MapServer",
+  "vintage": "Spring 2013",
+  "localBounds": {
+    "minX": -38,
+    "maxX": 38,
+    "minZ": -24,
+    "maxZ": 48
+  },
+  "inspectedDate": "2026-09-20",
+  "retrievedAt": "2026-09-20T22:01:58.530887+00:00",
+  "credit": "NYS ITS Geospatial Services / NYSDOP",
+  "note": "Export is oversampled for inspection; it does not increase native image detail."
+}

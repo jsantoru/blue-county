@@ -216,6 +216,14 @@ describe("Beverly reference data", () => {
 
   it("keeps photo observations separate from unverified facade placeholders", () => {
     expect(
+      [...new Set(survey.buildingObservations
+        .filter((item) => item.photographedFacade)
+        .map((item) => item.address))].sort(),
+    ).toEqual([
+      "12 Beverly Dr", "20 Beverly Dr", "22 Beverly Dr", "26 Beverly Dr",
+      "29 Beverly Dr", "34 Beverly Dr", "35 Beverly Dr", "41 Beverly Dr",
+    ]);
+    expect(
       survey.buildingObservations.some((item) => item.photographedFacade),
     ).toBe(true);
     expect(
@@ -274,9 +282,28 @@ describe("Beverly reference data", () => {
       stories: 2,
       porch: true,
     });
+    const followup = readJson(
+      "../docs/research-streetview/facade-followup-overrides.json",
+    );
+    expect(followup.facades.map((item: any) => item.address)).toEqual([
+      "12 Beverly Dr", "20 Beverly Dr",
+    ]);
+    for (const source of followup.facades) {
+      expect(source.sourcePage).toMatch(/^https:\/\/www\.zillow\.com\/homedetails\//);
+      expect(source.imageUrl).toMatch(/^https:\/\/photos\.zillowstatic\.com\//);
+      expect(source.captureDate).toBeNull();
+      expect(source.listingContext).toMatch(/MLS/);
+      expect(source.unsupportedObservedDetails.length).toBeGreaterThan(0);
+      expect(house(source.address).reference).toMatchObject(source.reference);
+      // Existing gable/stone presets would invent features absent from these photos.
+      expect(house(source.address).reference.frontGable).toBeUndefined();
+      expect(house(source.address).reference.stoneLower).toBeUndefined();
+    }
+    expect(house("12 Beverly Dr").reference.bayWindow).toBe("right");
+    expect(house("20 Beverly Dr").reference.bayWindow).toBeUndefined();
   });
 
-  it("retains Home's detached garage and the explicitly incomplete driveway mouth", () => {
+  it("retains Home's detached garage and a connected historically supported driveway", () => {
     const homeBuildings = map.buildings!.filter(
       (building) => building.address === "2 Beverly Dr",
     );
@@ -299,16 +326,24 @@ describe("Beverly reference data", () => {
       (item) => item.address === "2 Beverly Dr",
     )!;
     expect(driveway).toMatchObject({
-      traceStatus: "visible-road-mouth-only",
-      confidence: "low",
+      traceStatus: "reviewed-pavement-outline",
+      confidence: "medium",
     });
-    expect(driveway.completion).toMatch(/ground-level reference/);
+    expect(driveway.completion).toMatch(/canopy-obscured/);
     expect(driveway.points.slice(-driveway.surveyPoints.length)).toEqual(
       driveway.surveyPoints,
     );
-    expect(length(driveway.points)).toBeLessThan(
-      distance(driveway.points[0], xz(garage.center)) / 2,
+    expect(length(driveway.points)).toBeGreaterThan(30);
+    const homeSurfaces = map.beverlySurvey.drivewaySurfaces.filter(
+      (s: any) => s.address === "2 Beverly Dr",
     );
+    expect(homeSurfaces.some((s: any) => s.evidence === "observed")).toBe(true);
+    expect(
+      homeSurfaces.some(
+        (s: any) =>
+          s.evidence === "inferred-occluded" && s.sourceId === "home-2010",
+      ),
+    ).toBe(true);
   });
 });
 

@@ -1,0 +1,41 @@
+{
+  "method": "Replicates roads.ts renderParts expansion, longest-edge oriented envelope, minimum dimensions and road-clearance scale; exact convex clipping after polygon triangulation.",
+  "houseEnvelopeCount": 453,
+  "featureCount": 26,
+  "envelopeIntersections": [],
+  "homeCar": {
+    "lengthMeters": 5.2,
+    "widthMeters": 2.1,
+    "corners": [
+      [
+        -0.19339610214862057,
+        16.82571930043388
+      ],
+      [
+        1.8461467944960477,
+        17.32598400311265
+      ],
+      [
+        0.6073961021486206,
+        22.376280699566117
+      ],
+      [
+        -1.4321467944960478,
+        21.876015996887347
+      ]
+    ],
+    "areaMeters2": 10.920000000000002,
+    "uncoveredAreaMeters2": 0,
+    "uncoveredPieces": [],
+    "buildingIntersections": []
+  },
+  "historicalFeatures": [
+    {
+      "feature": "east-home-driveway-hidden",
+      "sourceId": "home-2010",
+      "evidence": "inferred-occluded",
+      "confidence": "medium"
+    }
+  ],
+  "limits": "Plan-view envelope and pavement coverage only. Does not certify terrain grade, 3D porch/stair/roof projections, or retained tree clearance."
+}

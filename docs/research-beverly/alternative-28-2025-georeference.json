@@ -1,0 +1,29 @@
+{
+  "href": "http://orthos.its.ny.gov/arcgis/rest/directories/arcgisoutput/wms/2025_MapServer/_ags_map91fa60ad4f374c938f64c2b30c5b2978.jpg",
+  "width": 1100,
+  "height": 919,
+  "extent": {
+    "xmin": -8278713.983645088,
+    "ymin": 5054623.741255234,
+    "xmax": -8278616.816102618,
+    "ymax": 5054704.920320261,
+    "spatialReference": {
+      "wkid": 102100,
+      "latestWkid": 3857
+    }
+  },
+  "scale": 333.86060919548567,
+  "source": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer/export?f=json&bbox=-8278713.972423615%2C5054623.741255234%2C-8278616.827324088%2C5054704.920320261&bboxSR=3857&imageSR=3857&size=1100%2C919&format=jpg&transparent=false&dpi=96",
+  "service": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer",
+  "vintage": "Spring 2025",
+  "address": "28 Beverly Dr",
+  "localBounds": {
+    "minX": -227,
+    "maxX": -154,
+    "minZ": -301,
+    "maxZ": -240
+  },
+  "retrievedAt": "2026-09-20T22:20:58.542974+00:00",
+  "credit": "NYS ITS Geospatial Services / NYSDOP",
+  "note": "Native original GIS export; requested pixel spacing is oversampled for inspection and does not increase image detail. Exact flight day not established."
+}

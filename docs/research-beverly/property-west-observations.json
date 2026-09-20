@@ -1,0 +1,5027 @@
+{
+  "schemaVersion": 1,
+  "coordinateSystem": "local-meters-x-east-z-south",
+  "origin": {
+    "lat": 41.283879,
+    "lon": -74.3662393
+  },
+  "sourcePixelOrigin": "top-left of the original retained image identified by sourceId; default 1800 x 2650 reference, number 28 terrace 1100 x 919 export. Number 28 also includes equivalent fullImagePixels.",
+  "sources": [
+    {
+      "id": "nysdop-spring-2025-beverly",
+      "url": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer/export?f=image&bbox=-8278856.363185936%2C5053983.648245853%2C-8278286.800136654%2C5054822.032303777&bboxSR=3857&imageSR=3857&size=1800%2C2650&format=jpg&transparent=false&dpi=96",
+      "imagePath": "docs/research-beverly/beverly-2025-ortho.jpg",
+      "georeferencePath": "docs/research-beverly/ortho2025-export-georeference.json",
+      "vintage": "Spring 2025; exact flight day not established",
+      "pixelSize": {
+        "groundMetersApprox": 0.23778,
+        "widthPixels": 1800,
+        "heightPixels": 2650
+      },
+      "width": 1800,
+      "height": 2650,
+      "pixelSizeMeters": 0.23778,
+      "credit": "NYS ITS Geospatial Services / NYSDOP, Spring 2025",
+      "useNote": "Public NYS reference imagery, not CC0. See findings.md for official access/use qualifications. No aerial image is used as a runtime ground texture."
+    },
+    {
+      "id": "nysdop-2025-alternative-28",
+      "url": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer/export?f=json&bbox=-8278713.972423615%2C5054623.741255234%2C-8278616.827324088%2C5054704.920320261&bboxSR=3857&imageSR=3857&size=1100%2C919&format=jpg&transparent=false&dpi=96",
+      "imagePath": "docs/research-beverly/alternative-28-2025.jpg",
+      "georeferencePath": "docs/research-beverly/alternative-28-2025-georeference.json",
+      "vintage": "Spring 2025; exact flight day not established",
+      "width": 1100,
+      "height": 919,
+      "pixelSizeMeters": 0.06638,
+      "credit": "NYS ITS Geospatial Services / NYSDOP",
+      "useNote": "Oversampled official export for inspection, not additional native detail. Public NYS reference imagery, not CC0. See findings.md for access/use qualifications. Not a runtime texture.",
+      "corroboratingGeoreferencePaths": [
+        "docs/research-beverly/alternative-28-2013-georeference.json",
+        "docs/research-beverly/alternative-28-2016-georeference.json",
+        "docs/research-beverly/alternative-28-2021-georeference.json"
+      ]
+    }
+  ],
+  "method": "Manual edge audit against the cached original image and cropped enlargements. Existing centerlines are retained only when still consistent with visible pavement; many garage aprons and parking heads now have actual polygon outlines. At garage thresholds, conservative termination outside the retained rendered building envelope is preferred within the source uncertainty; no polygon continues beneath a house. Coordinates use the returned export extent, not the requested bbox. No property-owner data was requested.",
+  "auditedAt": "2026-09-20",
+  "uncertainty": "Typically 0.5\u20131.5 m for exposed edges; greater where tree crowns, shadows or building displacement obscure an edge. Roof overhang can differ from older state footprint edges. Heights, pool depth, deck construction and stairs cannot be measured from this nadir image. No lawn schema extension; established landcover is retained.",
+  "coverageAddresses": [
+    "20 Beverly Dr",
+    "22 Beverly Dr",
+    "24 Beverly Dr",
+    "26 Beverly Dr",
+    "27 Beverly Dr",
+    "28 Beverly Dr",
+    "29 Beverly Dr",
+    "30 Beverly Dr",
+    "31 Beverly Dr",
+    "32 Beverly Dr",
+    "33 Beverly Dr",
+    "34 Beverly Dr",
+    "35 Beverly Dr",
+    "36 Beverly Dr",
+    "37 Beverly Dr",
+    "38 Beverly Dr",
+    "39 Beverly Dr",
+    "40 Beverly Dr",
+    "41 Beverly Dr",
+    "42 Beverly Dr",
+    "43 Beverly Dr",
+    "44 Beverly Dr"
+  ],
+  "notClassified": [
+    {
+      "address": "20 Beverly Dr",
+      "notes": "Small light-bordered northern projection may be an open platform or flat roof. It falls inside the retained building envelope and is not asserted as a separate deck."
+    },
+    {
+      "address": "29 Beverly Dr",
+      "notes": "Small circular object east of the house may be a hot tub or garden feature; it is not asserted to be a swimming pool."
+    },
+    {
+      "address": "38 Beverly Dr",
+      "notes": "Rear roof/platform boundary not clear enough to assert an additional deck."
+    },
+    {
+      "address": "40 Beverly Dr",
+      "notes": "Rear roof/platform boundary not clear enough to assert an additional deck."
+    },
+    {
+      "address": "42 Beverly Dr",
+      "notes": "Bright terrace-like shapes beside the roof are partly screened and cannot be separated confidently from roof/porch edges."
+    },
+    {
+      "address": "43 Beverly Dr",
+      "notes": "Dark northern square platform lies within the roof envelope and cannot be distinguished securely from a flat roof section. No separate deck is asserted."
+    },
+    {
+      "address": "44 Beverly Dr",
+      "notes": "No clearly resolved pool or open deck is asserted; this is not proof of absence."
+    }
+  ],
+  "features": [
+    {
+      "id": "beverly-20-driveway",
+      "address": "20 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          1328.0,
+          351.0
+        ],
+        [
+          1317.0,
+          309.0
+        ],
+        [
+          1314.0,
+          279.0
+        ],
+        [
+          1306.0,
+          255.0
+        ],
+        [
+          1288.0,
+          246.0
+        ],
+        [
+          1291.0,
+          228.0
+        ],
+        [
+          1308.0,
+          223.0
+        ],
+        [
+          1323.0,
+          247.0
+        ],
+        [
+          1329.0,
+          279.0
+        ],
+        [
+          1330.0,
+          308.0
+        ],
+        [
+          1346.0,
+          354.0
+        ]
+      ],
+      "points": [
+        [
+          -18.231,
+          -305.596
+        ],
+        [
+          -20.847,
+          -315.583
+        ],
+        [
+          -21.56,
+          -322.716
+        ],
+        [
+          -23.462,
+          -328.422
+        ],
+        [
+          -27.742,
+          -330.562
+        ],
+        [
+          -27.029,
+          -334.842
+        ],
+        [
+          -22.987,
+          -336.031
+        ],
+        [
+          -19.42,
+          -330.324
+        ],
+        [
+          -17.993,
+          -322.716
+        ],
+        [
+          -17.756,
+          -315.82
+        ],
+        [
+          -13.951,
+          -304.883
+        ]
+      ],
+      "evidence": "inferred-occluded",
+      "confidence": "medium",
+      "notes": "Gray paved side apron and northern strip are visible. The southern mouth passes beneath an evergreen; its edges and short connection interpolate the exposed ends. No pavement is claimed beneath the house.",
+      "centerlineSourcePixels": [
+        [
+          1335.0,
+          351.0
+        ],
+        [
+          1325.0,
+          313.0
+        ],
+        [
+          1321.0,
+          283.0
+        ],
+        [
+          1310.0,
+          257.0
+        ],
+        [
+          1292.0,
+          239.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -16.567,
+          -305.596
+        ],
+        [
+          -18.944,
+          -314.632
+        ],
+        [
+          -19.896,
+          -321.765
+        ],
+        [
+          -22.511,
+          -327.946
+        ],
+        [
+          -26.791,
+          -332.226
+        ]
+      ],
+      "widthMeters": 3.5,
+      "replacesDrivewayAddresses": [
+        "20 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 128.05
+    },
+    {
+      "id": "beverly-22-driveway",
+      "address": "22 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          1117.0,
+          328.0
+        ],
+        [
+          1115.0,
+          270.0
+        ],
+        [
+          1117.0,
+          231.0
+        ],
+        [
+          1111.0,
+          217.0
+        ],
+        [
+          1109.0,
+          204.0
+        ],
+        [
+          1109.0,
+          159.0
+        ],
+        [
+          1125.0,
+          161.0
+        ],
+        [
+          1145.0,
+          192.0
+        ],
+        [
+          1138.0,
+          226.0
+        ],
+        [
+          1136.0,
+          269.0
+        ],
+        [
+          1136.0,
+          325.0
+        ]
+      ],
+      "points": [
+        [
+          -68.402,
+          -311.065
+        ],
+        [
+          -68.878,
+          -324.855
+        ],
+        [
+          -68.402,
+          -334.128
+        ],
+        [
+          -69.829,
+          -337.457
+        ],
+        [
+          -70.304,
+          -340.548
+        ],
+        [
+          -70.304,
+          -351.248
+        ],
+        [
+          -66.5,
+          -350.772
+        ],
+        [
+          -61.744,
+          -343.401
+        ],
+        [
+          -63.409,
+          -335.317
+        ],
+        [
+          -63.884,
+          -325.093
+        ],
+        [
+          -63.884,
+          -311.778
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Continuous light-gray paved access with a broad side parking apron east of the house; edge widens near the side garage. The road tie-in extends to the visible asphalt margin.",
+      "centerlineSourcePixels": [
+        [
+          1126.0,
+          328.0
+        ],
+        [
+          1125.0,
+          275.0
+        ],
+        [
+          1127.0,
+          230.0
+        ],
+        [
+          1126.0,
+          201.0
+        ],
+        [
+          1116.0,
+          179.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -66.262,
+          -311.065
+        ],
+        [
+          -66.5,
+          -323.667
+        ],
+        [
+          -66.024,
+          -334.366
+        ],
+        [
+          -66.262,
+          -341.261
+        ],
+        [
+          -68.64,
+          -346.492
+        ]
+      ],
+      "widthMeters": 4.1,
+      "replacesDrivewayAddresses": [
+        "22 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 222.39
+    },
+    {
+      "id": "beverly-24-driveway",
+      "address": "24 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          969.0,
+          347.0
+        ],
+        [
+          944.0,
+          290.0
+        ],
+        [
+          923.0,
+          232.0
+        ],
+        [
+          896.0,
+          202.0
+        ],
+        [
+          910.0,
+          184.0
+        ],
+        [
+          923.0,
+          199.0
+        ],
+        [
+          944.0,
+          232.0
+        ],
+        [
+          961.0,
+          277.0
+        ],
+        [
+          995.0,
+          340.0
+        ]
+      ],
+      "points": [
+        [
+          -103.593,
+          -306.547
+        ],
+        [
+          -109.538,
+          -320.1
+        ],
+        [
+          -114.531,
+          -333.891
+        ],
+        [
+          -120.951,
+          -341.024
+        ],
+        [
+          -117.622,
+          -345.303
+        ],
+        [
+          -114.531,
+          -341.737
+        ],
+        [
+          -109.538,
+          -333.891
+        ],
+        [
+          -105.496,
+          -323.191
+        ],
+        [
+          -97.411,
+          -308.212
+        ]
+      ],
+      "evidence": "inferred-occluded",
+      "confidence": "medium",
+      "notes": "Narrow dark paved strip with a wider house-end apron. Tree shadows and the conifer screen the upper edge; interpolation is limited to that screened section.",
+      "centerlineSourcePixels": [
+        [
+          981.44,
+          339.53
+        ],
+        [
+          956.6,
+          281.56
+        ],
+        [
+          934.51,
+          226.35
+        ],
+        [
+          908.28,
+          191.85
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -100.635,
+          -308.324
+        ],
+        [
+          -106.542,
+          -322.107
+        ],
+        [
+          -111.794,
+          -335.234
+        ],
+        [
+          -118.031,
+          -343.437
+        ]
+      ],
+      "widthMeters": 3.7,
+      "replacesDrivewayAddresses": [
+        "24 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 209.23
+    },
+    {
+      "id": "beverly-26-driveway",
+      "address": "26 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          786.0,
+          409.0
+        ],
+        [
+          754.0,
+          380.0
+        ],
+        [
+          713.0,
+          362.0
+        ],
+        [
+          691.0,
+          345.0
+        ],
+        [
+          672.0,
+          325.0
+        ],
+        [
+          658.0,
+          305.0
+        ],
+        [
+          668.0,
+          290.0
+        ],
+        [
+          686.0,
+          303.0
+        ],
+        [
+          702.0,
+          325.0
+        ],
+        [
+          725.0,
+          342.0
+        ],
+        [
+          766.0,
+          364.0
+        ],
+        [
+          807.0,
+          396.0
+        ]
+      ],
+      "points": [
+        [
+          -147.107,
+          -291.806
+        ],
+        [
+          -154.716,
+          -298.701
+        ],
+        [
+          -164.464,
+          -302.981
+        ],
+        [
+          -169.696,
+          -307.023
+        ],
+        [
+          -174.213,
+          -311.778
+        ],
+        [
+          -177.542,
+          -316.534
+        ],
+        [
+          -175.164,
+          -320.1
+        ],
+        [
+          -170.884,
+          -317.009
+        ],
+        [
+          -167.08,
+          -311.778
+        ],
+        [
+          -161.611,
+          -307.736
+        ],
+        [
+          -151.862,
+          -302.505
+        ],
+        [
+          -142.113,
+          -294.897
+        ]
+      ],
+      "evidence": "inferred-occluded",
+      "confidence": "medium",
+      "notes": "Paved access bends from the western bend to a wider garage-side apron. Bare branches screen the middle; the exposed mouth and apron establish the route, with screened edges approximate.",
+      "centerlineSourcePixels": [
+        [
+          796.47,
+          403.02
+        ],
+        [
+          759.2,
+          372.66
+        ],
+        [
+          706.75,
+          347.81
+        ],
+        [
+          680.52,
+          311.93
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -144.617,
+          -293.228
+        ],
+        [
+          -153.479,
+          -300.446
+        ],
+        [
+          -165.951,
+          -306.355
+        ],
+        [
+          -172.187,
+          -314.886
+        ]
+      ],
+      "widthMeters": 3.8,
+      "replacesDrivewayAddresses": [
+        "26 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 213.7
+    },
+    {
+      "id": "beverly-27-driveway",
+      "address": "27 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          801.0,
+          419.0
+        ],
+        [
+          831.0,
+          450.0
+        ],
+        [
+          858.0,
+          490.0
+        ],
+        [
+          880.0,
+          522.0
+        ],
+        [
+          882.0,
+          536.0
+        ],
+        [
+          903.0,
+          538.0
+        ],
+        [
+          903.0,
+          514.0
+        ],
+        [
+          892.0,
+          493.0
+        ],
+        [
+          877.0,
+          480.0
+        ],
+        [
+          846.0,
+          438.0
+        ],
+        [
+          816.0,
+          411.0
+        ]
+      ],
+      "points": [
+        [
+          -143.54,
+          -289.428
+        ],
+        [
+          -136.407,
+          -282.057
+        ],
+        [
+          -129.987,
+          -272.547
+        ],
+        [
+          -124.756,
+          -264.938
+        ],
+        [
+          -124.28,
+          -261.609
+        ],
+        [
+          -119.287,
+          -261.134
+        ],
+        [
+          -119.287,
+          -266.84
+        ],
+        [
+          -121.902,
+          -271.833
+        ],
+        [
+          -125.469,
+          -274.924
+        ],
+        [
+          -132.84,
+          -284.911
+        ],
+        [
+          -139.973,
+          -291.33
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Dark paved strip broadens beside the west garage wall; the south parking end and road apron are visible. The house roof remains outside this polygon.",
+      "centerlineSourcePixels": [
+        [
+          808.0,
+          415.0
+        ],
+        [
+          840.0,
+          447.0
+        ],
+        [
+          863.0,
+          482.0
+        ],
+        [
+          885.0,
+          506.0
+        ],
+        [
+          892.0,
+          526.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -141.876,
+          -290.379
+        ],
+        [
+          -134.267,
+          -282.771
+        ],
+        [
+          -128.798,
+          -274.449
+        ],
+        [
+          -123.567,
+          -268.742
+        ],
+        [
+          -121.902,
+          -263.987
+        ]
+      ],
+      "widthMeters": 3.7,
+      "replacesDrivewayAddresses": [
+        "27 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 179.06
+    },
+    {
+      "id": "beverly-28-driveway",
+      "address": "28 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          719.0,
+          582.0
+        ],
+        [
+          681.0,
+          570.0
+        ],
+        [
+          646.0,
+          562.0
+        ],
+        [
+          625.0,
+          570.0
+        ],
+        [
+          607.0,
+          566.0
+        ],
+        [
+          589.0,
+          560.0
+        ],
+        [
+          583.0,
+          567.0
+        ],
+        [
+          595.0,
+          576.0
+        ],
+        [
+          618.0,
+          577.0
+        ],
+        [
+          645.0,
+          576.0
+        ],
+        [
+          679.0,
+          588.0
+        ],
+        [
+          714.0,
+          603.0
+        ]
+      ],
+      "points": [
+        [
+          -163.038,
+          -250.672
+        ],
+        [
+          -172.073,
+          -253.525
+        ],
+        [
+          -180.396,
+          -255.427
+        ],
+        [
+          -185.389,
+          -253.525
+        ],
+        [
+          -189.669,
+          -254.476
+        ],
+        [
+          -193.949,
+          -255.903
+        ],
+        [
+          -195.376,
+          -254.238
+        ],
+        [
+          -192.522,
+          -252.098
+        ],
+        [
+          -187.053,
+          -251.861
+        ],
+        [
+          -180.633,
+          -252.098
+        ],
+        [
+          -172.549,
+          -249.245
+        ],
+        [
+          -164.227,
+          -245.679
+        ]
+      ],
+      "evidence": "inferred-occluded",
+      "confidence": "medium",
+      "notes": "Visible paved strip south of the house opens into a side parking area east of the small dark outbuilding. That outbuilding roof is excluded. Bare branches partly obscure the strip; conservative edges interpolate through them.",
+      "centerlineSourcePixels": [
+        [
+          717.0,
+          589.0
+        ],
+        [
+          675.0,
+          577.0
+        ],
+        [
+          645.0,
+          569.0
+        ],
+        [
+          621.0,
+          573.0
+        ],
+        [
+          597.0,
+          569.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -163.513,
+          -249.007
+        ],
+        [
+          -173.5,
+          -251.861
+        ],
+        [
+          -180.633,
+          -253.763
+        ],
+        [
+          -186.34,
+          -252.812
+        ],
+        [
+          -192.047,
+          -253.763
+        ]
+      ],
+      "widthMeters": 3.9,
+      "replacesDrivewayAddresses": [
+        "28 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 110.42
+    },
+    {
+      "id": "beverly-29-driveway",
+      "address": "29 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          740.0,
+          580.0
+        ],
+        [
+          776.0,
+          596.0
+        ],
+        [
+          815.0,
+          617.0
+        ],
+        [
+          850.0,
+          634.0
+        ],
+        [
+          864.0,
+          648.0
+        ],
+        [
+          867.0,
+          670.0
+        ],
+        [
+          860.0,
+          692.0
+        ],
+        [
+          875.0,
+          695.0
+        ],
+        [
+          882.0,
+          672.0
+        ],
+        [
+          888.0,
+          648.0
+        ],
+        [
+          881.0,
+          635.0
+        ],
+        [
+          860.0,
+          621.0
+        ],
+        [
+          820.0,
+          601.0
+        ],
+        [
+          781.0,
+          580.0
+        ],
+        [
+          748.0,
+          563.0
+        ]
+      ],
+      "points": [
+        [
+          -158.044,
+          -251.147
+        ],
+        [
+          -149.484,
+          -247.343
+        ],
+        [
+          -140.211,
+          -242.35
+        ],
+        [
+          -131.889,
+          -238.308
+        ],
+        [
+          -128.56,
+          -234.979
+        ],
+        [
+          -127.847,
+          -229.748
+        ],
+        [
+          -129.511,
+          -224.517
+        ],
+        [
+          -125.944,
+          -223.804
+        ],
+        [
+          -124.28,
+          -229.272
+        ],
+        [
+          -122.853,
+          -234.979
+        ],
+        [
+          -124.518,
+          -238.07
+        ],
+        [
+          -129.511,
+          -241.399
+        ],
+        [
+          -139.022,
+          -246.154
+        ],
+        [
+          -148.296,
+          -251.147
+        ],
+        [
+          -156.142,
+          -255.189
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Continuous dark asphalt bends into the side parking pad north/east of the main house; the driveway does not extend through the roof. A separate small circular garden/hot-tub-sized object is not classified as a swimming pool.",
+      "centerlineSourcePixels": [
+        [
+          744.0,
+          571.0
+        ],
+        [
+          781.0,
+          590.0
+        ],
+        [
+          821.0,
+          611.0
+        ],
+        [
+          861.0,
+          633.0
+        ],
+        [
+          874.0,
+          652.0
+        ],
+        [
+          867.0,
+          690.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -157.093,
+          -253.287
+        ],
+        [
+          -148.296,
+          -248.77
+        ],
+        [
+          -138.784,
+          -243.776
+        ],
+        [
+          -129.273,
+          -238.546
+        ],
+        [
+          -126.182,
+          -234.028
+        ],
+        [
+          -127.847,
+          -224.993
+        ]
+      ],
+      "widthMeters": 4.1,
+      "replacesDrivewayAddresses": [
+        "29 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 195.92
+    },
+    {
+      "id": "beverly-30-driveway",
+      "address": "30 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          678.0,
+          739.0
+        ],
+        [
+          647.0,
+          727.0
+        ],
+        [
+          618.0,
+          725.0
+        ],
+        [
+          593.0,
+          737.0
+        ],
+        [
+          580.0,
+          748.0
+        ],
+        [
+          570.0,
+          767.0
+        ],
+        [
+          565.0,
+          780.0
+        ],
+        [
+          585.0,
+          787.0
+        ],
+        [
+          597.0,
+          763.0
+        ],
+        [
+          614.0,
+          751.0
+        ],
+        [
+          630.0,
+          748.0
+        ],
+        [
+          669.0,
+          761.0
+        ]
+      ],
+      "points": [
+        [
+          -172.787,
+          -213.342
+        ],
+        [
+          -180.158,
+          -216.195
+        ],
+        [
+          -187.053,
+          -216.671
+        ],
+        [
+          -192.998,
+          -213.817
+        ],
+        [
+          -196.089,
+          -211.202
+        ],
+        [
+          -198.467,
+          -206.684
+        ],
+        [
+          -199.656,
+          -203.593
+        ],
+        [
+          -194.9,
+          -201.929
+        ],
+        [
+          -192.047,
+          -207.635
+        ],
+        [
+          -188.004,
+          -210.489
+        ],
+        [
+          -184.2,
+          -211.202
+        ],
+        [
+          -174.927,
+          -208.111
+        ]
+      ],
+      "evidence": "inferred-occluded",
+      "confidence": "medium",
+      "notes": "The access follows a bent strip north and east of the house and broadens at its southern garage end. Bare branches conceal parts of the northern bend, so those edges are approximate.",
+      "centerlineSourcePixels": [
+        [
+          669.48,
+          748.07
+        ],
+        [
+          618.4,
+          735.65
+        ],
+        [
+          582.52,
+          748.07
+        ],
+        [
+          576.99,
+          775.68
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -174.813,
+          -211.185
+        ],
+        [
+          -186.958,
+          -214.138
+        ],
+        [
+          -195.49,
+          -211.185
+        ],
+        [
+          -196.805,
+          -204.62
+        ]
+      ],
+      "widthMeters": 4.0,
+      "replacesDrivewayAddresses": [
+        "30 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 161.66
+    },
+    {
+      "id": "beverly-31-driveway",
+      "address": "31 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          635.0,
+          878.0
+        ],
+        [
+          678.0,
+          894.0
+        ],
+        [
+          730.0,
+          912.0
+        ],
+        [
+          766.0,
+          921.0
+        ],
+        [
+          791.0,
+          920.0
+        ],
+        [
+          810.0,
+          912.0
+        ],
+        [
+          809.0,
+          902.0
+        ],
+        [
+          788.0,
+          896.0
+        ],
+        [
+          784.0,
+          902.0
+        ],
+        [
+          767.0,
+          903.0
+        ],
+        [
+          736.0,
+          898.0
+        ],
+        [
+          684.0,
+          881.0
+        ],
+        [
+          643.0,
+          861.0
+        ]
+      ],
+      "points": [
+        [
+          -183.011,
+          -180.292
+        ],
+        [
+          -172.787,
+          -176.487
+        ],
+        [
+          -160.422,
+          -172.207
+        ],
+        [
+          -151.862,
+          -170.067
+        ],
+        [
+          -145.918,
+          -170.305
+        ],
+        [
+          -141.4,
+          -172.207
+        ],
+        [
+          -141.638,
+          -174.585
+        ],
+        [
+          -146.631,
+          -176.012
+        ],
+        [
+          -147.582,
+          -174.585
+        ],
+        [
+          -151.624,
+          -174.347
+        ],
+        [
+          -158.996,
+          -175.536
+        ],
+        [
+          -171.36,
+          -179.578
+        ],
+        [
+          -181.109,
+          -184.334
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Broad dark asphalt strip and flared parking head west/south of the garage are visible; the garage-end edge stops outside the roof.",
+      "centerlineSourcePixels": [
+        [
+          641.0,
+          870.0
+        ],
+        [
+          683.0,
+          888.0
+        ],
+        [
+          735.0,
+          905.0
+        ],
+        [
+          766.0,
+          911.0
+        ],
+        [
+          794.0,
+          910.0
+        ],
+        [
+          798.0,
+          904.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -181.584,
+          -182.194
+        ],
+        [
+          -171.598,
+          -177.914
+        ],
+        [
+          -159.233,
+          -173.872
+        ],
+        [
+          -151.862,
+          -172.445
+        ],
+        [
+          -145.204,
+          -172.683
+        ],
+        [
+          -144.253,
+          -174.11
+        ]
+      ],
+      "widthMeters": 3.8,
+      "replacesDrivewayAddresses": [
+        "31 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 164.16
+    },
+    {
+      "id": "beverly-32-driveway",
+      "address": "32 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          554.0,
+          999.0
+        ],
+        [
+          530.0,
+          987.0
+        ],
+        [
+          499.0,
+          974.0
+        ],
+        [
+          484.0,
+          963.0
+        ],
+        [
+          481.0,
+          945.0
+        ],
+        [
+          465.0,
+          939.0
+        ],
+        [
+          458.0,
+          938.0
+        ],
+        [
+          454.0,
+          953.0
+        ],
+        [
+          458.0,
+          967.0
+        ],
+        [
+          472.0,
+          978.0
+        ],
+        [
+          497.0,
+          991.0
+        ],
+        [
+          531.0,
+          1005.0
+        ],
+        [
+          546.0,
+          1013.0
+        ]
+      ],
+      "points": [
+        [
+          -202.271,
+          -151.521
+        ],
+        [
+          -207.978,
+          -154.374
+        ],
+        [
+          -215.349,
+          -157.466
+        ],
+        [
+          -218.916,
+          -160.081
+        ],
+        [
+          -219.629,
+          -164.361
+        ],
+        [
+          -223.433,
+          -165.788
+        ],
+        [
+          -225.098,
+          -166.025
+        ],
+        [
+          -226.049,
+          -162.459
+        ],
+        [
+          -225.098,
+          -159.13
+        ],
+        [
+          -221.769,
+          -156.514
+        ],
+        [
+          -215.824,
+          -153.423
+        ],
+        [
+          -207.74,
+          -150.095
+        ],
+        [
+          -204.173,
+          -148.192
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Exposed strip south of the house has a broad two-car parking head. Polygon follows pavement rather than an even-width strip.",
+      "centerlineSourcePixels": [
+        [
+          554.0,
+          1003.0
+        ],
+        [
+          529.0,
+          995.0
+        ],
+        [
+          499.0,
+          981.0
+        ],
+        [
+          474.0,
+          967.0
+        ],
+        [
+          469.0,
+          954.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -202.271,
+          -150.57
+        ],
+        [
+          -208.216,
+          -152.472
+        ],
+        [
+          -215.349,
+          -155.801
+        ],
+        [
+          -221.293,
+          -159.13
+        ],
+        [
+          -222.482,
+          -162.221
+        ]
+      ],
+      "widthMeters": 4.0,
+      "replacesDrivewayAddresses": [
+        "32 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 121.1
+    },
+    {
+      "id": "beverly-33-driveway",
+      "address": "33 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          565.0,
+          1018.0
+        ],
+        [
+          608.0,
+          1034.0
+        ],
+        [
+          654.0,
+          1049.0
+        ],
+        [
+          698.0,
+          1059.0
+        ],
+        [
+          726.0,
+          1059.0
+        ],
+        [
+          747.0,
+          1050.0
+        ],
+        [
+          775.0,
+          1058.0
+        ],
+        [
+          780.0,
+          1035.0
+        ],
+        [
+          758.0,
+          1038.0
+        ],
+        [
+          736.0,
+          1031.0
+        ],
+        [
+          721.0,
+          1041.0
+        ],
+        [
+          697.0,
+          1042.0
+        ],
+        [
+          657.0,
+          1033.0
+        ],
+        [
+          614.0,
+          1018.0
+        ],
+        [
+          570.0,
+          1001.0
+        ]
+      ],
+      "points": [
+        [
+          -199.656,
+          -147.003
+        ],
+        [
+          -189.431,
+          -143.199
+        ],
+        [
+          -178.493,
+          -139.633
+        ],
+        [
+          -168.031,
+          -137.255
+        ],
+        [
+          -161.373,
+          -137.255
+        ],
+        [
+          -156.38,
+          -139.395
+        ],
+        [
+          -149.722,
+          -137.493
+        ],
+        [
+          -148.533,
+          -142.961
+        ],
+        [
+          -153.764,
+          -142.248
+        ],
+        [
+          -158.996,
+          -143.912
+        ],
+        [
+          -162.562,
+          -141.535
+        ],
+        [
+          -168.269,
+          -141.297
+        ],
+        [
+          -177.78,
+          -143.437
+        ],
+        [
+          -188.004,
+          -147.003
+        ],
+        [
+          -198.467,
+          -151.046
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Paved strip widens into an irregular parking head along the south side of the house; the white-edged rear platform is separate from this surface.",
+      "centerlineSourcePixels": [
+        [
+          572.0,
+          1023.0
+        ],
+        [
+          615.0,
+          1027.0
+        ],
+        [
+          661.0,
+          1041.0
+        ],
+        [
+          702.0,
+          1050.0
+        ],
+        [
+          731.0,
+          1049.0
+        ],
+        [
+          755.0,
+          1043.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -197.991,
+          -145.815
+        ],
+        [
+          -187.767,
+          -144.864
+        ],
+        [
+          -176.829,
+          -141.535
+        ],
+        [
+          -167.08,
+          -139.395
+        ],
+        [
+          -160.184,
+          -139.633
+        ],
+        [
+          -154.478,
+          -141.059
+        ]
+      ],
+      "widthMeters": 3.9,
+      "replacesDrivewayAddresses": [
+        "33 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 213.93
+    },
+    {
+      "id": "beverly-34-driveway",
+      "address": "34 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          525.0,
+          1142.0
+        ],
+        [
+          494.0,
+          1134.0
+        ],
+        [
+          465.0,
+          1128.0
+        ],
+        [
+          430.0,
+          1114.0
+        ],
+        [
+          414.0,
+          1100.0
+        ],
+        [
+          414.0,
+          1088.0
+        ],
+        [
+          396.0,
+          1083.0
+        ],
+        [
+          381.0,
+          1113.0
+        ],
+        [
+          376.0,
+          1130.0
+        ],
+        [
+          411.0,
+          1139.0
+        ],
+        [
+          441.0,
+          1148.0
+        ],
+        [
+          466.0,
+          1156.0
+        ],
+        [
+          489.0,
+          1155.0
+        ],
+        [
+          518.0,
+          1163.0
+        ]
+      ],
+      "points": [
+        [
+          -209.167,
+          -117.52
+        ],
+        [
+          -216.538,
+          -119.422
+        ],
+        [
+          -223.433,
+          -120.848
+        ],
+        [
+          -231.756,
+          -124.177
+        ],
+        [
+          -235.56,
+          -127.506
+        ],
+        [
+          -235.56,
+          -130.359
+        ],
+        [
+          -239.84,
+          -131.548
+        ],
+        [
+          -243.407,
+          -124.415
+        ],
+        [
+          -244.596,
+          -120.373
+        ],
+        [
+          -236.273,
+          -118.233
+        ],
+        [
+          -229.14,
+          -116.093
+        ],
+        [
+          -223.196,
+          -114.191
+        ],
+        [
+          -217.727,
+          -114.429
+        ],
+        [
+          -210.831,
+          -112.526
+        ]
+      ],
+      "evidence": "inferred-occluded",
+      "confidence": "medium",
+      "notes": "Visible paved approach bends around the southeast corner into a wider garage apron. The east middle is partially screened by a large crown; its continuation is interpolated.",
+      "centerlineSourcePixels": [
+        [
+          520.4,
+          1151.09
+        ],
+        [
+          466.56,
+          1148.33
+        ],
+        [
+          408.59,
+          1122.11
+        ],
+        [
+          393.4,
+          1095.89
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -210.26,
+          -115.358
+        ],
+        [
+          -223.062,
+          -116.014
+        ],
+        [
+          -236.846,
+          -122.249
+        ],
+        [
+          -240.458,
+          -128.483
+        ]
+      ],
+      "widthMeters": 3.8,
+      "replacesDrivewayAddresses": [
+        "34 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 250.28
+    },
+    {
+      "id": "beverly-35-driveway",
+      "address": "35 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          510.0,
+          1138.0
+        ],
+        [
+          558.0,
+          1152.0
+        ],
+        [
+          605.0,
+          1167.0
+        ],
+        [
+          641.0,
+          1179.0
+        ],
+        [
+          662.0,
+          1182.0
+        ],
+        [
+          666.0,
+          1195.0
+        ],
+        [
+          649.0,
+          1198.0
+        ],
+        [
+          607.0,
+          1185.0
+        ],
+        [
+          560.0,
+          1170.0
+        ],
+        [
+          505.0,
+          1156.0
+        ]
+      ],
+      "points": [
+        [
+          -212.733,
+          -118.471
+        ],
+        [
+          -201.32,
+          -115.142
+        ],
+        [
+          -190.144,
+          -111.575
+        ],
+        [
+          -181.584,
+          -108.722
+        ],
+        [
+          -176.591,
+          -108.009
+        ],
+        [
+          -175.64,
+          -104.918
+        ],
+        [
+          -179.682,
+          -104.204
+        ],
+        [
+          -189.669,
+          -107.295
+        ],
+        [
+          -200.844,
+          -110.862
+        ],
+        [
+          -213.922,
+          -114.191
+        ]
+      ],
+      "evidence": "inferred-occluded",
+      "confidence": "low",
+      "notes": "Dense branch cover screens nearly all the center strip. Only the road-end opening and house-end parked vehicle establish this interpolated access; polygon width and hidden edges are approximate. No additional side parking pad is asserted.",
+      "centerlineSourcePixels": [
+        [
+          507.98,
+          1144.19
+        ],
+        [
+          570.09,
+          1160.76
+        ],
+        [
+          636.35,
+          1181.46
+        ],
+        [
+          659.82,
+          1189.74
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -213.214,
+          -116.999
+        ],
+        [
+          -198.445,
+          -113.059
+        ],
+        [
+          -182.69,
+          -108.137
+        ],
+        [
+          -177.109,
+          -106.168
+        ]
+      ],
+      "widthMeters": 3.7,
+      "replacesDrivewayAddresses": [
+        "35 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 154.18
+    },
+    {
+      "id": "beverly-36-driveway",
+      "address": "36 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          472.0,
+          1204.0
+        ],
+        [
+          442.0,
+          1192.0
+        ],
+        [
+          411.0,
+          1182.0
+        ],
+        [
+          385.0,
+          1177.0
+        ],
+        [
+          360.0,
+          1168.0
+        ],
+        [
+          346.0,
+          1173.0
+        ],
+        [
+          339.0,
+          1189.0
+        ],
+        [
+          345.0,
+          1194.0
+        ],
+        [
+          364.0,
+          1200.0
+        ],
+        [
+          374.0,
+          1191.0
+        ],
+        [
+          405.0,
+          1197.0
+        ],
+        [
+          438.0,
+          1209.0
+        ],
+        [
+          465.0,
+          1222.0
+        ]
+      ],
+      "points": [
+        [
+          -221.769,
+          -102.778
+        ],
+        [
+          -228.902,
+          -105.631
+        ],
+        [
+          -236.273,
+          -108.009
+        ],
+        [
+          -242.456,
+          -109.197
+        ],
+        [
+          -248.4,
+          -111.337
+        ],
+        [
+          -251.729,
+          -110.149
+        ],
+        [
+          -253.393,
+          -106.344
+        ],
+        [
+          -251.967,
+          -105.155
+        ],
+        [
+          -247.449,
+          -103.729
+        ],
+        [
+          -245.071,
+          -105.869
+        ],
+        [
+          -237.7,
+          -104.442
+        ],
+        [
+          -229.853,
+          -101.589
+        ],
+        [
+          -223.433,
+          -98.498
+        ]
+      ],
+      "evidence": "inferred-occluded",
+      "confidence": "medium",
+      "notes": "Paved strip lies north of the house, with a clearly exposed broad light-gray apron beside its northeast corner. Branches screen the roadward half.",
+      "centerlineSourcePixels": [
+        [
+          465.18,
+          1213.2
+        ],
+        [
+          422.39,
+          1199.4
+        ],
+        [
+          389.26,
+          1189.74
+        ],
+        [
+          364.42,
+          1181.46
+        ],
+        [
+          360.28,
+          1193.88
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -223.391,
+          -100.59
+        ],
+        [
+          -233.565,
+          -103.871
+        ],
+        [
+          -241.443,
+          -106.168
+        ],
+        [
+          -247.349,
+          -108.137
+        ],
+        [
+          -248.333,
+          -105.184
+        ]
+      ],
+      "widthMeters": 3.8,
+      "replacesDrivewayAddresses": [
+        "36 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 141.28
+    },
+    {
+      "id": "beverly-37-driveway",
+      "address": "37 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          457.0,
+          1291.0
+        ],
+        [
+          495.0,
+          1304.0
+        ],
+        [
+          543.0,
+          1320.0
+        ],
+        [
+          590.0,
+          1336.0
+        ],
+        [
+          621.0,
+          1352.0
+        ],
+        [
+          634.0,
+          1352.0
+        ],
+        [
+          649.0,
+          1335.0
+        ],
+        [
+          645.0,
+          1329.0
+        ],
+        [
+          634.0,
+          1328.0
+        ],
+        [
+          616.0,
+          1332.0
+        ],
+        [
+          592.0,
+          1319.0
+        ],
+        [
+          548.0,
+          1304.0
+        ],
+        [
+          500.0,
+          1288.0
+        ],
+        [
+          463.0,
+          1274.0
+        ]
+      ],
+      "points": [
+        [
+          -225.336,
+          -82.091
+        ],
+        [
+          -216.3,
+          -79.0
+        ],
+        [
+          -204.887,
+          -75.196
+        ],
+        [
+          -193.711,
+          -71.391
+        ],
+        [
+          -186.34,
+          -67.587
+        ],
+        [
+          -183.249,
+          -67.587
+        ],
+        [
+          -179.682,
+          -71.629
+        ],
+        [
+          -180.633,
+          -73.056
+        ],
+        [
+          -183.249,
+          -73.294
+        ],
+        [
+          -187.529,
+          -72.342
+        ],
+        [
+          -193.236,
+          -75.433
+        ],
+        [
+          -203.698,
+          -79.0
+        ],
+        [
+          -215.111,
+          -82.805
+        ],
+        [
+          -223.909,
+          -86.133
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Continuous dark paved approach and widened southern parking head visible. This trace excludes the light rear platform on the east side of the building.",
+      "centerlineSourcePixels": [
+        [
+          455.0,
+          1291.0
+        ],
+        [
+          498.0,
+          1297.0
+        ],
+        [
+          547.0,
+          1312.0
+        ],
+        [
+          590.0,
+          1328.0
+        ],
+        [
+          622.0,
+          1343.0
+        ],
+        [
+          634.0,
+          1332.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -225.811,
+          -82.091
+        ],
+        [
+          -215.587,
+          -80.665
+        ],
+        [
+          -203.936,
+          -77.098
+        ],
+        [
+          -193.711,
+          -73.294
+        ],
+        [
+          -186.102,
+          -69.727
+        ],
+        [
+          -183.249,
+          -72.342
+        ]
+      ],
+      "widthMeters": 3.8,
+      "replacesDrivewayAddresses": [
+        "37 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 191.66
+    },
+    {
+      "id": "beverly-38-driveway",
+      "address": "38 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          397.0,
+          1371.0
+        ],
+        [
+          375.0,
+          1359.0
+        ],
+        [
+          345.0,
+          1348.0
+        ],
+        [
+          311.0,
+          1336.0
+        ],
+        [
+          294.0,
+          1334.0
+        ],
+        [
+          285.0,
+          1348.0
+        ],
+        [
+          281.0,
+          1360.0
+        ],
+        [
+          265.0,
+          1353.0
+        ],
+        [
+          266.0,
+          1340.0
+        ],
+        [
+          271.0,
+          1326.0
+        ],
+        [
+          289.0,
+          1318.0
+        ],
+        [
+          314.0,
+          1319.0
+        ],
+        [
+          351.0,
+          1331.0
+        ],
+        [
+          381.0,
+          1343.0
+        ],
+        [
+          404.0,
+          1356.0
+        ]
+      ],
+      "points": [
+        [
+          -239.602,
+          -63.069
+        ],
+        [
+          -244.833,
+          -65.922
+        ],
+        [
+          -251.967,
+          -68.538
+        ],
+        [
+          -260.051,
+          -71.391
+        ],
+        [
+          -264.093,
+          -71.867
+        ],
+        [
+          -266.233,
+          -68.538
+        ],
+        [
+          -267.184,
+          -65.685
+        ],
+        [
+          -270.989,
+          -67.349
+        ],
+        [
+          -270.751,
+          -70.44
+        ],
+        [
+          -269.562,
+          -73.769
+        ],
+        [
+          -265.282,
+          -75.671
+        ],
+        [
+          -259.338,
+          -75.433
+        ],
+        [
+          -250.54,
+          -72.58
+        ],
+        [
+          -243.407,
+          -69.727
+        ],
+        [
+          -237.938,
+          -66.636
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Dark paved strip north of the roof, widening toward the garage and a parking pad on the western end. Part of the source trace falls just north of this working crop, but remains in the original image.",
+      "centerlineSourcePixels": [
+        [
+          391.0,
+          1367.0
+        ],
+        [
+          366.0,
+          1354.0
+        ],
+        [
+          334.0,
+          1343.0
+        ],
+        [
+          301.0,
+          1328.0
+        ],
+        [
+          280.0,
+          1335.0
+        ],
+        [
+          271.0,
+          1353.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -241.029,
+          -64.02
+        ],
+        [
+          -246.973,
+          -67.111
+        ],
+        [
+          -254.582,
+          -69.727
+        ],
+        [
+          -262.429,
+          -73.294
+        ],
+        [
+          -267.422,
+          -71.629
+        ],
+        [
+          -269.562,
+          -67.349
+        ]
+      ],
+      "widthMeters": 3.8,
+      "replacesDrivewayAddresses": [
+        "38 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 155.36
+    },
+    {
+      "id": "beverly-39-driveway",
+      "address": "39 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          397.0,
+          1449.0
+        ],
+        [
+          441.0,
+          1464.0
+        ],
+        [
+          491.0,
+          1482.0
+        ],
+        [
+          534.0,
+          1498.0
+        ],
+        [
+          560.0,
+          1507.0
+        ],
+        [
+          571.0,
+          1504.0
+        ],
+        [
+          583.0,
+          1491.0
+        ],
+        [
+          571.0,
+          1485.0
+        ],
+        [
+          552.0,
+          1478.0
+        ],
+        [
+          547.0,
+          1484.0
+        ],
+        [
+          536.0,
+          1483.0
+        ],
+        [
+          496.0,
+          1469.0
+        ],
+        [
+          448.0,
+          1452.0
+        ],
+        [
+          405.0,
+          1434.0
+        ]
+      ],
+      "points": [
+        [
+          -239.602,
+          -44.523
+        ],
+        [
+          -229.14,
+          -40.956
+        ],
+        [
+          -217.251,
+          -36.676
+        ],
+        [
+          -207.027,
+          -32.872
+        ],
+        [
+          -200.844,
+          -30.732
+        ],
+        [
+          -198.229,
+          -31.445
+        ],
+        [
+          -195.376,
+          -34.536
+        ],
+        [
+          -198.229,
+          -35.963
+        ],
+        [
+          -202.747,
+          -37.627
+        ],
+        [
+          -203.936,
+          -36.2
+        ],
+        [
+          -206.551,
+          -36.438
+        ],
+        [
+          -216.062,
+          -39.767
+        ],
+        [
+          -227.476,
+          -43.809
+        ],
+        [
+          -237.7,
+          -48.089
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Dark paved driveway and right-angle parking apron immediately south of the house are unobscured. Orange rear deck is traced separately.",
+      "centerlineSourcePixels": [
+        [
+          400.0,
+          1443.0
+        ],
+        [
+          447.0,
+          1459.0
+        ],
+        [
+          493.0,
+          1475.0
+        ],
+        [
+          537.0,
+          1490.0
+        ],
+        [
+          562.0,
+          1497.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -238.889,
+          -45.949
+        ],
+        [
+          -227.713,
+          -42.145
+        ],
+        [
+          -216.776,
+          -38.34
+        ],
+        [
+          -206.313,
+          -34.774
+        ],
+        [
+          -200.369,
+          -33.109
+        ]
+      ],
+      "widthMeters": 4.0,
+      "replacesDrivewayAddresses": [
+        "39 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 166.69
+    },
+    {
+      "id": "beverly-40-driveway",
+      "address": "40 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          341.0,
+          1537.0
+        ],
+        [
+          311.0,
+          1524.0
+        ],
+        [
+          279.0,
+          1514.0
+        ],
+        [
+          259.0,
+          1509.0
+        ],
+        [
+          246.0,
+          1514.0
+        ],
+        [
+          240.0,
+          1520.0
+        ],
+        [
+          229.0,
+          1517.0
+        ],
+        [
+          229.0,
+          1502.0
+        ],
+        [
+          241.0,
+          1493.0
+        ],
+        [
+          259.0,
+          1492.0
+        ],
+        [
+          284.0,
+          1498.0
+        ],
+        [
+          317.0,
+          1509.0
+        ],
+        [
+          350.0,
+          1522.0
+        ]
+      ],
+      "points": [
+        [
+          -252.918,
+          -23.598
+        ],
+        [
+          -260.051,
+          -26.689
+        ],
+        [
+          -267.66,
+          -29.067
+        ],
+        [
+          -272.416,
+          -30.256
+        ],
+        [
+          -275.507,
+          -29.067
+        ],
+        [
+          -276.933,
+          -27.64
+        ],
+        [
+          -279.549,
+          -28.354
+        ],
+        [
+          -279.549,
+          -31.92
+        ],
+        [
+          -276.696,
+          -34.06
+        ],
+        [
+          -272.416,
+          -34.298
+        ],
+        [
+          -266.471,
+          -32.872
+        ],
+        [
+          -258.624,
+          -30.256
+        ],
+        [
+          -250.778,
+          -27.165
+        ]
+      ],
+      "evidence": "inferred-occluded",
+      "confidence": "medium",
+      "notes": "Narrow paved strip north of the house and visible west parking end; middle passes under bare branches. No extension across the house footprint is inferred.",
+      "centerlineSourcePixels": [
+        [
+          336.81,
+          1527.89
+        ],
+        [
+          298.16,
+          1515.47
+        ],
+        [
+          260.89,
+          1505.81
+        ],
+        [
+          247.09,
+          1511.33
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -253.914,
+          -25.764
+        ],
+        [
+          -263.104,
+          -28.718
+        ],
+        [
+          -271.966,
+          -31.015
+        ],
+        [
+          -275.247,
+          -29.702
+        ]
+      ],
+      "widthMeters": 3.8,
+      "replacesDrivewayAddresses": [
+        "40 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 120.8
+    },
+    {
+      "id": "beverly-41-driveway",
+      "address": "41 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          376.0,
+          1508.0
+        ],
+        [
+          411.0,
+          1520.0
+        ],
+        [
+          457.0,
+          1538.0
+        ],
+        [
+          486.0,
+          1549.0
+        ],
+        [
+          495.0,
+          1553.0
+        ],
+        [
+          499.0,
+          1561.0
+        ],
+        [
+          513.0,
+          1560.0
+        ],
+        [
+          528.0,
+          1558.0
+        ],
+        [
+          528.0,
+          1535.0
+        ],
+        [
+          514.0,
+          1524.0
+        ],
+        [
+          496.0,
+          1525.0
+        ],
+        [
+          463.0,
+          1519.0
+        ],
+        [
+          418.0,
+          1502.0
+        ],
+        [
+          382.0,
+          1490.0
+        ]
+      ],
+      "points": [
+        [
+          -244.596,
+          -30.494
+        ],
+        [
+          -236.273,
+          -27.64
+        ],
+        [
+          -225.336,
+          -23.361
+        ],
+        [
+          -218.44,
+          -20.745
+        ],
+        [
+          -216.3,
+          -19.794
+        ],
+        [
+          -215.349,
+          -17.892
+        ],
+        [
+          -212.02,
+          -18.129
+        ],
+        [
+          -208.453,
+          -18.605
+        ],
+        [
+          -208.453,
+          -24.074
+        ],
+        [
+          -211.782,
+          -26.689
+        ],
+        [
+          -216.062,
+          -26.452
+        ],
+        [
+          -223.909,
+          -27.878
+        ],
+        [
+          -234.609,
+          -31.92
+        ],
+        [
+          -243.169,
+          -34.774
+        ]
+      ],
+      "evidence": "inferred-occluded",
+      "confidence": "medium",
+      "notes": "Access terminates at the exposed north-side vehicle parking apron. Bare branches obscure the roadward connection. Rear hardscape east/south of the house is a separate patio, not driveway.",
+      "centerlineSourcePixels": [
+        [
+          384.0,
+          1499.0
+        ],
+        [
+          422.0,
+          1517.0
+        ],
+        [
+          469.0,
+          1531.0
+        ],
+        [
+          504.0,
+          1541.0
+        ],
+        [
+          513.0,
+          1551.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -242.693,
+          -32.634
+        ],
+        [
+          -233.658,
+          -28.354
+        ],
+        [
+          -222.482,
+          -25.025
+        ],
+        [
+          -214.16,
+          -22.647
+        ],
+        [
+          -212.02,
+          -20.269
+        ]
+      ],
+      "widthMeters": 3.8,
+      "replacesDrivewayAddresses": [
+        "41 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 203.65
+    },
+    {
+      "id": "beverly-42-driveway",
+      "address": "42 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          345.0,
+          1660.0
+        ],
+        [
+          319.0,
+          1669.0
+        ],
+        [
+          286.0,
+          1680.0
+        ],
+        [
+          257.0,
+          1690.0
+        ],
+        [
+          242.0,
+          1702.0
+        ],
+        [
+          228.0,
+          1709.0
+        ],
+        [
+          221.0,
+          1699.0
+        ],
+        [
+          231.0,
+          1684.0
+        ],
+        [
+          251.0,
+          1673.0
+        ],
+        [
+          281.0,
+          1663.0
+        ],
+        [
+          310.0,
+          1653.0
+        ],
+        [
+          337.0,
+          1642.0
+        ]
+      ],
+      "points": [
+        [
+          -251.967,
+          5.648
+        ],
+        [
+          -258.149,
+          7.788
+        ],
+        [
+          -265.996,
+          10.404
+        ],
+        [
+          -272.891,
+          12.782
+        ],
+        [
+          -276.458,
+          15.635
+        ],
+        [
+          -279.787,
+          17.299
+        ],
+        [
+          -281.451,
+          14.922
+        ],
+        [
+          -279.073,
+          11.355
+        ],
+        [
+          -274.318,
+          8.739
+        ],
+        [
+          -267.184,
+          6.362
+        ],
+        [
+          -260.289,
+          3.984
+        ],
+        [
+          -253.869,
+          1.368
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Light-gray paved strip runs west from the lower bend to the northern parking apron. Visible pavement stops at the north end of the main roof.",
+      "centerlineSourcePixels": [
+        [
+          344.0,
+          1655.0
+        ],
+        [
+          314.0,
+          1662.0
+        ],
+        [
+          281.0,
+          1672.0
+        ],
+        [
+          254.0,
+          1683.0
+        ],
+        [
+          235.0,
+          1697.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -252.204,
+          4.459
+        ],
+        [
+          -259.338,
+          6.124
+        ],
+        [
+          -267.184,
+          8.502
+        ],
+        [
+          -273.604,
+          11.117
+        ],
+        [
+          -278.122,
+          14.446
+        ]
+      ],
+      "widthMeters": 3.6,
+      "replacesDrivewayAddresses": [
+        "42 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 132.75
+    },
+    {
+      "id": "beverly-43-driveway",
+      "address": "43 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          684.0,
+          1824.0
+        ],
+        [
+          708.0,
+          1816.0
+        ],
+        [
+          741.0,
+          1798.0
+        ],
+        [
+          766.0,
+          1778.0
+        ],
+        [
+          780.0,
+          1756.0
+        ],
+        [
+          786.0,
+          1727.0
+        ],
+        [
+          792.0,
+          1700.0
+        ],
+        [
+          788.0,
+          1685.0
+        ],
+        [
+          771.0,
+          1678.0
+        ],
+        [
+          760.0,
+          1677.0
+        ],
+        [
+          754.0,
+          1687.0
+        ],
+        [
+          765.0,
+          1696.0
+        ],
+        [
+          766.0,
+          1718.0
+        ],
+        [
+          762.0,
+          1741.0
+        ],
+        [
+          755.0,
+          1761.0
+        ],
+        [
+          736.0,
+          1780.0
+        ],
+        [
+          707.0,
+          1796.0
+        ],
+        [
+          678.0,
+          1806.0
+        ]
+      ],
+      "points": [
+        [
+          -171.36,
+          44.644
+        ],
+        [
+          -165.653,
+          42.742
+        ],
+        [
+          -157.807,
+          38.462
+        ],
+        [
+          -151.862,
+          33.706
+        ],
+        [
+          -148.533,
+          28.475
+        ],
+        [
+          -147.107,
+          21.579
+        ],
+        [
+          -145.68,
+          15.159
+        ],
+        [
+          -146.631,
+          11.593
+        ],
+        [
+          -150.673,
+          9.928
+        ],
+        [
+          -153.289,
+          9.691
+        ],
+        [
+          -154.716,
+          12.068
+        ],
+        [
+          -152.1,
+          14.208
+        ],
+        [
+          -151.862,
+          19.439
+        ],
+        [
+          -152.813,
+          24.908
+        ],
+        [
+          -154.478,
+          29.664
+        ],
+        [
+          -158.996,
+          34.182
+        ],
+        [
+          -165.891,
+          37.986
+        ],
+        [
+          -172.787,
+          40.364
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Large continuous asphalt bend with a broad paved garage court on the east side of the solar-panel roof. The light horizontal roof/extension north of the main roof is explicitly excluded from paving; the old centerline endpoint incorrectly approached that roof.",
+      "centerlineSourcePixels": [
+        [
+          688.0,
+          1818.0
+        ],
+        [
+          721.0,
+          1802.0
+        ],
+        [
+          752.0,
+          1778.0
+        ],
+        [
+          769.0,
+          1754.0
+        ],
+        [
+          776.0,
+          1726.0
+        ],
+        [
+          779.0,
+          1695.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -170.409,
+          43.217
+        ],
+        [
+          -162.562,
+          39.413
+        ],
+        [
+          -155.191,
+          33.706
+        ],
+        [
+          -151.149,
+          28.0
+        ],
+        [
+          -149.484,
+          21.342
+        ],
+        [
+          -148.771,
+          13.971
+        ]
+      ],
+      "widthMeters": 4.2,
+      "replacesDrivewayAddresses": [
+        "43 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 219.77
+    },
+    {
+      "id": "beverly-44-driveway",
+      "address": "44 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          430.0,
+          1770.0
+        ],
+        [
+          405.0,
+          1786.0
+        ],
+        [
+          381.0,
+          1805.0
+        ],
+        [
+          351.0,
+          1824.0
+        ],
+        [
+          339.0,
+          1833.0
+        ],
+        [
+          335.0,
+          1851.0
+        ],
+        [
+          345.0,
+          1860.0
+        ],
+        [
+          350.0,
+          1845.0
+        ],
+        [
+          350.0,
+          1835.0
+        ],
+        [
+          370.0,
+          1824.0
+        ],
+        [
+          395.0,
+          1819.0
+        ],
+        [
+          419.0,
+          1801.0
+        ],
+        [
+          443.0,
+          1786.0
+        ]
+      ],
+      "points": [
+        [
+          -231.756,
+          31.804
+        ],
+        [
+          -237.7,
+          35.608
+        ],
+        [
+          -243.407,
+          40.126
+        ],
+        [
+          -250.54,
+          44.644
+        ],
+        [
+          -253.393,
+          46.784
+        ],
+        [
+          -254.344,
+          51.064
+        ],
+        [
+          -251.967,
+          53.204
+        ],
+        [
+          -250.778,
+          49.637
+        ],
+        [
+          -250.778,
+          47.26
+        ],
+        [
+          -246.022,
+          44.644
+        ],
+        [
+          -240.078,
+          43.455
+        ],
+        [
+          -234.371,
+          39.175
+        ],
+        [
+          -228.664,
+          35.608
+        ]
+      ],
+      "evidence": "inferred-occluded",
+      "confidence": "medium",
+      "notes": "Driveway runs southwest from the bend, then broadens into the visible parking head north/west of the house. Bare branch cover obscures part of the roadside half.",
+      "centerlineSourcePixels": [
+        [
+          421.0,
+          1778.0
+        ],
+        [
+          402.0,
+          1799.0
+        ],
+        [
+          379.0,
+          1815.0
+        ],
+        [
+          354.0,
+          1830.0
+        ],
+        [
+          346.0,
+          1846.0
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -233.896,
+          33.706
+        ],
+        [
+          -238.413,
+          38.7
+        ],
+        [
+          -243.882,
+          42.504
+        ],
+        [
+          -249.827,
+          46.071
+        ],
+        [
+          -251.729,
+          49.875
+        ]
+      ],
+      "widthMeters": 3.8,
+      "replacesDrivewayAddresses": [
+        "44 Beverly Dr"
+      ],
+      "surface": "paved",
+      "areaSquareMeters": 114.66
+    },
+    {
+      "id": "beverly-28-pool",
+      "address": "28 Beverly Dr",
+      "kind": "pool",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          546.0,
+          446.0
+        ],
+        [
+          559.5,
+          449.5
+        ],
+        [
+          570.0,
+          451.0
+        ],
+        [
+          578.0,
+          459.0
+        ],
+        [
+          579.0,
+          470.0
+        ],
+        [
+          571.0,
+          479.5
+        ],
+        [
+          574.5,
+          486.0
+        ],
+        [
+          563.0,
+          491.5
+        ],
+        [
+          551.0,
+          488.0
+        ],
+        [
+          540.5,
+          480.0
+        ],
+        [
+          539.0,
+          471.0
+        ]
+      ],
+      "points": [
+        [
+          -204.173,
+          -283.008
+        ],
+        [
+          -200.963,
+          -282.176
+        ],
+        [
+          -198.467,
+          -281.82
+        ],
+        [
+          -196.564,
+          -279.917
+        ],
+        [
+          -196.327,
+          -277.302
+        ],
+        [
+          -198.229,
+          -275.043
+        ],
+        [
+          -197.397,
+          -273.498
+        ],
+        [
+          -200.131,
+          -272.19
+        ],
+        [
+          -202.984,
+          -273.022
+        ],
+        [
+          -205.481,
+          -274.924
+        ],
+        [
+          -205.838,
+          -277.064
+        ]
+      ],
+      "evidence": "inferred-occluded",
+      "confidence": "medium",
+      "notes": "Angular irregular green pool surface with light coping is visible northwest of the house. Northern/eastern portions are screened by branches; boundary closes conservatively through that screen. Surface reads as water, without a visible taut seasonal cover. Basin depth is unmeasured.",
+      "form": "in-ground",
+      "surface": "water",
+      "waterColor": 3303775,
+      "copingWidthMeters": 0.45,
+      "areaSquareMeters": 74.34
+    },
+    {
+      "id": "beverly-30-pool",
+      "address": "30 Beverly Dr",
+      "kind": "pool",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          477.0,
+          662.0
+        ],
+        [
+          484.0,
+          662.0
+        ],
+        [
+          501.5,
+          668.5
+        ],
+        [
+          501.5,
+          675.5
+        ],
+        [
+          490.0,
+          709.0
+        ],
+        [
+          486.5,
+          714.5
+        ],
+        [
+          480.0,
+          716.5
+        ],
+        [
+          468.0,
+          712.0
+        ],
+        [
+          465.5,
+          706.5
+        ],
+        [
+          472.0,
+          679.5
+        ]
+      ],
+      "points": [
+        [
+          -220.58,
+          -231.65
+        ],
+        [
+          -218.916,
+          -231.65
+        ],
+        [
+          -214.754,
+          -230.105
+        ],
+        [
+          -214.754,
+          -228.44
+        ],
+        [
+          -217.489,
+          -220.475
+        ],
+        [
+          -218.321,
+          -219.167
+        ],
+        [
+          -219.867,
+          -218.692
+        ],
+        [
+          -222.72,
+          -219.762
+        ],
+        [
+          -223.314,
+          -221.069
+        ],
+        [
+          -221.769,
+          -227.489
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Green water basin with rounded corners and surrounding light coping, west of the house. Bare branches screen the northeast corner. Outline follows water/coping edge rather than the outer paved enclosure.",
+      "form": "in-ground",
+      "surface": "water",
+      "waterColor": 4092525,
+      "copingWidthMeters": 0.4,
+      "areaSquareMeters": 74.22
+    },
+    {
+      "id": "beverly-32-pool",
+      "address": "32 Beverly Dr",
+      "kind": "pool",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          408.5,
+          864.5
+        ],
+        [
+          423.0,
+          868.5
+        ],
+        [
+          424.0,
+          874.0
+        ],
+        [
+          418.0,
+          892.5
+        ],
+        [
+          414.0,
+          896.5
+        ],
+        [
+          404.0,
+          893.0
+        ],
+        [
+          401.5,
+          888.5
+        ],
+        [
+          406.0,
+          869.0
+        ]
+      ],
+      "points": [
+        [
+          -236.868,
+          -183.502
+        ],
+        [
+          -233.42,
+          -182.55
+        ],
+        [
+          -233.182,
+          -181.243
+        ],
+        [
+          -234.609,
+          -176.844
+        ],
+        [
+          -235.56,
+          -175.893
+        ],
+        [
+          -237.938,
+          -176.725
+        ],
+        [
+          -238.532,
+          -177.795
+        ],
+        [
+          -237.462,
+          -182.432
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Small rounded rectangular pool west of the house. Green surface has a sharp diagonal light band and reads as a seasonal cover; water versus cover and wall height cannot be proved from this export. Ground-flush rim is a rendering approximation, not a surveyed construction type.",
+      "form": "in-ground",
+      "surface": "covered",
+      "coverColor": 4747094,
+      "copingWidthMeters": 0.25,
+      "areaSquareMeters": 27.99
+    },
+    {
+      "id": "beverly-33-pool",
+      "address": "33 Beverly Dr",
+      "kind": "pool",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          902.0,
+          1047.0
+        ],
+        [
+          901.22,
+          1052.25
+        ],
+        [
+          898.94,
+          1056.99
+        ],
+        [
+          895.4,
+          1060.75
+        ],
+        [
+          890.94,
+          1063.17
+        ],
+        [
+          886.0,
+          1064.0
+        ],
+        [
+          881.06,
+          1063.17
+        ],
+        [
+          876.6,
+          1060.75
+        ],
+        [
+          873.06,
+          1056.99
+        ],
+        [
+          870.78,
+          1052.25
+        ],
+        [
+          870.0,
+          1047.0
+        ],
+        [
+          870.78,
+          1041.75
+        ],
+        [
+          873.06,
+          1037.01
+        ],
+        [
+          876.6,
+          1033.25
+        ],
+        [
+          881.06,
+          1030.83
+        ],
+        [
+          886.0,
+          1030.0
+        ],
+        [
+          890.94,
+          1030.83
+        ],
+        [
+          895.4,
+          1033.25
+        ],
+        [
+          898.94,
+          1037.01
+        ],
+        [
+          901.22,
+          1041.75
+        ]
+      ],
+      "points": [
+        [
+          -119.524,
+          -140.108
+        ],
+        [
+          -119.71,
+          -138.86
+        ],
+        [
+          -120.252,
+          -137.733
+        ],
+        [
+          -121.094,
+          -136.839
+        ],
+        [
+          -122.154,
+          -136.263
+        ],
+        [
+          -123.329,
+          -136.066
+        ],
+        [
+          -124.504,
+          -136.263
+        ],
+        [
+          -125.564,
+          -136.839
+        ],
+        [
+          -126.406,
+          -137.733
+        ],
+        [
+          -126.948,
+          -138.86
+        ],
+        [
+          -127.133,
+          -140.108
+        ],
+        [
+          -126.948,
+          -141.356
+        ],
+        [
+          -126.406,
+          -142.483
+        ],
+        [
+          -125.564,
+          -143.377
+        ],
+        [
+          -124.504,
+          -143.953
+        ],
+        [
+          -123.329,
+          -144.15
+        ],
+        [
+          -122.154,
+          -143.953
+        ],
+        [
+          -121.094,
+          -143.377
+        ],
+        [
+          -120.252,
+          -142.483
+        ],
+        [
+          -119.71,
+          -141.356
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Circular pool east of the house, with an opaque blue-gray cover showing bright irregular creases. Visible edge/shadow supports an above-ground pool; 1.15 m wall height is approximate and not measurable from the nadir image.",
+      "form": "above-ground",
+      "surface": "covered",
+      "heightMeters": 1.15,
+      "coverColor": 5530737,
+      "copingWidthMeters": 0.16,
+      "areaSquareMeters": 47.51
+    },
+    {
+      "id": "beverly-34-pool",
+      "address": "34 Beverly Dr",
+      "kind": "pool",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          370.0,
+          1006.0
+        ],
+        [
+          369.07,
+          1011.56
+        ],
+        [
+          366.37,
+          1016.58
+        ],
+        [
+          362.17,
+          1020.56
+        ],
+        [
+          356.87,
+          1023.12
+        ],
+        [
+          351.0,
+          1024.0
+        ],
+        [
+          345.13,
+          1023.12
+        ],
+        [
+          339.83,
+          1020.56
+        ],
+        [
+          335.63,
+          1016.58
+        ],
+        [
+          332.93,
+          1011.56
+        ],
+        [
+          332.0,
+          1006.0
+        ],
+        [
+          332.93,
+          1000.44
+        ],
+        [
+          335.63,
+          995.42
+        ],
+        [
+          339.83,
+          991.44
+        ],
+        [
+          345.13,
+          988.88
+        ],
+        [
+          351.0,
+          988.0
+        ],
+        [
+          356.87,
+          988.88
+        ],
+        [
+          362.17,
+          991.44
+        ],
+        [
+          366.37,
+          995.42
+        ],
+        [
+          369.07,
+          1000.44
+        ]
+      ],
+      "points": [
+        [
+          -246.022,
+          -149.857
+        ],
+        [
+          -246.243,
+          -148.535
+        ],
+        [
+          -246.885,
+          -147.341
+        ],
+        [
+          -247.884,
+          -146.395
+        ],
+        [
+          -249.144,
+          -145.786
+        ],
+        [
+          -250.54,
+          -145.577
+        ],
+        [
+          -251.936,
+          -145.786
+        ],
+        [
+          -253.196,
+          -146.395
+        ],
+        [
+          -254.195,
+          -147.341
+        ],
+        [
+          -254.837,
+          -148.535
+        ],
+        [
+          -255.058,
+          -149.857
+        ],
+        [
+          -254.837,
+          -151.179
+        ],
+        [
+          -254.195,
+          -152.372
+        ],
+        [
+          -253.196,
+          -153.319
+        ],
+        [
+          -251.936,
+          -153.927
+        ],
+        [
+          -250.54,
+          -154.137
+        ],
+        [
+          -249.144,
+          -153.927
+        ],
+        [
+          -247.884,
+          -153.319
+        ],
+        [
+          -246.885,
+          -152.372
+        ],
+        [
+          -246.243,
+          -151.179
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Circular pool northwest of the house, with an opaque gray cover and pale irregular creases. Edge shadow and adjoining platform support an above-ground pool; 1.15 m wall height is approximate.",
+      "form": "above-ground",
+      "surface": "covered",
+      "heightMeters": 1.15,
+      "coverColor": 6846071,
+      "copingWidthMeters": 0.16,
+      "areaSquareMeters": 59.75
+    },
+    {
+      "id": "beverly-31-deck",
+      "address": "31 Beverly Dr",
+      "kind": "deck",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          827.0,
+          846.0
+        ],
+        [
+          847.0,
+          853.0
+        ],
+        [
+          844.0,
+          874.0
+        ],
+        [
+          820.0,
+          866.0
+        ]
+      ],
+      "points": [
+        [
+          -137.358,
+          -187.9
+        ],
+        [
+          -132.602,
+          -186.236
+        ],
+        [
+          -133.316,
+          -181.243
+        ],
+        [
+          -139.022,
+          -183.145
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Small rear platform at the east side of the house; perimeter and shadow are visible. Material and vertical height are approximate; no rail or stairs invented.",
+      "heightMeters": 0.35,
+      "railEdges": [],
+      "areaSquareMeters": 27.62
+    },
+    {
+      "id": "beverly-33-deck",
+      "address": "33 Beverly Dr",
+      "kind": "deck",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          778.0,
+          1007.0
+        ],
+        [
+          792.0,
+          1013.0
+        ],
+        [
+          786.0,
+          1038.0
+        ],
+        [
+          774.0,
+          1041.0
+        ],
+        [
+          772.0,
+          1033.0
+        ]
+      ],
+      "points": [
+        [
+          -149.009,
+          -149.619
+        ],
+        [
+          -145.68,
+          -148.192
+        ],
+        [
+          -147.107,
+          -142.248
+        ],
+        [
+          -149.96,
+          -141.535
+        ],
+        [
+          -150.436,
+          -143.437
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Light rear platform beside the east wall; outer edge and small shadow visible. Height is approximate. Covered pool-side platform is recorded separately.",
+      "heightMeters": 0.4,
+      "railEdges": [],
+      "areaSquareMeters": 24.93
+    },
+    {
+      "id": "beverly-33-deck-poolside",
+      "address": "33 Beverly Dr",
+      "kind": "deck",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          901.0,
+          1049.0
+        ],
+        [
+          916.0,
+          1054.0
+        ],
+        [
+          905.0,
+          1094.0
+        ],
+        [
+          892.0,
+          1090.0
+        ]
+      ],
+      "points": [
+        [
+          -119.762,
+          -139.633
+        ],
+        [
+          -116.196,
+          -138.444
+        ],
+        [
+          -118.811,
+          -128.933
+        ],
+        [
+          -121.902,
+          -129.884
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Narrow light/brown pool-side platform east/southeast of the circular covered pool. Shape is directly visible; approximately pool-rim elevation, with exact construction and rails unverified.",
+      "heightMeters": 1.15,
+      "railEdges": [],
+      "areaSquareMeters": 34.6
+    },
+    {
+      "id": "beverly-34-deck",
+      "address": "34 Beverly Dr",
+      "kind": "deck",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          367.0,
+          1003.0
+        ],
+        [
+          380.0,
+          1000.0
+        ],
+        [
+          386.0,
+          1016.0
+        ],
+        [
+          380.0,
+          1029.0
+        ],
+        [
+          365.0,
+          1024.0
+        ],
+        [
+          370.0,
+          1016.0
+        ]
+      ],
+      "points": [
+        [
+          -246.736,
+          -150.57
+        ],
+        [
+          -243.644,
+          -151.283
+        ],
+        [
+          -242.218,
+          -147.479
+        ],
+        [
+          -243.644,
+          -144.388
+        ],
+        [
+          -247.211,
+          -145.577
+        ],
+        [
+          -246.022,
+          -147.479
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Narrow platform wraps the eastern side of the circular pool. Light outer edges and darker walking surface are visible. Pool-rim elevation is approximate; rails omitted rather than invented.",
+      "heightMeters": 1.15,
+      "railEdges": [],
+      "areaSquareMeters": 22.25
+    },
+    {
+      "id": "beverly-35-deck",
+      "address": "35 Beverly Dr",
+      "kind": "deck",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          713.0,
+          1134.0
+        ],
+        [
+          730.0,
+          1139.0
+        ],
+        [
+          726.0,
+          1156.0
+        ],
+        [
+          709.0,
+          1151.0
+        ]
+      ],
+      "points": [
+        [
+          -164.464,
+          -119.422
+        ],
+        [
+          -160.422,
+          -118.233
+        ],
+        [
+          -161.373,
+          -114.191
+        ],
+        [
+          -165.416,
+          -115.38
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Small rectangular light/brown platform immediately east of the roof, visible through bare branches. Exact board material and elevation remain approximate; no furniture, rails or stairs asserted.",
+      "heightMeters": 0.35,
+      "railEdges": [],
+      "areaSquareMeters": 17.47
+    },
+    {
+      "id": "beverly-37-deck",
+      "address": "37 Beverly Dr",
+      "kind": "deck",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          667.0,
+          1301.0
+        ],
+        [
+          681.0,
+          1306.0
+        ],
+        [
+          677.0,
+          1318.0
+        ],
+        [
+          666.0,
+          1314.0
+        ],
+        [
+          661.0,
+          1327.0
+        ],
+        [
+          651.0,
+          1324.0
+        ],
+        [
+          657.0,
+          1309.0
+        ]
+      ],
+      "points": [
+        [
+          -175.402,
+          -79.713
+        ],
+        [
+          -172.073,
+          -78.525
+        ],
+        [
+          -173.024,
+          -75.671
+        ],
+        [
+          -175.64,
+          -76.622
+        ],
+        [
+          -176.829,
+          -73.531
+        ],
+        [
+          -179.207,
+          -74.245
+        ],
+        [
+          -177.78,
+          -77.811
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Small light-edged stepped rear platform outside the southeast roof corner. Outline includes visible narrow return; height and construction are approximate. Rails and stair counts not resolved.",
+      "heightMeters": 0.35,
+      "railEdges": [],
+      "areaSquareMeters": 21.68
+    },
+    {
+      "id": "beverly-39-deck",
+      "address": "39 Beverly Dr",
+      "kind": "deck",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          600.0,
+          1435.0
+        ],
+        [
+          610.0,
+          1438.0
+        ],
+        [
+          605.0,
+          1457.0
+        ],
+        [
+          595.0,
+          1453.0
+        ]
+      ],
+      "points": [
+        [
+          -191.333,
+          -47.851
+        ],
+        [
+          -188.956,
+          -47.138
+        ],
+        [
+          -190.144,
+          -42.62
+        ],
+        [
+          -192.522,
+          -43.572
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Small orange-brown wood-toned rectangle adjoining the east/rear wall. Surface and projecting shadow are directly visible. Height is a low-platform approximation; no unsupported railing or furniture is added.",
+      "heightMeters": 0.45,
+      "railEdges": [],
+      "areaSquareMeters": 11.45
+    },
+    {
+      "id": "beverly-41-patio",
+      "address": "41 Beverly Dr",
+      "kind": "patio",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-spring-2025-beverly",
+      "sourcePixels": [
+        [
+          546.0,
+          1617.0
+        ],
+        [
+          565.0,
+          1612.0
+        ],
+        [
+          574.0,
+          1618.0
+        ],
+        [
+          572.0,
+          1635.0
+        ],
+        [
+          580.0,
+          1641.0
+        ],
+        [
+          579.0,
+          1661.0
+        ],
+        [
+          556.0,
+          1666.0
+        ],
+        [
+          549.0,
+          1648.0
+        ]
+      ],
+      "points": [
+        [
+          -204.173,
+          -4.576
+        ],
+        [
+          -199.656,
+          -5.765
+        ],
+        [
+          -197.516,
+          -4.338
+        ],
+        [
+          -197.991,
+          -0.296
+        ],
+        [
+          -196.089,
+          1.131
+        ],
+        [
+          -196.327,
+          5.886
+        ],
+        [
+          -201.796,
+          7.075
+        ],
+        [
+          -203.46,
+          2.795
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Light patterned rear hardscape terrace east/southeast of the roof, with a narrower section near the wall. Paving/terrace geometry is visible; exact retaining heights and overhead structure are unresolved, so rendered as low patio.",
+      "heightMeters": 0.06,
+      "areaSquareMeters": 76.12
+    },
+    {
+      "id": "beverly-28-patio",
+      "address": "28 Beverly Dr",
+      "kind": "patio",
+      "geometryType": "polygon",
+      "sourceId": "nysdop-2025-alternative-28",
+      "sourceImage": "alternative-28-2025.jpg",
+      "georeference": "alternative-28-2025-georeference.json",
+      "sourcePixels": [
+        [
+          290,
+          390
+        ],
+        [
+          319,
+          434
+        ],
+        [
+          354,
+          448
+        ],
+        [
+          408,
+          444
+        ],
+        [
+          447,
+          425
+        ],
+        [
+          424,
+          557
+        ],
+        [
+          403,
+          585
+        ],
+        [
+          310,
+          560
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          530.9220629968256,
+          479.2050989981457
+        ],
+        [
+          539.017815641019,
+          491.4883099016036
+        ],
+        [
+          548.7885515871525,
+          495.39660428064553
+        ],
+        [
+          563.863401334045,
+          494.2799487450378
+        ],
+        [
+          574.7507928157861,
+          488.9758349442788
+        ],
+        [
+          568.3300234794192,
+          525.8254676575958
+        ],
+        [
+          562.4675819123278,
+          533.6420564156796
+        ],
+        [
+          536.5053406836942,
+          526.6629593100374
+        ]
+      ],
+      "points": [
+        [
+          -207.7585316881815,
+          -275.11322905327177
+        ],
+        [
+          -205.83354161367564,
+          -272.19266448933666
+        ],
+        [
+          -203.51027773270087,
+          -271.2633937016031
+        ],
+        [
+          -199.9258134602159,
+          -271.52889965417614
+        ],
+        [
+          -197.33703370746937,
+          -272.79005279423444
+        ],
+        [
+          -198.8637499719401,
+          -264.0283527730378
+        ],
+        [
+          -200.25770830052494,
+          -262.16980898600127
+        ],
+        [
+          -206.4309523269452,
+          -263.82922310315195
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "heightMeters": 0.04,
+      "surface": "paving",
+      "notes": "Exposed pale hardscape between the pool and the L-shaped roof recess. Furniture and perimeter are separately visible in 2016, 2021 and 2025. Approximate edge uncertainty 0.75\u20131.5m; platform/grade height is not measurable from nadir imagery. Only exposed surface is traced; shaded strip directly against the roof is omitted.",
+      "supportingImages": [
+        "alternative-28-2013.jpg",
+        "alternative-28-2016.jpg",
+        "alternative-28-2021.jpg"
+      ],
+      "buildingRenderPartsSource": "alternative-28-subdivision.json",
+      "areaSquareMeters": 77.61
+    }
+  ]
+}

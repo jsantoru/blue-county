@@ -1,0 +1,227 @@
+{
+  "status": "Accepted implementation input: retain the original NYS footprint and render the two source-derived wings; terrace is included in reproducible west observations. No map or distribution rebuild is performed by this script.",
+  "address": "28 Beverly Dr",
+  "sourceBuildingId": "nys-7159159",
+  "sourceDate": "2013",
+  "coordinateSystem": "local-meters-x-east-z-south",
+  "originalFootprint": [
+    [
+      -185.674,
+      -258.809
+    ],
+    [
+      -179.962,
+      -274.689
+    ],
+    [
+      -194.527,
+      -279.982
+    ],
+    [
+      -196.896,
+      -273.435
+    ],
+    [
+      -192.123,
+      -271.709
+    ],
+    [
+      -195.486,
+      -262.395
+    ]
+  ],
+  "method": "Extend the short inward edge D\u2192E to its intersection G with the opposite A\u2194B edge. Split across G\u2013E. The two quadrilaterals exactly partition the original L-shaped source footprint; their tiny deviations from rectangles are retained, not snapped away.",
+  "splitPoint": [
+    -182.31027016105418,
+    -268.1605458407667
+  ],
+  "parts": [
+    {
+      "id": "28-north-crossbar",
+      "points": [
+        [
+          -179.962,
+          -274.689
+        ],
+        [
+          -194.527,
+          -279.982
+        ],
+        [
+          -196.896,
+          -273.435
+        ],
+        [
+          -182.31027016105418,
+          -268.1605458407667
+        ]
+      ],
+      "entrance": false
+    },
+    {
+      "id": "28-south-stem",
+      "points": [
+        [
+          -182.31027016105418,
+          -268.1605458407667
+        ],
+        [
+          -192.123,
+          -271.709
+        ],
+        [
+          -195.486,
+          -262.395
+        ],
+        [
+          -185.674,
+          -258.809
+        ]
+      ],
+      "entrance": true
+    }
+  ],
+  "renderPartsMetadata": {
+    "sourceFootprintPreserved": true,
+    "pointConvention": "Unclosed local X/Z quadrilaterals; compiler closes each and samples terrain to produce runtime X/Y/Z points.",
+    "sharedFloorHeight": true,
+    "sharedAppearanceId": "nys-7159159",
+    "sourceValidatedAgainst": "footprints-local.geojson and footprints-address-join.json",
+    "aerialPositionCheck": "The north crossbar and east/south stem match the L-shaped roof arrangement in 2013, 2016, 2021 and 2025 imagery. Source age, roof overhang and image displacement remain; positions are not snapped to the 2025 roof.",
+    "status": "accepted"
+  },
+  "renderNotes": "Reuse the same facade style/material on both parts. Do not render a duplicate wall along shared G\u2013E. Roof ridge/valley/height treatment remains approximate. OBB per part introduces only small source-rounding differences; original NYS polygon remains authoritative.",
+  "terrace": {
+    "id": "beverly-28-patio",
+    "address": "28 Beverly Dr",
+    "kind": "patio",
+    "geometryType": "polygon",
+    "sourceId": "nysdop-2025-alternative-28",
+    "sourceImage": "alternative-28-2025.jpg",
+    "georeference": "alternative-28-2025-georeference.json",
+    "sourcePixels": [
+      [
+        290,
+        390
+      ],
+      [
+        319,
+        434
+      ],
+      [
+        354,
+        448
+      ],
+      [
+        408,
+        444
+      ],
+      [
+        447,
+        425
+      ],
+      [
+        424,
+        557
+      ],
+      [
+        403,
+        585
+      ],
+      [
+        310,
+        560
+      ]
+    ],
+    "fullImagePixels": [
+      [
+        530.9220629968256,
+        479.2050989981457
+      ],
+      [
+        539.017815641019,
+        491.4883099016036
+      ],
+      [
+        548.7885515871525,
+        495.39660428064553
+      ],
+      [
+        563.863401334045,
+        494.2799487450378
+      ],
+      [
+        574.7507928157861,
+        488.9758349442788
+      ],
+      [
+        568.3300234794192,
+        525.8254676575958
+      ],
+      [
+        562.4675819123278,
+        533.6420564156796
+      ],
+      [
+        536.5053406836942,
+        526.6629593100374
+      ]
+    ],
+    "points": [
+      [
+        -207.7585316881815,
+        -275.11322905327177
+      ],
+      [
+        -205.83354161367564,
+        -272.19266448933666
+      ],
+      [
+        -203.51027773270087,
+        -271.2633937016031
+      ],
+      [
+        -199.9258134602159,
+        -271.52889965417614
+      ],
+      [
+        -197.33703370746937,
+        -272.79005279423444
+      ],
+      [
+        -198.8637499719401,
+        -264.0283527730378
+      ],
+      [
+        -200.25770830052494,
+        -262.16980898600127
+      ],
+      [
+        -206.4309523269452,
+        -263.82922310315195
+      ]
+    ],
+    "evidence": "observed",
+    "confidence": "high",
+    "heightMeters": 0.04,
+    "surface": "paving",
+    "notes": "Exposed pale hardscape between the pool and the L-shaped roof recess. Furniture and perimeter are separately visible in 2016, 2021 and 2025. Approximate edge uncertainty 0.75\u20131.5m; platform/grade height is not measurable from nadir imagery. Only exposed surface is traced; shaded strip directly against the roof is omitted.",
+    "supportingImages": [
+      "alternative-28-2013.jpg",
+      "alternative-28-2016.jpg",
+      "alternative-28-2021.jpg"
+    ]
+  },
+  "audit": {
+    "sourceRoundingMaxErrorMeters": 0.0004053788796050348,
+    "sourceAreaMeters2": 211.32660200000828,
+    "partsAreaMeters2": 211.32660200000828,
+    "partsOverlapMeters2": 0,
+    "oldEnvelopeAreaMeters2": 262.53721973494976,
+    "newEnvelopeSumAreaMeters2": 212.19031602762334,
+    "terraceAreaMeters2": 77.60737484382116,
+    "terraceSourceOverlapMeters2": 0,
+    "terraceOldEnvelopeOverlapMeters2": 5.650009133383719,
+    "terraceNewEnvelopesOverlapMeters2": 0
+  }
+}

@@ -1,5 +1,6 @@
 import * as T from "three";
 import type { MapData } from "./types";
+import { createPropertyClearance } from "./property-footprints";
 
 type XZ = [number, number];
 type Bounds = { minX: number; maxX: number; minZ: number; maxZ: number };
@@ -130,6 +131,7 @@ export function buildBeverlyDetails(
   map: MapData,
   heightAt: (x: number, z: number) => number,
 ): T.Group {
+  const propertyClear = createPropertyClearance(map);
   const root = new T.Group();
   root.name = "Beverly reference landcover";
   const statistics = {
@@ -204,6 +206,7 @@ export function buildBeverlyDetails(
     });
   }
   const clear = (x: number, z: number, radius = 0) => {
+    if (!propertyClear(x, z, radius)) return false;
     for (const segment of segmentIndex.get(
       key(Math.floor(x / indexSize), Math.floor(z / indexSize)),
     ) ?? [])
