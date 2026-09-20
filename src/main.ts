@@ -104,6 +104,7 @@ const camPos = new T.Vector3(),
   camTarget = new T.Vector3();
 let cameraInitialized = false;
 let inspectionView: { position: T.Vector3; target: T.Vector3 } | null = null;
+let homeBrakeHold = false;
 const renderer = new T.WebGLRenderer({
   canvas: $<HTMLCanvasElement>("game"),
   antialias: true,
@@ -327,6 +328,12 @@ function buildScene(test: boolean) {
   cameraInitialized = false;
   clock.reset();
 }
+function setHomeBrakeHold(active: boolean) {
+  homeBrakeHold = active;
+  // Static parking restraint: allow suspension to settle vertically without
+  // the velocity-based tire model slowly slipping down the driveway grade.
+  player?.body.setEnabledTranslations(!active, true, !active, true);
+}
 function startFree() {
   sound.start();
   if (mode !== "neighborhood") buildScene(false);
@@ -341,11 +348,13 @@ function startFree() {
     ],
     map.home.heading,
   );
+  setHomeBrakeHold(!!map.home.departurePath);
   input.resume();
   setScreen(null);
   toast("HOME · BEVERLY DRIVE");
 }
 function startTest() {
+  setHomeBrakeHold(false);
   sound.start();
   buildScene(true);
   input.resume();
@@ -353,6 +362,7 @@ function startTest() {
   toast("HANDLING GROUNDS");
 }
 function startRace() {
+  setHomeBrakeHold(false);
   sound.start();
   if (mode !== "neighborhood") buildScene(false);
   race = true;
@@ -394,6 +404,7 @@ function startRace() {
   toast(map.route.name, 2);
 }
 function recover(v = player) {
+  if (v === player) setHomeBrakeHold(false);
   let p: Point, heading: number;
   if (race && v.id < 4) {
     const cp = races[v.id];
@@ -685,6 +696,17 @@ function simulate(dt: number) {
   simTime += dt;
   const start = performance.now();
   let control: DriveInput = frame;
+  // Hold the parked Home car on its driveway grade until deliberate pedal input.
+  if (homeBrakeHold) {
+    if (
+      frame.throttle > 0.01 ||
+      frame.brake > 0.01 ||
+      frame.boost ||
+      frame.handbrake
+    )
+      setHomeBrakeHold(false);
+    else control = { ...frame, brake: 1 };
+  }
   if (countdown > 0) {
     countdown -= dt;
     control = { ...idleInput, brake: 1 };
@@ -700,7 +722,13 @@ function simulate(dt: number) {
     frame.reset = false;
   }
   const near = nearestRoad(map, player.position.x, player.position.z);
-  player.step(control, dt, simTime, near.distance < near.road.width / 2 + 1);
+  player.step(
+    control,
+    dt,
+    simTime,
+    near.distance < near.road.width / 2 + 1 ||
+      environment.isDriveway(player.position.x, player.position.z),
+  );
   for (const d of drivers) {
     const v = d.vehicle;
     let command =
@@ -1091,6 +1119,14 @@ async function init() {
 if (new URLSearchParams(location.search).has("test")) {
   let testDriver: Driver | null = null;
   (window as any).__game = {
+    referenceFacades: () => {
+      const facades: unknown[] = [];
+      environment.root.traverse((object) => {
+        if (object.userData.referenceFacades)
+          facades.push(...object.userData.referenceFacades);
+      });
+      return facades;
+    },
     getState: () => ({
       ready,
       screen,
@@ -1099,6 +1135,8 @@ if (new URLSearchParams(location.search).has("test")) {
       countdown,
       modelLoaded,
       position: player?.position.toArray(),
+      rotation: player?.rotation.toArray(),
+      chassisHalfExtents: player && player.collider.halfExtents(),
       speed: player?.speed,
       grounded: player?.grounded,
       slip: player?.slip,
@@ -1167,13 +1205,12 @@ if (new URLSearchParams(location.search).has("test")) {
     beginNeighborhoodDrive: () => {
       startFree();
       let path: Point[] = map.beverlySurvey.loop.points.slice(0, -1);
+      const departure = map.home.departurePath ?? [map.home.position];
+      const roadStart = departure[departure.length - 1];
       let i = path.reduce(
         (best, p, index) =>
-          Math.hypot(p[0] - player.position.x, p[2] - player.position.z) <
-          Math.hypot(
-            path[best][0] - player.position.x,
-            path[best][2] - player.position.z,
-          )
+          Math.hypot(p[0] - roadStart[0], p[2] - roadStart[2]) <
+          Math.hypot(path[best][0] - roadStart[0], path[best][2] - roadStart[2])
             ? index
             : best,
         0,
@@ -1189,7 +1226,7 @@ if (new URLSearchParams(location.search).has("test")) {
         path.reverse();
         i = path.length - 1 - i;
       }
-      path = [map.home.position, ...path.slice(i + 1), ...path.slice(0, i + 2)];
+      path = [...departure, ...path.slice(i + 1), ...path.slice(0, i + 2)];
       benchmarkDriver = new Driver(player, path);
       benchmarkDriver.speed = 11;
       frameTimes = [];
@@ -1230,13 +1267,12 @@ if (new URLSearchParams(location.search).has("test")) {
     driveHomeExit: () => {
       startFree();
       const road = map.roads.find((r) => r.name === "Beverly Drive")!;
+      const departure = map.home.departurePath ?? [map.home.position];
+      const roadStart = departure[departure.length - 1];
       let index = 0,
         best = Infinity;
       road.points.forEach((p, i) => {
-        const d = Math.hypot(
-          p[0] - player.position.x,
-          p[2] - player.position.z,
-        );
+        const d = Math.hypot(p[0] - roadStart[0], p[2] - roadStart[2]);
         if (d < best) {
           best = d;
           index = i;
@@ -1250,7 +1286,7 @@ if (new URLSearchParams(location.search).has("test")) {
         ) <
         Math.PI / 2;
       const path: Point[] = [
-        map.home.position,
+        ...departure,
         ...(forward
           ? road.points.slice(index)
           : road.points.slice(0, index + 1).reverse()),
@@ -1306,7 +1342,10 @@ if (new URLSearchParams(location.search).has("test")) {
       setScreen(raceFinished ? "results" : "pause");
       return (window as any).__game.getState();
     },
-    teleport: (point: Point, heading: number) => player.reset(point, heading),
+    teleport: (point: Point, heading: number) => {
+      setHomeBrakeHold(false);
+      player.reset(point, heading);
+    },
     input,
   };
 }

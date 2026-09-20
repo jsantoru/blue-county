@@ -1,0 +1,13 @@
+{
+  "method": "Replicates current roads.ts renderParts expansion, longest-edge oriented building envelope and road-clearance scaling via audit-property-east.py. All property polygons triangulate, have finite coordinates, and preserve polygon area.",
+  "featureCount": 36,
+  "counts": {
+    "driveway": 22,
+    "deck": 7,
+    "pool": 5,
+    "patio": 2
+  },
+  "houseEnvelopeCount": 453,
+  "envelopeIntersections": [],
+  "limits": "Source aerial uncertainty is still 0.5\u20131.5 m or greater under canopy. Plan-view validation excludes 3D roof, trim, stair and porch projections; vertical feature dimensions remain approximations."
+}

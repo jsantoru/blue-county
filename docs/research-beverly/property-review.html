@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  />
+  <title>Beverly · Property reference review</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #101b1b;
+      color: #e9eee4;
+      font: 15px system-ui;
+    }
+    header {
+      padding: 22px 28px;
+      border-bottom: 1px solid #ffffff20;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    h1 {
+      font-size: 21px;
+      margin: 0;
+    }
+    p {
+      line-height: 1.5;
+      color: #becdc5;
+      margin: 6px 0;
+    }
+    a {
+      color: #c3e5b2;
+    }
+    button {
+      background: #263b36;
+      color: #f5f6ec;
+      border: 1px solid #6b8778;
+      border-radius: 7px;
+      padding: 9px 15px;
+      cursor: pointer;
+    }
+    button:focus-visible,
+    input:focus-visible {
+      outline: 3px solid #ffe58d;
+    }
+    label {
+      margin-right: 15px;
+      white-space: nowrap;
+    }
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      height: calc(100vh - 143px);
+      min-height: 650px;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+      background: #192524;
+      touch-action: none;
+    }
+    aside {
+      padding: 22px;
+      overflow: auto;
+      border-left: 1px solid #ffffff20;
+    }
+    #controls {
+      padding: 12px 28px;
+      background: #1c2b28;
+    }
+    #info {
+      white-space: pre-wrap;
+      font-size: 13px;
+      line-height: 1.65;
+      color: #d4ddd4;
+    }
+    svg path {
+      cursor: pointer;
+    }
+    svg path:hover {
+      stroke: white !important;
+      stroke-width: 5;
+    }
+    svg text {
+      font: bold 15px system-ui;
+      paint-order: stroke;
+      stroke: #14201c;
+      stroke-width: 4;
+      fill: #fff;
+      pointer-events: none;
+    }
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      svg {
+        height: 75vh;
+      }
+      aside {
+        border-left: 0;
+      }
+    }
+  </style>
+  <header>
+    <div>
+      <h1>Beverly · Property reference review</h1>
+      <p>Traced driveways, decks and pools over the spring 2025 aerial.</p>
+    </div>
+    <button id="home">Home driveway</button><button id="all">Whole loop</button
+    ><a href="http://127.0.0.1:5180/?revision=property-pass"
+      >Drive the neighborhood →</a
+    >
+  </header>
+  <div id="controls">
+    <label
+      ><input type="checkbox" data-layer="driveway" checked /> Driveways</label
+    ><label
+      ><input type="checkbox" data-layer="deck" checked /> Decks / patios</label
+    ><label><input type="checkbox" data-layer="pool" checked /> Pools</label
+    ><label
+      ><input type="checkbox" data-layer="buildings" /> Source buildings</label
+    ><label
+      ><input type="checkbox" data-layer="labels" checked /> Addresses</label
+    >
+  </div>
+  <main>
+    <svg
+      id="map"
+      viewBox="0 0 1800 2650"
+      role="img"
+      aria-label="Aerial property overlay with selectable traced features"
+    >
+      <image href="beverly-2025-ortho.jpg" width="1800" height="2650" />
+    </svg>
+    <aside>
+      <p>
+        Click an outline to inspect its source, confidence and notes. Scroll to
+        zoom. Drag to pan.
+      </p>
+      <p>
+        <span style="color: #ffdb76">Gold</span> = pavement ·
+        <span style="color: #c595f5">Purple</span> = decks ·
+        <span style="color: #4bdded">Blue</span> = pools.
+      </p>
+      <p>
+        Dashed outlines include a canopy-obscured or historical interpretation.
+        Fine construction and ground heights remain approximate.
+      </p>
+      <div id="info">Loading source observations…</div>
+      <p><a href="../property-pass.md">Read the implementation notes</a></p>
+      <p>
+        Aerial: NYS ITS Geospatial Services / NYSDOP, spring 2025. This research
+        overlay is separate from game textures.
+      </p>
+    </aside>
+  </main>
+  <script type="module">
+    const root = document.getElementById("map"),
+      NS = "http://www.w3.org/2000/svg";
+    const [geo, east, west, footprints] = await Promise.all(
+      [
+        "ortho2025-export-georeference.json",
+        "property-east-observations.json",
+        "property-west-observations.json",
+        "footprints-local.geojson",
+      ].map((p) =>
+        fetch(p).then((r) => {
+          if (!r.ok) throw Error(p);
+          return r.json();
+        }),
+      ),
+    );
+    const ex = geo.extent,
+      lat = 41.283879,
+      lon = -74.3662393,
+      sx = 111320 * Math.cos((lat * Math.PI) / 180);
+    const pixel = ([x, z]) => {
+      const lo = lon + x / sx,
+        la = lat - z / 111320,
+        mx = (lo * 20037508.342789244) / 180,
+        my = Math.log(Math.tan(((90 + la) * Math.PI) / 360)) * 6378137;
+      return [
+        ((mx - ex.xmin) / (ex.xmax - ex.xmin)) * 1800,
+        ((ex.ymax - my) / (ex.ymax - ex.ymin)) * 2650,
+      ];
+    };
+    const add = (parent, type, attrs = {}) => {
+      const e = document.createElementNS(NS, type);
+      for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+      parent.append(e);
+      return e;
+    };
+    const groups = Object.fromEntries(
+      ["driveway", "deck", "pool", "buildings", "labels"].map((k) => [
+        k,
+        add(root, "g", { "data-layer": k }),
+      ]),
+    );
+    groups.buildings.style.display = "none";
+    for (const source of [east, west])
+      for (const f of source.features) {
+        const k = f.kind === "patio" ? "deck" : f.kind;
+        if (!groups[k] || f.geometryType !== "polygon") continue;
+        const p = f.points.map(pixel),
+          color = { driveway: "#ffdb76", deck: "#c595f5", pool: "#4bdded" }[k];
+        const shape = add(groups[k], "path", {
+          d: "M" + p.map((q) => q.join(",")).join("L") + "Z",
+          fill: color,
+          "fill-opacity": 0.18,
+          stroke: color,
+          "stroke-width": 2.5,
+          "stroke-dasharray": f.evidence === "observed" ? "none" : "8 5",
+        });
+        shape.setAttribute("tabindex", "0");
+        shape.setAttribute("role", "button");
+        shape.setAttribute("aria-label", `${f.address}: ${f.kind} evidence`);
+        shape.onkeydown = (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            shape.dispatchEvent(new MouseEvent("click"));
+          }
+        };
+        shape.onclick = (e) => {
+          e.stopPropagation();
+          const s = source.sources.find((s) => s.id === f.sourceId);
+          document.getElementById("info").textContent = [
+            f.address,
+            f.kind.toUpperCase(),
+            `Evidence: ${f.evidence}`,
+            `Confidence: ${f.confidence}`,
+            `Source: ${s?.vintage ?? f.sourceId}`,
+            f.notes,
+          ].join("\n\n");
+        };
+        const c = p.reduce(
+          (a, q) => [a[0] + q[0] / p.length, a[1] + q[1] / p.length],
+          [0, 0],
+        );
+        if (f.kind === "driveway" && f.centerlinePoints)
+          add(groups.labels, "text", { x: c[0] + 8, y: c[1] - 5 }).textContent =
+            f.address.replace(" Beverly Dr", "");
+      }
+    for (const f of footprints.features) {
+      const polygons =
+        f.geometry.type === "Polygon"
+          ? [f.geometry.coordinates]
+          : f.geometry.coordinates;
+      for (const polygon of polygons)
+        for (const ring of polygon) {
+          const p = ring.map(([lo, la]) =>
+            pixel([(lo - lon) * sx, (lat - la) * 111320]),
+          );
+          add(groups.buildings, "path", {
+            d: "M" + p.map((q) => q.join(",")).join("L") + "Z",
+            fill: "none",
+            stroke: "#a8f0df",
+            "stroke-width": 2,
+          });
+        }
+    }
+    document
+      .querySelectorAll("[data-layer][type=checkbox]")
+      .forEach(
+        (c) =>
+          (c.onchange = () =>
+            (groups[c.dataset.layer].style.display = c.checked ? "" : "none")),
+      );
+    let view = [0, 0, 1800, 2650];
+    const update = () => root.setAttribute("viewBox", view.join(" "));
+    document.getElementById("all").onclick = () => {
+      view = [0, 0, 1800, 2650];
+      update();
+    };
+    document.getElementById("home").onclick = () => {
+      const p = pixel([0, 16]);
+      view = [p[0] - 220, p[1] - 210, 440, 420];
+      update();
+    };
+    root.addEventListener(
+      "wheel",
+      (e) => {
+        e.preventDefault();
+        const r = root.getBoundingClientRect(),
+          scale = e.deltaY > 0 ? 1.15 : 0.87,
+          w = Math.max(140, Math.min(3000, view[2] * scale)),
+          ratio = w / view[2];
+        view = [
+          view[0] + (view[2] * (1 - ratio) * (e.clientX - r.left)) / r.width,
+          view[1] + (view[3] * (1 - ratio) * (e.clientY - r.top)) / r.height,
+          w,
+          view[3] * ratio,
+        ];
+        update();
+      },
+      { passive: false },
+    );
+    let drag, pressed;
+    root.onpointerdown = (e) => {
+      drag = [e.clientX, e.clientY, ...view];
+      pressed = e.target;
+      root.setPointerCapture(e.pointerId);
+    };
+    root.onpointermove = (e) => {
+      if (!drag) return;
+      const r = root.getBoundingClientRect(),
+        s = Math.max(view[2] / r.width, view[3] / r.height);
+      view[0] = drag[2] - (e.clientX - drag[0]) * s;
+      view[1] = drag[3] - (e.clientY - drag[1]) * s;
+      update();
+    };
+    root.onpointerup = (e) => {
+      if (
+        drag &&
+        Math.hypot(e.clientX - drag[0], e.clientY - drag[1]) < 4 &&
+        pressed?.tagName === "path"
+      )
+        pressed.dispatchEvent(new MouseEvent("click"));
+      drag = null;
+    };
+    root.onpointercancel = () => (drag = null);
+    document.getElementById("info").textContent =
+      "Select a feature to see its observation record.";
+  </script>
+</html>

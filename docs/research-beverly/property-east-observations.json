@@ -1,0 +1,4739 @@
+{
+  "schemaVersion": 1,
+  "coordinateSystem": "local-meters-x-east-z-south",
+  "origin": {
+    "lat": 41.283879,
+    "lon": -74.3662393
+  },
+  "inspectedDate": "2026-09-20",
+  "method": "Manual source-image polygons and access lines. Approximate edges, typically 1\u20132m uncertainty; greater under shadow or canopy. No facade or property ownership inference.",
+  "sources": [
+    {
+      "id": "east-south-2025",
+      "url": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer/export?f=json&bbox=-8278505.043921893%2C5054171.280267107%2C-8278325.392025508%2C5054510.624022761&bboxSR=3857&imageSR=3857&size=1100%2C2078&format=jpg&transparent=false&dpi=96",
+      "imagePath": "home-east-south-2025.jpg",
+      "georeferencePath": "home-east-south-georeference.json",
+      "vintage": "Spring 2025",
+      "width": 1100,
+      "height": 2078,
+      "pixelSizeMeters": 0.1227,
+      "credit": "NYS ITS Geospatial Services / NYSDOP",
+      "terms": "Public no-cost GIS access; as-is/no-warranty resource metadata. No CC0 claim; see findings.md. Reference image only, not a game texture."
+    },
+    {
+      "id": "east-north-2025",
+      "url": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer/export?f=json&bbox=-8278544.966565534%2C5054490.662295613%2C-8278298.776929746%2C5054770.130226923&bboxSR=3857&imageSR=3857&size=1100%2C1249&format=jpg&transparent=false&dpi=96",
+      "imagePath": "east-north-2025.jpg",
+      "georeferencePath": "east-north-georeference.json",
+      "vintage": "Spring 2025",
+      "width": 1100,
+      "height": 1249,
+      "pixelSizeMeters": 0.1682,
+      "credit": "NYS ITS Geospatial Services / NYSDOP",
+      "terms": "Public no-cost GIS access; as-is/no-warranty resource metadata. No CC0 claim; see findings.md. Reference image only, not a game texture."
+    },
+    {
+      "id": "home-2025",
+      "url": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer/export?f=json&bbox=-8278462.459768675%2C5054240.478811174%2C-8278361.322404784%2C5054336.292997633&bboxSR=3857&imageSR=3857&size=1100%2C1042&format=jpg&transparent=false&dpi=96",
+      "imagePath": "property-home-2025.jpg",
+      "georeferencePath": "property-home-2025-georeference.json",
+      "vintage": "Spring 2025",
+      "width": 1100,
+      "height": 1042,
+      "pixelSizeMeters": 0.0691,
+      "credit": "NYS ITS Geospatial Services / NYSDOP",
+      "terms": "Public no-cost GIS access; as-is/no-warranty resource metadata. No CC0 claim; see findings.md. Reference image only, not a game texture."
+    },
+    {
+      "id": "home-2021",
+      "url": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2021/MapServer/export?f=json&bbox=-8278462.459768675%2C5054240.478811174%2C-8278361.322404784%2C5054336.292997633&bboxSR=3857&imageSR=3857&size=1100%2C1042&format=jpg&transparent=false&dpi=96",
+      "imagePath": "property-home-2021.jpg",
+      "georeferencePath": "property-home-2021-georeference.json",
+      "vintage": "Spring 2021",
+      "width": 1100,
+      "height": 1042,
+      "pixelSizeMeters": 0.0691,
+      "credit": "NYS ITS Geospatial Services / NYSDOP",
+      "terms": "Public no-cost GIS access; as-is/no-warranty resource metadata. No CC0 claim; see findings.md. Reference image only, not a game texture."
+    },
+    {
+      "id": "home-2016",
+      "url": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2016/MapServer/export?f=json&bbox=-8278462.459768675%2C5054240.478811174%2C-8278361.322404784%2C5054336.292997633&bboxSR=3857&imageSR=3857&size=1100%2C1042&format=jpg&transparent=false&dpi=96",
+      "imagePath": "property-home-2016.jpg",
+      "georeferencePath": "property-home-2016-georeference.json",
+      "vintage": "Spring 2016",
+      "width": 1100,
+      "height": 1042,
+      "pixelSizeMeters": 0.0691,
+      "credit": "NYS ITS Geospatial Services / NYSDOP",
+      "terms": "Public no-cost GIS access; as-is/no-warranty resource metadata. No CC0 claim; see findings.md. Reference image only, not a game texture."
+    },
+    {
+      "id": "home-2013",
+      "url": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2013/MapServer/export?f=json&bbox=-8278462.459768675%2C5054240.478811174%2C-8278361.322404784%2C5054336.292997633&bboxSR=3857&imageSR=3857&size=1100%2C1042&format=jpg&transparent=false&dpi=96",
+      "imagePath": "property-home-2013.jpg",
+      "georeferencePath": "property-home-2013-georeference.json",
+      "vintage": "Spring 2013",
+      "width": 1100,
+      "height": 1042,
+      "pixelSizeMeters": 0.0691,
+      "credit": "NYS ITS Geospatial Services / NYSDOP",
+      "terms": "Public no-cost GIS access; as-is/no-warranty resource metadata. No CC0 claim; see findings.md. Reference image only, not a game texture."
+    },
+    {
+      "id": "home-2010",
+      "url": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2010/MapServer/export?f=json&bbox=-8278462.459768675%2C5054240.478811174%2C-8278361.322404784%2C5054336.292997633&bboxSR=3857&imageSR=3857&size=1100%2C1042&format=jpg&transparent=false&dpi=96",
+      "imagePath": "property-home-2010.jpg",
+      "georeferencePath": "property-home-2010-georeference.json",
+      "vintage": "Spring 2010",
+      "width": 1100,
+      "height": 1042,
+      "pixelSizeMeters": 0.0691,
+      "credit": "NYS ITS Geospatial Services / NYSDOP",
+      "terms": "Public no-cost GIS access; as-is/no-warranty resource metadata. No CC0 claim; see findings.md. Reference image only, not a game texture."
+    }
+  ],
+  "features": [
+    {
+      "id": "east-home-driveway-hidden",
+      "address": "2 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "home-2010",
+      "sourcePixels": [
+        [
+          171,
+          794
+        ],
+        [
+          249,
+          783
+        ],
+        [
+          328,
+          765
+        ],
+        [
+          410,
+          742
+        ],
+        [
+          468,
+          713
+        ],
+        [
+          508,
+          673
+        ],
+        [
+          522,
+          633
+        ],
+        [
+          565,
+          637
+        ],
+        [
+          565,
+          694
+        ],
+        [
+          527,
+          753
+        ],
+        [
+          453,
+          799
+        ],
+        [
+          355,
+          828
+        ],
+        [
+          257,
+          850
+        ],
+        [
+          151,
+          862
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1294.54,
+          1766.05
+        ],
+        [
+          1317.2,
+          1762.85
+        ],
+        [
+          1340.16,
+          1757.62
+        ],
+        [
+          1363.99,
+          1750.93
+        ],
+        [
+          1380.84,
+          1742.51
+        ],
+        [
+          1392.47,
+          1730.88
+        ],
+        [
+          1396.54,
+          1719.26
+        ],
+        [
+          1409.03,
+          1720.42
+        ],
+        [
+          1409.03,
+          1736.99
+        ],
+        [
+          1397.99,
+          1754.13
+        ],
+        [
+          1376.48,
+          1767.5
+        ],
+        [
+          1348.01,
+          1775.93
+        ],
+        [
+          1319.53,
+          1782.32
+        ],
+        [
+          1288.72,
+          1785.81
+        ]
+      ],
+      "points": [
+        [
+          -26.188,
+          30.864
+        ],
+        [
+          -20.798,
+          30.104
+        ],
+        [
+          -15.34,
+          28.86
+        ],
+        [
+          -9.674,
+          27.271
+        ],
+        [
+          -5.666,
+          25.267
+        ],
+        [
+          -2.902,
+          22.503
+        ],
+        [
+          -1.935,
+          19.739
+        ],
+        [
+          1.036,
+          20.015
+        ],
+        [
+          1.036,
+          23.954
+        ],
+        [
+          -1.589,
+          28.031
+        ],
+        [
+          -6.702,
+          31.209
+        ],
+        [
+          -13.474,
+          33.213
+        ],
+        [
+          -20.246,
+          34.733
+        ],
+        [
+          -27.57,
+          35.562
+        ]
+      ],
+      "evidence": "inferred-occluded",
+      "confidence": "medium",
+      "notes": "Curved approach is visible in 2010 and corroborated in 2013. In 2025 the evergreen crowns obscure its mouth and middle. This preserves a historically supported usable connection, with uncertain present-day edges; estimated width 4.4m. The former 2025-only short stub was about 8m too far north.",
+      "surface": "asphalt",
+      "widthMeters": 4.4,
+      "replacesDrivewayIds": [
+        "2 Beverly Dr"
+      ],
+      "supportingSourceIds": [
+        "home-2013",
+        "home-2016",
+        "home-2021",
+        "home-2025"
+      ],
+      "currentVisibility": "canopy-obscured",
+      "historicalEvidence": "observed in 2010/2013",
+      "centerlineSourcePixels": [
+        [
+          158,
+          830
+        ],
+        [
+          247,
+          815
+        ],
+        [
+          342,
+          794
+        ],
+        [
+          431,
+          769
+        ],
+        [
+          493,
+          735
+        ],
+        [
+          540,
+          684
+        ],
+        [
+          553,
+          631
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -27.086,
+          33.351
+        ],
+        [
+          -20.937,
+          32.315
+        ],
+        [
+          -14.372,
+          30.864
+        ],
+        [
+          -8.223,
+          29.136
+        ],
+        [
+          -3.939,
+          26.787
+        ],
+        [
+          -0.691,
+          23.263
+        ],
+        [
+          0.207,
+          19.601
+        ]
+      ]
+    },
+    {
+      "id": "east-home-driveway-apron",
+      "address": "2 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "home-2025",
+      "sourcePixels": [
+        [
+          518,
+          551
+        ],
+        [
+          587,
+          570
+        ],
+        [
+          608,
+          627
+        ],
+        [
+          646,
+          673
+        ],
+        [
+          618,
+          712
+        ],
+        [
+          573,
+          679
+        ],
+        [
+          546,
+          648
+        ],
+        [
+          520,
+          621
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1395.37,
+          1695.43
+        ],
+        [
+          1415.43,
+          1700.95
+        ],
+        [
+          1421.53,
+          1717.52
+        ],
+        [
+          1432.57,
+          1730.88
+        ],
+        [
+          1424.43,
+          1742.22
+        ],
+        [
+          1411.36,
+          1732.63
+        ],
+        [
+          1403.51,
+          1723.62
+        ],
+        [
+          1395.95,
+          1715.77
+        ]
+      ],
+      "points": [
+        [
+          -2.211,
+          14.073
+        ],
+        [
+          2.557,
+          15.386
+        ],
+        [
+          4.008,
+          19.324
+        ],
+        [
+          6.633,
+          22.503
+        ],
+        [
+          4.699,
+          25.198
+        ],
+        [
+          1.589,
+          22.917
+        ],
+        [
+          -0.276,
+          20.775
+        ],
+        [
+          -2.073,
+          18.91
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Exposed paved parking/apron between the main house and detached garage. Western and southern margins partly disappear beneath evergreen crowns. The north edge stops beyond the apparent roof edge and well clear of the older state footprint.",
+      "surface": "asphalt",
+      "widthMeters": 5.2,
+      "replacesDrivewayIds": [
+        "2 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          540,
+          684
+        ],
+        [
+          553,
+          631
+        ],
+        [
+          551,
+          586
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -0.691,
+          23.263
+        ],
+        [
+          0.207,
+          19.601
+        ],
+        [
+          0.069,
+          16.491
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-4",
+      "address": "4 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-south-2025",
+      "sourcePixels": [
+        [
+          450,
+          1049
+        ],
+        [
+          492,
+          1036
+        ],
+        [
+          534,
+          1004
+        ],
+        [
+          576,
+          963
+        ],
+        [
+          604,
+          916
+        ],
+        [
+          620,
+          880
+        ],
+        [
+          677,
+          894
+        ],
+        [
+          731,
+          900
+        ],
+        [
+          716,
+          953
+        ],
+        [
+          706,
+          989
+        ],
+        [
+          639,
+          993
+        ],
+        [
+          600,
+          1022
+        ],
+        [
+          548,
+          1065
+        ],
+        [
+          513,
+          1084
+        ],
+        [
+          458,
+          1097
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1342.54,
+          1525.75
+        ],
+        [
+          1364.22,
+          1519.04
+        ],
+        [
+          1385.9,
+          1502.52
+        ],
+        [
+          1407.58,
+          1481.36
+        ],
+        [
+          1422.03,
+          1457.1
+        ],
+        [
+          1430.29,
+          1438.52
+        ],
+        [
+          1459.71,
+          1445.75
+        ],
+        [
+          1487.58,
+          1448.84
+        ],
+        [
+          1479.84,
+          1476.2
+        ],
+        [
+          1474.68,
+          1494.78
+        ],
+        [
+          1440.1,
+          1496.84
+        ],
+        [
+          1419.97,
+          1511.81
+        ],
+        [
+          1393.13,
+          1534.01
+        ],
+        [
+          1375.06,
+          1543.81
+        ],
+        [
+          1346.67,
+          1550.52
+        ]
+      ],
+      "points": [
+        [
+          -14.773,
+          -26.274
+        ],
+        [
+          -9.618,
+          -27.869
+        ],
+        [
+          -4.464,
+          -31.797
+        ],
+        [
+          0.691,
+          -36.828
+        ],
+        [
+          4.127,
+          -42.597
+        ],
+        [
+          6.091,
+          -47.015
+        ],
+        [
+          13.086,
+          -45.296
+        ],
+        [
+          19.714,
+          -44.56
+        ],
+        [
+          17.873,
+          -38.056
+        ],
+        [
+          16.645,
+          -33.637
+        ],
+        [
+          8.423,
+          -33.147
+        ],
+        [
+          3.636,
+          -29.587
+        ],
+        [
+          -2.745,
+          -24.31
+        ],
+        [
+          -7.041,
+          -21.978
+        ],
+        [
+          -13.791,
+          -20.383
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Visible paved approach and widened parking apron; edges are approximate under tree shadows.",
+      "surface": "asphalt",
+      "widthMeters": 4.3,
+      "replacesDrivewayIds": [
+        "4 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          451,
+          1064
+        ],
+        [
+          507,
+          1048
+        ],
+        [
+          563,
+          1000
+        ],
+        [
+          607,
+          952
+        ],
+        [
+          655,
+          941
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -14.65,
+          -24.433
+        ],
+        [
+          -7.777,
+          -26.397
+        ],
+        [
+          -0.905,
+          -32.287
+        ],
+        [
+          4.495,
+          -38.178
+        ],
+        [
+          10.386,
+          -39.528
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-6",
+      "address": "6 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-south-2025",
+      "sourcePixels": [
+        [
+          472,
+          632
+        ],
+        [
+          576,
+          628
+        ],
+        [
+          608,
+          625
+        ],
+        [
+          642,
+          612
+        ],
+        [
+          672,
+          605
+        ],
+        [
+          714,
+          606
+        ],
+        [
+          719,
+          663
+        ],
+        [
+          687,
+          679
+        ],
+        [
+          651,
+          666
+        ],
+        [
+          600,
+          667
+        ],
+        [
+          475,
+          665
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1353.9,
+          1310.52
+        ],
+        [
+          1407.58,
+          1308.45
+        ],
+        [
+          1424.1,
+          1306.9
+        ],
+        [
+          1441.64,
+          1300.19
+        ],
+        [
+          1457.13,
+          1296.58
+        ],
+        [
+          1478.81,
+          1297.1
+        ],
+        [
+          1481.39,
+          1326.52
+        ],
+        [
+          1464.87,
+          1334.77
+        ],
+        [
+          1446.29,
+          1328.06
+        ],
+        [
+          1419.97,
+          1328.58
+        ],
+        [
+          1355.45,
+          1327.55
+        ]
+      ],
+      "points": [
+        [
+          -12.073,
+          -77.451
+        ],
+        [
+          0.691,
+          -77.942
+        ],
+        [
+          4.618,
+          -78.31
+        ],
+        [
+          8.791,
+          -79.905
+        ],
+        [
+          12.473,
+          -80.764
+        ],
+        [
+          17.627,
+          -80.642
+        ],
+        [
+          18.241,
+          -73.646
+        ],
+        [
+          14.314,
+          -71.683
+        ],
+        [
+          9.895,
+          -73.278
+        ],
+        [
+          3.636,
+          -73.155
+        ],
+        [
+          -11.705,
+          -73.401
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Visible paved approach and widened parking apron; edges are approximate under tree shadows.",
+      "surface": "asphalt",
+      "widthMeters": 4.4,
+      "replacesDrivewayIds": [
+        "6 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          475,
+          647
+        ],
+        [
+          556,
+          647
+        ],
+        [
+          622,
+          645
+        ],
+        [
+          681,
+          641
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -11.705,
+          -75.61
+        ],
+        [
+          -1.764,
+          -75.61
+        ],
+        [
+          6.336,
+          -75.855
+        ],
+        [
+          13.577,
+          -76.346
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-8",
+      "address": "8 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-south-2025",
+      "sourcePixels": [
+        [
+          538,
+          299
+        ],
+        [
+          614,
+          296
+        ],
+        [
+          660,
+          289
+        ],
+        [
+          691,
+          279
+        ],
+        [
+          754,
+          282
+        ],
+        [
+          785,
+          298
+        ],
+        [
+          787,
+          334
+        ],
+        [
+          750,
+          335
+        ],
+        [
+          719,
+          327
+        ],
+        [
+          652,
+          327
+        ],
+        [
+          607,
+          334
+        ],
+        [
+          540,
+          335
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1387.97,
+          1138.64
+        ],
+        [
+          1427.19,
+          1137.09
+        ],
+        [
+          1450.93,
+          1133.48
+        ],
+        [
+          1466.94,
+          1128.32
+        ],
+        [
+          1499.45,
+          1129.87
+        ],
+        [
+          1515.45,
+          1138.12
+        ],
+        [
+          1516.48,
+          1156.71
+        ],
+        [
+          1497.39,
+          1157.22
+        ],
+        [
+          1481.39,
+          1153.09
+        ],
+        [
+          1446.81,
+          1153.09
+        ],
+        [
+          1423.58,
+          1156.71
+        ],
+        [
+          1389.0,
+          1157.22
+        ]
+      ],
+      "points": [
+        [
+          -3.973,
+          -118.318
+        ],
+        [
+          5.355,
+          -118.687
+        ],
+        [
+          11.0,
+          -119.546
+        ],
+        [
+          14.805,
+          -120.773
+        ],
+        [
+          22.536,
+          -120.405
+        ],
+        [
+          26.341,
+          -118.441
+        ],
+        [
+          26.586,
+          -114.023
+        ],
+        [
+          22.045,
+          -113.9
+        ],
+        [
+          18.241,
+          -114.882
+        ],
+        [
+          10.018,
+          -114.882
+        ],
+        [
+          4.495,
+          -114.023
+        ],
+        [
+          -3.727,
+          -113.9
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Visible paved approach and widened parking apron; edges are approximate under tree shadows.",
+      "surface": "asphalt",
+      "widthMeters": 4.2,
+      "replacesDrivewayIds": [
+        "8 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          540,
+          318
+        ],
+        [
+          617,
+          314
+        ],
+        [
+          688,
+          309
+        ],
+        [
+          756,
+          310
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -3.727,
+          -115.987
+        ],
+        [
+          5.723,
+          -116.478
+        ],
+        [
+          14.436,
+          -117.091
+        ],
+        [
+          22.782,
+          -116.968
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-9",
+      "address": "9 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-south-2025",
+      "sourcePixels": [
+        [
+          404,
+          369
+        ],
+        [
+          354,
+          379
+        ],
+        [
+          304,
+          383
+        ],
+        [
+          254,
+          379
+        ],
+        [
+          210,
+          366
+        ],
+        [
+          177,
+          366
+        ],
+        [
+          168,
+          406
+        ],
+        [
+          202,
+          423
+        ],
+        [
+          273,
+          419
+        ],
+        [
+          343,
+          412
+        ],
+        [
+          400,
+          412
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1318.8,
+          1174.77
+        ],
+        [
+          1292.99,
+          1179.93
+        ],
+        [
+          1267.19,
+          1182.0
+        ],
+        [
+          1241.38,
+          1179.93
+        ],
+        [
+          1218.67,
+          1173.22
+        ],
+        [
+          1201.64,
+          1173.22
+        ],
+        [
+          1196.99,
+          1193.87
+        ],
+        [
+          1214.54,
+          1202.64
+        ],
+        [
+          1251.19,
+          1200.58
+        ],
+        [
+          1287.32,
+          1196.96
+        ],
+        [
+          1316.74,
+          1196.96
+        ]
+      ],
+      "points": [
+        [
+          -20.418,
+          -109.728
+        ],
+        [
+          -26.555,
+          -108.5
+        ],
+        [
+          -32.691,
+          -108.009
+        ],
+        [
+          -38.827,
+          -108.5
+        ],
+        [
+          -44.227,
+          -110.096
+        ],
+        [
+          -48.277,
+          -110.096
+        ],
+        [
+          -49.382,
+          -105.187
+        ],
+        [
+          -45.209,
+          -103.1
+        ],
+        [
+          -36.495,
+          -103.591
+        ],
+        [
+          -27.905,
+          -104.45
+        ],
+        [
+          -20.909,
+          -104.45
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Visible paved approach and widened parking apron; edges are approximate under tree shadows.",
+      "surface": "asphalt",
+      "widthMeters": 4.5,
+      "replacesDrivewayIds": [
+        "9 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          405,
+          395
+        ],
+        [
+          331,
+          397
+        ],
+        [
+          266,
+          401
+        ],
+        [
+          204,
+          396
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -20.295,
+          -106.537
+        ],
+        [
+          -29.377,
+          -106.291
+        ],
+        [
+          -37.355,
+          -105.8
+        ],
+        [
+          -44.964,
+          -106.414
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-7",
+      "address": "7 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-south-2025",
+      "sourcePixels": [
+        [
+          399,
+          671
+        ],
+        [
+          345,
+          677
+        ],
+        [
+          299,
+          671
+        ],
+        [
+          263,
+          656
+        ],
+        [
+          256,
+          644
+        ],
+        [
+          215,
+          649
+        ],
+        [
+          216,
+          688
+        ],
+        [
+          248,
+          704
+        ],
+        [
+          310,
+          702
+        ],
+        [
+          399,
+          712
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1316.22,
+          1330.65
+        ],
+        [
+          1288.35,
+          1333.74
+        ],
+        [
+          1264.61,
+          1330.65
+        ],
+        [
+          1246.03,
+          1322.9
+        ],
+        [
+          1242.41,
+          1316.71
+        ],
+        [
+          1221.25,
+          1319.29
+        ],
+        [
+          1221.77,
+          1339.42
+        ],
+        [
+          1238.28,
+          1347.68
+        ],
+        [
+          1270.28,
+          1346.65
+        ],
+        [
+          1316.22,
+          1351.81
+        ]
+      ],
+      "points": [
+        [
+          -21.032,
+          -72.664
+        ],
+        [
+          -27.659,
+          -71.928
+        ],
+        [
+          -33.305,
+          -72.664
+        ],
+        [
+          -37.723,
+          -74.505
+        ],
+        [
+          -38.582,
+          -75.978
+        ],
+        [
+          -43.614,
+          -75.364
+        ],
+        [
+          -43.491,
+          -70.578
+        ],
+        [
+          -39.564,
+          -68.614
+        ],
+        [
+          -31.955,
+          -68.86
+        ],
+        [
+          -21.032,
+          -67.633
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Approach and apron visible, with parked vehicles and tree shadows obscuring small portions of the edges.",
+      "surface": "asphalt",
+      "widthMeters": 3.7,
+      "replacesDrivewayIds": [
+        "7 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          399,
+          686
+        ],
+        [
+          329,
+          689
+        ],
+        [
+          275,
+          681
+        ],
+        [
+          238,
+          666
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -21.032,
+          -70.824
+        ],
+        [
+          -29.623,
+          -70.455
+        ],
+        [
+          -36.25,
+          -71.437
+        ],
+        [
+          -40.791,
+          -73.278
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-5",
+      "address": "5 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-south-2025",
+      "sourcePixels": [
+        [
+          380,
+          906
+        ],
+        [
+          308,
+          910
+        ],
+        [
+          236,
+          919
+        ],
+        [
+          178,
+          926
+        ],
+        [
+          134,
+          924
+        ],
+        [
+          125,
+          914
+        ],
+        [
+          82,
+          916
+        ],
+        [
+          76,
+          954
+        ],
+        [
+          95,
+          974
+        ],
+        [
+          142,
+          964
+        ],
+        [
+          189,
+          950
+        ],
+        [
+          267,
+          940
+        ],
+        [
+          380,
+          928
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1306.41,
+          1451.94
+        ],
+        [
+          1269.25,
+          1454.0
+        ],
+        [
+          1232.09,
+          1458.65
+        ],
+        [
+          1202.15,
+          1462.26
+        ],
+        [
+          1179.44,
+          1461.23
+        ],
+        [
+          1174.8,
+          1456.07
+        ],
+        [
+          1152.6,
+          1457.1
+        ],
+        [
+          1149.51,
+          1476.71
+        ],
+        [
+          1159.31,
+          1487.04
+        ],
+        [
+          1183.57,
+          1481.88
+        ],
+        [
+          1207.83,
+          1474.65
+        ],
+        [
+          1248.09,
+          1469.49
+        ],
+        [
+          1306.41,
+          1463.29
+        ]
+      ],
+      "points": [
+        [
+          -23.364,
+          -43.824
+        ],
+        [
+          -32.2,
+          -43.333
+        ],
+        [
+          -41.036,
+          -42.228
+        ],
+        [
+          -48.155,
+          -41.369
+        ],
+        [
+          -53.555,
+          -41.615
+        ],
+        [
+          -54.659,
+          -42.842
+        ],
+        [
+          -59.936,
+          -42.597
+        ],
+        [
+          -60.673,
+          -37.933
+        ],
+        [
+          -58.341,
+          -35.478
+        ],
+        [
+          -52.573,
+          -36.706
+        ],
+        [
+          -46.805,
+          -38.424
+        ],
+        [
+          -37.232,
+          -39.651
+        ],
+        [
+          -23.364,
+          -41.124
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Visible paved approach and widened parking apron; edges are approximate under tree shadows.",
+      "surface": "asphalt",
+      "widthMeters": 3.8,
+      "replacesDrivewayIds": [
+        "5 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          380,
+          917
+        ],
+        [
+          283,
+          927
+        ],
+        [
+          184,
+          939
+        ],
+        [
+          110,
+          943
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -23.364,
+          -42.474
+        ],
+        [
+          -35.268,
+          -41.247
+        ],
+        [
+          -47.418,
+          -39.774
+        ],
+        [
+          -56.5,
+          -39.283
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-10",
+      "address": "10 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          583,
+          1138
+        ],
+        [
+          644,
+          1151
+        ],
+        [
+          701,
+          1163
+        ],
+        [
+          723,
+          1151
+        ],
+        [
+          723,
+          1133
+        ],
+        [
+          781,
+          1144
+        ],
+        [
+          807,
+          1153
+        ],
+        [
+          810,
+          1201
+        ],
+        [
+          756,
+          1202
+        ],
+        [
+          682,
+          1193
+        ],
+        [
+          622,
+          1182
+        ],
+        [
+          575,
+          1170
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1396.47,
+          969.05
+        ],
+        [
+          1439.62,
+          978.25
+        ],
+        [
+          1479.93,
+          986.74
+        ],
+        [
+          1495.49,
+          978.25
+        ],
+        [
+          1495.49,
+          965.52
+        ],
+        [
+          1536.52,
+          973.3
+        ],
+        [
+          1554.91,
+          979.66
+        ],
+        [
+          1557.03,
+          1013.61
+        ],
+        [
+          1518.84,
+          1014.32
+        ],
+        [
+          1466.5,
+          1007.95
+        ],
+        [
+          1424.06,
+          1000.17
+        ],
+        [
+          1390.81,
+          991.69
+        ]
+      ],
+      "points": [
+        [
+          -1.95,
+          -158.642
+        ],
+        [
+          8.309,
+          -156.455
+        ],
+        [
+          17.895,
+          -154.437
+        ],
+        [
+          21.595,
+          -156.455
+        ],
+        [
+          21.595,
+          -159.483
+        ],
+        [
+          31.35,
+          -157.633
+        ],
+        [
+          35.723,
+          -156.119
+        ],
+        [
+          36.227,
+          -148.047
+        ],
+        [
+          27.145,
+          -147.878
+        ],
+        [
+          14.7,
+          -149.392
+        ],
+        [
+          4.609,
+          -151.242
+        ],
+        [
+          -3.295,
+          -153.26
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Visible paved approach and widened parking apron; edges are approximate under tree shadows.",
+      "surface": "asphalt",
+      "widthMeters": 3.7,
+      "replacesDrivewayIds": [
+        "10 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          582,
+          1151
+        ],
+        [
+          662,
+          1170
+        ],
+        [
+          734,
+          1177
+        ],
+        [
+          783,
+          1175
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -2.118,
+          -156.455
+        ],
+        [
+          11.336,
+          -153.26
+        ],
+        [
+          23.445,
+          -152.083
+        ],
+        [
+          31.686,
+          -152.419
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-12",
+      "address": "12 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          669,
+          754
+        ],
+        [
+          736,
+          764
+        ],
+        [
+          776,
+          768
+        ],
+        [
+          802,
+          756
+        ],
+        [
+          814,
+          751
+        ],
+        [
+          853,
+          758
+        ],
+        [
+          860,
+          791
+        ],
+        [
+          851,
+          800
+        ],
+        [
+          821,
+          800
+        ],
+        [
+          788,
+          795
+        ],
+        [
+          744,
+          795
+        ],
+        [
+          663,
+          789
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1457.3,
+          697.45
+        ],
+        [
+          1504.69,
+          704.52
+        ],
+        [
+          1532.98,
+          707.35
+        ],
+        [
+          1551.37,
+          698.86
+        ],
+        [
+          1559.86,
+          695.33
+        ],
+        [
+          1587.44,
+          700.28
+        ],
+        [
+          1592.4,
+          723.62
+        ],
+        [
+          1586.03,
+          729.98
+        ],
+        [
+          1564.81,
+          729.98
+        ],
+        [
+          1541.47,
+          726.45
+        ],
+        [
+          1510.35,
+          726.45
+        ],
+        [
+          1453.06,
+          722.2
+        ]
+      ],
+      "points": [
+        [
+          12.514,
+          -223.222
+        ],
+        [
+          23.782,
+          -221.54
+        ],
+        [
+          30.509,
+          -220.867
+        ],
+        [
+          34.882,
+          -222.886
+        ],
+        [
+          36.9,
+          -223.726
+        ],
+        [
+          43.459,
+          -222.549
+        ],
+        [
+          44.636,
+          -216.999
+        ],
+        [
+          43.123,
+          -215.486
+        ],
+        [
+          38.077,
+          -215.486
+        ],
+        [
+          32.527,
+          -216.327
+        ],
+        [
+          25.127,
+          -216.327
+        ],
+        [
+          11.505,
+          -217.336
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Visible paved approach and widened parking apron; edges are approximate under tree shadows.",
+      "surface": "asphalt",
+      "widthMeters": 4.4,
+      "replacesDrivewayIds": [
+        "12 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          668,
+          771
+        ],
+        [
+          739,
+          781
+        ],
+        [
+          794,
+          782
+        ],
+        [
+          836,
+          784
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          12.345,
+          -220.363
+        ],
+        [
+          24.286,
+          -218.681
+        ],
+        [
+          33.536,
+          -218.513
+        ],
+        [
+          40.6,
+          -218.177
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-14",
+      "address": "14 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          704,
+          496
+        ],
+        [
+          757,
+          486
+        ],
+        [
+          804,
+          470
+        ],
+        [
+          850,
+          460
+        ],
+        [
+          883,
+          460
+        ],
+        [
+          893,
+          476
+        ],
+        [
+          892,
+          517
+        ],
+        [
+          887,
+          517
+        ],
+        [
+          886,
+          498
+        ],
+        [
+          830,
+          502
+        ],
+        [
+          792,
+          514
+        ],
+        [
+          748,
+          529
+        ],
+        [
+          703,
+          537
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1482.06,
+          514.96
+        ],
+        [
+          1519.54,
+          507.89
+        ],
+        [
+          1552.79,
+          496.57
+        ],
+        [
+          1585.32,
+          489.5
+        ],
+        [
+          1608.66,
+          489.5
+        ],
+        [
+          1615.74,
+          500.82
+        ],
+        [
+          1615.03,
+          529.82
+        ],
+        [
+          1611.49,
+          529.82
+        ],
+        [
+          1610.79,
+          516.38
+        ],
+        [
+          1571.18,
+          519.21
+        ],
+        [
+          1544.3,
+          527.69
+        ],
+        [
+          1513.18,
+          538.3
+        ],
+        [
+          1481.35,
+          543.96
+        ]
+      ],
+      "points": [
+        [
+          18.4,
+          -266.611
+        ],
+        [
+          27.314,
+          -268.293
+        ],
+        [
+          35.218,
+          -270.984
+        ],
+        [
+          42.955,
+          -272.666
+        ],
+        [
+          48.505,
+          -272.666
+        ],
+        [
+          50.186,
+          -269.975
+        ],
+        [
+          50.018,
+          -263.08
+        ],
+        [
+          49.177,
+          -263.08
+        ],
+        [
+          49.009,
+          -266.275
+        ],
+        [
+          39.591,
+          -265.602
+        ],
+        [
+          33.2,
+          -263.584
+        ],
+        [
+          25.8,
+          -261.062
+        ],
+        [
+          18.232,
+          -259.716
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Broad apron along north of main house to detached garage; southern boundary next to main roof and eastern garage edge are shadowed.",
+      "surface": "asphalt",
+      "widthMeters": 5.0,
+      "replacesDrivewayIds": [
+        "14 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          704,
+          516
+        ],
+        [
+          767,
+          500
+        ],
+        [
+          831,
+          482
+        ],
+        [
+          881,
+          483
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          18.4,
+          -263.248
+        ],
+        [
+          28.995,
+          -265.939
+        ],
+        [
+          39.759,
+          -268.966
+        ],
+        [
+          48.168,
+          -268.798
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-16",
+      "address": "16 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          685,
+          432
+        ],
+        [
+          744,
+          418
+        ],
+        [
+          796,
+          402
+        ],
+        [
+          843,
+          395
+        ],
+        [
+          864,
+          374
+        ],
+        [
+          901,
+          369
+        ],
+        [
+          910,
+          399
+        ],
+        [
+          930,
+          415
+        ],
+        [
+          906,
+          433
+        ],
+        [
+          864,
+          435
+        ],
+        [
+          827,
+          427
+        ],
+        [
+          780,
+          433
+        ],
+        [
+          732,
+          449
+        ],
+        [
+          690,
+          457
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1468.62,
+          469.69
+        ],
+        [
+          1510.35,
+          459.79
+        ],
+        [
+          1547.13,
+          448.48
+        ],
+        [
+          1580.37,
+          443.52
+        ],
+        [
+          1595.23,
+          428.67
+        ],
+        [
+          1621.4,
+          425.13
+        ],
+        [
+          1627.76,
+          446.35
+        ],
+        [
+          1641.91,
+          457.67
+        ],
+        [
+          1624.93,
+          470.4
+        ],
+        [
+          1595.23,
+          471.82
+        ],
+        [
+          1569.05,
+          466.16
+        ],
+        [
+          1535.81,
+          470.4
+        ],
+        [
+          1501.86,
+          481.72
+        ],
+        [
+          1472.15,
+          487.38
+        ]
+      ],
+      "points": [
+        [
+          15.205,
+          -277.375
+        ],
+        [
+          25.127,
+          -279.729
+        ],
+        [
+          33.873,
+          -282.42
+        ],
+        [
+          41.777,
+          -283.597
+        ],
+        [
+          45.309,
+          -287.129
+        ],
+        [
+          51.532,
+          -287.97
+        ],
+        [
+          53.045,
+          -282.924
+        ],
+        [
+          56.409,
+          -280.234
+        ],
+        [
+          52.373,
+          -277.206
+        ],
+        [
+          45.309,
+          -276.87
+        ],
+        [
+          39.086,
+          -278.215
+        ],
+        [
+          31.182,
+          -277.206
+        ],
+        [
+          23.109,
+          -274.516
+        ],
+        [
+          16.045,
+          -273.17
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Tree canopy hides part of the road-end approach; visible continuation and apron support its alignment. Widened southeast parking pad is included.",
+      "surface": "asphalt",
+      "widthMeters": 3.6,
+      "replacesDrivewayIds": [
+        "16 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          686,
+          446
+        ],
+        [
+          753,
+          430
+        ],
+        [
+          812,
+          414
+        ],
+        [
+          871,
+          416
+        ],
+        [
+          901,
+          406
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          15.373,
+          -275.02
+        ],
+        [
+          26.641,
+          -277.711
+        ],
+        [
+          36.564,
+          -280.402
+        ],
+        [
+          46.486,
+          -280.065
+        ],
+        [
+          51.532,
+          -281.747
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-17",
+      "address": "17 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          477,
+          324
+        ],
+        [
+          458,
+          344
+        ],
+        [
+          439,
+          361
+        ],
+        [
+          409,
+          374
+        ],
+        [
+          413,
+          394
+        ],
+        [
+          433,
+          405
+        ],
+        [
+          456,
+          381
+        ],
+        [
+          477,
+          361
+        ],
+        [
+          502,
+          344
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1321.5,
+          393.31
+        ],
+        [
+          1308.06,
+          407.45
+        ],
+        [
+          1294.62,
+          419.48
+        ],
+        [
+          1273.4,
+          428.67
+        ],
+        [
+          1276.23,
+          442.82
+        ],
+        [
+          1290.38,
+          450.6
+        ],
+        [
+          1306.64,
+          433.62
+        ],
+        [
+          1321.5,
+          419.48
+        ],
+        [
+          1339.18,
+          407.45
+        ]
+      ],
+      "points": [
+        [
+          -19.777,
+          -295.538
+        ],
+        [
+          -22.973,
+          -292.174
+        ],
+        [
+          -26.168,
+          -289.315
+        ],
+        [
+          -31.214,
+          -287.129
+        ],
+        [
+          -30.541,
+          -283.765
+        ],
+        [
+          -27.177,
+          -281.915
+        ],
+        [
+          -23.309,
+          -285.952
+        ],
+        [
+          -19.777,
+          -289.315
+        ],
+        [
+          -15.573,
+          -292.174
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Road-end and parking corners are partly shaded; polygon follows visible gray paving, avoiding the house roof.",
+      "surface": "asphalt",
+      "widthMeters": 4.0,
+      "replacesDrivewayIds": [
+        "17 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          491,
+          335
+        ],
+        [
+          468,
+          356
+        ],
+        [
+          439,
+          383
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -17.423,
+          -293.688
+        ],
+        [
+          -21.291,
+          -290.156
+        ],
+        [
+          -26.168,
+          -285.615
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-15",
+      "address": "15 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          641,
+          644
+        ],
+        [
+          602,
+          648
+        ],
+        [
+          578,
+          656
+        ],
+        [
+          563,
+          649
+        ],
+        [
+          536,
+          660
+        ],
+        [
+          527,
+          681
+        ],
+        [
+          542,
+          694
+        ],
+        [
+          561,
+          682
+        ],
+        [
+          586,
+          670
+        ],
+        [
+          611,
+          666
+        ],
+        [
+          641,
+          666
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1437.5,
+          619.64
+        ],
+        [
+          1409.91,
+          622.47
+        ],
+        [
+          1392.94,
+          628.13
+        ],
+        [
+          1382.33,
+          623.18
+        ],
+        [
+          1363.23,
+          630.96
+        ],
+        [
+          1356.86,
+          645.81
+        ],
+        [
+          1367.47,
+          655.01
+        ],
+        [
+          1380.91,
+          646.52
+        ],
+        [
+          1398.59,
+          638.03
+        ],
+        [
+          1416.28,
+          635.2
+        ],
+        [
+          1437.5,
+          635.2
+        ]
+      ],
+      "points": [
+        [
+          7.805,
+          -241.721
+        ],
+        [
+          1.245,
+          -241.049
+        ],
+        [
+          -2.791,
+          -239.703
+        ],
+        [
+          -5.314,
+          -240.88
+        ],
+        [
+          -9.855,
+          -239.031
+        ],
+        [
+          -11.368,
+          -235.499
+        ],
+        [
+          -8.845,
+          -233.313
+        ],
+        [
+          -5.65,
+          -235.331
+        ],
+        [
+          -1.445,
+          -237.349
+        ],
+        [
+          2.759,
+          -238.021
+        ],
+        [
+          7.805,
+          -238.021
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Pale access strip and small pad are partly shadowed; surface could include gravel, and the eastern side-yard endpoint remains uncertain.",
+      "surface": "asphalt",
+      "widthMeters": 3.2,
+      "replacesDrivewayIds": [
+        "15 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          643,
+          656
+        ],
+        [
+          597,
+          658
+        ],
+        [
+          563,
+          672
+        ],
+        [
+          543,
+          681
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          8.141,
+          -239.703
+        ],
+        [
+          0.405,
+          -239.367
+        ],
+        [
+          -5.314,
+          -237.012
+        ],
+        [
+          -8.677,
+          -235.499
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-13",
+      "address": "13 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          602,
+          844
+        ],
+        [
+          563,
+          844
+        ],
+        [
+          538,
+          853
+        ],
+        [
+          495,
+          856
+        ],
+        [
+          459,
+          855
+        ],
+        [
+          433,
+          868
+        ],
+        [
+          416,
+          883
+        ],
+        [
+          433,
+          881
+        ],
+        [
+          453,
+          887
+        ],
+        [
+          473,
+          879
+        ],
+        [
+          508,
+          878
+        ],
+        [
+          542,
+          874
+        ],
+        [
+          597,
+          879
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1409.91,
+          761.1
+        ],
+        [
+          1382.33,
+          761.1
+        ],
+        [
+          1364.64,
+          767.47
+        ],
+        [
+          1334.23,
+          769.59
+        ],
+        [
+          1308.77,
+          768.89
+        ],
+        [
+          1290.38,
+          778.08
+        ],
+        [
+          1278.35,
+          788.69
+        ],
+        [
+          1290.38,
+          787.28
+        ],
+        [
+          1304.52,
+          791.52
+        ],
+        [
+          1318.67,
+          785.86
+        ],
+        [
+          1343.42,
+          785.15
+        ],
+        [
+          1367.47,
+          782.32
+        ],
+        [
+          1406.37,
+          785.86
+        ]
+      ],
+      "points": [
+        [
+          1.245,
+          -208.086
+        ],
+        [
+          -5.314,
+          -208.086
+        ],
+        [
+          -9.518,
+          -206.572
+        ],
+        [
+          -16.75,
+          -206.068
+        ],
+        [
+          -22.805,
+          -206.236
+        ],
+        [
+          -27.177,
+          -204.05
+        ],
+        [
+          -30.036,
+          -201.527
+        ],
+        [
+          -27.177,
+          -201.863
+        ],
+        [
+          -23.814,
+          -200.854
+        ],
+        [
+          -20.45,
+          -202.2
+        ],
+        [
+          -14.564,
+          -202.368
+        ],
+        [
+          -8.845,
+          -203.041
+        ],
+        [
+          0.405,
+          -202.2
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Visible paved approach and widened parking apron; edges are approximate under tree shadows.",
+      "surface": "asphalt",
+      "widthMeters": 3.7,
+      "replacesDrivewayIds": [
+        "13 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          601,
+          860
+        ],
+        [
+          552,
+          861
+        ],
+        [
+          504,
+          867
+        ],
+        [
+          467,
+          869
+        ],
+        [
+          441,
+          882
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          1.077,
+          -205.395
+        ],
+        [
+          -7.164,
+          -205.227
+        ],
+        [
+          -15.236,
+          -204.218
+        ],
+        [
+          -21.459,
+          -203.882
+        ],
+        [
+          -25.832,
+          -201.695
+        ]
+      ]
+    },
+    {
+      "id": "east-driveway-11",
+      "address": "11 Beverly Dr",
+      "kind": "driveway",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          548,
+          1065
+        ],
+        [
+          510,
+          1064
+        ],
+        [
+          474,
+          1058
+        ],
+        [
+          437,
+          1048
+        ],
+        [
+          403,
+          1045
+        ],
+        [
+          396,
+          1054
+        ],
+        [
+          389,
+          1084
+        ],
+        [
+          421,
+          1092
+        ],
+        [
+          442,
+          1085
+        ],
+        [
+          478,
+          1087
+        ],
+        [
+          508,
+          1093
+        ],
+        [
+          542,
+          1099
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1371.72,
+          917.42
+        ],
+        [
+          1344.84,
+          916.71
+        ],
+        [
+          1319.38,
+          912.47
+        ],
+        [
+          1293.21,
+          905.4
+        ],
+        [
+          1269.16,
+          903.27
+        ],
+        [
+          1264.21,
+          909.64
+        ],
+        [
+          1259.25,
+          930.86
+        ],
+        [
+          1281.89,
+          936.52
+        ],
+        [
+          1296.74,
+          931.57
+        ],
+        [
+          1322.2,
+          932.98
+        ],
+        [
+          1343.42,
+          937.22
+        ],
+        [
+          1367.47,
+          941.47
+        ]
+      ],
+      "points": [
+        [
+          -7.836,
+          -170.919
+        ],
+        [
+          -14.227,
+          -171.087
+        ],
+        [
+          -20.282,
+          -172.096
+        ],
+        [
+          -26.505,
+          -173.778
+        ],
+        [
+          -32.223,
+          -174.282
+        ],
+        [
+          -33.4,
+          -172.769
+        ],
+        [
+          -34.577,
+          -167.723
+        ],
+        [
+          -29.195,
+          -166.378
+        ],
+        [
+          -25.664,
+          -167.555
+        ],
+        [
+          -19.609,
+          -167.219
+        ],
+        [
+          -14.564,
+          -166.21
+        ],
+        [
+          -8.845,
+          -165.201
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Visible paved approach and widened parking apron; edges are approximate under tree shadows.",
+      "surface": "asphalt",
+      "widthMeters": 4.2,
+      "replacesDrivewayIds": [
+        "11 Beverly Dr"
+      ],
+      "centerlineSourcePixels": [
+        [
+          546,
+          1080
+        ],
+        [
+          491,
+          1076
+        ],
+        [
+          445,
+          1071
+        ],
+        [
+          408,
+          1075
+        ]
+      ],
+      "centerlinePoints": [
+        [
+          -8.173,
+          -168.396
+        ],
+        [
+          -17.423,
+          -169.069
+        ],
+        [
+          -25.159,
+          -169.91
+        ],
+        [
+          -31.382,
+          -169.237
+        ]
+      ]
+    },
+    {
+      "id": "east-pool-6",
+      "address": "6 Beverly Dr",
+      "kind": "pool",
+      "geometryType": "polygon",
+      "sourceId": "east-south-2025",
+      "sourcePixels": [
+        [
+          791,
+          580
+        ],
+        [
+          810,
+          582
+        ],
+        [
+          828,
+          598
+        ],
+        [
+          842,
+          606
+        ],
+        [
+          831,
+          641
+        ],
+        [
+          813,
+          672
+        ],
+        [
+          794,
+          676
+        ],
+        [
+          773,
+          663
+        ],
+        [
+          777,
+          638
+        ],
+        [
+          782,
+          609
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1518.55,
+          1283.68
+        ],
+        [
+          1528.36,
+          1284.71
+        ],
+        [
+          1537.65,
+          1292.97
+        ],
+        [
+          1544.87,
+          1297.1
+        ],
+        [
+          1539.19,
+          1315.16
+        ],
+        [
+          1529.9,
+          1331.16
+        ],
+        [
+          1520.1,
+          1333.23
+        ],
+        [
+          1509.26,
+          1326.52
+        ],
+        [
+          1511.32,
+          1313.61
+        ],
+        [
+          1513.9,
+          1298.64
+        ]
+      ],
+      "points": [
+        [
+          27.077,
+          -83.833
+        ],
+        [
+          29.409,
+          -83.587
+        ],
+        [
+          31.618,
+          -81.623
+        ],
+        [
+          33.336,
+          -80.642
+        ],
+        [
+          31.986,
+          -76.346
+        ],
+        [
+          29.777,
+          -72.542
+        ],
+        [
+          27.445,
+          -72.051
+        ],
+        [
+          24.868,
+          -73.646
+        ],
+        [
+          25.359,
+          -76.714
+        ],
+        [
+          25.973,
+          -80.273
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Clearly visible irregular teal in-ground pool with surrounding pale paving. Outline follows the water, not the outer patio.",
+      "form": "in-ground",
+      "surface": "water",
+      "heightMeters": 0.05
+    },
+    {
+      "id": "east-patio-6",
+      "address": "6 Beverly Dr",
+      "kind": "patio",
+      "geometryType": "polygon",
+      "sourceId": "east-south-2025",
+      "sourcePixels": [
+        [
+          752,
+          555
+        ],
+        [
+          782,
+          539
+        ],
+        [
+          815,
+          546
+        ],
+        [
+          839,
+          570
+        ],
+        [
+          858,
+          612
+        ],
+        [
+          851,
+          648
+        ],
+        [
+          829,
+          680
+        ],
+        [
+          803,
+          699
+        ],
+        [
+          775,
+          696
+        ],
+        [
+          749,
+          679
+        ],
+        [
+          731,
+          654
+        ],
+        [
+          738,
+          611
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1498.42,
+          1270.77
+        ],
+        [
+          1513.9,
+          1262.51
+        ],
+        [
+          1530.94,
+          1266.13
+        ],
+        [
+          1543.32,
+          1278.52
+        ],
+        [
+          1553.13,
+          1300.19
+        ],
+        [
+          1549.52,
+          1318.77
+        ],
+        [
+          1538.16,
+          1335.29
+        ],
+        [
+          1524.74,
+          1345.1
+        ],
+        [
+          1510.29,
+          1343.55
+        ],
+        [
+          1496.87,
+          1334.77
+        ],
+        [
+          1487.58,
+          1321.87
+        ],
+        [
+          1491.19,
+          1299.68
+        ]
+      ],
+      "points": [
+        [
+          22.291,
+          -86.901
+        ],
+        [
+          25.973,
+          -88.864
+        ],
+        [
+          30.023,
+          -88.005
+        ],
+        [
+          32.968,
+          -85.06
+        ],
+        [
+          35.3,
+          -79.905
+        ],
+        [
+          34.441,
+          -75.487
+        ],
+        [
+          31.741,
+          -71.56
+        ],
+        [
+          28.55,
+          -69.228
+        ],
+        [
+          25.114,
+          -69.596
+        ],
+        [
+          21.923,
+          -71.683
+        ],
+        [
+          19.714,
+          -74.751
+        ],
+        [
+          20.573,
+          -80.028
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Observed pool-surround hardscape. Exclude the pool polygon as a hole; paving pattern and height are approximate.",
+      "surface": "paving",
+      "heightMeters": 0.04,
+      "holesFeatureIds": [
+        "east-pool-6"
+      ]
+    },
+    {
+      "id": "east-pool-13",
+      "address": "13 Beverly Dr",
+      "kind": "pool",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          274.0,
+          941.0
+        ],
+        [
+          272.25,
+          950.18
+        ],
+        [
+          267.26,
+          957.97
+        ],
+        [
+          259.8,
+          963.17
+        ],
+        [
+          251.0,
+          965.0
+        ],
+        [
+          242.2,
+          963.17
+        ],
+        [
+          234.74,
+          957.97
+        ],
+        [
+          229.75,
+          950.18
+        ],
+        [
+          228.0,
+          941.0
+        ],
+        [
+          229.75,
+          931.82
+        ],
+        [
+          234.74,
+          924.03
+        ],
+        [
+          242.2,
+          918.83
+        ],
+        [
+          251.0,
+          917.0
+        ],
+        [
+          259.8,
+          918.83
+        ],
+        [
+          267.26,
+          924.03
+        ],
+        [
+          272.25,
+          931.82
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1177.91,
+          829.71
+        ],
+        [
+          1176.68,
+          836.21
+        ],
+        [
+          1173.15,
+          841.72
+        ],
+        [
+          1167.87,
+          845.39
+        ],
+        [
+          1161.65,
+          846.69
+        ],
+        [
+          1155.42,
+          845.39
+        ],
+        [
+          1150.15,
+          841.72
+        ],
+        [
+          1146.62,
+          836.21
+        ],
+        [
+          1145.38,
+          829.71
+        ],
+        [
+          1146.62,
+          823.22
+        ],
+        [
+          1150.15,
+          817.71
+        ],
+        [
+          1155.42,
+          814.03
+        ],
+        [
+          1161.65,
+          812.74
+        ],
+        [
+          1167.87,
+          814.03
+        ],
+        [
+          1173.15,
+          817.71
+        ],
+        [
+          1176.68,
+          823.22
+        ]
+      ],
+      "points": [
+        [
+          -53.918,
+          -191.773
+        ],
+        [
+          -54.212,
+          -190.229
+        ],
+        [
+          -55.052,
+          -188.919
+        ],
+        [
+          -56.306,
+          -188.044
+        ],
+        [
+          -57.786,
+          -187.737
+        ],
+        [
+          -59.266,
+          -188.044
+        ],
+        [
+          -60.521,
+          -188.919
+        ],
+        [
+          -61.36,
+          -190.229
+        ],
+        [
+          -61.655,
+          -191.773
+        ],
+        [
+          -61.36,
+          -193.317
+        ],
+        [
+          -60.521,
+          -194.627
+        ],
+        [
+          -59.266,
+          -195.501
+        ],
+        [
+          -57.786,
+          -195.809
+        ],
+        [
+          -56.306,
+          -195.501
+        ],
+        [
+          -55.052,
+          -194.627
+        ],
+        [
+          -54.212,
+          -193.317
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Dark covered circular pool with visible pale raised rim. Wall height is a plausible rendering value, not a measured height.",
+      "form": "above-ground",
+      "surface": "covered",
+      "heightMeters": 1.15
+    },
+    {
+      "id": "east-pool-14",
+      "address": "14 Beverly Dr",
+      "kind": "pool",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          989.0,
+          645.0
+        ],
+        [
+          986.64,
+          651.89
+        ],
+        [
+          979.92,
+          657.73
+        ],
+        [
+          969.86,
+          661.63
+        ],
+        [
+          958.0,
+          663.0
+        ],
+        [
+          946.14,
+          661.63
+        ],
+        [
+          936.08,
+          657.73
+        ],
+        [
+          929.36,
+          651.89
+        ],
+        [
+          927.0,
+          645.0
+        ],
+        [
+          929.36,
+          638.11
+        ],
+        [
+          936.08,
+          632.27
+        ],
+        [
+          946.14,
+          628.37
+        ],
+        [
+          958.0,
+          627.0
+        ],
+        [
+          969.86,
+          628.37
+        ],
+        [
+          979.92,
+          632.27
+        ],
+        [
+          986.64,
+          638.11
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1683.64,
+          620.35
+        ],
+        [
+          1681.97,
+          625.22
+        ],
+        [
+          1677.22,
+          629.35
+        ],
+        [
+          1670.1,
+          632.11
+        ],
+        [
+          1661.71,
+          633.08
+        ],
+        [
+          1653.32,
+          632.11
+        ],
+        [
+          1646.21,
+          629.35
+        ],
+        [
+          1641.45,
+          625.22
+        ],
+        [
+          1639.79,
+          620.35
+        ],
+        [
+          1641.45,
+          615.48
+        ],
+        [
+          1646.21,
+          611.35
+        ],
+        [
+          1653.32,
+          608.59
+        ],
+        [
+          1661.71,
+          607.62
+        ],
+        [
+          1670.1,
+          608.59
+        ],
+        [
+          1677.22,
+          611.35
+        ],
+        [
+          1681.97,
+          615.48
+        ]
+      ],
+      "points": [
+        [
+          66.332,
+          -241.553
+        ],
+        [
+          65.935,
+          -240.394
+        ],
+        [
+          64.805,
+          -239.412
+        ],
+        [
+          63.113,
+          -238.756
+        ],
+        [
+          61.118,
+          -238.526
+        ],
+        [
+          59.124,
+          -238.756
+        ],
+        [
+          57.432,
+          -239.412
+        ],
+        [
+          56.301,
+          -240.394
+        ],
+        [
+          55.905,
+          -241.553
+        ],
+        [
+          56.301,
+          -242.712
+        ],
+        [
+          57.432,
+          -243.694
+        ],
+        [
+          59.124,
+          -244.35
+        ],
+        [
+          61.118,
+          -244.58
+        ],
+        [
+          63.113,
+          -244.35
+        ],
+        [
+          64.805,
+          -243.694
+        ],
+        [
+          65.935,
+          -242.712
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Visible blue oval pool and pale raised perimeter. Blue interior could include a cover; water treatment is provisional. Pool presence/outline is clearer than surface state.",
+      "form": "above-ground",
+      "surface": "water",
+      "heightMeters": 1.15
+    },
+    {
+      "id": "east-pool-16",
+      "address": "16 Beverly Dr",
+      "kind": "pool",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          941.0,
+          150.0
+        ],
+        [
+          939.02,
+          160.33
+        ],
+        [
+          933.38,
+          169.09
+        ],
+        [
+          924.95,
+          174.94
+        ],
+        [
+          915.0,
+          177.0
+        ],
+        [
+          905.05,
+          174.94
+        ],
+        [
+          896.62,
+          169.09
+        ],
+        [
+          890.98,
+          160.33
+        ],
+        [
+          889.0,
+          150.0
+        ],
+        [
+          890.98,
+          139.67
+        ],
+        [
+          896.62,
+          130.91
+        ],
+        [
+          905.05,
+          125.06
+        ],
+        [
+          915.0,
+          123.0
+        ],
+        [
+          924.95,
+          125.06
+        ],
+        [
+          933.38,
+          130.91
+        ],
+        [
+          939.02,
+          139.67
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1649.69,
+          270.23
+        ],
+        [
+          1648.29,
+          277.54
+        ],
+        [
+          1644.3,
+          283.74
+        ],
+        [
+          1638.34,
+          287.87
+        ],
+        [
+          1631.3,
+          289.33
+        ],
+        [
+          1624.26,
+          287.87
+        ],
+        [
+          1618.3,
+          283.74
+        ],
+        [
+          1614.31,
+          277.54
+        ],
+        [
+          1612.91,
+          270.23
+        ],
+        [
+          1614.31,
+          262.93
+        ],
+        [
+          1618.3,
+          256.73
+        ],
+        [
+          1624.26,
+          252.59
+        ],
+        [
+          1631.3,
+          251.14
+        ],
+        [
+          1638.34,
+          252.59
+        ],
+        [
+          1644.3,
+          256.73
+        ],
+        [
+          1648.29,
+          262.93
+        ]
+      ],
+      "points": [
+        [
+          58.259,
+          -324.8
+        ],
+        [
+          57.926,
+          -323.063
+        ],
+        [
+          56.978,
+          -321.589
+        ],
+        [
+          55.56,
+          -320.606
+        ],
+        [
+          53.886,
+          -320.259
+        ],
+        [
+          52.213,
+          -320.606
+        ],
+        [
+          50.795,
+          -321.589
+        ],
+        [
+          49.847,
+          -323.063
+        ],
+        [
+          49.514,
+          -324.8
+        ],
+        [
+          49.847,
+          -326.537
+        ],
+        [
+          50.795,
+          -328.01
+        ],
+        [
+          52.213,
+          -328.994
+        ],
+        [
+          53.886,
+          -329.341
+        ],
+        [
+          55.56,
+          -328.994
+        ],
+        [
+          56.978,
+          -328.01
+        ],
+        [
+          57.926,
+          -326.537
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Round turquoise pool with prominent pale raised rim and adjacent small access deck. Wall height is approximate.",
+      "form": "above-ground",
+      "surface": "water",
+      "heightMeters": 1.15
+    },
+    {
+      "id": "east-deck-2",
+      "address": "2 Beverly Dr",
+      "kind": "deck",
+      "geometryType": "polygon",
+      "sourceId": "home-2025",
+      "sourcePixels": [
+        [
+          666,
+          331
+        ],
+        [
+          685,
+          336
+        ],
+        [
+          696,
+          390
+        ],
+        [
+          657,
+          389
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1438.38,
+          1631.5
+        ],
+        [
+          1443.9,
+          1632.95
+        ],
+        [
+          1447.1,
+          1648.64
+        ],
+        [
+          1435.77,
+          1648.35
+        ]
+      ],
+      "points": [
+        [
+          8.015,
+          -1.129
+        ],
+        [
+          9.328,
+          -0.783
+        ],
+        [
+          10.088,
+          2.948
+        ],
+        [
+          7.393,
+          2.879
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Small rear/east platform is clearer in 2016 and partly visible in 2025 beside the recessed roof edge. Height and rail treatment are approximate; no unseen wraparound deck is added.",
+      "heightMeters": 1.1,
+      "railEdges": [
+        0,
+        1,
+        2
+      ],
+      "supportingSourceIds": [
+        "home-2016"
+      ]
+    },
+    {
+      "id": "east-deck-4",
+      "address": "4 Beverly Dr",
+      "kind": "deck",
+      "geometryType": "polygon",
+      "sourceId": "east-south-2025",
+      "sourcePixels": [
+        [
+          724,
+          830
+        ],
+        [
+          761,
+          839
+        ],
+        [
+          758,
+          873
+        ],
+        [
+          716,
+          868
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1483.97,
+          1412.71
+        ],
+        [
+          1503.06,
+          1417.36
+        ],
+        [
+          1501.52,
+          1434.91
+        ],
+        [
+          1479.84,
+          1432.33
+        ]
+      ],
+      "points": [
+        [
+          18.855,
+          -53.151
+        ],
+        [
+          23.395,
+          -52.046
+        ],
+        [
+          23.027,
+          -47.874
+        ],
+        [
+          17.873,
+          -48.487
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Visible rectangular rear platform and narrow east-running access/steps. Height is approximate; outline avoids the main house source polygon.",
+      "heightMeters": 1.2,
+      "railEdges": [
+        0,
+        1,
+        2
+      ],
+      "stairs": {
+        "edgeIndex": 1,
+        "widthMeters": 1.1,
+        "runMeters": 2.2
+      }
+    },
+    {
+      "id": "east-deck-13-pool",
+      "address": "13 Beverly Dr",
+      "kind": "deck",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          213,
+          923
+        ],
+        [
+          229,
+          926
+        ],
+        [
+          227,
+          951
+        ],
+        [
+          211,
+          948
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1134.77,
+          816.98
+        ],
+        [
+          1146.09,
+          819.1
+        ],
+        [
+          1144.67,
+          836.79
+        ],
+        [
+          1133.35,
+          834.66
+        ]
+      ],
+      "points": [
+        [
+          -64.177,
+          -194.8
+        ],
+        [
+          -61.486,
+          -194.295
+        ],
+        [
+          -61.823,
+          -190.091
+        ],
+        [
+          -64.514,
+          -190.596
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Small pale platform abutting west side of the covered round pool. Height/rails are approximate.",
+      "heightMeters": 1.1,
+      "railEdges": [
+        0,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "east-deck-14-pool",
+      "address": "14 Beverly Dr",
+      "kind": "deck",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          953,
+          612
+        ],
+        [
+          975,
+          613
+        ],
+        [
+          977,
+          630
+        ],
+        [
+          953,
+          629
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1658.18,
+          597.01
+        ],
+        [
+          1673.74,
+          597.72
+        ],
+        [
+          1675.15,
+          609.74
+        ],
+        [
+          1658.18,
+          609.03
+        ]
+      ],
+      "points": [
+        [
+          60.277,
+          -247.103
+        ],
+        [
+          63.977,
+          -246.935
+        ],
+        [
+          64.314,
+          -244.076
+        ],
+        [
+          60.277,
+          -244.244
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "medium",
+      "notes": "Small tan access platform at the north side of the oval pool. No connecting raised deck to the house is inferred.",
+      "heightMeters": 1.1,
+      "railEdges": [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "id": "east-deck-16-pool",
+      "address": "16 Beverly Dr",
+      "kind": "deck",
+      "geometryType": "polygon",
+      "sourceId": "east-north-2025",
+      "sourcePixels": [
+        [
+          944,
+          132
+        ],
+        [
+          965,
+          127
+        ],
+        [
+          972,
+          157
+        ],
+        [
+          948,
+          165
+        ]
+      ],
+      "fullImagePixels": [
+        [
+          1651.81,
+          257.5
+        ],
+        [
+          1666.66,
+          253.97
+        ],
+        [
+          1671.61,
+          275.18
+        ],
+        [
+          1654.64,
+          280.84
+        ]
+      ],
+      "points": [
+        [
+          58.764,
+          -327.827
+        ],
+        [
+          62.295,
+          -328.668
+        ],
+        [
+          63.473,
+          -323.623
+        ],
+        [
+          59.436,
+          -322.277
+        ]
+      ],
+      "evidence": "observed",
+      "confidence": "high",
+      "notes": "Visible tan access platform on east side of the round pool; height/rails are approximate.",
+      "heightMeters": 1.1,
+      "railEdges": [
+        0,
+        1,
+        2
+      ]
+    }
+  ],
+  "excludedObservations": [
+    {
+      "address": "2 Beverly Dr",
+      "notes": "Circular pale backyard feature is not classified as a pool. No pool added at Home."
+    },
+    {
+      "address": "8 Beverly Dr",
+      "notes": "Small dark circular backyard object might be a hot tub or trampoline; not sufficiently resolved to create a pool."
+    },
+    {
+      "address": "16 Beverly Dr",
+      "notes": "Small dark circular object immediately beside the house is distinct from the clearly visible large round pool; excluded."
+    },
+    {
+      "address": "16 Beverly Dr",
+      "notes": "Narrow rear platform beside the house is partly visible, but its trace overlaps the older state footprint. Omitted rather than inventing a displaced deck; the distinct pool access deck is included."
+    },
+    {
+      "kind": "sign",
+      "notes": "No readable sign faces or verified sign-post coordinates were established from these aerials. Do not invent posted text or traffic controls from this file."
+    }
+  ],
+  "limits": [
+    "Ground-cover outlines are not a survey. Historical visibility does not prove unchanged pavement today.",
+    "Pool/deck presence and plan shape are observed; deck height, rails and pool wall height are approximate rendering choices, not aerial measurements.",
+    "Pixel coordinates use each sourceId original image grid; fullImagePixels maps the same coordinates onto the existing 1800\u00d72650 2025 overlay.",
+    "Building polygons are older than the imagery. Rendering should preserve source footprints and avoid rendering surface polygons through house envelopes."
+  ],
+  "home": {
+    "connectionFeatureIds": [
+      "east-home-driveway-hidden",
+      "east-home-driveway-apron"
+    ],
+    "drivewayCenterline": [
+      [
+        -27.086,
+        33.351
+      ],
+      [
+        -20.937,
+        32.315
+      ],
+      [
+        -14.372,
+        30.864
+      ],
+      [
+        -8.223,
+        29.136
+      ],
+      [
+        -3.939,
+        26.787
+      ],
+      [
+        -0.691,
+        23.263
+      ],
+      [
+        0.207,
+        19.601
+      ],
+      [
+        0.069,
+        16.491
+      ]
+    ],
+    "drivewayCenterlineSourceId": "home-2010",
+    "drivewayCenterlineSourcePixels": [
+      [
+        158,
+        830
+      ],
+      [
+        247,
+        815
+      ],
+      [
+        342,
+        794
+      ],
+      [
+        431,
+        769
+      ],
+      [
+        493,
+        735
+      ],
+      [
+        540,
+        684
+      ],
+      [
+        553,
+        631
+      ],
+      [
+        551,
+        586
+      ]
+    ],
+    "status": "Historically observed connection; 2025 entry and middle obscured by evergreen crowns. Current exposed apron corroborates the destination.",
+    "spawnRecommendation": {
+      "positionXZ": [
+        0.207,
+        19.601
+      ],
+      "headingRadians": -0.240534,
+      "confidence": "medium",
+      "kind": "driveway-apron",
+      "notes": "Optional spawn on exposed apron facing south-southwest toward the historical driveway exit. Root should validate 442 full chassis clearance and nearby retained tree stems before adopting. Existing roadside Home remains safe until that review."
+    }
+  }
+}

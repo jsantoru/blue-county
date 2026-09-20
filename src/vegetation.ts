@@ -1,6 +1,7 @@
 import * as T from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import type { MapData, Point } from "./types";
+import { createPropertyClearance } from "./property-footprints";
 
 export type VegetationQuality = "low" | "medium" | "high";
 export interface VegetationOptions {
@@ -988,7 +989,9 @@ export class Vegetation {
       return true;
     };
     const surveyRandom = seeded((options.seed ?? 442) ^ 0x5e7e9);
+    const propertyClear = createPropertyClearance(map);
     const drivewayClear = (x: number, z: number, radius: number) => {
+      if (!propertyClear(x, z, radius)) return false;
       for (const driveway of survey?.driveways ?? []) {
         const clearance =
           Math.max(0, driveway.widthMeters || 0) / 2 + radius + 0.25;

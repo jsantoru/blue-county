@@ -9,6 +9,8 @@ import { buildNeighborhood, type NeighborhoodHouse } from "./neighborhood";
 import { buildRoadside } from "./roadside";
 import { buildBeverlyDetails } from "./beverly-details";
 import { BeverlyMicrodetail } from "./beverly-microdetail";
+import { buildPropertyDetails } from "./property-details";
+import { createDrivewayQuery } from "./property-footprints";
 /** Matches the terrain mesh's diagonal exactly, including its outermost vertices. */
 export function heightAt(map: MapData, x: number, z: number) {
   const g = map.terrain;
@@ -230,6 +232,24 @@ export function roadMesh(
   }
   return surfaceMesh(polygons, color, offset, sample);
 }
+/** Trace the actual pavement outline, retaining concave aprons and parking areas. */
+export function groundPolygonMesh(
+  points: [number, number][],
+  color: number,
+  offset: number,
+  sample: HeightSampler,
+) {
+  const ring = points.map(([x, z]) => new T.Vector2(x, z));
+  const triangles = T.ShapeUtils.triangulateShape(ring, []);
+  const polygons = triangles.map((indices) => {
+    const polygon = indices.map((i) => [ring[i].x, 0, ring[i].y] as Point);
+    const [a, b, c] = polygon;
+    if ((b[0] - a[0]) * (c[2] - a[2]) - (b[2] - a[2]) * (c[0] - a[0]) < 0)
+      polygon.reverse();
+    return polygon;
+  });
+  return surfaceMesh(polygons, color, offset, sample);
+}
 export function roadJoins(
   points: Point[],
   width: number,
@@ -275,6 +295,7 @@ export function textSign(
 }
 export class Environment {
   root = new T.Group();
+  isDriveway: (x: number, z: number) => boolean;
   colliders: RAPIER.Collider[] = [];
   cameraObstacles: T.Object3D[] = [];
   materials = createSurfaceMaterials();
@@ -286,6 +307,7 @@ export class Environment {
     public world: RAPIER.World,
     public test = false,
   ) {
+    this.isDriveway = createDrivewayQuery(map);
     this.build();
   }
   collider(mesh: T.Mesh) {
@@ -332,6 +354,31 @@ export class Environment {
     return m;
   }
   private house(building: any, index: number) {
+    if (building.renderParts?.length) {
+      // Keep the surveyed outline authoritative, but fit separate wings rather
+      // than filling an observed L-shaped courtyard with one rectangular box.
+      const baseHeight = Math.max(
+        ...building.points.map((p: Point) => heightAt(this.map, p[0], p[2])),
+      );
+      for (const [partIndex, part] of building.renderParts.entries())
+        this.house(
+          {
+            ...building,
+            id: `${building.id}:${part.id}`,
+            appearanceId: building.id,
+            points: part.points,
+            renderParts: undefined,
+            baseHeight,
+            reference: {
+              ...building.reference,
+              entrance:
+                part.entrance ?? partIndex === building.renderParts.length - 1,
+            },
+          },
+          index,
+        );
+      return;
+    }
     const points: Point[] = building.points || building.footprint;
     if (!points?.length) return;
     // Use the footprint's longest edge for orientation instead of inflating rotated houses into large axis-aligned boxes.
@@ -389,7 +436,7 @@ export class Environment {
       point(-width / 2, 0, depth / 2),
     ].map((p) => heightAt(this.map, p[0], p[2]));
     const low = Math.min(...corners) - 0.15,
-      base = Math.max(...corners),
+      base = building.baseHeight ?? Math.max(...corners),
       wallHeight =
         building.wallHeight ?? Math.max(2.8, (building.height || 5) * 0.72),
       wallTop = base + wallHeight;
@@ -409,6 +456,7 @@ export class Environment {
     );
     this.houses.push({
       id: building.id ?? index,
+      appearanceId: building.appearanceId,
       x,
       z,
       width,
@@ -542,6 +590,7 @@ export class Environment {
     driveMaterial.customProgramCacheKey =
       this.materials.asphalt.customProgramCacheKey;
     for (const driveway of map.beverlySurvey?.driveways ?? []) {
+      if (driveway.surfaceIds?.length) continue;
       const points: Point[] = driveway.points.map(([x, z]: number[]) => [
         x,
         heightAt(map, x, z),
@@ -558,6 +607,17 @@ export class Environment {
         this.root.add(mesh);
         this.collider(mesh);
       }
+    }
+    for (const surface of map.beverlySurvey?.drivewaySurfaces ?? []) {
+      const mesh = groundPolygonMesh(surface.points, 0x777777, 0.082, sample);
+      (mesh.material as T.Material).dispose();
+      mesh.material = driveMaterial;
+      worldUV(mesh.geometry);
+      mesh.userData.referenceDriveway = surface.address;
+      mesh.userData.sourceFeature = surface.id;
+      mesh.receiveShadow = true;
+      this.root.add(mesh);
+      this.collider(mesh);
     }
     if (!map.beverlySurvey) {
       driveMaterial.dispose();
@@ -584,6 +644,8 @@ export class Environment {
     this.root.add(this.vegetation.root);
     if (map.beverlySurvey)
       this.root.add(buildBeverlyDetails(map, (x, z) => heightAt(map, x, z)));
+    if (map.beverlySurvey)
+      this.root.add(buildPropertyDetails(map, (x, z) => heightAt(map, x, z)));
     if (map.beverlySurvey) {
       this.microdetail = new BeverlyMicrodetail(
         map,

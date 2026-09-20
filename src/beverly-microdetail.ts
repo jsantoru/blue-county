@@ -1,5 +1,6 @@
 import * as T from "three";
 import type { MapData } from "./types";
+import { createPropertyClearance } from "./property-footprints";
 
 type XZ = [number, number];
 type Quality = "low" | "medium" | "high";
@@ -97,6 +98,7 @@ function ringDistance(x: number, z: number, r: Ring) {
 
 /** Exact source polygon / polyline clearance, buffered by each primitive's full horizontal extent. */
 export function createBeverlyMicrodetailClearance(map: MapData) {
+  const propertyClear = createPropertyClearance(map);
   const survey = map.beverlySurvey as Survey | undefined;
   const segments: Segment[] = [];
   const index = new Map<string, Segment[]>();
@@ -160,6 +162,7 @@ export function createBeverlyMicrodetailClearance(map: MapData) {
     return best;
   };
   const clear = (x: number, z: number, radius = 0) => {
+    if (!propertyClear(x, z, radius)) return false;
     const b = survey?.bounds;
     if (
       !b ||

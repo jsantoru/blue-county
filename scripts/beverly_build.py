@@ -39,6 +39,11 @@ FACADE={
  35:{'wallColor':0xd8c9a9,'trimColor':0xeee8d8,'shutterColor':0x584435,'doorColor':0x3d9290,'roofColor':0x5d5448},
  41:{'wallColor':0xe7e2cf,'trimColor':0xf5f2e9,'shutterColor':0x263b32,'doorColor':0x713738,'roofColor':0x747570,'frontGable':'large'},
 }
+# Follow-up observations stay in a source document with individual photo URLs,
+# historical listing context and explicit unsupported-feature qualifications.
+FACADE_FOLLOWUP=ROOT/'docs'/'research-streetview'/'facade-followup-overrides.json'
+for observation in json.loads(FACADE_FOLLOWUP.read_text(encoding='utf-8'))['facades']:
+    FACADE[int(observation['number'])]=observation['reference']
 
 def apply_survey(data,manifest,point):
     if not (RESEARCH/'east-observations.json').exists():
@@ -140,17 +145,22 @@ def apply_survey(data,manifest,point):
             {'name':'NYS 2025 orthoimagery','url':'https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer'},
             {'name':'NYS Building Footprints','url':'https://gisservices.its.ny.gov/arcgis/rest/services/BuildingFootprints/MapServer'},
             {'name':'NYS public tax parcels','url':'https://nysgeohub.ny.gov/arcgis/rest/services/Parcels/NYS_Tax_Parcels_Public/FeatureServer'},
-            {'name':'Inspected exterior photographs','url':'../../docs/research-streetview/exterior-observations.md'}],
-        'limits':['Ground photographs verified only for numbers22,26,29,34,35,41. Other paint colors remain provisional.',
+            {'name':'Inspected exterior photographs','url':'../../docs/research-streetview/exterior-observations.md'},
+            {'name':'Follow-up exterior photographs','url':'../../docs/research-streetview/property-followup.md'}],
+        'limits':['Ground photographs verified only for numbers12,20,22,26,29,34,35,41. Listing dates are historical context, not image capture dates; current paint conditions remain unverified.',
           'Footprints have mixed source dates, chiefly2013; manually crosschecked against2025orthophoto.',
           'Driveway lines are visual estimates; number2 is only a visible mouth stub because its middle is tree-obscured.',
           'Canopy centers approximate trunks. Woodland stems and exact species/heights remain representative.',
           'OSM centerlines retained,9.2m pavement reflects observed local cross-sections; ground grade remains USGS30m DEM.']}
+    from property_build import apply_properties
+    apply_properties(data, survey, manifest, near_road, point)
     data['beverlySurvey']=survey
     data['attribution']+=' Beverly reference: NYS Geospatial Services / Orange County GIS.'
-    manifest['beverlySurvey']={k:v for k,v in survey.items() if k not in ['driveways','canopies','woodlands','landcover','buildingObservations']}
+    manifest['beverlySurvey']={k:v for k,v in survey.items() if k not in ['driveways','canopies','woodlands','landcover','buildingObservations','drivewaySurfaces','propertyFeatures']}
     manifest['beverlySurvey']['counts']={'footprints':len(buildings),'driveways':len(driveways),'canopies':len(survey['canopies']),'photoFacades':sum(b['photographedFacade'] for b in observations)}
+    manifest['beverlySurvey']['counts'].update(drivewaySurfaces=len(survey['drivewaySurfaces']), decks=sum(f['kind']=='deck' for f in survey['propertyFeatures']), pools=sum(f['kind']=='pool' for f in survey['propertyFeatures']), patios=sum(f['kind']=='patio' for f in survey['propertyFeatures']), signs=len(survey['roadSigns']))
     manifest['beverlySurvey']['cacheSha256']={name:hashlib.sha256((RESEARCH/name).read_bytes()).hexdigest() for name in ['footprints-local.geojson','parcels-local.geojson','east-observations.json','west-observations.json','verified-loop-extent.json']}
+    manifest['beverlySurvey']['cacheSha256']['../research-streetview/facade-followup-overrides.json']=hashlib.sha256(FACADE_FOLLOWUP.read_bytes()).hexdigest()
     manifest['adjustments'].append('Beverly reference area supersedes generic scenery: state footprints replace address envelopes, pavement9.2m with no invented centerline, observed driveway paths/canopy concentrations; unknown facades explicitly provisional.')
     (ROOT/'public/map/beverly-survey.json').write_text(json.dumps(survey,ensure_ascii=False,indent=2),encoding='utf-8')
     print('Beverly:',manifest['beverlySurvey']['counts'])

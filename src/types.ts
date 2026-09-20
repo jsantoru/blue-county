@@ -15,7 +15,12 @@ export interface MapData {
   name?: string;
   roads: Road[];
   buildings?: any[];
-  home: { position: Point; heading: number; label?: string };
+  home: {
+    position: Point;
+    heading: number;
+    label?: string;
+    departurePath?: Point[];
+  };
   route: {
     type: "circuit" | "point-to-point";
     name: string;

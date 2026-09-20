@@ -18,6 +18,7 @@
     "test:visual": "node scripts/visual-check.mjs",
     "test:beverly": "node scripts/beverly-check.mjs",
     "test:detail": "node scripts/beverly-check.mjs --detail-pass",
+    "test:property": "node scripts/property-check.mjs",
     "format": "prettier --write src tests index.html scripts/browser-check.mjs"
   },
   "keywords": [],

@@ -1,5 +1,7 @@
 # Beverly Drive reference reconstruction
 
+This document records the initial reconstruction. The subsequent [property pass](property-pass.md) replaces the driveway strips and corrects Home's formerly incomplete approach using older official aerials, with an apron spawn, decks, pools and junction signs. Its per-feature dates and confidence supersede the driveway limitations below.
+
 This pass reworks scenery around the starting **Beverly Drive horseshoe and its connecting West Ridge Road segment**, using public GIS geometry, spring 2025 aerial imagery and six inspected exterior listing photographs. It covers approximately **428 × 630m**, with local bounds X −334 to 94m and Z −389 to 241m relative to 2 Beverly Drive. The broader map and the separate **Ridge & Hollow** race remain available and retain their original route. The active `../oldsmobile_442` Blender source was not changed.
 
 The real neighborhood loop measures **1,218.89m** along the cached OSM centerlines. Beverly Drive way `20686958` joins West Ridge Road way `20668865` at shared nodes `221872780` and `221872784`; the closing segment is an existing road. This is a reference loop for neighborhood driving, not a newly invented connection or a replacement race.

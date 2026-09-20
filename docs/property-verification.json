@@ -1,0 +1,2057 @@
+{
+  "date": "2026-09-20T22:40:35.675Z",
+  "browser": "153.0.4234.48",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "errors": [],
+  "warnings": [
+    "THREE.WebGLProgram: Program Info Log: (210,81-129): warning X4122: sum of 0.996094 and -2.98545e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision"
+  ],
+  "screenshots": [
+    "docs/property-home.png",
+    "docs/property-home-driveway.png",
+    "docs/property-pool-6.png",
+    "docs/property-pool-28.png",
+    "docs/property-pool-30.png",
+    "docs/property-pool-32.png",
+    "docs/property-pool-33.png",
+    "docs/property-pool-34.png",
+    "docs/property-courtyard-28.png",
+    "docs/property-deck-39.png",
+    "docs/property-sign-west.png",
+    "docs/property-sign-east.png"
+  ],
+  "tour": [
+    {
+      "target": 19,
+      "points": 181,
+      "steps": 720,
+      "position": [
+        -50.36731719970703,
+        -4.93415641784668,
+        119.86467742919922
+      ],
+      "grounded": 4
+    },
+    {
+      "target": 34,
+      "points": 181,
+      "steps": 720,
+      "position": [
+        -153.62474060058594,
+        -6.423218250274658,
+        157.31585693359375
+      ],
+      "grounded": 4
+    },
+    {
+      "target": 45,
+      "points": 181,
+      "steps": 720,
+      "position": [
+        -156.5455322265625,
+        -3.025791645050049,
+        90.43427276611328
+      ],
+      "grounded": 4
+    },
+    {
+      "target": 56,
+      "points": 181,
+      "steps": 720,
+      "position": [
+        -199.10015869140625,
+        -1.1025675535202026,
+        37.21278381347656
+      ],
+      "grounded": 4
+    },
+    {
+      "target": 68,
+      "points": 181,
+      "steps": 720,
+      "position": [
+        -253.4188995361328,
+        -5.714224815368652,
+        -4.961798191070557
+      ],
+      "grounded": 4
+    },
+    {
+      "target": 84,
+      "points": 181,
+      "steps": 720,
+      "position": [
+        -210.92630004882812,
+        -4.551054954528809,
+        -115.60348510742188
+      ],
+      "grounded": 4
+    },
+    {
+      "target": 101,
+      "points": 181,
+      "steps": 720,
+      "position": [
+        -166.48448181152344,
+        -1.5192073583602905,
+        -231.00750732421875
+      ],
+      "grounded": 4
+    },
+    {
+      "target": 112,
+      "points": 181,
+      "steps": 720,
+      "position": [
+        -132.5856475830078,
+        2.6957194805145264,
+        -297.3139343261719
+      ],
+      "grounded": 4
+    },
+    {
+      "target": 127,
+      "points": 181,
+      "steps": 720,
+      "position": [
+        -35.907318115234375,
+        8.197349548339844,
+        -305.2199401855469
+      ],
+      "grounded": 4
+    },
+    {
+      "target": 138,
+      "points": 181,
+      "steps": 720,
+      "position": [
+        13.363368034362793,
+        9.99575424194336,
+        -261.7644958496094
+      ],
+      "grounded": 4
+    },
+    {
+      "target": 155,
+      "points": 181,
+      "steps": 720,
+      "position": [
+        -10.39920711517334,
+        11.954452514648438,
+        -140.56629943847656
+      ],
+      "grounded": 4
+    },
+    {
+      "target": 170,
+      "points": 181,
+      "steps": 720,
+      "position": [
+        -15.243531227111816,
+        5.521503448486328,
+        -35.07368850708008
+      ],
+      "grounded": 4
+    },
+    {
+      "target": 1,
+      "points": 181,
+      "steps": 444,
+      "position": [
+        -32.09330368041992,
+        -0.2801379859447479,
+        43.972713470458984
+      ],
+      "grounded": 4
+    }
+  ],
+  "transitions": [
+    {
+      "label": "medium",
+      "state": {
+        "ready": true,
+        "screen": null,
+        "mode": "neighborhood",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.2066534161567688,
+          -0.3276396095752716,
+          19.600669860839844
+        ],
+        "rotation": [
+          0.0035758144222199917,
+          -0.12007568031549454,
+          -0.004796442110091448,
+          0.9927467703819275
+        ],
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.563388375083537,
+        "ai": [
+          {
+            "id": 1,
+            "target": 125,
+            "speed": 21.25586983872113,
+            "position": [
+              1441.998046875,
+              23.30942726135254,
+              -285.23138427734375
+            ]
+          },
+          {
+            "id": 2,
+            "target": 161,
+            "speed": 24.320669136100793,
+            "position": [
+              1275.9927978515625,
+              -1.053592562675476,
+              55.22957229614258
+            ]
+          },
+          {
+            "id": 3,
+            "target": 185,
+            "speed": 24.447811000611228,
+            "position": [
+              1151.8966064453125,
+              -0.6546027660369873,
+              282.7160949707031
+            ]
+          },
+          {
+            "id": 4,
+            "target": 95,
+            "speed": 11.187906222582845,
+            "position": [
+              1542.0321044921875,
+              26.981468200683594,
+              -534.127197265625
+            ]
+          },
+          {
+            "id": 5,
+            "target": 150,
+            "speed": 13.630167248003085,
+            "position": [
+              1325.6689453125,
+              4.013303756713867,
+              -52.108211517333984
+            ]
+          },
+          {
+            "id": 6,
+            "target": 158,
+            "speed": 11.738473311133099,
+            "position": [
+              1291.209228515625,
+              0.8374009132385254,
+              19.559253692626953
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "medium",
+          "frames": 978,
+          "p50": 16.700000000000728,
+          "p95": 16.799999999999272,
+          "physicsMs": 0.5999999046325684,
+          "width": 1920,
+          "height": 1080,
+          "draws": 534,
+          "triangles": 3476934,
+          "vegetation": {
+            "trees": 18925,
+            "shrubs": 1099,
+            "grassTufts": 6084,
+            "chunks": 283,
+            "visibleChunks": 52,
+            "visibleBatches": 316,
+            "totalBatches": 3504,
+            "referenceTreeCount": 93,
+            "referenceWoodlandTreeCount": 280,
+            "referenceOmittedTreeCount": 29
+          },
+          "scenery": [
+            {
+              "houses": 453,
+              "batches": 615,
+              "triangles": 1343071,
+              "detailFeatures": 9716,
+              "referenceFacades": 65
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 12,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 21,
+              "triangles": 22027
+            },
+            {
+              "grassBlades": 30997,
+              "pebbles": 3192,
+              "soilFragments": 2473,
+              "leaves": 5997,
+              "rootRibs": 372,
+              "grassTriangles": 92991,
+              "groundTriangles": 40344,
+              "totalTriangles": 133335,
+              "batches": 112,
+              "visibleDrawCalls": 12,
+              "visibleTriangles": 12683,
+              "treeContacts": 93,
+              "rejected": 6360,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "glError": 0
+    },
+    {
+      "label": "low",
+      "state": {
+        "ready": true,
+        "screen": null,
+        "mode": "neighborhood",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.2057005614042282,
+          -0.273835152387619,
+          19.599300384521484
+        ],
+        "rotation": [
+          0.019146211445331573,
+          -0.12042288482189178,
+          -0.018691373988986015,
+          0.9923620820045471
+        ],
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.56217257152416,
+        "ai": [
+          {
+            "id": 1,
+            "target": 125,
+            "speed": 21.84478973265645,
+            "position": [
+              1440.3822021484375,
+              23.11549949645996,
+              -282.00628662109375
+            ]
+          },
+          {
+            "id": 2,
+            "target": 162,
+            "speed": 23.511958272082026,
+            "position": [
+              1274.181396484375,
+              -1.2711325883865356,
+              58.7995719909668
+            ]
+          },
+          {
+            "id": 3,
+            "target": 186,
+            "speed": 22.526678536238265,
+            "position": [
+              1150.550537109375,
+              -0.6755631566047668,
+              286.3898010253906
+            ]
+          },
+          {
+            "id": 4,
+            "target": 95,
+            "speed": 11.190869118502745,
+            "position": [
+              1541.754150390625,
+              26.960189819335938,
+              -532.2828979492188
+            ]
+          },
+          {
+            "id": 5,
+            "target": 150,
+            "speed": 13.631113645323396,
+            "position": [
+              1324.6728515625,
+              3.8843252658843994,
+              -50.065059661865234
+            ]
+          },
+          {
+            "id": 6,
+            "target": 158,
+            "speed": 11.73660764662411,
+            "position": [
+              1290.335205078125,
+              0.7764310836791992,
+              21.310482025146484
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "low",
+          "frames": 982,
+          "p50": 16.700000000000728,
+          "p95": 16.799999999999272,
+          "physicsMs": 1.100000023841858,
+          "width": 1440,
+          "height": 810,
+          "draws": 395,
+          "triangles": 1741525,
+          "vegetation": {
+            "trees": 18925,
+            "shrubs": 1099,
+            "grassTufts": 6084,
+            "chunks": 283,
+            "visibleChunks": 32,
+            "visibleBatches": 194,
+            "totalBatches": 3504,
+            "referenceTreeCount": 93,
+            "referenceWoodlandTreeCount": 280,
+            "referenceOmittedTreeCount": 29
+          },
+          "scenery": [
+            {
+              "houses": 453,
+              "batches": 615,
+              "triangles": 1343071,
+              "detailFeatures": 9716,
+              "referenceFacades": 65
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 12,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 21,
+              "triangles": 22027
+            },
+            {
+              "grassBlades": 30997,
+              "pebbles": 3192,
+              "soilFragments": 2473,
+              "leaves": 5997,
+              "rootRibs": 372,
+              "grassTriangles": 92991,
+              "groundTriangles": 40344,
+              "totalTriangles": 133335,
+              "batches": 112,
+              "visibleDrawCalls": 8,
+              "visibleTriangles": 2785,
+              "treeContacts": 93,
+              "rejected": 6360,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "glError": 0
+    },
+    {
+      "label": "high",
+      "state": {
+        "ready": true,
+        "screen": null,
+        "mode": "neighborhood",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20559637248516083,
+          -0.2658455967903137,
+          19.59910011291504
+        ],
+        "rotation": [
+          0.0214729942381382,
+          -0.12049178034067154,
+          -0.02028941921889782,
+          0.9922747015953064
+        ],
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.562029166970163,
+        "ai": [
+          {
+            "id": 1,
+            "target": 125,
+            "speed": 21.980978702593664,
+            "position": [
+              1439.89501953125,
+              23.056739807128906,
+              -281.02142333984375
+            ]
+          },
+          {
+            "id": 2,
+            "target": 162,
+            "speed": 23.14633305825439,
+            "position": [
+              1273.656494140625,
+              -1.3331595659255981,
+              59.834007263183594
+            ]
+          },
+          {
+            "id": 3,
+            "target": 186,
+            "speed": 22.825181337617373,
+            "position": [
+              1150.1593017578125,
+              -0.6816167831420898,
+              287.4603271484375
+            ]
+          },
+          {
+            "id": 4,
+            "target": 95,
+            "speed": 11.19697717509913,
+            "position": [
+              1541.6690673828125,
+              26.942588806152344,
+              -531.7296142578125
+            ]
+          },
+          {
+            "id": 5,
+            "target": 150,
+            "speed": 13.63122801909396,
+            "position": [
+              1324.3740234375,
+              3.8455989360809326,
+              -49.45216369628906
+            ]
+          },
+          {
+            "id": 6,
+            "target": 158,
+            "speed": 11.73623156883429,
+            "position": [
+              1290.07421875,
+              0.7581615447998047,
+              21.836095809936523
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 986,
+          "p50": 16.700000000000728,
+          "p95": 16.799999999999272,
+          "physicsMs": 1.5,
+          "width": 1920,
+          "height": 1080,
+          "draws": 621,
+          "triangles": 3926264,
+          "vegetation": {
+            "trees": 18925,
+            "shrubs": 1099,
+            "grassTufts": 6084,
+            "chunks": 283,
+            "visibleChunks": 88,
+            "visibleBatches": 532,
+            "totalBatches": 3504,
+            "referenceTreeCount": 93,
+            "referenceWoodlandTreeCount": 280,
+            "referenceOmittedTreeCount": 29
+          },
+          "scenery": [
+            {
+              "houses": 453,
+              "batches": 615,
+              "triangles": 1343071,
+              "detailFeatures": 9716,
+              "referenceFacades": 65
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 12,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 21,
+              "triangles": 22027
+            },
+            {
+              "grassBlades": 30997,
+              "pebbles": 3192,
+              "soilFragments": 2473,
+              "leaves": 5997,
+              "rootRibs": 372,
+              "grassTriangles": 92991,
+              "groundTriangles": 40344,
+              "totalTriangles": 133335,
+              "batches": 112,
+              "visibleDrawCalls": 24,
+              "visibleTriangles": 32976,
+              "treeContacts": 93,
+              "rejected": 6360,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "glError": 0
+    },
+    {
+      "label": "resize 1280 × 720",
+      "state": {
+        "ready": true,
+        "screen": null,
+        "mode": "neighborhood",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20546428859233856,
+          -0.26235541701316833,
+          19.598840713500977
+        ],
+        "rotation": [
+          0.024492142722010612,
+          -0.12060181051492691,
+          -0.02232551947236061,
+          0.99214768409729
+        ],
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.561846227373007,
+        "ai": [
+          {
+            "id": 1,
+            "target": 126,
+            "speed": 22.27957659679895,
+            "position": [
+              1438.5899658203125,
+              22.904325485229492,
+              -278.3664855957031
+            ]
+          },
+          {
+            "id": 2,
+            "target": 162,
+            "speed": 22.48602458015014,
+            "position": [
+              1272.2877197265625,
+              -1.488073706626892,
+              62.534278869628906
+            ]
+          },
+          {
+            "id": 3,
+            "target": 186,
+            "speed": 22.894933747182094,
+            "position": [
+              1149.1119384765625,
+              -0.6976920366287231,
+              290.3249206542969
+            ]
+          },
+          {
+            "id": 4,
+            "target": 95,
+            "speed": 11.214839667488995,
+            "position": [
+              1541.4310302734375,
+              26.8935604095459,
+              -530.25439453125
+            ]
+          },
+          {
+            "id": 5,
+            "target": 150,
+            "speed": 13.631475308630161,
+            "position": [
+              1323.5771484375,
+              3.7421116828918457,
+              -47.81787109375
+            ]
+          },
+          {
+            "id": 6,
+            "target": 158,
+            "speed": 11.735460478665091,
+            "position": [
+              1289.37890625,
+              0.7094430923461914,
+              23.238033294677734
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 991,
+          "p50": 16.700000000000728,
+          "p95": 16.799999999999272,
+          "physicsMs": 1.100000023841858,
+          "width": 1280,
+          "height": 720,
+          "draws": 623,
+          "triangles": 3941004,
+          "vegetation": {
+            "trees": 18925,
+            "shrubs": 1099,
+            "grassTufts": 6084,
+            "chunks": 283,
+            "visibleChunks": 88,
+            "visibleBatches": 532,
+            "totalBatches": 3504,
+            "referenceTreeCount": 93,
+            "referenceWoodlandTreeCount": 280,
+            "referenceOmittedTreeCount": 29
+          },
+          "scenery": [
+            {
+              "houses": 453,
+              "batches": 615,
+              "triangles": 1343071,
+              "detailFeatures": 9716,
+              "referenceFacades": 65
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 12,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 21,
+              "triangles": 22027
+            },
+            {
+              "grassBlades": 30997,
+              "pebbles": 3192,
+              "soilFragments": 2473,
+              "leaves": 5997,
+              "rootRibs": 372,
+              "grassTriangles": 92991,
+              "groundTriangles": 40344,
+              "totalTriangles": 133335,
+              "batches": 112,
+              "visibleDrawCalls": 24,
+              "visibleTriangles": 32976,
+              "treeContacts": 93,
+              "rejected": 6360,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "glError": 0
+    },
+    {
+      "label": "resize 1920 × 1080",
+      "state": {
+        "ready": true,
+        "screen": null,
+        "mode": "neighborhood",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20543207228183746,
+          -0.2653581202030182,
+          19.598779678344727
+        ],
+        "rotation": [
+          0.025193536654114723,
+          -0.12063819169998169,
+          -0.02281843312084675,
+          0.9921144247055054
+        ],
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.56180206967865,
+        "ai": [
+          {
+            "id": 1,
+            "target": 126,
+            "speed": 22.424402316221293,
+            "position": [
+              1437.770751953125,
+              22.814048767089844,
+              -276.6895446777344
+            ]
+          },
+          {
+            "id": 2,
+            "target": 162,
+            "speed": 22.23105065778182,
+            "position": [
+              1271.4520263671875,
+              -1.5865492820739746,
+              64.1943588256836
+            ]
+          },
+          {
+            "id": 3,
+            "target": 186,
+            "speed": 22.67668384009829,
+            "position": [
+              1148.45751953125,
+              -0.7076521515846252,
+              292.1098327636719
+            ]
+          },
+          {
+            "id": 4,
+            "target": 95,
+            "speed": 11.228219442169124,
+            "position": [
+              1541.27294921875,
+              26.85359001159668,
+              -529.3323364257812
+            ]
+          },
+          {
+            "id": 5,
+            "target": 150,
+            "speed": 13.631655287197011,
+            "position": [
+              1323.0791015625,
+              3.6772875785827637,
+              -46.796451568603516
+            ]
+          },
+          {
+            "id": 6,
+            "target": 158,
+            "speed": 11.735112776305176,
+            "position": [
+              1288.9443359375,
+              0.6789800524711609,
+              24.114328384399414
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 996,
+          "p50": 16.700000000000728,
+          "p95": 16.799999999999272,
+          "physicsMs": 1.100000023841858,
+          "width": 1920,
+          "height": 1080,
+          "draws": 623,
+          "triangles": 3941004,
+          "vegetation": {
+            "trees": 18925,
+            "shrubs": 1099,
+            "grassTufts": 6084,
+            "chunks": 283,
+            "visibleChunks": 88,
+            "visibleBatches": 532,
+            "totalBatches": 3504,
+            "referenceTreeCount": 93,
+            "referenceWoodlandTreeCount": 280,
+            "referenceOmittedTreeCount": 29
+          },
+          "scenery": [
+            {
+              "houses": 453,
+              "batches": 615,
+              "triangles": 1343071,
+              "detailFeatures": 9716,
+              "referenceFacades": 65
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 12,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 21,
+              "triangles": 22027
+            },
+            {
+              "grassBlades": 30997,
+              "pebbles": 3192,
+              "soilFragments": 2473,
+              "leaves": 5997,
+              "rootRibs": 372,
+              "grassTriangles": 92991,
+              "groundTriangles": 40344,
+              "totalTriangles": 133335,
+              "batches": 112,
+              "visibleDrawCalls": 24,
+              "visibleTriangles": 32976,
+              "treeContacts": 93,
+              "rejected": 6360,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "glError": 0
+    },
+    {
+      "label": "handling grounds",
+      "state": {
+        "ready": true,
+        "screen": null,
+        "mode": "test",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          -150,
+          0.869835376739502,
+          -139.99998474121094
+        ],
+        "rotation": [
+          -0.0001733323442749679,
+          0,
+          0,
+          1
+        ],
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 101,
+        "near": 0,
+        "ai": [],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 1001,
+          "p50": 16.700000000000728,
+          "p95": 16.799999999999272,
+          "physicsMs": 0.30000007152557373,
+          "width": 1920,
+          "height": 1080,
+          "draws": 164,
+          "triangles": 686309,
+          "vegetation": {
+            "trees": 50,
+            "shrubs": 0,
+            "grassTufts": 0,
+            "chunks": 4,
+            "visibleChunks": 4,
+            "visibleBatches": 24,
+            "totalBatches": 48,
+            "referenceTreeCount": 0,
+            "referenceWoodlandTreeCount": 0,
+            "referenceOmittedTreeCount": 0
+          },
+          "scenery": [
+            {
+              "houses": 0,
+              "batches": 0,
+              "triangles": 0,
+              "detailFeatures": 0,
+              "referenceFacades": 0
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "glError": 0
+    },
+    {
+      "label": "return Home",
+      "state": {
+        "ready": true,
+        "screen": null,
+        "mode": "neighborhood",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20559631288051605,
+          -0.2658455967903137,
+          19.59910011291504
+        ],
+        "rotation": [
+          0.02147340215742588,
+          -0.12049456685781479,
+          -0.020290225744247437,
+          0.992274284362793
+        ],
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.562029108657626,
+        "ai": [
+          {
+            "id": 1,
+            "target": 6,
+            "speed": 1.7706073437040082,
+            "position": [
+              888.7256469726562,
+              33.572174072265625,
+              -363.9444274902344
+            ]
+          },
+          {
+            "id": 2,
+            "target": 11,
+            "speed": 1.5792458663968179,
+            "position": [
+              870.1260375976562,
+              35.4002685546875,
+              -416.6564025878906
+            ]
+          },
+          {
+            "id": 3,
+            "target": 16,
+            "speed": 1.5551241192864713,
+            "position": [
+              918.6038818359375,
+              41.10207748413086,
+              -434.4595947265625
+            ]
+          },
+          {
+            "id": 4,
+            "target": 136,
+            "speed": 2.0110139995434144,
+            "position": [
+              1397.3726806640625,
+              16.165111541748047,
+              -193.68014526367188
+            ]
+          },
+          {
+            "id": 5,
+            "target": 170,
+            "speed": 1.3090714327121344,
+            "position": [
+              1232.572265625,
+              -2.7541584968566895,
+              133.77638244628906
+            ]
+          },
+          {
+            "id": 6,
+            "target": 203,
+            "speed": 1.744460757382851,
+            "position": [
+              1103.8106689453125,
+              5.443261623382568,
+              229.5614471435547
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 1008,
+          "p50": 16.700000000000728,
+          "p95": 16.799999999999272,
+          "physicsMs": 1.100000023841858,
+          "width": 1920,
+          "height": 1080,
+          "draws": 625,
+          "triangles": 3942696,
+          "vegetation": {
+            "trees": 18925,
+            "shrubs": 1099,
+            "grassTufts": 6084,
+            "chunks": 283,
+            "visibleChunks": 88,
+            "visibleBatches": 532,
+            "totalBatches": 3504,
+            "referenceTreeCount": 93,
+            "referenceWoodlandTreeCount": 280,
+            "referenceOmittedTreeCount": 29
+          },
+          "scenery": [
+            {
+              "houses": 453,
+              "batches": 615,
+              "triangles": 1343071,
+              "detailFeatures": 9716,
+              "referenceFacades": 65
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 12,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 21,
+              "triangles": 22027
+            },
+            {
+              "grassBlades": 30997,
+              "pebbles": 3192,
+              "soilFragments": 2473,
+              "leaves": 5997,
+              "rootRibs": 372,
+              "grassTriangles": 92991,
+              "groundTriangles": 40344,
+              "totalTriangles": 133335,
+              "batches": 112,
+              "visibleDrawCalls": 24,
+              "visibleTriangles": 32976,
+              "treeContacts": 93,
+              "rejected": 6360,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "glError": 0
+    }
+  ],
+  "measurement": "Actual fixed-step vehicle physics with the scripted neighborhood driver. Home departure checks the true quaternion-projected chassis against mapped road/driveway pavement and building footprints every physics step. Inspection cameras and RAF timing are separate. No physical controller evidence.",
+  "survey": {
+    "drivewayPolygons": 53,
+    "decks": 12,
+    "patios": 3,
+    "pools": 9,
+    "roadSigns": 4,
+    "departurePoints": 8
+  },
+  "courtyard28": [
+    {
+      "id": "nys-7159159:28-north-crossbar",
+      "style": "ranch",
+      "frontFace": 0,
+      "garageFace": null,
+      "garageDoors": 0,
+      "garageDoorWidth": 2.85,
+      "garageBase": -4.445014609051308,
+      "roofType": "gable",
+      "roofRise": 1.65,
+      "roofBase": -1.3015104973279183,
+      "foundationTop": -3.9015104973279184,
+      "entryBase": -4.201510497327918,
+      "entryAccess": null,
+      "livingStories": 1,
+      "lowerWindows": 0,
+      "porch": false,
+      "frontGable": null,
+      "stoneLower": false,
+      "bayWindow": null,
+      "dormers": false,
+      "chimney": false,
+      "genericYard": false,
+      "recessedWindows": 12,
+      "windowRecessMeters": 0.3,
+      "sidingCourseMeters": 0.18,
+      "detailApproximation": "Window spacing, cavity depth, curtains, siding/shingle courses and gutter profiles are procedural construction detail, not surveyed observations. Explicit source colors and major facade overrides remain authoritative.",
+      "colors": {
+        "wall": 13223868,
+        "trim": 14210504,
+        "shutter": 4279388,
+        "door": 7958360,
+        "roof": 6909033
+      }
+    },
+    {
+      "id": "nys-7159159:28-south-stem",
+      "style": "ranch",
+      "frontFace": 0,
+      "garageFace": null,
+      "garageDoors": 0,
+      "garageDoorWidth": 2.85,
+      "garageBase": -4.834683011195397,
+      "roofType": "gable",
+      "roofRise": 1.65,
+      "roofBase": -1.3015104973279183,
+      "foundationTop": -3.9015104973279184,
+      "entryBase": -4.201510497327918,
+      "entryAccess": {
+        "landingTop": -4.156510497327918,
+        "steps": 2,
+        "reachMeters": 1.6600000000000001
+      },
+      "livingStories": 1,
+      "lowerWindows": 0,
+      "porch": false,
+      "frontGable": null,
+      "stoneLower": false,
+      "bayWindow": null,
+      "dormers": false,
+      "chimney": false,
+      "genericYard": false,
+      "recessedWindows": 11,
+      "windowRecessMeters": 0.3,
+      "sidingCourseMeters": 0.18,
+      "detailApproximation": "Window spacing, cavity depth, curtains, siding/shingle courses and gutter profiles are procedural construction detail, not surveyed observations. Explicit source colors and major facade overrides remain authoritative.",
+      "colors": {
+        "wall": 13223868,
+        "trim": 14210504,
+        "shutter": 4279388,
+        "door": 7958360,
+        "roof": 6909033
+      }
+    }
+  ],
+  "gpu": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER (0x000021C4) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "home": {
+    "ready": true,
+    "screen": null,
+    "mode": "neighborhood",
+    "race": false,
+    "countdown": 0,
+    "modelLoaded": true,
+    "position": [
+      0.2053997963666916,
+      -0.2689407169818878,
+      19.598726272583008
+    ],
+    "rotation": [
+      0.02579927258193493,
+      -0.12110599130392075,
+      -0.023312868550419807,
+      0.9920304417610168
+    ],
+    "chassisHalfExtents": {
+      "x": 0.8999999761581421,
+      "y": 0.3100000023841858,
+      "z": 2.299999952316284
+    },
+    "speed": 0,
+    "grounded": 4,
+    "slip": 0,
+    "boost": 65,
+    "finished": false,
+    "routePoints": 260,
+    "near": 26.56175943364334,
+    "ai": [
+      {
+        "id": 1,
+        "target": 8,
+        "speed": 7.5254269045919635,
+        "position": [
+          878.20751953125,
+          34.89065933227539,
+          -392.948974609375
+        ]
+      },
+      {
+        "id": 2,
+        "target": 14,
+        "speed": 20.39305224228031,
+        "position": [
+          902.5323486328125,
+          39.18770217895508,
+          -428.597412109375
+        ]
+      },
+      {
+        "id": 3,
+        "target": 19,
+        "speed": 19.540947517403037,
+        "position": [
+          950.0704956054688,
+          45.51409149169922,
+          -445.924560546875
+        ]
+      },
+      {
+        "id": 4,
+        "target": 138,
+        "speed": 12.879776613720749,
+        "position": [
+          1382.0234375,
+          13.708755493164062,
+          -167.65521240234375
+        ]
+      },
+      {
+        "id": 5,
+        "target": 172,
+        "speed": 13.313953104306353,
+        "position": [
+          1215.63916015625,
+          -2.1179585456848145,
+          157.06224060058594
+        ]
+      },
+      {
+        "id": 6,
+        "target": 205,
+        "speed": 11.373286373455546,
+        "position": [
+          1104.810302734375,
+          5.919451713562012,
+          202.2552947998047
+        ]
+      }
+    ],
+    "testDriver": null,
+    "metrics": {
+      "quality": "high",
+      "frames": 195,
+      "p50": 16.69999999999891,
+      "p95": 16.799999999999272,
+      "physicsMs": 1.100000023841858,
+      "width": 1920,
+      "height": 1080,
+      "draws": 627,
+      "triangles": 3944274,
+      "vegetation": {
+        "trees": 18925,
+        "shrubs": 1099,
+        "grassTufts": 6084,
+        "chunks": 283,
+        "visibleChunks": 88,
+        "visibleBatches": 532,
+        "totalBatches": 3504,
+        "referenceTreeCount": 93,
+        "referenceWoodlandTreeCount": 280,
+        "referenceOmittedTreeCount": 29
+      },
+      "scenery": [
+        {
+          "houses": 453,
+          "batches": 615,
+          "triangles": 1343071,
+          "detailFeatures": 9716,
+          "referenceFacades": 65
+        },
+        {
+          "patches": 8,
+          "ponds": 2,
+          "surfaceTriangles": 22155,
+          "detailTriangles": 4963,
+          "shoreTriangles": 340,
+          "meadowTufts": 192,
+          "reedTufts": 87,
+          "leafClusters": 1076,
+          "drawCalls": 5,
+          "maxGridSpacingMeters": 3
+        },
+        {
+          "decks": 12,
+          "pools": 9,
+          "patios": 3,
+          "stopSigns": 2,
+          "streetSigns": 2,
+          "stairs": 1,
+          "drawCalls": 21,
+          "triangles": 22027
+        },
+        {
+          "grassBlades": 30997,
+          "pebbles": 3192,
+          "soilFragments": 2473,
+          "leaves": 5997,
+          "rootRibs": 372,
+          "grassTriangles": 92991,
+          "groundTriangles": 40344,
+          "totalTriangles": 133335,
+          "batches": 112,
+          "visibleDrawCalls": 24,
+          "visibleTriangles": 32976,
+          "treeContacts": 93,
+          "rejected": 6360,
+          "maxPrimitiveRadiusMeters": 0.645
+        },
+        {
+          "poles": 96,
+          "wireSpans": 87,
+          "fenceSections": 11,
+          "stoneClusters": 6,
+          "surveyPlacementsSuppressed": 17,
+          "drawCalls": 12
+        }
+      ]
+    },
+    "renderer": "WebKit WebGL"
+  },
+  "neutralHome": {
+    "seconds": 3.2,
+    "movedMeters": 0.002697815800307238,
+    "speed": 0,
+    "initialPosition": [
+      0.20693524181842804,
+      -0.3348768949508667,
+      19.60094451904297
+    ],
+    "settledPosition": [
+      0.2053997963666916,
+      -0.2689407169818878,
+      19.598726272583008
+    ]
+  },
+  "parkingHold": {
+    "simulatedHoldSeconds": 30,
+    "heldDriftMeters": 0.000003822140584440565,
+    "heldGrounded": 4,
+    "heldSpeed": 0,
+    "throttleReleaseMeters": 6.532263446178363,
+    "throttleReleaseSpeed": 10.518553164643581,
+    "recoveryReleaseMeters": 6.456490877488748,
+    "recoveryReleaseSpeed": 10.63254695600477
+  },
+  "departure": {
+    "routePoints": 181,
+    "pavementToleranceMeters": 0.08,
+    "checkedSteps": 463,
+    "airborneSteps": 0,
+    "offPavementSteps": 0,
+    "maximumOffPavementMeters": 0,
+    "approximateVisualOverhangSteps": 0,
+    "houseOverlaps": [],
+    "firstOffPavement": [],
+    "samples": [
+      {
+        "step": 0,
+        "position": [
+          0.2070799618959427,
+          -0.3348768949508667,
+          19.601116180419922
+        ],
+        "speed": 0,
+        "grounded": 4,
+        "target": 1,
+        "outsideMeters": 0
+      },
+      {
+        "step": 30,
+        "position": [
+          -0.031714703887701035,
+          -0.3123628497123718,
+          20.5914363861084
+        ],
+        "speed": 3.6458991113003782,
+        "grounded": 4,
+        "target": 1,
+        "outsideMeters": 0
+      },
+      {
+        "step": 60,
+        "position": [
+          -0.8811661005020142,
+          -0.39302700757980347,
+          22.607831954956055
+        ],
+        "speed": 4.729341119835892,
+        "grounded": 4,
+        "target": 1,
+        "outsideMeters": 0
+      },
+      {
+        "step": 90,
+        "position": [
+          -2.1977241039276123,
+          -0.4397144317626953,
+          24.662822723388672
+        ],
+        "speed": 4.985279403381195,
+        "grounded": 4,
+        "target": 2,
+        "outsideMeters": 0
+      },
+      {
+        "step": 120,
+        "position": [
+          -3.9427926540374756,
+          -0.4412635862827301,
+          26.461956024169922
+        ],
+        "speed": 5.030305992100926,
+        "grounded": 4,
+        "target": 2,
+        "outsideMeters": 0
+      },
+      {
+        "step": 150,
+        "position": [
+          -5.94844388961792,
+          -0.4056200683116913,
+          27.894859313964844
+        ],
+        "speed": 4.861672570269818,
+        "grounded": 4,
+        "target": 3,
+        "outsideMeters": 0
+      },
+      {
+        "step": 180,
+        "position": [
+          -8.106192588806152,
+          -0.3445548713207245,
+          28.980640411376953
+        ],
+        "speed": 4.8178315006358385,
+        "grounded": 4,
+        "target": 3,
+        "outsideMeters": 0
+      },
+      {
+        "step": 210,
+        "position": [
+          -10.354744911193848,
+          -0.26782962679862976,
+          29.832975387573242
+        ],
+        "speed": 4.804767530435135,
+        "grounded": 4,
+        "target": 4,
+        "outsideMeters": 0
+      },
+      {
+        "step": 240,
+        "position": [
+          -12.652496337890625,
+          -0.18431559205055237,
+          30.528717041015625
+        ],
+        "speed": 4.796610223262964,
+        "grounded": 4,
+        "target": 4,
+        "outsideMeters": 0
+      },
+      {
+        "step": 270,
+        "position": [
+          -14.976190567016602,
+          -0.09436497092247009,
+          31.12151527404785
+        ],
+        "speed": 4.7933147264995295,
+        "grounded": 4,
+        "target": 5,
+        "outsideMeters": 0
+      },
+      {
+        "step": 300,
+        "position": [
+          -17.312118530273438,
+          0.0006905384361743927,
+          31.656557083129883
+        ],
+        "speed": 4.788797881074381,
+        "grounded": 4,
+        "target": 5,
+        "outsideMeters": 0
+      },
+      {
+        "step": 330,
+        "position": [
+          -19.65583038330078,
+          0.10020656883716583,
+          32.14271926879883
+        ],
+        "speed": 4.782971836873028,
+        "grounded": 4,
+        "target": 5,
+        "outsideMeters": 0
+      },
+      {
+        "step": 360,
+        "position": [
+          -22.005367279052734,
+          0.20365628600120544,
+          32.58699417114258
+        ],
+        "speed": 4.7788853192821215,
+        "grounded": 4,
+        "target": 6,
+        "outsideMeters": 0
+      },
+      {
+        "step": 390,
+        "position": [
+          -24.361499786376953,
+          0.31478920578956604,
+          32.93585968017578
+        ],
+        "speed": 4.741989634345892,
+        "grounded": 4,
+        "target": 6,
+        "outsideMeters": 0
+      },
+      {
+        "step": 420,
+        "position": [
+          -26.708988189697266,
+          0.4293133020401001,
+          33.18370056152344
+        ],
+        "speed": 4.669166103840154,
+        "grounded": 4,
+        "target": 6,
+        "outsideMeters": 0
+      },
+      {
+        "step": 450,
+        "position": [
+          -28.86366844177246,
+          0.4717790484428406,
+          34.07175827026367
+        ],
+        "speed": 4.748419838289952,
+        "grounded": 4,
+        "target": 7,
+        "outsideMeters": -1.0593686199674108
+      }
+    ],
+    "reachedRoad": true,
+    "endState": {
+      "ready": true,
+      "screen": "pause",
+      "mode": "neighborhood",
+      "race": false,
+      "countdown": 0,
+      "modelLoaded": true,
+      "position": [
+        -29.64966583251953,
+        0.4497951865196228,
+        34.617183685302734
+      ],
+      "rotation": [
+        0.023296646773815155,
+        -0.4998171031475067,
+        -0.03232242912054062,
+        0.8652140498161316
+      ],
+      "chassisHalfExtents": {
+        "x": 0.8999999761581421,
+        "y": 0.3100000023841858,
+        "z": 2.299999952316284
+      },
+      "speed": 4.812877924815987,
+      "grounded": 4,
+      "slip": 0.14716723891176337,
+      "boost": 65,
+      "finished": false,
+      "routePoints": 260,
+      "near": 0.4627361544018486,
+      "ai": [
+        {
+          "id": 1,
+          "target": 77,
+          "speed": 22.400401064525177,
+          "position": [
+            1433.82958984375,
+            35.50487518310547,
+            -648.2190551757812
+          ]
+        },
+        {
+          "id": 2,
+          "target": 91,
+          "speed": 10.416167830462918,
+          "position": [
+            1552.16796875,
+            27.4241943359375,
+            -578.5690307617188
+          ]
+        },
+        {
+          "id": 3,
+          "target": 98,
+          "speed": 22.60036463395596,
+          "position": [
+            1537.6776123046875,
+            26.036052703857422,
+            -502.6424560546875
+          ]
+        },
+        {
+          "id": 4,
+          "target": 186,
+          "speed": 12.344254298438045,
+          "position": [
+            1148.73583984375,
+            -0.48996689915657043,
+            284.6441345214844
+          ]
+        },
+        {
+          "id": 5,
+          "target": 214,
+          "speed": 10.372262331305253,
+          "position": [
+            1096.76318359375,
+            12.279838562011719,
+            100.07393646240234
+          ]
+        },
+        {
+          "id": 6,
+          "target": 248,
+          "speed": 11.714508891213578,
+          "position": [
+            962.0054321289062,
+            21.274932861328125,
+            -221.0126495361328
+          ]
+        }
+      ],
+      "testDriver": null,
+      "metrics": {
+        "quality": "high",
+        "frames": 251,
+        "p50": 0,
+        "p95": 0,
+        "physicsMs": 0.5,
+        "width": 1920,
+        "height": 1080,
+        "draws": 643,
+        "triangles": 4014307,
+        "vegetation": {
+          "trees": 18925,
+          "shrubs": 1099,
+          "grassTufts": 6084,
+          "chunks": 283,
+          "visibleChunks": 90,
+          "visibleBatches": 546,
+          "totalBatches": 3504,
+          "referenceTreeCount": 93,
+          "referenceWoodlandTreeCount": 280,
+          "referenceOmittedTreeCount": 29
+        },
+        "scenery": [
+          {
+            "houses": 453,
+            "batches": 615,
+            "triangles": 1343071,
+            "detailFeatures": 9716,
+            "referenceFacades": 65
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 12,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 21,
+            "triangles": 22027
+          },
+          {
+            "grassBlades": 30997,
+            "pebbles": 3192,
+            "soilFragments": 2473,
+            "leaves": 5997,
+            "rootRibs": 372,
+            "grassTriangles": 92991,
+            "groundTriangles": 40344,
+            "totalTriangles": 133335,
+            "batches": 112,
+            "visibleDrawCalls": 22,
+            "visibleTriangles": 31461,
+            "treeContacts": 93,
+            "rejected": 6360,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "renderer": "WebKit WebGL"
+    }
+  },
+  "loopCompleted": true,
+  "frameTiming": {
+    "seconds": 12.009899999999998,
+    "intervals": 720,
+    "medianMs": 16.700000000000728,
+    "p95Ms": 16.799999999999272,
+    "p99Ms": 16.80000000000291,
+    "maxMs": 16.80000000000291,
+    "meanMs": 16.680416666666662,
+    "metrics": {
+      "quality": "high",
+      "frames": 974,
+      "p50": 16.700000000000728,
+      "p95": 16.799999999999272,
+      "physicsMs": 1.1999999284744263,
+      "width": 1920,
+      "height": 1080,
+      "draws": 647,
+      "triangles": 4147503,
+      "vegetation": {
+        "trees": 18925,
+        "shrubs": 1099,
+        "grassTufts": 6084,
+        "chunks": 283,
+        "visibleChunks": 95,
+        "visibleBatches": 575,
+        "totalBatches": 3504,
+        "referenceTreeCount": 93,
+        "referenceWoodlandTreeCount": 280,
+        "referenceOmittedTreeCount": 29
+      },
+      "scenery": [
+        {
+          "houses": 453,
+          "batches": 615,
+          "triangles": 1343071,
+          "detailFeatures": 9716,
+          "referenceFacades": 65
+        },
+        {
+          "patches": 8,
+          "ponds": 2,
+          "surfaceTriangles": 22155,
+          "detailTriangles": 4963,
+          "shoreTriangles": 340,
+          "meadowTufts": 192,
+          "reedTufts": 87,
+          "leafClusters": 1076,
+          "drawCalls": 5,
+          "maxGridSpacingMeters": 3
+        },
+        {
+          "decks": 12,
+          "pools": 9,
+          "patios": 3,
+          "stopSigns": 2,
+          "streetSigns": 2,
+          "stairs": 1,
+          "drawCalls": 21,
+          "triangles": 22027
+        },
+        {
+          "grassBlades": 30997,
+          "pebbles": 3192,
+          "soilFragments": 2473,
+          "leaves": 5997,
+          "rootRibs": 372,
+          "grassTriangles": 92991,
+          "groundTriangles": 40344,
+          "totalTriangles": 133335,
+          "batches": 112,
+          "visibleDrawCalls": 21,
+          "visibleTriangles": 26893,
+          "treeContacts": 93,
+          "rejected": 6360,
+          "maxPrimitiveRadiusMeters": 0.645
+        },
+        {
+          "poles": 96,
+          "wireSpans": 87,
+          "fenceSections": 11,
+          "stoneClusters": 6,
+          "surveyPlacementsSuppressed": 17,
+          "drawCalls": 12
+        }
+      ]
+    }
+  },
+  "passed": true
+}
