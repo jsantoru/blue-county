@@ -1,0 +1,17 @@
+Geographic database and OpenStreetMap-derived assets
+
+Map data © OpenStreetMap contributors.
+https://www.openstreetmap.org/copyright
+
+The cached OSM extract and this project's derived geographic database are made
+available under the Open Database License (ODbL) 1.0:
+https://opendatacommons.org/licenses/odbl/1-0/
+
+This database notice applies to the map data, not automatically to independent
+game software, vehicle meshes, audio, or other unrelated works.
+
+Elevation: U.S. Geological Survey, 3D Elevation Program (3DEP), public domain.
+https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits
+
+Source provenance, retrieval timestamps and deliberate modifications are recorded
+in manifest.json. Source data and repeatable build scripts are included.

@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-20T18:26:20.186Z",
+  "browser": "153.0.4234.48",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "input": "Synthetic Gamepad API snapshots at index2; no physical controller evidence",
+  "checks": [
+    "nonzero device selection and confirmation consumption",
+    "diagnostics partial simultaneous analog triggers",
+    "controller-only settings slider",
+    "controller acceleration",
+    "unplug pause and deliberate reconnect resume",
+    "blur/focus pause and deliberate resume",
+    "controller-only race start",
+    "full actual-physics 3-lap race with 777 ordered gates",
+    "controller-only results restart",
+    "controller-only Return Home exits race"
+  ],
+  "finish": {
+    "lap": 3,
+    "checkpoint": 260,
+    "routePoints": 260,
+    "result": "1968 OLDSMOBILE 442 · WARWICK, NEW YORK\nA good run.\n\nThe Ridge circuit · race complete\n\n1 / 4\nFINISH POSITION\n6:35.57\nRACE TIME\nRace again\n↗\nReturn Home\n↗\nMain menu\n↗\nA Select B Back · D-pad to navigate\nKeyboard: arrows / Enter / Esc · Drive: WASD · Shift boost\nMap data © OpenStreetMap contributors · ODbL · USGS elevation"
+  },
+  "errors": []
+}

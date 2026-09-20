@@ -1,0 +1,69 @@
+# Blue County — Warwick / 442
+
+A locally playable arcade driving slice starring your actual dark blue 1968 Oldsmobile 442 convertible with the wheel and controls on the US driver's left. Free Drive starts on Beverly Drive, roughly 24m from the verified house address point. No exact driveway connection was available, so Home is a right-hand roadside spawn facing the eastern West Ridge Road exit.
+
+## Launch on Windows
+
+Double-click **Launch Blue County.cmd**, then choose **Drive from Home**. The launcher serves the built game at **http://127.0.0.1:5180/** and opens your default browser. Use Chrome or Edge. Node.js 22+ is required; dependencies and the production build are already present in this workspace.
+
+From PowerShell, the equivalent commands are:
+
+```powershell
+cd C:\Users\Joe\Documents\ChatGPT\blender\driving-game
+npm ci                 # only needed on a fresh checkout
+npm run build
+npm run preview -- --port 5180 --strictPort
+```
+
+Development: `npm run dev -- --port 5174 --strictPort`. The game loads all map, model, and sound resources locally. No paid services, keys, live maps, or CDN requests are needed during play.
+
+## First drive
+
+Click once to focus/unlock audio, connect the wired Xbox controller, and press a button to select it. Release that first press, then use the pad for all menus. RT is proportional throttle; LT is proportional brake. To reverse, come to a stop, release LT, then press it again. Hold A to boost, X for handbrake, B to look back, Y to switch camera, right stick to look around, Menu to pause, and View for 0.7s to recover. Return Home is in Pause and exits an active race.
+
+Keyboard: WASD/arrows drive, Shift boost, Space handbrake, B look back, C camera, R hold reset, Escape pause, Enter confirm. Menu arrows/WASD navigate; left/right adjusts settings. F3 shows telemetry.
+
+Start with **Balanced** handling, 0.12 stick deadzone, 1.35 response curve, and sensitivity 1.0. Increase deadzone only for stick drift. Try **Planted** if high-speed steering feels too lively. Physics tuning lives together in `src/vehicle.ts`: `steerLow`, `steerFalloff`, `grip`, `driftGrip`, `engineForce`, and `stability` are the useful first adjustments. Settings and the chosen handling preset persist locally. Diagnostics shows selected device, raw and processed analog inputs, mapping, buttons, and haptic availability; every binding can be remapped.
+
+## Included slice
+
+- Free Drive on 82 mapped road polylines across approximately 3.8 × 3.9km, with Home and safe recovery.
+- **Ridge & Hollow**: a verified connected 2.645km clockwise circuit, three laps, countdown, three physical AI rivals, three civilian cars, ordered directional progress, position, results, restart.
+- Real route: Old Ridge Road → High Hill Avenue → Claire Ann Drive → Seward Highway → existing mapped connector → Old Ridge Road. Beverly Drive retains both real connections to West Ridge Road.
+- Separate handling grounds: straight, slalom, constant-radius loop, ramp and collision barriers.
+- Dynamic Rapier chassis, four spring/damper wheel rays, contact-limited tire forces, speed-sensitive steering, brake/handbrake drift, boost, CCD, collision feedback, recent-contact takedown credit, and temporary vehicle-to-vehicle protection after recovery.
+- Detailed actual 442 with closed hood, parchment interior, redlines, chrome, separate steering/spinning wheels, and the modeled engine retained under the hood. Rivals and traffic use deliberately simple original car models.
+- Stable horizon chase/close cameras, minimap, synthesized engine/shift/tire/wind/boost/impact audio, pooled skid marks, smoke and sparks. Graphics, camera motion, input and rumble settings.
+
+## Rebuild the data and car
+
+```powershell
+npm run map            # offline, Python 3 stdlib; uses cached sources
+npm run export-car     # Blender background export from the saved snapshot
+```
+
+Optional geographic refresh: `python scripts/map-fetch.py` (requires Pillow). Refresh uses open OSM and USGS endpoints, preserves cached provenance, and rejects a mismatched house anchor. See `docs/geography.md`. Source data and the ODbL notice are in `public/map/source` and `public/map/LICENSE.txt`; the map manifest records bounds, origin, meter convention, road graph, Home, checkpoints, sources, dates and adjustments.
+
+The active source folder `../oldsmobile_442` was **not modified**. Export uses the included `asset-source/1968_oldsmobile_442.snapshot.blend`, preserving the detailed source. See `docs/vehicle.md` and `public/assets/vehicle-manifest.json` for axes, dimensions, pivots, scale and export settings. The source snapshot is tracked so a fresh clone can rebuild the vehicle; intermediate Blender exports remain ignored. To use a future model revision, copy its saved `.blend` into the snapshot path yourself, then export.
+
+## Checks and evidence
+
+```powershell
+npm test               # input, rules, surfaces, physics and complete AI route tests
+npm run build           # TypeScript + production bundle
+# With the production server running on 5180:
+$env:GAME_URL='http://127.0.0.1:5180'
+npm run test:browser     # system Edge; synthetic pad, actual game/race physics
+```
+
+Tests compare acceleration, proportional throttle, braking, turning and boosted wall collision at simulated 30/60/120 fps rendering with fixed 60Hz physics. Tolerances are 0.15m position and 0.2m/s speed, not a cross-machine determinism promise. Ordered gates reject reverse travel, out-of-order crossings, teleport progress and duplicate rewards. Full mapped-route physics tests complete all 777 crossings over three laps, including all four racers with traffic and no racer recoveries. See `docs/verification.md`, the JSON reports and browser screenshots for measured environment and results.
+
+## Geographic and visual limits
+
+The anchor is **41.283879, -74.3662393**, an OSM house-address point agreeing with an independent PointAddress match within approximately 1m. This is high-confidence address placement, not a survey. The neighborhood is a simplified 3D interpretation: building footprints are preserved in source data, while envelopes, roofs, materials, windows, landscaping and trees are approximate. Beverly lacks mapped building footprints, so flagged simple homes use known address points. Road widths are increased to 10.5–13m; centerlines, bends and junctions remain geographic. Coarse USGS terrain softens small bumps. Roads and their colliders follow the same triangulated terrain. A mapped Jessup stream bridge retains its grade/tags; water and structural bridge detail are not reconstructed. The race has no road-over-road crossing.
+
+Civilian cars follow the verified race loop in its right-hand lane; they do not simulate every neighborhood journey. AI is competent path-following with physical contacts, not human race tactics. Damage is impact/wreck feedback with quick recovery, not deformable destruction. The cabin/close camera is a closer chase view, not a fully modeled first-person driving interface. Campaign, multiplayer and destruction simulation remain outside this slice.
+
+**Physical wired-controller feel, end-to-end latency and felt rumble were not verified.** The automated pad tests inject API snapshots and are labeled accordingly. Use the short hardware checklist in `docs/controller.md`: menus/sliders, partial triggers, drift/recovery, boosted bend, scrape/hard impact, unplug/reconnect, tab away/back, rumble off/on, and controller-only race restart.
+
+Map data © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), [ODbL 1.0](https://opendatacommons.org/licenses/odbl/1-0/). Elevation: [USGS 3DEP](https://www.usgs.gov/3d-elevation-program), public domain. Game UI, generated audio and scenery implementation are original. No Burnout names, artwork, sounds or code are included.

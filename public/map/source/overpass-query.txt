@@ -1,0 +1,1 @@
+[out:json][timeout:45];(way(around:1850,41.2838790,-74.3662393)[highway];way(around:1850,41.2838790,-74.3662393)[building];way(around:1850,41.2838790,-74.3662393)[landuse];way(around:1850,41.2838790,-74.3662393)[natural];node(8788896022););out body;>;out skel qt;

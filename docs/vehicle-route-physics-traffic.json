@@ -1,0 +1,69 @@
+{
+  "seconds": 556.3166666666667,
+  "cars": [
+    {
+      "id": 0,
+      "finished": true,
+      "next": 260,
+      "lap": 3,
+      "crossings": 777,
+      "finishedAt": 395.75,
+      "recoveries": 0,
+      "position": [
+        881.6119995117188,
+        29.856475830078125,
+        -334.0445251464844
+      ],
+      "driverTarget": 259,
+      "speed": 0.09548833873490577
+    },
+    {
+      "id": 1,
+      "finished": true,
+      "next": 260,
+      "lap": 3,
+      "crossings": 777,
+      "finishedAt": 556.3166666666667,
+      "recoveries": 0,
+      "position": [
+        906.696533203125,
+        29.40536117553711,
+        -316.7476806640625
+      ],
+      "driverTarget": 259,
+      "speed": 21.77262925875453
+    },
+    {
+      "id": 2,
+      "finished": true,
+      "next": 260,
+      "lap": 3,
+      "crossings": 777,
+      "finishedAt": 403.73333333333335,
+      "recoveries": 0,
+      "position": [
+        892.2608032226562,
+        27.98876190185547,
+        -311.6995849609375
+      ],
+      "driverTarget": 259,
+      "speed": 0.144084641435301
+    },
+    {
+      "id": 3,
+      "finished": true,
+      "next": 260,
+      "lap": 3,
+      "crossings": 777,
+      "finishedAt": 396.23333333333335,
+      "recoveries": 0,
+      "position": [
+        880.7076416015625,
+        28.59942054748535,
+        -323.43798828125
+      ],
+      "driverTarget": 259,
+      "speed": 0.1225150079083472
+    }
+  ]
+}

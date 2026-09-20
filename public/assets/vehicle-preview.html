@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>442 export inspection</title>
+<style>html,body{margin:0;height:100%;overflow:hidden;background:#141c25;color:#e8e9e6;font:15px system-ui}canvas{display:block}aside{position:absolute;top:22px;left:25px;padding:20px 24px;background:#101b27d9;border:1px solid #ffffff25;border-radius:14px;pointer-events:none;max-width:300px}h1{font-size:23px;margin:5px 0 12px}p{color:#aebecb;line-height:1.5;font-size:13px}.tag{color:#e2b666;font-size:11px;letter-spacing:2px}button{pointer-events:auto;border:1px solid #b9ccd255;background:#314153;color:white;border-radius:6px;padding:8px 12px}#status{font-size:12px}</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script></head>
+<body><aside><div class="tag">SOURCE ASSET / EXPORTED GLB</div><h1>1968 Oldsmobile 442</h1><p>Dark sapphire · parchment · redline tires<br>Drag to orbit. Scroll to inspect.<br>Wheels demonstrate independent steering and rotation.</p><button id="wheels">Animate wheels</button><p id="status">Loading actual Blender export…</p></aside>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+const renderer = new THREE.WebGLRenderer({antialias:true});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;document.body.append(renderer.domElement);
+const scene=new THREE.Scene();scene.background=new THREE.Color('#17212b');scene.environment=new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(),.04).texture;
+const camera=new THREE.PerspectiveCamera(36,innerWidth/innerHeight,.1,100);camera.position.set(-6,3.2,7.5);
+const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,.65,0);controls.update();
+scene.add(new THREE.HemisphereLight(0xe2efff,0x556250,2));
+const light=new THREE.DirectionalLight(0xffe6c4,3);light.position.set(-3,7,5);light.castShadow=true;light.shadow.mapSize.set(2048,2048);light.shadow.camera.left=-6;light.shadow.camera.right=6;light.shadow.camera.top=6;light.shadow.camera.bottom=-6;light.shadow.normalBias=.03;scene.add(light);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:0x34424b,roughness:.8}));floor.rotation.x=-Math.PI/2;floor.position.y=-.005;floor.receiveShadow=true;scene.add(floor);
+const grid=new THREE.GridHelper(30,30,0x60707a,0x44545e);grid.position.y=-.003;scene.add(grid);
+let car,manifest,animate=false;
+document.querySelector('#wheels').onclick=()=>{animate=!animate;document.querySelector('#wheels').textContent=animate?'Stop wheels':'Animate wheels'};
+try{manifest=await (await fetch('/assets/vehicle-manifest.json')).json();const gltf=await new GLTFLoader().loadAsync('/assets/oldsmobile-442.glb');car=gltf.scene;car.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}});scene.add(car);document.querySelector('#status').textContent=`Loaded ${manifest.statistics.trianglesAfterReduction.toLocaleString()} triangles · ${(manifest.statistics.glbBytes/1048576).toFixed(1)} MB · hood closed`;window.vehicleInspection={loaded:true,manifest,nodes:[]};car.traverse(o=>window.vehicleInspection.nodes.push(o.name));}catch(error){document.querySelector('#status').textContent=String(error);window.vehicleInspection={loaded:false,error:String(error)}}
+let last=performance.now();function frame(now){const dt=Math.min((now-last)/1000,.05);last=now;if(car&&animate)for(const w of manifest.wheels){car.getObjectByName(w.spinNode).rotation.x+=dt*4;if(w.steering)car.getObjectByName(w.steerNode).rotation.y=Math.sin(now/1700)*.4}controls.update();renderer.render(scene,camera);requestAnimationFrame(frame)}requestAnimationFrame(frame);
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+</script></body></html>

@@ -1,0 +1,7 @@
+node_modules/
+dist/
+asset-source/*
+!asset-source/1968_oldsmobile_442.snapshot.blend
+*.log
+.server-pid
+__pycache__/

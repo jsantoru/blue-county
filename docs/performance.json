@@ -1,0 +1,10 @@
+{
+  "date":"2026-09-20T18:15:56.026Z",
+  "environment":{"os":"Windows","cpu":"AMD Ryzen 5 3600","gpu":"NVIDIA GeForce GTX 1660 SUPER","renderer":"ANGLE Direct3D11","browser":"Edge 153.0.4234.48","viewport":[1920,1080],"renderResolution":[1920,1080],"quality":"high"},
+  "scenario":"Production build, real-time scripted race driving, real GLB, three opponents and three civilian cars",
+  "measurement":"Independent uncapped requestAnimationFrame timestamp differences; first 10 warmup intervals excluded",
+  "durationSeconds":20,"samples":1185,"p50Ms":16.70,"p95Ms":16.80,"p99Ms":16.80,"maxMs":16.90,"meanMs":16.680253164556966,
+  "lastPhysicsStepMs":0.80,"lastDrawCalls":171,"lastTrianglesIncludingShadows":976679,
+  "realGamepadsDetected":0,"physicalControllerVerified":false,
+  "limits":"Short sample only; not every location, long-run thermal performance, input-to-display latency or physical controller evidence."
+}

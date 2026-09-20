@@ -1,0 +1,38 @@
+{
+  "name": "blue-county",
+  "version": "0.1.0",
+  "description": "Local Warwick arcade racing with the 1968 Oldsmobile 442",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "map": "python scripts/map-build.py",
+    "export-car": "powershell -ExecutionPolicy Bypass -File scripts/export-car.ps1",
+    "test:browser": "node scripts/browser-check.mjs",
+    "format": "prettier --write src tests index.html scripts/browser-check.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "^0.20.0",
+    "three": "^0.186.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.2",
+    "@types/three": "^0.186.0",
+    "prettier": "^3.9.8",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  },
+  "type": "module",
+  "private": true
+}
