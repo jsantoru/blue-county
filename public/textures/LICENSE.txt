@@ -1,0 +1,25 @@
+OFFLINE ENVIRONMENT TEXTURES
+
+All JPEG and HDR files in this directory originate from Poly Haven or ambientCG and are
+released by their authors under Creative Commons CC0 1.0 Universal.
+
+Provider license statement: https://polyhaven.com/license
+Lawn provider license statement: https://docs.ambientcg.com/license/
+CC0 legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Asset authors, original URLs, tile dimensions, resolution, and SHA-256 checksums
+are recorded per file in manifest.json.
+
+CC0 permits copying, modification and redistribution, including use inside
+commercial games. Attribution is appreciated by the provider but is not required
+for the downloaded assets. We retain it here as provenance.
+
+Preparation used the Poly Haven public asset API. API service terms:
+https://github.com/Poly-Haven/Public-API/blob/master/ToS.md
+Powered by Poly Haven during asset preparation. The shipped game uses these
+local files and makes no requests to Poly Haven or its API while playing.
+The lawn-* maps are original Grass004 files from ambientCG, also CC0.
+The game makes no requests to ambientCG while playing.
+
+These assets are material and lighting references, not claims about particular
+Warwick properties. The Greenwich Park HDRI was captured in London and is used
+for outdoor illumination/reflections, not as Warwick geography.

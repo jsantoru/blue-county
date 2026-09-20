@@ -3,6 +3,10 @@ import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import RAPIER from "@dimforge/rapier3d-compat";
 import type { MapData, Point, Road } from "./types";
 import { clamp } from "./types";
+import { createSurfaceMaterials, worldUV } from "./materials";
+import { Vegetation } from "./vegetation";
+import { buildNeighborhood, type NeighborhoodHouse } from "./neighborhood";
+import { buildRoadside } from "./roadside";
 /** Matches the terrain mesh's diagonal exactly, including its outermost vertices. */
 export function heightAt(map: MapData, x: number, z: number) {
   const g = map.terrain;
@@ -264,13 +268,16 @@ export function textSign(
   const tex = new T.CanvasTexture(c);
   tex.colorSpace = T.SRGBColorSpace;
   const obj = new T.Sprite(new T.SpriteMaterial({ map: tex }));
-  obj.scale.set(4, 0.75, 1);
+  obj.scale.set(2.8, 0.525, 1);
   return obj;
 }
 export class Environment {
   root = new T.Group();
   colliders: RAPIER.Collider[] = [];
   cameraObstacles: T.Object3D[] = [];
+  materials = createSurfaceMaterials();
+  vegetation?: Vegetation;
+  private houses: NeighborhoodHouse[] = [];
   constructor(
     public map: MapData,
     public world: RAPIER.World,
@@ -382,78 +389,35 @@ export class Environment {
       base = Math.max(...corners),
       wallHeight = Math.max(2.8, (building.height || 5) * 0.72),
       wallTop = base + wallHeight;
-    const walls = [0xc9c0ab, 0xc6cbd0, 0xb4b7a7, 0xd1c7b4, 0xb6a89e],
-      roofs = [0x555b5b, 0x685c55, 0x555e68];
-    this.box(
-      [x, (low + wallTop) / 2, z],
-      [width, wallTop - low, depth],
-      walls[index % walls.length],
-      true,
+    // Detailed facades share the original, road-clear collision envelope.
+    this.colliders.push(
+      this.world.createCollider(
+        RAPIER.ColliderDesc.cuboid(width / 2, (wallTop - low) / 2, depth / 2)
+          .setTranslation(x, (low + wallTop) / 2, z)
+          .setRotation({
+            x: 0,
+            y: Math.sin(heading / 2),
+            z: 0,
+            w: Math.cos(heading / 2),
+          })
+          .setFriction(0.28),
+      ),
+    );
+    this.houses.push({
+      id: building.id ?? index,
+      x,
+      z,
+      width,
+      depth,
       heading,
-    );
-    const w = width / 2 + 0.35,
-      d = depth / 2 + 0.35,
-      rise = Math.min(2.7, Math.max(1, width * 0.22));
-    const roofPoints: Point[] = [
-        [-w, 0, -d],
-        [w, 0, -d],
-        [0, rise, -d],
-        [-w, 0, d],
-        [w, 0, d],
-        [0, rise, d],
-      ],
-      roofVertices: number[] = [];
-    for (const tri of [
-      [0, 1, 2],
-      [5, 4, 3],
-      [0, 2, 5],
-      [0, 5, 3],
-      [2, 1, 4],
-      [2, 4, 5],
-      [0, 3, 4],
-      [0, 4, 1],
-    ])
-      for (const n of tri) roofVertices.push(...roofPoints[n]);
-    const roofGeometry = new T.BufferGeometry();
-    roofGeometry.setAttribute(
-      "position",
-      new T.Float32BufferAttribute(roofVertices, 3),
-    );
-    roofGeometry.computeVertexNormals();
-    const roof = new T.Mesh(
-      roofGeometry,
-      new T.MeshStandardMaterial({
-        color: roofs[index % roofs.length],
-        roughness: 0.95,
-        side: T.DoubleSide,
-      }),
-    );
-    roof.position.set(x, wallTop, z);
-    roof.rotation.y = heading;
-    roof.castShadow = true;
-    roof.receiveShadow = true;
-    this.root.add(roof);
-    // Materials, facades and roof pitch are intentionally generic, not assertions about the real houses.
-    for (const side of [-1, 1])
-      for (const lx of [-width * 0.25, width * 0.25])
-        this.box(
-          point(lx, base + wallHeight * 0.6, side * (depth / 2 + 0.035)),
-          [Math.min(1.45, width * 0.2), 1.25, 0.08],
-          0x405761,
-          false,
-          heading,
-        );
-    const roadFacing =
-      (nearby.position[0] - x) * sin + (nearby.position[2] - z) * cos >= 0
-        ? 1
-        : -1;
-    this.box(
-      point(0, base + 1.05, roadFacing * (depth / 2 + 0.04)),
-      [1, 2.1, 0.1],
-      0x715b48,
-      false,
-      heading,
-    );
+      base,
+      low,
+      wallHeight,
+      roadPosition: nearby.position,
+      roadWidth: nearby.road?.width ?? 8,
+      kind: building.kind,
+      approximate: building.approximate,
+    });
   }
   build() {
     const map = this.map,
@@ -478,24 +442,31 @@ export class Environment {
     terrain.setAttribute("position", new T.Float32BufferAttribute(verts, 3));
     terrain.setIndex(idx);
     terrain.computeVertexNormals();
-    const ground = new T.Mesh(
-      terrain,
-      new T.MeshStandardMaterial({
-        color: this.test ? 0x76846b : 0x76905f,
-        roughness: 1,
-      }),
-    );
+    worldUV(terrain);
+    const ground = new T.Mesh(terrain, this.materials.grass);
     ground.receiveShadow = true;
     this.root.add(ground);
     this.collider(ground);
     for (const road of map.roads) {
       if (road.points.length < 2) continue;
       const roadSample = road.bridge ? undefined : sample;
+      const textured = (mesh: T.Mesh, material: T.MeshStandardMaterial) => {
+        (mesh.material as T.Material).dispose();
+        mesh.material = material;
+        worldUV(mesh.geometry);
+        return mesh;
+      };
       this.root.add(
-        roadMesh(road.points, road.width + 2.5, 0xaba48b, 0.025, roadSample),
+        textured(
+          roadMesh(road.points, road.width + 1.6, 0xaba48b, 0.025, roadSample),
+          this.materials.gravel,
+        ),
       );
       this.root.add(
-        roadJoins(road.points, road.width + 2.5, 0xaba48b, 0.025, roadSample),
+        textured(
+          roadJoins(road.points, road.width + 1.6, 0xaba48b, 0.025, roadSample),
+          this.materials.gravel,
+        ),
       );
       const asphalt = roadMesh(
           road.points,
@@ -505,66 +476,56 @@ export class Environment {
           roadSample,
         ),
         joins = roadJoins(road.points, road.width, 0x394143, 0.065, roadSample);
-      this.root.add(asphalt, joins);
+      this.root.add(
+        textured(asphalt, this.materials.asphalt),
+        textured(joins, this.materials.asphalt),
+      );
       this.collider(asphalt);
       this.collider(joins);
       // Both join rims and strips follow terrain facets; the colliders use these exact meshes.
       // Bridges preserve their imported deck grade rather than snapping down to terrain.
       if (road.width >= 7) {
-        const line = roadMesh(road.points, 0.12, 0xc9b66c, 0.079, roadSample);
-        this.root.add(line);
+        for (const side of [-1, 1]) {
+          const points = road.points.map((p, i): Point => {
+            const previous = road.points[Math.max(0, i - 1)],
+              next = road.points[Math.min(road.points.length - 1, i + 1)];
+            const heading = Math.atan2(
+              next[0] - previous[0],
+              next[2] - previous[2],
+            );
+            return [
+              p[0] + Math.cos(heading) * side * 0.15,
+              p[1],
+              p[2] - Math.sin(heading) * side * 0.15,
+            ];
+          });
+          this.root.add(roadMesh(points, 0.1, 0xbfa351, 0.079, roadSample));
+        }
       }
     }
     // OSM footprints/address points determine placement; facades, roofs and materials are approximations.
     (map.buildings || []).forEach((building, index) =>
       this.house(building, index),
     );
-    let seed = 442;
-    const random = () => {
-      seed = (seed * 1664525 + 1013904223) >>> 0;
-      return seed / 4294967296;
-    };
-    const trees: Point[] = [];
-    const count = this.test ? 70 : 2200;
-    for (let i = 0; i < count * 2 && trees.length < count; i++) {
-      const x = b.minX + random() * (b.maxX - b.minX),
-        z = b.minZ + random() * (b.maxZ - b.minZ);
-      if (nearestRoad(map, x, z).distance < 13) continue;
-      trees.push([x, heightAt(map, x, z), z]);
-    }
-    const trunks = new T.InstancedMesh(
-        new T.CylinderGeometry(0.24, 0.36, 4, 5),
-        new T.MeshStandardMaterial({ color: 0x665c46 }),
-        trees.length,
-      ),
-      leaves = new T.InstancedMesh(
-        new T.IcosahedronGeometry(3.5, 0),
-        new T.MeshStandardMaterial({ color: 0x365b3e, roughness: 1 }),
-        trees.length,
-      ),
-      dummy = new T.Object3D();
-    trees.forEach((p, i) => {
-      const s = 0.75 + random() * 0.9;
-      dummy.position.set(p[0], p[1] + 2, p[2]);
-      dummy.scale.set(1, 1, 1);
-      dummy.updateMatrix();
-      trunks.setMatrixAt(i, dummy.matrix);
-      dummy.position.y = p[1] + 5.2 * s;
-      dummy.scale.set(s, 1.3 * s, s);
-      dummy.updateMatrix();
-      leaves.setMatrixAt(i, dummy.matrix);
-      leaves.setColorAt(
-        i,
-        new T.Color().setHSL(
-          0.22 + random() * 0.1,
-          0.28,
-          0.24 + random() * 0.15,
-        ),
-      );
+    this.root.add(
+      buildNeighborhood(this.houses, {
+        heightAt: (x, z) => heightAt(map, x, z),
+        roadClearance: (x, z) => {
+          const near = nearestRoad(map, x, z);
+          return near.distance - (near.road?.width ?? 8) / 2;
+        },
+        materials: this.materials,
+      }),
+    );
+    this.vegetation = new Vegetation(map, heightAt, nearestRoad, {
+      test: this.test,
+      barkMaterial: this.materials.bark,
     });
-    trunks.castShadow = true;
-    leaves.castShadow = true;
-    this.root.add(trunks, leaves);
+    this.root.add(this.vegetation.root);
+    if (!this.test)
+      this.root.add(
+        buildRoadside(map, (x, z) => heightAt(map, x, z), this.materials),
+      );
     const home = textSign(
       this.test ? "HANDLING GROUNDS" : "HOME · BEVERLY DRIVE",
       "#fff4d8",
@@ -576,6 +537,12 @@ export class Environment {
       map.home.position[2],
     );
     this.root.add(home);
+    this.box(
+      [home.position.x, home.position.y - 1.5, home.position.z],
+      [0.07, 3, 0.07],
+      0x7f8581,
+      false,
+    );
     const named = new Set<string>();
     for (const road of map.roads) {
       if (!road.name || named.has(road.name) || !road.points.length) continue;
@@ -591,6 +558,12 @@ export class Environment {
       sign.scale.multiplyScalar(0.75);
       sign.position.set(x, heightAt(map, x, z) + 2.5, z);
       this.root.add(sign);
+      this.box(
+        [x, heightAt(map, x, z) + 1.25, z],
+        [0.06, 2.5, 0.06],
+        0x7f8581,
+        false,
+      );
     }
     // Visible edge fencing plus automatic recovery beyond the cached terrain.
     const fenceMat = 0xb9ae8d;
@@ -658,6 +631,8 @@ export class Environment {
         continue;
       const material = mesh.material,
         key = [
+          material.map?.uuid ?? "",
+          material.normalMap?.uuid ?? "",
           material.color.getHex(),
           material.roughness,
           material.metalness,
@@ -671,7 +646,7 @@ export class Environment {
       if (!batch) {
         batch = {
           geometries: [],
-          material: material.clone(),
+          material,
           cast: mesh.castShadow,
           receive: mesh.receiveShadow,
           obstacle: false,
@@ -682,8 +657,9 @@ export class Environment {
         ? mesh.geometry.toNonIndexed()
         : mesh.geometry.clone();
       for (const name of Object.keys(geometry.attributes))
-        if (name !== "position" && name !== "normal")
+        if (name !== "position" && name !== "normal" && name !== "uv")
           geometry.deleteAttribute(name);
+      if (!geometry.getAttribute("uv")) worldUV(geometry);
       geometry.clearGroups();
       mesh.updateMatrix();
       geometry.applyMatrix4(mesh.matrix);
@@ -707,9 +683,19 @@ export class Environment {
       this.root.add(mesh);
       if (batch.obstacle) this.cameraObstacles.push(mesh);
     }
+    for (const batch of batches.values())
+      disposedMaterials.delete(batch.material);
     for (const material of disposedMaterials) material.dispose();
   }
+  update(time: number, camera: T.Camera) {
+    this.vegetation?.update(time, camera);
+  }
+  setQuality(quality: "low" | "medium" | "high") {
+    this.vegetation?.setQuality(quality);
+  }
   dispose() {
+    this.vegetation?.dispose();
+    this.materials.dispose();
     for (const c of this.colliders) this.world.removeCollider(c, true);
     this.colliders = [];
     const materials = new Set<T.Material>();

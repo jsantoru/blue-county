@@ -1,0 +1,486 @@
+{
+  "runtimeNetworkRequests": false,
+  "schemaVersion": 1,
+  "providerUrl": "https://polyhaven.com",
+  "retrievedAt": "2026-09-20T18:47:39.582415Z",
+  "apiTermsUrl": "https://github.com/Poly-Haven/Public-API/blob/master/ToS.md",
+  "assets": [
+    {
+      "license": "CC0-1.0",
+      "tileMeters": 2,
+      "use": "Ground turf with leaf litter, not exact local vegetation.",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "name": "Leafy Grass",
+      "authors": [
+        "Charlotte Baglioni"
+      ],
+      "maps": {
+        "normal": {
+          "colorSpace": "linear",
+          "bytes": 1466049,
+          "sha256": "832328216adc0a7e1f70a31d5ee48c9ab7f2152d83816122736cf42ac4b2ebd6",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/leafy_grass/leafy_grass_nor_gl_1k.jpg",
+          "sourceMd5": "8279e096e204ea326d57a318869f99df",
+          "url": "/textures/grass-normal.jpg",
+          "file": "grass-normal.jpg"
+        },
+        "albedo": {
+          "colorSpace": "sRGB",
+          "bytes": 1195394,
+          "sha256": "cfa40bc9d9417d1852db8753a8d5917f110c40101179f63543c382e39bc05e4a",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/leafy_grass/leafy_grass_diff_1k.jpg",
+          "sourceMd5": "0dbc071e91d6905edfcfbe8eb785a1ab",
+          "url": "/textures/grass-albedo.jpg",
+          "file": "grass-albedo.jpg"
+        },
+        "roughness": {
+          "colorSpace": "linear",
+          "bytes": 511385,
+          "sha256": "0c2a1d91aacb8e54a496051b59854e51e456fe858abeade778e308359ef16463",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/leafy_grass/leafy_grass_rough_1k.jpg",
+          "sourceMd5": "05f6bb1383e12b327727d313c5899cf2",
+          "url": "/textures/grass-roughness.jpg",
+          "file": "grass-roughness.jpg"
+        }
+      },
+      "sourceUrl": "https://polyhaven.com/a/leafy_grass",
+      "normalConvention": "OpenGL +Y",
+      "resolution": [
+        1024,
+        1024
+      ],
+      "assetId": "leafy_grass",
+      "key": "grass",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "license": "CC0-1.0",
+      "tileMeters": 3,
+      "use": "Weathered roadway and driveway asphalt.",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "name": "Asphalt 02",
+      "authors": [
+        "Rob Tuytel"
+      ],
+      "maps": {
+        "normal": {
+          "colorSpace": "linear",
+          "bytes": 1240122,
+          "sha256": "42a1c381b53204e83a982db2864479a30bc127bbdeebb1006f8ee51bff099df3",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/asphalt_02/asphalt_02_nor_gl_1k.jpg",
+          "sourceMd5": "338da8de636ea36133170578cac82e8e",
+          "url": "/textures/asphalt-normal.jpg",
+          "file": "asphalt-normal.jpg"
+        },
+        "albedo": {
+          "colorSpace": "sRGB",
+          "bytes": 731707,
+          "sha256": "1aa5ce99f58a625c71d48cfc3e68b65ca85ccb00f39e045c0a928608a0ea25ed",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/asphalt_02/asphalt_02_diff_1k.jpg",
+          "sourceMd5": "fa19772d4817754c3efab708c651f5a8",
+          "url": "/textures/asphalt-albedo.jpg",
+          "file": "asphalt-albedo.jpg"
+        },
+        "roughness": {
+          "colorSpace": "linear",
+          "bytes": 544032,
+          "sha256": "70ba3edc65525eb4dc366cf010ca7ae0bd34e0251ff0225c2dad627a873d0712",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/asphalt_02/asphalt_02_rough_1k.jpg",
+          "sourceMd5": "ec80a2929797c1b3ffc121c4f665585a",
+          "url": "/textures/asphalt-roughness.jpg",
+          "file": "asphalt-roughness.jpg"
+        }
+      },
+      "sourceUrl": "https://polyhaven.com/a/asphalt_02",
+      "normalConvention": "OpenGL +Y",
+      "resolution": [
+        1024,
+        1024
+      ],
+      "assetId": "asphalt_02",
+      "key": "asphalt",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "license": "CC0-1.0",
+      "tileMeters": 1,
+      "use": "Tree trunks and branches.",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "name": "Bark Brown 02",
+      "authors": [
+        "Rob Tuytel"
+      ],
+      "maps": {
+        "normal": {
+          "colorSpace": "linear",
+          "bytes": 1015623,
+          "sha256": "0d5e691e8ad8bcd093a3587887fda2a6b4a948b5708a4f256f7919584c6eb857",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/bark_brown_02/bark_brown_02_nor_gl_1k.jpg",
+          "sourceMd5": "1cad3fe0349a44df2d4d1c2859c79920",
+          "url": "/textures/bark-normal.jpg",
+          "file": "bark-normal.jpg"
+        },
+        "albedo": {
+          "colorSpace": "sRGB",
+          "bytes": 659592,
+          "sha256": "920fa0bed0c9d78c1d530e99795113afd532d7db746de440f4a85d7c83ed0f1a",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/bark_brown_02/bark_brown_02_diff_1k.jpg",
+          "sourceMd5": "6669cca520594bdca19f94084984ab72",
+          "url": "/textures/bark-albedo.jpg",
+          "file": "bark-albedo.jpg"
+        },
+        "roughness": {
+          "colorSpace": "linear",
+          "bytes": 337946,
+          "sha256": "68125592de36e15bae7aa6db85c4d135aeb7e5653199ba226483a70f6d69837d",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/bark_brown_02/bark_brown_02_rough_1k.jpg",
+          "sourceMd5": "bbcde696e5b9418cdcb2abe638965417",
+          "url": "/textures/bark-roughness.jpg",
+          "file": "bark-roughness.jpg"
+        }
+      },
+      "sourceUrl": "https://polyhaven.com/a/bark_brown_02",
+      "normalConvention": "OpenGL +Y",
+      "resolution": [
+        1024,
+        1024
+      ],
+      "assetId": "bark_brown_02",
+      "key": "bark",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "license": "CC0-1.0",
+      "tileMeters": 3,
+      "use": "Generic weathered slate roofs, not evidence for any specific house roof.",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "name": "Roof Slates 02",
+      "authors": [
+        "Rob Tuytel"
+      ],
+      "maps": {
+        "normal": {
+          "colorSpace": "linear",
+          "bytes": 763206,
+          "sha256": "32be0c0ba1565856156a315dc98a773d72f1a03415930657b8a8ad62bf60c1bf",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/roof_slates_02/roof_slates_02_nor_gl_1k.jpg",
+          "sourceMd5": "e661093ac3305df7de9159ad07ef5f75",
+          "url": "/textures/roof-normal.jpg",
+          "file": "roof-normal.jpg"
+        },
+        "albedo": {
+          "colorSpace": "sRGB",
+          "bytes": 515626,
+          "sha256": "de3d2729ab385c5f7dd7106d3b435c737f6d2c3ea8883cea37de53cec2a34867",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/roof_slates_02/roof_slates_02_diff_1k.jpg",
+          "sourceMd5": "d7683ac63f6d46159790186f2e19919f",
+          "url": "/textures/roof-albedo.jpg",
+          "file": "roof-albedo.jpg"
+        },
+        "roughness": {
+          "colorSpace": "linear",
+          "bytes": 307076,
+          "sha256": "737f95fdbb09e49670cbce09a78fe75c18bbaed597524db832f0227df0dce2cd",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/roof_slates_02/roof_slates_02_rough_1k.jpg",
+          "sourceMd5": "90922aa9a6fe1bd6b6fc59548e476705",
+          "url": "/textures/roof-roughness.jpg",
+          "file": "roof-roughness.jpg"
+        }
+      },
+      "sourceUrl": "https://polyhaven.com/a/roof_slates_02",
+      "normalConvention": "OpenGL +Y",
+      "resolution": [
+        1024,
+        1024
+      ],
+      "assetId": "roof_slates_02",
+      "key": "roof",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "license": "CC0-1.0",
+      "tileMeters": 1,
+      "use": "Brick foundation walls and chimneys.",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "name": "Red Brick 03",
+      "authors": [
+        "Rob Tuytel"
+      ],
+      "maps": {
+        "normal": {
+          "colorSpace": "linear",
+          "bytes": 955430,
+          "sha256": "9bfd45e24720d851017c1e1678b70219c72239b2ac6b25e11d57d458bdab8503",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/red_brick_03/red_brick_03_nor_gl_1k.jpg",
+          "sourceMd5": "e89ce432d9160edb7c902f901756865f",
+          "url": "/textures/brick-normal.jpg",
+          "file": "brick-normal.jpg"
+        },
+        "albedo": {
+          "colorSpace": "sRGB",
+          "bytes": 694500,
+          "sha256": "9c58254c099b2d211478f50a427fcdde622af24249ff2e94da41fb836f8c857f",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/red_brick_03/red_brick_03_diff_1k.jpg",
+          "sourceMd5": "d157c6d6dd774762b4269927a87fe9b5",
+          "url": "/textures/brick-albedo.jpg",
+          "file": "brick-albedo.jpg"
+        },
+        "roughness": {
+          "colorSpace": "linear",
+          "bytes": 286623,
+          "sha256": "cd865623c1422926848024e877103e9dfe857b2ca8221fce49264b74c9ff48b1",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/red_brick_03/red_brick_03_rough_1k.jpg",
+          "sourceMd5": "8f16439361c5fe27f9df03be279ce8c9",
+          "url": "/textures/brick-roughness.jpg",
+          "file": "brick-roughness.jpg"
+        }
+      },
+      "sourceUrl": "https://polyhaven.com/a/red_brick_03",
+      "normalConvention": "OpenGL +Y",
+      "resolution": [
+        1024,
+        1024
+      ],
+      "assetId": "red_brick_03",
+      "key": "brick",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "license": "CC0-1.0",
+      "tileMeters": 1.8,
+      "use": "Neutral painted planks for siding. Vertex-color palette creates variation.",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "name": "White Planks Clean",
+      "authors": [
+        "Rob Tuytel"
+      ],
+      "maps": {
+        "normal": {
+          "colorSpace": "linear",
+          "bytes": 512902,
+          "sha256": "8d9ceef61dbc4bd567ba1b10691c890caf74cddb9861b576f194533b7089ff7e",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/white_planks_clean/white_planks_clean_nor_gl_1k.jpg",
+          "sourceMd5": "12225d3539c1404b79eb5d21e7d28a89",
+          "url": "/textures/siding-normal.jpg",
+          "file": "siding-normal.jpg"
+        },
+        "albedo": {
+          "colorSpace": "sRGB",
+          "bytes": 473124,
+          "sha256": "1be65e3940b59a4e7eb902f47da5d00ddb2b427b5ef18e7959fd82f17a3afb2c",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/white_planks_clean/white_planks_clean_diff_1k.jpg",
+          "sourceMd5": "50b7addfff3f66b46c0182d23faf2882",
+          "url": "/textures/siding-albedo.jpg",
+          "file": "siding-albedo.jpg"
+        },
+        "roughness": {
+          "colorSpace": "linear",
+          "bytes": 428932,
+          "sha256": "a707c6ffc7cfa8f354e0e62e351009e1ced71a6150738d39eb20faa814ac39f1",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/white_planks_clean/white_planks_clean_rough_1k.jpg",
+          "sourceMd5": "ae63701219ba6fa760868c43f18dd1eb",
+          "url": "/textures/siding-roughness.jpg",
+          "file": "siding-roughness.jpg"
+        }
+      },
+      "sourceUrl": "https://polyhaven.com/a/white_planks_clean",
+      "normalConvention": "OpenGL +Y",
+      "resolution": [
+        1024,
+        1024
+      ],
+      "assetId": "white_planks_clean",
+      "key": "siding",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "license": "CC0-1.0",
+      "tileMeters": 2.08,
+      "use": "Paths, steps and concrete aprons.",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "name": "Concrete Floor",
+      "authors": [
+        "eye-candy.xyz"
+      ],
+      "maps": {
+        "normal": {
+          "colorSpace": "linear",
+          "bytes": 883889,
+          "sha256": "5a403c176361193b785198ab363d3dc3755773ca5b023f19e05874e50caea302",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/concrete_floor/concrete_floor_nor_gl_1k.jpg",
+          "sourceMd5": "d77c5c5de3f58adcb00f93caeb4c5a73",
+          "url": "/textures/concrete-normal.jpg",
+          "file": "concrete-normal.jpg"
+        },
+        "albedo": {
+          "colorSpace": "sRGB",
+          "bytes": 927975,
+          "sha256": "5e06d0fb226f671470f59bf7798954b6965c9ed56dd45084dfd012e15737e444",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/concrete_floor/concrete_floor_diff_1k.jpg",
+          "sourceMd5": "99b94da291a4f038fa6af93c3993cbec",
+          "url": "/textures/concrete-albedo.jpg",
+          "file": "concrete-albedo.jpg"
+        },
+        "roughness": {
+          "colorSpace": "linear",
+          "bytes": 503981,
+          "sha256": "342110e685c07af2c56194662a796b2ab4f2a4d992a9745b8fc55943414faead",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/concrete_floor/concrete_floor_rough_1k.jpg",
+          "sourceMd5": "5d9bd1bfd18e5d32a3217e8275dd8271",
+          "url": "/textures/concrete-roughness.jpg",
+          "file": "concrete-roughness.jpg"
+        }
+      },
+      "sourceUrl": "https://polyhaven.com/a/concrete_floor",
+      "normalConvention": "OpenGL +Y",
+      "resolution": [
+        1024,
+        1024
+      ],
+      "assetId": "concrete_floor",
+      "key": "concrete",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "license": "CC0-1.0",
+      "tileMeters": 2.25,
+      "use": "Road shoulders and gravel driveways.",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "name": "Gravel Floor",
+      "authors": [
+        "Jenelle van Heerden",
+        "Matterfield"
+      ],
+      "maps": {
+        "normal": {
+          "colorSpace": "linear",
+          "bytes": 1538430,
+          "sha256": "a3544e4aa7612a0bf0ea4890093b60c9f360234855d389bb9d408d29b90a7131",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/gravel_floor/gravel_floor_nor_gl_1k.jpg",
+          "sourceMd5": "2377939c71250cf32f8b842bc4f3fe82",
+          "url": "/textures/gravel-normal.jpg",
+          "file": "gravel-normal.jpg"
+        },
+        "albedo": {
+          "colorSpace": "sRGB",
+          "bytes": 1327302,
+          "sha256": "4e6ff82988506676cfd8a79ac3e2964af239764c0064d4566040167704c4838d",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/gravel_floor/gravel_floor_diff_1k.jpg",
+          "sourceMd5": "4f055e1545dcf41f347600fbb01d9ac2",
+          "url": "/textures/gravel-albedo.jpg",
+          "file": "gravel-albedo.jpg"
+        },
+        "roughness": {
+          "colorSpace": "linear",
+          "bytes": 697340,
+          "sha256": "acf3c8607bcf943ac9f9871e4f57961ce46ea0635232d78af68eebbbf5f62b4b",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/gravel_floor/gravel_floor_rough_1k.jpg",
+          "sourceMd5": "06a97bcb5cfaaa17456282237f9446eb",
+          "url": "/textures/gravel-roughness.jpg",
+          "file": "gravel-roughness.jpg"
+        }
+      },
+      "sourceUrl": "https://polyhaven.com/a/gravel_floor",
+      "normalConvention": "OpenGL +Y",
+      "resolution": [
+        1024,
+        1024
+      ],
+      "assetId": "gravel_floor",
+      "key": "gravel",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    {
+      "key": "lawn",
+      "assetId": "Grass004",
+      "name": "Grass 004",
+      "provider": "ambientCG",
+      "sourceUrl": "https://ambientcg.com/view?id=Grass004",
+      "authors": [
+        "ambientCG / Lennart Demes"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "providerLicenseUrl": "https://docs.ambientcg.com/license/",
+      "tileMeters": 1.4,
+      "resolution": [
+        1024,
+        1024
+      ],
+      "normalConvention": "OpenGL +Y",
+      "use": "Generic dense green short lawn turf; no claim about individual Warwick properties.",
+      "maps": {
+        "albedo": {
+          "file": "lawn-albedo.jpg",
+          "url": "/textures/lawn-albedo.jpg",
+          "sourceUrl": "https://ambientcg.com/get?file=Grass004_1K-JPG.zip",
+          "sourceArchiveEntry": "Grass004_1K-JPG_Color.jpg",
+          "sourceArchiveBytes": 11003149,
+          "sourceArchiveSha256": "4b63495f459db8481f4d5144e4e9069345c81cf898cc71f2216f5dd3bb344469",
+          "bytes": 1985561,
+          "sha256": "9e1c60da44b34a9738b1256ba827541f097dc583521b1d281e61b5f4b4217bc5",
+          "colorSpace": "sRGB"
+        },
+        "normal": {
+          "file": "lawn-normal.jpg",
+          "url": "/textures/lawn-normal.jpg",
+          "sourceUrl": "https://ambientcg.com/get?file=Grass004_1K-JPG.zip",
+          "sourceArchiveEntry": "Grass004_1K-JPG_NormalGL.jpg",
+          "sourceArchiveBytes": 11003149,
+          "sourceArchiveSha256": "4b63495f459db8481f4d5144e4e9069345c81cf898cc71f2216f5dd3bb344469",
+          "bytes": 2339612,
+          "sha256": "8014a81d896a5c589b60612a769bc39eb1213e48d96f6146f485ea36e9e9610f",
+          "colorSpace": "linear"
+        },
+        "roughness": {
+          "file": "lawn-roughness.jpg",
+          "url": "/textures/lawn-roughness.jpg",
+          "sourceUrl": "https://ambientcg.com/get?file=Grass004_1K-JPG.zip",
+          "sourceArchiveEntry": "Grass004_1K-JPG_Roughness.jpg",
+          "sourceArchiveBytes": 11003149,
+          "sourceArchiveSha256": "4b63495f459db8481f4d5144e4e9069345c81cf898cc71f2216f5dd3bb344469",
+          "bytes": 851664,
+          "sha256": "706580983860f942e141acdd68c4128dd683be50fcc5d85b7c67a9a3a8c7bac0",
+          "colorSpace": "linear"
+        }
+      }
+    }
+  ],
+  "provider": "Poly Haven",
+  "attribution": "Textures from Poly Haven and named artists, licensed CC0 1.0. Powered by Poly Haven asset API during preparation; gameplay is offline. Lawn turf from ambientCG (Grass004), licensed CC0 1.0.",
+  "environment": {
+    "colorSpace": "linear HDR",
+    "url": "/textures/greenwich-park-1k.hdr",
+    "key": "outdoor",
+    "projection": "equirectangular",
+    "file": "greenwich-park-1k.hdr",
+    "use": "Lighting and reflections only. Captured in London, not Warwick; not neighborhood geography.",
+    "resolution": [
+      1024,
+      512
+    ],
+    "sha256": "cdca265aa9025ea0aa5fd3c6d42219f31015aca75d1a2b432c63801a9540e132",
+    "sourceUrl": "https://polyhaven.com/a/greenwich_park",
+    "sourceMd5": "b8f8aec2103d2787bc73f4c4c25f92c7",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sourceFileUrl": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/greenwich_park_1k.hdr",
+    "name": "Greenwich Park",
+    "license": "CC0-1.0",
+    "bytes": 1762788,
+    "providerLicenseUrl": "https://polyhaven.com/license",
+    "authors": [
+      "Andreas Mischok"
+    ],
+    "assetId": "greenwich_park"
+  },
+  "providers": [
+    {
+      "name": "Poly Haven",
+      "url": "https://polyhaven.com"
+    },
+    {
+      "name": "ambientCG",
+      "url": "https://ambientcg.com"
+    }
+  ]
+}

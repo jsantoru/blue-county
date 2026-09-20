@@ -12,7 +12,7 @@ import type { MapData } from "../src/types";
 
 afterEach(() => vi.unstubAllGlobals());
 
-describe("terrain/road alignment and static rendering budget", () => {
+describe("terrain/road alignment, top-level batching, and resource disposal", () => {
   it("matches the rendered triangle diagonal rather than a bilinear saddle", () => {
     const map = {
       terrain: {
@@ -56,7 +56,7 @@ describe("terrain/road alignment and static rendering budget", () => {
     (road.material as THREE.Material).dispose();
   });
 
-  it("keeps the complete Warwick environment below 100 base draw batches and aligns the southern connector collider", async () => {
+  it("keeps top-level road/sign meshes below 100 batches, aligns the connector collider, and disposes vegetation instances", async () => {
     await RAPIER.init();
     vi.stubGlobal("document", {
       createElement: () => ({
@@ -77,6 +77,20 @@ describe("terrain/road alignment and static rendering budget", () => {
       (child) => child instanceof THREE.Mesh || child instanceof THREE.Sprite,
     ).length;
     expect(batches).toBeLessThan(100);
+    // Nested architecture/vegetation draws are covered by browser camera/quality QA.
+    // Every instance owns GPU matrix/color buffers even when its geometry is shared.
+    const instanceDisposals = new Map<string, number>();
+    environment.root.traverse((object) => {
+      if (!(object instanceof THREE.InstancedMesh)) return;
+      instanceDisposals.set(object.uuid, 0);
+      object.addEventListener("dispose", () => {
+        instanceDisposals.set(
+          object.uuid,
+          instanceDisposals.get(object.uuid)! + 1,
+        );
+      });
+    });
+    expect(instanceDisposals.size).toBeGreaterThan(0);
     world.step();
     const points = [
       [1118, 327],
@@ -97,9 +111,12 @@ describe("terrain/road alignment and static rendering budget", () => {
       expect(Math.abs(surfaceHeight - ground - 0.065)).toBeLessThan(0.002);
     }
     console.log(
-      `Warwick environment: ${batches} base rendering batches; ${environment.colliders.length} static colliders.`,
+      `Warwick environment: ${batches} top-level road/sign batches; ${environment.colliders.length} static colliders.`,
     );
     environment.dispose();
     world.free();
+    expect([...instanceDisposals.values()].every((count) => count === 1)).toBe(
+      true,
+    );
   }, 20_000);
 });

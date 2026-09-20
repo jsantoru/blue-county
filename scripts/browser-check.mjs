@@ -36,14 +36,16 @@ try {
   });
   const state = () => page.evaluate(() => window.__game.getState());
   const press = async (index) => {
-    await page.evaluate((i) => {
+    await page.evaluate(async (i) => {
+      const frames = async () => {
+        for (let n = 0; n < 3; n++) await new Promise(requestAnimationFrame);
+      };
       window.__syntheticPad.buttons[i] = { value: 1, pressed: true };
-    }, index);
-    await page.waitForTimeout(90);
-    await page.evaluate((i) => {
+      // Guarantee the game samples both edges even during a slow render/startup frame.
+      await frames();
       window.__syntheticPad.buttons[i] = { value: 0, pressed: false };
+      await frames();
     }, index);
-    await page.waitForTimeout(100);
   };
   const analog = async (values) => {
     await page.evaluate((values) => {
@@ -147,11 +149,14 @@ try {
   const home = await state();
   assert.equal(home.race, false);
   assert.equal(home.screen, null);
-  const homeAnchor = await page.evaluate(async () =>
-    (await (await fetch('/map/warwick.json')).json()).home.position,
+  const homeAnchor = await page.evaluate(
+    async () => (await (await fetch("/map/warwick.json")).json()).home.position,
   );
   assert.ok(
-    Math.hypot(home.position[0] - homeAnchor[0], home.position[2] - homeAnchor[2]) < 2,
+    Math.hypot(
+      home.position[0] - homeAnchor[0],
+      home.position[2] - homeAnchor[2],
+    ) < 2,
   );
   await page.evaluate(() =>
     window.__game.input.updateSettings({ deadzone: 0.12 }),

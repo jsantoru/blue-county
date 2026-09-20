@@ -1,7 +1,9 @@
 import "./style.css";
 import * as T from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { Atmosphere } from "./atmosphere";
+import { Presentation } from "./presentation";
+import { createTrafficVisual } from "./traffic-visual";
 import RAPIER from "@dimforge/rapier3d-compat";
 import {
   InputManager,
@@ -101,6 +103,7 @@ let benchmarkDriver: Driver | null = null;
 const camPos = new T.Vector3(),
   camTarget = new T.Vector3();
 let cameraInitialized = false;
+let inspectionView: { position: T.Vector3; target: T.Vector3 } | null = null;
 const renderer = new T.WebGLRenderer({
   canvas: $<HTMLCanvasElement>("game"),
   antialias: true,
@@ -110,16 +113,15 @@ renderer.setPixelRatio(1);
 renderer.setSize(innerWidth, innerHeight);
 renderer.outputColorSpace = T.SRGBColorSpace;
 renderer.toneMapping = T.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 0.9;
+renderer.toneMappingExposure = 1.05;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = T.PCFShadowMap;
 const scene = new T.Scene();
-scene.background = new T.Color(0xa7c4ce);
-scene.fog = new T.Fog(0xa7c4ce, 150, 850);
+scene.fog = new T.Fog(0xbdc9c6, 220, 1250);
 const camera = new T.PerspectiveCamera(62, innerWidth / innerHeight, 0.2, 2200);
-const hemi = new T.HemisphereLight(0xe6f3f5, 0x63734c, 2.3);
+const hemi = new T.HemisphereLight(0xc9e0ef, 0x5b6551, 0.7);
 scene.add(hemi);
-const sun = new T.DirectionalLight(0xffe1aa, 3.1);
+const sun = new T.DirectionalLight(0xffe5bd, 2.65);
 sun.position.set(100, 140, -80);
 sun.castShadow = true;
 sun.shadow.mapSize.set(2048, 2048);
@@ -130,11 +132,11 @@ sun.shadow.camera.bottom = -65;
 sun.shadow.camera.near = 1;
 sun.shadow.camera.far = 350;
 sun.shadow.bias = -0.0003;
-sun.shadow.normalBias = 0.035;
+sun.shadow.normalBias = 0.028;
+sun.shadow.radius = 2;
 scene.add(sun, sun.target);
-const pmrem = new T.PMREMGenerator(renderer);
-scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-pmrem.dispose();
+const atmosphere = new Atmosphere(scene, renderer);
+const presentation = new Presentation(renderer, camera);
 scene.add(effects.root);
 const routeMarkers = new T.Group();
 scene.add(routeMarkers);
@@ -171,54 +173,30 @@ function resume() {
 function setQuality() {
   if (quality === input.settings.quality) return;
   quality = input.settings.quality;
+  environment?.setQuality(input.settings.quality);
+  presentation.setQuality(input.settings.quality);
   renderer.setPixelRatio(quality === "low" ? 0.75 : 1);
+  const shadowsChanged = renderer.shadowMap.enabled !== (quality !== "low");
   renderer.shadowMap.enabled = quality !== "low";
+  if (shadowsChanged) {
+    // Three's shader cache does not invalidate when only shadowMap.enabled changes.
+    // A stale PCF sampler otherwise reads an ordinary fallback texture on Low.
+    const materials = new Set<T.Material>();
+    scene.traverse((object) => {
+      if (object instanceof T.Mesh || object instanceof T.Sprite)
+        for (const material of Array.isArray(object.material)
+          ? object.material
+          : [object.material])
+          materials.add(material);
+    });
+    for (const material of materials) material.needsUpdate = true;
+  }
   sun.shadow.mapSize.set(
     quality === "high" ? 2048 : 1024,
     quality === "high" ? 2048 : 1024,
   );
   sun.shadow.map?.dispose();
   sun.shadow.map = null;
-}
-function createProxy(color: number) {
-  const g = new T.Group();
-  const body = new T.Mesh(
-    new T.BoxGeometry(1.95, 0.65, 4.6),
-    new T.MeshStandardMaterial({ color, metalness: 0.35, roughness: 0.4 }),
-  );
-  body.position.y = 0.63;
-  const cab = new T.Mesh(
-    new T.BoxGeometry(1.7, 0.55, 2.15),
-    new T.MeshStandardMaterial({
-      color: 0x4d6971,
-      metalness: 0.5,
-      roughness: 0.15,
-    }),
-  );
-  cab.position.set(0, 1.2, -0.15);
-  g.add(body, cab);
-  for (const x of [-0.9, 0.9])
-    for (const z of [-1.4, 1.4]) {
-      const wheel = new T.Mesh(
-        new T.CylinderGeometry(0.35, 0.35, 0.23, 12),
-        new T.MeshStandardMaterial({ color: 0x1b2020 }),
-      );
-      wheel.rotation.z = Math.PI / 2;
-      wheel.position.set(x, 0.35, z);
-      g.add(wheel);
-    }
-  for (const x of [-0.68, 0.68]) {
-    const lamp = new T.Mesh(
-      new T.BoxGeometry(0.38, 0.16, 0.04),
-      new T.MeshBasicMaterial({ color: 0xffe7aa }),
-    );
-    lamp.position.set(x, 0.69, 2.31);
-    g.add(lamp);
-  }
-  g.traverse((o) => {
-    if (o instanceof T.Mesh) o.castShadow = true;
-  });
-  return g;
 }
 function buildScene(test: boolean) {
   if (environment) {
@@ -228,7 +206,10 @@ function buildScene(test: boolean) {
   if (world) {
     for (const v of vehicles) world.removeRigidBody(v.body);
   }
-  for (const v of visuals) scene.remove(v);
+  for (const v of visuals) {
+    v.userData.dispose?.();
+    scene.remove(v);
+  }
   vehicles = [];
   drivers = [];
   visuals = [];
@@ -236,6 +217,7 @@ function buildScene(test: boolean) {
   mode = test ? "test" : "neighborhood";
   map = test ? makeTestMap() : neighborhood;
   environment = new Environment(map, world, test);
+  environment.setQuality(input.settings.quality);
   scene.add(environment.root);
   const home = map.home;
   player = new Vehicle(
@@ -268,11 +250,13 @@ function buildScene(test: boolean) {
       driver.speed = i > 3 ? 12 + (i % 3) : 22 + i * 1.3;
       drivers.push(driver);
       const g = new T.Group(),
-        m = createProxy(
+        m = createTrafficVisual(
           [0, 0xc26442, 0x789fa1, 0xe0c68a, 0xc3c6b7, 0x384e69, 0x9f907c][i],
+          i - 1,
         );
       m.position.y = -0.78;
       g.add(m);
+      g.userData.dispose = m.userData.dispose;
       scene.add(g);
       visuals.push(g);
     }
@@ -817,6 +801,17 @@ function renderVehicles(alpha: number) {
   });
 }
 function updateCamera(dt: number) {
+  if (inspectionView) {
+    camera.position.copy(inspectionView.position);
+    camera.lookAt(inspectionView.target);
+    camera.fov = 52;
+    camera.updateProjectionMatrix();
+    sun.position
+      .copy(inspectionView.target)
+      .addScaledVector(atmosphere.sunDirection, 180);
+    sun.target.position.copy(inspectionView.target);
+    return;
+  }
   const p = visuals[0].position,
     q = visuals[0].quaternion;
   const forward = new T.Vector3(0, 0, 1).applyQuaternion(q);
@@ -888,7 +883,7 @@ function updateCamera(dt: number) {
       camera.fov) *
     Math.min(1, dt * 4);
   camera.updateProjectionMatrix();
-  sun.position.copy(p).add(new T.Vector3(80, 120, -70));
+  sun.position.copy(p).addScaledVector(atmosphere.sunDirection, 180);
   sun.target.position.copy(p);
 }
 function drawMinimap() {
@@ -979,8 +974,10 @@ function animate(now: number) {
   } else clock.reset();
   renderVehicles(alpha);
   updateCamera(dt);
+  environment.update(now / 1000, camera);
+  atmosphere.update(now / 1000, camera);
   sound.update(player, frame.throttle, screen !== null);
-  renderer.render(scene, camera);
+  presentation.render(scene);
   if (now - lastHud > 100) {
     hud();
     updateDiagnostics();
@@ -992,6 +989,7 @@ window.addEventListener("resize", () => {
   camera.aspect = innerWidth / innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(innerWidth, innerHeight);
+  presentation.resize(innerWidth, innerHeight);
 });
 window.addEventListener("keydown", (event) => {
   if (event.code === "F3") {
@@ -1025,12 +1023,26 @@ async function init() {
     }
   });
   modelLoaded = true;
+  await atmosphere.loadReflections(
+    scene,
+    renderer,
+    "/textures/greenwich-park-1k.hdr",
+  );
   if (localStorage.getItem("blue-county-handling") === "planted") {
     handling.grip = 1.9;
     handling.steerLow = 0.46;
   }
   buildScene(false);
   setQuality();
+  await environment.materials.ready;
+  renderVehicles(1);
+  updateCamera(1 / 60);
+  environment.update(0, camera);
+  atmosphere.update(0, camera);
+  await renderer.compileAsync(scene, camera);
+  // Warm shadow programs, multisampling, and texture uploads under the loading screen.
+  presentation.render(scene);
+  await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
   ready = true;
   $("loading").remove();
   renderMenu();
@@ -1072,6 +1084,7 @@ if (new URLSearchParams(location.search).has("test")) {
         command: testDriver.input(0),
       },
       metrics: {
+        quality,
         frames: frameCount,
         p50: percentile(0.5),
         p95: percentile(0.95),
@@ -1080,12 +1093,30 @@ if (new URLSearchParams(location.search).has("test")) {
         height: renderer.domElement.height,
         draws: renderer.info.render.calls,
         triangles: renderer.info.render.triangles,
+        vegetation: environment?.vegetation?.stats,
+        scenery: environment?.root.children
+          .map((o) => o.userData.neighborhoodStats || o.userData.statistics)
+          .filter(Boolean),
       },
       renderer: renderer
         .getContext()
         .getParameter(renderer.getContext().RENDERER),
     }),
     startFree,
+    inspectView: (position: Point, target: Point) => {
+      inspectionView = {
+        position: new T.Vector3(...position),
+        target: new T.Vector3(...target),
+      };
+    },
+    clearInspectionView: () => {
+      inspectionView = null;
+      cameraInitialized = false;
+    },
+    quality: (value: "low" | "medium" | "high") => {
+      input.updateSettings({ quality: value });
+      setQuality();
+    },
     startRace,
     startTest,
     resume,

@@ -2,6 +2,8 @@
 
 A locally playable arcade driving slice starring your actual dark blue 1968 Oldsmobile 442 convertible with the wheel and controls on the US driver's left. Free Drive starts on Beverly Drive, roughly 24m from the verified house address point. No exact driveway connection was available, so Home is a right-hand roadside spawn facing the eastern West Ridge Road exit.
 
+![Beverly Drive in the updated game](docs/neighborhood-home.png)
+
 ## Launch on Windows
 
 Double-click **Launch Blue County.cmd**, then choose **Drive from Home**. The launcher serves the built game at **http://127.0.0.1:5180/** and opens your default browser. Use Chrome or Edge. Node.js 22+ is required; dependencies and the production build are already present in this workspace.
@@ -32,14 +34,16 @@ Start with **Balanced** handling, 0.12 stick deadzone, 1.35 response curve, and 
 - Real route: Old Ridge Road → High Hill Avenue → Claire Ann Drive → Seward Highway → existing mapped connector → Old Ridge Road. Beverly Drive retains both real connections to West Ridge Road.
 - Separate handling grounds: straight, slalom, constant-radius loop, ramp and collision barriers.
 - Dynamic Rapier chassis, four spring/damper wheel rays, contact-limited tire forces, speed-sensitive steering, brake/handbrake drift, boost, CCD, collision feedback, recent-contact takedown credit, and temporary vehicle-to-vehicle protection after recovery.
-- Detailed actual 442 with closed hood, parchment interior, redlines, chrome, separate steering/spinning wheels, and the modeled engine retained under the hood. Rivals and traffic use deliberately simple original car models.
+- Detailed actual 442 with closed hood, parchment interior, redlines, chrome, separate steering/spinning wheels, and the modeled engine retained under the hood. Rivals and traffic use original sedan, wagon and pickup models with shaped bodywork, glazing, lamps, grilles, trim and detailed wheels.
 - Stable horizon chase/close cameras, minimap, synthesized engine/shift/tire/wind/boost/impact audio, pooled skid marks, smoke and sparks. Graphics, camera motion, input and rumble settings.
+- Scanned PBR road, lawn, bark, roof, brick, siding and gravel surfaces; 18,731 procedural trees with branching trunks, leaf/needle sprays, wind and distant detail levels; grass and shrubs; 432 detailed generic houses; poles, wires, mailboxes, porches and fences. Afternoon sky/clouds, outdoor HDR reflections, and contact shading on High. See `docs/visual-upgrade.md` for the rendering design, licenses and limits.
 
 ## Rebuild the data and car
 
 ```powershell
 npm run map            # offline, Python 3 stdlib; uses cached sources
 npm run export-car     # Blender background export from the saved snapshot
+python scripts/fetch-textures.py --verify-only  # local checksums/dimensions
 ```
 
 Optional geographic refresh: `python scripts/map-fetch.py` (requires Pillow). Refresh uses open OSM and USGS endpoints, preserves cached provenance, and rejects a mismatched house anchor. See `docs/geography.md`. Source data and the ODbL notice are in `public/map/source` and `public/map/LICENSE.txt`; the map manifest records bounds, origin, meter convention, road graph, Home, checkpoints, sources, dates and adjustments.
@@ -54,6 +58,7 @@ npm run build           # TypeScript + production bundle
 # With the production server running on 5180:
 $env:GAME_URL='http://127.0.0.1:5180'
 npm run test:browser     # system Edge; synthetic pad, actual game/race physics
+npm run test:visual      # real rendered scenery, quality presets, independent RAF metrics
 ```
 
 Tests compare acceleration, proportional throttle, braking, turning and boosted wall collision at simulated 30/60/120 fps rendering with fixed 60Hz physics. Tolerances are 0.15m position and 0.2m/s speed, not a cross-machine determinism promise. Ordered gates reject reverse travel, out-of-order crossings, teleport progress and duplicate rewards. Full mapped-route physics tests complete all 777 crossings over three laps, including all four racers with traffic and no racer recoveries. See `docs/verification.md`, the JSON reports and browser screenshots for measured environment and results.
@@ -66,4 +71,4 @@ Civilian cars follow the verified race loop in its right-hand lane; they do not 
 
 **Physical wired-controller feel, end-to-end latency and felt rumble were not verified.** The automated pad tests inject API snapshots and are labeled accordingly. Use the short hardware checklist in `docs/controller.md`: menus/sliders, partial triggers, drift/recovery, boosted bend, scrape/hard impact, unplug/reconnect, tab away/back, rumble off/on, and controller-only race restart.
 
-Map data © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), [ODbL 1.0](https://opendatacommons.org/licenses/odbl/1-0/). Elevation: [USGS 3DEP](https://www.usgs.gov/3d-elevation-program), public domain. Game UI, generated audio and scenery implementation are original. No Burnout names, artwork, sounds or code are included.
+Map data © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), [ODbL 1.0](https://opendatacommons.org/licenses/odbl/1-0/). Elevation: [USGS 3DEP](https://www.usgs.gov/3d-elevation-program), public domain. Scanned materials and outdoor HDRI are CC0 from [Poly Haven](https://polyhaven.com/license) and [ambientCG](https://docs.ambientcg.com/license/); exact authors, source URLs, scales and checksums are in `public/textures/manifest.json`. Game UI, generated audio, leaf masks and scenery implementation are original. No Burnout names, artwork, sounds or code are included.
