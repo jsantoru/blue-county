@@ -1,0 +1,23 @@
+{
+  "href": "http://orthos.its.ny.gov/arcgis/rest/directories/arcgisoutput/wms/2025_MapServer/_ags_map955759e2f95846fcaaeb1fd28e52d36d.jpg",
+  "width": 1100,
+  "height": 2078,
+  "extent": {
+    "xmin": -8278505.043921893,
+    "ymin": 5054171.262762803,
+    "xmax": -8278325.392025508,
+    "ymax": 5054510.641527065,
+    "spatialReference": {
+      "wkid": 102100,
+      "latestWkid": 3857
+    }
+  },
+  "scale": 617.270850388031,
+  "localBounds": {
+    "minX": -70,
+    "maxX": 65,
+    "minZ": -155,
+    "maxZ": 100
+  },
+  "source": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer/export?f=json&bbox=-8278505.043921893%2C5054171.280267107%2C-8278325.392025508%2C5054510.624022761&bboxSR=3857&imageSR=3857&size=1100%2C2078&format=jpg&transparent=false&dpi=96"
+}

@@ -1,6 +1,40 @@
 import * as T from "three";
 import type { Point } from "./types";
 
+/**
+ * Observed facade overrides; this module never assigns observations to an address.
+ * Faces are local 0=+Z, 1=+X, 2=-Z, 3=-X before `heading` rotates the house.
+ * The roof ridge is local Z; gable ends are faces 0/2, eaves are faces 1/3.
+ * Heights are meters. `stories` counts full living stories (a cape's roof half-story
+ * is represented by `dormers`), and a raised-ranch's exposed lower level is separate.
+ * Undefined features retain generic/style defaults; explicit false/zero disables.
+ */
+export interface NeighborhoodReference {
+  wallColor?: number;
+  trimColor?: number;
+  shutterColor?: number;
+  doorColor?: number;
+  roofColor?: number;
+  roofType?: "gable" | "hip";
+  roofRise?: number;
+  stories?: number;
+  style?: "ranch" | "raised-ranch" | "colonial" | "cape";
+  frontFace?: 0 | 1 | 2 | 3;
+  garageFace?: 0 | 1 | 2 | 3;
+  garageDoors?: number;
+  porch?: boolean;
+  dormers?: boolean;
+  chimney?: boolean;
+  /** Small entry portico, or a taller projection across the entry/right facade. */
+  frontGable?: "small" | "large";
+  /** Irregular gray stone on the lower front facade and the central entry bay. */
+  stoneLower?: boolean;
+  /** Viewer-facing left/right on frontFace, independent of house heading. */
+  bayWindow?: "left" | "right";
+  /** Omit generated lawn patches, paths, shrubs, fences, mailboxes and yard utilities. */
+  suppressGenericYard?: boolean;
+}
+
 /** Root-approved oriented envelope. Placement and road-clearance colliders remain in roads.ts. */
 export interface NeighborhoodHouse {
   id: string | number;
@@ -16,6 +50,7 @@ export interface NeighborhoodHouse {
   roadWidth: number;
   kind?: string;
   approximate?: boolean;
+  reference?: NeighborhoodReference;
 }
 
 export type NeighborhoodMaterialKey =
@@ -23,6 +58,7 @@ export type NeighborhoodMaterialKey =
   | "brick"
   | "roof"
   | "concrete"
+  | "referenceConcrete"
   | "wood"
   | "grass"
   | "gravel"
@@ -99,6 +135,10 @@ class SurfaceBatch {
     ny /= length;
     nz /= length;
     const rgb = color(tint);
+    const neutral =
+      this.material === "referenceConcrete"
+        ? rgb.r * 0.2126 + rgb.g * 0.7152 + rgb.b * 0.0722
+        : undefined;
     for (const [p, uv] of [
       [a, ua],
       [b, ub],
@@ -107,7 +147,7 @@ class SurfaceBatch {
       this.positions.push(...p);
       this.normals.push(nx, ny, nz);
       this.uvs.push(...uv);
-      this.colors.push(rgb.r, rgb.g, rgb.b);
+      this.colors.push(neutral ?? rgb.r, neutral ?? rgb.g, neutral ?? rgb.b);
     }
   }
   quad(
@@ -239,6 +279,7 @@ export function buildNeighborhood(
   const shrubUVs = shrubTemplate.getAttribute("uv");
   let builtHouses = 0;
   let detailFeatures = 0;
+  const referenceFacades: Record<string, unknown>[] = [];
 
   const getBatch = (
     key: NeighborhoodMaterialKey,
@@ -393,6 +434,12 @@ export function buildNeighborhood(
       continue;
     builtHouses++;
     const random = seeded(house.id);
+    const reference = house.reference;
+    const concreteKey: NeighborhoodMaterialKey = reference
+      ? "referenceConcrete"
+      : "concrete";
+    const raisedRanch = reference?.style === "raised-ranch";
+    const genericYard = !reference?.suppressGenericYard;
     const co = Math.cos(house.heading),
       si = Math.sin(house.heading);
     const point = (x: number, y: number, z: number): V => [
@@ -419,22 +466,38 @@ export function buildNeighborhood(
         house.kind || "",
       ) || house.width * house.depth < 34;
     const large = house.width > 26 || house.depth > 32;
-    const wallMaterial: NeighborhoodMaterialKey =
+    const genericWallMaterial: NeighborhoodMaterialKey =
       large || random() < 0.18 ? "brick" : "siding";
+    // An explicit siding paint color must not inherit a random brick facade.
+    const wallMaterial: NeighborhoodMaterialKey =
+      reference?.wallColor !== undefined || reference?.style
+        ? "siding"
+        : genericWallMaterial;
     const wallTint =
-      wallMaterial === "brick"
+      reference?.wallColor ??
+      (wallMaterial === "brick"
         ? tinted(0xf0e9dd, 0.91 + random() * 0.09)
-        : HOUSE_COLORS[Math.floor(random() * HOUSE_COLORS.length)];
-    const trimTint = [0xe3e1d5, 0xd8d5c8, 0xe5e5dc][Math.floor(random() * 3)];
+        : HOUSE_COLORS[Math.floor(random() * HOUSE_COLORS.length)]);
+    const trimTint =
+      reference?.trimColor ??
+      [0xe3e1d5, 0xd8d5c8, 0xe5e5dc][Math.floor(random() * 3)];
     const shutterTint =
+      reference?.shutterColor ??
       SHUTTER_COLORS[Math.floor(random() * SHUTTER_COLORS.length)];
-    const roofTint = [0xbcbeb9, 0xc6bfaf, 0xa8b0b1, 0xbdb6ab][
-      Math.floor(random() * 4)
-    ];
-    const doorTint = DOOR_COLORS[Math.floor(random() * DOOR_COLORS.length)];
+    const roofTint =
+      reference?.roofColor ??
+      [0xbcbeb9, 0xc6bfaf, 0xa8b0b1, 0xbdb6ab][Math.floor(random() * 4)];
+    const doorTint =
+      reference?.doorColor ??
+      DOOR_COLORS[Math.floor(random() * DOOR_COLORS.length)];
     // The source-approved footprint and wall top do not move. Concrete foundations
     // absorb terrain grade under a level floor rather than leaving floating walls.
-    const foundationTop = house.base + 0.3;
+    const foundationTop = raisedRanch
+      ? house.base + clamp(house.wallHeight - 2.65, 0.75, 1.85)
+      : house.base + 0.3;
+    const entryBase = raisedRanch
+      ? house.base + Math.min(0.65, (foundationTop - house.base) * 0.4)
+      : house.base;
     localBox(
       0,
       (house.low + foundationTop) / 2,
@@ -442,7 +505,7 @@ export function buildNeighborhood(
       house.width + 0.05,
       foundationTop - house.low,
       house.depth + 0.05,
-      "concrete",
+      concreteKey,
       0xb8b6a9,
     );
     localBox(
@@ -509,11 +572,24 @@ export function buildNeighborhood(
 
     const w = halfW + 0.42,
       d = halfD + 0.42;
-    const rise = Math.min(
+    const genericRise = Math.min(
       large ? 1.8 : utility ? 1.9 : 3.1,
       Math.max(1.05, house.width * (utility ? 0.17 : 0.245)),
     );
-    const hip = !utility && (large || random() < 0.29);
+    const rise =
+      reference?.roofRise !== undefined && Number.isFinite(reference.roofRise)
+        ? Math.max(0.05, reference.roofRise)
+        : reference?.style === "ranch" || raisedRanch
+          ? Math.min(2.1, Math.max(0.85, house.width * 0.14))
+          : reference?.style === "cape"
+            ? Math.min(4, Math.max(1.9, house.width * 0.32))
+            : genericRise;
+    const hip =
+      reference?.roofType !== undefined
+        ? reference.roofType === "hip"
+        : reference?.style
+          ? false
+          : !utility && (large || random() < 0.29);
     const ridgeEnd = hip ? Math.max(0.2, d - w * 0.8) : d;
     const slope = Math.hypot(w, rise);
     const roofBatch = getBatch("roof", house.x, house.z);
@@ -645,7 +721,9 @@ export function buildNeighborhood(
         false,
       );
     }
-    if (!utility && !large && random() < 0.72) {
+    const hasChimney =
+      reference?.chimney ?? (!utility && !large && random() < 0.72);
+    if (hasChimney) {
       const chimneyX = halfW * 0.43,
         chimneyZ = -halfD * 0.24;
       const top = roofBase + rise + 0.55;
@@ -666,7 +744,7 @@ export function buildNeighborhood(
         0.89,
         0.18,
         0.86,
-        "concrete",
+        concreteKey,
         0xb9b6a9,
       );
       localBox(
@@ -687,13 +765,14 @@ export function buildNeighborhood(
     const roadLX = roadDX * co - roadDZ * si,
       roadLZ = roadDX * si + roadDZ * co;
     const front: Face =
-      Math.abs(roadLX) / halfW > Math.abs(roadLZ) / halfD
+      reference?.frontFace ??
+      (Math.abs(roadLX) / halfW > Math.abs(roadLZ) / halfD
         ? roadLX >= 0
           ? 1
           : 3
         : roadLZ >= 0
           ? 0
-          : 2;
+          : 2);
     const faceWidth = (face: Face) =>
       face % 2 === 0 ? house.width : house.depth;
     const facePoint = (face: Face, u: number, y: number, out: number): V => {
@@ -740,14 +819,150 @@ export function buildNeighborhood(
       );
     };
     const frontage = faceWidth(front);
-    const garage = utility || (!large && frontage > 9.5 && random() < 0.19);
-    const garageU = utility ? 0 : -frontage * 0.25;
-    const garageWidth = Math.min(
+    const genericGarage =
+      utility || (!large && frontage > 9.5 && random() < 0.19);
+    const garageFace = reference?.garageFace ?? front;
+    const garageDoors =
+      reference?.garageDoors !== undefined &&
+      Number.isFinite(reference.garageDoors)
+        ? clamp(Math.floor(reference.garageDoors), 0, 3)
+        : reference?.garageFace !== undefined
+          ? 1
+          : Number(genericGarage);
+    const garage = garageDoors > 0;
+    const genericGarageWidth = Math.min(
       utility ? frontage * 0.72 : 3.15,
       utility ? 5.3 : 3.4,
     );
-    const doorU = garage && !utility ? frontage * 0.22 : 0;
-    const hasShutters = !utility && !large && random() < 0.72;
+    const referenceGarage =
+      !!reference &&
+      (reference.garageFace !== undefined ||
+        reference.garageDoors !== undefined);
+    const garageSpan = faceWidth(garageFace),
+      garageGap = 0.24;
+    const garageDoorWidth = referenceGarage
+      ? Math.min(
+          2.85,
+          Math.max(
+            1.2,
+            ((garageFace === front && !utility
+              ? garageSpan * 0.57
+              : garageSpan - 0.85) -
+              garageGap * Math.max(0, garageDoors - 1)) /
+              Math.max(1, garageDoors),
+          ),
+        )
+      : genericGarageWidth;
+    const garageWidth =
+      garageDoorWidth * garageDoors + garageGap * Math.max(0, garageDoors - 1);
+    const genericGarageU =
+      utility || garageFace !== front ? 0 : -frontage * 0.25;
+    const garageU = referenceGarage
+      ? clamp(
+          genericGarageU,
+          -garageSpan / 2 + garageWidth / 2 + 0.3,
+          garageSpan / 2 - garageWidth / 2 - 0.3,
+        )
+      : genericGarageU;
+    const garageCenters = Array.from(
+      { length: garageDoors },
+      (_, n) =>
+        garageU + (n - (garageDoors - 1) / 2) * (garageDoorWidth + garageGap),
+    );
+    const garageGround = facePoint(garageFace, garageU, 0, 0.35);
+    const garageBase = referenceGarage
+      ? Math.max(
+          house.low + 0.04,
+          Math.min(
+            house.base,
+            options.heightAt(garageGround[0], garageGround[2]),
+          ),
+        )
+      : house.base;
+    const doorU =
+      garage && !utility && garageFace === front ? frontage * 0.22 : 0;
+    const baySide = !utility ? reference?.bayWindow : undefined;
+    const bayWidth = Math.min(2.95, frontage * 0.24);
+    const bayU = (baySide === "left" ? -1 : 1) * frontage * 0.265;
+    const stoneLower = !!reference?.stoneLower;
+    if (stoneLower) {
+      // Geometry carries a restrained irregular masonry pattern, without photo
+      // textures or claims about measured stone sizes. The relief stays behind
+      // the existing door/window casings, so openings remain unobstructed.
+      const stoneRandom = seeded(`${house.id}:observed-stone`);
+      const stone = getBatch(concreteKey, house.x, house.z, false);
+      const stonePanel = (
+        centerU: number,
+        width: number,
+        bottom: number,
+        top: number,
+      ) => {
+        if (top <= bottom) return;
+        faceBox(
+          front,
+          centerU,
+          (bottom + top) / 2,
+          0.049,
+          width,
+          top - bottom,
+          0.006,
+          concreteKey,
+          0x74766e,
+        );
+        for (let y = bottom + 0.016; y < top - 0.025;) {
+          const height = Math.min(0.23 + stoneRandom() * 0.16, top - y - 0.012);
+          for (
+            let u = centerU - width / 2 + 0.015;
+            u < centerU + width / 2 - 0.025;
+          ) {
+            const span = Math.min(
+              0.31 + stoneRandom() * 0.43,
+              centerU + width / 2 - u - 0.012,
+            );
+            const bevel = Math.min(0.052, span * 0.16, height * 0.2);
+            const outline: UV[] = [
+              [u + bevel, y],
+              [u + span - bevel, y + stoneRandom() * 0.015],
+              [u + span, y + height * 0.43],
+              [u + span - bevel, y + height],
+              [u + bevel, y + height - stoneRandom() * 0.018],
+              [u, y + height * 0.53],
+            ];
+            const out = 0.058 + stoneRandom() * 0.01;
+            const tint = [
+              0x9a9c94, 0x858b86, 0xa7a99f, 0x92978e, 0x7b827c, 0xaba99f,
+            ][Math.floor(stoneRandom() * 6)];
+            for (let i = 1; i < outline.length - 1; i++) {
+              const a = outline[0],
+                b = outline[i],
+                c = outline[i + 1];
+              stone.triangle(
+                facePoint(front, a[0], a[1], out),
+                facePoint(front, b[0], b[1], out),
+                facePoint(front, c[0], c[1], out),
+                a,
+                b,
+                c,
+                tint,
+              );
+            }
+            u += span + 0.018;
+          }
+          y += height + 0.018;
+        }
+      };
+      stonePanel(0, frontage, house.low, foundationTop);
+      stonePanel(
+        doorU,
+        Math.min(2.65, frontage * 0.26),
+        foundationTop,
+        roofBase - 0.18,
+      );
+      detailFeatures++;
+    }
+    const hasShutters =
+      reference?.shutterColor !== undefined ||
+      (!utility && !large && random() < 0.72);
     const window = (
       face: Face,
       u: number,
@@ -850,11 +1065,19 @@ export function buildNeighborhood(
             );
         }
     };
-    const floors =
+    const genericFloors =
       !utility &&
       (house.wallHeight >= 4.5 || (house.wallHeight >= 4.05 && random() < 0.27))
         ? 2
         : 1;
+    const floors =
+      reference?.stories !== undefined && Number.isFinite(reference.stories)
+        ? clamp(Math.floor(reference.stories), 1, 3)
+        : reference?.style === "colonial"
+          ? 2
+          : reference?.style
+            ? 1
+            : genericFloors;
     for (let fi = 0; fi < 4; fi++) {
       const face = fi as Face,
         span = faceWidth(face);
@@ -866,41 +1089,174 @@ export function buildNeighborhood(
       for (let floor = 0; floor < floors; floor++)
         for (let n = 0; n < count; n++) {
           const u = ((n - (count - 1) / 2) * span) / (count + 0.45);
+          const windowHeight = reference
+            ? Math.min(
+                1.32,
+                Math.max(0.75, (roofBase - foundationTop) / floors - 0.8),
+              )
+            : utility
+              ? 0.83
+              : floors === 2 && house.wallHeight < 4.5
+                ? 1.05
+                : 1.32;
+          const windowY = reference
+            ? foundationTop +
+              ((roofBase - foundationTop) * (floor + 0.54)) / floors
+            : house.base +
+              (floors === 2
+                ? 1.23 + floor * (house.wallHeight - 0.95 - 1.23)
+                : 1.55);
           if (
-            face === front &&
-            floor === 0 &&
-            (Math.abs(u - doorU) < 1.35 ||
-              (garage && Math.abs(u - garageU) < garageWidth / 2 + 0.6))
+            (face === front &&
+              floor === 0 &&
+              Math.abs(u - doorU) < 1.35 &&
+              (!reference || windowY - windowHeight / 2 < entryBase + 2.35)) ||
+            (garage &&
+              face === garageFace &&
+              windowY - windowHeight / 2 < garageBase + 2.48 &&
+              Math.abs(u - garageU) < garageWidth / 2 + 0.6) ||
+            (baySide &&
+              face === front &&
+              floor === floors - 1 &&
+              Math.abs(u - bayU) < bayWidth / 2 + 0.55)
           )
             continue;
           window(
             face,
             u,
-            house.base +
-              (floors === 2
-                ? 1.23 + floor * (house.wallHeight - 0.95 - 1.23)
-                : 1.55),
+            windowY,
             large ? 1.45 : 1.07,
-            utility
-              ? 0.83
-              : floors === 2 && house.wallHeight < 4.5
-                ? 1.05
-                : 1.32,
+            windowHeight,
             hasShutters && (face === front || face === (front + 2) % 4),
           );
         }
     }
+    if (baySide) {
+      const bayHeight = Math.min(
+        1.55,
+        Math.max(0.95, (roofBase - foundationTop) / floors - 0.7),
+      );
+      const bayY =
+        foundationTop + ((roofBase - foundationTop) * (floors - 0.46)) / floors;
+      const bottom = bayY - bayHeight / 2,
+        top = bayY + bayHeight / 2;
+      const outline: UV[] = [
+        [bayU - bayWidth / 2, 0.055],
+        [bayU - bayWidth * 0.3, 0.72],
+        [bayU + bayWidth * 0.3, 0.72],
+        [bayU + bayWidth / 2, 0.055],
+      ];
+      const glass = getBatch("glass", house.x, house.z, false),
+        apron = getBatch(wallMaterial, house.x, house.z);
+      const cap = getBatch("roof", house.x, house.z);
+      for (let i = 0; i < outline.length - 1; i++) {
+        const a = outline[i],
+          b = outline[i + 1],
+          span = Math.hypot(b[0] - a[0], b[1] - a[1]);
+        glass.quad(
+          facePoint(front, a[0], bottom, a[1]),
+          facePoint(front, b[0], bottom, b[1]),
+          facePoint(front, b[0], top, b[1]),
+          facePoint(front, a[0], top, a[1]),
+          span,
+          bayHeight,
+          0x7b94a0,
+        );
+        apron.quad(
+          facePoint(front, a[0], bottom - 0.36, a[1]),
+          facePoint(front, b[0], bottom - 0.36, b[1]),
+          facePoint(front, b[0], bottom, b[1]),
+          facePoint(front, a[0], bottom, a[1]),
+          span,
+          0.36,
+          wallTint,
+          wallMaterial === "siding",
+        );
+        for (const y of [bottom - 0.36, bottom, top])
+          beam(
+            facePoint(front, a[0], y, a[1]),
+            facePoint(front, b[0], y, b[1]),
+            0.105,
+            "trim",
+            trimTint,
+          );
+        beam(
+          facePoint(front, a[0], bayY, a[1]),
+          facePoint(front, b[0], bayY, b[1]),
+          0.036,
+          "trim",
+          trimTint,
+        );
+        cap.triangle(
+          facePoint(front, a[0], top + 0.06, a[1]),
+          facePoint(front, b[0], top + 0.06, b[1]),
+          facePoint(front, bayU, top + 0.24, -0.04),
+          [0, 0],
+          [span, 0],
+          [span / 2, 0.8],
+          roofTint,
+        );
+      }
+      for (const [u, out] of outline)
+        beam(
+          facePoint(front, u, bottom - 0.36, out),
+          facePoint(front, u, top + 0.05, out),
+          0.1,
+          "trim",
+          trimTint,
+        );
+      beam(
+        facePoint(front, bayU, bottom, 0.723),
+        facePoint(front, bayU, top, 0.723),
+        0.052,
+        "trim",
+        trimTint,
+      );
+      detailFeatures++;
+    }
+    let lowerWindows = 0;
+    if (raisedRanch && foundationTop - house.low > 1.1) {
+      for (let fi = 0; fi < 4; fi++) {
+        const face = fi as Face,
+          span = faceWidth(face);
+        for (const u of [-span * 0.29, span * 0.29]) {
+          if (
+            (face === front && Math.abs(u - doorU) < 1.2) ||
+            (garage &&
+              face === garageFace &&
+              Math.abs(u - garageU) < garageWidth / 2 + 0.6)
+          )
+            continue;
+          const location = facePoint(face, u, 0, 0.1),
+            ground = options.heightAt(location[0], location[2]);
+          const y = foundationTop - 0.56;
+          if (y - 0.29 < ground + 0.2) continue;
+          window(face, u, y, 0.96, 0.52, false);
+          lowerWindows++;
+        }
+      }
+    }
     // Cape-style dormers vary the roof silhouette without enlarging the source
     // footprint, changing the accepted wall envelope, or inventing another wing.
-    if (
+    const hasDormers =
       !hip &&
       !utility &&
       !large &&
       house.width > 7.5 &&
       house.depth > 8.5 &&
-      random() < 0.32
-    ) {
-      const direction = roadLX >= 0 ? 1 : -1;
+      (reference?.dormers ??
+        (reference?.style && reference.style !== "cape"
+          ? false
+          : random() < 0.32));
+    if (hasDormers) {
+      const direction =
+        reference?.frontFace === 1
+          ? 1
+          : reference?.frontFace === 3
+            ? -1
+            : roadLX >= 0
+              ? 1
+              : -1;
       const outerX = direction * w * 0.63,
         innerX = direction * w * 0.25;
       const dormerBase = roofBase + rise * 0.37,
@@ -1083,7 +1439,7 @@ export function buildNeighborhood(
       faceBox(
         front,
         doorU,
-        house.base + 1.13,
+        entryBase + 1.13,
         0.055,
         1.16,
         2.21,
@@ -1094,19 +1450,19 @@ export function buildNeighborhood(
       faceBox(
         front,
         doorU,
-        house.base + 1.1,
+        entryBase + 1.1,
         0.138,
         0.98,
         2.08,
         0.06,
-        "wood",
+        reference?.doorColor !== undefined ? "trim" : "wood",
         doorTint,
       );
       for (const side of [-1, 1])
         faceBox(
           front,
           doorU + side * 0.59,
-          house.base + 1.13,
+          entryBase + 1.13,
           0.16,
           0.13,
           2.3,
@@ -1117,7 +1473,7 @@ export function buildNeighborhood(
       faceBox(
         front,
         doorU,
-        house.base + 2.29,
+        entryBase + 2.29,
         0.16,
         1.31,
         0.16,
@@ -1126,7 +1482,7 @@ export function buildNeighborhood(
         trimTint,
       );
       for (const side of [-1, 1])
-        for (const y of [house.base + 0.48, house.base + 1.06])
+        for (const y of [entryBase + 0.48, entryBase + 1.06])
           faceBox(
             front,
             doorU + side * 0.22,
@@ -1135,13 +1491,13 @@ export function buildNeighborhood(
             0.32,
             0.42,
             0.035,
-            "wood",
+            reference?.doorColor !== undefined ? "trim" : "wood",
             tinted(doorTint, 1.15),
           );
       faceBox(
         front,
         doorU,
-        house.base + 1.72,
+        entryBase + 1.72,
         0.182,
         0.49,
         0.55,
@@ -1152,7 +1508,7 @@ export function buildNeighborhood(
       faceBox(
         front,
         doorU + 0.36,
-        house.base + 1.05,
+        entryBase + 1.05,
         0.23,
         0.055,
         0.18,
@@ -1164,7 +1520,7 @@ export function buildNeighborhood(
       faceBox(
         front,
         doorU + 0.91,
-        house.base + 1.97,
+        entryBase + 1.97,
         0.15,
         0.17,
         0.31,
@@ -1175,7 +1531,7 @@ export function buildNeighborhood(
       faceBox(
         front,
         doorU + 0.91,
-        house.base + 1.96,
+        entryBase + 1.96,
         0.265,
         0.12,
         0.2,
@@ -1184,24 +1540,24 @@ export function buildNeighborhood(
         0xd8ca9b,
       );
     }
-    if (garage) {
+    for (const garageCenter of garageCenters) {
       faceBox(
-        front,
-        garageU,
-        house.base + 1.15,
+        garageFace,
+        garageCenter,
+        garageBase + 1.15,
         0.07,
-        garageWidth + 0.24,
+        garageDoorWidth + 0.24,
         2.4,
         0.12,
         "wood",
         0x3f443e,
       );
       faceBox(
-        front,
-        garageU,
-        house.base + 1.13,
+        garageFace,
+        garageCenter,
+        garageBase + 1.13,
         0.15,
-        garageWidth,
+        garageDoorWidth,
         2.24,
         0.09,
         "trim",
@@ -1209,11 +1565,11 @@ export function buildNeighborhood(
       );
       for (let row = 1; row < 5; row++)
         faceBox(
-          front,
-          garageU,
-          house.base + row * 0.44,
+          garageFace,
+          garageCenter,
+          garageBase + row * 0.44,
           0.204,
-          garageWidth,
+          garageDoorWidth,
           0.025,
           0.013,
           "wood",
@@ -1221,9 +1577,9 @@ export function buildNeighborhood(
         );
       for (const side of [-1, 1])
         faceBox(
-          front,
-          garageU + side * (garageWidth / 2 + 0.08),
-          house.base + 1.15,
+          garageFace,
+          garageCenter + side * (garageDoorWidth / 2 + 0.08),
+          garageBase + 1.15,
           0.21,
           0.14,
           2.4,
@@ -1232,22 +1588,23 @@ export function buildNeighborhood(
           trimTint,
         );
       faceBox(
-        front,
-        garageU,
-        house.base + 2.34,
+        garageFace,
+        garageCenter,
+        garageBase + 2.34,
         0.21,
-        garageWidth + 0.3,
+        garageDoorWidth + 0.3,
         0.16,
         0.15,
         "trim",
         trimTint,
       );
-      const panes = Math.max(2, Math.floor(garageWidth / 0.8));
+      const panes = Math.max(2, Math.floor(garageDoorWidth / 0.8));
       for (let n = 0; n < panes; n++)
         faceBox(
-          front,
-          garageU + ((n - (panes - 1) / 2) * garageWidth) / (panes + 0.3),
-          house.base + 1.92,
+          garageFace,
+          garageCenter +
+            ((n - (panes - 1) / 2) * garageDoorWidth) / (panes + 0.3),
+          garageBase + 1.92,
           0.218,
           0.48,
           0.28,
@@ -1300,7 +1657,7 @@ export function buildNeighborhood(
           );
         }
     };
-    if (!utility && !large)
+    if (genericYard && !utility && !large)
       patch(
         0,
         0,
@@ -1350,12 +1707,158 @@ export function buildNeighborhood(
       }
     };
     const doorOutside = facePoint(front, doorU, 0, 1.9);
+    const frontGable =
+      !utility && reference?.frontGable && clear(doorOutside, 2.4)
+        ? reference.frontGable
+        : undefined;
+    if (frontGable) {
+      // Observed projected gables replace the generic porch canopy. The broad
+      // version spans the entry and viewer-right living window, with full-height
+      // pale supports; the small version is a compact entry portico.
+      const broad = frontGable === "large";
+      const gableWidth = broad
+        ? Math.min(7.8, frontage * 0.61)
+        : Math.min(2.85, frontage * 0.36);
+      const centerU = broad ? Math.min(frontage * 0.13, 1.9) : doorU;
+      const projection = broad ? 1.72 : 1.55;
+      const eaveY = broad
+        ? roofBase - 0.04
+        : Math.min(roofBase - 0.12, entryBase + 2.64);
+      const gableRise = broad
+        ? Math.min(1.58, Math.max(0.8, rise * 0.86))
+        : 0.68;
+      const left = centerU - gableWidth / 2,
+        right = centerU + gableWidth / 2;
+      const canopy = getBatch("roof", house.x, house.z);
+      const gable = getBatch("siding", house.x, house.z);
+      const frontOut = projection + 0.12,
+        backOut = -0.16;
+      canopy.quad(
+        facePoint(front, left - 0.14, eaveY, frontOut),
+        facePoint(front, centerU, eaveY + gableRise, frontOut),
+        facePoint(front, centerU, eaveY + gableRise, backOut),
+        facePoint(front, left - 0.14, eaveY, backOut),
+        Math.hypot(gableWidth / 2 + 0.14, gableRise),
+        frontOut - backOut,
+        roofTint,
+      );
+      canopy.quad(
+        facePoint(front, centerU, eaveY + gableRise, frontOut),
+        facePoint(front, right + 0.14, eaveY, frontOut),
+        facePoint(front, right + 0.14, eaveY, backOut),
+        facePoint(front, centerU, eaveY + gableRise, backOut),
+        Math.hypot(gableWidth / 2 + 0.14, gableRise),
+        frontOut - backOut,
+        roofTint,
+      );
+      gable.triangle(
+        facePoint(front, left, eaveY, projection),
+        facePoint(front, right, eaveY, projection),
+        facePoint(front, centerU, eaveY + gableRise - 0.055, projection),
+        [0, 0],
+        [0, gableWidth],
+        [gableRise, gableWidth / 2],
+        broad ? wallTint : trimTint,
+      );
+      for (const edge of [left - 0.14, right + 0.14])
+        beam(
+          facePoint(front, edge, eaveY - 0.025, frontOut),
+          facePoint(front, centerU, eaveY + gableRise - 0.025, frontOut),
+          0.16,
+          "trim",
+          trimTint,
+        );
+      faceBox(
+        front,
+        centerU,
+        eaveY - 0.065,
+        projection / 2,
+        gableWidth + 0.18,
+        0.16,
+        projection + 0.16,
+        "trim",
+        trimTint,
+        true,
+      );
+      const deckY = entryBase + 0.075,
+        deckWidth = broad ? 2.2 : gableWidth - 0.16;
+      const deckGround = options.heightAt(doorOutside[0], doorOutside[2]);
+      const deckBottom = Math.min(deckGround - 0.06, deckY - 0.12);
+      faceBox(
+        front,
+        doorU,
+        (deckBottom + deckY) / 2,
+        0.77,
+        deckWidth,
+        deckY - deckBottom,
+        1.55,
+        concreteKey,
+        0xb9b9ad,
+        true,
+      );
+      for (const u of [left + 0.18, right - 0.18]) {
+        const foot = facePoint(front, u, 0, projection - 0.1);
+        const postBase = broad ? options.heightAt(foot[0], foot[2]) : deckY;
+        faceBox(
+          front,
+          u,
+          (postBase + eaveY) / 2,
+          projection - 0.1,
+          broad ? 0.2 : 0.14,
+          eaveY - postBase,
+          broad ? 0.2 : 0.14,
+          "trim",
+          trimTint,
+          true,
+        );
+        for (const y of [postBase + 0.09, eaveY - 0.15])
+          faceBox(
+            front,
+            u,
+            y,
+            projection - 0.1,
+            broad ? 0.3 : 0.22,
+            0.18,
+            broad ? 0.3 : 0.22,
+            "trim",
+            trimTint,
+            true,
+          );
+      }
+      const steps = Math.round(clamp((deckY - deckGround) / 0.17, 1, 6));
+      for (let n = 0; n < steps; n++) {
+        const top = deckY - (n + 1) * 0.16;
+        const out = 1.72 + n * 0.3,
+          location = facePoint(front, doorU, 0, out);
+        if (!clear(location, 1.15)) break;
+        const ground = options.heightAt(location[0], location[2]);
+        if (top > ground)
+          faceBox(
+            front,
+            doorU,
+            (top + ground) / 2,
+            out,
+            broad ? 2.06 : 1.64,
+            top - ground,
+            0.35,
+            concreteKey,
+            0xbfc0b5,
+            true,
+          );
+      }
+      detailFeatures++;
+    }
     const porch =
-      !utility && !large && random() < 0.61 && clear(doorOutside, 2.4);
+      !utility &&
+      !frontGable &&
+      (reference?.porch ?? (!large && random() < 0.61)) &&
+      clear(doorOutside, 2.4);
+    let entryAccess:
+      { landingTop: number; steps: number; reachMeters: number } | undefined;
     if (porch) {
       const deckWidth = Math.min(3.3, frontage * 0.45),
         deckDepth = 1.7,
-        deckY = house.base + 0.18;
+        deckY = entryBase + 0.18;
       const deckGround = options.heightAt(doorOutside[0], doorOutside[2]);
       const deckBottom = Math.min(deckGround - 0.1, deckY - 0.18);
       faceBox(
@@ -1366,7 +1869,7 @@ export function buildNeighborhood(
         deckWidth,
         deckY - deckBottom,
         deckDepth,
-        "concrete",
+        concreteKey,
         0xb8b4a4,
         true,
       );
@@ -1382,7 +1885,7 @@ export function buildNeighborhood(
         0xb0a992,
         true,
       );
-      const canopyY = house.base + 2.66;
+      const canopyY = entryBase + 2.66;
       for (const side of [-1, 1]) {
         faceBox(
           front,
@@ -1458,30 +1961,118 @@ export function buildNeighborhood(
             1.45,
             top - ground,
             0.34,
-            "concrete",
+            concreteKey,
             0xc1bdae,
             true,
           );
       }
-      path(
-        facePoint(front, doorU, 0, 2 + steps * 0.29),
-        facePoint(front, doorU, 0, 5 + steps * 0.29),
-        1.05,
-        "concrete",
-        0xd1cec0,
-      );
-    } else if (!utility && !large) {
+      if (genericYard)
+        path(
+          facePoint(front, doorU, 0, 2 + steps * 0.29),
+          facePoint(front, doorU, 0, 5 + steps * 0.29),
+          1.05,
+          concreteKey,
+          0xd1cec0,
+        );
+    } else if (reference && !frontGable && !utility) {
+      // A disabled porch does not remove physical access to an elevated door.
+      // This compact landing/flight is approximate entrance geometry, without
+      // inventing a garden or a path to the street. Solid risers extend below
+      // the lowest sampled ground corner so slopes cannot leave them floating.
+      const landingTop = entryBase + 0.045,
+        landingWidth = 1.62,
+        landingDepth = 1.08;
+      const treadDepth = 0.29,
+        treadWidth = 1.38;
+      const corners = (out: number, width: number, depth: number) =>
+        [-1, 1].flatMap((side) =>
+          [-1, 1].map((end) =>
+            facePoint(
+              front,
+              doorU + (side * width) / 2,
+              0,
+              out + (end * depth) / 2,
+            ),
+          ),
+        );
+      const groundedTread = (
+        out: number,
+        width: number,
+        depth: number,
+        top: number,
+      ) => {
+        const points = corners(out, width, depth);
+        if (points.some((p) => !clear(p, 0.05))) return false;
+        const bottom =
+          Math.min(...points.map((p) => options.heightAt(p[0], p[2]))) - 0.08;
+        if (top > bottom + 0.01)
+          faceBox(
+            front,
+            doorU,
+            (top + bottom) / 2,
+            out,
+            width,
+            top - bottom,
+            depth,
+            concreteKey,
+            0xbebcaf,
+            true,
+          );
+        return true;
+      };
+      if (
+        groundedTread(landingDepth / 2, landingWidth, landingDepth, landingTop)
+      ) {
+        let steps = 0,
+          riser = 0;
+        for (let count = 1; count <= 12; count++) {
+          const reach = landingDepth + count * treadDepth;
+          const foot = facePoint(front, doorU, 0, reach);
+          if (!clear(foot, treadWidth / 2)) break;
+          const target = options.heightAt(foot[0], foot[2]) + 0.025;
+          if (target >= landingTop) break;
+          steps = count;
+          riser = (landingTop - target) / (count + 1);
+          if (riser <= 0.19) break;
+        }
+        let builtSteps = 0;
+        for (let n = 1; n <= steps; n++) {
+          if (
+            !groundedTread(
+              landingDepth + (n - 0.5) * treadDepth,
+              treadWidth,
+              treadDepth,
+              landingTop - n * riser,
+            )
+          )
+            break;
+          builtSteps++;
+        }
+        entryAccess = {
+          landingTop,
+          steps: builtSteps,
+          reachMeters: landingDepth + builtSteps * treadDepth,
+        };
+        detailFeatures++;
+      }
+    } else if (
+      genericYard &&
+      !frontGable &&
+      reference?.porch !== false &&
+      !utility &&
+      !large
+    ) {
       const pad = facePoint(front, doorU, 0, 0.65);
       if (clear(pad, 1)) {
         faceBox(
           front,
           doorU,
-          house.base + 0.08,
+          entryBase + 0.08,
           0.58,
           1.44,
           0.15,
           0.96,
-          "concrete",
+          concreteKey,
           0xc2beb0,
           true,
         );
@@ -1489,29 +2080,30 @@ export function buildNeighborhood(
           facePoint(front, doorU, 0, 1.05),
           facePoint(front, doorU, 0, 4.8),
           0.95,
-          "concrete",
+          concreteKey,
           0xd1cec0,
         );
       }
     }
-    if (garage)
+    if (genericYard && garage)
       path(
-        facePoint(front, garageU, 0, 0.3),
-        facePoint(front, garageU, 0, 4.5),
+        facePoint(garageFace, garageU, 0, 0.3),
+        facePoint(garageFace, garageU, 0, 4.5),
         garageWidth + 0.35,
         "gravel",
         0xd1cdc0,
       );
 
-    if (!large) {
+    if (genericYard && !large) {
       const plantCount = utility ? 2 : 4 + Math.floor(random() * 4);
       for (let n = 0; n < plantCount; n++) {
         const face = (n % 4) as Face;
         const u = (random() - 0.5) * Math.max(1, faceWidth(face) - 2);
         if (
-          face === front &&
-          (Math.abs(u - doorU) < 1.35 ||
-            (garage && Math.abs(u - garageU) < garageWidth / 2 + 0.5))
+          (face === front && Math.abs(u - doorU) < 1.35) ||
+          (face === garageFace &&
+            garage &&
+            Math.abs(u - garageU) < garageWidth / 2 + 0.5)
         )
           continue;
         const p = facePoint(face, u, 0, 0.8 + random() * 0.7),
@@ -1561,7 +2153,7 @@ export function buildNeighborhood(
     }
     // A single restrained mailbox and utility hardware add human scale without
     // extra physics obstacles or new driveway claims.
-    if (!utility && !large && Math.hypot(roadDX, roadDZ) < 110) {
+    if (genericYard && !utility && !large && Math.hypot(roadDX, roadDZ) < 110) {
       const len = Math.hypot(roadDX, roadDZ) || 1,
         awayX = -roadDX / len,
         awayZ = -roadDZ / len;
@@ -1588,7 +2180,7 @@ export function buildNeighborhood(
         );
       }
     }
-    if (!utility) {
+    if (genericYard && !utility) {
       const side = ((front + 1) % 4) as Face,
         u = -faceWidth(side) * 0.25;
       faceBox(
@@ -1642,6 +2234,38 @@ export function buildNeighborhood(
           );
       }
     }
+    if (reference)
+      referenceFacades.push({
+        id: house.id,
+        style: reference.style ?? "generic",
+        frontFace: front,
+        garageFace: garage ? garageFace : null,
+        garageDoors,
+        garageDoorWidth,
+        garageBase,
+        roofType: hip ? "hip" : "gable",
+        roofRise: rise,
+        roofBase,
+        foundationTop,
+        entryBase,
+        entryAccess: entryAccess ?? null,
+        livingStories: floors,
+        lowerWindows,
+        porch,
+        frontGable: frontGable ?? null,
+        stoneLower,
+        bayWindow: baySide ?? null,
+        dormers: hasDormers,
+        chimney: hasChimney,
+        genericYard,
+        colors: {
+          wall: wallTint,
+          trim: trimTint,
+          shutter: shutterTint,
+          door: doorTint,
+          roof: roofTint,
+        },
+      });
   }
 
   let triangleCount = 0;
@@ -1649,13 +2273,28 @@ export function buildNeighborhood(
     if (!batch.positions.length) continue;
     let material = materials.get(batch.material);
     if (!material) {
-      const supplied = options.materials?.[batch.material];
+      const supplied =
+        options.materials?.[batch.material] ??
+        (batch.material === "referenceConcrete"
+          ? options.materials?.concrete
+          : undefined);
       material = supplied?.clone() ?? defaultMaterial(batch.material);
       // Three's Material.copy does not copy shader hooks. Preserve shared
       // ground-scale color variation on the local vertex-colored yard clone.
       if (supplied) {
         material.onBeforeCompile = supplied.onBeforeCompile;
         material.customProgramCacheKey = supplied.customProgramCacheKey;
+      }
+      if (
+        batch.material === "referenceConcrete" &&
+        material instanceof T.MeshStandardMaterial
+      ) {
+        // The shared scan has a tan albedo. Reference masonry uses a local
+        // neutral clone while preserving its physical normal/roughness detail;
+        // the original material and shared texture ownership stay unchanged.
+        material.name = "Reference gray concrete";
+        material.map = null;
+        material.color.set(0xffffff);
       }
       if (
         material instanceof T.MeshStandardMaterial ||
@@ -1678,8 +2317,10 @@ export function buildNeighborhood(
     batches: group.children.length,
     triangles: triangleCount,
     detailFeatures,
+    referenceFacades: referenceFacades.length,
   };
+  group.userData.referenceFacades = referenceFacades;
   group.userData.provenance =
-    "Real OSM footprint/address positions; facade, roof, garden and utility appearance are plausible generic approximations. Existing envelope colliders are owned by Environment.";
+    "Source-approved footprint/address positions. Explicit facade overrides supplied by Environment take precedence; other facade and yard details remain generic approximations. Existing envelope colliders are owned by Environment.";
   return group;
 }

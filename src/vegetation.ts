@@ -9,6 +9,19 @@ export interface VegetationOptions {
   barkMaterial?: T.MeshStandardMaterial;
   seed?: number;
 }
+/** Image-measured plan geometry. Heights and detailed leaf shapes remain approximate. */
+export interface BeverlyVegetationSurvey {
+  bounds: { minX: number; maxX: number; minZ: number; maxZ: number };
+  canopies: {
+    center: [number, number];
+    radiusMeters: number;
+    type: "broadleaf" | "conifer" | "mixed";
+    confidence?: string | number;
+  }[];
+  woodlands?: { points: [number, number][]; spacing?: number }[];
+  driveways?: { points: [number, number][]; widthMeters: number }[];
+  landcover?: { kind: string; points: [number, number][] }[];
+}
 type HeightQuery = (map: MapData, x: number, z: number) => number;
 type RoadQuery = (
   map: MapData,
@@ -24,6 +37,8 @@ interface Plant {
   yaw: number;
   tone: number;
   species: Species;
+  /** An observed horizontal canopy radius, unaffected by generic shape variation. */
+  radiusMeters?: number;
 }
 interface RoadSegment {
   ax: number;
@@ -37,6 +52,7 @@ interface Envelope {
   maxX: number;
   minZ: number;
   maxZ: number;
+  footprint?: [number, number][];
 }
 interface Chunk {
   x: number;
@@ -74,6 +90,41 @@ function cellKey(x: number, z: number, size: number) {
 }
 function clamp(value: number, low: number, high: number) {
   return Math.max(low, Math.min(high, value));
+}
+function segmentDistanceSquared(
+  x: number,
+  z: number,
+  a: [number, number],
+  b: [number, number],
+) {
+  const dx = b[0] - a[0],
+    dz = b[1] - a[1];
+  const t = clamp(
+    ((x - a[0]) * dx + (z - a[1]) * dz) / (dx * dx + dz * dz || 1),
+    0,
+    1,
+  );
+  return (x - a[0] - dx * t) ** 2 + (z - a[1] - dz * t) ** 2;
+}
+function insidePolygon(x: number, z: number, points: [number, number][]) {
+  let inside = false;
+  for (let i = 0, j = points.length - 1; i < points.length; j = i++) {
+    const a = points[i],
+      b = points[j];
+    if (
+      a[1] > z !== b[1] > z &&
+      x < ((b[0] - a[0]) * (z - a[1])) / (b[1] - a[1]) + a[0]
+    )
+      inside = !inside;
+  }
+  return inside;
+}
+function horizontalRadius(geometry: T.BufferGeometry) {
+  const positions = geometry.getAttribute("position");
+  let radius = 0;
+  for (let i = 0; i < positions.count; i++)
+    radius = Math.max(radius, Math.hypot(positions.getX(i), positions.getZ(i)));
+  return radius || 1;
 }
 
 /** Original, deterministic leaf/needle/grass masks. These are generated assets, not map imagery. */
@@ -544,6 +595,7 @@ class PlacementIndex {
         maxX: Math.max(...xs),
         minZ: Math.min(...zs),
         maxZ: Math.max(...zs),
+        footprint: points.map((p): [number, number] => [p[0], p[2]]),
       };
       this.add(
         this.buildings,
@@ -615,13 +667,47 @@ class PlacementIndex {
         return false;
     return true;
   }
-  spaced(x: number, z: number, radius: number): boolean {
+  /** A surveyed crown may overhang pavement/roofs; only its unmoved trunk is excluded. */
+  trunkClear(x: number, z: number, radius: number): boolean {
+    const key = cellKey(x, z, INDEX_SIZE);
+    for (const segment of this.roads.get(key) ?? [])
+      if (
+        segmentDistanceSquared(
+          x,
+          z,
+          [segment.ax, segment.az],
+          [segment.bx, segment.bz],
+        ) <
+        (segment.width / 2 + radius + 0.55) ** 2
+      )
+        return false;
+    for (const box of this.buildings.get(key) ?? []) {
+      const points = box.footprint!;
+      if (insidePolygon(x, z, points)) return false;
+      for (let i = 0; i < points.length; i++)
+        if (
+          segmentDistanceSquared(
+            x,
+            z,
+            points[i],
+            points[(i + 1) % points.length],
+          ) <
+          (radius + 0.25) ** 2
+        )
+          return false;
+    }
+    return true;
+  }
+  spaced(x: number, z: number, radius: number, observed = false): boolean {
     const cx = Math.floor(x / 16),
       cz = Math.floor(z / 16);
     for (let dx = -1; dx <= 1; dx++)
       for (let dz = -1; dz <= 1; dz++)
         for (const tree of this.occupied.get(`${cx + dx},${cz + dz}`) ?? [])
-          if (Math.hypot(x - tree.x, z - tree.z) < radius + tree.radius)
+          if (
+            !observed &&
+            Math.hypot(x - tree.x, z - tree.z) < radius + tree.radius
+          )
             return false;
     const key = `${cx},${cz}`;
     let list = this.occupied.get(key);
@@ -666,6 +752,9 @@ export class Vegetation {
     visibleChunks: 0,
     visibleBatches: 0,
     totalBatches: 0,
+    referenceTreeCount: 0,
+    referenceWoodlandTreeCount: 0,
+    referenceOmittedTreeCount: 0,
   };
   private chunks: Chunk[] = [];
   private geometries: T.BufferGeometry[] = [];
@@ -688,6 +777,65 @@ export class Vegetation {
     const random = seeded(options.seed ?? 442),
       index = new PlacementIndex(map),
       placements = new Map<string, ChunkPlants>();
+    const candidate = map.beverlySurvey as BeverlyVegetationSurvey | undefined;
+    const survey =
+      candidate?.bounds &&
+      [
+        candidate.bounds.minX,
+        candidate.bounds.maxX,
+        candidate.bounds.minZ,
+        candidate.bounds.maxZ,
+      ].every(Number.isFinite) &&
+      candidate.bounds.minX < candidate.bounds.maxX &&
+      candidate.bounds.minZ < candidate.bounds.maxZ
+        ? candidate
+        : undefined;
+    const inSurvey = (x: number, z: number) =>
+      !!survey &&
+      x >= survey.bounds.minX &&
+      x <= survey.bounds.maxX &&
+      z >= survey.bounds.minZ &&
+      z <= survey.bounds.maxZ;
+    const referenceCanopies: Record<string, unknown>[] = [];
+    const ponds = (survey?.landcover ?? []).filter(
+      (cover) => cover.kind === "pond" && cover.points.length >= 3,
+    );
+    const pondClear = (x: number, z: number, radius: number) => {
+      for (const pond of ponds) {
+        if (insidePolygon(x, z, pond.points)) return false;
+        for (let i = 0; i < pond.points.length; i++)
+          if (
+            segmentDistanceSquared(
+              x,
+              z,
+              pond.points[i],
+              pond.points[(i + 1) % pond.points.length],
+            ) <
+            (radius + 0.2) ** 2
+          )
+            return false;
+      }
+      return true;
+    };
+    const surveyRandom = seeded((options.seed ?? 442) ^ 0x5e7e9);
+    const drivewayClear = (x: number, z: number, radius: number) => {
+      for (const driveway of survey?.driveways ?? []) {
+        const clearance =
+          Math.max(0, driveway.widthMeters || 0) / 2 + radius + 0.25;
+        for (let i = 1; i < driveway.points.length; i++)
+          if (
+            segmentDistanceSquared(
+              x,
+              z,
+              driveway.points[i - 1],
+              driveway.points[i],
+            ) <
+            clearance ** 2
+          )
+            return false;
+      }
+      return true;
+    };
     const inBounds = (x: number, z: number) =>
       x > map.bounds.minX + 10 &&
       x < map.bounds.maxX - 10 &&
@@ -708,6 +856,7 @@ export class Vegetation {
         crown = (species === 0 ? 5.7 : species === 1 ? 4.45 : 3.8) * scale;
       if (
         !inBounds(x, z) ||
+        inSurvey(x, z) ||
         !index.clear(x, z, crown, roadside ? 4 : 2, 4.8) ||
         !index.spaced(x, z, crown * 0.64)
       )
@@ -724,6 +873,140 @@ export class Vegetation {
       });
       this.stats.trees++;
     };
+    const addReferenceTree = (
+      x: number,
+      z: number,
+      radiusMeters: number,
+      type: "broadleaf" | "conifer" | "mixed",
+      woodland = false,
+      confidence?: string | number,
+    ) => {
+      const species: Species =
+        type === "conifer"
+          ? 2
+          : type === "mixed" && surveyRandom() < 0.2
+            ? 2
+            : surveyRandom() < 0.46
+              ? 1
+              : 0;
+      const scale = clamp(
+        radiusMeters / (species === 0 ? 5.7 : species === 1 ? 4.45 : 3.8),
+        0.25,
+        2.6,
+      );
+      const trunkRadius = Math.max(0.15, scale * (species === 2 ? 0.29 : 0.47));
+      const valid =
+        Number.isFinite(x) &&
+        Number.isFinite(z) &&
+        Number.isFinite(radiusMeters) &&
+        radiusMeters > 0;
+      const blocked = !valid
+        ? "invalid geometry"
+        : !pondClear(x, z, trunkRadius)
+          ? "pond trunk obstruction"
+          : !index.trunkClear(x, z, trunkRadius)
+            ? "road or building trunk obstruction"
+            : !drivewayClear(x, z, trunkRadius)
+              ? "driveway trunk obstruction"
+              : null;
+      if (blocked) {
+        if (!woodland) {
+          this.stats.referenceOmittedTreeCount++;
+          referenceCanopies.push({
+            center: [x, z],
+            radiusMeters,
+            type,
+            confidence,
+            omitted: blocked,
+          });
+        }
+        return;
+      }
+      // Measured crowns may overlap. Never relocate or thin individually observed centers.
+      if (woodland && !index.spaced(x, z, radiusMeters * 0.36)) return;
+      if (!woodland) index.spaced(x, z, Math.min(4, radiusMeters * 0.36), true);
+      chunk(x, z).trees[species].push({
+        x,
+        y: heightAt(map, x, z) - 0.06,
+        z,
+        scale,
+        radiusMeters,
+        yaw: surveyRandom() * TAU,
+        tone: surveyRandom(),
+        species,
+      });
+      this.stats.trees++;
+      if (woodland) this.stats.referenceWoodlandTreeCount++;
+      else {
+        this.stats.referenceTreeCount++;
+        referenceCanopies.push({
+          center: [x, z],
+          radiusMeters,
+          type,
+          confidence,
+          omitted: null,
+        });
+      }
+    };
+    if (survey) {
+      this.root.name =
+        "Surveyed Beverly vegetation and surrounding procedural woodland";
+      for (const canopy of survey.canopies ?? [])
+        addReferenceTree(
+          canopy.center[0],
+          canopy.center[1],
+          canopy.radiusMeters,
+          canopy.type,
+          false,
+          canopy.confidence,
+        );
+      for (const woodland of survey.woodlands ?? []) {
+        if (
+          woodland.points.length < 3 ||
+          !woodland.points.every((p) => p.every(Number.isFinite))
+        )
+          continue;
+        const minX = Math.max(
+            survey.bounds.minX,
+            Math.min(...woodland.points.map((p) => p[0])),
+          ),
+          maxX = Math.min(
+            survey.bounds.maxX,
+            Math.max(...woodland.points.map((p) => p[0])),
+          ),
+          minZ = Math.max(
+            survey.bounds.minZ,
+            Math.min(...woodland.points.map((p) => p[1])),
+          ),
+          maxZ = Math.min(
+            survey.bounds.maxZ,
+            Math.max(...woodland.points.map((p) => p[1])),
+          ),
+          spacing = Math.max(
+            4,
+            Number.isFinite(woodland.spacing) && woodland.spacing! > 0
+              ? woodland.spacing!
+              : 9,
+          );
+        for (let z = minZ + spacing / 2; z < maxZ; z += spacing)
+          for (let x = minX + spacing / 2; x < maxX; x += spacing) {
+            const px = x + (surveyRandom() - 0.5) * spacing * 0.65,
+              pz = z + (surveyRandom() - 0.5) * spacing * 0.65;
+            if (inSurvey(px, pz) && insidePolygon(px, pz, woodland.points))
+              addReferenceTree(
+                px,
+                pz,
+                3.8 + surveyRandom() * 2.3,
+                "mixed",
+                true,
+              );
+          }
+      }
+      this.root.userData.surveyBounds = { ...survey.bounds };
+      this.root.userData.referenceCanopies = referenceCanopies;
+      this.root.userData.surveyProvenance =
+        "Observed canopy centers/radii and explicit woodland extent; broad vegetation type only. Height, branch shape and woodland interior stems are approximations. Blocked observed trunks are omitted, never relocated.";
+    }
     // Recognizable streets get continuous but irregular vegetation, including the Home approach.
     // Setback and species are scenic approximations; road coordinates are never altered.
     for (const road of map.roads) {
@@ -766,7 +1049,11 @@ export class Vegetation {
             const offset = road.width / 2 + 1.8 + random() * 1.4,
               gx = x + (dz / length) * offset * side,
               gz = z - (dx / length) * offset * side;
-            if (inBounds(gx, gz) && index.clear(gx, gz, 0.3, 1, 1.1)) {
+            if (
+              inBounds(gx, gz) &&
+              !inSurvey(gx, gz) &&
+              index.clear(gx, gz, 0.3, 1, 1.1)
+            ) {
               chunk(gx, gz).grass.push({
                 x: gx,
                 y: heightAt(map, gx, gz) - 0.02,
@@ -826,7 +1113,11 @@ export class Vegetation {
           const angle = (i * Math.PI) / 2 + 0.3 + random() * 0.5,
             px = x + Math.sin(angle) * rx,
             pz = z + Math.cos(angle) * rz;
-          if (inBounds(px, pz) && index.clear(px, pz, 0.8, 0.2, 2)) {
+          if (
+            inBounds(px, pz) &&
+            !inSurvey(px, pz) &&
+            index.clear(px, pz, 0.8, 0.2, 2)
+          ) {
             chunk(px, pz).shrubs.push({
               x: px,
               y: heightAt(map, px, pz),
@@ -880,6 +1171,12 @@ export class Vegetation {
     this.geometries.push(shrubs, grassGeometry);
     for (const template of [...templates, ...distantTemplates])
       this.geometries.push(template.trunk, template.leaves);
+    const templateRadii = templates.map((template) =>
+        horizontalRadius(template.leaves),
+      ),
+      distantRadii = distantTemplates.map((template) =>
+        horizontalRadius(template.leaves),
+      );
     const dummy = new T.Object3D(),
       tint = new T.Color();
     const instances = (
@@ -887,16 +1184,21 @@ export class Vegetation {
       geometry: T.BufferGeometry,
       material: T.Material,
       foliage: boolean,
+      canopyRadius?: number,
     ) => {
       const mesh = new T.InstancedMesh(geometry, material, plants.length);
       mesh.receiveShadow = true;
       plants.forEach((plant, i) => {
         dummy.position.set(plant.x, plant.y, plant.z);
         dummy.rotation.set(0, plant.yaw, 0);
+        const referenceScale =
+          plant.radiusMeters === undefined
+            ? undefined
+            : plant.radiusMeters / (canopyRadius ?? 1);
         dummy.scale.set(
-          plant.scale * (1 + plant.tone * 0.09),
+          referenceScale ?? plant.scale * (1 + plant.tone * 0.09),
           plant.scale,
-          plant.scale,
+          referenceScale ?? plant.scale,
         );
         dummy.updateMatrix();
         mesh.setMatrixAt(i, dummy.matrix);
@@ -926,12 +1228,14 @@ export class Vegetation {
               templates[species].trunk,
               bark,
               false,
+              templateRadii[species],
             ),
             foliage = instances(
               plants.trees[species],
               templates[species].leaves,
               species === 2 ? pineMaterial : leafMaterial,
               true,
+              templateRadii[species],
             );
           trees.push(wood, foliage);
           root.add(wood, foliage);
@@ -940,12 +1244,14 @@ export class Vegetation {
               distantTemplates[species].trunk,
               bark,
               false,
+              distantRadii[species],
             ),
             distantFoliage = instances(
               plants.trees[species],
               distantTemplates[species].leaves,
               species === 2 ? pineMaterial : leafMaterial,
               true,
+              distantRadii[species],
             );
           distantWood.visible = distantFoliage.visible = false;
           distantTrees.push(distantWood, distantFoliage);

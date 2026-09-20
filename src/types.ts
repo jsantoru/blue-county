@@ -7,6 +7,9 @@ export interface Road {
   oneway?: boolean;
   highway?: string;
   bridge?: boolean;
+  markings?: "none" | "double-yellow";
+  shoulderWidth?: number;
+  surveyed?: boolean;
 }
 export interface MapData {
   name?: string;

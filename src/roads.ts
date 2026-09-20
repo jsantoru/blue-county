@@ -7,6 +7,7 @@ import { createSurfaceMaterials, worldUV } from "./materials";
 import { Vegetation } from "./vegetation";
 import { buildNeighborhood, type NeighborhoodHouse } from "./neighborhood";
 import { buildRoadside } from "./roadside";
+import { buildBeverlyDetails } from "./beverly-details";
 /** Matches the terrain mesh's diagonal exactly, including its outermost vertices. */
 export function heightAt(map: MapData, x: number, z: number) {
   const g = map.terrain;
@@ -360,8 +361,8 @@ export class Environment {
       centerZ = (minZ + maxZ) / 2;
     const x = origin[0] + centerX * cos + centerZ * sin,
       z = origin[2] - centerX * sin + centerZ * cos;
-    let width = Math.max(4, maxX - minX),
-      depth = Math.max(4, maxZ - minZ);
+    let width = Math.max(building.reference ? 2 : 4, maxX - minX),
+      depth = Math.max(building.reference ? 2 : 4, maxZ - minZ);
     const nearby = nearestRoad(this.map, x, z),
       normalX = Math.cos(nearby.heading),
       normalZ = -Math.sin(nearby.heading),
@@ -387,7 +388,8 @@ export class Environment {
     ].map((p) => heightAt(this.map, p[0], p[2]));
     const low = Math.min(...corners) - 0.15,
       base = Math.max(...corners),
-      wallHeight = Math.max(2.8, (building.height || 5) * 0.72),
+      wallHeight =
+        building.wallHeight ?? Math.max(2.8, (building.height || 5) * 0.72),
       wallTop = base + wallHeight;
     // Detailed facades share the original, road-clear collision envelope.
     this.colliders.push(
@@ -417,6 +419,7 @@ export class Environment {
       roadWidth: nearby.road?.width ?? 8,
       kind: building.kind,
       approximate: building.approximate,
+      reference: building.reference,
     });
   }
   build() {
@@ -447,6 +450,15 @@ export class Environment {
     ground.receiveShadow = true;
     this.root.add(ground);
     this.collider(ground);
+    const inReference = (x: number, z: number) => {
+      const b = map.beverlySurvey?.bounds;
+      return b && x >= b.minX && x <= b.maxX && z >= b.minZ && z <= b.maxZ;
+    };
+    const residentialAsphalt = this.materials.asphalt.clone();
+    residentialAsphalt.color.set(0xcccbc4);
+    residentialAsphalt.onBeforeCompile = this.materials.asphalt.onBeforeCompile;
+    residentialAsphalt.customProgramCacheKey =
+      this.materials.asphalt.customProgramCacheKey;
     for (const road of map.roads) {
       if (road.points.length < 2) continue;
       const roadSample = road.bridge ? undefined : sample;
@@ -458,13 +470,25 @@ export class Environment {
       };
       this.root.add(
         textured(
-          roadMesh(road.points, road.width + 1.6, 0xaba48b, 0.025, roadSample),
+          roadMesh(
+            road.points,
+            road.width + (road.shoulderWidth ?? 0.8) * 2,
+            0xaba48b,
+            0.025,
+            roadSample,
+          ),
           this.materials.gravel,
         ),
       );
       this.root.add(
         textured(
-          roadJoins(road.points, road.width + 1.6, 0xaba48b, 0.025, roadSample),
+          roadJoins(
+            road.points,
+            road.width + (road.shoulderWidth ?? 0.8) * 2,
+            0xaba48b,
+            0.025,
+            roadSample,
+          ),
           this.materials.gravel,
         ),
       );
@@ -477,14 +501,20 @@ export class Environment {
         ),
         joins = roadJoins(road.points, road.width, 0x394143, 0.065, roadSample);
       this.root.add(
-        textured(asphalt, this.materials.asphalt),
-        textured(joins, this.materials.asphalt),
+        textured(
+          asphalt,
+          road.surveyed ? residentialAsphalt : this.materials.asphalt,
+        ),
+        textured(
+          joins,
+          road.surveyed ? residentialAsphalt : this.materials.asphalt,
+        ),
       );
       this.collider(asphalt);
       this.collider(joins);
       // Both join rims and strips follow terrain facets; the colliders use these exact meshes.
       // Bridges preserve their imported deck grade rather than snapping down to terrain.
-      if (road.width >= 7) {
+      if (road.width >= 7 && road.markings !== "none") {
         for (const side of [-1, 1]) {
           const points = road.points.map((p, i): Point => {
             const previous = road.points[Math.max(0, i - 1)],
@@ -503,7 +533,35 @@ export class Environment {
         }
       }
     }
-    // OSM footprints/address points determine placement; facades, roofs and materials are approximations.
+    // Driveways follow observed plan paths and the exact road/terrain facets.
+    const driveMaterial = this.materials.asphalt.clone();
+    driveMaterial.color.set(0x858887);
+    driveMaterial.onBeforeCompile = this.materials.asphalt.onBeforeCompile;
+    driveMaterial.customProgramCacheKey =
+      this.materials.asphalt.customProgramCacheKey;
+    for (const driveway of map.beverlySurvey?.driveways ?? []) {
+      const points: Point[] = driveway.points.map(([x, z]: number[]) => [
+        x,
+        heightAt(map, x, z),
+        z,
+      ]);
+      for (const mesh of [
+        roadMesh(points, driveway.widthMeters, 0x777777, 0.082, sample),
+        roadJoins(points, driveway.widthMeters, 0x777777, 0.082, sample),
+      ]) {
+        (mesh.material as T.Material).dispose();
+        mesh.material = driveMaterial;
+        worldUV(mesh.geometry);
+        mesh.userData.referenceDriveway = driveway.address;
+        this.root.add(mesh);
+        this.collider(mesh);
+      }
+    }
+    if (!map.beverlySurvey) {
+      driveMaterial.dispose();
+      residentialAsphalt.dispose();
+    }
+    // State footprints supersede address envelopes inside the observed area.
     (map.buildings || []).forEach((building, index) =>
       this.house(building, index),
     );
@@ -522,6 +580,8 @@ export class Environment {
       barkMaterial: this.materials.bark,
     });
     this.root.add(this.vegetation.root);
+    if (map.beverlySurvey)
+      this.root.add(buildBeverlyDetails(map, (x, z) => heightAt(map, x, z)));
     if (!this.test)
       this.root.add(
         buildRoadside(map, (x, z) => heightAt(map, x, z), this.materials),
@@ -536,13 +596,18 @@ export class Environment {
       heightAt(map, map.home.position[0] + 7, map.home.position[2]) + 3,
       map.home.position[2],
     );
-    this.root.add(home);
-    this.box(
-      [home.position.x, home.position.y - 1.5, home.position.z],
-      [0.07, 3, 0.07],
-      0x7f8581,
-      false,
-    );
+    if (!map.beverlySurvey) {
+      this.root.add(home);
+      this.box(
+        [home.position.x, home.position.y - 1.5, home.position.z],
+        [0.07, 3, 0.07],
+        0x7f8581,
+        false,
+      );
+    } else {
+      (home.material as T.SpriteMaterial).map?.dispose();
+      home.material.dispose();
+    }
     const named = new Set<string>();
     for (const road of map.roads) {
       if (!road.name || named.has(road.name) || !road.points.length) continue;
@@ -554,6 +619,7 @@ export class Environment {
         heading = Math.atan2(next[0] - previous[0], next[2] - previous[2]),
         x = p[0] + Math.cos(heading) * (road.width / 2 + 2.5),
         z = p[2] - Math.sin(heading) * (road.width / 2 + 2.5);
+      if (inReference(x, z)) continue;
       const sign = textSign(road.name);
       sign.scale.multiplyScalar(0.75);
       sign.position.set(x, heightAt(map, x, z) + 2.5, z);

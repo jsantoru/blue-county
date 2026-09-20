@@ -1,0 +1,141 @@
+{
+ "currentVersion": 10.81,
+ "serviceDescription": "<DIV STYLE=\"text-align:Left;\"><DIV><P><SPAN>Combination of multiple years of orthoimagery encompassing 2022, 2023, 2024, and 2025. The service provides a Natural Color view at approximately 12 inch resolution. The source orthoimagery is 4-band at resolutions of 12 or 6 inches.For more information see https://gis.ny.gov/orthoimagery#statewide-status-overview. Please contact NYS ITS Geospatial Services at nysgis@its.ny.gov if you have any questions.<\/SPAN><\/P><\/DIV><\/DIV>",
+ "mapName": "Layers",
+ "description": "",
+ "copyrightText": "NYS ITS Geospatial Services",
+ "supportsDynamicLayers": false,
+ "layers": [
+  {
+   "id": 0,
+   "name": "2025",
+   "parentLayerId": -1,
+   "defaultVisibility": true,
+   "subLayerIds": null,
+   "minScale": 0,
+   "maxScale": 0,
+   "type": "Raster Layer"
+  },
+  {
+   "id": 1,
+   "name": "2024",
+   "parentLayerId": -1,
+   "defaultVisibility": true,
+   "subLayerIds": null,
+   "minScale": 0,
+   "maxScale": 0,
+   "type": "Raster Layer"
+  },
+  {
+   "id": 2,
+   "name": "2023",
+   "parentLayerId": -1,
+   "defaultVisibility": true,
+   "subLayerIds": null,
+   "minScale": 0,
+   "maxScale": 0,
+   "type": "Raster Layer"
+  },
+  {
+   "id": 3,
+   "name": "2022",
+   "parentLayerId": -1,
+   "defaultVisibility": true,
+   "subLayerIds": null,
+   "minScale": 0,
+   "maxScale": 0,
+   "type": "Raster Layer"
+  }
+ ],
+ "tables": [],
+ "spatialReference": {
+  "wkid": 102100,
+  "latestWkid": 3857
+ },
+ "singleFusedMapCache": false,
+ "initialExtent": {
+  "xmin": -9065252.692925904,
+  "ymin": 5159361.147583321,
+  "xmax": -7815014.350425552,
+  "ymax": 5661651.366211079,
+  "spatialReference": {
+   "wkid": 102100,
+   "latestWkid": 3857
+  }
+ },
+ "fullExtent": {
+  "xmin": -8883203.592525538,
+  "ymin": 4937225.312928157,
+  "xmax": -7997063.450825918,
+  "ymax": 5627154.887483321,
+  "spatialReference": {
+   "wkid": 102100,
+   "latestWkid": 3857
+  }
+ },
+ "minScale": 0,
+ "maxScale": 0,
+ "units": "esriMeters",
+ "supportedImageFormatTypes": "PNG32,PNG24,PNG,JPG,DIB,TIFF,EMF,PS,PDF,GIF,SVG,SVGZ,BMP",
+ "documentInfo": {
+  "Title": "Latest New York State Orthoimagery",
+  "Author": "NYS ITS Geospatial Services",
+  "Comments": "Combination of multiple years of orthoimagery encompassing 2022, 2023, 2024, and 2025. The service provides a Natural Color view at approximately 12 inch resolution. The source orthoimagery is 4-band at resolutions of 12 or 6 inches.For more information see https://gis.ny.gov/orthoimagery#statewide-status-overview. Please contact NYS ITS Geospatial Services at nysgis@its.ny.gov if you have any questions.",
+  "Subject": "New York Statewide coverage of orthoimagery using the most recent versions.",
+  "Category": "",
+  "AntialiasingMode": "None",
+  "TextAntialiasingMode": "Force",
+  "Keywords": "Orthoimagery"
+ },
+ "capabilities": "Map",
+ "supportedQueryFormats": "JSON, geoJSON",
+ "exportTilesAllowed": false,
+ "referenceScale": 0,
+ "datumTransformations": [
+  {
+   "geoTransforms": [
+    {
+     "wkid": 108001,
+     "latestWkid": 1241,
+     "transformForward": true,
+     "name": "NAD_1927_To_NAD_1983_NADCON"
+    }
+   ]
+  },
+  {
+   "geoTransforms": [
+    {
+     "wkid": 108001,
+     "latestWkid": 1241,
+     "transformForward": false,
+     "name": "NAD_1927_To_NAD_1983_NADCON"
+    }
+   ]
+  },
+  {
+   "geoTransforms": [
+    {
+     "wkid": 8088,
+     "latestWkid": 1188,
+     "transformForward": false,
+     "name": "NAD_1983_To_WGS_1984_1"
+    }
+   ]
+  },
+  {
+   "geoTransforms": [
+    {
+     "wkid": 8088,
+     "latestWkid": 1188,
+     "transformForward": true,
+     "name": "NAD_1983_To_WGS_1984_1"
+    }
+   ]
+  }
+ ],
+ "supportsDatumTransformation": true,
+ "maxRecordCount": 1000,
+ "maxImageHeight": 4096,
+ "maxImageWidth": 4096,
+ "supportedExtensions": "WMSServer"
+}

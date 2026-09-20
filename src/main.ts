@@ -893,9 +893,21 @@ function drawMinimap() {
     w = 440,
     h = 320;
   ctx.clearRect(0, 0, w, h);
-  const scale = 0.28,
-    cx = player.position.x,
-    cz = player.position.z;
+  const survey = map.beverlySurvey;
+  const localLoop =
+    !race &&
+    survey &&
+    player.position.x > survey.bounds.minX - 80 &&
+    player.position.x < survey.bounds.maxX + 80 &&
+    player.position.z > survey.bounds.minZ - 80 &&
+    player.position.z < survey.bounds.maxZ + 80;
+  const scale = localLoop ? 0.47 : 0.28,
+    cx = localLoop
+      ? (survey.bounds.minX + survey.bounds.maxX) / 2
+      : player.position.x,
+    cz = localLoop
+      ? (survey.bounds.minZ + survey.bounds.maxZ) / 2
+      : player.position.z;
   const transform = (p: Point) => [
     (p[0] - cx) * scale + w / 2,
     (p[2] - cz) * scale + h / 2,
@@ -911,6 +923,15 @@ function drawMinimap() {
     ctx.stroke();
   };
   for (const road of map.roads) path(road.points, "#8b9b8e", 2);
+  if (localLoop) {
+    for (const d of survey.driveways)
+      path(
+        d.points.map(([x, z]: number[]) => [x, 0, z]),
+        "#5f746a",
+        1,
+      );
+    path(survey.loop.points, "#b8e8ba", 3);
+  }
   if (race) path(map.route.points, "#e7bd77", 3);
   const home = transform(map.home.position);
   ctx.fillStyle = "#b8e8ba";
@@ -925,7 +946,8 @@ function drawMinimap() {
     ctx.fill();
   }
   ctx.save();
-  ctx.translate(w / 2, h / 2);
+  const playerPixel = transform([player.position.x, 0, player.position.z]);
+  ctx.translate(...(playerPixel as [number, number]));
   const f = new T.Vector3(0, 0, 1).applyQuaternion(player.rotation);
   ctx.rotate(-Math.atan2(f.x, f.z));
   ctx.fillStyle = "#fff4d3";
@@ -1123,6 +1145,60 @@ if (new URLSearchParams(location.search).has("test")) {
     pause: () => setScreen("pause"),
     recover,
     route: () => map.route.points,
+    neighborhoodSurvey: () => map.beverlySurvey,
+    surfaceAt: (x: number, z: number) => heightAt(map, x, z),
+    beginNeighborhoodDrive: () => {
+      startFree();
+      let path: Point[] = map.beverlySurvey.loop.points.slice(0, -1);
+      let i = path.reduce(
+        (best, p, index) =>
+          Math.hypot(p[0] - player.position.x, p[2] - player.position.z) <
+          Math.hypot(
+            path[best][0] - player.position.x,
+            path[best][2] - player.position.z,
+          )
+            ? index
+            : best,
+        0,
+      );
+      const a = path[i],
+        b = path[(i + 1) % path.length];
+      if (
+        Math.abs(
+          angleDiff(Math.atan2(b[0] - a[0], b[2] - a[2]), map.home.heading),
+        ) >
+        Math.PI / 2
+      ) {
+        path.reverse();
+        i = path.length - 1 - i;
+      }
+      path = [map.home.position, ...path.slice(i + 1), ...path.slice(0, i + 2)];
+      benchmarkDriver = new Driver(player, path);
+      benchmarkDriver.speed = 11;
+      frameTimes = [];
+      return { points: path.length, path };
+    },
+    advanceNeighborhoodDrive: (seconds: number) => {
+      if (!benchmarkDriver) throw new Error("Start neighborhood drive first");
+      const d = benchmarkDriver;
+      let steps = 0,
+        airborne = 0;
+      for (; steps < seconds * 60 && !d.finished; steps++) {
+        frame = { ...emptyInput(), ...d.input(1 / 60) };
+        simulate(1 / 60);
+        if (player.grounded < 2) airborne++;
+      }
+      renderVehicles(1);
+      updateCamera(1 / 60);
+      return {
+        finished: d.finished,
+        target: d.target,
+        points: d.path.length,
+        steps,
+        airborne,
+        state: (window as any).__game.getState(),
+      };
+    },
     beginBenchmark: () => {
       startRace();
       benchmarkDriver = new Driver(player, map.route.points);

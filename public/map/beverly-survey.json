@@ -1,0 +1,7485 @@
+{
+  "schemaVersion": 1,
+  "name": "Beverly Drive reference area",
+  "bounds": {
+    "minX": -334,
+    "maxX": 94,
+    "minZ": -389,
+    "maxZ": 241
+  },
+  "sourceImageYear": 2025,
+  "retrievedDate": "2026-09-20",
+  "driveways": [
+    {
+      "address": "16 Beverly Dr",
+      "points": [
+        [
+          10.571973154043432,
+          -273.8706223933654
+        ],
+        [
+          15.37,
+          -275.02
+        ],
+        [
+          27.82,
+          -278.89
+        ],
+        [
+          40.94,
+          -279.9
+        ],
+        [
+          49.85,
+          -281.58
+        ],
+        [
+          49.35,
+          -285.28
+        ]
+      ],
+      "widthMeters": 3.6,
+      "confidence": "medium",
+      "occlusion": "Tree crown overlaps the first several metres; exposed strip is visible further east.",
+      "sourcePixels": [
+        [
+          1469.32,
+          479.6
+        ],
+        [
+          1521.67,
+          463.33
+        ],
+        [
+          1576.84,
+          459.08
+        ],
+        [
+          1614.32,
+          452.01
+        ],
+        [
+          1612.2,
+          436.45
+        ]
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixels": [
+        [
+          686,
+          446
+        ],
+        [
+          760,
+          423
+        ],
+        [
+          838,
+          417
+        ],
+        [
+          891,
+          407
+        ],
+        [
+          888,
+          385
+        ]
+      ],
+      "surveyPoints": [
+        [
+          15.37,
+          -275.02
+        ],
+        [
+          27.82,
+          -278.89
+        ],
+        [
+          40.94,
+          -279.9
+        ],
+        [
+          49.85,
+          -281.58
+        ],
+        [
+          49.35,
+          -285.28
+        ]
+      ]
+    },
+    {
+      "address": "14 Beverly Dr",
+      "points": [
+        [
+          13.402924323859374,
+          -262.05293981980225
+        ],
+        [
+          18.4,
+          -263.25
+        ],
+        [
+          28.83,
+          -265.77
+        ],
+        [
+          40.6,
+          -269.13
+        ],
+        [
+          51.2,
+          -269.13
+        ]
+      ],
+      "widthMeters": 5.0,
+      "confidence": "high",
+      "occlusion": "No material occlusion on traced segment.",
+      "sourcePixels": [
+        [
+          1482.06,
+          529.11
+        ],
+        [
+          1525.91,
+          518.5
+        ],
+        [
+          1575.42,
+          504.35
+        ],
+        [
+          1619.98,
+          504.35
+        ]
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixels": [
+        [
+          704,
+          516
+        ],
+        [
+          766,
+          501
+        ],
+        [
+          836,
+          481
+        ],
+        [
+          899,
+          481
+        ]
+      ],
+      "apronWidthMeters": 8.0,
+      "surveyPoints": [
+        [
+          18.4,
+          -263.25
+        ],
+        [
+          28.83,
+          -265.77
+        ],
+        [
+          40.6,
+          -269.13
+        ],
+        [
+          51.2,
+          -269.13
+        ]
+      ]
+    },
+    {
+      "address": "12 Beverly Dr",
+      "points": [
+        [
+          6.805630943861666,
+          -221.53977185283588
+        ],
+        [
+          12.35,
+          -220.36
+        ],
+        [
+          24.79,
+          -218.68
+        ],
+        [
+          34.21,
+          -218.18
+        ],
+        [
+          40.43,
+          -217.17
+        ],
+        [
+          40.43,
+          -212.63
+        ]
+      ],
+      "widthMeters": 4.4,
+      "confidence": "high",
+      "occlusion": "No material occlusion on traced segment.",
+      "sourcePixels": [
+        [
+          1456.59,
+          709.47
+        ],
+        [
+          1508.93,
+          716.54
+        ],
+        [
+          1548.54,
+          718.67
+        ],
+        [
+          1574.71,
+          722.91
+        ],
+        [
+          1574.71,
+          742.01
+        ]
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixels": [
+        [
+          668,
+          771
+        ],
+        [
+          742,
+          781
+        ],
+        [
+          798,
+          784
+        ],
+        [
+          835,
+          790
+        ],
+        [
+          835,
+          817
+        ]
+      ],
+      "apronWidthMeters": 7.0,
+      "surveyPoints": [
+        [
+          12.35,
+          -220.36
+        ],
+        [
+          24.79,
+          -218.68
+        ],
+        [
+          34.21,
+          -218.18
+        ],
+        [
+          40.43,
+          -217.17
+        ],
+        [
+          40.43,
+          -212.63
+        ]
+      ]
+    },
+    {
+      "address": "10 Beverly Dr",
+      "points": [
+        [
+          -6.828135787693345,
+          -157.46174019369957
+        ],
+        [
+          -2.12,
+          -156.46
+        ],
+        [
+          11.67,
+          -153.76
+        ],
+        [
+          22.77,
+          -151.91
+        ],
+        [
+          30.68,
+          -152.25
+        ],
+        [
+          31.85,
+          -158.81
+        ]
+      ],
+      "widthMeters": 3.7,
+      "confidence": "high",
+      "occlusion": "No material occlusion on traced segment.",
+      "sourcePixels": [
+        [
+          1395.76,
+          978.25
+        ],
+        [
+          1453.76,
+          989.56
+        ],
+        [
+          1500.45,
+          997.35
+        ],
+        [
+          1533.69,
+          995.93
+        ],
+        [
+          1538.64,
+          968.35
+        ]
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixels": [
+        [
+          582,
+          1151
+        ],
+        [
+          664,
+          1167
+        ],
+        [
+          730,
+          1178
+        ],
+        [
+          777,
+          1176
+        ],
+        [
+          784,
+          1137
+        ]
+      ],
+      "apronWidthMeters": 7.5,
+      "surveyPoints": [
+        [
+          -2.12,
+          -156.46
+        ],
+        [
+          11.67,
+          -153.76
+        ],
+        [
+          22.77,
+          -151.91
+        ],
+        [
+          30.68,
+          -152.25
+        ],
+        [
+          31.85,
+          -158.81
+        ]
+      ]
+    },
+    {
+      "address": "17 Beverly Dr",
+      "points": [
+        [
+          -15.974859350776637,
+          -297.30135947989965
+        ],
+        [
+          -17.42,
+          -293.69
+        ],
+        [
+          -21.29,
+          -290.66
+        ],
+        [
+          -25.33,
+          -285.95
+        ]
+      ],
+      "widthMeters": 4.0,
+      "confidence": "medium",
+      "occlusion": "Road-end partly shaded; visible driveway approaches the north side of house.",
+      "sourcePixels": [
+        [
+          1331.4,
+          401.09
+        ],
+        [
+          1315.13,
+          413.82
+        ],
+        [
+          1298.16,
+          433.62
+        ]
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixels": [
+        [
+          491,
+          335
+        ],
+        [
+          468,
+          353
+        ],
+        [
+          444,
+          381
+        ]
+      ],
+      "surveyPoints": [
+        [
+          -17.42,
+          -293.69
+        ],
+        [
+          -21.29,
+          -290.66
+        ],
+        [
+          -25.33,
+          -285.95
+        ]
+      ]
+    },
+    {
+      "address": "15 Beverly Dr",
+      "points": [
+        [
+          10.560177455859153,
+          -239.18506391006036
+        ],
+        [
+          8.14,
+          -239.7
+        ],
+        [
+          -0.6,
+          -239.54
+        ],
+        [
+          -6.15,
+          -237.52
+        ],
+        [
+          -10.19,
+          -233.99
+        ]
+      ],
+      "widthMeters": 3.2,
+      "confidence": "medium",
+      "occlusion": "Pale access strip partly shaded by branches; surface material uncertain.",
+      "sourcePixels": [
+        [
+          1438.91,
+          628.13
+        ],
+        [
+          1402.13,
+          628.84
+        ],
+        [
+          1378.79,
+          637.33
+        ],
+        [
+          1361.81,
+          652.18
+        ]
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixels": [
+        [
+          643,
+          656
+        ],
+        [
+          591,
+          657
+        ],
+        [
+          558,
+          669
+        ],
+        [
+          534,
+          690
+        ]
+      ],
+      "surveyPoints": [
+        [
+          8.14,
+          -239.7
+        ],
+        [
+          -0.6,
+          -239.54
+        ],
+        [
+          -6.15,
+          -237.52
+        ],
+        [
+          -10.19,
+          -233.99
+        ]
+      ]
+    },
+    {
+      "address": "13 Beverly Dr",
+      "points": [
+        [
+          3.2723397589386165,
+          -204.93354045978987
+        ],
+        [
+          1.08,
+          -205.4
+        ],
+        [
+          -8.68,
+          -204.72
+        ],
+        [
+          -19.78,
+          -204.05
+        ],
+        [
+          -26.17,
+          -201.36
+        ]
+      ],
+      "widthMeters": 3.7,
+      "confidence": "high",
+      "occlusion": "No material occlusion on traced segment.",
+      "sourcePixels": [
+        [
+          1409.2,
+          772.42
+        ],
+        [
+          1368.18,
+          775.25
+        ],
+        [
+          1321.5,
+          778.08
+        ],
+        [
+          1294.62,
+          789.4
+        ]
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixels": [
+        [
+          601,
+          860
+        ],
+        [
+          543,
+          864
+        ],
+        [
+          477,
+          868
+        ],
+        [
+          439,
+          884
+        ]
+      ],
+      "surveyPoints": [
+        [
+          1.08,
+          -205.4
+        ],
+        [
+          -8.68,
+          -204.72
+        ],
+        [
+          -19.78,
+          -204.05
+        ],
+        [
+          -26.17,
+          -201.36
+        ]
+      ]
+    },
+    {
+      "address": "11 Beverly Dr",
+      "points": [
+        [
+          -4.659735465180457,
+          -167.65312836468348
+        ],
+        [
+          -8.17,
+          -168.4
+        ],
+        [
+          -17.76,
+          -169.07
+        ],
+        [
+          -25.83,
+          -169.74
+        ],
+        [
+          -32.22,
+          -169.91
+        ],
+        [
+          -33.23,
+          -166.04
+        ]
+      ],
+      "widthMeters": 4.2,
+      "confidence": "high",
+      "occlusion": "No material occlusion on traced segment.",
+      "sourcePixels": [
+        [
+          1370.3,
+          928.03
+        ],
+        [
+          1329.99,
+          925.2
+        ],
+        [
+          1296.03,
+          922.37
+        ],
+        [
+          1269.16,
+          921.66
+        ],
+        [
+          1264.91,
+          937.93
+        ]
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixels": [
+        [
+          546,
+          1080
+        ],
+        [
+          489,
+          1076
+        ],
+        [
+          441,
+          1072
+        ],
+        [
+          403,
+          1071
+        ],
+        [
+          397,
+          1094
+        ]
+      ],
+      "apronWidthMeters": 8.0,
+      "surveyPoints": [
+        [
+          -8.17,
+          -168.4
+        ],
+        [
+          -17.76,
+          -169.07
+        ],
+        [
+          -25.83,
+          -169.74
+        ],
+        [
+          -32.22,
+          -169.91
+        ],
+        [
+          -33.23,
+          -166.04
+        ]
+      ]
+    },
+    {
+      "address": "8 Beverly Dr",
+      "points": [
+        [
+          -3.73,
+          -115.99
+        ],
+        [
+          4.86,
+          -116.6
+        ],
+        [
+          12.96,
+          -117.34
+        ],
+        [
+          20.45,
+          -117.09
+        ],
+        [
+          21.68,
+          -119.91
+        ]
+      ],
+      "widthMeters": 4.2,
+      "confidence": "high",
+      "occlusion": "No material occlusion on traced segment.",
+      "sourcePixels": [
+        [
+          1389.0,
+          1148.45
+        ],
+        [
+          1425.13,
+          1145.87
+        ],
+        [
+          1459.19,
+          1142.77
+        ],
+        [
+          1490.68,
+          1143.8
+        ],
+        [
+          1495.84,
+          1131.93
+        ]
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixels": [
+        [
+          540,
+          318
+        ],
+        [
+          610,
+          313
+        ],
+        [
+          676,
+          307
+        ],
+        [
+          737,
+          309
+        ],
+        [
+          747,
+          286
+        ]
+      ],
+      "apronWidthMeters": 7.0,
+      "surveyPoints": [
+        [
+          -3.73,
+          -115.99
+        ],
+        [
+          4.86,
+          -116.6
+        ],
+        [
+          12.96,
+          -117.34
+        ],
+        [
+          20.45,
+          -117.09
+        ],
+        [
+          21.68,
+          -119.91
+        ]
+      ]
+    },
+    {
+      "address": "6 Beverly Dr",
+      "points": [
+        [
+          -16.592024037206986,
+          -75.31719208670933
+        ],
+        [
+          -11.7,
+          -75.61
+        ],
+        [
+          -3.85,
+          -75.61
+        ],
+        [
+          3.39,
+          -75.61
+        ],
+        [
+          9.65,
+          -75.61
+        ],
+        [
+          13.45,
+          -77.33
+        ]
+      ],
+      "widthMeters": 4.4,
+      "confidence": "high",
+      "occlusion": "No material occlusion on traced segment.",
+      "sourcePixels": [
+        [
+          1355.45,
+          1318.26
+        ],
+        [
+          1388.48,
+          1318.26
+        ],
+        [
+          1418.93,
+          1318.26
+        ],
+        [
+          1445.26,
+          1318.26
+        ],
+        [
+          1461.26,
+          1311.03
+        ]
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixels": [
+        [
+          475,
+          647
+        ],
+        [
+          539,
+          647
+        ],
+        [
+          598,
+          647
+        ],
+        [
+          649,
+          647
+        ],
+        [
+          680,
+          633
+        ]
+      ],
+      "apronWidthMeters": 6.5,
+      "surveyPoints": [
+        [
+          -11.7,
+          -75.61
+        ],
+        [
+          -3.85,
+          -75.61
+        ],
+        [
+          3.39,
+          -75.61
+        ],
+        [
+          9.65,
+          -75.61
+        ],
+        [
+          13.45,
+          -77.33
+        ]
+      ]
+    },
+    {
+      "address": "4 Beverly Dr",
+      "points": [
+        [
+          -17.499285725823118,
+          -25.03283702802921
+        ],
+        [
+          -14.65,
+          -24.43
+        ],
+        [
+          -8.76,
+          -26.03
+        ],
+        [
+          -3.24,
+          -30.08
+        ],
+        [
+          2.04,
+          -34.99
+        ],
+        [
+          5.85,
+          -39.04
+        ],
+        [
+          10.51,
+          -41.37
+        ]
+      ],
+      "widthMeters": 4.3,
+      "confidence": "high",
+      "occlusion": "No material occlusion on traced segment.",
+      "sourcePixels": [
+        [
+          1343.06,
+          1533.49
+        ],
+        [
+          1367.84,
+          1526.78
+        ],
+        [
+          1391.06,
+          1509.75
+        ],
+        [
+          1413.26,
+          1489.1
+        ],
+        [
+          1429.26,
+          1472.07
+        ],
+        [
+          1448.87,
+          1462.26
+        ]
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixels": [
+        [
+          451,
+          1064
+        ],
+        [
+          499,
+          1051
+        ],
+        [
+          544,
+          1018
+        ],
+        [
+          587,
+          978
+        ],
+        [
+          618,
+          945
+        ],
+        [
+          656,
+          926
+        ]
+      ],
+      "apronWidthMeters": 7.0,
+      "surveyPoints": [
+        [
+          -14.65,
+          -24.43
+        ],
+        [
+          -8.76,
+          -26.03
+        ],
+        [
+          -3.24,
+          -30.08
+        ],
+        [
+          2.04,
+          -34.99
+        ],
+        [
+          5.85,
+          -39.04
+        ],
+        [
+          10.51,
+          -41.37
+        ]
+      ]
+    },
+    {
+      "address": "2 Beverly Dr",
+      "points": [
+        [
+          -27.995929683691134,
+          24.56868875660184
+        ],
+        [
+          -26.43,
+          24.9
+        ],
+        [
+          -22.5,
+          24.04
+        ]
+      ],
+      "widthMeters": 4.5,
+      "confidence": "low",
+      "occlusion": "Only the road-mouth stub is traced. Evergreen canopy obscures its connection to the detached garage/main-house apron. Do not extend this stub procedurally.",
+      "sourcePixels": [
+        [
+          1293.51,
+          1740.98
+        ],
+        [
+          1310.03,
+          1737.37
+        ]
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixels": [
+        [
+          355,
+          1466
+        ],
+        [
+          387,
+          1459
+        ]
+      ],
+      "traceStatus": "visible-road-mouth-only",
+      "completion": "requires ground-level reference",
+      "surveyPoints": [
+        [
+          -26.43,
+          24.9
+        ],
+        [
+          -22.5,
+          24.04
+        ]
+      ]
+    },
+    {
+      "address": "9 Beverly Dr",
+      "points": [
+        [
+          -16.851210253966556,
+          -106.38339158112781
+        ],
+        [
+          -20.3,
+          -106.54
+        ],
+        [
+          -29.62,
+          -106.9
+        ],
+        [
+          -37.48,
+          -106.17
+        ],
+        [
+          -42.75,
+          -106.17
+        ]
+      ],
+      "widthMeters": 4.5,
+      "confidence": "high",
+      "occlusion": "No material occlusion on traced segment.",
+      "sourcePixels": [
+        [
+          1319.32,
+          1188.19
+        ],
+        [
+          1280.09,
+          1186.64
+        ],
+        [
+          1247.06,
+          1189.74
+        ],
+        [
+          1224.86,
+          1189.74
+        ]
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixels": [
+        [
+          405,
+          395
+        ],
+        [
+          329,
+          392
+        ],
+        [
+          265,
+          398
+        ],
+        [
+          222,
+          398
+        ]
+      ],
+      "surveyPoints": [
+        [
+          -20.3,
+          -106.54
+        ],
+        [
+          -29.62,
+          -106.9
+        ],
+        [
+          -37.48,
+          -106.17
+        ],
+        [
+          -42.75,
+          -106.17
+        ]
+      ]
+    },
+    {
+      "address": "7 Beverly Dr",
+      "points": [
+        [
+          -16.339651712515398,
+          -71.10073678383823
+        ],
+        [
+          -21.03,
+          -70.82
+        ],
+        [
+          -29.62,
+          -70.95
+        ],
+        [
+          -36.74,
+          -71.44
+        ],
+        [
+          -41.16,
+          -73.77
+        ]
+      ],
+      "widthMeters": 3.7,
+      "confidence": "medium",
+      "occlusion": "Parked vehicles obscure a portion of apron.",
+      "sourcePixels": [
+        [
+          1316.22,
+          1338.39
+        ],
+        [
+          1280.09,
+          1337.87
+        ],
+        [
+          1250.16,
+          1335.81
+        ],
+        [
+          1231.57,
+          1326.0
+        ]
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixels": [
+        [
+          399,
+          686
+        ],
+        [
+          329,
+          685
+        ],
+        [
+          271,
+          681
+        ],
+        [
+          235,
+          662
+        ]
+      ],
+      "apronWidthMeters": 6.0,
+      "surveyPoints": [
+        [
+          -21.03,
+          -70.82
+        ],
+        [
+          -29.62,
+          -70.95
+        ],
+        [
+          -36.74,
+          -71.44
+        ],
+        [
+          -41.16,
+          -73.77
+        ]
+      ]
+    },
+    {
+      "address": "5 Beverly Dr",
+      "points": [
+        [
+          -14.737028380576605,
+          -44.33311844591629
+        ],
+        [
+          -23.36,
+          -43.82
+        ],
+        [
+          -38.83,
+          -41.86
+        ],
+        [
+          -52.33,
+          -39.9
+        ],
+        [
+          -59.08,
+          -40.14
+        ],
+        [
+          -58.1,
+          -44.56
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "high",
+      "occlusion": "No material occlusion on traced segment.",
+      "sourcePixels": [
+        [
+          1306.41,
+          1451.94
+        ],
+        [
+          1241.38,
+          1460.2
+        ],
+        [
+          1184.6,
+          1468.46
+        ],
+        [
+          1156.22,
+          1467.42
+        ],
+        [
+          1160.35,
+          1448.84
+        ]
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixels": [
+        [
+          380,
+          906
+        ],
+        [
+          254,
+          922
+        ],
+        [
+          144,
+          938
+        ],
+        [
+          89,
+          936
+        ],
+        [
+          97,
+          900
+        ]
+      ],
+      "apronWidthMeters": 7.0,
+      "surveyPoints": [
+        [
+          -23.36,
+          -43.82
+        ],
+        [
+          -38.83,
+          -41.86
+        ],
+        [
+          -52.33,
+          -39.9
+        ],
+        [
+          -59.08,
+          -40.14
+        ],
+        [
+          -58.1,
+          -44.56
+        ]
+      ]
+    },
+    {
+      "address": "20 Beverly Dr",
+      "points": [
+        [
+          -19.419281256921707,
+          -298.679697509484
+        ],
+        [
+          -16.61,
+          -305.7
+        ],
+        [
+          -18.91,
+          -314.56
+        ],
+        [
+          -19.89,
+          -321.78
+        ],
+        [
+          -22.52,
+          -328.01
+        ],
+        [
+          -27.77,
+          -332.28
+        ]
+      ],
+      "widthMeters": 3.5,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          1334.82,
+          350.57
+        ],
+        [
+          1325.15,
+          313.31
+        ],
+        [
+          1321.01,
+          282.94
+        ],
+        [
+          1309.97,
+          256.72
+        ],
+        [
+          1287.88,
+          238.78
+        ]
+      ],
+      "occlusion": "Corrected the road mouth westward to the actual approach. A conifer obscures its final road connection; only a corridor between visible paved ends is supported.",
+      "surveyPoints": [
+        [
+          -16.61,
+          -305.7
+        ],
+        [
+          -18.91,
+          -314.56
+        ],
+        [
+          -19.89,
+          -321.78
+        ],
+        [
+          -22.52,
+          -328.01
+        ],
+        [
+          -27.77,
+          -332.28
+        ]
+      ]
+    },
+    {
+      "address": "22 Beverly Dr",
+      "points": [
+        [
+          -65.77038346153151,
+          -307.7870005063183
+        ],
+        [
+          -66.17,
+          -310.95
+        ],
+        [
+          -66.5,
+          -323.09
+        ],
+        [
+          -65.84,
+          -335.56
+        ],
+        [
+          -71.1,
+          -340.16
+        ]
+      ],
+      "widthMeters": 4.1,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          1126.38,
+          328.49
+        ],
+        [
+          1125.0,
+          277.42
+        ],
+        [
+          1127.76,
+          224.97
+        ],
+        [
+          1105.67,
+          205.65
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate.",
+      "surveyPoints": [
+        [
+          -66.17,
+          -310.95
+        ],
+        [
+          -66.5,
+          -323.09
+        ],
+        [
+          -65.84,
+          -335.56
+        ],
+        [
+          -71.1,
+          -340.16
+        ]
+      ]
+    },
+    {
+      "address": "24 Beverly Dr",
+      "points": [
+        [
+          -100.02456300550412,
+          -303.4563538801951
+        ],
+        [
+          -100.64,
+          -308.32
+        ],
+        [
+          -106.54,
+          -322.11
+        ],
+        [
+          -111.79,
+          -335.23
+        ],
+        [
+          -118.03,
+          -343.44
+        ]
+      ],
+      "widthMeters": 3.7,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          981.44,
+          339.53
+        ],
+        [
+          956.6,
+          281.56
+        ],
+        [
+          934.51,
+          226.35
+        ],
+        [
+          908.28,
+          191.85
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate.",
+      "surveyPoints": [
+        [
+          -100.64,
+          -308.32
+        ],
+        [
+          -106.54,
+          -322.11
+        ],
+        [
+          -111.79,
+          -335.23
+        ],
+        [
+          -118.03,
+          -343.44
+        ]
+      ]
+    },
+    {
+      "address": "26 Beverly Dr",
+      "points": [
+        [
+          -142.07963000702813,
+          -290.53480034037875
+        ],
+        [
+          -144.62,
+          -293.23
+        ],
+        [
+          -153.48,
+          -300.45
+        ],
+        [
+          -165.95,
+          -306.35
+        ],
+        [
+          -172.19,
+          -314.89
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          796.47,
+          403.02
+        ],
+        [
+          759.2,
+          372.66
+        ],
+        [
+          706.75,
+          347.81
+        ],
+        [
+          680.52,
+          311.93
+        ]
+      ],
+      "occlusion": "Some intermediate segments are screened by deciduous crowns; interpolated visible endpoints.",
+      "surveyPoints": [
+        [
+          -144.62,
+          -293.23
+        ],
+        [
+          -153.48,
+          -300.45
+        ],
+        [
+          -165.95,
+          -306.35
+        ],
+        [
+          -172.19,
+          -314.89
+        ]
+      ]
+    },
+    {
+      "address": "27 Beverly Dr",
+      "points": [
+        [
+          -142.16433551638048,
+          -290.4549608622793
+        ],
+        [
+          -141.99,
+          -290.27
+        ],
+        [
+          -134.77,
+          -283.38
+        ],
+        [
+          -127.55,
+          -273.21
+        ],
+        [
+          -120.33,
+          -268.94
+        ]
+      ],
+      "widthMeters": 3.7,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          807.52,
+          415.44
+        ],
+        [
+          837.88,
+          444.43
+        ],
+        [
+          868.25,
+          487.21
+        ],
+        [
+          898.62,
+          505.16
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate.",
+      "surveyPoints": [
+        [
+          -141.99,
+          -290.27
+        ],
+        [
+          -134.77,
+          -283.38
+        ],
+        [
+          -127.55,
+          -273.21
+        ],
+        [
+          -120.33,
+          -268.94
+        ]
+      ]
+    },
+    {
+      "address": "28 Beverly Dr",
+      "points": [
+        [
+          -160.8435833102028,
+          -247.89343269270987
+        ],
+        [
+          -163.98,
+          -248.92
+        ],
+        [
+          -174.16,
+          -252.53
+        ],
+        [
+          -184.33,
+          -255.49
+        ],
+        [
+          -193.52,
+          -257.13
+        ]
+      ],
+      "widthMeters": 3.9,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          715.03,
+          589.35
+        ],
+        [
+          672.24,
+          574.17
+        ],
+        [
+          629.45,
+          561.74
+        ],
+        [
+          590.8,
+          554.84
+        ]
+      ],
+      "occlusion": "Corrected the trace to the visible strip south of the house; original endpoint entered the main footprint. Branches obscure part of the strip.",
+      "surveyPoints": [
+        [
+          -163.98,
+          -248.92
+        ],
+        [
+          -174.16,
+          -252.53
+        ],
+        [
+          -184.33,
+          -255.49
+        ],
+        [
+          -193.52,
+          -257.13
+        ]
+      ]
+    },
+    {
+      "address": "29 Beverly Dr",
+      "points": [
+        [
+          -159.9817676924488,
+          -250.52649227668078
+        ],
+        [
+          -157.09,
+          -249.58
+        ],
+        [
+          -147.57,
+          -244.66
+        ],
+        [
+          -134.77,
+          -237.11
+        ],
+        [
+          -127.88,
+          -231.86
+        ],
+        [
+          -128.21,
+          -226.94
+        ]
+      ],
+      "widthMeters": 4.1,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          744.02,
+          586.59
+        ],
+        [
+          784.05,
+          607.29
+        ],
+        [
+          837.88,
+          639.04
+        ],
+        [
+          866.87,
+          661.12
+        ],
+        [
+          865.49,
+          681.82
+        ]
+      ],
+      "occlusion": "Corrected the road mouth to the east pavement edge and stopped at the visible front parking area before the main footprint.",
+      "surveyPoints": [
+        [
+          -157.09,
+          -249.58
+        ],
+        [
+          -147.57,
+          -244.66
+        ],
+        [
+          -134.77,
+          -237.11
+        ],
+        [
+          -127.88,
+          -231.86
+        ],
+        [
+          -128.21,
+          -226.94
+        ]
+      ]
+    },
+    {
+      "address": "30 Beverly Dr",
+      "points": [
+        [
+          -173.04431268320494,
+          -210.6120803376621
+        ],
+        [
+          -174.81,
+          -211.19
+        ],
+        [
+          -186.96,
+          -214.14
+        ],
+        [
+          -195.49,
+          -211.19
+        ],
+        [
+          -196.8,
+          -204.62
+        ]
+      ],
+      "widthMeters": 4.0,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          669.48,
+          748.07
+        ],
+        [
+          618.4,
+          735.65
+        ],
+        [
+          582.52,
+          748.07
+        ],
+        [
+          576.99,
+          775.68
+        ]
+      ],
+      "occlusion": "Some intermediate segments are screened by deciduous crowns; interpolated visible endpoints.",
+      "surveyPoints": [
+        [
+          -174.81,
+          -211.19
+        ],
+        [
+          -186.96,
+          -214.14
+        ],
+        [
+          -195.49,
+          -211.19
+        ],
+        [
+          -196.8,
+          -204.62
+        ]
+      ]
+    },
+    {
+      "address": "31 Beverly Dr",
+      "points": [
+        [
+          -184.19806280470254,
+          -177.98637527356422
+        ],
+        [
+          -184.33,
+          -178.04
+        ],
+        [
+          -171.53,
+          -173.44
+        ],
+        [
+          -156.1,
+          -167.87
+        ],
+        [
+          -147.57,
+          -167.21
+        ],
+        [
+          -144.29,
+          -171.15
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          629.45,
+          887.47
+        ],
+        [
+          683.28,
+          906.8
+        ],
+        [
+          748.16,
+          930.26
+        ],
+        [
+          784.05,
+          933.02
+        ],
+        [
+          797.85,
+          916.46
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate.",
+      "surveyPoints": [
+        [
+          -184.33,
+          -178.04
+        ],
+        [
+          -171.53,
+          -173.44
+        ],
+        [
+          -156.1,
+          -167.87
+        ],
+        [
+          -147.57,
+          -167.21
+        ],
+        [
+          -144.29,
+          -171.15
+        ]
+      ]
+    },
+    {
+      "address": "32 Beverly Dr",
+      "points": [
+        [
+          -197.15070497356845,
+          -147.3819795086996
+        ],
+        [
+          -202.05,
+          -149.49
+        ],
+        [
+          -209.28,
+          -152.11
+        ],
+        [
+          -215.84,
+          -155.07
+        ],
+        [
+          -219.78,
+          -157.69
+        ],
+        [
+          -221.09,
+          -160.98
+        ]
+      ],
+      "widthMeters": 4.0,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          554.91,
+          1007.55
+        ],
+        [
+          524.54,
+          996.51
+        ],
+        [
+          496.93,
+          984.09
+        ],
+        [
+          480.37,
+          973.05
+        ],
+        [
+          474.85,
+          959.24
+        ]
+      ],
+      "occlusion": "Corrected a gross road-mouth displacement. The visible driveway reaches the road south of the house, alongside its southern parking apron.",
+      "surveyPoints": [
+        [
+          -202.05,
+          -149.49
+        ],
+        [
+          -209.28,
+          -152.11
+        ],
+        [
+          -215.84,
+          -155.07
+        ],
+        [
+          -219.78,
+          -157.69
+        ],
+        [
+          -221.09,
+          -160.98
+        ]
+      ]
+    },
+    {
+      "address": "33 Beverly Dr",
+      "points": [
+        [
+          -197.7958744053828,
+          -145.8825275813876
+        ],
+        [
+          -197.79,
+          -145.88
+        ],
+        [
+          -183.35,
+          -140.95
+        ],
+        [
+          -167.92,
+          -134.72
+        ],
+        [
+          -156.43,
+          -136.69
+        ]
+      ],
+      "widthMeters": 3.9,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          572.85,
+          1022.73
+        ],
+        [
+          633.59,
+          1043.44
+        ],
+        [
+          698.47,
+          1069.66
+        ],
+        [
+          746.78,
+          1061.38
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate.",
+      "surveyPoints": [
+        [
+          -197.79,
+          -145.88
+        ],
+        [
+          -183.35,
+          -140.95
+        ],
+        [
+          -167.92,
+          -134.72
+        ],
+        [
+          -156.43,
+          -136.69
+        ]
+      ]
+    },
+    {
+      "address": "34 Beverly Dr",
+      "points": [
+        [
+          -210.8255382628208,
+          -115.60333424303067
+        ],
+        [
+          -210.26,
+          -115.36
+        ],
+        [
+          -223.06,
+          -116.01
+        ],
+        [
+          -236.85,
+          -122.25
+        ],
+        [
+          -240.46,
+          -128.48
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          520.4,
+          1151.09
+        ],
+        [
+          466.56,
+          1148.33
+        ],
+        [
+          408.59,
+          1122.11
+        ],
+        [
+          393.4,
+          1095.89
+        ]
+      ],
+      "occlusion": "Some intermediate segments are screened by deciduous crowns; interpolated visible endpoints.",
+      "surveyPoints": [
+        [
+          -210.26,
+          -115.36
+        ],
+        [
+          -223.06,
+          -116.01
+        ],
+        [
+          -236.85,
+          -122.25
+        ],
+        [
+          -240.46,
+          -128.48
+        ]
+      ]
+    },
+    {
+      "address": "35 Beverly Dr",
+      "points": [
+        [
+          -210.6909520830737,
+          -115.91612883102572
+        ],
+        [
+          -213.21,
+          -117.0
+        ],
+        [
+          -198.45,
+          -113.06
+        ],
+        [
+          -182.69,
+          -108.14
+        ],
+        [
+          -177.11,
+          -106.17
+        ]
+      ],
+      "widthMeters": 3.7,
+      "confidence": "low",
+      "sourcePixels": [
+        [
+          507.98,
+          1144.19
+        ],
+        [
+          570.09,
+          1160.76
+        ],
+        [
+          636.35,
+          1181.46
+        ],
+        [
+          659.82,
+          1189.74
+        ]
+      ],
+      "occlusion": "Endpoint stopped outside the state footprint. Intermediate alignment remains low confidence under dense branches; do not present it as surveyed.",
+      "surveyPoints": [
+        [
+          -213.21,
+          -117.0
+        ],
+        [
+          -198.45,
+          -113.06
+        ],
+        [
+          -182.69,
+          -108.14
+        ],
+        [
+          -177.11,
+          -106.17
+        ]
+      ]
+    },
+    {
+      "address": "36 Beverly Dr",
+      "points": [
+        [
+          -218.23895374447062,
+          -98.37365846520555
+        ],
+        [
+          -223.39,
+          -100.59
+        ],
+        [
+          -233.57,
+          -103.87
+        ],
+        [
+          -241.44,
+          -106.17
+        ],
+        [
+          -247.35,
+          -108.14
+        ],
+        [
+          -248.33,
+          -105.18
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          465.18,
+          1213.2
+        ],
+        [
+          422.39,
+          1199.4
+        ],
+        [
+          389.26,
+          1189.74
+        ],
+        [
+          364.42,
+          1181.46
+        ],
+        [
+          360.28,
+          1193.88
+        ]
+      ],
+      "occlusion": "Corrected from the south lawn to the visible access north of the house. End stops before the older state footprint; branches partly screen pavement.",
+      "surveyPoints": [
+        [
+          -223.39,
+          -100.59
+        ],
+        [
+          -233.57,
+          -103.87
+        ],
+        [
+          -241.44,
+          -106.17
+        ],
+        [
+          -247.35,
+          -108.14
+        ],
+        [
+          -248.33,
+          -105.18
+        ]
+      ]
+    },
+    {
+      "address": "37 Beverly Dr",
+      "points": [
+        [
+          -225.6640737639956,
+          -81.11713877219599
+        ],
+        [
+          -226.67,
+          -81.55
+        ],
+        [
+          -205.67,
+          -74.33
+        ],
+        [
+          -186.96,
+          -68.43
+        ],
+        [
+          -181.71,
+          -71.38
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          451.38,
+          1293.26
+        ],
+        [
+          539.72,
+          1323.62
+        ],
+        [
+          618.4,
+          1348.46
+        ],
+        [
+          640.49,
+          1336.04
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate.",
+      "surveyPoints": [
+        [
+          -226.67,
+          -81.55
+        ],
+        [
+          -205.67,
+          -74.33
+        ],
+        [
+          -186.96,
+          -68.43
+        ],
+        [
+          -181.71,
+          -71.38
+        ]
+      ]
+    },
+    {
+      "address": "38 Beverly Dr",
+      "points": [
+        [
+          -235.66466560821544,
+          -57.8765170482845
+        ],
+        [
+          -241.11,
+          -60.22
+        ],
+        [
+          -250.3,
+          -64.49
+        ],
+        [
+          -260.15,
+          -68.1
+        ],
+        [
+          -265.73,
+          -68.76
+        ],
+        [
+          -266.71,
+          -66.79
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          390.64,
+          1382.97
+        ],
+        [
+          351.99,
+          1365.03
+        ],
+        [
+          310.58,
+          1349.84
+        ],
+        [
+          287.12,
+          1347.08
+        ],
+        [
+          282.98,
+          1355.36
+        ]
+      ],
+      "occlusion": "Corrected to the exposed access north of the house; original approach was on the wrong side of the building.",
+      "surveyPoints": [
+        [
+          -241.11,
+          -60.22
+        ],
+        [
+          -250.3,
+          -64.49
+        ],
+        [
+          -260.15,
+          -68.1
+        ],
+        [
+          -265.73,
+          -68.76
+        ],
+        [
+          -266.71,
+          -66.79
+        ]
+      ]
+    },
+    {
+      "address": "39 Beverly Dr",
+      "points": [
+        [
+          -241.7404773641119,
+          -43.75659428442525
+        ],
+        [
+          -238.82,
+          -42.5
+        ],
+        [
+          -221.09,
+          -34.95
+        ],
+        [
+          -204.68,
+          -30.03
+        ],
+        [
+          -196.8,
+          -31.67
+        ]
+      ],
+      "widthMeters": 4.0,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          400.31,
+          1457.5
+        ],
+        [
+          474.85,
+          1489.24
+        ],
+        [
+          543.87,
+          1509.95
+        ],
+        [
+          576.99,
+          1503.05
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate.",
+      "surveyPoints": [
+        [
+          -238.82,
+          -42.5
+        ],
+        [
+          -221.09,
+          -34.95
+        ],
+        [
+          -204.68,
+          -30.03
+        ],
+        [
+          -196.8,
+          -31.67
+        ]
+      ]
+    },
+    {
+      "address": "40 Beverly Dr",
+      "points": [
+        [
+          -250.17565380675623,
+          -24.153222238200005
+        ],
+        [
+          -253.91,
+          -25.76
+        ],
+        [
+          -263.1,
+          -28.72
+        ],
+        [
+          -271.97,
+          -31.01
+        ],
+        [
+          -275.25,
+          -29.7
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          336.81,
+          1527.89
+        ],
+        [
+          298.16,
+          1515.47
+        ],
+        [
+          260.89,
+          1505.81
+        ],
+        [
+          247.09,
+          1511.33
+        ]
+      ],
+      "occlusion": "Corrected to the partly visible strip north of the house. Tree crowns obscure the middle; exact edges remain uncertain.",
+      "surveyPoints": [
+        [
+          -253.91,
+          -25.76
+        ],
+        [
+          -263.1,
+          -28.72
+        ],
+        [
+          -271.97,
+          -31.01
+        ],
+        [
+          -275.25,
+          -29.7
+        ]
+      ]
+    },
+    {
+      "address": "41 Beverly Dr",
+      "points": [
+        [
+          -245.92868897227825,
+          -34.023522045629775
+        ],
+        [
+          -242.76,
+          -32.66
+        ],
+        [
+          -229.63,
+          -26.42
+        ],
+        [
+          -218.47,
+          -21.83
+        ],
+        [
+          -209.93,
+          -17.89
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          383.74,
+          1498.91
+        ],
+        [
+          438.96,
+          1525.13
+        ],
+        [
+          485.89,
+          1544.45
+        ],
+        [
+          521.78,
+          1561.02
+        ]
+      ],
+      "occlusion": "Some intermediate segments are screened by deciduous crowns; interpolated visible endpoints.",
+      "surveyPoints": [
+        [
+          -242.76,
+          -32.66
+        ],
+        [
+          -229.63,
+          -26.42
+        ],
+        [
+          -218.47,
+          -21.83
+        ],
+        [
+          -209.93,
+          -17.89
+        ]
+      ]
+    },
+    {
+      "address": "42 Beverly Dr",
+      "points": [
+        [
+          -249.62791824257206,
+          6.431709675131444
+        ],
+        [
+          -252.27,
+          7.71
+        ],
+        [
+          -261.79,
+          10.99
+        ],
+        [
+          -272.29,
+          13.62
+        ],
+        [
+          -278.2,
+          15.92
+        ]
+      ],
+      "widthMeters": 3.6,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          343.71,
+          1668.67
+        ],
+        [
+          303.68,
+          1682.47
+        ],
+        [
+          259.51,
+          1693.52
+        ],
+        [
+          234.66,
+          1703.18
+        ]
+      ],
+      "occlusion": "Stopped the trace at the visible northern parking apron; original final segment entered the footprint.",
+      "surveyPoints": [
+        [
+          -252.27,
+          7.71
+        ],
+        [
+          -261.79,
+          10.99
+        ],
+        [
+          -272.29,
+          13.62
+        ],
+        [
+          -278.2,
+          15.92
+        ]
+      ]
+    },
+    {
+      "address": "43 Beverly Dr",
+      "points": [
+        [
+          -172.02489969697234,
+          47.83087368077478
+        ],
+        [
+          -170.22,
+          44.14
+        ],
+        [
+          -156.1,
+          38.56
+        ],
+        [
+          -150.2,
+          30.36
+        ],
+        [
+          -150.52,
+          22.81
+        ],
+        [
+          -162.34,
+          21.17
+        ]
+      ],
+      "widthMeters": 4.2,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          688.8,
+          1821.88
+        ],
+        [
+          748.16,
+          1798.41
+        ],
+        [
+          773.01,
+          1763.91
+        ],
+        [
+          771.63,
+          1732.16
+        ],
+        [
+          721.93,
+          1725.26
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate.",
+      "surveyPoints": [
+        [
+          -170.22,
+          44.14
+        ],
+        [
+          -156.1,
+          38.56
+        ],
+        [
+          -150.2,
+          30.36
+        ],
+        [
+          -150.52,
+          22.81
+        ],
+        [
+          -162.34,
+          21.17
+        ]
+      ]
+    },
+    {
+      "address": "44 Beverly Dr",
+      "points": [
+        [
+          -229.2027664191262,
+          26.034968299876674
+        ],
+        [
+          -233.89,
+          33.64
+        ],
+        [
+          -241.44,
+          38.89
+        ],
+        [
+          -248.33,
+          44.14
+        ],
+        [
+          -254.9,
+          48.73
+        ],
+        [
+          -255.88,
+          55.62
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          421.01,
+          1777.71
+        ],
+        [
+          389.26,
+          1799.79
+        ],
+        [
+          360.28,
+          1821.88
+        ],
+        [
+          332.67,
+          1841.2
+        ],
+        [
+          328.53,
+          1870.18
+        ]
+      ],
+      "occlusion": "Corrected to the northwest approach from farther west on the bend. Original trace crossed the house for about eight metres. The approach near the road is partly branch-screened.",
+      "surveyPoints": [
+        [
+          -233.89,
+          33.64
+        ],
+        [
+          -241.44,
+          38.89
+        ],
+        [
+          -248.33,
+          44.14
+        ],
+        [
+          -254.9,
+          48.73
+        ],
+        [
+          -255.88,
+          55.62
+        ]
+      ]
+    }
+  ],
+  "canopies": [
+    {
+      "center": [
+        -13.55,
+        -315.05
+      ],
+      "radiusMeters": 8,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1347.67,
+        311.26
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        514,
+        208
+      ]
+    },
+    {
+      "center": [
+        18.4,
+        -295.37
+      ],
+      "radiusMeters": 6.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1482.06,
+        394.01
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        704,
+        325
+      ]
+    },
+    {
+      "center": [
+        33.2,
+        -279.22
+      ],
+      "radiusMeters": 4.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1544.3,
+        461.91
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        792,
+        421
+      ]
+    },
+    {
+      "center": [
+        24.96,
+        -231.29
+      ],
+      "radiusMeters": 6.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1509.64,
+        663.5
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        743,
+        706
+      ]
+    },
+    {
+      "center": [
+        38.08,
+        -232.98
+      ],
+      "radiusMeters": 4.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1564.81,
+        656.42
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        821,
+        696
+      ]
+    },
+    {
+      "center": [
+        74.91,
+        -206.24
+      ],
+      "radiusMeters": 9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1719.71,
+        768.89
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        1040,
+        855
+      ]
+    },
+    {
+      "center": [
+        -3.8,
+        -287.13
+      ],
+      "radiusMeters": 8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1388.69,
+        428.67
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        572,
+        374
+      ]
+    },
+    {
+      "center": [
+        10.33,
+        -269.47
+      ],
+      "radiusMeters": 8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1448.11,
+        502.94
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        656,
+        479
+      ]
+    },
+    {
+      "center": [
+        15.71,
+        -246.09
+      ],
+      "radiusMeters": 7,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1470.74,
+        601.25
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        688,
+        618
+      ]
+    },
+    {
+      "center": [
+        3.43,
+        -178.65
+      ],
+      "radiusMeters": 8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1419.11,
+        884.88
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        615,
+        1019
+      ]
+    },
+    {
+      "center": [
+        -1.78,
+        -170.41
+      ],
+      "radiusMeters": 7,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1397.18,
+        919.54
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        584,
+        1068
+      ]
+    },
+    {
+      "center": [
+        25.13,
+        -143.17
+      ],
+      "radiusMeters": 9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1510.35,
+        1034.13
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        744,
+        1230
+      ]
+    },
+    {
+      "center": [
+        -15.07,
+        -210.61
+      ],
+      "radiusMeters": 7.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1341.3,
+        750.5
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        505,
+        829
+      ]
+    },
+    {
+      "center": [
+        -28.52,
+        -213.64
+      ],
+      "radiusMeters": 7.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1284.72,
+        737.76
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        425,
+        811
+      ]
+    },
+    {
+      "center": [
+        -40.3,
+        -215.15
+      ],
+      "radiusMeters": 8,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1235.21,
+        731.4
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        355,
+        802
+      ]
+    },
+    {
+      "center": [
+        -53.58,
+        -215.99
+      ],
+      "radiusMeters": 8,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1179.33,
+        727.86
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        276,
+        797
+      ]
+    },
+    {
+      "center": [
+        -69.73,
+        -214.31
+      ],
+      "radiusMeters": 8,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1111.43,
+        734.93
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        180,
+        807
+      ]
+    },
+    {
+      "center": [
+        -46.18,
+        -224.57
+      ],
+      "radiusMeters": 7,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1210.45,
+        691.79
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        320,
+        746
+      ]
+    },
+    {
+      "center": [
+        -78.14,
+        -246.43
+      ],
+      "radiusMeters": 9,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1076.06,
+        599.84
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        130,
+        616
+      ]
+    },
+    {
+      "center": [
+        -22.47,
+        -296.38
+      ],
+      "radiusMeters": 6,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1310.18,
+        389.77
+      ],
+      "inspectionImage": "east-north-2025.jpg",
+      "inspectionPixel": [
+        461,
+        319
+      ]
+    },
+    {
+      "center": [
+        11.86,
+        -108.87
+      ],
+      "radiusMeters": 7.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1454.55,
+        1178.38
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        667,
+        376
+      ]
+    },
+    {
+      "center": [
+        24.75,
+        -107.52
+      ],
+      "radiusMeters": 7.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1508.74,
+        1184.06
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        772,
+        387
+      ]
+    },
+    {
+      "center": [
+        31.99,
+        -106.17
+      ],
+      "radiusMeters": 6,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1539.19,
+        1189.74
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        831,
+        398
+      ]
+    },
+    {
+      "center": [
+        -4.83,
+        -107.76
+      ],
+      "radiusMeters": 7.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1384.35,
+        1183.03
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        531,
+        385
+      ]
+    },
+    {
+      "center": [
+        -29.25,
+        -122.12
+      ],
+      "radiusMeters": 9,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1281.64,
+        1122.64
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        332,
+        268
+      ]
+    },
+    {
+      "center": [
+        -50.36,
+        -138.94
+      ],
+      "radiusMeters": 8,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1192.86,
+        1051.93
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        160,
+        131
+      ]
+    },
+    {
+      "center": [
+        50.76,
+        -122.12
+      ],
+      "radiusMeters": 15,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1618.16,
+        1122.64
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        984,
+        268
+      ]
+    },
+    {
+      "center": [
+        50.27,
+        -74.51
+      ],
+      "radiusMeters": 15,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1616.1,
+        1322.9
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        980,
+        656
+      ]
+    },
+    {
+      "center": [
+        12.84,
+        -68.37
+      ],
+      "radiusMeters": 7,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1458.68,
+        1348.71
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        675,
+        706
+      ]
+    },
+    {
+      "center": [
+        24.13,
+        -62.36
+      ],
+      "radiusMeters": 6.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1506.16,
+        1374.0
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        767,
+        755
+      ]
+    },
+    {
+      "center": [
+        40.58,
+        -55.73
+      ],
+      "radiusMeters": 12,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1575.32,
+        1401.87
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        901,
+        809
+      ]
+    },
+    {
+      "center": [
+        -32.32,
+        -80.76
+      ],
+      "radiusMeters": 8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1268.74,
+        1296.58
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        307,
+        605
+      ]
+    },
+    {
+      "center": [
+        -21.52,
+        -78.56
+      ],
+      "radiusMeters": 9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1314.16,
+        1305.87
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        395,
+        623
+      ]
+    },
+    {
+      "center": [
+        -16.49,
+        -110.46
+      ],
+      "radiusMeters": 8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1335.32,
+        1171.67
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        436,
+        363
+      ]
+    },
+    {
+      "center": [
+        -30.48,
+        -62.6
+      ],
+      "radiusMeters": 7.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1276.48,
+        1372.97
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        322,
+        753
+      ]
+    },
+    {
+      "center": [
+        -6.67,
+        -20.14
+      ],
+      "radiusMeters": 8,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1376.61,
+        1551.55
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        516,
+        1099
+      ]
+    },
+    {
+      "center": [
+        9.04,
+        -20.51
+      ],
+      "radiusMeters": 8,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1442.68,
+        1550.01
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        644,
+        1096
+      ]
+    },
+    {
+      "center": [
+        20.2,
+        -19.65
+      ],
+      "radiusMeters": 7,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1489.65,
+        1553.62
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        735,
+        1103
+      ]
+    },
+    {
+      "center": [
+        32.48,
+        -19.77
+      ],
+      "radiusMeters": 7,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1541.26,
+        1553.1
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        835,
+        1102
+      ]
+    },
+    {
+      "center": [
+        -9.0,
+        14.47
+      ],
+      "radiusMeters": 9,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1366.8,
+        1697.11
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        497,
+        1381
+      ]
+    },
+    {
+      "center": [
+        -19.07,
+        22.2
+      ],
+      "radiusMeters": 9,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1324.48,
+        1729.62
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        415,
+        1444
+      ]
+    },
+    {
+      "center": [
+        -22.87,
+        29.94
+      ],
+      "radiusMeters": 9,
+      "type": "conifer",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1308.48,
+        1762.14
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        384,
+        1507
+      ]
+    },
+    {
+      "center": [
+        38.86,
+        6.13
+      ],
+      "radiusMeters": 18,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1568.1,
+        1662.01
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        887,
+        1313
+      ]
+    },
+    {
+      "center": [
+        34.56,
+        35.09
+      ],
+      "radiusMeters": 16,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1550.03,
+        1783.82
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        852,
+        1549
+      ]
+    },
+    {
+      "center": [
+        5.11,
+        54.36
+      ],
+      "radiusMeters": 12,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1426.16,
+        1864.85
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        612,
+        1706
+      ]
+    },
+    {
+      "center": [
+        -36.5,
+        43.07
+      ],
+      "radiusMeters": 10,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1251.19,
+        1817.37
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        273,
+        1614
+      ]
+    },
+    {
+      "center": [
+        -30.11,
+        77.31
+      ],
+      "radiusMeters": 12,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "notes": "Visible canopy, approximate crown center; trunk position is not resolved.",
+      "sourcePixels": [
+        1278.03,
+        1961.37
+      ],
+      "inspectionImage": "home-east-south-2025.jpg",
+      "inspectionPixel": [
+        325,
+        1893
+      ]
+    },
+    {
+      "center": [
+        -148.23,
+        -373.63
+      ],
+      "radiusMeters": 7.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        781.29,
+        64.87
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -134.11,
+        -372.64
+      ],
+      "radiusMeters": 6.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        840.64,
+        69.01
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -100.96,
+        -359.52
+      ],
+      "radiusMeters": 11.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        980.06,
+        124.22
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -55.67,
+        -360.5
+      ],
+      "radiusMeters": 8.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        1170.55,
+        120.08
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -0.86,
+        -329.65
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        1401.07,
+        249.82
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -178.1,
+        -346.39
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        655.67,
+        179.43
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -147.9,
+        -324.08
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        782.67,
+        273.28
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -140.02,
+        -300.45
+      ],
+      "radiusMeters": 7.2,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        815.8,
+        372.66
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -132.14,
+        -301.43
+      ],
+      "radiusMeters": 7.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        848.93,
+        368.52
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -122.95,
+        -302.75
+      ],
+      "radiusMeters": 6.6,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        887.58,
+        362.99
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -111.79,
+        -297.82
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        934.51,
+        383.7
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -87.83,
+        -291.26
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        1035.28,
+        411.3
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -100.64,
+        -242.03
+      ],
+      "radiusMeters": 7.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        981.44,
+        618.33
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -88.49,
+        -239.74
+      ],
+      "radiusMeters": 7.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        1032.52,
+        627.99
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -189.91,
+        -293.56
+      ],
+      "radiusMeters": 10.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        605.98,
+        401.64
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -203.7,
+        -292.9
+      ],
+      "radiusMeters": 8.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        548.01,
+        404.4
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -185.32,
+        -273.54
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "low",
+      "sourcePixels": [
+        625.31,
+        485.83
+      ],
+      "notes": "Canopy/shadow boundaries overlap the roof at 28 Beverly; no trunk location is resolved. Do not instantiate a trunk at this source center.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -159.71,
+        -262.05
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        732.98,
+        534.14
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -179.08,
+        -239.41
+      ],
+      "radiusMeters": 9.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        651.53,
+        629.38
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -201.73,
+        -238.42
+      ],
+      "radiusMeters": 9.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        556.29,
+        633.52
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -221.09,
+        -251.55
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        474.85,
+        578.31
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -190.57,
+        -199.04
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        603.22,
+        799.14
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -172.52,
+        -197.4
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        679.14,
+        806.04
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -154.79,
+        -199.7
+      ],
+      "radiusMeters": 9.2,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        753.68,
+        796.38
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -130.5,
+        -190.18
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        855.83,
+        836.41
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -112.45,
+        -172.79
+      ],
+      "radiusMeters": 10.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        931.75,
+        909.56
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -119.34,
+        -154.08
+      ],
+      "radiusMeters": 8.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        902.76,
+        988.23
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -136.74,
+        -154.41
+      ],
+      "radiusMeters": 9.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        829.6,
+        986.85
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -219.45,
+        -191.16
+      ],
+      "radiusMeters": 9.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        481.75,
+        832.27
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -207.96,
+        -181.32
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        530.06,
+        873.67
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -220.43,
+        -147.85
+      ],
+      "radiusMeters": 8.2,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        477.61,
+        1014.45
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -209.93,
+        -134.39
+      ],
+      "radiusMeters": 8.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        521.78,
+        1071.04
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -193.19,
+        -118.64
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        592.18,
+        1137.29
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -144.95,
+        -127.17
+      ],
+      "radiusMeters": 11.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        795.09,
+        1101.41
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -139.69,
+        -110.11
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        817.18,
+        1173.18
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -121.97,
+        -103.87
+      ],
+      "radiusMeters": 8.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        891.72,
+        1199.4
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -108.84,
+        -131.77
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        946.93,
+        1082.08
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -240.46,
+        -105.51
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        393.4,
+        1192.5
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -255.88,
+        -116.01
+      ],
+      "radiusMeters": 9.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        328.53,
+        1148.33
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -226.67,
+        -98.62
+      ],
+      "radiusMeters": 8.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        451.38,
+        1221.48
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -200.41,
+        -99.93
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        561.81,
+        1215.96
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -164.97,
+        -96.65
+      ],
+      "radiusMeters": 8.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        710.89,
+        1229.77
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -214.53,
+        -82.21
+      ],
+      "radiusMeters": 9.8,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        502.45,
+        1290.49
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -210.92,
+        -69.08
+      ],
+      "radiusMeters": 9.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        517.64,
+        1345.7
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -189.58,
+        -59.24
+      ],
+      "radiusMeters": 9.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        607.36,
+        1387.11
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -158.73,
+        -64.82
+      ],
+      "radiusMeters": 11.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        737.12,
+        1363.65
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -167.59,
+        -39.88
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        699.85,
+        1468.54
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -243.41,
+        -69.41
+      ],
+      "radiusMeters": 10.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        380.98,
+        1344.32
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -253.26,
+        -45.13
+      ],
+      "radiusMeters": 8.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        339.57,
+        1446.46
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -240.46,
+        -22.81
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        393.4,
+        1540.31
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -229.95,
+        -31.34
+      ],
+      "radiusMeters": 7.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        437.58,
+        1504.43
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -205.34,
+        -27.41
+      ],
+      "radiusMeters": 6.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        541.1,
+        1520.99
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -222.08,
+        -11.0
+      ],
+      "radiusMeters": 8.2,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        470.71,
+        1590.0
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -238.82,
+        -4.43
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        400.31,
+        1617.6
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -250.63,
+        4.43
+      ],
+      "radiusMeters": 8.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        350.61,
+        1654.87
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -228.31,
+        8.04
+      ],
+      "radiusMeters": 8.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        444.48,
+        1670.05
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -216.83,
+        28.72
+      ],
+      "radiusMeters": 10.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        492.79,
+        1757.01
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -266.06,
+        53.98
+      ],
+      "radiusMeters": 6.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        285.74,
+        1863.28
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -189.91,
+        53.98
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        605.98,
+        1863.28
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -174.48,
+        47.42
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        670.86,
+        1835.68
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -145.27,
+        38.23
+      ],
+      "radiusMeters": 8.2,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        793.71,
+        1797.03
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -141.66,
+        61.21
+      ],
+      "radiusMeters": 10.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        808.9,
+        1893.65
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -127.55,
+        69.41
+      ],
+      "radiusMeters": 7.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        868.25,
+        1928.15
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -147.9,
+        91.4
+      ],
+      "radiusMeters": 6.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        782.67,
+        2020.62
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -159.71,
+        94.68
+      ],
+      "radiusMeters": 7.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        732.98,
+        2034.43
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -153.81,
+        114.37
+      ],
+      "radiusMeters": 8.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        757.82,
+        2117.24
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -184.33,
+        119.62
+      ],
+      "radiusMeters": 8.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        629.45,
+        2139.32
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -176.78,
+        133.08
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        661.2,
+        2195.91
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -168.58,
+        152.44
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        695.71,
+        2277.34
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -222.08,
+        121.26
+      ],
+      "radiusMeters": 10.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        470.71,
+        2146.22
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -214.2,
+        134.39
+      ],
+      "radiusMeters": 9.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        503.83,
+        2201.43
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -242.1,
+        142.6
+      ],
+      "radiusMeters": 8.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        386.5,
+        2235.94
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -221.75,
+        152.44
+      ],
+      "radiusMeters": 8.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        472.09,
+        2277.34
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -235.86,
+        170.82
+      ],
+      "radiusMeters": 11.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        412.73,
+        2354.64
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -200.41,
+        173.12
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        561.81,
+        2364.3
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    }
+  ],
+  "woodlands": [
+    {
+      "points": [
+        [
+          -328.09,
+          -379.21
+        ],
+        [
+          -227.0,
+          -385.77
+        ],
+        [
+          -202.38,
+          -311.93
+        ],
+        [
+          -228.31,
+          -262.71
+        ],
+        [
+          -242.43,
+          -188.87
+        ],
+        [
+          -254.57,
+          -147.19
+        ],
+        [
+          -279.84,
+          -109.78
+        ],
+        [
+          -290.67,
+          -48.74
+        ],
+        [
+          -312.67,
+          -16.25
+        ],
+        [
+          -332.36,
+          -47.75
+        ]
+      ],
+      "spacing": 12,
+      "sourcePixels": [
+        [
+          24.85,
+          41.41
+        ],
+        [
+          450.0,
+          13.8
+        ],
+        [
+          553.53,
+          324.35
+        ],
+        [
+          444.48,
+          531.38
+        ],
+        [
+          385.12,
+          841.93
+        ],
+        [
+          334.05,
+          1017.21
+        ],
+        [
+          227.76,
+          1174.56
+        ],
+        [
+          182.21,
+          1431.28
+        ],
+        [
+          89.72,
+          1567.92
+        ],
+        [
+          6.9,
+          1435.42
+        ]
+      ],
+      "confidence": "medium",
+      "notes": "Observed contiguous canopy area; interior trunks are representative sampling."
+    },
+    {
+      "points": [
+        [
+          -165.62,
+          -117.66
+        ],
+        [
+          -136.41,
+          -131.44
+        ],
+        [
+          -99.32,
+          -114.37
+        ],
+        [
+          -99.32,
+          -39.22
+        ],
+        [
+          -127.22,
+          -23.8
+        ],
+        [
+          -151.18,
+          -35.61
+        ],
+        [
+          -166.93,
+          -65.14
+        ]
+      ],
+      "spacing": 12,
+      "sourcePixels": [
+        [
+          708.13,
+          1141.43
+        ],
+        [
+          830.98,
+          1083.46
+        ],
+        [
+          986.96,
+          1155.23
+        ],
+        [
+          986.96,
+          1471.3
+        ],
+        [
+          869.63,
+          1536.17
+        ],
+        [
+          768.87,
+          1486.48
+        ],
+        [
+          702.61,
+          1362.27
+        ]
+      ],
+      "confidence": "medium",
+      "notes": "Observed contiguous canopy area; interior trunks are representative sampling."
+    },
+    {
+      "points": [
+        [
+          -152.49,
+          157.69
+        ],
+        [
+          -120.66,
+          159.66
+        ],
+        [
+          -99.98,
+          194.12
+        ],
+        [
+          -99.98,
+          239.41
+        ],
+        [
+          -207.31,
+          239.41
+        ],
+        [
+          -194.83,
+          210.86
+        ],
+        [
+          -177.44,
+          191.82
+        ]
+      ],
+      "spacing": 12,
+      "sourcePixels": [
+        [
+          763.34,
+          2299.43
+        ],
+        [
+          897.24,
+          2307.71
+        ],
+        [
+          984.2,
+          2452.63
+        ],
+        [
+          984.2,
+          2643.1
+        ],
+        [
+          532.82,
+          2643.1
+        ],
+        [
+          585.28,
+          2523.02
+        ],
+        [
+          658.44,
+          2442.97
+        ]
+      ],
+      "confidence": "medium",
+      "notes": "Observed contiguous canopy area; interior trunks are representative sampling."
+    }
+  ],
+  "landcover": [
+    {
+      "kind": "meadow",
+      "points": [
+        [
+          -152.82,
+          -25.76
+        ],
+        [
+          -126.89,
+          -28.72
+        ],
+        [
+          -76.02,
+          -18.22
+        ],
+        [
+          -38.6,
+          -20.19
+        ],
+        [
+          -42.21,
+          18.54
+        ],
+        [
+          -108.51,
+          27.73
+        ],
+        [
+          -136.08,
+          19.2
+        ]
+      ],
+      "sourcePixels": [
+        [
+          761.96,
+          1527.89
+        ],
+        [
+          871.01,
+          1515.47
+        ],
+        [
+          1084.97,
+          1559.64
+        ],
+        [
+          1242.33,
+          1551.35
+        ],
+        [
+          1227.15,
+          1714.22
+        ],
+        [
+          948.31,
+          1752.86
+        ],
+        [
+          832.36,
+          1716.98
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "meadow",
+      "points": [
+        [
+          -224.7,
+          56.94
+        ],
+        [
+          -198.45,
+          54.31
+        ],
+        [
+          -173.17,
+          72.36
+        ],
+        [
+          -167.92,
+          95.01
+        ],
+        [
+          -166.61,
+          118.64
+        ],
+        [
+          -181.05,
+          139.97
+        ],
+        [
+          -204.68,
+          130.78
+        ],
+        [
+          -229.95,
+          113.06
+        ],
+        [
+          -243.74,
+          88.11
+        ]
+      ],
+      "sourcePixels": [
+        [
+          459.66,
+          1875.7
+        ],
+        [
+          570.09,
+          1864.66
+        ],
+        [
+          676.38,
+          1940.57
+        ],
+        [
+          698.47,
+          2035.81
+        ],
+        [
+          703.99,
+          2135.18
+        ],
+        [
+          643.25,
+          2224.9
+        ],
+        [
+          543.87,
+          2186.25
+        ],
+        [
+          437.58,
+          2111.72
+        ],
+        [
+          379.6,
+          2006.82
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "meadow",
+      "points": [
+        [
+          -170.22,
+          57.27
+        ],
+        [
+          -151.84,
+          58.25
+        ],
+        [
+          -146.26,
+          99.93
+        ],
+        [
+          -132.14,
+          124.55
+        ],
+        [
+          -123.94,
+          149.16
+        ],
+        [
+          -158.73,
+          159.0
+        ]
+      ],
+      "sourcePixels": [
+        [
+          688.8,
+          1877.08
+        ],
+        [
+          766.1,
+          1881.22
+        ],
+        [
+          789.57,
+          2056.51
+        ],
+        [
+          848.93,
+          2160.03
+        ],
+        [
+          883.44,
+          2263.54
+        ],
+        [
+          737.12,
+          2304.95
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "pond",
+      "points": [
+        [
+          -135.1,
+          173.12
+        ],
+        [
+          -124.27,
+          166.22
+        ],
+        [
+          -109.17,
+          163.27
+        ],
+        [
+          -98.34,
+          165.57
+        ],
+        [
+          -95.38,
+          175.74
+        ],
+        [
+          -102.28,
+          188.54
+        ],
+        [
+          -110.81,
+          203.64
+        ],
+        [
+          -121.64,
+          221.03
+        ],
+        [
+          -133.79,
+          229.24
+        ],
+        [
+          -144.62,
+          220.38
+        ],
+        [
+          -151.51,
+          205.94
+        ],
+        [
+          -153.15,
+          187.89
+        ],
+        [
+          -146.91,
+          178.37
+        ]
+      ],
+      "sourcePixels": [
+        [
+          836.5,
+          2364.3
+        ],
+        [
+          882.06,
+          2335.31
+        ],
+        [
+          945.55,
+          2322.89
+        ],
+        [
+          991.1,
+          2332.55
+        ],
+        [
+          1003.53,
+          2375.34
+        ],
+        [
+          974.54,
+          2429.17
+        ],
+        [
+          938.65,
+          2492.66
+        ],
+        [
+          893.1,
+          2565.81
+        ],
+        [
+          842.02,
+          2600.31
+        ],
+        [
+          796.47,
+          2563.05
+        ],
+        [
+          767.48,
+          2502.32
+        ],
+        [
+          760.58,
+          2426.41
+        ],
+        [
+          786.81,
+          2386.38
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "pond",
+      "points": [
+        [
+          -278.86,
+          202.33
+        ],
+        [
+          -272.29,
+          200.36
+        ],
+        [
+          -258.18,
+          203.64
+        ],
+        [
+          -246.36,
+          212.17
+        ],
+        [
+          -252.27,
+          224.64
+        ],
+        [
+          -265.07,
+          232.52
+        ],
+        [
+          -278.53,
+          236.79
+        ],
+        [
+          -289.03,
+          234.16
+        ],
+        [
+          -291.99,
+          225.3
+        ],
+        [
+          -287.72,
+          215.78
+        ]
+      ],
+      "sourcePixels": [
+        [
+          231.9,
+          2487.14
+        ],
+        [
+          259.51,
+          2478.85
+        ],
+        [
+          318.87,
+          2492.66
+        ],
+        [
+          368.56,
+          2528.54
+        ],
+        [
+          343.71,
+          2580.99
+        ],
+        [
+          289.88,
+          2614.11
+        ],
+        [
+          233.28,
+          2632.06
+        ],
+        [
+          189.11,
+          2621.02
+        ],
+        [
+          176.69,
+          2583.75
+        ],
+        [
+          194.63,
+          2543.72
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "woodland-floor",
+      "points": [
+        [
+          -328.09,
+          -379.21
+        ],
+        [
+          -227.0,
+          -385.77
+        ],
+        [
+          -202.38,
+          -311.93
+        ],
+        [
+          -228.31,
+          -262.71
+        ],
+        [
+          -242.43,
+          -188.87
+        ],
+        [
+          -254.57,
+          -147.19
+        ],
+        [
+          -279.84,
+          -109.78
+        ],
+        [
+          -290.67,
+          -48.74
+        ],
+        [
+          -312.67,
+          -16.25
+        ],
+        [
+          -332.36,
+          -47.75
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "woodland-floor",
+      "points": [
+        [
+          -165.62,
+          -117.66
+        ],
+        [
+          -136.41,
+          -131.44
+        ],
+        [
+          -99.32,
+          -114.37
+        ],
+        [
+          -99.32,
+          -39.22
+        ],
+        [
+          -127.22,
+          -23.8
+        ],
+        [
+          -151.18,
+          -35.61
+        ],
+        [
+          -166.93,
+          -65.14
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "woodland-floor",
+      "points": [
+        [
+          -152.49,
+          157.69
+        ],
+        [
+          -120.66,
+          159.66
+        ],
+        [
+          -99.98,
+          194.12
+        ],
+        [
+          -99.98,
+          239.41
+        ],
+        [
+          -207.31,
+          239.41
+        ],
+        [
+          -194.83,
+          210.86
+        ],
+        [
+          -177.44,
+          191.82
+        ]
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "loop": {
+    "name": "Beverly neighborhood loop",
+    "points": [
+      [
+        -162.342,
+        -7.051,
+        160.412
+      ],
+      [
+        -161.707,
+        -6.608,
+        152.653
+      ],
+      [
+        -161.071,
+        -6.195,
+        144.894
+      ],
+      [
+        -160.435,
+        -5.806,
+        137.135
+      ],
+      [
+        -159.799,
+        -5.425,
+        129.376
+      ],
+      [
+        -159.164,
+        -5.052,
+        121.617
+      ],
+      [
+        -158.528,
+        -4.742,
+        113.858
+      ],
+      [
+        -157.892,
+        -4.471,
+        106.099
+      ],
+      [
+        -157.256,
+        -4.197,
+        98.34
+      ],
+      [
+        -156.621,
+        -3.918,
+        90.581
+      ],
+      [
+        -155.985,
+        -3.697,
+        82.822
+      ],
+      [
+        -156.152,
+        -3.547,
+        78.147
+      ],
+      [
+        -156.319,
+        -3.398,
+        73.471
+      ],
+      [
+        -158.16,
+        -3.12,
+        66.792
+      ],
+      [
+        -160.0,
+        -2.858,
+        60.113
+      ],
+      [
+        -163.346,
+        -2.554,
+        54.769
+      ],
+      [
+        -168.532,
+        -2.211,
+        49.537
+      ],
+      [
+        -171.176,
+        -2.091,
+        48.246
+      ],
+      [
+        -176.73,
+        -1.854,
+        45.53
+      ],
+      [
+        -184.223,
+        -1.833,
+        42.747
+      ],
+      [
+        -191.716,
+        -1.923,
+        39.964
+      ],
+      [
+        -199.209,
+        -2.07,
+        37.181
+      ],
+      [
+        -206.701,
+        -2.275,
+        34.398
+      ],
+      [
+        -214.194,
+        -2.671,
+        31.615
+      ],
+      [
+        -221.687,
+        -3.121,
+        28.832
+      ],
+      [
+        -229.18,
+        -3.597,
+        26.049
+      ],
+      [
+        -233.153,
+        -3.891,
+        23.6
+      ],
+      [
+        -237.127,
+        -4.197,
+        21.151
+      ],
+      [
+        -242.648,
+        -4.832,
+        15.919
+      ],
+      [
+        -245.701,
+        -5.223,
+        12.078
+      ],
+      [
+        -248.754,
+        -5.615,
+        8.238
+      ],
+      [
+        -250.72,
+        -5.925,
+        4.174
+      ],
+      [
+        -252.686,
+        -6.236,
+        0.111
+      ],
+      [
+        -253.606,
+        -6.716,
+        -6.791
+      ],
+      [
+        -253.02,
+        -7.094,
+        -14.138
+      ],
+      [
+        -251.18,
+        -7.382,
+        -21.819
+      ],
+      [
+        -248.165,
+        -7.524,
+        -28.827
+      ],
+      [
+        -245.149,
+        -7.597,
+        -35.834
+      ],
+      [
+        -242.134,
+        -7.632,
+        -42.842
+      ],
+      [
+        -239.118,
+        -7.636,
+        -49.85
+      ],
+      [
+        -236.103,
+        -7.577,
+        -56.858
+      ],
+      [
+        -233.087,
+        -7.408,
+        -63.866
+      ],
+      [
+        -230.072,
+        -7.217,
+        -70.874
+      ],
+      [
+        -227.057,
+        -7.025,
+        -77.882
+      ],
+      [
+        -224.041,
+        -6.832,
+        -84.889
+      ],
+      [
+        -221.026,
+        -6.598,
+        -91.897
+      ],
+      [
+        -218.01,
+        -6.296,
+        -98.905
+      ],
+      [
+        -214.995,
+        -5.966,
+        -105.913
+      ],
+      [
+        -211.979,
+        -5.608,
+        -112.921
+      ],
+      [
+        -208.964,
+        -5.216,
+        -119.929
+      ],
+      [
+        -205.949,
+        -4.78,
+        -126.937
+      ],
+      [
+        -202.933,
+        -4.347,
+        -133.944
+      ],
+      [
+        -199.918,
+        -3.921,
+        -140.952
+      ],
+      [
+        -196.902,
+        -3.509,
+        -147.96
+      ],
+      [
+        -193.887,
+        -3.326,
+        -154.968
+      ],
+      [
+        -190.871,
+        -3.185,
+        -161.976
+      ],
+      [
+        -187.856,
+        -3.085,
+        -168.984
+      ],
+      [
+        -185.82,
+        -3.055,
+        -173.993
+      ],
+      [
+        -183.785,
+        -3.013,
+        -179.003
+      ],
+      [
+        -181.749,
+        -2.917,
+        -184.012
+      ],
+      [
+        -179.381,
+        -2.854,
+        -191.248
+      ],
+      [
+        -177.013,
+        -2.787,
+        -198.484
+      ],
+      [
+        -174.645,
+        -2.706,
+        -205.719
+      ],
+      [
+        -172.277,
+        -2.589,
+        -212.955
+      ],
+      [
+        -169.909,
+        -2.481,
+        -220.191
+      ],
+      [
+        -167.542,
+        -2.388,
+        -227.427
+      ],
+      [
+        -165.174,
+        -2.311,
+        -234.663
+      ],
+      [
+        -162.806,
+        -2.09,
+        -241.898
+      ],
+      [
+        -160.438,
+        -1.82,
+        -249.134
+      ],
+      [
+        -158.07,
+        -1.55,
+        -256.37
+      ],
+      [
+        -155.702,
+        -1.28,
+        -263.606
+      ],
+      [
+        -153.334,
+        -0.916,
+        -270.842
+      ],
+      [
+        -150.966,
+        -0.493,
+        -278.077
+      ],
+      [
+        -147.285,
+        0.085,
+        -284.979
+      ],
+      [
+        -143.604,
+        0.554,
+        -289.098
+      ],
+      [
+        -140.593,
+        0.916,
+        -291.937
+      ],
+      [
+        -137.581,
+        1.268,
+        -294.775
+      ],
+      [
+        -130.555,
+        2.028,
+        -298.449
+      ],
+      [
+        -125.828,
+        2.539,
+        -299.618
+      ],
+      [
+        -121.102,
+        3.059,
+        -300.787
+      ],
+      [
+        -114.642,
+        3.57,
+        -301.605
+      ],
+      [
+        -108.182,
+        3.969,
+        -302.423
+      ],
+      [
+        -101.722,
+        4.368,
+        -303.241
+      ],
+      [
+        -95.262,
+        4.765,
+        -304.059
+      ],
+      [
+        -87.581,
+        5.207,
+        -305.03
+      ],
+      [
+        -79.9,
+        5.525,
+        -306.001
+      ],
+      [
+        -72.22,
+        5.836,
+        -306.972
+      ],
+      [
+        -64.539,
+        6.14,
+        -307.942
+      ],
+      [
+        -56.858,
+        6.447,
+        -308.913
+      ],
+      [
+        -50.863,
+        6.699,
+        -308.097
+      ],
+      [
+        -44.868,
+        6.952,
+        -307.28
+      ],
+      [
+        -38.873,
+        7.206,
+        -306.464
+      ],
+      [
+        -31.612,
+        7.516,
+        -303.559
+      ],
+      [
+        -24.351,
+        7.766,
+        -300.653
+      ],
+      [
+        -17.09,
+        8.015,
+        -297.748
+      ],
+      [
+        -9.829,
+        8.293,
+        -294.842
+      ],
+      [
+        -6.583,
+        8.43,
+        -293.551
+      ],
+      [
+        -1.564,
+        8.665,
+        -290.211
+      ],
+      [
+        2.2,
+        8.785,
+        -286.816
+      ],
+      [
+        5.964,
+        8.843,
+        -283.421
+      ],
+      [
+        8.097,
+        8.902,
+        -279.358
+      ],
+      [
+        10.231,
+        8.95,
+        -275.294
+      ],
+      [
+        12.071,
+        9.037,
+        -267.613
+      ],
+      [
+        13.911,
+        9.136,
+        -259.932
+      ],
+      [
+        13.577,
+        9.25,
+        -253.364
+      ],
+      [
+        11.987,
+        9.398,
+        -245.894
+      ],
+      [
+        10.398,
+        9.551,
+        -238.424
+      ],
+      [
+        8.808,
+        9.719,
+        -230.954
+      ],
+      [
+        7.219,
+        9.9,
+        -223.484
+      ],
+      [
+        5.63,
+        10.091,
+        -216.014
+      ],
+      [
+        4.04,
+        10.291,
+        -208.543
+      ],
+      [
+        2.451,
+        10.476,
+        -201.073
+      ],
+      [
+        0.862,
+        10.666,
+        -193.603
+      ],
+      [
+        -0.728,
+        10.835,
+        -186.133
+      ],
+      [
+        -2.317,
+        10.97,
+        -178.663
+      ],
+      [
+        -3.907,
+        11.013,
+        -171.193
+      ],
+      [
+        -5.496,
+        11.052,
+        -163.722
+      ],
+      [
+        -7.085,
+        11.107,
+        -156.252
+      ],
+      [
+        -8.675,
+        11.179,
+        -148.782
+      ],
+      [
+        -10.264,
+        11.073,
+        -141.312
+      ],
+      [
+        -11.853,
+        10.939,
+        -133.842
+      ],
+      [
+        -13.443,
+        10.809,
+        -126.372
+      ],
+      [
+        -15.032,
+        10.684,
+        -118.901
+      ],
+      [
+        -16.622,
+        10.407,
+        -111.431
+      ],
+      [
+        -16.928,
+        10.117,
+        -104.678
+      ],
+      [
+        -17.235,
+        9.828,
+        -97.924
+      ],
+      [
+        -17.542,
+        9.538,
+        -91.171
+      ],
+      [
+        -17.093,
+        9.003,
+        -83.676
+      ],
+      [
+        -16.644,
+        8.363,
+        -76.18
+      ],
+      [
+        -16.195,
+        7.72,
+        -68.684
+      ],
+      [
+        -15.746,
+        7.072,
+        -61.189
+      ],
+      [
+        -15.297,
+        6.35,
+        -53.693
+      ],
+      [
+        -14.848,
+        5.591,
+        -46.198
+      ],
+      [
+        -14.53,
+        5.044,
+        -40.854
+      ],
+      [
+        -15.283,
+        4.659,
+        -36.402
+      ],
+      [
+        -16.036,
+        4.285,
+        -31.949
+      ],
+      [
+        -17.638,
+        3.719,
+        -24.379
+      ],
+      [
+        -19.24,
+        3.169,
+        -16.809
+      ],
+      [
+        -20.842,
+        2.62,
+        -9.24
+      ],
+      [
+        -22.444,
+        2.073,
+        -1.67
+      ],
+      [
+        -24.046,
+        1.587,
+        5.9
+      ],
+      [
+        -25.648,
+        1.1,
+        13.47
+      ],
+      [
+        -27.249,
+        0.591,
+        21.039
+      ],
+      [
+        -28.851,
+        0.061,
+        28.609
+      ],
+      [
+        -30.453,
+        -0.52,
+        36.179
+      ],
+      [
+        -32.055,
+        -1.139,
+        43.749
+      ],
+      [
+        -33.657,
+        -1.755,
+        51.319
+      ],
+      [
+        -35.259,
+        -2.367,
+        58.888
+      ],
+      [
+        -36.861,
+        -2.936,
+        66.458
+      ],
+      [
+        -38.463,
+        -3.503,
+        74.028
+      ],
+      [
+        -40.065,
+        -4.069,
+        81.598
+      ],
+      [
+        -41.667,
+        -4.613,
+        89.167
+      ],
+      [
+        -43.269,
+        -4.888,
+        96.737
+      ],
+      [
+        -44.871,
+        -5.181,
+        104.307
+      ],
+      [
+        -46.473,
+        -5.493,
+        111.877
+      ],
+      [
+        -48.074,
+        -5.772,
+        119.446
+      ],
+      [
+        -54.885,
+        -5.851,
+        121.887
+      ],
+      [
+        -61.695,
+        -5.936,
+        124.329
+      ],
+      [
+        -68.506,
+        -6.014,
+        126.77
+      ],
+      [
+        -75.316,
+        -6.135,
+        129.211
+      ],
+      [
+        -82.127,
+        -6.301,
+        131.652
+      ],
+      [
+        -88.937,
+        -6.509,
+        134.093
+      ],
+      [
+        -95.747,
+        -6.61,
+        136.534
+      ],
+      [
+        -102.67,
+        -6.693,
+        139.016
+      ],
+      [
+        -109.593,
+        -6.759,
+        141.499
+      ],
+      [
+        -116.515,
+        -6.806,
+        143.981
+      ],
+      [
+        -123.438,
+        -6.873,
+        146.464
+      ],
+      [
+        -130.36,
+        -6.95,
+        148.946
+      ],
+      [
+        -137.283,
+        -7.017,
+        151.429
+      ],
+      [
+        -144.206,
+        -7.086,
+        153.911
+      ],
+      [
+        -151.128,
+        -7.09,
+        156.393
+      ],
+      [
+        -158.051,
+        -7.042,
+        158.876
+      ],
+      [
+        -162.342,
+        -7.051,
+        160.412
+      ]
+    ],
+    "lengthMeters": 1218.89,
+    "sourceWays": [
+      20686958,
+      20668865
+    ]
+  },
+  "buildingObservations": [
+    {
+      "id": "nys-7159301",
+      "address": "39 Beverly Dr",
+      "center": [
+        -198.037,
+        -2.749,
+        -46.64
+      ],
+      "areaMeters2": 160.8,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 39.0,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7158313",
+      "address": "24 Beverly Dr",
+      "center": [
+        -128.463,
+        3.103,
+        -351.875
+      ],
+      "areaMeters2": 179.1,
+      "style": "Colonial",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 51.6,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7248323",
+      "address": "70 West Ridge Rd",
+      "center": [
+        33.804,
+        -1.802,
+        128.326
+      ],
+      "areaMeters2": 87.9,
+      "style": "Ranch",
+      "sourceDate": "2021-22",
+      "roadCenterDistanceMeters": 36.1,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7229577",
+      "address": "53 West Ridge Rd",
+      "center": [
+        -314.42,
+        -9.667,
+        75.353
+      ],
+      "areaMeters2": 146.6,
+      "style": "Ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 45.5,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159540",
+      "address": "42 Beverly Dr",
+      "center": [
+        -271.338,
+        -7.063,
+        23.505
+      ],
+      "areaMeters2": 155.0,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 27.3,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159311",
+      "address": "32 Beverly Dr",
+      "center": [
+        -215.561,
+        -7.124,
+        -175.606
+      ],
+      "areaMeters2": 169.3,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 28.1,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159348",
+      "address": "37 Beverly Dr",
+      "center": [
+        -184.114,
+        -1.448,
+        -82.306
+      ],
+      "areaMeters2": 159.8,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 37.7,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159294",
+      "address": "35 Beverly Dr",
+      "center": [
+        -170.906,
+        0.609,
+        -117.214
+      ],
+      "areaMeters2": 156.2,
+      "style": "Ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 36.0,
+      "photographedFacade": true,
+      "appearanceConfidence": "Photo-observed facade; geometry and heights approximate"
+    },
+    {
+      "id": "nys-7159312",
+      "address": "33 Beverly Dr",
+      "center": [
+        -154.928,
+        1.729,
+        -153.463
+      ],
+      "areaMeters2": 202.5,
+      "style": "Split level",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 36.4,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7206180",
+      "address": "29 Beverly Dr",
+      "center": [
+        -107.474,
+        4.043,
+        -232.48
+      ],
+      "areaMeters2": 17.0,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 55.5,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159284",
+      "address": "13 Beverly Dr",
+      "center": [
+        -24.299,
+        10.607,
+        -192.446
+      ],
+      "areaMeters2": 151.1,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 24.4,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7229576",
+      "address": "122 Sleepy Valley Rd",
+      "center": [
+        -286.206,
+        -10.323,
+        195.927
+      ],
+      "areaMeters2": 152.0,
+      "style": "Contemporary",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 37.7,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159386",
+      "address": "36 Beverly Dr",
+      "center": [
+        -251.856,
+        -10.825,
+        -95.71
+      ],
+      "areaMeters2": 136.6,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 29.8,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159258",
+      "address": "30 Beverly Dr",
+      "center": [
+        -204.0,
+        -6.654,
+        -214.996
+      ],
+      "areaMeters2": 147.6,
+      "style": "Colonial",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 30.8,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159429",
+      "address": "66 West Ridge Rd",
+      "center": [
+        -37.746,
+        -5.483,
+        145.631
+      ],
+      "areaMeters2": 198.0,
+      "style": "Old style",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 28.1,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159158",
+      "address": "17 Beverly Dr",
+      "center": [
+        -30.068,
+        8.107,
+        -276.261
+      ],
+      "areaMeters2": 200.6,
+      "style": "Split level",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 24.8,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159011",
+      "address": "20 Beverly Dr",
+      "center": [
+        -35.044,
+        7.27,
+        -343.043
+      ],
+      "areaMeters2": 145.3,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 36.8,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7206345",
+      "address": "2 Beverly Dr",
+      "center": [
+        13.234,
+        -1.593,
+        20.856
+      ],
+      "areaMeters2": 70.9,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 39.6,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159248",
+      "address": "6 Beverly Dr",
+      "center": [
+        11.96,
+        7.835,
+        -90.974
+      ],
+      "areaMeters2": 161.9,
+      "style": "Cape cod",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 29.4,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7157414",
+      "address": "70 West Ridge Rd",
+      "center": [
+        56.216,
+        -0.372,
+        117.49
+      ],
+      "areaMeters2": 145.4,
+      "style": "Ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 34.4,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159186",
+      "address": "12 Beverly Dr",
+      "center": [
+        36.109,
+        8.939,
+        -206.612
+      ],
+      "areaMeters2": 143.9,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 31.8,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7206411",
+      "address": "53 West Ridge Rd",
+      "center": [
+        -291.385,
+        -7.869,
+        61.663
+      ],
+      "areaMeters2": 21.0,
+      "style": "Ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 66.8,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159351",
+      "address": "38 Beverly Dr",
+      "center": [
+        -271.296,
+        -11.583,
+        -58.701
+      ],
+      "areaMeters2": 178.0,
+      "style": "Ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 33.1,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159243",
+      "address": "34 Beverly Dr",
+      "center": [
+        -234.575,
+        -9.658,
+        -137.257
+      ],
+      "areaMeters2": 121.2,
+      "style": "Colonial",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 30.4,
+      "photographedFacade": true,
+      "appearanceConfidence": "Photo-observed facade; geometry and heights approximate"
+    },
+    {
+      "id": "nys-7206366",
+      "address": "41 Beverly Dr",
+      "center": [
+        -198.198,
+        -2.172,
+        9.613
+      ],
+      "areaMeters2": 17.0,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 26.2,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159162",
+      "address": "29 Beverly Dr",
+      "center": [
+        -132.924,
+        2.009,
+        -217.375
+      ],
+      "areaMeters2": 159.1,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 36.0,
+      "photographedFacade": true,
+      "appearanceConfidence": "Photo-observed facade; geometry and heights approximate"
+    },
+    {
+      "id": "nys-7159400",
+      "address": "65 West Ridge Rd",
+      "center": [
+        -92.18,
+        -2.993,
+        65.459
+      ],
+      "areaMeters2": 159.6,
+      "style": "Cape cod",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 54.3,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7158384",
+      "address": "22 Beverly Dr",
+      "center": [
+        -78.708,
+        6.34,
+        -347.171
+      ],
+      "areaMeters2": 161.1,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 40.7,
+      "photographedFacade": true,
+      "appearanceConfidence": "Photo-observed facade; geometry and heights approximate"
+    },
+    {
+      "id": "nys-7206449",
+      "address": "65 West Ridge Rd",
+      "center": [
+        -62.771,
+        -2.446,
+        63.549
+      ],
+      "areaMeters2": 34.5,
+      "style": "Cape cod",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 26.0,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7206408",
+      "address": "65 West Ridge Rd",
+      "center": [
+        -63.27,
+        0.224,
+        29.269
+      ],
+      "areaMeters2": 85.5,
+      "style": "Cape cod",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 33.5,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159387",
+      "address": "7 Beverly Dr",
+      "center": [
+        -48.364,
+        9.117,
+        -83.025
+      ],
+      "areaMeters2": 183.6,
+      "style": "Cape cod",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 31.3,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159466",
+      "address": "2 Beverly Dr",
+      "center": [
+        1.967,
+        -0.186,
+        2.129
+      ],
+      "areaMeters2": 149.1,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 24.7,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7206297",
+      "address": "2 Beverly Dr",
+      "center": [
+        26.377,
+        -1.555,
+        13.558
+      ],
+      "areaMeters2": 19.7,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 50.9,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159263",
+      "address": "10 Beverly Dr",
+      "center": [
+        32.203,
+        9.18,
+        -168.811
+      ],
+      "areaMeters2": 192.1,
+      "style": "Ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 35.8,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7206310",
+      "address": "69 West Ridge Rd",
+      "center": [
+        29.81,
+        -2.347,
+        26.682
+      ],
+      "areaMeters2": 49.2,
+      "style": "Ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 57.0,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159153",
+      "address": "16 Beverly Dr",
+      "center": [
+        42.723,
+        8.455,
+        -298.214
+      ],
+      "areaMeters2": 210.9,
+      "style": "Colonial",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 39.4,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159427",
+      "address": "73 West Ridge Rd",
+      "center": [
+        60.438,
+        -0.466,
+        60.965
+      ],
+      "areaMeters2": 76.7,
+      "style": "Old style",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 14.4,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7157343",
+      "address": "53 West Ridge Rd",
+      "center": [
+        -310.739,
+        -9.571,
+        120.61
+      ],
+      "areaMeters2": 141.4,
+      "style": "Ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 23.9,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7206430",
+      "address": "122 Sleepy Valley Rd",
+      "center": [
+        -271.363,
+        -8.513,
+        173.643
+      ],
+      "areaMeters2": 581.2,
+      "style": "Contemporary",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 12.4,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7206315",
+      "address": "59 West Ridge Rd",
+      "center": [
+        -253.252,
+        -6.127,
+        151.06
+      ],
+      "areaMeters2": 123.9,
+      "style": "Colonial",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 13.8,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159159",
+      "address": "28 Beverly Dr",
+      "center": [
+        -190.778,
+        -5.904,
+        -270.17
+      ],
+      "areaMeters2": 211.3,
+      "style": "Ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 35.4,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159149",
+      "address": "26 Beverly Dr",
+      "center": [
+        -161.221,
+        -1.893,
+        -325.792
+      ],
+      "areaMeters2": 142.4,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 39.0,
+      "photographedFacade": true,
+      "appearanceConfidence": "Photo-observed facade; geometry and heights approximate"
+    },
+    {
+      "id": "nys-7159229",
+      "address": "27 Beverly Dr",
+      "center": [
+        -106.142,
+        3.983,
+        -272.409
+      ],
+      "areaMeters2": 163.3,
+      "style": "Ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 30.0,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7241957",
+      "address": "9 Beverly Dr",
+      "center": [
+        -103.857,
+        7.651,
+        -106.962
+      ],
+      "areaMeters2": 36.2,
+      "style": "Raised ranch",
+      "sourceDate": " ",
+      "roadCenterDistanceMeters": 86.9,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159342",
+      "address": "9 Beverly Dr",
+      "center": [
+        -39.907,
+        10.876,
+        -121.227
+      ],
+      "areaMeters2": 186.7,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 24.8,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7157430",
+      "address": "14 Beverly Dr",
+      "center": [
+        43.625,
+        8.356,
+        -253.602
+      ],
+      "areaMeters2": 212.4,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 30.0,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7248308",
+      "address": "14 Beverly Dr",
+      "center": [
+        56.088,
+        7.93,
+        -266.086
+      ],
+      "areaMeters2": 67.1,
+      "style": "Raised ranch",
+      "sourceDate": "2021-22",
+      "roadCenterDistanceMeters": 42.6,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159470",
+      "address": "44 Beverly Dr",
+      "center": [
+        -242.064,
+        -3.369,
+        54.529
+      ],
+      "areaMeters2": 177.2,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 31.3,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159287",
+      "address": "31 Beverly Dr",
+      "center": [
+        -143.971,
+        1.864,
+        -183.925
+      ],
+      "areaMeters2": 140.3,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 35.9,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7206372",
+      "address": "66 West Ridge Rd",
+      "center": [
+        -22.168,
+        -4.171,
+        165.893
+      ],
+      "areaMeters2": 91.6,
+      "style": "Old style",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 52.4,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7157338",
+      "address": "15 Beverly Dr",
+      "center": [
+        -18.504,
+        9.569,
+        -231.586
+      ],
+      "areaMeters2": 161.3,
+      "style": "Split level",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 26.8,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159352",
+      "address": "4 Beverly Dr",
+      "center": [
+        12.462,
+        4.323,
+        -52.519
+      ],
+      "areaMeters2": 130.2,
+      "style": "Colonial",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 27.6,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159221",
+      "address": "8 Beverly Dr",
+      "center": [
+        21.126,
+        9.157,
+        -131.575
+      ],
+      "areaMeters2": 161.9,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 32.7,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7206316",
+      "address": "70 West Ridge Rd",
+      "center": [
+        57.241,
+        0.844,
+        151.216
+      ],
+      "areaMeters2": 31.3,
+      "style": "Ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 65.7,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7206368",
+      "address": "49 West Ridge Rd",
+      "center": [
+        -327.966,
+        -11.221,
+        53.44
+      ],
+      "areaMeters2": 28.4,
+      "style": "Old style",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 44.7,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7205241",
+      "address": "30 Beverly Dr",
+      "center": [
+        -208.776,
+        -8.213,
+        -245.792
+      ],
+      "areaMeters2": 27.1,
+      "style": "Colonial",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 44.9,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159491",
+      "address": "43 Beverly Dr",
+      "center": [
+        -170.764,
+        -1.063,
+        12.066
+      ],
+      "areaMeters2": 172.7,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 33.4,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159438",
+      "address": "5 Beverly Dr",
+      "center": [
+        -60.927,
+        6.691,
+        -50.725
+      ],
+      "areaMeters2": 171.6,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 45.7,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159465",
+      "address": "40 Beverly Dr",
+      "center": [
+        -282.481,
+        -10.505,
+        -21.174
+      ],
+      "areaMeters2": 136.8,
+      "style": "Colonial",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 30.3,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159520",
+      "address": "59 West Ridge Rd",
+      "center": [
+        -202.464,
+        -4.674,
+        145.255
+      ],
+      "areaMeters2": 175.4,
+      "style": "Colonial",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 26.6,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159512",
+      "address": "41 Beverly Dr",
+      "center": [
+        -210.136,
+        -3.205,
+        -8.857
+      ],
+      "areaMeters2": 179.7,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 39.4,
+      "photographedFacade": true,
+      "appearanceConfidence": "Photo-observed facade; geometry and heights approximate"
+    },
+    {
+      "id": "nys-7206221",
+      "address": "15 Beverly Dr",
+      "center": [
+        -60.981,
+        7.695,
+        -230.184
+      ],
+      "areaMeters2": 20.0,
+      "style": "Split level",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 68.1,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7159337",
+      "address": "11 Beverly Dr",
+      "center": [
+        -33.219,
+        11.168,
+        -158.815
+      ],
+      "areaMeters2": 144.3,
+      "style": "Raised ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 26.1,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    },
+    {
+      "id": "nys-7157386",
+      "address": "69 West Ridge Rd",
+      "center": [
+        -11.456,
+        -3.673,
+        69.328
+      ],
+      "areaMeters2": 167.6,
+      "style": "Ranch",
+      "sourceDate": "2013",
+      "roadCenterDistanceMeters": 25.4,
+      "photographedFacade": false,
+      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+    }
+  ],
+  "sources": [
+    {
+      "name": "NYS 2025 orthoimagery",
+      "url": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer"
+    },
+    {
+      "name": "NYS Building Footprints",
+      "url": "https://gisservices.its.ny.gov/arcgis/rest/services/BuildingFootprints/MapServer"
+    },
+    {
+      "name": "NYS public tax parcels",
+      "url": "https://nysgeohub.ny.gov/arcgis/rest/services/Parcels/NYS_Tax_Parcels_Public/FeatureServer"
+    },
+    {
+      "name": "Inspected exterior photographs",
+      "url": "../../docs/research-streetview/exterior-observations.md"
+    }
+  ],
+  "limits": [
+    "Ground photographs verified only for numbers22,26,29,34,35,41. Other paint colors remain provisional.",
+    "Footprints have mixed source dates, chiefly2013; manually crosschecked against2025orthophoto.",
+    "Driveway lines are visual estimates; number2 is only a visible mouth stub because its middle is tree-obscured.",
+    "Canopy centers approximate trunks. Woodland stems and exact species/heights remain representative.",
+    "OSM centerlines retained,9.2m pavement reflects observed local cross-sections; ground grade remains USGS30m DEM."
+  ]
+}

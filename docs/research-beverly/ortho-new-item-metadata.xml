@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata xml:lang="en">
+    <Esri>
+        <ArcGISFormat>1.0</ArcGISFormat>
+        <ArcGISProfile>DCPLUS</ArcGISProfile>
+        <CreaDate>20241205</CreaDate>
+        <CreaTime>16075000</CreaTime>
+        <ModDate>20241205</ModDate>
+        <ModTime>16075000</ModTime>
+        <DataProperties>
+            <itemProps>
+                <portalDetails>
+                    <thumbnailURL>https://www.arcgis.com/sharing/rest/content/items/222c4bc1c84a44899a7f01d7cf3e227a/info/thumbnail/ago_downloaded.png</thumbnailURL>
+                    <itemDetailsURL>https://www.arcgis.com/home/item.html?id=222c4bc1c84a44899a7f01d7cf3e227a</itemDetailsURL>
+                    <itemIdentifier>222c4bc1c84a44899a7f01d7cf3e227a</itemIdentifier>
+                    <itemType>Map Service</itemType>
+                    <resourceURL>https://orthos.its.ny.gov/arcgis/rest/services/wms/Latest/MapServer</resourceURL>
+                </portalDetails>
+            </itemProps>
+        </DataProperties>
+    </Esri>
+    <dataIdInfo>
+        <idCitation>
+            <resTitle>Latest New York State Orthoimagery</resTitle>
+            <date>
+                <createDate>2024-12-05T16:07:50</createDate>
+                <reviseDate>2024-12-05T16:07:51</reviseDate>
+            </date>
+        </idCitation>
+        <searchKeys>
+            <keyword>Orthoimagery</keyword>
+            <keyword>NYSDOP</keyword>
+            <keyword>color</keyword>
+        </searchKeys>
+        <idPurp>New York Statewide coverage of orthoimagery using the most recent versions.</idPurp>
+        <idAbs>&lt;div style='text-align:Left;'&gt;&lt;div&gt;&lt;p&gt;&lt;span&gt;Combination of multiple years of orthoimagery encompassing 2020, 2021, 2022, 2023, and 2024. The service provides a Natural Color view at approximately 12 inch resolution. The source orthoimagery is 4-band at resolutions of 12 or 6 inches. For more information see &lt;/span&gt;&lt;a href='https://gis.ny.gov/orthoimagery#statewide-status-overview' rel='nofollow ugc'&gt;&lt;span&gt;https://gis.ny.gov/orthoimagery#statewide-status-overview&lt;/span&gt;&lt;/a&gt;&lt;span&gt;. Please contact NYS ITS Geospatial Services at &lt;/span&gt;&lt;a href='mailto:nysgis@its.ny.gov' rel='nofollow ugc'&gt;&lt;span&gt;nysgis@its.ny.gov&lt;/span&gt;&lt;/a&gt;&lt;span&gt; if you have any questions.&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</idAbs>
+        <idCredit>NYS ITS Geospatial Services, Westchester County GIS </idCredit>
+        <dataExt>
+            <geoEle>
+                <GeoBndBox>
+                    <westBL Sync="FALSE">-8883203.5925</westBL>
+                    <eastBL Sync="FALSE">-7997063.4508</eastBL>
+                    <northBL Sync="FALSE">5627154.8875</northBL>
+                    <southBL Sync="FALSE">4937225.3129</southBL>
+                    <exTypeCode Sync="TRUE">1</exTypeCode>
+                </GeoBndBox>
+            </geoEle>
+        </dataExt>
+    </dataIdInfo>
+    <Binary>
+        <Thumbnail>
+            <Data EsriPropertyType="PictureX">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</Data>
+        </Thumbnail>
+    </Binary>
+    <mdFileID>222c4bc1c84a44899a7f01d7cf3e227a</mdFileID>
+    <distInfo>
+        <distTranOps>
+            <onLineSrc>
+                <linkage>https://orthos.its.ny.gov/arcgis/rest/services/wms/Latest/MapServer</linkage>
+            </onLineSrc>
+        </distTranOps>
+        <distFormat>
+            <formatName>Map Service</formatName>
+        </distFormat>
+    </distInfo>
+    <refSysInfo>
+        <RefSystem>
+            <refSysID>
+                <identCode code="102100"/>
+                <idCodeSpace>EPSG</idCodeSpace>
+            </refSysID>
+        </RefSystem>
+    </refSysInfo>
+</metadata>

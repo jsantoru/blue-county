@@ -1,0 +1,2877 @@
+{
+  "sourceImage": "beverly-2025-ortho.jpg",
+  "coordinateSystem": "local-meters-x-east-z-south",
+  "method": "Manual observations from 2025 NYS aerial imagery; no facade colors inferred. Canopy locations are observed crown centers, not measured trunks. Measurements have roughly 1\u20133m planimetric uncertainty, greater under canopy.",
+  "driveways": [
+    {
+      "address": "20 Beverly Dr",
+      "points": [
+        [
+          -16.61,
+          -305.7
+        ],
+        [
+          -18.91,
+          -314.56
+        ],
+        [
+          -19.89,
+          -321.78
+        ],
+        [
+          -22.52,
+          -328.01
+        ],
+        [
+          -27.77,
+          -332.28
+        ]
+      ],
+      "widthMeters": 3.5,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          1334.82,
+          350.57
+        ],
+        [
+          1325.15,
+          313.31
+        ],
+        [
+          1321.01,
+          282.94
+        ],
+        [
+          1309.97,
+          256.72
+        ],
+        [
+          1287.88,
+          238.78
+        ]
+      ],
+      "occlusion": "Corrected the road mouth westward to the actual approach. A conifer obscures its final road connection; only a corridor between visible paved ends is supported."
+    },
+    {
+      "address": "22 Beverly Dr",
+      "points": [
+        [
+          -66.17,
+          -310.95
+        ],
+        [
+          -66.5,
+          -323.09
+        ],
+        [
+          -65.84,
+          -335.56
+        ],
+        [
+          -71.1,
+          -340.16
+        ]
+      ],
+      "widthMeters": 4.1,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          1126.38,
+          328.49
+        ],
+        [
+          1125.0,
+          277.42
+        ],
+        [
+          1127.76,
+          224.97
+        ],
+        [
+          1105.67,
+          205.65
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate."
+    },
+    {
+      "address": "24 Beverly Dr",
+      "points": [
+        [
+          -100.64,
+          -308.32
+        ],
+        [
+          -106.54,
+          -322.11
+        ],
+        [
+          -111.79,
+          -335.23
+        ],
+        [
+          -118.03,
+          -343.44
+        ]
+      ],
+      "widthMeters": 3.7,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          981.44,
+          339.53
+        ],
+        [
+          956.6,
+          281.56
+        ],
+        [
+          934.51,
+          226.35
+        ],
+        [
+          908.28,
+          191.85
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate."
+    },
+    {
+      "address": "26 Beverly Dr",
+      "points": [
+        [
+          -144.62,
+          -293.23
+        ],
+        [
+          -153.48,
+          -300.45
+        ],
+        [
+          -165.95,
+          -306.35
+        ],
+        [
+          -172.19,
+          -314.89
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          796.47,
+          403.02
+        ],
+        [
+          759.2,
+          372.66
+        ],
+        [
+          706.75,
+          347.81
+        ],
+        [
+          680.52,
+          311.93
+        ]
+      ],
+      "occlusion": "Some intermediate segments are screened by deciduous crowns; interpolated visible endpoints."
+    },
+    {
+      "address": "27 Beverly Dr",
+      "points": [
+        [
+          -141.99,
+          -290.27
+        ],
+        [
+          -134.77,
+          -283.38
+        ],
+        [
+          -127.55,
+          -273.21
+        ],
+        [
+          -120.33,
+          -268.94
+        ]
+      ],
+      "widthMeters": 3.7,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          807.52,
+          415.44
+        ],
+        [
+          837.88,
+          444.43
+        ],
+        [
+          868.25,
+          487.21
+        ],
+        [
+          898.62,
+          505.16
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate."
+    },
+    {
+      "address": "28 Beverly Dr",
+      "points": [
+        [
+          -163.98,
+          -248.92
+        ],
+        [
+          -174.16,
+          -252.53
+        ],
+        [
+          -184.33,
+          -255.49
+        ],
+        [
+          -193.52,
+          -257.13
+        ]
+      ],
+      "widthMeters": 3.9,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          715.03,
+          589.35
+        ],
+        [
+          672.24,
+          574.17
+        ],
+        [
+          629.45,
+          561.74
+        ],
+        [
+          590.8,
+          554.84
+        ]
+      ],
+      "occlusion": "Corrected the trace to the visible strip south of the house; original endpoint entered the main footprint. Branches obscure part of the strip."
+    },
+    {
+      "address": "29 Beverly Dr",
+      "points": [
+        [
+          -157.09,
+          -249.58
+        ],
+        [
+          -147.57,
+          -244.66
+        ],
+        [
+          -134.77,
+          -237.11
+        ],
+        [
+          -127.88,
+          -231.86
+        ],
+        [
+          -128.21,
+          -226.94
+        ]
+      ],
+      "widthMeters": 4.1,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          744.02,
+          586.59
+        ],
+        [
+          784.05,
+          607.29
+        ],
+        [
+          837.88,
+          639.04
+        ],
+        [
+          866.87,
+          661.12
+        ],
+        [
+          865.49,
+          681.82
+        ]
+      ],
+      "occlusion": "Corrected the road mouth to the east pavement edge and stopped at the visible front parking area before the main footprint."
+    },
+    {
+      "address": "30 Beverly Dr",
+      "points": [
+        [
+          -174.81,
+          -211.19
+        ],
+        [
+          -186.96,
+          -214.14
+        ],
+        [
+          -195.49,
+          -211.19
+        ],
+        [
+          -196.8,
+          -204.62
+        ]
+      ],
+      "widthMeters": 4.0,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          669.48,
+          748.07
+        ],
+        [
+          618.4,
+          735.65
+        ],
+        [
+          582.52,
+          748.07
+        ],
+        [
+          576.99,
+          775.68
+        ]
+      ],
+      "occlusion": "Some intermediate segments are screened by deciduous crowns; interpolated visible endpoints."
+    },
+    {
+      "address": "31 Beverly Dr",
+      "points": [
+        [
+          -184.33,
+          -178.04
+        ],
+        [
+          -171.53,
+          -173.44
+        ],
+        [
+          -156.1,
+          -167.87
+        ],
+        [
+          -147.57,
+          -167.21
+        ],
+        [
+          -144.29,
+          -171.15
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          629.45,
+          887.47
+        ],
+        [
+          683.28,
+          906.8
+        ],
+        [
+          748.16,
+          930.26
+        ],
+        [
+          784.05,
+          933.02
+        ],
+        [
+          797.85,
+          916.46
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate."
+    },
+    {
+      "address": "32 Beverly Dr",
+      "points": [
+        [
+          -202.05,
+          -149.49
+        ],
+        [
+          -209.28,
+          -152.11
+        ],
+        [
+          -215.84,
+          -155.07
+        ],
+        [
+          -219.78,
+          -157.69
+        ],
+        [
+          -221.09,
+          -160.98
+        ]
+      ],
+      "widthMeters": 4.0,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          554.91,
+          1007.55
+        ],
+        [
+          524.54,
+          996.51
+        ],
+        [
+          496.93,
+          984.09
+        ],
+        [
+          480.37,
+          973.05
+        ],
+        [
+          474.85,
+          959.24
+        ]
+      ],
+      "occlusion": "Corrected a gross road-mouth displacement. The visible driveway reaches the road south of the house, alongside its southern parking apron."
+    },
+    {
+      "address": "33 Beverly Dr",
+      "points": [
+        [
+          -197.79,
+          -145.88
+        ],
+        [
+          -183.35,
+          -140.95
+        ],
+        [
+          -167.92,
+          -134.72
+        ],
+        [
+          -156.43,
+          -136.69
+        ]
+      ],
+      "widthMeters": 3.9,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          572.85,
+          1022.73
+        ],
+        [
+          633.59,
+          1043.44
+        ],
+        [
+          698.47,
+          1069.66
+        ],
+        [
+          746.78,
+          1061.38
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate."
+    },
+    {
+      "address": "34 Beverly Dr",
+      "points": [
+        [
+          -210.26,
+          -115.36
+        ],
+        [
+          -223.06,
+          -116.01
+        ],
+        [
+          -236.85,
+          -122.25
+        ],
+        [
+          -240.46,
+          -128.48
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          520.4,
+          1151.09
+        ],
+        [
+          466.56,
+          1148.33
+        ],
+        [
+          408.59,
+          1122.11
+        ],
+        [
+          393.4,
+          1095.89
+        ]
+      ],
+      "occlusion": "Some intermediate segments are screened by deciduous crowns; interpolated visible endpoints."
+    },
+    {
+      "address": "35 Beverly Dr",
+      "points": [
+        [
+          -213.21,
+          -117.0
+        ],
+        [
+          -198.45,
+          -113.06
+        ],
+        [
+          -182.69,
+          -108.14
+        ],
+        [
+          -177.11,
+          -106.17
+        ]
+      ],
+      "widthMeters": 3.7,
+      "confidence": "low",
+      "sourcePixels": [
+        [
+          507.98,
+          1144.19
+        ],
+        [
+          570.09,
+          1160.76
+        ],
+        [
+          636.35,
+          1181.46
+        ],
+        [
+          659.82,
+          1189.74
+        ]
+      ],
+      "occlusion": "Endpoint stopped outside the state footprint. Intermediate alignment remains low confidence under dense branches; do not present it as surveyed."
+    },
+    {
+      "address": "36 Beverly Dr",
+      "points": [
+        [
+          -223.39,
+          -100.59
+        ],
+        [
+          -233.57,
+          -103.87
+        ],
+        [
+          -241.44,
+          -106.17
+        ],
+        [
+          -247.35,
+          -108.14
+        ],
+        [
+          -248.33,
+          -105.18
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          465.18,
+          1213.2
+        ],
+        [
+          422.39,
+          1199.4
+        ],
+        [
+          389.26,
+          1189.74
+        ],
+        [
+          364.42,
+          1181.46
+        ],
+        [
+          360.28,
+          1193.88
+        ]
+      ],
+      "occlusion": "Corrected from the south lawn to the visible access north of the house. End stops before the older state footprint; branches partly screen pavement."
+    },
+    {
+      "address": "37 Beverly Dr",
+      "points": [
+        [
+          -226.67,
+          -81.55
+        ],
+        [
+          -205.67,
+          -74.33
+        ],
+        [
+          -186.96,
+          -68.43
+        ],
+        [
+          -181.71,
+          -71.38
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          451.38,
+          1293.26
+        ],
+        [
+          539.72,
+          1323.62
+        ],
+        [
+          618.4,
+          1348.46
+        ],
+        [
+          640.49,
+          1336.04
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate."
+    },
+    {
+      "address": "38 Beverly Dr",
+      "points": [
+        [
+          -241.11,
+          -60.22
+        ],
+        [
+          -250.3,
+          -64.49
+        ],
+        [
+          -260.15,
+          -68.1
+        ],
+        [
+          -265.73,
+          -68.76
+        ],
+        [
+          -266.71,
+          -66.79
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          390.64,
+          1382.97
+        ],
+        [
+          351.99,
+          1365.03
+        ],
+        [
+          310.58,
+          1349.84
+        ],
+        [
+          287.12,
+          1347.08
+        ],
+        [
+          282.98,
+          1355.36
+        ]
+      ],
+      "occlusion": "Corrected to the exposed access north of the house; original approach was on the wrong side of the building."
+    },
+    {
+      "address": "39 Beverly Dr",
+      "points": [
+        [
+          -238.82,
+          -42.5
+        ],
+        [
+          -221.09,
+          -34.95
+        ],
+        [
+          -204.68,
+          -30.03
+        ],
+        [
+          -196.8,
+          -31.67
+        ]
+      ],
+      "widthMeters": 4.0,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          400.31,
+          1457.5
+        ],
+        [
+          474.85,
+          1489.24
+        ],
+        [
+          543.87,
+          1509.95
+        ],
+        [
+          576.99,
+          1503.05
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate."
+    },
+    {
+      "address": "40 Beverly Dr",
+      "points": [
+        [
+          -253.91,
+          -25.76
+        ],
+        [
+          -263.1,
+          -28.72
+        ],
+        [
+          -271.97,
+          -31.01
+        ],
+        [
+          -275.25,
+          -29.7
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          336.81,
+          1527.89
+        ],
+        [
+          298.16,
+          1515.47
+        ],
+        [
+          260.89,
+          1505.81
+        ],
+        [
+          247.09,
+          1511.33
+        ]
+      ],
+      "occlusion": "Corrected to the partly visible strip north of the house. Tree crowns obscure the middle; exact edges remain uncertain."
+    },
+    {
+      "address": "41 Beverly Dr",
+      "points": [
+        [
+          -242.76,
+          -32.66
+        ],
+        [
+          -229.63,
+          -26.42
+        ],
+        [
+          -218.47,
+          -21.83
+        ],
+        [
+          -209.93,
+          -17.89
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          383.74,
+          1498.91
+        ],
+        [
+          438.96,
+          1525.13
+        ],
+        [
+          485.89,
+          1544.45
+        ],
+        [
+          521.78,
+          1561.02
+        ]
+      ],
+      "occlusion": "Some intermediate segments are screened by deciduous crowns; interpolated visible endpoints."
+    },
+    {
+      "address": "42 Beverly Dr",
+      "points": [
+        [
+          -252.27,
+          7.71
+        ],
+        [
+          -261.79,
+          10.99
+        ],
+        [
+          -272.29,
+          13.62
+        ],
+        [
+          -278.2,
+          15.92
+        ]
+      ],
+      "widthMeters": 3.6,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          343.71,
+          1668.67
+        ],
+        [
+          303.68,
+          1682.47
+        ],
+        [
+          259.51,
+          1693.52
+        ],
+        [
+          234.66,
+          1703.18
+        ]
+      ],
+      "occlusion": "Stopped the trace at the visible northern parking apron; original final segment entered the footprint."
+    },
+    {
+      "address": "43 Beverly Dr",
+      "points": [
+        [
+          -170.22,
+          44.14
+        ],
+        [
+          -156.1,
+          38.56
+        ],
+        [
+          -150.2,
+          30.36
+        ],
+        [
+          -150.52,
+          22.81
+        ],
+        [
+          -162.34,
+          21.17
+        ]
+      ],
+      "widthMeters": 4.2,
+      "confidence": "high",
+      "sourcePixels": [
+        [
+          688.8,
+          1821.88
+        ],
+        [
+          748.16,
+          1798.41
+        ],
+        [
+          773.01,
+          1763.91
+        ],
+        [
+          771.63,
+          1732.16
+        ],
+        [
+          721.93,
+          1725.26
+        ]
+      ],
+      "occlusion": "Exposed paved path clearly visible; final garage threshold approximate."
+    },
+    {
+      "address": "44 Beverly Dr",
+      "points": [
+        [
+          -233.89,
+          33.64
+        ],
+        [
+          -241.44,
+          38.89
+        ],
+        [
+          -248.33,
+          44.14
+        ],
+        [
+          -254.9,
+          48.73
+        ],
+        [
+          -255.88,
+          55.62
+        ]
+      ],
+      "widthMeters": 3.8,
+      "confidence": "medium",
+      "sourcePixels": [
+        [
+          421.01,
+          1777.71
+        ],
+        [
+          389.26,
+          1799.79
+        ],
+        [
+          360.28,
+          1821.88
+        ],
+        [
+          332.67,
+          1841.2
+        ],
+        [
+          328.53,
+          1870.18
+        ]
+      ],
+      "occlusion": "Corrected to the northwest approach from farther west on the bend. Original trace crossed the house for about eight metres. The approach near the road is partly branch-screened."
+    }
+  ],
+  "canopies": [
+    {
+      "center": [
+        -148.23,
+        -373.63
+      ],
+      "radiusMeters": 7.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        781.29,
+        64.87
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -134.11,
+        -372.64
+      ],
+      "radiusMeters": 6.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        840.64,
+        69.01
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -100.96,
+        -359.52
+      ],
+      "radiusMeters": 11.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        980.06,
+        124.22
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -55.67,
+        -360.5
+      ],
+      "radiusMeters": 8.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        1170.55,
+        120.08
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -0.86,
+        -329.65
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        1401.07,
+        249.82
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -178.1,
+        -346.39
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        655.67,
+        179.43
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -147.9,
+        -324.08
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        782.67,
+        273.28
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -140.02,
+        -300.45
+      ],
+      "radiusMeters": 7.2,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        815.8,
+        372.66
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -132.14,
+        -301.43
+      ],
+      "radiusMeters": 7.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        848.93,
+        368.52
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -122.95,
+        -302.75
+      ],
+      "radiusMeters": 6.6,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        887.58,
+        362.99
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -111.79,
+        -297.82
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        934.51,
+        383.7
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -87.83,
+        -291.26
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        1035.28,
+        411.3
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -100.64,
+        -242.03
+      ],
+      "radiusMeters": 7.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        981.44,
+        618.33
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -88.49,
+        -239.74
+      ],
+      "radiusMeters": 7.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        1032.52,
+        627.99
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -189.91,
+        -293.56
+      ],
+      "radiusMeters": 10.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        605.98,
+        401.64
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -203.7,
+        -292.9
+      ],
+      "radiusMeters": 8.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        548.01,
+        404.4
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -185.32,
+        -273.54
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "low",
+      "sourcePixels": [
+        625.31,
+        485.83
+      ],
+      "notes": "Canopy/shadow boundaries overlap the roof at 28 Beverly; no trunk location is resolved. Do not instantiate a trunk at this source center.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -159.71,
+        -262.05
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        732.98,
+        534.14
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -179.08,
+        -239.41
+      ],
+      "radiusMeters": 9.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        651.53,
+        629.38
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -201.73,
+        -238.42
+      ],
+      "radiusMeters": 9.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        556.29,
+        633.52
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -221.09,
+        -251.55
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        474.85,
+        578.31
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -190.57,
+        -199.04
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        603.22,
+        799.14
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -172.52,
+        -197.4
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        679.14,
+        806.04
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -154.79,
+        -199.7
+      ],
+      "radiusMeters": 9.2,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        753.68,
+        796.38
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -130.5,
+        -190.18
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        855.83,
+        836.41
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -112.45,
+        -172.79
+      ],
+      "radiusMeters": 10.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        931.75,
+        909.56
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -119.34,
+        -154.08
+      ],
+      "radiusMeters": 8.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        902.76,
+        988.23
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -136.74,
+        -154.41
+      ],
+      "radiusMeters": 9.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        829.6,
+        986.85
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -219.45,
+        -191.16
+      ],
+      "radiusMeters": 9.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        481.75,
+        832.27
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -207.96,
+        -181.32
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        530.06,
+        873.67
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -220.43,
+        -147.85
+      ],
+      "radiusMeters": 8.2,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        477.61,
+        1014.45
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -209.93,
+        -134.39
+      ],
+      "radiusMeters": 8.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        521.78,
+        1071.04
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -193.19,
+        -118.64
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        592.18,
+        1137.29
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -144.95,
+        -127.17
+      ],
+      "radiusMeters": 11.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        795.09,
+        1101.41
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -139.69,
+        -110.11
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        817.18,
+        1173.18
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -121.97,
+        -103.87
+      ],
+      "radiusMeters": 8.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        891.72,
+        1199.4
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -108.84,
+        -131.77
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        946.93,
+        1082.08
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -240.46,
+        -105.51
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        393.4,
+        1192.5
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -255.88,
+        -116.01
+      ],
+      "radiusMeters": 9.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        328.53,
+        1148.33
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -226.67,
+        -98.62
+      ],
+      "radiusMeters": 8.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        451.38,
+        1221.48
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -200.41,
+        -99.93
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        561.81,
+        1215.96
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -164.97,
+        -96.65
+      ],
+      "radiusMeters": 8.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        710.89,
+        1229.77
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -214.53,
+        -82.21
+      ],
+      "radiusMeters": 9.8,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        502.45,
+        1290.49
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -210.92,
+        -69.08
+      ],
+      "radiusMeters": 9.5,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        517.64,
+        1345.7
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -189.58,
+        -59.24
+      ],
+      "radiusMeters": 9.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        607.36,
+        1387.11
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -158.73,
+        -64.82
+      ],
+      "radiusMeters": 11.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        737.12,
+        1363.65
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -167.59,
+        -39.88
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        699.85,
+        1468.54
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -243.41,
+        -69.41
+      ],
+      "radiusMeters": 10.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        380.98,
+        1344.32
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -253.26,
+        -45.13
+      ],
+      "radiusMeters": 8.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        339.57,
+        1446.46
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -240.46,
+        -22.81
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        393.4,
+        1540.31
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -229.95,
+        -31.34
+      ],
+      "radiusMeters": 7.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        437.58,
+        1504.43
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -205.34,
+        -27.41
+      ],
+      "radiusMeters": 6.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        541.1,
+        1520.99
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -222.08,
+        -11.0
+      ],
+      "radiusMeters": 8.2,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        470.71,
+        1590.0
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -238.82,
+        -4.43
+      ],
+      "radiusMeters": 9.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        400.31,
+        1617.6
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -250.63,
+        4.43
+      ],
+      "radiusMeters": 8.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        350.61,
+        1654.87
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -228.31,
+        8.04
+      ],
+      "radiusMeters": 8.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        444.48,
+        1670.05
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -216.83,
+        28.72
+      ],
+      "radiusMeters": 10.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        492.79,
+        1757.01
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -266.06,
+        53.98
+      ],
+      "radiusMeters": 6.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        285.74,
+        1863.28
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -189.91,
+        53.98
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        605.98,
+        1863.28
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -174.48,
+        47.42
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        670.86,
+        1835.68
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -145.27,
+        38.23
+      ],
+      "radiusMeters": 8.2,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        793.71,
+        1797.03
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -141.66,
+        61.21
+      ],
+      "radiusMeters": 10.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        808.9,
+        1893.65
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -127.55,
+        69.41
+      ],
+      "radiusMeters": 7.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        868.25,
+        1928.15
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -147.9,
+        91.4
+      ],
+      "radiusMeters": 6.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        782.67,
+        2020.62
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -159.71,
+        94.68
+      ],
+      "radiusMeters": 7.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        732.98,
+        2034.43
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -153.81,
+        114.37
+      ],
+      "radiusMeters": 8.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        757.82,
+        2117.24
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -184.33,
+        119.62
+      ],
+      "radiusMeters": 8.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        629.45,
+        2139.32
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -176.78,
+        133.08
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        661.2,
+        2195.91
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -168.58,
+        152.44
+      ],
+      "radiusMeters": 7.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        695.71,
+        2277.34
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -222.08,
+        121.26
+      ],
+      "radiusMeters": 10.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        470.71,
+        2146.22
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -214.2,
+        134.39
+      ],
+      "radiusMeters": 9.5,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        503.83,
+        2201.43
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -242.1,
+        142.6
+      ],
+      "radiusMeters": 8.9,
+      "type": "conifer",
+      "confidence": "medium",
+      "sourcePixels": [
+        386.5,
+        2235.94
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -221.75,
+        152.44
+      ],
+      "radiusMeters": 8.9,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        472.09,
+        2277.34
+      ],
+      "notes": "Observed crown; trunk and exact species not resolved from overhead view.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -235.86,
+        170.82
+      ],
+      "radiusMeters": 11.2,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        412.73,
+        2354.64
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    },
+    {
+      "center": [
+        -200.41,
+        173.12
+      ],
+      "radiusMeters": 9.8,
+      "type": "broadleaf",
+      "confidence": "medium",
+      "sourcePixels": [
+        561.81,
+        2364.3
+      ],
+      "notes": "Observed crown overlaps the mapped road corridor; the trunk is not resolved. This center must not be interpreted as an observed trunk in the roadway.",
+      "trunkPositionVerified": false
+    }
+  ],
+  "woodlands": [
+    {
+      "points": [
+        [
+          -328.09,
+          -379.21
+        ],
+        [
+          -227.0,
+          -385.77
+        ],
+        [
+          -202.38,
+          -311.93
+        ],
+        [
+          -228.31,
+          -262.71
+        ],
+        [
+          -242.43,
+          -188.87
+        ],
+        [
+          -254.57,
+          -147.19
+        ],
+        [
+          -279.84,
+          -109.78
+        ],
+        [
+          -290.67,
+          -48.74
+        ],
+        [
+          -312.67,
+          -16.25
+        ],
+        [
+          -332.36,
+          -47.75
+        ]
+      ],
+      "spacing": 12,
+      "sourcePixels": [
+        [
+          24.85,
+          41.41
+        ],
+        [
+          450.0,
+          13.8
+        ],
+        [
+          553.53,
+          324.35
+        ],
+        [
+          444.48,
+          531.38
+        ],
+        [
+          385.12,
+          841.93
+        ],
+        [
+          334.05,
+          1017.21
+        ],
+        [
+          227.76,
+          1174.56
+        ],
+        [
+          182.21,
+          1431.28
+        ],
+        [
+          89.72,
+          1567.92
+        ],
+        [
+          6.9,
+          1435.42
+        ]
+      ],
+      "confidence": "medium",
+      "notes": "Observed contiguous canopy area; interior trunks are representative sampling."
+    },
+    {
+      "points": [
+        [
+          -165.62,
+          -117.66
+        ],
+        [
+          -136.41,
+          -131.44
+        ],
+        [
+          -99.32,
+          -114.37
+        ],
+        [
+          -99.32,
+          -39.22
+        ],
+        [
+          -127.22,
+          -23.8
+        ],
+        [
+          -151.18,
+          -35.61
+        ],
+        [
+          -166.93,
+          -65.14
+        ]
+      ],
+      "spacing": 12,
+      "sourcePixels": [
+        [
+          708.13,
+          1141.43
+        ],
+        [
+          830.98,
+          1083.46
+        ],
+        [
+          986.96,
+          1155.23
+        ],
+        [
+          986.96,
+          1471.3
+        ],
+        [
+          869.63,
+          1536.17
+        ],
+        [
+          768.87,
+          1486.48
+        ],
+        [
+          702.61,
+          1362.27
+        ]
+      ],
+      "confidence": "medium",
+      "notes": "Observed contiguous canopy area; interior trunks are representative sampling."
+    },
+    {
+      "points": [
+        [
+          -152.49,
+          157.69
+        ],
+        [
+          -120.66,
+          159.66
+        ],
+        [
+          -99.98,
+          194.12
+        ],
+        [
+          -99.98,
+          239.41
+        ],
+        [
+          -207.31,
+          239.41
+        ],
+        [
+          -194.83,
+          210.86
+        ],
+        [
+          -177.44,
+          191.82
+        ]
+      ],
+      "spacing": 12,
+      "sourcePixels": [
+        [
+          763.34,
+          2299.43
+        ],
+        [
+          897.24,
+          2307.71
+        ],
+        [
+          984.2,
+          2452.63
+        ],
+        [
+          984.2,
+          2643.1
+        ],
+        [
+          532.82,
+          2643.1
+        ],
+        [
+          585.28,
+          2523.02
+        ],
+        [
+          658.44,
+          2442.97
+        ]
+      ],
+      "confidence": "medium",
+      "notes": "Observed contiguous canopy area; interior trunks are representative sampling."
+    }
+  ],
+  "landcover": [
+    {
+      "kind": "meadow",
+      "points": [
+        [
+          -152.82,
+          -25.76
+        ],
+        [
+          -126.89,
+          -28.72
+        ],
+        [
+          -76.02,
+          -18.22
+        ],
+        [
+          -38.6,
+          -20.19
+        ],
+        [
+          -42.21,
+          18.54
+        ],
+        [
+          -108.51,
+          27.73
+        ],
+        [
+          -136.08,
+          19.2
+        ]
+      ],
+      "sourcePixels": [
+        [
+          761.96,
+          1527.89
+        ],
+        [
+          871.01,
+          1515.47
+        ],
+        [
+          1084.97,
+          1559.64
+        ],
+        [
+          1242.33,
+          1551.35
+        ],
+        [
+          1227.15,
+          1714.22
+        ],
+        [
+          948.31,
+          1752.86
+        ],
+        [
+          832.36,
+          1716.98
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "meadow",
+      "points": [
+        [
+          -224.7,
+          56.94
+        ],
+        [
+          -198.45,
+          54.31
+        ],
+        [
+          -173.17,
+          72.36
+        ],
+        [
+          -167.92,
+          95.01
+        ],
+        [
+          -166.61,
+          118.64
+        ],
+        [
+          -181.05,
+          139.97
+        ],
+        [
+          -204.68,
+          130.78
+        ],
+        [
+          -229.95,
+          113.06
+        ],
+        [
+          -243.74,
+          88.11
+        ]
+      ],
+      "sourcePixels": [
+        [
+          459.66,
+          1875.7
+        ],
+        [
+          570.09,
+          1864.66
+        ],
+        [
+          676.38,
+          1940.57
+        ],
+        [
+          698.47,
+          2035.81
+        ],
+        [
+          703.99,
+          2135.18
+        ],
+        [
+          643.25,
+          2224.9
+        ],
+        [
+          543.87,
+          2186.25
+        ],
+        [
+          437.58,
+          2111.72
+        ],
+        [
+          379.6,
+          2006.82
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "meadow",
+      "points": [
+        [
+          -170.22,
+          57.27
+        ],
+        [
+          -151.84,
+          58.25
+        ],
+        [
+          -146.26,
+          99.93
+        ],
+        [
+          -132.14,
+          124.55
+        ],
+        [
+          -123.94,
+          149.16
+        ],
+        [
+          -158.73,
+          159.0
+        ]
+      ],
+      "sourcePixels": [
+        [
+          688.8,
+          1877.08
+        ],
+        [
+          766.1,
+          1881.22
+        ],
+        [
+          789.57,
+          2056.51
+        ],
+        [
+          848.93,
+          2160.03
+        ],
+        [
+          883.44,
+          2263.54
+        ],
+        [
+          737.12,
+          2304.95
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "pond",
+      "points": [
+        [
+          -135.1,
+          173.12
+        ],
+        [
+          -124.27,
+          166.22
+        ],
+        [
+          -109.17,
+          163.27
+        ],
+        [
+          -98.34,
+          165.57
+        ],
+        [
+          -95.38,
+          175.74
+        ],
+        [
+          -102.28,
+          188.54
+        ],
+        [
+          -110.81,
+          203.64
+        ],
+        [
+          -121.64,
+          221.03
+        ],
+        [
+          -133.79,
+          229.24
+        ],
+        [
+          -144.62,
+          220.38
+        ],
+        [
+          -151.51,
+          205.94
+        ],
+        [
+          -153.15,
+          187.89
+        ],
+        [
+          -146.91,
+          178.37
+        ]
+      ],
+      "sourcePixels": [
+        [
+          836.5,
+          2364.3
+        ],
+        [
+          882.06,
+          2335.31
+        ],
+        [
+          945.55,
+          2322.89
+        ],
+        [
+          991.1,
+          2332.55
+        ],
+        [
+          1003.53,
+          2375.34
+        ],
+        [
+          974.54,
+          2429.17
+        ],
+        [
+          938.65,
+          2492.66
+        ],
+        [
+          893.1,
+          2565.81
+        ],
+        [
+          842.02,
+          2600.31
+        ],
+        [
+          796.47,
+          2563.05
+        ],
+        [
+          767.48,
+          2502.32
+        ],
+        [
+          760.58,
+          2426.41
+        ],
+        [
+          786.81,
+          2386.38
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "pond",
+      "points": [
+        [
+          -278.86,
+          202.33
+        ],
+        [
+          -272.29,
+          200.36
+        ],
+        [
+          -258.18,
+          203.64
+        ],
+        [
+          -246.36,
+          212.17
+        ],
+        [
+          -252.27,
+          224.64
+        ],
+        [
+          -265.07,
+          232.52
+        ],
+        [
+          -278.53,
+          236.79
+        ],
+        [
+          -289.03,
+          234.16
+        ],
+        [
+          -291.99,
+          225.3
+        ],
+        [
+          -287.72,
+          215.78
+        ]
+      ],
+      "sourcePixels": [
+        [
+          231.9,
+          2487.14
+        ],
+        [
+          259.51,
+          2478.85
+        ],
+        [
+          318.87,
+          2492.66
+        ],
+        [
+          368.56,
+          2528.54
+        ],
+        [
+          343.71,
+          2580.99
+        ],
+        [
+          289.88,
+          2614.11
+        ],
+        [
+          233.28,
+          2632.06
+        ],
+        [
+          189.11,
+          2621.02
+        ],
+        [
+          176.69,
+          2583.75
+        ],
+        [
+          194.63,
+          2543.72
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "woodland-floor",
+      "points": [
+        [
+          -328.09,
+          -379.21
+        ],
+        [
+          -227.0,
+          -385.77
+        ],
+        [
+          -202.38,
+          -311.93
+        ],
+        [
+          -228.31,
+          -262.71
+        ],
+        [
+          -242.43,
+          -188.87
+        ],
+        [
+          -254.57,
+          -147.19
+        ],
+        [
+          -279.84,
+          -109.78
+        ],
+        [
+          -290.67,
+          -48.74
+        ],
+        [
+          -312.67,
+          -16.25
+        ],
+        [
+          -332.36,
+          -47.75
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "woodland-floor",
+      "points": [
+        [
+          -165.62,
+          -117.66
+        ],
+        [
+          -136.41,
+          -131.44
+        ],
+        [
+          -99.32,
+          -114.37
+        ],
+        [
+          -99.32,
+          -39.22
+        ],
+        [
+          -127.22,
+          -23.8
+        ],
+        [
+          -151.18,
+          -35.61
+        ],
+        [
+          -166.93,
+          -65.14
+        ]
+      ],
+      "confidence": "medium"
+    },
+    {
+      "kind": "woodland-floor",
+      "points": [
+        [
+          -152.49,
+          157.69
+        ],
+        [
+          -120.66,
+          159.66
+        ],
+        [
+          -99.98,
+          194.12
+        ],
+        [
+          -99.98,
+          239.41
+        ],
+        [
+          -207.31,
+          239.41
+        ],
+        [
+          -194.83,
+          210.86
+        ],
+        [
+          -177.44,
+          191.82
+        ]
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "audit": {
+    "date": "2026-09-20",
+    "method": "Independent visual inspection of bounded high-resolution exports from the same 2025 service, plus segment sampling against retained state footprint polygons. Temporary crops enlarged existing source imagery; no additional ground detail was invented.",
+    "correctedDrivewayAddresses": [
+      20,
+      28,
+      29,
+      32,
+      35,
+      36,
+      38,
+      40,
+      42,
+      44
+    ],
+    "canopyQualification": "Seven crown centers overlap the road corridor and one overlaps a roof; these are not surveyed trunk positions. No crown was silently moved to manufacture a safe trunk location.",
+    "limitations": "Endpoints near garage thresholds and tree-screened strips retain metre-scale uncertainty. Apparent roof edges can differ from older footprint edges; source building polygons were not moved."
+  }
+}

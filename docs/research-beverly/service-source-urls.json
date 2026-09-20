@@ -1,0 +1,10 @@
+{
+  "retrievedAt": "2026-09-20T19:25:54.516835+00:00",
+  "urls": {
+    "ortho-service.json": "https://orthos.its.ny.gov/arcgis/rest/services/wms/Latest/MapServer?f=pjson",
+    "ortho-item.json": "https://www.arcgis.com/sharing/rest/content/items/72fdc987f2e64fb59ddaa53ab7b9b0e3?f=json",
+    "footprints-service.json": "https://gisservices.its.ny.gov/arcgis/rest/services/BuildingFootprints/FeatureServer?f=pjson",
+    "parcels-service.json": "https://gisservices.its.ny.gov/arcgis/rest/services/NYS_Tax_Parcels_Public/FeatureServer?f=pjson",
+    "ortho-index-service.json": "https://services6.arcgis.com/EbVsqZ18sv1kVJ3k/arcgis/rest/services/NYS_Orthoimagery_Latest_Index/FeatureServer?f=pjson"
+  }
+}

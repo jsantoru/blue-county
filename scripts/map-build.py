@@ -300,7 +300,6 @@ result = {'schemaVersion': 1, 'name': 'Warwick — Beverly & the Ridge', 'origin
           'bounds': BOUNDS, 'terrain': terrain, 'roads': roads, 'buildings': buildings, 'landuse': land,
           'home': home, 'route': route, 'attribution': attribution, 'attributionUrl': 'https://www.openstreetmap.org/copyright',
           'graph': {'nodes': {str(n): point(*coords[n]) for n in sorted(connected)}, 'edges': geo_edges}}
-write('warwick.json', result)
 
 manifest = {'schemaVersion': 1, 'name': result['name'], 'retrievedAt': retrieval['retrievedAt'],
     'anchor': {'address': '2 Beverly Dr, Warwick, NY 10990, United States', 'lat': LAT, 'lon': LON,
@@ -337,12 +336,16 @@ manifest = {'schemaVersion': 1, 'name': result['name'], 'retrievedAt': retrieval
         'Stored point heights are bilinear source samples. Runtime road strips and joins are clipped against terrain facets and use exact triangle interpolation with a 0.065m asphalt lift. Runtime terrain sampling is authoritative for spawn placement; minor differences from stored point y are expected.',
         'Map clipped by retaining connected source segments inside bounds with a 30m terrain margin; roads deliberately end at map edge.',
         'Home is a roadside spawn ~20m from the address point; exact driveway connection is not established.',
-        f'Buildings include mapped footprints and {approximate_houses} explicitly flagged generic house envelopes at OSM address points; missing mapped heights default to 6m; roof, material, yards and vegetation appearance are approximations.',
+        f'Initial OSM import included {approximate_houses} explicitly flagged generic house envelopes at address points; the Beverly pass replaces those inside its reference bounds. Missing OSM heights default to 6m; roof, material, yards and vegetation appearance remain approximations except for documented reference overrides.',
         'Runtime buildings use rotated oriented envelopes. Colliders are conservatively shrunk or omitted where envelopes encroach on widened roads; real source footprints remain unchanged in this geographic database.',
         'No road-over-road overpass occurs on the race; mapped stream bridges keep explicit bridge/layer tags and shared-node topology.',
         'Race direction and width are gameplay choices, not a claim that public roads support racing.'],
     'attribution': attribution, 'rebuild': 'python scripts/map-build.py',
     'cacheSha256': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(SOURCE.glob('*')) if p.is_file()}}
+from beverly_build import apply_survey
+apply_survey(result, manifest, point)
+roads, buildings = result['roads'], result['buildings']
+write('warwick.json', result)
 write('manifest.json', manifest)
 
 # Offline SVG route review, with genuine coordinates and named intersections.
@@ -392,6 +395,6 @@ assert all(inside(p[0], p[2]) for p in route_points)
 assert home['distanceToAddressMeters'] < 40
 assert all(abs(p[1] - height(p[0], p[2])) < .01 for r in roads for p in r['points'])
 assert max(math.hypot(b[0]-a[0], b[2]-a[2]) for a,b in zip(route_points,route_points[1:])) <= 12.01
-print(f'Built {len(roads)} connected roads, {len(buildings)} buildings ({approximate_houses} approximate address-point envelopes), {len(connected)} graph nodes.')
+print(f'Built {len(roads)} connected roads, {len(buildings)} buildings ({sum(bool(b.get("footprintApproximate")) for b in buildings)} approximate address-point envelopes), {len(connected)} graph nodes.')
 print(f'Route: {route["lengthMeters"]:.0f}m clockwise, {len(route_points)} samples, {len(checkpoints)} checkpoints, 3 laps.')
 print(f'Home: {home}. Ground datum: {HOME_ELEVATION:.1f}m. All geographic invariants passed.')

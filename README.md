@@ -2,7 +2,7 @@
 
 A locally playable arcade driving slice starring your actual dark blue 1968 Oldsmobile 442 convertible with the wheel and controls on the US driver's left. Free Drive starts on Beverly Drive, roughly 24m from the verified house address point. No exact driveway connection was available, so Home is a right-hand roadside spawn facing the eastern West Ridge Road exit.
 
-![Beverly Drive in the updated game](docs/neighborhood-home.png)
+![Beverly Drive in the updated game](docs/beverly-home.png)
 
 ## Launch on Windows
 
@@ -29,14 +29,15 @@ Start with **Balanced** handling, 0.12 stick deadzone, 1.35 response curve, and 
 
 ## Included slice
 
-- Free Drive on 82 mapped road polylines across approximately 3.8 × 3.9km, with Home and safe recovery.
+- Free Drive across approximately 3.8 × 3.9km of mapped roads, with Home and safe recovery.
 - **Ridge & Hollow**: a verified connected 2.645km clockwise circuit, three laps, countdown, three physical AI rivals, three civilian cars, ordered directional progress, position, results, restart.
 - Real route: Old Ridge Road → High Hill Avenue → Claire Ann Drive → Seward Highway → existing mapped connector → Old Ridge Road. Beverly Drive retains both real connections to West Ridge Road.
 - Separate handling grounds: straight, slalom, constant-radius loop, ramp and collision barriers.
 - Dynamic Rapier chassis, four spring/damper wheel rays, contact-limited tire forces, speed-sensitive steering, brake/handbrake drift, boost, CCD, collision feedback, recent-contact takedown credit, and temporary vehicle-to-vehicle protection after recovery.
 - Detailed actual 442 with closed hood, parchment interior, redlines, chrome, separate steering/spinning wheels, and the modeled engine retained under the hood. Rivals and traffic use original sedan, wagon and pickup models with shaped bodywork, glazing, lamps, grilles, trim and detailed wheels.
 - Stable horizon chase/close cameras, minimap, synthesized engine/shift/tire/wind/boost/impact audio, pooled skid marks, smoke and sparks. Graphics, camera motion, input and rumble settings.
-- Scanned PBR road, lawn, bark, roof, brick, siding and gravel surfaces; 18,731 procedural trees with branching trunks, leaf/needle sprays, wind and distant detail levels; grass and shrubs; 432 detailed generic houses; poles, wires, mailboxes, porches and fences. Afternoon sky/clouds, outdoor HDR reflections, and contact shading on High. See `docs/visual-upgrade.md` for the rendering design, licenses and limits.
+- A targeted Beverly Drive reference pass: 64 state building footprints, including garages and sheds; 37 observed driveway approaches; 122 aerial crown observations before blocked-trunk omissions; and six facades informed by inspected exterior photographs. The real Beverly/West Ridge neighborhood loop is 1.21889km. See [the reconstruction notes](docs/beverly-reconstruction.md) and [interactive source overlay](docs/research-beverly/review-overlay.html).
+- Scanned PBR road, lawn, bark, roof, brick, siding and gravel surfaces; procedural trees with branching trunks, leaf/needle sprays, wind and distant detail levels; grass and shrubs; detailed houses; poles, wires, mailboxes, porches and fences. Afternoon sky/clouds, outdoor HDR reflections, and contact shading on High. Scenery beyond the Beverly reference area remains a generic geographic interpretation. See `docs/visual-upgrade.md` for the rendering design, licenses and limits.
 
 ## Rebuild the data and car
 
@@ -46,7 +47,7 @@ npm run export-car     # Blender background export from the saved snapshot
 python scripts/fetch-textures.py --verify-only  # local checksums/dimensions
 ```
 
-Optional geographic refresh: `python scripts/map-fetch.py` (requires Pillow). Refresh uses open OSM and USGS endpoints, preserves cached provenance, and rejects a mismatched house anchor. See `docs/geography.md`. Source data and the ODbL notice are in `public/map/source` and `public/map/LICENSE.txt`; the map manifest records bounds, origin, meter convention, road graph, Home, checkpoints, sources, dates and adjustments.
+The offline map build also applies the cached Beverly research through `scripts/beverly_build.py` and writes `public/map/beverly-survey.json`. Optional geographic refresh: `python scripts/map-fetch.py` (requires Pillow). This refresh uses OSM and USGS endpoints, preserves cached provenance, and rejects a mismatched house anchor; it does not refresh the separate NYS reference cache. See [geography and attribution](docs/geography.md) and [Beverly reproduction details](docs/beverly-reconstruction.md). Source data and the ODbL notice are in `public/map/source` and `public/map/LICENSE.txt`; the map manifest records bounds, origin, meter convention, road graph, Home, checkpoints, sources, dates and adjustments.
 
 The active source folder `../oldsmobile_442` was **not modified**. Export uses the included `asset-source/1968_oldsmobile_442.snapshot.blend`, preserving the detailed source. See `docs/vehicle.md` and `public/assets/vehicle-manifest.json` for axes, dimensions, pivots, scale and export settings. The source snapshot is tracked so a fresh clone can rebuild the vehicle; intermediate Blender exports remain ignored. To use a future model revision, copy its saved `.blend` into the snapshot path yourself, then export.
 
@@ -59,16 +60,21 @@ npm run build           # TypeScript + production bundle
 $env:GAME_URL='http://127.0.0.1:5180'
 npm run test:browser     # system Edge; synthetic pad, actual game/race physics
 npm run test:visual      # real rendered scenery, quality presets, independent RAF metrics
+npm run test:beverly     # surveyed neighborhood loop, reference views and moving frame sample
 ```
 
 Tests compare acceleration, proportional throttle, braking, turning and boosted wall collision at simulated 30/60/120 fps rendering with fixed 60Hz physics. Tolerances are 0.15m position and 0.2m/s speed, not a cross-machine determinism promise. Ordered gates reject reverse travel, out-of-order crossings, teleport progress and duplicate rewards. Full mapped-route physics tests complete all 777 crossings over three laps, including all four racers with traffic and no racer recoveries. See `docs/verification.md`, the JSON reports and browser screenshots for measured environment and results.
 
 ## Geographic and visual limits
 
-The anchor is **41.283879, -74.3662393**, an OSM house-address point agreeing with an independent PointAddress match within approximately 1m. This is high-confidence address placement, not a survey. The neighborhood is a simplified 3D interpretation: building footprints are preserved in source data, while envelopes, roofs, materials, windows, landscaping and trees are approximate. Beverly lacks mapped building footprints, so flagged simple homes use known address points. Road widths are increased to 10.5–13m; centerlines, bends and junctions remain geographic. Coarse USGS terrain softens small bumps. Roads and their colliders follow the same triangulated terrain. A mapped Jessup stream bridge retains its grade/tags; water and structural bridge detail are not reconstructed. The race has no road-over-road crossing.
+The anchor is **41.283879, -74.3662393**, an OSM house-address point agreeing with an independent PointAddress match within approximately 1m. This is high-confidence address placement, not a survey. Around the starting Beverly loop, NYS building footprints replace the earlier address-point houses, and spring 2025 aerial evidence guides visible driveway approaches, crowns and ground-cover patterns. Most source footprints date to 2013. Six facades have exterior-photo observations; the remaining paint colors and hidden details are provisional. There is no complete Street View reconstruction, and Home's driveway connection remains hidden by trees.
+
+Beverly and the inspected West Ridge segment use an approximately **9.2m paved width without an invented center stripe**. Outside that area, game road widths remain widened to 10.5–13m. Geographic centerlines, bends and junctions are retained; the broader **Ridge & Hollow** race is unchanged. Building envelopes, heights, roofs and landscaping remain approximations. Coarse USGS terrain softens small bumps; roads and their colliders follow the same triangulated terrain. A mapped Jessup stream bridge retains its grade/tags; water and structural bridge detail are not reconstructed. The race has no road-over-road crossing.
 
 Civilian cars follow the verified race loop in its right-hand lane; they do not simulate every neighborhood journey. AI is competent path-following with physical contacts, not human race tactics. Damage is impact/wreck feedback with quick recovery, not deformable destruction. The cabin/close camera is a closer chase view, not a fully modeled first-person driving interface. Campaign, multiplayer and destruction simulation remain outside this slice.
 
 **Physical wired-controller feel, end-to-end latency and felt rumble were not verified.** The automated pad tests inject API snapshots and are labeled accordingly. Use the short hardware checklist in `docs/controller.md`: menus/sliders, partial triggers, drift/recovery, boosted bend, scrape/hard impact, unplug/reconnect, tab away/back, rumble off/on, and controller-only race restart.
 
 Map data © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), [ODbL 1.0](https://opendatacommons.org/licenses/odbl/1-0/). Elevation: [USGS 3DEP](https://www.usgs.gov/3d-elevation-program), public domain. Scanned materials and outdoor HDRI are CC0 from [Poly Haven](https://polyhaven.com/license) and [ambientCG](https://docs.ambientcg.com/license/); exact authors, source URLs, scales and checksums are in `public/textures/manifest.json`. Game UI, generated audio, leaf masks and scenery implementation are original. No Burnout names, artwork, sounds or code are included.
+
+Beverly references: **NYS ITS Geospatial Services / NYSDOP, Orange County GIS Division, NYSERDA and contributing sources**. NYS public-service access and as-is resource terms are documented in [the reconstruction notes](docs/beverly-reconstruction.md#sources-and-resource-terms); these sources are not labeled CC0. Aerial and listing photographs are research references, not game textures. Listing photographs are linked and described only; they are not included as assets.

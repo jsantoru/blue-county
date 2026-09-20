@@ -15,3 +15,17 @@ https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credit
 
 Source provenance, retrieval timestamps and deliberate modifications are recorded
 in manifest.json. Source data and repeatable build scripts are included.
+
+Beverly reference area: NYS Geospatial Services / Orange County GIS.
+Building footprints and selective public parcel geometry are independent NYS
+reference sources; individual footprint source dates are retained. The 2025
+NYS orthophoto is retained as an attributed research reference, not a game
+texture. Source-specific notices remain applicable; these sources are not
+represented as CC0 or USGS public-domain imagery.
+https://gis.ny.gov/shareGIS/
+https://gis.ny.gov/orthoimagery-faqs
+https://gis.ny.gov/orange-county-orthoimagery-downloads
+Exact source metadata and usage notices: ../../docs/research-beverly/findings.md
+
+Ordinary listing photographs are linked as observation references only; no
+listing photograph or Google Street View imagery is distributed as a game asset.

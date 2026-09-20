@@ -1,0 +1,717 @@
+[
+  {
+    "id": 7159301,
+    "address": "39 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -198.04,
+      -46.64
+    ],
+    "area": 160.8,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7158313,
+    "address": "24 Beverly Dr",
+    "style": "Colonial",
+    "center": [
+      -128.46,
+      -351.88
+    ],
+    "area": 179.1,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7248323,
+    "address": "70 West Ridge Rd",
+    "style": "Ranch",
+    "center": [
+      33.8,
+      128.33
+    ],
+    "area": 87.9,
+    "sourceYear": "2021-22"
+  },
+  {
+    "id": 7229577,
+    "address": "53 West Ridge Rd",
+    "style": "Ranch",
+    "center": [
+      -314.42,
+      75.35
+    ],
+    "area": 146.6,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159540,
+    "address": "42 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -271.34,
+      23.51
+    ],
+    "area": 155.0,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159311,
+    "address": "32 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -215.56,
+      -175.61
+    ],
+    "area": 169.3,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159348,
+    "address": "37 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -184.11,
+      -82.31
+    ],
+    "area": 159.8,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159294,
+    "address": "35 Beverly Dr",
+    "style": "Ranch",
+    "center": [
+      -170.91,
+      -117.21
+    ],
+    "area": 156.2,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159312,
+    "address": "33 Beverly Dr",
+    "style": "Split level",
+    "center": [
+      -154.93,
+      -153.46
+    ],
+    "area": 202.5,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206180,
+    "address": "29 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -107.47,
+      -232.48
+    ],
+    "area": 17.0,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159284,
+    "address": "13 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -24.3,
+      -192.45
+    ],
+    "area": 151.1,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7229576,
+    "address": "122 Sleepy Valley Rd",
+    "style": "Contemporary",
+    "center": [
+      -286.21,
+      195.93
+    ],
+    "area": 152.0,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159386,
+    "address": "36 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -251.86,
+      -95.71
+    ],
+    "area": 136.6,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159258,
+    "address": "30 Beverly Dr",
+    "style": "Colonial",
+    "center": [
+      -204.0,
+      -215.0
+    ],
+    "area": 147.6,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159429,
+    "address": "66 West Ridge Rd",
+    "style": "Old style",
+    "center": [
+      -37.75,
+      145.63
+    ],
+    "area": 198.0,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159158,
+    "address": "17 Beverly Dr",
+    "style": "Split level",
+    "center": [
+      -30.07,
+      -276.26
+    ],
+    "area": 200.6,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159011,
+    "address": "20 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -35.04,
+      -343.04
+    ],
+    "area": 145.3,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206345,
+    "address": "2 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      13.23,
+      20.86
+    ],
+    "area": 70.9,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159248,
+    "address": "6 Beverly Dr",
+    "style": "Cape cod",
+    "center": [
+      11.96,
+      -90.97
+    ],
+    "area": 161.9,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7157414,
+    "address": "70 West Ridge Rd",
+    "style": "Ranch",
+    "center": [
+      56.22,
+      117.49
+    ],
+    "area": 145.4,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159186,
+    "address": "12 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      36.11,
+      -206.61
+    ],
+    "area": 143.9,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206411,
+    "address": "53 West Ridge Rd",
+    "style": "Ranch",
+    "center": [
+      -291.38,
+      61.66
+    ],
+    "area": 21.0,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159351,
+    "address": "38 Beverly Dr",
+    "style": "Ranch",
+    "center": [
+      -271.3,
+      -58.7
+    ],
+    "area": 178.0,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159243,
+    "address": "34 Beverly Dr",
+    "style": "Colonial",
+    "center": [
+      -234.58,
+      -137.26
+    ],
+    "area": 121.2,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206366,
+    "address": "41 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -198.2,
+      9.61
+    ],
+    "area": 17.0,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159162,
+    "address": "29 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -132.92,
+      -217.37
+    ],
+    "area": 159.1,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159400,
+    "address": "65 West Ridge Rd",
+    "style": "Cape cod",
+    "center": [
+      -92.18,
+      65.46
+    ],
+    "area": 159.6,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7158384,
+    "address": "22 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -78.71,
+      -347.17
+    ],
+    "area": 161.1,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206449,
+    "address": "65 West Ridge Rd",
+    "style": "Cape cod",
+    "center": [
+      -62.77,
+      63.55
+    ],
+    "area": 34.5,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206408,
+    "address": "65 West Ridge Rd",
+    "style": "Cape cod",
+    "center": [
+      -63.27,
+      29.27
+    ],
+    "area": 85.5,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159387,
+    "address": "7 Beverly Dr",
+    "style": "Cape cod",
+    "center": [
+      -48.36,
+      -83.02
+    ],
+    "area": 183.6,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159466,
+    "address": "2 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      1.97,
+      2.13
+    ],
+    "area": 149.1,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206297,
+    "address": "2 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      26.38,
+      13.56
+    ],
+    "area": 19.7,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159263,
+    "address": "10 Beverly Dr",
+    "style": "Ranch",
+    "center": [
+      32.2,
+      -168.81
+    ],
+    "area": 192.1,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206310,
+    "address": "69 West Ridge Rd",
+    "style": "Ranch",
+    "center": [
+      29.81,
+      26.68
+    ],
+    "area": 49.2,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159153,
+    "address": "16 Beverly Dr",
+    "style": "Colonial",
+    "center": [
+      42.72,
+      -298.21
+    ],
+    "area": 210.9,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159427,
+    "address": "73 West Ridge Rd",
+    "style": "Old style",
+    "center": [
+      60.44,
+      60.97
+    ],
+    "area": 76.7,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7157343,
+    "address": "53 West Ridge Rd",
+    "style": "Ranch",
+    "center": [
+      -310.74,
+      120.61
+    ],
+    "area": 141.4,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206430,
+    "address": "122 Sleepy Valley Rd",
+    "style": "Contemporary",
+    "center": [
+      -271.36,
+      173.64
+    ],
+    "area": 581.2,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206315,
+    "address": "59 West Ridge Rd",
+    "style": "Colonial",
+    "center": [
+      -253.25,
+      151.06
+    ],
+    "area": 123.9,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159159,
+    "address": "28 Beverly Dr",
+    "style": "Ranch",
+    "center": [
+      -190.78,
+      -270.17
+    ],
+    "area": 211.3,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159149,
+    "address": "26 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -161.22,
+      -325.79
+    ],
+    "area": 142.4,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159229,
+    "address": "27 Beverly Dr",
+    "style": "Ranch",
+    "center": [
+      -106.14,
+      -272.41
+    ],
+    "area": 163.3,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7241957,
+    "address": "9 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -103.86,
+      -106.96
+    ],
+    "area": 36.2,
+    "sourceYear": " "
+  },
+  {
+    "id": 7159342,
+    "address": "9 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -39.91,
+      -121.23
+    ],
+    "area": 186.7,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7157430,
+    "address": "14 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      43.63,
+      -253.6
+    ],
+    "area": 212.4,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7248308,
+    "address": "14 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      56.09,
+      -266.09
+    ],
+    "area": 67.1,
+    "sourceYear": "2021-22"
+  },
+  {
+    "id": 7206410,
+    "address": "49 West Ridge Rd",
+    "style": "Old style",
+    "center": [
+      -336.27,
+      60.53
+    ],
+    "area": 29.1,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159470,
+    "address": "44 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -242.06,
+      54.53
+    ],
+    "area": 177.2,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159287,
+    "address": "31 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -143.97,
+      -183.92
+    ],
+    "area": 140.3,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206372,
+    "address": "66 West Ridge Rd",
+    "style": "Old style",
+    "center": [
+      -22.17,
+      165.89
+    ],
+    "area": 91.6,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7157338,
+    "address": "15 Beverly Dr",
+    "style": "Split level",
+    "center": [
+      -18.5,
+      -231.59
+    ],
+    "area": 161.3,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159352,
+    "address": "4 Beverly Dr",
+    "style": "Colonial",
+    "center": [
+      12.46,
+      -52.52
+    ],
+    "area": 130.2,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159221,
+    "address": "8 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      21.13,
+      -131.58
+    ],
+    "area": 161.9,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206316,
+    "address": "70 West Ridge Rd",
+    "style": "Ranch",
+    "center": [
+      57.24,
+      151.22
+    ],
+    "area": 31.3,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206368,
+    "address": "49 West Ridge Rd",
+    "style": "Old style",
+    "center": [
+      -327.97,
+      53.44
+    ],
+    "area": 28.4,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7205241,
+    "address": "30 Beverly Dr",
+    "style": "Colonial",
+    "center": [
+      -208.78,
+      -245.79
+    ],
+    "area": 27.1,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159491,
+    "address": "43 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -170.76,
+      12.07
+    ],
+    "area": 172.7,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159438,
+    "address": "5 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -60.93,
+      -50.73
+    ],
+    "area": 171.6,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159465,
+    "address": "40 Beverly Dr",
+    "style": "Colonial",
+    "center": [
+      -282.48,
+      -21.17
+    ],
+    "area": 136.8,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159520,
+    "address": "59 West Ridge Rd",
+    "style": "Colonial",
+    "center": [
+      -202.46,
+      145.26
+    ],
+    "area": 175.4,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159512,
+    "address": "41 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -210.14,
+      -8.86
+    ],
+    "area": 179.7,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7206221,
+    "address": "15 Beverly Dr",
+    "style": "Split level",
+    "center": [
+      -60.98,
+      -230.18
+    ],
+    "area": 20.0,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7159337,
+    "address": "11 Beverly Dr",
+    "style": "Raised ranch",
+    "center": [
+      -33.22,
+      -158.81
+    ],
+    "area": 144.3,
+    "sourceYear": "2013"
+  },
+  {
+    "id": 7157386,
+    "address": "69 West Ridge Rd",
+    "style": "Ranch",
+    "center": [
+      -11.46,
+      69.33
+    ],
+    "area": 167.6,
+    "sourceYear": "2013"
+  }
+]

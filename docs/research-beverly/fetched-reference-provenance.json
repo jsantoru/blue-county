@@ -1,0 +1,28 @@
+{
+  "retrievedAt": "2026-09-20T19:28:01.431585+00:00",
+  "bboxWgs84": [
+    -74.37023206080082,
+    41.28171407006827,
+    -74.36511558887642,
+    41.287373430470716
+  ],
+  "localBounds": {
+    "minX": -334,
+    "maxX": 94,
+    "minZ": -389,
+    "maxZ": 241
+  },
+  "orthoImagePixels": [
+    1800,
+    2650
+  ],
+  "imageGroundMetersPerPixel": 0.23777777777777778,
+  "urls": {
+    "ortho2025-boundary-layer.json": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer/0?f=pjson",
+    "ortho2025-boundary-at-home.json": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer/0/query?f=json&geometry=-74.3662393%2C41.283879&geometryType=esriGeometryPoint&inSR=4326&outFields=%2A&returnGeometry=false",
+    "footprints-orange-metadata.json": "https://gisservices.its.ny.gov/arcgis/rest/services/BuildingFootprints/FeatureServer/1/query?f=json&where=NAME+%3D+%27Orange%27&outFields=%2A&returnGeometry=false",
+    "parcels-local.geojson": "https://gisservices.its.ny.gov/arcgis/rest/services/NYS_Tax_Parcels_Public/FeatureServer/1/query?f=geojson&geometry=-74.37023206080082%2C41.28171407006827%2C-74.36511558887642%2C41.287373430470716&geometryType=esriGeometryEnvelope&inSR=4326&outSR=4326&spatialRel=esriSpatialRelIntersects&outFields=OBJECTID%2CPARCEL_ADDR%2CLOC_ST_NBR%2CLOC_STREET%2CLOC_ZIP%2CPRINT_KEY%2CSBL%2CYR_BLT%2CBLDG_STYLE_DESC%2CFRONT%2CDEPTH%2CACRES&returnGeometry=true",
+    "footprints-local.geojson": "https://gisservices.its.ny.gov/arcgis/rest/services/BuildingFootprints/FeatureServer/2/query?f=geojson&geometry=-74.37023206080082%2C41.28171407006827%2C-74.36511558887642%2C41.287373430470716&geometryType=esriGeometryEnvelope&inSR=4326&outSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&returnGeometry=true",
+    "beverly-2025-ortho.jpg": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer/export?f=image&bbox=-8278856.363185936%2C5053983.648245853%2C-8278286.800136654%2C5054822.032303777&bboxSR=3857&imageSR=3857&size=1800%2C2650&format=jpg&transparent=false&dpi=96"
+  }
+}

@@ -1,0 +1,15 @@
+{
+ "currentVersion": 10.81,
+ "folders": [
+  "Dynamic",
+  "Utilities",
+  "vector",
+  "wms"
+ ],
+ "services": [
+  {
+   "name": "2018_4Band",
+   "type": "ImageServer"
+  }
+ ]
+}

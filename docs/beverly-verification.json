@@ -1,0 +1,384 @@
+{
+  "date": "2026-09-20T20:00:14.566Z",
+  "browser": "153.0.4234.48",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "errors": [],
+  "warnings": [
+    "THREE.WebGLProgram: Program Info Log: (210,81-129): warning X4122: sum of 0.996094 and -2.98545e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision"
+  ],
+  "tour": [
+    {
+      "target": 14,
+      "points": 174,
+      "steps": 720,
+      "grounded": 4,
+      "nearMeters": 0.04145744709713178,
+      "position": [
+        -44.41611099243164,
+        -4.384034156799316,
+        102.36062622070312
+      ]
+    },
+    {
+      "target": 29,
+      "points": 174,
+      "steps": 720,
+      "grounded": 4,
+      "nearMeters": 0.028144654924512347,
+      "position": [
+        -131.21139526367188,
+        -6.088120937347412,
+        149.2814483642578
+      ]
+    },
+    {
+      "target": 38,
+      "points": 174,
+      "steps": 720,
+      "grounded": 4,
+      "nearMeters": 0.16833450614456685,
+      "position": [
+        -159.0869903564453,
+        -4.317834377288818,
+        122.74356842041016
+      ]
+    },
+    {
+      "target": 49,
+      "points": 174,
+      "steps": 720,
+      "grounded": 4,
+      "nearMeters": 0.245180466070367,
+      "position": [
+        -167.9144744873047,
+        -1.2801792621612549,
+        50.50828170776367
+      ]
+    },
+    {
+      "target": 63,
+      "points": 174,
+      "steps": 720,
+      "grounded": 4,
+      "nearMeters": 0.10446012345917965,
+      "position": [
+        -246.2924041748047,
+        -4.40895414352417,
+        11.502413749694824
+      ]
+    },
+    {
+      "target": 77,
+      "points": 174,
+      "steps": 720,
+      "grounded": 4,
+      "nearMeters": 0.10878881322518873,
+      "position": [
+        -225.1251678466797,
+        -6.0249481201171875,
+        -82.64472961425781
+      ]
+    },
+    {
+      "target": 94,
+      "points": 174,
+      "steps": 720,
+      "grounded": 4,
+      "nearMeters": 0.09637437766917395,
+      "position": [
+        -177.38108825683594,
+        -1.9356820583343506,
+        -197.67054748535156
+      ]
+    },
+    {
+      "target": 107,
+      "points": 174,
+      "steps": 720,
+      "grounded": 4,
+      "nearMeters": 0.02960390630332292,
+      "position": [
+        -145.4672393798828,
+        1.1736018657684326,
+        -286.9686279296875
+      ]
+    },
+    {
+      "target": 121,
+      "points": 174,
+      "steps": 720,
+      "grounded": 4,
+      "nearMeters": 0.20927734935526102,
+      "position": [
+        -57.99764633178711,
+        7.268853664398193,
+        -308.5580749511719
+      ]
+    },
+    {
+      "target": 134,
+      "points": 174,
+      "steps": 720,
+      "grounded": 4,
+      "nearMeters": 0.0037086541953740256,
+      "position": [
+        8.705092430114746,
+        9.879083633422852,
+        -278.1922912597656
+      ]
+    },
+    {
+      "target": 149,
+      "points": 174,
+      "steps": 720,
+      "grounded": 4,
+      "nearMeters": 0.007568767753231429,
+      "position": [
+        -3.975472927093506,
+        11.95621109008789,
+        -170.832763671875
+      ]
+    },
+    {
+      "target": 164,
+      "points": 174,
+      "steps": 720,
+      "grounded": 4,
+      "nearMeters": 0.0857816306269269,
+      "position": [
+        -15.420402526855469,
+        7.604349613189697,
+        -57.179744720458984
+      ]
+    },
+    {
+      "target": 1,
+      "points": 174,
+      "steps": 394,
+      "grounded": 4,
+      "nearMeters": 0.029052384538918636,
+      "position": [
+        -24.07171058654785,
+        2.4059600830078125,
+        6.165542125701904
+      ]
+    }
+  ],
+  "screenshots": [
+    "docs/beverly-home-house.png",
+    "docs/beverly-west-35.png",
+    "docs/beverly-north-22.png",
+    "docs/beverly-loop-overview.png"
+  ],
+  "measurement": "Scripted Gamepad-independent driver using actual fixed-step vehicle physics. Scenery inspection cameras are separate from the driving test. No physical controller evidence.",
+  "gpu": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER (0x000021C4) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "home": {
+    "ready": true,
+    "screen": null,
+    "mode": "neighborhood",
+    "race": false,
+    "countdown": 0,
+    "modelLoaded": true,
+    "position": [
+      -24.296554565429688,
+      2.962287425994873,
+      -0.05009431391954422
+    ],
+    "speed": 2.4797408207299907,
+    "grounded": 4,
+    "slip": 0.046044608733432794,
+    "boost": 65,
+    "finished": false,
+    "routePoints": 260,
+    "near": 1.4778355716744187,
+    "ai": [
+      {
+        "id": 1,
+        "target": 9,
+        "speed": 6.3674899922883235,
+        "position": [
+          876.8953857421875,
+          34.93617248535156,
+          -396.5072326660156
+        ]
+      },
+      {
+        "id": 2,
+        "target": 15,
+        "speed": 22.869756292381762,
+        "position": [
+          914.1981811523438,
+          40.585994720458984,
+          -432.8780517578125
+        ]
+      },
+      {
+        "id": 3,
+        "target": 20,
+        "speed": 21.06658691797998,
+        "position": [
+          961.0265502929688,
+          46.58034896850586,
+          -449.7983093261719
+        ]
+      },
+      {
+        "id": 4,
+        "target": 139,
+        "speed": 12.933107804010861,
+        "position": [
+          1378.88623046875,
+          13.045522689819336,
+          -161.0502166748047
+        ]
+      },
+      {
+        "id": 5,
+        "target": 173,
+        "speed": 13.368816733235832,
+        "position": [
+          1211.8056640625,
+          -2.016709327697754,
+          163.588623046875
+        ]
+      },
+      {
+        "id": 6,
+        "target": 206,
+        "speed": 11.54937734052686,
+        "position": [
+          1104.3740234375,
+          6.06601095199585,
+          195.79312133789062
+        ]
+      }
+    ],
+    "testDriver": null,
+    "metrics": {
+      "quality": "high",
+      "frames": 222,
+      "p50": 16.700000000000728,
+      "p95": 16.799999999999272,
+      "physicsMs": 1.4000000953674316,
+      "width": 1920,
+      "height": 1080,
+      "draws": 609,
+      "triangles": 3495751,
+      "vegetation": {
+        "trees": 18904,
+        "shrubs": 1070,
+        "grassTufts": 6024,
+        "chunks": 285,
+        "visibleChunks": 90,
+        "visibleBatches": 546,
+        "totalBatches": 3492,
+        "referenceTreeCount": 96,
+        "referenceWoodlandTreeCount": 284,
+        "referenceOmittedTreeCount": 26
+      },
+      "scenery": [
+        {
+          "houses": 452,
+          "batches": 591,
+          "triangles": 1217295,
+          "detailFeatures": 9710,
+          "referenceFacades": 64
+        },
+        {
+          "patches": 8,
+          "ponds": 2,
+          "surfaceTriangles": 22185,
+          "detailTriangles": 4963,
+          "shoreTriangles": 340,
+          "meadowTufts": 192,
+          "reedTufts": 87,
+          "leafClusters": 1076,
+          "drawCalls": 5,
+          "maxGridSpacingMeters": 3
+        },
+        {
+          "poles": 96,
+          "wireSpans": 87,
+          "fenceSections": 11,
+          "stoneClusters": 6,
+          "surveyPlacementsSuppressed": 17,
+          "drawCalls": 12
+        }
+      ]
+    },
+    "renderer": "WebKit WebGL"
+  },
+  "survey": {
+    "loopMeters": 1218.89,
+    "footprints": 64,
+    "driveways": 37,
+    "canopies": 122,
+    "photoFacades": 6
+  },
+  "frameTiming": {
+    "seconds": 12.0098,
+    "intervals": 720,
+    "medianMs": 16.700000000000728,
+    "p95Ms": 16.799999999999272,
+    "p99Ms": 16.80000000000291,
+    "maxMs": 16.80000000000291,
+    "meanMs": 16.68027777777778,
+    "metrics": {
+      "quality": "high",
+      "frames": 1019,
+      "p50": 16.700000000000728,
+      "p95": 16.799999999999272,
+      "physicsMs": 1,
+      "width": 1920,
+      "height": 1080,
+      "draws": 590,
+      "triangles": 3382497,
+      "vegetation": {
+        "trees": 18904,
+        "shrubs": 1070,
+        "grassTufts": 6024,
+        "chunks": 285,
+        "visibleChunks": 95,
+        "visibleBatches": 575,
+        "totalBatches": 3492,
+        "referenceTreeCount": 96,
+        "referenceWoodlandTreeCount": 284,
+        "referenceOmittedTreeCount": 26
+      },
+      "scenery": [
+        {
+          "houses": 452,
+          "batches": 591,
+          "triangles": 1217295,
+          "detailFeatures": 9710,
+          "referenceFacades": 64
+        },
+        {
+          "patches": 8,
+          "ponds": 2,
+          "surfaceTriangles": 22185,
+          "detailTriangles": 4963,
+          "shoreTriangles": 340,
+          "meadowTufts": 192,
+          "reedTufts": 87,
+          "leafClusters": 1076,
+          "drawCalls": 5,
+          "maxGridSpacingMeters": 3
+        },
+        {
+          "poles": 96,
+          "wireSpans": 87,
+          "fenceSections": 11,
+          "stoneClusters": 6,
+          "surveyPlacementsSuppressed": 17,
+          "drawCalls": 12
+        }
+      ]
+    }
+  },
+  "loopCompleted": true,
+  "passed": true
+}

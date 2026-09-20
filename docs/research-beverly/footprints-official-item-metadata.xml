@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><metadata xml:lang="en">
+
+    <Esri>
+
+        <CreaDate>20230321</CreaDate>
+
+        <CreaTime>11235900</CreaTime>
+
+        <ArcGISFormat>1.0</ArcGISFormat>
+
+        <SyncOnce>TRUE</SyncOnce>
+
+    </Esri>
+
+    <dataIdInfo>
+
+        <idAbs>&lt;div&gt;NYS Building Footprints - metadata info:&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;Building footprints in New York State are from four different sources: Microsoft, Open Data, New York State Energy Research and Development Authority (NYSERDA), and Geospatial Services. The majority of the footprints are from NYSERDA, except in NYC where the primary source was Open Data. Microsoft footprints were added where the other 2 sources were missing polygons.&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;Field Descriptions:&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;NYSGeo Source : tells the end user if the source is NYSERDA, Microsoft, NYC Open Data, and could expand from here in the future&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;County Name : County name populated from CIESINs. If not populated from CIESINs, identified by the GS&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;Municipality Name : Municipality name populated from CIESINs. If not populated from CIESINs, identified by the GS&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;Source: Source where the data came from. If NYSGeo Source = NYSERDA, the data would typically list orthoimagery, LIDAR, county data, etc.&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;Source ID: if NYSGeo Source = NYSERDA, Source ID would typically list an orthoimage or LIDAR tile&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;Source Date: Date the footprint was created. If the source image was from 2016 orthoimagery, 2016 would be the Source Date.&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;Description of each footprint source:&lt;/div&gt;&lt;div&gt;NYSERDA Building footprints that were created as part of the New York State Flood Impact Decision Support Systems https://fidss.ciesin.columbia.edu/home Footprints vary in age from county to county.&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;Microsoft Building Footprints released 6/28/2018 - vintage unknown/varies. More info on this dataset can be found at https://blogs.bing.com/maps/2018-06/microsoft-releases-125-million-building-footprints-in-the-us-as-open-data.&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;NYC Open Data - Building Footprints of New York City as a polygon feature class. Last updated 7/30/2018, downloaded on 8/6/2018. Feature Class of footprint outlines of buildings in New York City. Please see the following link for additional documentation- https://github.com/CityOfNewYork/nyc-geo-metadata/blob/master/Metadata/Metadata_BuildingFootprints.md&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;Spatial Reference of Source Data: UTM Zone 18, meters, NAD 83.&amp;nbsp;&lt;/div&gt;&lt;div&gt;Spatial Reference of Web Service: Spatial Reference of Web Service: WGS 1984 Web Mercator Auxiliary Sphere.&lt;/div&gt;</idAbs>
+
+        <searchKeys>
+
+            <keyword>NYS Building Footprints</keyword>
+
+            <keyword>   Microsoft</keyword>
+
+            <keyword>   NYSERDA</keyword>
+
+            <keyword>   Open Data</keyword>
+
+            <keyword>   Address Range</keyword>
+
+        </searchKeys>
+
+        <idPurp>Building footprints in New York State from four different sources: Microsoft, Open Data, NYSERDA and Geospatial Services.  Updated building footprint data in March of 2025 for Monroe (based on 2023 Orthoimagery) and Orange (based on 2021 Orthoimagery/2022 LiDAR). Previously Broome, Cortland, Onondaga and Warren Counties based on 2022 orthoimagery as of March 2024.  Download this data using the overview layer's download field.</idPurp>
+
+        <idCredit>NYS ITS Geospatial Services, Microsoft, NYSERDA, Open Data</idCredit>
+
+        <resConst>
+
+            <Consts>
+
+                <useLimit>The State of New York, acting through the New York State Office of Information Technology Services, makes no representations or warranties, express or implied, with respect to the use of or reliance on the Data provided. The User accepts the Data provided “as is” with no guarantees that it is error free, complete, accurate, current or fit for any particular purpose and assumes all risks associated with its use. The State disclaims any responsibility or legal liability to Users for damages of any kind, relating to the providing of the Data or the use of it. Users should be aware that temporal changes may have occurred since this Data was created.</useLimit>
+
+            </Consts>
+
+        </resConst>
+
+    </dataIdInfo>
+
+    <Binary>
+
+        <Thumbnail>
+
+            <Data EsriPropertyType="PictureX">/9j/4AAQSkZJRgABAQEAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCACFAMgDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii
+gAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKA
+CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK
+KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoo
+ooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiii
+gAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKA
+CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK
+KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoo
+ooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiii
+gAooooAKKKKAP//Z</Data>
+
+        </Thumbnail>
+
+    </Binary>
+
+</metadata>

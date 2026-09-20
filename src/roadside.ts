@@ -182,6 +182,29 @@ export function buildRoadside(
       });
     }
   const envelopes: Envelope[] = [];
+  const surveyBounds = map.beverlySurvey?.bounds as Envelope | undefined;
+  let surveyPlacementsSuppressed = 0;
+  const intersectsSurvey = (ax: number, az: number, bx = ax, bz = az) => {
+    if (!surveyBounds) return false;
+    // Include crossarms, rocks, and rails; a wire span may cross the bounds even when both poles are outside.
+    let enter = 0,
+      exit = 1;
+    for (const [a, b, low, high] of [
+      [ax, bx, surveyBounds.minX - 1.5, surveyBounds.maxX + 1.5],
+      [az, bz, surveyBounds.minZ - 1.5, surveyBounds.maxZ + 1.5],
+    ]) {
+      if (Math.abs(b - a) < 1e-9) {
+        if (a < low || a > high) return false;
+      } else {
+        const t0 = (low - a) / (b - a),
+          t1 = (high - a) / (b - a);
+        enter = Math.max(enter, Math.min(t0, t1));
+        exit = Math.min(exit, Math.max(t0, t1));
+        if (enter > exit) return false;
+      }
+    }
+    return true;
+  };
   for (const building of map.buildings ?? []) {
     const points: Point[] = building.points ?? building.footprint;
     if (!points?.length) continue;
@@ -198,6 +221,10 @@ export function buildRoadside(
     roadMargin: number,
     buildingMargin = 2.5,
   ) => {
+    if (intersectsSurvey(x, z)) {
+      surveyPlacementsSuppressed++;
+      return false;
+    }
     if (
       x < map.bounds.minX + 12 ||
       x > map.bounds.maxX - 12 ||
@@ -373,7 +400,10 @@ export function buildRoadside(
           ),
         );
         const sag = 0.55 + length * 0.008;
-        let adequateClearance = length < 85 && headingChange < 0.7;
+        let adequateClearance =
+          length < 85 &&
+          headingChange < 0.7 &&
+          !intersectsSurvey(previous.x, previous.z, x, z);
         for (let i = 1; i < 10 && adequateClearance; i++) {
           const t = i / 10,
             tx = previous.x + (x - previous.x) * t,
@@ -500,6 +530,7 @@ export function buildRoadside(
     wireSpans: spanCount,
     fenceSections: fenceCount,
     stoneClusters,
+    surveyPlacementsSuppressed,
     drawCalls: root.children.length,
   };
   root.userData.dispose = () => {

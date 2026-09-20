@@ -1,0 +1,133 @@
+{
+  "researchDate": "2026-09-20",
+  "requestedCenter": {
+    "latitude": 41.283879,
+    "longitude": -74.3662393
+  },
+  "finding": "No usable street-level image obtained; no visual house/tree/driveway observations established.",
+  "mapillary": {
+    "appViews": [
+      {
+        "latitude": 41.283879,
+        "longitude": -74.3662393,
+        "zoom": 17
+      },
+      {
+        "latitude": 41.2855,
+        "longitude": -74.369,
+        "zoom": 15
+      }
+    ],
+    "visibleImageryTracks": false,
+    "selectedImageId": null,
+    "tileSummary": [
+      {
+        "url": "https://tiles.mapillary.com/maps/vtp/mly2/2/14/4807/6126",
+        "status": 200,
+        "bytes": 38,
+        "layers": [
+          {
+            "name": "water",
+            "features": 1
+          }
+        ]
+      },
+      {
+        "url": "https://tiles.mapillary.com/maps/vtp/mly2/2/14/4807/6125",
+        "status": 200,
+        "bytes": 38,
+        "layers": [
+          {
+            "name": "water",
+            "features": 1
+          }
+        ]
+      },
+      {
+        "url": "https://tiles.mapillary.com/maps/vtp/mly2/2/14/4806/6125",
+        "status": 200,
+        "bytes": 38,
+        "layers": [
+          {
+            "name": "water",
+            "features": 1
+          }
+        ]
+      },
+      {
+        "url": "https://tiles.mapillary.com/maps/vtp/mly2/2/14/4808/6125",
+        "status": 200,
+        "bytes": 38,
+        "layers": [
+          {
+            "name": "water",
+            "features": 1
+          }
+        ]
+      },
+      {
+        "url": "https://tiles.mapillary.com/maps/vtp/mly2/2/14/4806/6126",
+        "status": 200,
+        "bytes": 38,
+        "layers": [
+          {
+            "name": "water",
+            "features": 1
+          }
+        ]
+      },
+      {
+        "url": "https://tiles.mapillary.com/maps/vtp/mly2/2/14/4808/6126",
+        "status": 200,
+        "bytes": 38,
+        "layers": [
+          {
+            "name": "water",
+            "features": 1
+          }
+        ]
+      }
+    ],
+    "limitation": "Absence in inspected current views is not proof of exhaustive or future absence."
+  },
+  "kartaview": {
+    "queries": [
+      {
+        "label": "requested center",
+        "latitude": 41.283879,
+        "longitude": -74.3662393,
+        "zoomLevel": 15,
+        "url": "https://api.openstreetcam.org/2.0/photo/?lat=41.283879&lng=-74.3662393&zoomLevel=15&join=sequence&orderBy=id&orderDirection=desc",
+        "httpStatus": 200,
+        "apiCode": 601,
+        "apiMessage": "The request has an empty response",
+        "result": null
+      },
+      {
+        "label": "north/central loop sample",
+        "latitude": 41.2868,
+        "longitude": -74.3678,
+        "zoomLevel": 15,
+        "url": "https://api.openstreetcam.org/2.0/photo/?lat=41.2868&lng=-74.3678&zoomLevel=15&join=sequence&orderBy=id&orderDirection=desc",
+        "httpStatus": 200,
+        "apiCode": 601,
+        "apiMessage": "The request has an empty response",
+        "result": null
+      },
+      {
+        "label": "western junction sample",
+        "latitude": 41.283,
+        "longitude": -74.37,
+        "zoomLevel": 15,
+        "url": "https://api.openstreetcam.org/2.0/photo/?lat=41.283&lng=-74.37&zoomLevel=15&join=sequence&orderBy=id&orderDirection=desc",
+        "httpStatus": 200,
+        "apiCode": 601,
+        "apiMessage": "The request has an empty response",
+        "result": null
+      }
+    ],
+    "selectedImageId": null
+  },
+  "distributedPhotos": [],
+  "runtimeAssetsAdded": []
+}
