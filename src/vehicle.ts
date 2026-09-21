@@ -191,7 +191,7 @@ export class Vehicle {
         1.05,
         true,
         undefined,
-        undefined,
+        0x0001ffff, // Suspension ignores scenery reserved for pedestrian collision layer 8.
         undefined,
         this.body,
         (c) => !c.parent() || c.parent()!.isFixed(),

@@ -77,6 +77,368 @@ const actions = (patch = {}) => ({
   ...patch,
 });
 
+function keyEvent(host: Window, code: string, down: boolean): void {
+  const event = new Event(down ? "keydown" : "keyup", { cancelable: true });
+  Object.defineProperties(event, {
+    code: { value: code },
+    repeat: { value: false },
+  });
+  host.dispatchEvent(event);
+}
+
+describe("on-foot controls", () => {
+  it("retains keyboard/mouse hints while a selected controller is idle, ignoring stick drift", () => {
+    const host = new EventTarget() as Window,
+      pad = makePad();
+    const input = new InputManager({
+      getGamepads: () => [pad],
+      window: host,
+      document: null,
+      storage: null,
+    });
+    button(pad, 0, 1);
+    input.sample(1 / 60);
+    button(pad, 0, 0);
+    input.sample(1 / 60);
+    expect(input.sample(1 / 60).source).toBe("gamepad");
+    keyEvent(host, "KeyW", true);
+    expect(input.sample(1 / 60).source).toBe("keyboard");
+    keyEvent(host, "KeyW", false);
+    axis(pad, 0, 0.06);
+    axis(pad, 1, -0.05);
+    expect(input.sample(1 / 60).source).toBe("keyboard");
+    axis(pad, 1, -0.8);
+    expect(input.sample(1 / 60).source).toBe("gamepad");
+    input.consume();
+    expect(input.sample(1 / 60)).toMatchObject({ source: "gamepad", moveY: 0 });
+    axis(pad, 1, 0);
+    input.sample(1 / 60);
+    input.addMouseLook(6, 0);
+    expect(input.sample(1 / 60).source).toBe("keyboard");
+    expect(input.sample(1 / 60).source).toBe("keyboard");
+    input.dispose();
+  });
+  it("keeps diagonal keyboard movement normalized and separate from driving axes", () => {
+    const host = new EventTarget() as Window;
+    const input = new InputManager({
+      window: host,
+      document: null,
+      storage: null,
+      getGamepads: () => [],
+    });
+    keyEvent(host, "KeyW", true);
+    keyEvent(host, "KeyD", true);
+    keyEvent(host, "ShiftLeft", true);
+    const diagonal = input.sample(1 / 60);
+    expect(Math.hypot(diagonal.moveX, diagonal.moveY)).toBeCloseTo(1);
+    expect(diagonal.moveX).toBeCloseTo(Math.SQRT1_2);
+    expect(diagonal.moveY).toBeCloseTo(Math.SQRT1_2);
+    expect(diagonal).toMatchObject({
+      throttle: 1,
+      steer: 1,
+      sprint: true,
+      boost: true,
+    });
+    keyEvent(host, "KeyD", false);
+    expect(input.sample(1 / 60).moveY).toBe(1);
+    keyEvent(host, "KeyS", true);
+    expect(input.sample(1 / 60).moveY).toBe(0);
+    input.dispose();
+  });
+  it("uses a radial left-stick deadzone and retains analog walking speed", () => {
+    const { input, pad, select } = harness();
+    select();
+    axis(pad, 0, 0.07);
+    axis(pad, 1, -0.07);
+    expect(input.sample(1 / 60)).toMatchObject({ moveX: 0, moveY: 0 });
+    axis(pad, 0, 0);
+    axis(pad, 1, -0.56);
+    expect(input.sample(1 / 60).moveY).toBeCloseTo(0.5);
+    axis(pad, 0, 1);
+    axis(pad, 1, -1);
+    const diagonal = input.sample(1 / 60);
+    expect(Math.hypot(diagonal.moveX, diagonal.moveY)).toBeCloseTo(1);
+    expect(diagonal.moveX).toBeCloseTo(diagonal.moveY);
+  });
+  it("uses Y/F and X/Space press edges and moves camera cycling to R3", () => {
+    const { input, pad, select } = harness();
+    select();
+    button(pad, 3, 1);
+    button(pad, 2, 1);
+    const first = input.sample(1 / 60);
+    expect(first).toMatchObject({ interact: true, jump: true });
+    expect(first.actions.camera).toBe(false);
+    for (let i = 0; i < 90; i++)
+      expect(input.sample(1 / 60)).toMatchObject({
+        interact: false,
+        jump: false,
+      });
+    button(pad, 3, 0);
+    button(pad, 2, 0);
+    input.sample(1 / 60);
+    button(pad, 3, 1);
+    button(pad, 11, 1);
+    expect(input.sample(1 / 60)).toMatchObject({
+      interact: true,
+      actions: { camera: true },
+    });
+    expect(input.sample(1 / 60).actions.camera).toBe(false);
+
+    const host = new EventTarget() as Window;
+    const keyboard = new InputManager({
+      window: host,
+      document: null,
+      storage: null,
+      getGamepads: () => [],
+    });
+    keyEvent(host, "KeyF", true);
+    keyEvent(host, "Space", true);
+    expect(keyboard.sample(1 / 60)).toMatchObject({
+      interact: true,
+      jump: true,
+    });
+    expect(keyboard.sample(1 / 60)).toMatchObject({
+      interact: false,
+      jump: false,
+    });
+    keyboard.dispose();
+  });
+  it("requires movement, jump and interact release after a mode transition", () => {
+    const { input, pad, select } = harness();
+    select();
+    button(pad, 3, 1);
+    expect(input.sample(1 / 60).interact).toBe(true);
+    input.consume();
+    axis(pad, 1, -1);
+    button(pad, 2, 1);
+    button(pad, 3, 0);
+    expect(input.sample(1 / 60)).toMatchObject({
+      moveY: 0,
+      jump: false,
+      interact: false,
+    });
+    button(pad, 2, 0);
+    input.sample(1 / 60);
+    expect(input.diagnostics().awaitingNeutral).toBe(true);
+    axis(pad, 1, 0);
+    input.sample(1 / 60);
+    expect(input.diagnostics().awaitingNeutral).toBe(false);
+    axis(pad, 1, -1);
+    button(pad, 3, 1);
+    button(pad, 2, 1);
+    expect(input.sample(1 / 60)).toMatchObject({
+      moveY: 1,
+      jump: true,
+      interact: true,
+    });
+  });
+  it("silences foot actions in menus, on disconnect and until deliberate resume", () => {
+    const { input, pad, select, setPads } = harness();
+    select();
+    axis(pad, 1, -1);
+    button(pad, 0, 1);
+    button(pad, 2, 1);
+    button(pad, 3, 1);
+    expect(input.sample(1 / 60, true)).toMatchObject({
+      moveY: 0,
+      sprint: false,
+      jump: false,
+      interact: false,
+    });
+    // Menu-held jump/interact cannot become a fresh edge merely because the menu closes.
+    expect(input.sample(1 / 60)).toMatchObject({
+      jump: false,
+      interact: false,
+    });
+    setPads([]);
+    expect(input.sample(1 / 60)).toMatchObject({
+      moveY: 0,
+      sprint: false,
+      jump: false,
+      interact: false,
+    });
+    setPads([pad]);
+    input.sample(1 / 60);
+    axis(pad, 1, 0);
+    for (const i of [0, 2, 3]) button(pad, i, 0);
+    input.sample(1 / 60);
+    axis(pad, 1, -1);
+    expect(input.sample(1 / 60).moveY).toBe(0);
+    input.resume();
+    axis(pad, 1, 0);
+    input.sample(1 / 60);
+    axis(pad, 1, -1);
+    expect(input.sample(1 / 60).moveY).toBe(1);
+  });
+  it("consumes mouse movement exactly once and discards it across every safety gate", () => {
+    const { input, pad, select, setPads } = harness();
+    select();
+    input.updateSettings({ cameraSensitivity: 1.5 });
+    input.addMouseLook(10, -5);
+    input.addMouseLook(2, 1);
+    expect(input.sample(1 / 60)).toMatchObject({ mouseX: 18, mouseY: -6 });
+    expect(input.sample(1 / 60)).toMatchObject({ mouseX: 0, mouseY: 0 });
+    input.addMouseLook(40, 30);
+    expect(input.sample(1 / 60, true)).toMatchObject({ mouseX: 0, mouseY: 0 });
+    expect(input.sample(1 / 60)).toMatchObject({ mouseX: 0, mouseY: 0 });
+    input.addMouseLook(20, 20);
+    input.consume();
+    expect(input.sample(1 / 60)).toMatchObject({ mouseX: 0, mouseY: 0 });
+    input.startBindingCapture("interact");
+    input.addMouseLook(20, 20);
+    expect(input.sample(1 / 60)).toMatchObject({ mouseX: 0, mouseY: 0 });
+    input.cancelBindingCapture();
+    input.sample(1 / 60);
+    input.addMouseLook(20, 20);
+    setPads([]);
+    expect(input.sample(1 / 60)).toMatchObject({ mouseX: 0, mouseY: 0 });
+    input.addMouseLook(20, 20);
+    setPads([pad]);
+    expect(input.sample(1 / 60)).toMatchObject({ mouseX: 0, mouseY: 0 });
+  });
+  it("migrates old standard remaps without colliding with interact or losing default movement", () => {
+    const pad = makePad();
+    const storage = {
+      getItem: () =>
+        JSON.stringify({
+          version: 1,
+          settings: { deadzone: 0.2 },
+          bindings: {
+            [pad.id]: {
+              camera: { kind: "button", index: 3 },
+              boost: { kind: "button", index: 4 },
+            },
+          },
+        }),
+      setItem: vi.fn(),
+      removeItem: vi.fn(),
+    };
+    const input = new InputManager({
+      getGamepads: () => [pad],
+      storage,
+      window: null,
+      document: null,
+    });
+    button(pad, 0, 1);
+    input.sample(1 / 60);
+    button(pad, 0, 0);
+    input.sample(1 / 60);
+    expect(input.settings.deadzone).toBe(0.2);
+    expect(input.getBindings()).toMatchObject({
+      camera: { kind: "button", index: 11 },
+      interact: { kind: "button", index: 3 },
+      moveX: { kind: "axis", index: 0 },
+      moveY: { kind: "axis", index: 1 },
+      boost: { kind: "button", index: 4 },
+      sprint: { kind: "button", index: 4 },
+    });
+    expect(JSON.parse(storage.setItem.mock.calls.at(-1)![1]).version).toBe(2);
+  });
+  it("does not assume foot axes on unknown devices and supports signed movement capture", () => {
+    const { input, pad, select } = harness(makePad(2, ""));
+    select();
+    axis(pad, 0, 1);
+    axis(pad, 1, -1);
+    button(pad, 3, 1);
+    expect(input.sample(1 / 60)).toMatchObject({
+      moveX: 0,
+      moveY: 0,
+      interact: false,
+    });
+    axis(pad, 0, 0);
+    axis(pad, 1, 0);
+    button(pad, 3, 0);
+    input.startBindingCapture("moveY");
+    expect(input.calibration?.instruction).toContain("DOWN");
+    axis(pad, 4, -1);
+    input.sample(1 / 60);
+    expect(input.getBindings().moveY).toEqual({
+      kind: "axis",
+      index: 4,
+      invert: true,
+    });
+    axis(pad, 4, 0);
+    input.sample(1 / 60);
+    axis(pad, 4, 1);
+    expect(input.sample(1 / 60).moveY).toBe(1);
+  });
+  it("retains pending migrations for disconnected devices when settings are saved", () => {
+    const pad = makePad();
+    let saved = JSON.stringify({
+      version: 1,
+      bindings: { [pad.id]: { camera: { kind: "button", index: 3 } } },
+    });
+    const storage = {
+      getItem: () => saved,
+      setItem: (_key: string, value: string) => {
+        saved = value;
+      },
+      removeItem: vi.fn(),
+    };
+    const beforeConnect = new InputManager({
+      getGamepads: () => [],
+      storage,
+      window: null,
+      document: null,
+    });
+    beforeConnect.updateSettings({ cameraSensitivity: 1.2 });
+    expect(JSON.parse(saved).version).toBe(2);
+    beforeConnect.dispose();
+    const restored = new InputManager({
+      getGamepads: () => [pad],
+      storage,
+      window: null,
+      document: null,
+    });
+    button(pad, 0, 1);
+    restored.sample(1 / 60);
+    button(pad, 0, 0);
+    restored.sample(1 / 60);
+    expect(restored.getBindings().camera).toEqual({
+      kind: "button",
+      index: 11,
+    });
+    expect(restored.settings.cameraSensitivity).toBe(1.2);
+    expect(JSON.parse(saved).legacyBindings).toEqual([]);
+    restored.dispose();
+  });
+  it("preserves a nonstandard device's camera mapping instead of guessing its Y button", () => {
+    const pad = makePad(2, "");
+    const storage = {
+      getItem: () =>
+        JSON.stringify({
+          version: 1,
+          bindings: {
+            [pad.id]: {
+              camera: { kind: "button", index: 3 },
+              steer: { kind: "axis", index: 4, invert: true },
+            },
+          },
+        }),
+      setItem: vi.fn(),
+      removeItem: vi.fn(),
+    };
+    const input = new InputManager({
+      getGamepads: () => [pad],
+      storage,
+      window: null,
+      document: null,
+    });
+    button(pad, 0, 1);
+    input.sample(1 / 60);
+    button(pad, 0, 0);
+    input.sample(1 / 60);
+    expect(input.getBindings().camera).toEqual({ kind: "button", index: 3 });
+    expect(input.getBindings().moveX).toEqual({
+      kind: "axis",
+      index: 4,
+      invert: true,
+    });
+    expect(input.getBindings().interact).toBeUndefined();
+    input.dispose();
+  });
+});
+
 describe("analog processing", () => {
   it("rescales outside the deadzone, preserving endpoints and symmetry", () => {
     expect(rescaleDeadzone(0.1, 0.12)).toBe(0);

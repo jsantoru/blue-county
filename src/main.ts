@@ -23,6 +23,9 @@ import { FixedClock, RaceProgress, TakedownLedger } from "./rules";
 import { Driver } from "./ai";
 import { Sound } from "./audio";
 import { Effects } from "./effects";
+import { Pedestrian, findVehicleExit, footCameraPosition } from "./pedestrian";
+import { CharacterVisual, CHARACTER_SEAT_ANCHOR } from "./character-visual";
+import { buildExplorationObstacles } from "./exploration-obstacles";
 import {
   angleDiff,
   clamp,
@@ -105,6 +108,19 @@ const camPos = new T.Vector3(),
 let cameraInitialized = false;
 let inspectionView: { position: T.Vector3; target: T.Vector3 } | null = null;
 let homeBrakeHold = false;
+let pedestrian: Pedestrian;
+let seatedDriver: CharacterVisual, walkingDriver: CharacterVisual;
+let explorationObstacles:
+  ReturnType<typeof buildExplorationObstacles> | undefined;
+let footPhase: "driving" | "exiting" | "foot" | "entering" = "driving";
+let transitionTime = 0,
+  transitionSide = 1;
+let footYaw = 0,
+  footPitch = 0.22;
+let draggingLook = false,
+  hadPointerLock = false;
+const onFoot = () => footPhase !== "driving";
+const actorPosition = () => (onFoot() ? pedestrian.position : player.position);
 const renderer = new T.WebGLRenderer({
   canvas: $<HTMLCanvasElement>("game"),
   antialias: true,
@@ -144,6 +160,12 @@ const shadowUp = new T.Vector3()
   .crossVectors(atmosphere.sunDirection, shadowRight)
   .normalize();
 function placeSun(target: T.Vector3) {
+  const extent = onFoot() && !inspectionView ? 36 : 65;
+  if (sun.shadow.camera.right !== extent) {
+    sun.shadow.camera.left = sun.shadow.camera.bottom = -extent;
+    sun.shadow.camera.right = sun.shadow.camera.top = extent;
+    sun.shadow.camera.updateProjectionMatrix();
+  }
   // Quantize in the light's plane so foliage shadows do not crawl across the
   // asphalt every time the chase camera/car moves a fraction of a texel.
   const texel =
@@ -182,7 +204,14 @@ function setScreen(next: Screen) {
   screen = next;
   focus = 0;
   input.consume();
-  if (next) input.stopRumble();
+  if (next) {
+    input.stopRumble();
+    draggingLook = false;
+  }
+  if (next && document.pointerLockElement) {
+    hadPointerLock = false;
+    document.exitPointerLock();
+  }
   clock.reset();
   renderMenu();
 }
@@ -221,6 +250,14 @@ function setQuality() {
   sun.shadow.map = null;
 }
 function buildScene(test: boolean) {
+  explorationObstacles?.dispose();
+  pedestrian?.dispose();
+  if (walkingDriver) {
+    scene.remove(walkingDriver.root);
+    walkingDriver.dispose();
+  }
+  seatedDriver?.dispose();
+  footPhase = "driving";
   if (environment) {
     scene.remove(environment.root);
     environment.dispose();
@@ -254,6 +291,20 @@ function buildScene(test: boolean) {
   real.position.y = vehicleGeometry.visualOffsetY;
   visual.add(real);
   visual.userData.car = real;
+  seatedDriver = new CharacterVisual();
+  seatedDriver.root.position.set(...CHARACTER_SEAT_ANCHOR);
+  real.add(seatedDriver.root);
+  seatedDriver.update({ pose: "seated", speed: 0, time: 0 });
+  walkingDriver = new CharacterVisual();
+  walkingDriver.root.visible = false;
+  scene.add(walkingDriver.root);
+  pedestrian = new Pedestrian(world);
+  explorationObstacles = buildExplorationObstacles(
+    world,
+    environment.root,
+    map,
+    (x, z) => heightAt(map, x, z),
+  );
   scene.add(visual);
   visuals.push(visual);
   if (!test) {
@@ -334,7 +385,123 @@ function setHomeBrakeHold(active: boolean) {
   // the velocity-based tire model slowly slipping down the driveway grade.
   player?.body.setEnabledTranslations(!active, true, !active, true);
 }
+function carHeading() {
+  const forward = new T.Vector3(0, 0, 1).applyQuaternion(player.rotation);
+  return Math.atan2(forward.x, forward.z);
+}
+function releaseWalking() {
+  footPhase = "driving";
+  transitionTime = 0;
+  pedestrian?.setEnabled(false);
+  if (walkingDriver) walkingDriver.root.visible = false;
+  if (seatedDriver) seatedDriver.root.visible = true;
+  player?.body.setEnabledTranslations(true, true, true, true);
+  player?.body.setEnabledRotations(true, true, true, true);
+  draggingLook = hadPointerLock = false;
+  if (document.pointerLockElement) document.exitPointerLock();
+  benchmarkDriver = null;
+}
+function interaction() {
+  if (footPhase === "exiting" || footPhase === "entering")
+    return { available: false, reason: "" };
+  if (!onFoot()) {
+    if (race)
+      return { available: false, reason: "Exit available in Free Drive" };
+    if (player.speed > 1.15)
+      return { available: false, reason: "Stop to exit" };
+    if (
+      player.grounded < 2 ||
+      new T.Vector3(0, 1, 0).applyQuaternion(player.rotation).y < 0.7
+    )
+      return { available: false, reason: "Park on solid ground to exit" };
+    return { available: true, reason: "Exit vehicle" };
+  }
+  const local = pedestrian.position
+    .clone()
+    .sub(player.position)
+    .applyQuaternion(player.rotation.clone().invert());
+  if (
+    Math.abs(local.z + 0.3) > 1.35 ||
+    Math.abs(local.x) < 0.9 ||
+    Math.abs(local.x) > 2.5 ||
+    Math.abs(local.y + 0.8) > 1.35
+  )
+    return { available: false, reason: "" };
+  if (!pedestrian.grounded)
+    return { available: false, reason: "Land to enter" };
+  const door = player.position
+    .clone()
+    .add(
+      new T.Vector3(Math.sign(local.x) * 1.2, 0.2, -0.3).applyQuaternion(
+        player.rotation,
+      ),
+    );
+  const from = pedestrian.position.clone().add(new T.Vector3(0, 1, 0));
+  door.y = from.y;
+  const delta = door.sub(from);
+  const obstruction = world.castShape(
+    from,
+    { x: 0, y: 0, z: 0, w: 1 },
+    delta,
+    new RAPIER.Capsule(0.52, 0.28),
+    0,
+    1,
+    true,
+    RAPIER.QueryFilterFlags.EXCLUDE_SENSORS,
+    0xffffffff,
+    pedestrian.collider,
+    player.body,
+  );
+  return {
+    available: !obstruction,
+    reason: obstruction ? "Approach the door" : "Enter 442",
+  };
+}
+function interactVehicle() {
+  const action = interaction();
+  if (!action.available) {
+    if (action.reason) toast(action.reason, 1.5);
+    return false;
+  }
+  if (!onFoot()) {
+    const exit = findVehicleExit(world, pedestrian, player, carHeading());
+    if (!exit) {
+      toast("Both doors are blocked · move the car", 2);
+      return false;
+    }
+    setHomeBrakeHold(false);
+    player.body.setLinvel({ x: 0, y: 0, z: 0 }, true);
+    player.body.setAngvel({ x: 0, y: 0, z: 0 }, true);
+    player.body.setEnabledTranslations(false, false, false, true);
+    player.body.setEnabledRotations(false, false, false, true);
+    pedestrian.setEnabled(true);
+    pedestrian.place(exit.feet, carHeading());
+    footYaw = carHeading();
+    footPitch = 0.22;
+    transitionSide = exit.side;
+    footPhase = "exiting";
+    seatedDriver.root.visible = false;
+    walkingDriver.root.visible = true;
+    benchmarkDriver = null;
+    toast("ON FOOT · explore the neighborhood", 2.3);
+  } else {
+    footPhase = "entering";
+    pedestrian.velocity.set(0, 0, 0);
+    transitionSide = Math.sign(
+      pedestrian.position
+        .clone()
+        .sub(player.position)
+        .applyQuaternion(player.rotation.clone().invert()).x,
+    );
+  }
+  transitionTime = 0.42;
+  input.consume();
+  frame = emptyInput();
+  clock.reset();
+  return true;
+}
 function startFree() {
+  releaseWalking();
   sound.start();
   if (mode !== "neighborhood") buildScene(false);
   race = false;
@@ -354,6 +521,7 @@ function startFree() {
   toast("HOME · BEVERLY DRIVE");
 }
 function startTest() {
+  releaseWalking();
   setHomeBrakeHold(false);
   sound.start();
   buildScene(true);
@@ -362,6 +530,7 @@ function startTest() {
   toast("HANDLING GROUNDS");
 }
 function startRace() {
+  releaseWalking();
   setHomeBrakeHold(false);
   sound.start();
   if (mode !== "neighborhood") buildScene(false);
@@ -404,6 +573,13 @@ function startRace() {
   toast(map.route.name, 2);
 }
 function recover(v = player) {
+  if (v === player && onFoot()) {
+    pedestrian.place(
+      pedestrian.lastSafe.clone().add(new T.Vector3(0, 0.15, 0)),
+    );
+    toast("BACK ON YOUR FEET", 1.5);
+    return;
+  }
   if (v === player) setHomeBrakeHold(false);
   let p: Point, heading: number;
   if (race && v.id < 4) {
@@ -521,7 +697,7 @@ function renderMenu() {
     items = [
       {
         label: "Drive from Home",
-        detail: "Beverly Drive · free drive",
+        detail: "Beverly Drive · drive & explore on foot",
         action: startFree,
       },
       {
@@ -614,7 +790,7 @@ function renderMenu() {
       { label: "Main menu", action: () => setScreen("main") },
     ];
   }
-  el.innerHTML = `<section class="panel"><div class="eyebrow">1968 Oldsmobile 442 · Warwick, New York</div><${screen === "main" ? "h1" : "h2"}>${title}</${screen === "main" ? "h1" : "h2"}><p class="intro">${intro}</p>${safetyMessage ? `<div class="safety">${escape(safetyMessage)}</div>` : ""}${extra}<nav class="menu-items">${items.map((item, i) => `<button class="menu-item ${i === focus ? "focus" : ""}" data-index="${i}"><span>${escape(item.label)}${item.detail ? `<small>${escape(item.detail)}</small>` : ""}</span><span class="value">${item.value ? escape(item.value) : "↗"}</span></button>`).join("")}</nav><div class="foot"><span class="key green">A</span> Select <span class="key">B</span> Back · D-pad to navigate<br>Keyboard: arrows / Enter / Esc · Drive: WASD · Shift boost<br>Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors · ODbL</a> · USGS elevation</div></section>`;
+  el.innerHTML = `<section class="panel"><div class="eyebrow">1968 Oldsmobile 442 · Warwick, New York</div><${screen === "main" ? "h1" : "h2"}>${title}</${screen === "main" ? "h1" : "h2"}><p class="intro">${intro}</p>${safetyMessage ? `<div class="safety">${escape(safetyMessage)}</div>` : ""}${extra}<nav class="menu-items">${items.map((item, i) => `<button class="menu-item ${i === focus ? "focus" : ""}" data-index="${i}"><span>${escape(item.label)}${item.detail ? `<small>${escape(item.detail)}</small>` : ""}</span><span class="value">${item.value ? escape(item.value) : "↗"}</span></button>`).join("")}</nav><div class="foot"><span class="key green">A</span> Select <span class="key">B</span> Back · D-pad to navigate<br>Keyboard: arrows / Enter / Esc · Drive: WASD · Shift boost · F / Y exit & enter<br>Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors · ODbL</a> · USGS elevation</div></section>`;
   el.querySelectorAll<HTMLButtonElement>("button").forEach((button) => {
     button.onclick = () => {
       sound.start();
@@ -696,8 +872,32 @@ function simulate(dt: number) {
   simTime += dt;
   const start = performance.now();
   let control: DriveInput = frame;
+  const previousSafeFoot = onFoot() ? pedestrian.lastSafe.clone() : null;
+  if (onFoot()) {
+    control = { ...idleInput, brake: 1, handbrake: true };
+    if (transitionTime > 0) {
+      transitionTime = Math.max(0, transitionTime - dt);
+      if (transitionTime === 0) {
+        if (footPhase === "entering") {
+          releaseWalking();
+          input.consume();
+          frame = emptyInput();
+          toast("BACK IN THE 442", 1.2);
+        } else footPhase = "foot";
+      }
+    }
+    if (onFoot())
+      pedestrian.step(
+        footPhase === "foot"
+          ? frame
+          : { moveX: 0, moveY: 0, sprint: false, jump: false },
+        footYaw,
+        dt,
+      );
+    frame.jump = false;
+  }
   // Hold the parked Home car on its driveway grade until deliberate pedal input.
-  if (homeBrakeHold) {
+  if (homeBrakeHold && !onFoot()) {
     if (
       frame.throttle > 0.01 ||
       frame.brake > 0.01 ||
@@ -733,13 +933,36 @@ function simulate(dt: number) {
     const v = d.vehicle;
     let command =
       countdown > 0 && v.id < 4 ? { ...idleInput, brake: 1 } : d.input(dt);
+    // Neighborhood traffic yields to an explorer; the parked player's car remains stationary.
+    const yielding =
+      onFoot() &&
+      v.position.distanceTo(pedestrian.position) <
+        Math.max(11, (v.speed * v.speed) / 16 + 6);
+    if (yielding) {
+      command = { ...idleInput, brake: 1 };
+      d.stuck = 0;
+    }
     if (race && v.id < 4 && races[v.id]?.finished)
       command = { ...idleInput, brake: 1 };
     v.step(command, dt, simTime, true);
-    if (d.stuck > 4) recover(v);
+    if (!yielding && d.stuck > 4) recover(v);
   }
   world.step(events);
   vehicles.forEach((v) => v.sync());
+  if (onFoot()) {
+    const p = pedestrian.position,
+      b = map.bounds;
+    if (
+      p.y < heightAt(map, p.x, p.z) - 4 ||
+      p.x < b.minX + 2 ||
+      p.x > b.maxX - 2 ||
+      p.z < b.minZ + 2 ||
+      p.z > b.maxZ - 2
+    ) {
+      pedestrian.place(previousSafeFoot ?? pedestrian.lastSafe.clone());
+      toast("Edge of the mapped neighborhood", 1.5);
+    }
+  }
   events.drainContactForceEvents((event) => {
     const a = vehicles.find((v) => v.collider.handle === event.collider1()),
       b = vehicles.find((v) => v.collider.handle === event.collider2()),
@@ -752,7 +975,7 @@ function simulate(dt: number) {
       if (!v || v.protection > 0 || simTime - v.lastImpact < 0.25) continue;
       v.lastImpact = simTime;
       const severity = (force * dt) / handling.mass;
-      if (v.id === 0) {
+      if (v.id === 0 && !onFoot()) {
         sound.impact(severity);
         input.rumble("impact", clamp(severity / 13, 0.1, 1));
         effects.impact(v.position, Math.min(15, severity));
@@ -822,13 +1045,13 @@ function simulate(dt: number) {
     )
       player.bank.earn("oncoming", 1, simTime, 1);
   }
-  if (player.boosting) input.rumble("boost", 0.2);
+  if (!onFoot() && player.boosting) input.rumble("boost", 0.2);
   else if (Math.abs(player.slip) > 0.14 && player.grounded > 1)
     input.rumble("slip", Math.min(0.4, Math.abs(player.slip)));
   effects.update(player, dt, simTime);
   physicsMs = performance.now() - start;
 }
-function renderVehicles(alpha: number) {
+function renderVehicles(alpha: number, renderDt = 0) {
   routeMarkers.visible = race;
   vehicles.forEach((v, i) => {
     const root = visuals[i];
@@ -848,6 +1071,48 @@ function renderVehicles(alpha: number) {
       root.visible = true;
     }
   });
+  seatedDriver.update({
+    pose: "seated",
+    speed: player.speed,
+    time: simTime,
+    steering: player.steering,
+    dt: screen ? 0 : renderDt,
+  });
+  seatedDriver.root.visible = !onFoot();
+  walkingDriver.root.visible = onFoot();
+  if (onFoot()) {
+    walkingDriver.root.position.lerpVectors(
+      pedestrian.previous,
+      pedestrian.position,
+      alpha,
+    );
+    if (footPhase === "exiting" || footPhase === "entering") {
+      const t =
+        footPhase === "exiting"
+          ? transitionTime / 0.42
+          : 1 - transitionTime / 0.42;
+      walkingDriver.root.position.add(
+        new T.Vector3(-transitionSide * 0.42 * t, -0.12 * t, 0).applyQuaternion(
+          player.rotation,
+        ),
+      );
+    }
+    walkingDriver.root.rotation.y = pedestrian.yaw;
+    const speed = pedestrian.speed();
+    walkingDriver.update({
+      pose: !pedestrian.grounded
+        ? "airborne"
+        : speed > 3.4
+          ? "run"
+          : speed > 0.15
+            ? "walk"
+            : "idle",
+      speed,
+      time: simTime,
+      verticalSpeed: pedestrian.velocity.y,
+      dt: screen ? 0 : renderDt,
+    });
+  }
 }
 function updateCamera(dt: number) {
   if (inspectionView) {
@@ -856,6 +1121,43 @@ function updateCamera(dt: number) {
     camera.fov = 52;
     camera.updateProjectionMatrix();
     placeSun(inspectionView.target);
+    return;
+  }
+  if (onFoot()) {
+    const p = walkingDriver.root.position;
+    const target = p.clone().add(new T.Vector3(0, 1.2, 0));
+    const distance = 4.6;
+    const desired = target
+      .clone()
+      .add(
+        new T.Vector3(
+          -Math.sin(footYaw) * Math.cos(footPitch) * distance,
+          Math.sin(footPitch) * distance + 0.3,
+          -Math.cos(footYaw) * Math.cos(footPitch) * distance,
+        ),
+      );
+    const clear = (position: T.Vector3) =>
+      footCameraPosition(
+        world,
+        pedestrian,
+        target,
+        position,
+        (origin, direction, length) =>
+          environment.cameraDistance(origin, direction, length),
+      );
+    const safe = clear(desired);
+    if (!cameraInitialized) {
+      camPos.copy(safe);
+      cameraInitialized = true;
+    } else camPos.lerp(safe, 1 - Math.exp(-dt * (transitionTime > 0 ? 6 : 15)));
+    camPos.copy(clear(camPos));
+    camTarget.copy(target);
+    camera.position.copy(camPos);
+    camera.lookAt(camTarget);
+    camera.fov += (58 - camera.fov) * Math.min(1, dt * 6);
+    camera.updateProjectionMatrix();
+    walkingDriver.root.visible = camera.position.distanceTo(target) > 0.65;
+    placeSun(p);
     return;
   }
   const p = visuals[0].position,
@@ -952,20 +1254,17 @@ function drawMinimap() {
     h = 320;
   ctx.clearRect(0, 0, w, h);
   const survey = map.beverlySurvey;
+  const actor = actorPosition();
   const localLoop =
     !race &&
     survey &&
-    player.position.x > survey.bounds.minX - 80 &&
-    player.position.x < survey.bounds.maxX + 80 &&
-    player.position.z > survey.bounds.minZ - 80 &&
-    player.position.z < survey.bounds.maxZ + 80;
+    actor.x > survey.bounds.minX - 80 &&
+    actor.x < survey.bounds.maxX + 80 &&
+    actor.z > survey.bounds.minZ - 80 &&
+    actor.z < survey.bounds.maxZ + 80;
   const scale = localLoop ? 0.47 : 0.28,
-    cx = localLoop
-      ? (survey.bounds.minX + survey.bounds.maxX) / 2
-      : player.position.x,
-    cz = localLoop
-      ? (survey.bounds.minZ + survey.bounds.maxZ) / 2
-      : player.position.z;
+    cx = localLoop ? (survey.bounds.minX + survey.bounds.maxX) / 2 : actor.x,
+    cz = localLoop ? (survey.bounds.minZ + survey.bounds.maxZ) / 2 : actor.z;
   const transform = (p: Point) => [
     (p[0] - cx) * scale + w / 2,
     (p[2] - cz) * scale + h / 2,
@@ -991,6 +1290,19 @@ function drawMinimap() {
     path(survey.loop.points, "#b8e8ba", 3);
   }
   if (race) path(map.route.points, "#e7bd77", 3);
+  if (map.backyard)
+    path(
+      map.backyard.stream.pointsXZ.map(([x, z]: number[]) => [x, 0, z]),
+      "#77b6c6",
+      2,
+    );
+  if (onFoot()) {
+    const car = transform([player.position.x, 0, player.position.z]);
+    ctx.fillStyle = "#8ecae6";
+    ctx.fillRect(car[0] - 4, car[1] - 6, 8, 12);
+    ctx.font = "14px Arial";
+    ctx.fillText("442", car[0] + 8, car[1] + 4);
+  }
   const home = transform(map.home.position);
   ctx.fillStyle = "#b8e8ba";
   ctx.fillRect(home[0] - 4, home[1] - 4, 8, 8);
@@ -1004,10 +1316,10 @@ function drawMinimap() {
     ctx.fill();
   }
   ctx.save();
-  const playerPixel = transform([player.position.x, 0, player.position.z]);
+  const playerPixel = transform([actor.x, 0, actor.z]);
   ctx.translate(...(playerPixel as [number, number]));
   const f = new T.Vector3(0, 0, 1).applyQuaternion(player.rotation);
-  ctx.rotate(-Math.atan2(f.x, f.z));
+  ctx.rotate(-(onFoot() ? pedestrian.yaw : Math.atan2(f.x, f.z)));
   ctx.fillStyle = "#fff4d3";
   ctx.beginPath();
   ctx.moveTo(0, 9);
@@ -1018,15 +1330,44 @@ function drawMinimap() {
   ctx.restore();
 }
 function hud() {
-  const near = nearestRoad(map, player.position.x, player.position.z);
+  const actor = actorPosition();
+  const near = nearestRoad(map, actor.x, actor.z);
+  const pad = frame.source === "gamepad";
+  const action = interaction();
   const stats = race
     ? `<div class="race-stat"><b>${position()} <small>/ 4</small></b><span>POSITION</span></div><div class="race-stat"><b>${races[0]?.lap || 1} <small>/ ${map.route.laps}</small></b><span>LAP</span></div><div class="race-stat"><b>${formatTime(races[0]?.elapsed || 0)}</b><span>TIME</span></div>`
-    : '<span class="badge">FREE DRIVE</span>';
+    : `<span class="badge">${onFoot() ? "ON FOOT" : "FREE DRIVE"}</span>`;
   const r = races[0],
     cp = r && map.route.points[Math.min(r.next, map.route.points.length - 1)];
   $("hud").innerHTML =
-    `<div class="topbar"><div><div class="brand">BLUE COUNTY</div><div class="place">${escape(near.road.name || "Warwick")} · ${mode === "test" ? "Handling grounds" : "New York"}</div></div><div class="race-status">${stats}</div></div><div class="speedometer"><span class="speed">${Math.round(player.speed * 2.23694)}</span><span class="unit">MPH</span><div class="boost-meter"><i style="width:${player.bank.value}%"></i></div><div class="boost-label"><span>${player.reverse.reverse ? "REVERSE" : `GEAR ${player.gear}`} · ${Math.round(player.rpm)} RPM</span><span><span class="key green">A</span>BOOST</span></div></div><div class="minimap"><div class="map-title"><span>${race ? "RIDGE CIRCUIT" : "LOCAL ROADS"}</span><span>N ↑</span></div><canvas width="440" height="320" id="minimap-canvas"></canvas><div class="map-credit">© OpenStreetMap contributors · ODbL</div></div><div class="controls-bar"><span class="key">RT</span> Throttle <span class="key">LT</span> Brake <span class="key">X</span> Handbrake<br><span class="key">Y</span> Camera <span class="key">View</span> Hold to recover <span class="key">Menu</span> Pause</div>${race && cp ? `<div class="next-turn">NEXT CHECKPOINT<br><b>${Math.round(Math.hypot(cp[0] - player.position.x, cp[2] - player.position.z))} m</b> · ${Math.min(r.next, map.route.points.length - 1)} / ${map.route.points.length - 1}</div>` : ""}${countdown > 0 ? `<div class="center-count">${Math.ceil(countdown)}</div>` : ""}${developer ? `<div class="dev">${renderer.domElement.width} × ${renderer.domElement.height} · ${quality}\nFrame p50 / p95: ${percentile(0.5).toFixed(1)} / ${percentile(0.95).toFixed(1)} ms\nPhysics: ${physicsMs.toFixed(2)} ms · 60 Hz\nSpeed: ${player.speed.toFixed(2)} m/s\nSteer: ${player.steering.toFixed(3)} rad\nSlip: ${((player.slip * 180) / Math.PI).toFixed(1)}° · drift ${player.drift.toFixed(2)}\nWheels grounded: ${player.grounded} / 4\nBoost: ${player.bank.value.toFixed(1)}\nDraws: ${renderer.info.render.calls} · triangles ${renderer.info.render.triangles}</div>` : ""}`;
+    `<div class="topbar"><div><div class="brand">BLUE COUNTY</div><div class="place">${escape(near.road.name || "Warwick")} · ${mode === "test" ? "Handling grounds" : "New York"}</div></div><div class="race-status">${stats}</div></div><div class="speedometer"><span class="speed">${Math.round(player.speed * 2.23694)}</span><span class="unit">MPH</span><div class="boost-meter"><i style="width:${player.bank.value}%"></i></div><div class="boost-label"><span>${player.reverse.reverse ? "REVERSE" : `GEAR ${player.gear}`} · ${Math.round(player.rpm)} RPM</span><span><span class="key green">A</span>BOOST</span></div></div><div class="minimap"><div class="map-title"><span>${race ? "RIDGE CIRCUIT" : "LOCAL ROADS"}</span><span>N ↑</span></div><canvas width="440" height="320" id="minimap-canvas"></canvas><div class="map-credit">© OpenStreetMap contributors · ODbL</div></div><div class="controls-bar"><span class="key">RT</span> Throttle <span class="key">LT</span> Brake <span class="key">X</span> Handbrake<br><span class="key">R3</span> Camera <span class="key">View</span> Hold to recover <span class="key">Menu</span> Pause</div>${race && cp ? `<div class="next-turn">NEXT CHECKPOINT<br><b>${Math.round(Math.hypot(cp[0] - player.position.x, cp[2] - player.position.z))} m</b> · ${Math.min(r.next, map.route.points.length - 1)} / ${map.route.points.length - 1}</div>` : ""}${countdown > 0 ? `<div class="center-count">${Math.ceil(countdown)}</div>` : ""}${developer ? `<div class="dev">${renderer.domElement.width} × ${renderer.domElement.height} · ${quality}\nFrame p50 / p95: ${percentile(0.5).toFixed(1)} / ${percentile(0.95).toFixed(1)} ms\nPhysics: ${physicsMs.toFixed(2)} ms · 60 Hz\nSpeed: ${player.speed.toFixed(2)} m/s\nSteer: ${player.steering.toFixed(3)} rad\nSlip: ${((player.slip * 180) / Math.PI).toFixed(1)}° · drift ${player.drift.toFixed(2)}\nWheels grounded: ${player.grounded} / 4\nBoost: ${player.bank.value.toFixed(1)}\nDraws: ${renderer.info.render.calls} · triangles ${renderer.info.render.triangles}</div>` : ""}`;
   drawMinimap();
+  const speedometer = $("hud").querySelector(".speedometer");
+  if (onFoot() && speedometer) {
+    const distance = Math.round(
+      pedestrian.position.distanceTo(player.position),
+    );
+    const bearing = angleDiff(
+      Math.atan2(player.position.x - actor.x, player.position.z - actor.z),
+      footYaw,
+    );
+    speedometer.innerHTML = `<div class="foot-status">${pedestrian.grounded ? (pedestrian.speed() > 3.4 ? "RUNNING" : pedestrian.speed() > 0.2 ? "WALKING" : "ON FOOT") : "IN THE AIR"}</div><div class="car-distance"><span class="car-bearing" aria-label="Direction to your car" style="transform:rotate(${-bearing}rad)">↑</span>${distance}<small> m to your 442</small></div><div class="foot-caption">Follow the arrow back to your car</div>`;
+  }
+  const controls = $("hud").querySelector(".controls-bar");
+  if (controls)
+    controls.innerHTML = onFoot()
+      ? pad
+        ? "Left stick Move · A Run · X Jump<br>Right stick Look · Y Enter · R3 Recenter · Menu Pause"
+        : "WASD Move · Shift Run · Space Jump<br>Mouse Look (click or right-drag) · F Enter · C Recenter · Esc Pause"
+      : pad
+        ? "RT Throttle · LT Brake · X Handbrake · A Boost<br>Y Exit · R3 Camera · Hold View Recover · Menu Pause"
+        : "WASD Drive · Shift Boost · Space Handbrake<br>F Exit · C Camera · Hold R Recover · Esc Pause";
+  if (!screen && action.reason) {
+    const prompt = document.createElement("div");
+    prompt.className = `interaction-prompt${action.available ? " available" : ""}`;
+    prompt.innerHTML = `${action.available ? `<span class="key">${pad ? "Y" : "F"}</span> ` : ""}${escape(action.reason)}`;
+    $("hud").append(prompt);
+  }
 }
 function percentile(p: number) {
   const a = [...frameTimes].sort((a, b) => a - b);
@@ -1043,7 +1384,24 @@ function animate(now: number) {
   if (screen) menuInput(frame);
   else {
     if (frame.actions.pause) setScreen("pause");
-    if (frame.actions.camera) cameraMode = (cameraMode + 1) % 2;
+    if (!screen && frame.interact) interactVehicle();
+    if (frame.actions.camera) {
+      if (onFoot()) {
+        footYaw = pedestrian.yaw;
+        footPitch = 0.22;
+      } else cameraMode = (cameraMode + 1) % 2;
+    }
+    if (onFoot() && !screen) {
+      footYaw -= frame.lookX * dt * 2.5 + frame.mouseX * 0.0025;
+      footPitch = clamp(
+        footPitch + frame.lookY * dt * 1.8 + frame.mouseY * 0.002,
+        -0.38,
+        1.1,
+      );
+      // Buffer render-frame edges independently of the number of fixed steps.
+      if (frame.jump && footPhase === "foot") pedestrian.queueJump();
+      frame.jump = false;
+    }
   }
   let alpha = 1;
   if (!screen) {
@@ -1052,11 +1410,24 @@ function animate(now: number) {
     if (frameTimes.length > 1800) frameTimes.shift();
     frameCount++;
   } else clock.reset();
-  renderVehicles(alpha);
+  renderVehicles(alpha, dt);
   updateCamera(dt);
+  environment.vegetation?.setExploring(onFoot());
   environment.update(now / 1000, camera);
   atmosphere.update(now / 1000, camera);
-  sound.update(player, frame.throttle, screen !== null);
+  sound.update(
+    player,
+    onFoot() ? 0 : frame.throttle,
+    screen !== null,
+    onFoot()
+      ? {
+          distance: pedestrian.position.distanceTo(player.position),
+          speed: pedestrian.speed(),
+          grounded: pedestrian.grounded,
+          time: simTime,
+        }
+      : undefined,
+  );
   presentation.render(scene);
   if (now - lastHud > 100) {
     hud();
@@ -1078,6 +1449,36 @@ window.addEventListener("keydown", (event) => {
   }
 });
 window.addEventListener("pointerdown", () => sound.start(), { once: true });
+renderer.domElement.addEventListener("contextmenu", (event) =>
+  event.preventDefault(),
+);
+renderer.domElement.addEventListener("pointerdown", (event) => {
+  if (screen || !onFoot()) return;
+  if (event.button === 2) {
+    draggingLook = true;
+    renderer.domElement.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  } else if (event.button === 0 && !document.pointerLockElement)
+    void renderer.domElement
+      .requestPointerLock()
+      ?.catch(() => toast("Hold the right mouse button to look around", 2));
+});
+window.addEventListener("pointerup", () => {
+  draggingLook = false;
+});
+window.addEventListener("pointermove", (event) => {
+  if (
+    !screen &&
+    onFoot() &&
+    (document.pointerLockElement === renderer.domElement || draggingLook)
+  )
+    input.addMouseLook(event.movementX, event.movementY);
+});
+document.addEventListener("pointerlockchange", () => {
+  const locked = document.pointerLockElement === renderer.domElement;
+  if (!locked && hadPointerLock && !screen && onFoot()) setScreen("pause");
+  hadPointerLock = locked;
+});
 async function init() {
   await RAPIER.init();
   world = new RAPIER.World({ x: 0, y: -9.81, z: 0 });
@@ -1175,6 +1576,24 @@ if (new URLSearchParams(location.search).has("test")) {
       screen,
       mode,
       race,
+      exploration: pedestrian && {
+        mode: onFoot() ? "foot" : "driving",
+        phase: footPhase,
+        position: pedestrian.position.toArray(),
+        velocity: pedestrian.velocity.toArray(),
+        grounded: pedestrian.grounded,
+        yaw: pedestrian.yaw,
+        cameraYaw: footYaw,
+        driver: {
+          visible: walkingDriver.root.visible || seatedDriver.root.visible,
+          seated: seatedDriver.root.visible,
+          seatWorld: seatedDriver.root
+            .getWorldPosition(new T.Vector3())
+            .toArray(),
+        },
+        interaction: interaction(),
+        obstacles: explorationObstacles?.stats,
+      },
       countdown,
       modelLoaded,
       position: player?.position.toArray(),
@@ -1199,6 +1618,8 @@ if (new URLSearchParams(location.search).has("test")) {
         nearestRoad(map, player.position.x, player.position.z).distance,
       ai: drivers.map((d) => ({
         id: d.vehicle.id,
+        life: d.vehicle.life,
+        stuck: d.stuck,
         target: d.target,
         speed: d.vehicle.speed,
         position: d.vehicle.position.toArray(),
@@ -1229,6 +1650,54 @@ if (new URLSearchParams(location.search).has("test")) {
         .getParameter(renderer.getContext().RENDERER),
     }),
     startFree,
+    characterPose: () => {
+      const joints: number[][] = [];
+      walkingDriver.root.traverse((object) => {
+        if (object instanceof T.Group && object !== walkingDriver.root)
+          joints.push([
+            ...object.position.toArray(),
+            object.rotation.x,
+            object.rotation.y,
+            object.rotation.z,
+          ]);
+      });
+      return joints;
+    },
+    interactVehicle,
+    setFootPosition: (point: Point, yaw = 0) => {
+      if (!onFoot())
+        throw new Error("Exit the car before placing the explorer");
+      pedestrian.place(new T.Vector3(...point), yaw);
+      footYaw = yaw;
+      footPhase = "foot";
+      transitionTime = 0;
+      cameraInitialized = false;
+    },
+    simulateFoot: (
+      command: {
+        moveX?: number;
+        moveY?: number;
+        sprint?: boolean;
+        jump?: boolean;
+      },
+      seconds: number,
+      cameraYaw = footYaw,
+    ) => {
+      if (!onFoot())
+        throw new Error("Exit the car before simulating exploration");
+      footYaw = cameraYaw;
+      for (let i = 0; i < Math.round(seconds * 60); i++) {
+        frame = {
+          ...emptyInput(),
+          ...command,
+          jump: i === 0 && !!command.jump,
+        };
+        simulate(1 / 60);
+      }
+      renderVehicles(1);
+      updateCamera(1 / 60);
+      return (window as any).__game.getState();
+    },
     inspectView: (position: Point, target: Point) => {
       inspectionView = {
         position: new T.Vector3(...position),

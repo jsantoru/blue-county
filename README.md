@@ -27,15 +27,18 @@ Development: `npm run dev -- --port 5174 --strictPort`. The game loads all map, 
 
 ## First drive
 
-Click once to focus/unlock audio, connect the wired Xbox controller, and press a button to select it. Release that first press, then use the pad for all menus. RT is proportional throttle; LT is proportional brake. To reverse, come to a stop, release LT, then press it again. Hold A to boost, X for handbrake, B to look back, Y to switch camera, right stick to look around, Menu to pause, and View for 0.7s to recover. Return Home is in Pause and exits an active race.
+Click once to focus/unlock audio, connect the wired Xbox controller, and press a button to select it. Release that first press, then use the pad for all menus. RT is proportional throttle; LT is proportional brake. To reverse, come to a stop, release LT, then press it again. Hold A to boost, X for handbrake, B to look back, R3 to switch camera, right stick to look around, Menu to pause, and View for 0.7s to recover. Y exits the parked car in Free Drive. Return Home is in Pause and exits an active race.
 
 Keyboard: WASD/arrows drive, Shift boost, Space handbrake, B look back, C camera, R hold reset, Escape pause, Enter confirm. Menu arrows/WASD navigate; left/right adjusts settings. F3 shows telemetry.
+
+**Explore on foot:** stop and press **F / Y** to get out. WASD/arrows or the left stick move relative to the camera; Shift / A runs; Space / X jumps. Look with the right stick, right mouse drag, or click the game to capture the mouse (Escape releases and pauses). C / R3 recenters the walking camera. Approach either door and press F / Y to re-enter the 442. The map marks the parked car in blue. Walking follows terrain, steps over curbs and collides with houses, tree trunks, decks and rails. The temporary articulated driver can be replaced with a Blender character later; see [exploration notes](docs/exploration-pass.md).
 
 Start with **Balanced** handling, 0.12 stick deadzone, 1.35 response curve, and sensitivity 1.0. Increase deadzone only for stick drift. Try **Planted** if high-speed steering feels too lively. Physics tuning lives together in `src/vehicle.ts`: `steerLow`, `steerFalloff`, `grip`, `driftGrip`, `engineForce`, and `stability` are the useful first adjustments. Settings and the chosen handling preset persist locally. Diagnostics shows selected device, raw and processed analog inputs, mapping, buttons, and haptic availability; every binding can be remapped.
 
 ## Included slice
 
 - Free Drive across approximately 3.8 × 3.9km of mapped roads, with Home and safe recovery.
+- A visible US-left seated driver and third-person exterior exploration, with walking/running/jumping, collision-aware orbit camera, parked-car return prompts and footsteps.
 - **Ridge & Hollow**: a verified connected 2.645km clockwise circuit, three laps, countdown, three physical AI rivals, three civilian cars, ordered directional progress, position, results, restart.
 - Real route: Old Ridge Road → High Hill Avenue → Claire Ann Drive → Seward Highway → existing mapped connector → Old Ridge Road. Beverly Drive retains both real connections to West Ridge Road.
 - Separate handling grounds: straight, slalom, constant-radius loop, ramp and collision barriers.
@@ -71,6 +74,8 @@ npm run test:detail      # latest detail pass, all presets, resize and environme
 npm run test:property    # Home driveway departure, property details, loop and graphics checks
 npm run test:home        # photo-specific facade, yard, deck/patio relationships and reference views
 npm run test:backyard    # woodland/creek views, stream clearances, presets and environment rebuild
+npm run test:exploration # actual keyboard/mouse exit, walking, collisions and return
+npm run test:exploration:second # separate synthetic-controller and lifecycle review
 ```
 
 Tests compare acceleration, proportional throttle, braking, turning and boosted wall collision at simulated 30/60/120 fps rendering with fixed 60Hz physics. Tolerances are 0.15m position and 0.2m/s speed, not a cross-machine determinism promise. Ordered gates reject reverse travel, out-of-order crossings, teleport progress and duplicate rewards. Full mapped-route physics tests complete all 777 crossings over three laps, including all four racers with traffic and no racer recoveries. See `docs/verification.md`, the JSON reports and browser screenshots for measured environment and results.

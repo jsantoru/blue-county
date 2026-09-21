@@ -1,7 +1,9 @@
 * {
   box-sizing: border-box;
 }
-.foot a { color: inherit; }
+.foot a {
+  color: inherit;
+}
 html,
 body {
   margin: 0;
@@ -276,7 +278,8 @@ h2 {
   bottom: 29px;
   left: 300px;
   color: #ececddc9;
-  font-size: 10px;
+  font-size: 12px;
+  max-width: calc(100vw - 600px);
   line-height: 1.8;
   text-shadow: 0 1px 5px #000;
 }
@@ -367,6 +370,52 @@ h2 {
   letter-spacing: 0.13em;
   margin-left: 12px;
 }
+.interaction-prompt {
+  position: absolute;
+  bottom: 118px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #aac5bd44;
+  border-radius: 8px;
+  padding: 10px 16px;
+  background: #102320dc;
+  color: #cad4c9;
+  font-size: 13px;
+  box-shadow: 0 4px 16px #0004;
+}
+.interaction-prompt.available {
+  color: #fff2d0;
+  border-color: #d8c19477;
+}
+.foot-status {
+  color: #c4d0b9;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  margin-bottom: 12px;
+}
+.car-distance {
+  font-size: 34px;
+  font-weight: 650;
+  color: #9ad3e5;
+}
+.car-distance small {
+  font-size: 12px;
+  font-weight: 400;
+  color: #eef0df;
+}
+.car-bearing {
+  display: inline-block;
+  font-size: 26px;
+  margin-right: 12px;
+  width: 28px;
+  text-align: center;
+  color: #a3dce8;
+}
+.foot-caption {
+  font-size: 10px;
+  margin-top: 12px;
+  color: #c3d0c1;
+}
 .route-list {
   font-size: 12px;
   line-height: 1.8;
@@ -398,7 +447,10 @@ h2 {
     width: 400px;
   }
   .controls-bar {
-    display: none;
+    left: 20px;
+    bottom: 250px;
+    font-size: 10px;
+    max-width: calc(100vw - 40px);
   }
   .minimap {
     width: 190px;
