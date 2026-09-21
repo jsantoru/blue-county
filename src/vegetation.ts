@@ -948,6 +948,7 @@ export class Vegetation {
   private quality: VegetationQuality;
   private timeUniform = { value: 0 };
   private lastUpdate = -Infinity;
+  private exploring = false;
   private cameraPosition = new T.Vector3();
   private lastCameraPosition = new T.Vector3(Infinity, Infinity, Infinity);
 
@@ -1719,6 +1720,11 @@ export class Vegetation {
     this.quality = quality;
     this.lastUpdate = -Infinity;
   }
+  setExploring(active: boolean) {
+    if (this.exploring === active) return;
+    this.exploring = active;
+    this.lastUpdate = -Infinity;
+  }
 
   /** Native per-mesh frustum bounds plus coarse distance chunks; no per-tree updates. */
   update(time: number, camera: T.Camera) {
@@ -1734,7 +1740,13 @@ export class Vegetation {
     const distance =
       this.quality === "low" ? 580 : this.quality === "medium" ? 820 : 1120;
     const shadowDistance =
-      this.quality === "low" ? 0 : this.quality === "medium" ? 180 : 230;
+      this.quality === "low"
+        ? 0
+        : this.exploring
+          ? 110
+          : this.quality === "medium"
+            ? 180
+            : 230;
     let visibleChunks = 0,
       visibleBatches = 0;
     for (const chunk of this.chunks) {
@@ -1749,7 +1761,8 @@ export class Vegetation {
       if (!chunk.root.visible) continue;
       visibleChunks++;
       visibleBatches += chunk.trees.length;
-      const detailed = d < (this.quality === "low" ? 130 : 300);
+      const detailed =
+        d < (this.quality === "low" ? 130 : this.exploring ? 150 : 300);
       for (const tree of chunk.trees) {
         tree.visible = detailed;
         tree.castShadow = d < shadowDistance;

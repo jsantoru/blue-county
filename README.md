@@ -1,10 +1,31 @@
 # Blue County — Warwick / 442
 
-A locally playable arcade driving slice starring your actual dark blue 1968 Oldsmobile 442 convertible with the wheel and controls on the US driver's left. Free Drive starts on the visible parking apron at 2 Beverly Drive, facing its curved driveway exit. Official 2010/2013 aerials resolve the approach hidden by trees in the 2025 reference; current edges beneath those trees remain approximate.
+A locally playable arcade driving and exploration game starring your actual dark blue 1968 Oldsmobile 442 convertible. Drive the Warwick roads, race the Ridge & Hollow circuit, or park, step out and explore Beverly Drive's yards, woods and Stony Creek on foot. The visible driver sits behind the wheel on the US driver's left.
 
-![Home's photo-referenced front facade and yard](docs/home-front-details.png)
+**`main` is the current playable version.** The latest update adds a simple articulated driver, walking, running and jumping, a collision-aware third-person camera, and prompts that guide you back into your parked car. The character is ready to be replaced with a Blender model later.
 
-Home now has its own house and yard reconstruction from the three supplied street photographs: the offset red entrance, burgundy shutters, distinct window groups, front garden ornaments and open lawn. The owner's description places the upper deck on the driveway/right side, with a patio and red door below, sliders above, and a roofed screened area around the back. Read [the Home detail notes](docs/home-detail-pass.md) for reference observations, game views and remaining approximations.
+![The driver standing beside the parked 442 at Home](docs/exploration-second-first-exit.png)
+
+Stop in Free Drive and press **F / Xbox Y** to get out. Move with **WASD / left stick**, run with **Shift / A**, jump with **Space / X**, and look with the mouse or right stick. Approach either door and press **F / Y** to get back in. See [full controls](#first-drive) or [launch instructions](#launch-on-windows).
+
+## Recent screenshots — September 21, 2026
+
+Actual screenshots from the local production build. The seated-driver close-up was captured for this README; the exploration views come from the final second review of the feature.
+
+| Behind the wheel | From the yard into the woods |
+| --- | --- |
+| ![Close-up of the placeholder driver seated behind the 442's left-hand steering wheel](docs/readme-driver-seat.png) | ![The character running from the backyard toward the woods](docs/exploration-second-running-to-woods.png) |
+| The replaceable driver in the US-left seat. | Run through the lawn and into the surrounding woodland. |
+
+![Exploring the mapped Stony Creek channel and woodland plants on foot](docs/exploration-second-creek-exploration.png)
+
+Walking through the shallow Stony Creek channel. [More gameplay views and verification notes](docs/exploration-pass.md).
+
+## The starting neighborhood
+
+Free Drive starts on the visible parking apron at 2 Beverly Drive, facing its curved driveway exit. Official 2010/2013 aerials resolve the approach hidden by trees in the 2025 reference; current edges beneath those trees remain approximate.
+
+Home has its own house and yard reconstruction from the three supplied street photographs: the offset red entrance, burgundy shutters, distinct window groups, front garden ornaments and open lawn. The owner's description places the upper deck on the driveway/right side, with a patio and red door below, sliders above, and a roofed screened area around the back. See the [front facade and yard view](docs/home-front-details.png) or read [the Home detail notes](docs/home-detail-pass.md) for reference observations, game views and remaining approximations.
 
 Behind Home, **Stony Creek** follows its mapped course through woods traced from official 2013/2025 aerials, with an open rear lawn, mature trees and layered woodland ground cover. The approximately 212m creek reach uses an explicitly inferred channel and bank profile; it is not a new elevation survey. See [the backyard notes and game views](docs/backyard-pass.md).
 
@@ -27,15 +48,18 @@ Development: `npm run dev -- --port 5174 --strictPort`. The game loads all map, 
 
 ## First drive
 
-Click once to focus/unlock audio, connect the wired Xbox controller, and press a button to select it. Release that first press, then use the pad for all menus. RT is proportional throttle; LT is proportional brake. To reverse, come to a stop, release LT, then press it again. Hold A to boost, X for handbrake, B to look back, Y to switch camera, right stick to look around, Menu to pause, and View for 0.7s to recover. Return Home is in Pause and exits an active race.
+Click once to focus/unlock audio, connect the wired Xbox controller, and press a button to select it. Release that first press, then use the pad for all menus. RT is proportional throttle; LT is proportional brake. To reverse, come to a stop, release LT, then press it again. Hold A to boost, X for handbrake, B to look back, R3 to switch camera, right stick to look around, Menu to pause, and View for 0.7s to recover. Y exits the parked car in Free Drive. Return Home is in Pause and exits an active race.
 
 Keyboard: WASD/arrows drive, Shift boost, Space handbrake, B look back, C camera, R hold reset, Escape pause, Enter confirm. Menu arrows/WASD navigate; left/right adjusts settings. F3 shows telemetry.
+
+**Explore on foot:** stop and press **F / Y** to get out. WASD/arrows or the left stick move relative to the camera; Shift / A runs; Space / X jumps. Look with the right stick, right mouse drag, or click the game to capture the mouse (Escape releases and pauses). C / R3 recenters the walking camera. Approach either door and press F / Y to re-enter the 442. The map marks the parked car in blue. Walking follows terrain, steps over curbs and collides with houses, tree trunks, decks and rails. The temporary articulated driver can be replaced with a Blender character later; see [exploration notes](docs/exploration-pass.md).
 
 Start with **Balanced** handling, 0.12 stick deadzone, 1.35 response curve, and sensitivity 1.0. Increase deadzone only for stick drift. Try **Planted** if high-speed steering feels too lively. Physics tuning lives together in `src/vehicle.ts`: `steerLow`, `steerFalloff`, `grip`, `driftGrip`, `engineForce`, and `stability` are the useful first adjustments. Settings and the chosen handling preset persist locally. Diagnostics shows selected device, raw and processed analog inputs, mapping, buttons, and haptic availability; every binding can be remapped.
 
 ## Included slice
 
 - Free Drive across approximately 3.8 × 3.9km of mapped roads, with Home and safe recovery.
+- A visible US-left seated driver and third-person exterior exploration, with walking/running/jumping, collision-aware orbit camera, parked-car return prompts and footsteps.
 - **Ridge & Hollow**: a verified connected 2.645km clockwise circuit, three laps, countdown, three physical AI rivals, three civilian cars, ordered directional progress, position, results, restart.
 - Real route: Old Ridge Road → High Hill Avenue → Claire Ann Drive → Seward Highway → existing mapped connector → Old Ridge Road. Beverly Drive retains both real connections to West Ridge Road.
 - Separate handling grounds: straight, slalom, constant-radius loop, ramp and collision barriers.
@@ -59,6 +83,8 @@ The active source folder `../oldsmobile_442` was **not modified**. Export uses t
 
 ## Checks and evidence
 
+The September 21 exploration update passed **118 tests across 18 files** and the production build. Two complete browser reviews passed 11 initial checks and 19 second-pass checks, followed by the full three-lap race, restart and Return Home. Both exploration reviews and the final race reported zero runtime, resource or WebGL errors. See [the verification record](docs/verification.md) and [exploration review](docs/exploration-pass.md) for the measured environment, screenshots and limits. Controller automation uses synthetic Gamepad API input; physical controller feel and rumble remain unverified.
+
 ```powershell
 npm test               # input, rules, surfaces, physics and complete AI route tests
 npm run build           # TypeScript + production bundle
@@ -71,6 +97,8 @@ npm run test:detail      # latest detail pass, all presets, resize and environme
 npm run test:property    # Home driveway departure, property details, loop and graphics checks
 npm run test:home        # photo-specific facade, yard, deck/patio relationships and reference views
 npm run test:backyard    # woodland/creek views, stream clearances, presets and environment rebuild
+npm run test:exploration # actual keyboard/mouse exit, walking, collisions and return
+npm run test:exploration:second # separate synthetic-controller and lifecycle review
 ```
 
 Tests compare acceleration, proportional throttle, braking, turning and boosted wall collision at simulated 30/60/120 fps rendering with fixed 60Hz physics. Tolerances are 0.15m position and 0.2m/s speed, not a cross-machine determinism promise. Ordered gates reject reverse travel, out-of-order crossings, teleport progress and duplicate rewards. Full mapped-route physics tests complete all 777 crossings over three laps, including all four racers with traffic and no racer recoveries. See `docs/verification.md`, the JSON reports and browser screenshots for measured environment and results.

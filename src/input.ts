@@ -10,6 +10,11 @@ export type BindingName =
   | "lookBack"
   | "lookX"
   | "lookY"
+  | "moveX"
+  | "moveY"
+  | "sprint"
+  | "jump"
+  | "interact"
   | "reset"
   | "camera"
   | "pause"
@@ -58,6 +63,11 @@ export const BINDING_NAMES: readonly BindingName[] = [
   "lookBack",
   "lookX",
   "lookY",
+  "moveX",
+  "moveY",
+  "sprint",
+  "jump",
+  "interact",
   "camera",
   "pause",
   "reset",
@@ -77,7 +87,12 @@ export const STANDARD_BINDINGS: Readonly<Bindings> = Object.freeze({
   lookBack: { kind: "button", index: 1 },
   lookX: { kind: "axis", index: 2 },
   lookY: { kind: "axis", index: 3 },
-  camera: { kind: "button", index: 3 },
+  moveX: { kind: "axis", index: 0 },
+  moveY: { kind: "axis", index: 1 },
+  sprint: { kind: "button", index: 0 },
+  jump: { kind: "button", index: 2 },
+  interact: { kind: "button", index: 3 },
+  camera: { kind: "button", index: 11 },
   pause: { kind: "button", index: 9 },
   reset: { kind: "button", index: 8 },
   confirm: { kind: "button", index: 0 },
@@ -106,6 +121,16 @@ export interface InputFrame {
   lookBack: boolean;
   lookX: number;
   lookY: number;
+  /** Camera-relative movement: right and forward respectively, with length <= 1. */
+  moveX: number;
+  moveY: number;
+  sprint: boolean;
+  /** Press edges, never repeated while held. */
+  jump: boolean;
+  interact: boolean;
+  /** Mouse displacement in pixels, sensitivity applied; consume without multiplying by dt. */
+  mouseX: number;
+  mouseY: number;
   reset: boolean;
   resetProgress: number;
   actions: Record<MenuAction, boolean>;
@@ -186,6 +211,13 @@ export const emptyInput = (): InputFrame => ({
   lookBack: false,
   lookX: 0,
   lookY: 0,
+  moveX: 0,
+  moveY: 0,
+  sprint: false,
+  jump: false,
+  interact: false,
+  mouseX: 0,
+  mouseY: 0,
   reset: false,
   resetProgress: 0,
   actions: emptyActions(),
@@ -335,6 +367,7 @@ const gameplayKeys = new Set([
   "Enter",
   "Backspace",
   "KeyR",
+  "KeyF",
 ]);
 
 export class InputManager {
@@ -350,15 +383,19 @@ export class InputManager {
   private active: { index: number; id: string } | null = null;
   private previousPadButtons = new Map<string, boolean[]>();
   private customBindings: Record<string, Bindings> = {};
+  private legacyBindings = new Set<string>();
   private keys = new Set<string>();
   private repeater = new MenuRepeater();
   private frame = emptyInput();
+  private lastSource: InputFrame["source"] = "none";
   private diagnosticFrame = emptyInput();
   private needsNeutral = false;
   private focused = true;
   private safetySuspended = false;
   private resetHeld = 0;
   private resetFired = false;
+  private footHeld = { jump: false, interact: false };
+  private mouse = { x: 0, y: 0 };
   private capture: {
     name: BindingName;
     axes: number[];
@@ -447,7 +484,7 @@ export class InputManager {
   private load(): void {
     try {
       const saved = JSON.parse(this.storage?.getItem(STORAGE_KEY) ?? "null");
-      if (!saved || saved.version !== 1) return;
+      if (!saved || ![1, 2].includes(saved.version)) return;
       this.settings = normalizeSettings(saved.settings ?? {});
       if (saved.bindings && typeof saved.bindings === "object") {
         for (const [id, bindings] of Object.entries(saved.bindings)) {
@@ -457,6 +494,12 @@ export class InputManager {
             if (validBinding((bindings as Bindings)[name]))
               cleaned[name] = (bindings as Bindings)[name];
           this.customBindings[id] = cleaned;
+          if (
+            saved.version === 1 ||
+            (Array.isArray(saved.legacyBindings) &&
+              saved.legacyBindings.includes(id))
+          )
+            this.legacyBindings.add(id);
         }
       }
     } catch {
@@ -468,9 +511,10 @@ export class InputManager {
       this.storage?.setItem(
         STORAGE_KEY,
         JSON.stringify({
-          version: 1,
+          version: 2,
           settings: this.settings,
           bindings: this.customBindings,
+          legacyBindings: [...this.legacyBindings],
         }),
       );
     } catch {
@@ -485,11 +529,32 @@ export class InputManager {
   resetDefaults(): void {
     this.settings = { ...DEFAULT_SETTINGS };
     this.customBindings = {};
+    this.legacyBindings.clear();
     this.persist();
     this.consume();
   }
   getBindings(): Bindings {
     const pad = this.activePad();
+    if (pad && this.legacyBindings.has(pad.id)) {
+      const custom = this.customBindings[pad.id];
+      // Carry intentional remaps into their matching foot controls. Only standard pads
+      // have a known Y button: move that legacy camera binding to R3 so Y can interact.
+      if (custom) {
+        if (!custom.moveX && custom.steer) custom.moveX = { ...custom.steer };
+        if (!custom.sprint && custom.boost) custom.sprint = { ...custom.boost };
+        if (!custom.jump && custom.handbrake)
+          custom.jump = { ...custom.handbrake };
+        if (
+          pad.mapping === "standard" &&
+          custom.camera?.kind === "button" &&
+          custom.camera.index === 3 &&
+          !custom.interact
+        )
+          custom.camera = { kind: "button", index: 11 };
+      }
+      this.legacyBindings.delete(pad.id);
+      this.persist();
+    }
     return pad
       ? {
           ...(pad.mapping === "standard" ? STANDARD_BINDINGS : {}),
@@ -513,9 +578,9 @@ export class InputManager {
     if (!this.capture) return null;
     const name = this.capture.name;
     const instruction =
-      name === "steer" || name === "lookX"
+      name === "steer" || name === "lookX" || name === "moveX"
         ? "Move the stick fully RIGHT, then release."
-        : name === "lookY"
+        : name === "lookY" || name === "moveY"
           ? "Move the stick fully DOWN, then release."
           : name === "throttle" || name === "brake"
             ? "Release the trigger first, then squeeze it fully."
@@ -540,7 +605,9 @@ export class InputManager {
   private captureBinding(pad: PadState): void {
     const capture = this.capture;
     if (!capture) return;
-    const signed = ["steer", "lookX", "lookY"].includes(capture.name);
+    const signed = ["steer", "lookX", "lookY", "moveX", "moveY"].includes(
+      capture.name,
+    );
     if (!signed) {
       const button = pad.buttons.findIndex(
         (value, index) =>
@@ -594,6 +661,8 @@ export class InputManager {
     this.repeater.clear();
     this.resetHeld = 0;
     this.resetFired = false;
+    this.footHeld = { jump: false, interact: false };
+    this.mouse = { x: 0, y: 0 };
     this.frame = emptyInput();
     this.diagnosticFrame = emptyInput();
   }
@@ -604,8 +673,23 @@ export class InputManager {
     this.stopRumble();
   }
 
+  /** The game forwards mouse events only while its canvas owns pointer lock or a drag. */
+  addMouseLook(dx: number, dy: number): void {
+    if (
+      !this.focused ||
+      this.safetySuspended ||
+      this.needsNeutral ||
+      this.capture
+    )
+      return;
+    this.mouse.x += clamp(dx, -800, 800);
+    this.mouse.y += clamp(dy, -800, 800);
+  }
+
   sample(dt: number, menuMode = false): InputFrame {
     const step = clamp(dt, 0, 0.1);
+    const mouse = this.mouse;
+    this.mouse = { x: 0, y: 0 };
     this.hapticElapsed += step;
     try {
       this.pads = Array.from(this.getPads()).filter(
@@ -634,6 +718,7 @@ export class InputManager {
       ) {
         this.stopRumble();
         this.active = { index: pad.index, id: pad.id };
+        this.lastSource = "gamepad";
         this.hapticFailure = false;
         this.capture = null;
         this.consume();
@@ -658,7 +743,7 @@ export class InputManager {
       return this.frame;
     }
     if (!this.focused || selected) {
-      this.frame = emptyInput();
+      this.frame = { ...emptyInput(), source: this.lastSource };
       this.diagnosticFrame = emptyInput();
       return this.frame;
     }
@@ -675,8 +760,17 @@ export class InputManager {
     );
     const brake = processTrigger(value("brake"), this.settings.triggerDeadzone);
     const look = processLook(value("lookX"), value("lookY"));
+    const movement = processLook(
+      value("moveX"),
+      -value("moveY"),
+      this.settings.deadzone,
+    );
+    const keyboardX =
+      Number(key("KeyD", "ArrowRight")) - Number(key("KeyA", "ArrowLeft"));
+    const keyboardY =
+      Number(key("KeyW", "ArrowUp")) - Number(key("KeyS", "ArrowDown"));
+    const keyboardLength = Math.max(1, Math.hypot(keyboardX, keyboardY));
     const current = emptyInput();
-    current.source = this.keys.size ? "keyboard" : pad ? "gamepad" : "none";
     current.steer = key("KeyA", "KeyD", "ArrowLeft", "ArrowRight")
       ? Number(key("KeyD", "ArrowRight")) - Number(key("KeyA", "ArrowLeft"))
       : steer;
@@ -687,10 +781,29 @@ export class InputManager {
     current.lookBack = held("lookBack") || key("KeyB");
     current.lookX = look[0] * this.settings.cameraSensitivity;
     current.lookY = look[1] * this.settings.cameraSensitivity;
+    const keyboardMove = key(
+      "KeyW",
+      "KeyA",
+      "KeyS",
+      "KeyD",
+      "ArrowUp",
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+    );
+    current.moveX = keyboardMove ? keyboardX / keyboardLength : movement[0];
+    current.moveY = keyboardMove ? keyboardY / keyboardLength : movement[1];
+    current.sprint = held("sprint") || key("ShiftLeft", "ShiftRight");
+    const jump = held("jump") || key("Space");
+    const interact = held("interact") || key("KeyF");
+    current.jump = jump && !this.footHeld.jump;
+    current.interact = interact && !this.footHeld.interact;
+    this.footHeld = { jump, interact };
+    current.mouseX = mouse.x * this.settings.cameraSensitivity;
+    current.mouseY = mouse.y * this.settings.cameraSensitivity;
     const reset = held("reset") || key("KeyR");
     const menuX = value("steer");
-    // Standard left Y is used only after mapping has been verified. Unknown pads use remapped D-pad.
-    const menuY = pad?.mapping === "standard" ? (pad.axes[1] ?? 0) : 0;
+    const menuY = value("moveY");
     const menuHeld: Record<MenuAction, boolean> = {
       up: held("menuUp") || menuY < -0.6 || key("ArrowUp", "KeyW"),
       down: held("menuDown") || menuY > 0.6 || key("ArrowDown", "KeyS"),
@@ -701,6 +814,27 @@ export class InputManager {
       pause: held("pause") || key("Escape", "KeyP"),
       camera: held("camera") || key("KeyC"),
     };
+    // Keep the most recently used device in the HUD after release. Merely having
+    // an idle controller connected must not replace keyboard/mouse hints.
+    if (this.keys.size || mouse.x || mouse.y) this.lastSource = "keyboard";
+    else if (
+      pad &&
+      (Math.abs(steer) > 0.02 ||
+        throttle > 0.01 ||
+        brake > 0.01 ||
+        Math.hypot(...look) > 0.02 ||
+        Math.hypot(...movement) > 0.02 ||
+        current.boost ||
+        current.handbrake ||
+        current.lookBack ||
+        current.sprint ||
+        jump ||
+        interact ||
+        reset ||
+        Object.values(menuHeld).some(Boolean))
+    )
+      this.lastSource = "gamepad";
+    current.source = this.lastSource;
     // Diagnostics retain processed hardware values even when the menu or safety gate silences gameplay.
     this.diagnosticFrame = current;
     if (this.needsNeutral) {
@@ -711,11 +845,15 @@ export class InputManager {
         !current.boost &&
         !current.handbrake &&
         !current.lookBack &&
+        Math.hypot(current.moveX, current.moveY) < 0.02 &&
+        !current.sprint &&
+        !jump &&
+        !interact &&
         !reset &&
         Math.hypot(...look) < 0.02 &&
         !Object.values(menuHeld).some(Boolean);
       if (neutral) this.needsNeutral = false;
-      this.frame = emptyInput();
+      this.frame = { ...emptyInput(), source: this.lastSource };
       return this.frame;
     }
     current.actions = this.repeater.step(menuHeld, step);
@@ -752,9 +890,19 @@ export class InputManager {
       needsCalibration:
         !!pad &&
         pad.mapping !== "standard" &&
-        ["steer", "throttle", "brake", "confirm", "back", "pause"].some(
-          (name) => !bindings[name as BindingName],
-        ),
+        [
+          "steer",
+          "throttle",
+          "brake",
+          "confirm",
+          "back",
+          "pause",
+          "moveX",
+          "moveY",
+          "sprint",
+          "jump",
+          "interact",
+        ].some((name) => !bindings[name as BindingName]),
       suspended: this.safetySuspended,
       awaitingNeutral: this.needsNeutral,
       rawAxes: pad ? [...pad.axes] : [],

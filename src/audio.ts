@@ -10,6 +10,7 @@ export class Sound {
   boostGain?: GainNode;
   muted = false;
   lastGear = 1;
+  private lastStep = 0;
   start() {
     if (this.context) {
       void this.context.resume();
@@ -76,20 +77,47 @@ export class Sound {
     bf.connect(this.boostGain);
     this.boostGain.connect(this.master);
   }
-  update(v: Vehicle, throttle: number, paused: boolean) {
+  update(
+    v: Vehicle,
+    throttle: number,
+    paused: boolean,
+    foot?: { distance: number; speed: number; grounded: boolean; time: number },
+  ) {
     if (!this.context || !this.master) return;
     const t = this.context.currentTime;
     this.master.gain.setTargetAtTime(paused ? 0 : 0.22, t, 0.08);
     this.engine!.frequency.setTargetAtTime(v.rpm / 22, t, 0.06);
     this.harmonic!.frequency.setTargetAtTime(v.rpm / 11, t, 0.06);
-    this.engineGain!.gain.setTargetAtTime(0.09 + throttle * 0.2, t, 0.035);
-    this.windGain!.gain.setTargetAtTime(Math.min(0.4, v.speed / 180), t, 0.08);
+    this.engineGain!.gain.setTargetAtTime(
+      foot ? 0.035 / (1 + foot.distance * 0.3) : 0.09 + throttle * 0.2,
+      t,
+      0.12,
+    );
+    this.windGain!.gain.setTargetAtTime(
+      foot ? 0.018 : Math.min(0.4, v.speed / 180),
+      t,
+      0.08,
+    );
     this.tireGain!.gain.setTargetAtTime(
-      v.grounded > 1 ? Math.max(0, Math.abs(v.slip) - 0.09) * 1.8 : 0,
+      !foot && v.grounded > 1 ? Math.max(0, Math.abs(v.slip) - 0.09) * 1.8 : 0,
       t,
       0.035,
     );
-    this.boostGain!.gain.setTargetAtTime(v.boosting ? 0.4 : 0, t, 0.05);
+    this.boostGain!.gain.setTargetAtTime(
+      !foot && v.boosting ? 0.4 : 0,
+      t,
+      0.05,
+    );
+    if (
+      foot &&
+      !paused &&
+      foot.grounded &&
+      foot.speed > 0.3 &&
+      foot.time - this.lastStep > (foot.speed > 3.4 ? 0.28 : 0.43)
+    ) {
+      this.lastStep = foot.time;
+      this.footstep(foot.speed > 3.4);
+    }
     if (v.gear !== this.lastGear) {
       this.tone(90, 0.04, 0.12);
       this.lastGear = v.gear;
@@ -111,5 +139,30 @@ export class Sound {
   }
   impact(strength: number) {
     this.tone(45 + strength * 2, 0.18, Math.min(1, strength / 8));
+  }
+  private footstep(running: boolean) {
+    if (!this.context || !this.master) return;
+    const c = this.context,
+      count = Math.round(c.sampleRate * 0.085);
+    const buffer = c.createBuffer(1, count, c.sampleRate),
+      data = buffer.getChannelData(0);
+    for (let i = 0; i < count; i++)
+      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (count * 0.2));
+    const source = c.createBufferSource(),
+      filter = c.createBiquadFilter(),
+      gain = c.createGain();
+    source.buffer = buffer;
+    filter.type = "lowpass";
+    filter.frequency.value = running ? 900 : 650;
+    gain.gain.value = running ? 0.2 : 0.12;
+    source.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.master);
+    source.start();
+    source.onended = () => {
+      source.disconnect();
+      filter.disconnect();
+      gain.disconnect();
+    };
   }
 }

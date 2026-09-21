@@ -21,6 +21,8 @@
     "test:property": "node scripts/property-check.mjs",
     "test:home": "node scripts/home-check.mjs",
     "test:backyard": "node scripts/backyard-check.mjs",
+    "test:exploration": "node scripts/exploration-check.mjs",
+    "test:exploration:second": "node scripts/exploration-check.mjs --second-pass",
     "format": "prettier --write src tests index.html scripts/browser-check.mjs"
   },
   "keywords": [],
