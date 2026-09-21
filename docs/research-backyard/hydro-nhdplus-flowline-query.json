@@ -1,0 +1,2385 @@
+{
+  "url": "https://hydro.nationalmap.gov/arcgis/rest/services/NHDPlus_HR/MapServer/3/query?f=json&where=1%3D1&geometry=-74.37341192419308%2C41.27848913295005%2C-74.35787123844142%2C41.28971802263744&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&returnGeometry=true&outSR=4326",
+  "retrievedAt": "2026-09-21T01:38:39.939623+00:00",
+  "response": {
+    "displayFieldName": "GNIS_NAME",
+    "fieldAliases": {
+      "OBJECTID": "OBJECTID",
+      "permanent_identifier": "Permanent_Identifier",
+      "fdate": "FDate",
+      "resolution": "Resolution",
+      "gnis_id": "GNIS_ID",
+      "gnis_name": "GNIS_Name",
+      "lengthkm": "LengthKm",
+      "reachcode": "ReachCode",
+      "flowdir": "FlowDir",
+      "wbarea_permanent_identifier": "WBArea_Permanent_Identifier",
+      "ftype": "FType",
+      "fcode": "FCode",
+      "mainpath": "MainPath",
+      "innetwork": "InNetwork",
+      "visibilityfilter": "VisibilityFilter",
+      "nhdplusid": "NHDPlusID",
+      "vpuid": "VPUID",
+      "streamleve": "StreamLevel",
+      "streamorde": "StreamOrder",
+      "streamcalc": "StreamCalculator",
+      "fromnode": "FromNode",
+      "tonode": "ToNode",
+      "hydroseq": "HydrologicSequence",
+      "levelpathi": "LevelPathIdentifier",
+      "pathlength": "PathLength",
+      "terminalpa": "TerminalPathIdentifier",
+      "arbolatesu": "UpstreamCumulativeStreamKm",
+      "divergence": "DivergenceCode",
+      "startflag": "IsHeadwater",
+      "terminalfl": "IsNetworkEnd",
+      "uplevelpat": "UpstreamMainPathLevelPathID",
+      "uphydroseq": "UpstreamMainPathHydroSeq",
+      "dnlevel": "DownstreamMainPathStreamLevel",
+      "dnlevelpat": "DownstreamMainPathLevelPathID",
+      "dnhydroseq": "DownstreamMainPathHydroSeq",
+      "dnminorhyd": "DownstreamMinorHydroSequence",
+      "dndraincou": "DownstreamDrainageCount",
+      "frommeas": "FromMeasure",
+      "tomeas": "ToMeasure",
+      "rtndiv": "HasReturningDivergence",
+      "thinner": "Thinner",
+      "vpuin": "VPUIn",
+      "vpuout": "VPUOut",
+      "areasqkm": "AreaSqKm",
+      "totdasqkm": "TotalDrainageAreaSqKm",
+      "divdasqkm": "DivergenceRoutedDrainAreaSqKm",
+      "maxelevraw": "MaximumElevationRaw",
+      "minelevraw": "MinimumElevationRaw",
+      "maxelevsmo": "MaximumElevationSmoothed",
+      "minelevsmo": "MinimumElevationSmoothed",
+      "slope": "Slope",
+      "slopelenkm": "SlopeLengthKm",
+      "elevfixed": "IsElevationFixed",
+      "hwtype": "HeadwaterType",
+      "hwnodesqkm": "HeadwaterNodeDrainageAreaSqKm",
+      "statusflag": "StatusFlag",
+      "qama": "FlowEstARunoffMA",
+      "vama": "VelocityARunoffMA",
+      "qincrama": "IncrFlowEstARunoffMA",
+      "qbma": "FlowEstBExcessETMA",
+      "vbma": "VelocityBExcessETMA",
+      "qincrbma": "IncrFlowEstBExcessETMA",
+      "qcma": "FlowEstCRefGageRegressMA",
+      "vcma": "VelocityCRefGageRegressMA",
+      "qincrcma": "IncrFlowEstCRefGageRegressMA",
+      "qdma": "FlowEstDAdditionRemovalMA",
+      "vdma": "VelocityDAdditionRemovalMA",
+      "qincrdma": "IncrFlowEstDAdditionRemovalMA",
+      "qema": "FlowEstEGageAdjustedMA",
+      "vema": "VelocityEGageAdjustedMA",
+      "qincrema": "IncrFlowEstEGageAdjustedMA",
+      "qfma": "FlowEstFGageSequesterMA",
+      "qincrfma": "IncrFlowEstFGageSequesterMA",
+      "arqnavma": "AddRemoveFlowNotAvailableMA",
+      "petma": "CatchmentPotentialETMA",
+      "qlossma": "FlowLossFromPotentialETMA",
+      "qgadjma": "GageFlowAdjustmentMA",
+      "qgnavma": "GageAdjustmentNotAvailableMA",
+      "gageadjma": "IsGageAdjustedMA",
+      "avgqadjma": "GageFlowFlowlineBottomMA",
+      "gageidma": "NWISGageIDMA",
+      "gageqma": "GageFlowMA",
+      "Shape_Length": "Shape_Length"
+    },
+    "geometryType": "esriGeometryPolyline",
+    "spatialReference": {
+      "wkid": 4326,
+      "latestWkid": 4326
+    },
+    "fields": [
+      {
+        "name": "OBJECTID",
+        "type": "esriFieldTypeOID",
+        "alias": "OBJECTID"
+      },
+      {
+        "name": "permanent_identifier",
+        "type": "esriFieldTypeString",
+        "alias": "Permanent_Identifier",
+        "length": 40
+      },
+      {
+        "name": "fdate",
+        "type": "esriFieldTypeDate",
+        "alias": "FDate",
+        "length": 8
+      },
+      {
+        "name": "resolution",
+        "type": "esriFieldTypeInteger",
+        "alias": "Resolution"
+      },
+      {
+        "name": "gnis_id",
+        "type": "esriFieldTypeString",
+        "alias": "GNIS_ID",
+        "length": 10
+      },
+      {
+        "name": "gnis_name",
+        "type": "esriFieldTypeString",
+        "alias": "GNIS_Name",
+        "length": 65
+      },
+      {
+        "name": "lengthkm",
+        "type": "esriFieldTypeDouble",
+        "alias": "LengthKm"
+      },
+      {
+        "name": "reachcode",
+        "type": "esriFieldTypeString",
+        "alias": "ReachCode",
+        "length": 14
+      },
+      {
+        "name": "flowdir",
+        "type": "esriFieldTypeInteger",
+        "alias": "FlowDir"
+      },
+      {
+        "name": "wbarea_permanent_identifier",
+        "type": "esriFieldTypeString",
+        "alias": "WBArea_Permanent_Identifier",
+        "length": 40
+      },
+      {
+        "name": "ftype",
+        "type": "esriFieldTypeInteger",
+        "alias": "FType"
+      },
+      {
+        "name": "fcode",
+        "type": "esriFieldTypeInteger",
+        "alias": "FCode"
+      },
+      {
+        "name": "mainpath",
+        "type": "esriFieldTypeInteger",
+        "alias": "MainPath"
+      },
+      {
+        "name": "innetwork",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "InNetwork"
+      },
+      {
+        "name": "visibilityfilter",
+        "type": "esriFieldTypeInteger",
+        "alias": "VisibilityFilter"
+      },
+      {
+        "name": "nhdplusid",
+        "type": "esriFieldTypeDouble",
+        "alias": "NHDPlusID"
+      },
+      {
+        "name": "vpuid",
+        "type": "esriFieldTypeString",
+        "alias": "VPUID",
+        "length": 8
+      },
+      {
+        "name": "streamleve",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "StreamLevel"
+      },
+      {
+        "name": "streamorde",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "StreamOrder"
+      },
+      {
+        "name": "streamcalc",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "StreamCalculator"
+      },
+      {
+        "name": "fromnode",
+        "type": "esriFieldTypeDouble",
+        "alias": "FromNode"
+      },
+      {
+        "name": "tonode",
+        "type": "esriFieldTypeDouble",
+        "alias": "ToNode"
+      },
+      {
+        "name": "hydroseq",
+        "type": "esriFieldTypeDouble",
+        "alias": "HydrologicSequence"
+      },
+      {
+        "name": "levelpathi",
+        "type": "esriFieldTypeDouble",
+        "alias": "LevelPathIdentifier"
+      },
+      {
+        "name": "pathlength",
+        "type": "esriFieldTypeDouble",
+        "alias": "PathLength"
+      },
+      {
+        "name": "terminalpa",
+        "type": "esriFieldTypeDouble",
+        "alias": "TerminalPathIdentifier"
+      },
+      {
+        "name": "arbolatesu",
+        "type": "esriFieldTypeDouble",
+        "alias": "UpstreamCumulativeStreamKm"
+      },
+      {
+        "name": "divergence",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "DivergenceCode"
+      },
+      {
+        "name": "startflag",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "IsHeadwater"
+      },
+      {
+        "name": "terminalfl",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "IsNetworkEnd"
+      },
+      {
+        "name": "uplevelpat",
+        "type": "esriFieldTypeDouble",
+        "alias": "UpstreamMainPathLevelPathID"
+      },
+      {
+        "name": "uphydroseq",
+        "type": "esriFieldTypeDouble",
+        "alias": "UpstreamMainPathHydroSeq"
+      },
+      {
+        "name": "dnlevel",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "DownstreamMainPathStreamLevel"
+      },
+      {
+        "name": "dnlevelpat",
+        "type": "esriFieldTypeDouble",
+        "alias": "DownstreamMainPathLevelPathID"
+      },
+      {
+        "name": "dnhydroseq",
+        "type": "esriFieldTypeDouble",
+        "alias": "DownstreamMainPathHydroSeq"
+      },
+      {
+        "name": "dnminorhyd",
+        "type": "esriFieldTypeDouble",
+        "alias": "DownstreamMinorHydroSequence"
+      },
+      {
+        "name": "dndraincou",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "DownstreamDrainageCount"
+      },
+      {
+        "name": "frommeas",
+        "type": "esriFieldTypeDouble",
+        "alias": "FromMeasure"
+      },
+      {
+        "name": "tomeas",
+        "type": "esriFieldTypeDouble",
+        "alias": "ToMeasure"
+      },
+      {
+        "name": "rtndiv",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "HasReturningDivergence"
+      },
+      {
+        "name": "thinner",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "Thinner"
+      },
+      {
+        "name": "vpuin",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "VPUIn"
+      },
+      {
+        "name": "vpuout",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "VPUOut"
+      },
+      {
+        "name": "areasqkm",
+        "type": "esriFieldTypeDouble",
+        "alias": "AreaSqKm"
+      },
+      {
+        "name": "totdasqkm",
+        "type": "esriFieldTypeDouble",
+        "alias": "TotalDrainageAreaSqKm"
+      },
+      {
+        "name": "divdasqkm",
+        "type": "esriFieldTypeDouble",
+        "alias": "DivergenceRoutedDrainAreaSqKm"
+      },
+      {
+        "name": "maxelevraw",
+        "type": "esriFieldTypeDouble",
+        "alias": "MaximumElevationRaw"
+      },
+      {
+        "name": "minelevraw",
+        "type": "esriFieldTypeDouble",
+        "alias": "MinimumElevationRaw"
+      },
+      {
+        "name": "maxelevsmo",
+        "type": "esriFieldTypeDouble",
+        "alias": "MaximumElevationSmoothed"
+      },
+      {
+        "name": "minelevsmo",
+        "type": "esriFieldTypeDouble",
+        "alias": "MinimumElevationSmoothed"
+      },
+      {
+        "name": "slope",
+        "type": "esriFieldTypeDouble",
+        "alias": "Slope"
+      },
+      {
+        "name": "slopelenkm",
+        "type": "esriFieldTypeDouble",
+        "alias": "SlopeLengthKm"
+      },
+      {
+        "name": "elevfixed",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "IsElevationFixed"
+      },
+      {
+        "name": "hwtype",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "HeadwaterType"
+      },
+      {
+        "name": "hwnodesqkm",
+        "type": "esriFieldTypeDouble",
+        "alias": "HeadwaterNodeDrainageAreaSqKm"
+      },
+      {
+        "name": "statusflag",
+        "type": "esriFieldTypeString",
+        "alias": "StatusFlag",
+        "length": 1
+      },
+      {
+        "name": "qama",
+        "type": "esriFieldTypeDouble",
+        "alias": "FlowEstARunoffMA"
+      },
+      {
+        "name": "vama",
+        "type": "esriFieldTypeDouble",
+        "alias": "VelocityARunoffMA"
+      },
+      {
+        "name": "qincrama",
+        "type": "esriFieldTypeDouble",
+        "alias": "IncrFlowEstARunoffMA"
+      },
+      {
+        "name": "qbma",
+        "type": "esriFieldTypeDouble",
+        "alias": "FlowEstBExcessETMA"
+      },
+      {
+        "name": "vbma",
+        "type": "esriFieldTypeDouble",
+        "alias": "VelocityBExcessETMA"
+      },
+      {
+        "name": "qincrbma",
+        "type": "esriFieldTypeDouble",
+        "alias": "IncrFlowEstBExcessETMA"
+      },
+      {
+        "name": "qcma",
+        "type": "esriFieldTypeDouble",
+        "alias": "FlowEstCRefGageRegressMA"
+      },
+      {
+        "name": "vcma",
+        "type": "esriFieldTypeDouble",
+        "alias": "VelocityCRefGageRegressMA"
+      },
+      {
+        "name": "qincrcma",
+        "type": "esriFieldTypeDouble",
+        "alias": "IncrFlowEstCRefGageRegressMA"
+      },
+      {
+        "name": "qdma",
+        "type": "esriFieldTypeDouble",
+        "alias": "FlowEstDAdditionRemovalMA"
+      },
+      {
+        "name": "vdma",
+        "type": "esriFieldTypeDouble",
+        "alias": "VelocityDAdditionRemovalMA"
+      },
+      {
+        "name": "qincrdma",
+        "type": "esriFieldTypeDouble",
+        "alias": "IncrFlowEstDAdditionRemovalMA"
+      },
+      {
+        "name": "qema",
+        "type": "esriFieldTypeDouble",
+        "alias": "FlowEstEGageAdjustedMA"
+      },
+      {
+        "name": "vema",
+        "type": "esriFieldTypeDouble",
+        "alias": "VelocityEGageAdjustedMA"
+      },
+      {
+        "name": "qincrema",
+        "type": "esriFieldTypeDouble",
+        "alias": "IncrFlowEstEGageAdjustedMA"
+      },
+      {
+        "name": "qfma",
+        "type": "esriFieldTypeDouble",
+        "alias": "FlowEstFGageSequesterMA"
+      },
+      {
+        "name": "qincrfma",
+        "type": "esriFieldTypeDouble",
+        "alias": "IncrFlowEstFGageSequesterMA"
+      },
+      {
+        "name": "arqnavma",
+        "type": "esriFieldTypeDouble",
+        "alias": "AddRemoveFlowNotAvailableMA"
+      },
+      {
+        "name": "petma",
+        "type": "esriFieldTypeDouble",
+        "alias": "CatchmentPotentialETMA"
+      },
+      {
+        "name": "qlossma",
+        "type": "esriFieldTypeDouble",
+        "alias": "FlowLossFromPotentialETMA"
+      },
+      {
+        "name": "qgadjma",
+        "type": "esriFieldTypeDouble",
+        "alias": "GageFlowAdjustmentMA"
+      },
+      {
+        "name": "qgnavma",
+        "type": "esriFieldTypeDouble",
+        "alias": "GageAdjustmentNotAvailableMA"
+      },
+      {
+        "name": "gageadjma",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "IsGageAdjustedMA"
+      },
+      {
+        "name": "avgqadjma",
+        "type": "esriFieldTypeDouble",
+        "alias": "GageFlowFlowlineBottomMA"
+      },
+      {
+        "name": "gageidma",
+        "type": "esriFieldTypeString",
+        "alias": "NWISGageIDMA",
+        "length": 16
+      },
+      {
+        "name": "gageqma",
+        "type": "esriFieldTypeDouble",
+        "alias": "GageFlowMA"
+      },
+      {
+        "name": "Shape_Length",
+        "type": "esriFieldTypeDouble",
+        "alias": "Shape_Length"
+      }
+    ],
+    "features": [
+      {
+        "attributes": {
+          "OBJECTID": 12171430,
+          "permanent_identifier": "61784457",
+          "fdate": 1331192646000,
+          "resolution": 2,
+          "gnis_id": "00966557",
+          "gnis_name": "Stony Creek",
+          "lengthkm": 0.882,
+          "reachcode": "02020007000878",
+          "flowdir": 1,
+          "wbarea_permanent_identifier": null,
+          "ftype": 460,
+          "fcode": 46006,
+          "mainpath": 0,
+          "innetwork": 1,
+          "visibilityfilter": 100000,
+          "nhdplusid": 10000700052713,
+          "vpuid": "0202",
+          "streamleve": 6,
+          "streamorde": 1,
+          "streamcalc": 1,
+          "fromnode": 10000700038175,
+          "tonode": 10000700038261,
+          "hydroseq": 10000700049078,
+          "levelpathi": 10000700018751,
+          "pathlength": 322.96225308,
+          "terminalpa": 10000100000477,
+          "arbolatesu": 1.073,
+          "divergence": 0,
+          "startflag": 0,
+          "terminalfl": 0,
+          "uplevelpat": 10000700018751,
+          "uphydroseq": 10000700063352,
+          "dnlevel": 6,
+          "dnlevelpat": 10000700018751,
+          "dnhydroseq": 10000700040280,
+          "dnminorhyd": 0,
+          "dndraincou": 1,
+          "frommeas": 69.13362122,
+          "tomeas": 94.51850128000001,
+          "rtndiv": 0,
+          "thinner": null,
+          "vpuin": 0,
+          "vpuout": 0,
+          "areasqkm": 0.7779000100000001,
+          "totdasqkm": 1.15160003,
+          "divdasqkm": 1.15160003,
+          "maxelevraw": -9998,
+          "minelevraw": 20439,
+          "maxelevsmo": 22197,
+          "minelevsmo": 20439,
+          "slope": 0.01993197,
+          "slopelenkm": 0.882,
+          "elevfixed": 0,
+          "hwtype": null,
+          "hwnodesqkm": null,
+          "statusflag": "A",
+          "qama": 0.8436520000000001,
+          "vama": 0.73171645,
+          "qincrama": 0.570686,
+          "qbma": 0.8436520000000001,
+          "vbma": 0.73171645,
+          "qincrbma": 0.570686,
+          "qcma": 0.79028094,
+          "vcma": 0.72948153,
+          "qincrcma": 0.53420794,
+          "qdma": 0.79028094,
+          "vdma": 0.72948153,
+          "qincrdma": 0.53420794,
+          "qema": 0.79028094,
+          "vema": 0.72948153,
+          "qincrema": 0.53420794,
+          "qfma": 0.79028094,
+          "qincrfma": 0.53420794,
+          "arqnavma": 0,
+          "petma": 0,
+          "qlossma": 0,
+          "qgadjma": 0,
+          "qgnavma": 0,
+          "gageadjma": 0,
+          "avgqadjma": 0,
+          "gageidma": "0",
+          "gageqma": 0,
+          "Shape_Length": 1176.8594519081705
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.3590460620412,
+                41.28546600289914
+              ],
+              [
+                -74.36143692816988,
+                41.285773069204026
+              ],
+              [
+                -74.36149099507189,
+                41.28576606925401
+              ],
+              [
+                -74.36159692800345,
+                41.28573600321136
+              ],
+              [
+                -74.36202706202273,
+                41.28566000270645
+              ],
+              [
+                -74.36311099529571,
+                41.28545000284056
+              ],
+              [
+                -74.36328199499992,
+                41.2854290028843
+              ],
+              [
+                -74.36387692765304,
+                41.285403003025515
+              ],
+              [
+                -74.3644589281593,
+                41.28540800292127
+              ],
+              [
+                -74.36451106188682,
+                41.28539200284851
+              ],
+              [
+                -74.36457292796213,
+                41.28535100327688
+              ],
+              [
+                -74.36461492779492,
+                41.28530400271555
+              ],
+              [
+                -74.36480099494139,
+                41.285035003030686
+              ],
+              [
+                -74.36491492826889,
+                41.284947003091304
+              ],
+              [
+                -74.36500292813243,
+                41.2849110031739
+              ],
+              [
+                -74.3651010618907,
+                41.28489500297928
+              ],
+              [
+                -74.36516892781378,
+                41.284849069310006
+              ],
+              [
+                -74.3652519950281,
+                41.28470400275739
+              ],
+              [
+                -74.36527792759372,
+                41.28460500273693
+              ],
+              [
+                -74.36527806234103,
+                41.284227002995586
+              ],
+              [
+                -74.36524599518033,
+                41.28408300296818
+              ],
+              [
+                -74.36524599518033,
+                41.283938002891375
+              ],
+              [
+                -74.36527806234103,
+                41.28384400307448
+              ],
+              [
+                -74.36531392757874,
+                41.283798003186526
+              ],
+              [
+                -74.36539699479306,
+                41.28374606898789
+              ],
+              [
+                -74.3655730618938,
+                41.283679003032496
+              ],
+              [
+                -74.36582106159092,
+                41.283409935894866
+              ],
+              [
+                -74.36591999484979,
+                41.28334193600761
+              ],
+              [
+                -74.36612699543734,
+                41.28313900316937
+              ],
+              [
+                -74.36628399489786,
+                41.28301793616748
+              ],
+              [
+                -74.36648392843907,
+                41.28290200268847
+              ],
+              [
+                -74.36683406209242,
+                41.28270600328123
+              ],
+              [
+                -74.36720292831437,
+                41.28254200281508
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 13911525,
+          "permanent_identifier": "159826262",
+          "fdate": 1331192614000,
+          "resolution": 2,
+          "gnis_id": null,
+          "gnis_name": null,
+          "lengthkm": 0.366,
+          "reachcode": "02020007003421",
+          "flowdir": 1,
+          "wbarea_permanent_identifier": null,
+          "ftype": 460,
+          "fcode": 46006,
+          "mainpath": 0,
+          "innetwork": 1,
+          "visibilityfilter": 24000,
+          "nhdplusid": 10000700052698,
+          "vpuid": "0202",
+          "streamleve": 7,
+          "streamorde": 1,
+          "streamcalc": 1,
+          "fromnode": 10000700038164,
+          "tonode": 10000700040765,
+          "hydroseq": 10000700049080,
+          "levelpathi": 10000700039944,
+          "pathlength": 322.94225308,
+          "terminalpa": 10000100000477,
+          "arbolatesu": 0.40900000000000003,
+          "divergence": 0,
+          "startflag": 0,
+          "terminalfl": 0,
+          "uplevelpat": 10000700039944,
+          "uphydroseq": 10000700063341,
+          "dnlevel": 7,
+          "dnlevelpat": 10000700039944,
+          "dnhydroseq": 10000700039944,
+          "dnminorhyd": 0,
+          "dndraincou": 1,
+          "frommeas": 4.4460001,
+          "tomeas": 89.99250031000001,
+          "rtndiv": 0,
+          "thinner": null,
+          "vpuin": 0,
+          "vpuout": 0,
+          "areasqkm": 0.32090002,
+          "totdasqkm": 0.37770001000000003,
+          "divdasqkm": 0.37770001000000003,
+          "maxelevraw": -9998,
+          "minelevraw": 20427,
+          "maxelevsmo": 22328,
+          "minelevsmo": 20427,
+          "slope": 0.05193989,
+          "slopelenkm": 0.366,
+          "elevfixed": 0,
+          "hwtype": null,
+          "hwnodesqkm": null,
+          "statusflag": "A",
+          "qama": 0.274283,
+          "vama": 0.68969196,
+          "qincrama": 0.232746,
+          "qbma": 0.274283,
+          "vbma": 0.68969196,
+          "qincrbma": 0.232746,
+          "qcma": 0.25730688,
+          "vcma": 0.68772378,
+          "qincrcma": 0.21824498,
+          "qdma": 0.25730688,
+          "vdma": 0.68772378,
+          "qincrdma": 0.21824498,
+          "qema": 0.25730688,
+          "vema": 0.68772378,
+          "qincrema": 0.21824498,
+          "qfma": 0.25730688,
+          "qincrfma": 0.21824498,
+          "arqnavma": 0,
+          "petma": 0,
+          "qlossma": 0,
+          "qgadjma": 0,
+          "qgnavma": 0,
+          "gageadjma": 0,
+          "avgqadjma": 0,
+          "gageidma": "0",
+          "gageqma": 0,
+          "Shape_Length": 488.0979006134483
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.36432999476321,
+                41.28064500297038
+              ],
+              [
+                -74.36457299533576,
+                41.280570936020986
+              ],
+              [
+                -74.36466199502422,
+                41.280564935971356
+              ],
+              [
+                -74.36479506156894,
+                41.28060100309329
+              ],
+              [
+                -74.36494699542959,
+                41.28069100305562
+              ],
+              [
+                -74.36501499520163,
+                41.28071400274854
+              ],
+              [
+                -74.36504592779012,
+                41.28070793587994
+              ],
+              [
+                -74.36515306176923,
+                41.28063606906294
+              ],
+              [
+                -74.36517799540826,
+                41.280628003297544
+              ],
+              [
+                -74.36521099502023,
+                41.28063000286218
+              ],
+              [
+                -74.3653139949524,
+                41.28071400274854
+              ],
+              [
+                -74.3654279947552,
+                41.28075193568495
+              ],
+              [
+                -74.36555606217537,
+                41.28086000301709
+              ],
+              [
+                -74.36564299484036,
+                41.28097100266978
+              ],
+              [
+                -74.3657609283658,
+                41.28104600278436
+              ],
+              [
+                -74.36591099462895,
+                41.281110936207284
+              ],
+              [
+                -74.36594299531433,
+                41.281112068970515
+              ],
+              [
+                -74.3660580623157,
+                41.28108400303456
+              ],
+              [
+                -74.366090994554,
+                41.28109500326274
+              ],
+              [
+                -74.36625292756207,
+                41.28121600295001
+              ],
+              [
+                -74.36628992827032,
+                41.28122900270223
+              ],
+              [
+                -74.36640799474642,
+                41.28123600313894
+              ],
+              [
+                -74.36659899544044,
+                41.28120700296425
+              ],
+              [
+                -74.36669806164997,
+                41.28122300271304
+              ],
+              [
+                -74.36674999505318,
+                41.281250003335046
+              ],
+              [
+                -74.36690992841142,
+                41.28142693587907
+              ],
+              [
+                -74.36693999502398,
+                41.28149393596753
+              ],
+              [
+                -74.36700099512336,
+                41.28154400270909
+              ],
+              [
+                -74.36718299469823,
+                41.281577003155476
+              ],
+              [
+                -74.36734712768042,
+                41.28174340318816
+              ],
+              [
+                -74.36744712813784,
+                41.281905202942895
+              ],
+              [
+                -74.3674619952558,
+                41.28214100274247
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 15001766,
+          "permanent_identifier": "61785851",
+          "fdate": 1331192646000,
+          "resolution": 2,
+          "gnis_id": "00966557",
+          "gnis_name": "Stony Creek",
+          "lengthkm": 0.039,
+          "reachcode": "02020007000878",
+          "flowdir": 1,
+          "wbarea_permanent_identifier": "61783913",
+          "ftype": 558,
+          "fcode": 55800,
+          "mainpath": 0,
+          "innetwork": 1,
+          "visibilityfilter": 100000,
+          "nhdplusid": 10000700052849,
+          "vpuid": "0202",
+          "streamleve": 6,
+          "streamorde": 1,
+          "streamcalc": 1,
+          "fromnode": 10000700038261,
+          "tonode": 10000700038206,
+          "hydroseq": 10000700040280,
+          "levelpathi": 10000700018751,
+          "pathlength": 322.92325308,
+          "terminalpa": 10000100000477,
+          "arbolatesu": 1.112,
+          "divergence": 0,
+          "startflag": 0,
+          "terminalfl": 0,
+          "uplevelpat": 10000700018751,
+          "uphydroseq": 10000700049078,
+          "dnlevel": 6,
+          "dnlevelpat": 10000700018751,
+          "dnhydroseq": 10000700034357,
+          "dnminorhyd": 0,
+          "dndraincou": 1,
+          "frommeas": 68.00837708,
+          "tomeas": 69.13362122,
+          "rtndiv": 0,
+          "thinner": null,
+          "vpuin": 0,
+          "vpuout": 0,
+          "areasqkm": 0.022500010000000004,
+          "totdasqkm": 1.17410004,
+          "divdasqkm": 1.17410004,
+          "maxelevraw": -9998,
+          "minelevraw": 20351,
+          "maxelevsmo": 20439,
+          "minelevsmo": 20410,
+          "slope": 0.0074359000000000005,
+          "slopelenkm": 0.039,
+          "elevfixed": 0,
+          "hwtype": null,
+          "hwnodesqkm": null,
+          "statusflag": "A",
+          "qama": 0.8602310000000001,
+          "vama": -9998,
+          "qincrama": 0.016579,
+          "qbma": 0.8602310000000001,
+          "vbma": -9998,
+          "qincrbma": 0.016579,
+          "qcma": 0.8057907400000001,
+          "vcma": -9998,
+          "qincrcma": 0.0155098,
+          "qdma": 0.8057907400000001,
+          "vdma": -9998,
+          "qincrdma": 0.0155098,
+          "qema": 0.8057907400000001,
+          "vema": -9998,
+          "qincrema": 0.0155098,
+          "qfma": 0.8057907400000001,
+          "qincrfma": 0.0155098,
+          "arqnavma": 0,
+          "petma": 0,
+          "qlossma": 0,
+          "qgadjma": 0,
+          "qgnavma": 0,
+          "gageadjma": 0,
+          "avgqadjma": 0,
+          "gageidma": "0",
+          "gageqma": 0,
+          "Shape_Length": 52.199893601727226
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.36720292831437,
+                41.28254200281508
+              ],
+              [
+                -74.36754486214582,
+                41.28230086882855
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 16134405,
+          "permanent_identifier": "61785853",
+          "fdate": 1331192614000,
+          "resolution": 2,
+          "gnis_id": null,
+          "gnis_name": null,
+          "lengthkm": 0.019,
+          "reachcode": "02020007003421",
+          "flowdir": 1,
+          "wbarea_permanent_identifier": "61783913",
+          "ftype": 558,
+          "fcode": 55800,
+          "mainpath": 0,
+          "innetwork": 1,
+          "visibilityfilter": 24000,
+          "nhdplusid": 10000700056153,
+          "vpuid": "0202",
+          "streamleve": 7,
+          "streamorde": 1,
+          "streamcalc": 1,
+          "fromnode": 10000700040765,
+          "tonode": 10000700038206,
+          "hydroseq": 10000700039944,
+          "levelpathi": 10000700039944,
+          "pathlength": 322.92325308,
+          "terminalpa": 10000100000477,
+          "arbolatesu": 0.42800000000000005,
+          "divergence": 0,
+          "startflag": 0,
+          "terminalfl": 0,
+          "uplevelpat": 10000700039944,
+          "uphydroseq": 10000700049080,
+          "dnlevel": 6,
+          "dnlevelpat": 10000700018751,
+          "dnhydroseq": 10000700034357,
+          "dnminorhyd": 0,
+          "dndraincou": 1,
+          "frommeas": 0,
+          "tomeas": 4.4460001,
+          "rtndiv": 0,
+          "thinner": null,
+          "vpuin": 0,
+          "vpuout": 0,
+          "areasqkm": 0.0005,
+          "totdasqkm": 0.37820001000000003,
+          "divdasqkm": 0.37820001000000003,
+          "maxelevraw": -9998,
+          "minelevraw": 20410,
+          "maxelevsmo": 20427,
+          "minelevsmo": 20410,
+          "slope": 0.00894737,
+          "slopelenkm": 0.019,
+          "elevfixed": 1,
+          "hwtype": null,
+          "hwnodesqkm": null,
+          "statusflag": "A",
+          "qama": 0.27465100000000003,
+          "vama": -9998,
+          "qincrama": 0.00036800000000000005,
+          "qbma": 0.27465100000000003,
+          "vbma": -9998,
+          "qincrbma": 0.00036800000000000005,
+          "qcma": 0.25765166,
+          "vcma": -9998,
+          "qincrcma": 0.00034478000000000004,
+          "qdma": 0.25765166,
+          "vdma": -9998,
+          "qincrdma": 0.00034478000000000004,
+          "qema": 0.25765166,
+          "vema": -9998,
+          "qincrema": 0.00034478000000000004,
+          "qfma": 0.25765166,
+          "qincrfma": 0.00034478000000000004,
+          "arqnavma": 0,
+          "petma": 0,
+          "qlossma": 0,
+          "qgadjma": 0,
+          "qgnavma": 0,
+          "gageadjma": 0,
+          "avgqadjma": 0,
+          "gageidma": "0",
+          "gageqma": 0,
+          "Shape_Length": 25.415103340340927
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.3674619952558,
+                41.28214100274247
+              ],
+              [
+                -74.36754486214582,
+                41.28230086882855
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 18708092,
+          "permanent_identifier": "61785849",
+          "fdate": 1331192646000,
+          "resolution": 2,
+          "gnis_id": "00966557",
+          "gnis_name": "Stony Creek",
+          "lengthkm": 0.191,
+          "reachcode": "02020007000878",
+          "flowdir": 1,
+          "wbarea_permanent_identifier": "61784219",
+          "ftype": 558,
+          "fcode": 55800,
+          "mainpath": 0,
+          "innetwork": 1,
+          "visibilityfilter": 100000,
+          "nhdplusid": 10000700052823,
+          "vpuid": "0202",
+          "streamleve": 6,
+          "streamorde": 1,
+          "streamcalc": 1,
+          "fromnode": 10000700070023,
+          "tonode": 10000700038175,
+          "hydroseq": 10000700063352,
+          "levelpathi": 10000700018751,
+          "pathlength": 323.84425308,
+          "terminalpa": 10000100000477,
+          "arbolatesu": 0.191,
+          "divergence": 0,
+          "startflag": 1,
+          "terminalfl": 0,
+          "uplevelpat": 0,
+          "uphydroseq": 0,
+          "dnlevel": 6,
+          "dnlevelpat": 10000700018751,
+          "dnhydroseq": 10000700049078,
+          "dnminorhyd": 0,
+          "dndraincou": 1,
+          "frommeas": 94.51850128000001,
+          "tomeas": 100,
+          "rtndiv": 0,
+          "thinner": null,
+          "vpuin": 0,
+          "vpuout": 0,
+          "areasqkm": 0.37370002,
+          "totdasqkm": 0.37370002,
+          "divdasqkm": 0.37370002,
+          "maxelevraw": 22197,
+          "minelevraw": 22197,
+          "maxelevsmo": 22197,
+          "minelevsmo": 22197,
+          "slope": 1e-05,
+          "slopelenkm": 0.091,
+          "elevfixed": 0,
+          "hwtype": 0,
+          "hwnodesqkm": 0.3164,
+          "statusflag": "A",
+          "qama": 0.27296600000000004,
+          "vama": -9998,
+          "qincrama": 0.27296600000000004,
+          "qbma": 0.27296600000000004,
+          "vbma": -9998,
+          "qincrbma": 0.27296600000000004,
+          "qcma": 0.256073,
+          "vcma": -9998,
+          "qincrcma": 0.256073,
+          "qdma": 0.256073,
+          "vdma": -9998,
+          "qincrdma": 0.256073,
+          "qema": 0.256073,
+          "vema": -9998,
+          "qincrema": 0.256073,
+          "qfma": 0.256073,
+          "qincrfma": 0.256073,
+          "arqnavma": 0,
+          "petma": 0,
+          "qlossma": 0,
+          "qgadjma": 0,
+          "qgnavma": 0,
+          "gageadjma": 0,
+          "avgqadjma": 0,
+          "gageidma": "0",
+          "gageqma": 0,
+          "Shape_Length": 254.2770958206522
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.35739299483178,
+                41.28651900306412
+              ],
+              [
+                -74.35827732783848,
+                41.28561880282205
+              ],
+              [
+                -74.3590460620412,
+                41.28546600289914
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 18734968,
+          "permanent_identifier": "61785855",
+          "fdate": 1331192646000,
+          "resolution": 2,
+          "gnis_id": "00966557",
+          "gnis_name": "Stony Creek",
+          "lengthkm": 0.052000000000000005,
+          "reachcode": "02020007000878",
+          "flowdir": 1,
+          "wbarea_permanent_identifier": "61783913",
+          "ftype": 558,
+          "fcode": 55800,
+          "mainpath": 0,
+          "innetwork": 1,
+          "visibilityfilter": 100000,
+          "nhdplusid": 10000700052762,
+          "vpuid": "0202",
+          "streamleve": 6,
+          "streamorde": 2,
+          "streamcalc": 2,
+          "fromnode": 10000700038206,
+          "tonode": 10000700040753,
+          "hydroseq": 10000700034357,
+          "levelpathi": 10000700018751,
+          "pathlength": 322.87125308,
+          "terminalpa": 10000100000477,
+          "arbolatesu": 1.592,
+          "divergence": 0,
+          "startflag": 0,
+          "terminalfl": 0,
+          "uplevelpat": 10000700018751,
+          "uphydroseq": 10000700040280,
+          "dnlevel": 6,
+          "dnlevelpat": 10000700018751,
+          "dnhydroseq": 10000700029837,
+          "dnminorhyd": 0,
+          "dndraincou": 1,
+          "frommeas": 66.51587677,
+          "tomeas": 68.00837708,
+          "rtndiv": 0,
+          "thinner": null,
+          "vpuin": 0,
+          "vpuout": 0,
+          "areasqkm": 0.0048000000000000004,
+          "totdasqkm": 1.55710005,
+          "divdasqkm": 1.55710005,
+          "maxelevraw": -9998,
+          "minelevraw": 20254,
+          "maxelevsmo": 20410,
+          "minelevsmo": 20254,
+          "slope": 0.030000000000000002,
+          "slopelenkm": 0.052000000000000005,
+          "elevfixed": 0,
+          "hwtype": null,
+          "hwnodesqkm": null,
+          "statusflag": "A",
+          "qama": 1.138419,
+          "vama": -9998,
+          "qincrama": 0.003537,
+          "qbma": 1.138419,
+          "vbma": -9998,
+          "qincrbma": 0.003537,
+          "qcma": 1.0659850800000001,
+          "vcma": -9998,
+          "qincrcma": 0.00254268,
+          "qdma": 1.0659850800000001,
+          "vdma": -9998,
+          "qincrdma": 0.00254268,
+          "qema": 1.0659850800000001,
+          "vema": -9998,
+          "qincrema": 0.00254268,
+          "qfma": 1.0659850800000001,
+          "qincrfma": 0.00254268,
+          "arqnavma": 0,
+          "petma": 0,
+          "qlossma": 0,
+          "qgadjma": 0,
+          "qgnavma": 0,
+          "gageadjma": 0,
+          "avgqadjma": 0,
+          "gageidma": "0",
+          "gageqma": 0,
+          "Shape_Length": 69.35327672001723
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.36754486214582,
+                41.28230086882855
+              ],
+              [
+                -74.36777206225085,
+                41.2818649363205
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 21815418,
+          "permanent_identifier": "159826259",
+          "fdate": 1331192614000,
+          "resolution": 2,
+          "gnis_id": null,
+          "gnis_name": null,
+          "lengthkm": 0.043000000000000003,
+          "reachcode": "02020007003421",
+          "flowdir": 1,
+          "wbarea_permanent_identifier": "159826215",
+          "ftype": 558,
+          "fcode": 55800,
+          "mainpath": 0,
+          "innetwork": 1,
+          "visibilityfilter": 24000,
+          "nhdplusid": 10000700052870,
+          "vpuid": "0202",
+          "streamleve": 7,
+          "streamorde": 1,
+          "streamcalc": 1,
+          "fromnode": 10000700070034,
+          "tonode": 10000700038164,
+          "hydroseq": 10000700063341,
+          "levelpathi": 10000700039944,
+          "pathlength": 323.30825308,
+          "terminalpa": 10000100000477,
+          "arbolatesu": 0.043000000000000003,
+          "divergence": 0,
+          "startflag": 1,
+          "terminalfl": 0,
+          "uplevelpat": 0,
+          "uphydroseq": 0,
+          "dnlevel": 7,
+          "dnlevelpat": 10000700039944,
+          "dnhydroseq": 10000700049080,
+          "dnminorhyd": 0,
+          "dndraincou": 1,
+          "frommeas": 89.99250031000001,
+          "tomeas": 100,
+          "rtndiv": 0,
+          "thinner": null,
+          "vpuin": 0,
+          "vpuout": 0,
+          "areasqkm": 0.05679999,
+          "totdasqkm": 0.05679999,
+          "divdasqkm": 0.05679999,
+          "maxelevraw": 22630,
+          "minelevraw": 22328,
+          "maxelevsmo": 22630,
+          "minelevsmo": 22328,
+          "slope": 0.45299977,
+          "slopelenkm": 0.0066666699999999995,
+          "elevfixed": 0,
+          "hwtype": 0,
+          "hwnodesqkm": 0.0388,
+          "statusflag": "A",
+          "qama": 0.041537000000000004,
+          "vama": -9998,
+          "qincrama": 0.041537000000000004,
+          "qbma": 0.041537000000000004,
+          "vbma": -9998,
+          "qincrbma": 0.041537000000000004,
+          "qcma": 0.0390619,
+          "vcma": -9998,
+          "qincrcma": 0.0390619,
+          "qdma": 0.0390619,
+          "vdma": -9998,
+          "qincrdma": 0.0390619,
+          "qema": 0.0390619,
+          "vema": -9998,
+          "qincrema": 0.0390619,
+          "qfma": 0.0390619,
+          "qincrfma": 0.0390619,
+          "arqnavma": 0,
+          "petma": 0,
+          "qlossma": 0,
+          "qgadjma": 0,
+          "qgnavma": 0,
+          "gageadjma": 0,
+          "avgqadjma": 0,
+          "gageidma": "0",
+          "gageqma": 0,
+          "Shape_Length": 57.07608502227297
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.36390999463863,
+                41.280424002827814
+              ],
+              [
+                -74.36432999476321,
+                41.28064500297038
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 24116270,
+          "permanent_identifier": "61776679",
+          "fdate": 1331192646000,
+          "resolution": 2,
+          "gnis_id": "00966557",
+          "gnis_name": "Stony Creek",
+          "lengthkm": 2.313,
+          "reachcode": "02020007000878",
+          "flowdir": 1,
+          "wbarea_permanent_identifier": null,
+          "ftype": 460,
+          "fcode": 46003,
+          "mainpath": 0,
+          "innetwork": 1,
+          "visibilityfilter": 100000,
+          "nhdplusid": 10000700056137,
+          "vpuid": "0202",
+          "streamleve": 6,
+          "streamorde": 2,
+          "streamcalc": 2,
+          "fromnode": 10000700040753,
+          "tonode": 10000700040770,
+          "hydroseq": 10000700029837,
+          "levelpathi": 10000700018751,
+          "pathlength": 320.55825308,
+          "terminalpa": 10000100000477,
+          "arbolatesu": 3.9050000000000002,
+          "divergence": 0,
+          "startflag": 0,
+          "terminalfl": 0,
+          "uplevelpat": 10000700018751,
+          "uphydroseq": 10000700034357,
+          "dnlevel": 6,
+          "dnlevelpat": 10000700018751,
+          "dnhydroseq": 10000700020186,
+          "dnminorhyd": 0,
+          "dndraincou": 1,
+          "frommeas": 0,
+          "tomeas": 66.51587677,
+          "rtndiv": 0,
+          "thinner": null,
+          "vpuin": 0,
+          "vpuout": 0,
+          "areasqkm": 1.64869997,
+          "totdasqkm": 3.20580002,
+          "divdasqkm": 3.20580002,
+          "maxelevraw": -9998,
+          "minelevraw": 15105,
+          "maxelevsmo": 20254,
+          "minelevsmo": 15115,
+          "slope": 0.022217900000000002,
+          "slopelenkm": 2.313,
+          "elevfixed": 0,
+          "hwtype": null,
+          "hwnodesqkm": null,
+          "statusflag": "A",
+          "qama": 2.343813,
+          "vama": 0.85321303,
+          "qincrama": 1.205394,
+          "qbma": 2.343813,
+          "vbma": 0.85321303,
+          "qincrbma": 1.205394,
+          "qcma": 2.19262441,
+          "vcma": 0.8502783600000001,
+          "qincrcma": 1.12663933,
+          "qdma": 2.19262441,
+          "vdma": 0.8502783600000001,
+          "qincrdma": 1.12663933,
+          "qema": 2.19262441,
+          "vema": 0.8502783600000001,
+          "qincrema": 1.12663933,
+          "qfma": 2.19262441,
+          "qincrfma": 1.12663933,
+          "arqnavma": 0,
+          "petma": 0,
+          "qlossma": 0,
+          "qgadjma": 0,
+          "qgnavma": 0,
+          "gageadjma": 0,
+          "avgqadjma": 0,
+          "gageidma": "0",
+          "gageqma": 0,
+          "Shape_Length": 3084.5941636381667
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.36777206225085,
+                41.2818649363205
+              ],
+              [
+                -74.3678919954261,
+                41.28172600281513
+              ],
+              [
+                -74.36793299543397,
+                41.28169693602712
+              ],
+              [
+                -74.36803099534329,
+                41.281661003173035
+              ],
+              [
+                -74.36808599469654,
+                41.281649936209156
+              ],
+              [
+                -74.36812006240538,
+                41.28165400278196
+              ],
+              [
+                -74.36819899467444,
+                41.28167500327801
+              ],
+              [
+                -74.36823106183516,
+                41.28171906926206
+              ],
+              [
+                -74.3683009947817,
+                41.28190806924445
+              ],
+              [
+                -74.36835492783473,
+                41.28198500299964
+              ],
+              [
+                -74.36838092777401,
+                41.2819880029593
+              ],
+              [
+                -74.36843599539924,
+                41.28191200281447
+              ],
+              [
+                -74.36851892786626,
+                41.28189400303368
+              ],
+              [
+                -74.36867606207409,
+                41.281824002713925
+              ],
+              [
+                -74.36891692824953,
+                41.28178100272133
+              ],
+              [
+                -74.36920499460494,
+                41.281769935777795
+              ],
+              [
+                -74.36956199498033,
+                41.281805936077916
+              ],
+              [
+                -74.36966799528552,
+                41.28182800311999
+              ],
+              [
+                -74.3697369948825,
+                41.28186400271295
+              ],
+              [
+                -74.37009406173321,
+                41.28212700273751
+              ],
+              [
+                -74.37020699523578,
+                41.28218600268988
+              ],
+              [
+                -74.37040599542742,
+                41.28227193595756
+              ],
+              [
+                -74.37069806198079,
+                41.282312003187585
+              ],
+              [
+                -74.37076699510246,
+                41.28234500324557
+              ],
+              [
+                -74.37084399509534,
+                41.28240700294119
+              ],
+              [
+                -74.37096399474594,
+                41.28254593567183
+              ],
+              [
+                -74.37114399467099,
+                41.282793003118314
+              ],
+              [
+                -74.37128999515916,
+                41.28293200320709
+              ],
+              [
+                -74.37138899489337,
+                41.282996936103594
+              ],
+              [
+                -74.37142906155168,
+                41.28303700288848
+              ],
+              [
+                -74.37145392781704,
+                41.283081003148325
+              ],
+              [
+                -74.37149806204695,
+                41.28321600297797
+              ],
+              [
+                -74.37153799485628,
+                41.28328500273802
+              ],
+              [
+                -74.37169492784147,
+                41.28345300299348
+              ],
+              [
+                -74.37189006168411,
+                41.28358000280708
+              ],
+              [
+                -74.37208306202797,
+                41.283653003151485
+              ],
+              [
+                -74.37277899496343,
+                41.283890002929994
+              ],
+              [
+                -74.37281599477333,
+                41.28392593590675
+              ],
+              [
+                -74.37283106221561,
+                41.2839549362233
+              ],
+              [
+                -74.37280899510064,
+                41.284003002965655
+              ],
+              [
+                -74.37267699485615,
+                41.28409006925231
+              ],
+              [
+                -74.37255292763396,
+                41.284149003301465
+              ],
+              [
+                -74.37246206214465,
+                41.28417793601526
+              ],
+              [
+                -74.37238606197668,
+                41.2842360032399
+              ],
+              [
+                -74.37236399486171,
+                41.284280002691304
+              ],
+              [
+                -74.37233799492246,
+                41.284378002804885
+              ],
+              [
+                -74.3723059951354,
+                41.28442500268317
+              ],
+              [
+                -74.37225999510466,
+                41.28445500317666
+              ],
+              [
+                -74.37222699459437,
+                41.28450893625687
+              ],
+              [
+                -74.37223099479233,
+                41.284560003107565
+              ],
+              [
+                -74.37226006158,
+                41.28462200272389
+              ],
+              [
+                -74.37243099480887,
+                41.28483006927133
+              ],
+              [
+                -74.37256992825071,
+                41.28495700295231
+              ],
+              [
+                -74.37262799535068,
+                41.2849810028825
+              ],
+              [
+                -74.3726789954043,
+                41.28499100273829
+              ],
+              [
+                -74.37300499491923,
+                41.284983002988795
+              ],
+              [
+                -74.37312599529304,
+                41.28499400323474
+              ],
+              [
+                -74.37335899492155,
+                41.28506100303609
+              ],
+              [
+                -74.37347999529537,
+                41.28512700305519
+              ],
+              [
+                -74.37355299509031,
+                41.28518500328283
+              ],
+              [
+                -74.3737219951447,
+                41.28541993597729
+              ],
+              [
+                -74.3738059948103,
+                41.28548600313558
+              ],
+              [
+                -74.37386806210823,
+                41.28551906909072
+              ],
+              [
+                -74.37402199472037,
+                41.28555500319551
+              ],
+              [
+                -74.3741359954215,
+                41.28555500319551
+              ],
+              [
+                -74.3743369278893,
+                41.2855220027357
+              ],
+              [
+                -74.37457892773864,
+                41.285442003147345
+              ],
+              [
+                -74.37474792779304,
+                41.28530300300482
+              ],
+              [
+                -74.37481392791528,
+                41.285270003092606
+              ],
+              [
+                -74.37486506181787,
+                41.28525900289318
+              ],
+              [
+                -74.37490899482516,
+                41.285258936065716
+              ],
+              [
+                -74.37500306191014,
+                41.28527606886211
+              ],
+              [
+                -74.37517406161437,
+                41.285389003045346
+              ],
+              [
+                -74.37525492795625,
+                41.285421003188496
+              ],
+              [
+                -74.37531899490399,
+                41.28542700279167
+              ],
+              [
+                -74.3755449948598,
+                41.28537400267753
+              ],
+              [
+                -74.37561206218061,
+                41.285395003326535
+              ],
+              [
+                -74.37574192802798,
+                41.2854700030819
+              ],
+              [
+                -74.37583506176337,
+                41.285501935683094
+              ],
+              [
+                -74.37591906232727,
+                41.285511003253745
+              ],
+              [
+                -74.37601499521308,
+                41.285505002983264
+              ],
+              [
+                -74.37613199538896,
+                41.28547900315477
+              ],
+              [
+                -74.3762050616592,
+                41.28544706919228
+              ],
+              [
+                -74.37632899503245,
+                41.28533900270595
+              ],
+              [
+                -74.37638206210954,
+                41.285308002908224
+              ],
+              [
+                -74.3766649945931,
+                41.28522593613127
+              ],
+              [
+                -74.37670599460098,
+                41.285226002958716
+              ],
+              [
+                -74.37678192829364,
+                41.28524706913274
+              ],
+              [
+                -74.37689799511992,
+                41.28529900281182
+              ],
+              [
+                -74.37710706183263,
+                41.28534500299169
+              ],
+              [
+                -74.37726599536595,
+                41.2853540030818
+              ],
+              [
+                -74.37737599497082,
+                41.28535093577453
+              ],
+              [
+                -74.37832392780133,
+                41.28516600266693
+              ],
+              [
+                -74.37857306207066,
+                41.285129003157
+              ],
+              [
+                -74.37863099532164,
+                41.285143003192964
+              ],
+              [
+                -74.37877106243737,
+                41.285267936167706
+              ],
+              [
+                -74.37879999537606,
+                41.28532593627003
+              ],
+              [
+                -74.37880799487365,
+                41.28541300281663
+              ],
+              [
+                -74.37883199516311,
+                41.28547900315477
+              ],
+              [
+                -74.37893292807179,
+                41.285636003026
+              ],
+              [
+                -74.37897406192864,
+                41.285659003001186
+              ],
+              [
+                -74.37904606189866,
+                41.28566200279194
+              ],
+              [
+                -74.37913299456366,
+                41.28564700316188
+              ],
+              [
+                -74.3792089282563,
+                41.2856470693139
+              ],
+              [
+                -74.37927492837856,
+                41.285663003172154
+              ],
+              [
+                -74.37931292801339,
+                41.285671002838285
+              ],
+              [
+                -74.37941999461883,
+                41.2857520686767
+              ],
+              [
+                -74.37950692818215,
+                41.285781002704766
+              ],
+              [
+                -74.37964899494769,
+                41.285903935730026
+              ],
+              [
+                -74.37976199492559,
+                41.28592193575482
+              ],
+              [
+                -74.37988692812374,
+                41.285918069253235
+              ],
+              [
+                -74.3799449952237,
+                41.28594093615055
+              ],
+              [
+                -74.3799739946377,
+                41.2859700030733
+              ],
+              [
+                -74.38000106177553,
+                41.28603900329645
+              ],
+              [
+                -74.38002892841396,
+                41.28618300305745
+              ],
+              [
+                -74.38005999485144,
+                41.28623700288594
+              ],
+              [
+                -74.38009299536172,
+                41.28627000298414
+              ],
+              [
+                -74.38046999493027,
+                41.28641700266638
+              ],
+              [
+                -74.38052199480879,
+                41.286450068824756
+              ],
+              [
+                -74.38054299472519,
+                41.28649200327213
+              ],
+              [
+                -74.38053606242615,
+                41.28654606899597
+              ],
+              [
+                -74.38050499509036,
+                41.286579002786766
+              ],
+              [
+                -74.38050499509036,
+                41.28661900324628
+              ],
+              [
+                -74.38052399535692,
+                41.286657069102276
+              ],
+              [
+                -74.38058599528122,
+                41.28670700295579
+              ],
+              [
+                -74.38068406166583,
+                41.28673093609144
+              ],
+              [
+                -74.38075899463526,
+                41.28672300270615
+              ],
+              [
+                -74.38079699516841,
+                41.28669600299861
+              ],
+              [
+                -74.38083392760468,
+                41.2866390031293
+              ],
+              [
+                -74.3808710621619,
+                41.2866070029085
+              ],
+              [
+                -74.38091499516919,
+                41.28659500324354
+              ],
+              [
+                -74.3810009953829,
+                41.28660093591273
+              ],
+              [
+                -74.38109992774348,
+                41.286645003295504
+              ],
+              [
+                -74.38113599510211,
+                41.28667000296966
+              ],
+              [
+                -74.38115406201912,
+                41.286709935872395
+              ],
+              [
+                -74.38115199499566,
+                41.28676400276569
+              ],
+              [
+                -74.38112999525434,
+                41.28679500322163
+              ],
+              [
+                -74.38112899542944,
+                41.286823936112256
+              ],
+              [
+                -74.38114599514786,
+                41.28685300331662
+              ],
+              [
+                -74.38132299469987,
+                41.28696400290079
+              ],
+              [
+                -74.38137999460128,
+                41.286988002767814
+              ],
+              [
+                -74.38163299521959,
+                41.2870440033232
+              ],
+              [
+                -74.38178899485519,
+                41.28713200313454
+              ],
+              [
+                -74.38181206179506,
+                41.28716693599393
+              ],
+              [
+                -74.38180992829625,
+                41.2872130030324
+              ],
+              [
+                -74.3817930624268,
+                41.28724393577461
+              ],
+              [
+                -74.38168099490017,
+                41.28727100275582
+              ],
+              [
+                -74.38165199458784,
+                41.2872940028297
+              ],
+              [
+                -74.38164592826473,
+                41.28731700289551
+              ],
+              [
+                -74.38165399513598,
+                41.28733993612789
+              ],
+              [
+                -74.38168899529607,
+                41.287359002936014
+              ],
+              [
+                -74.38178706168071,
+                41.28737300316848
+              ],
+              [
+                -74.38199699526766,
+                41.28737100313549
+              ],
+              [
+                -74.382021995382,
+                41.28738100330003
+              ],
+              [
+                -74.38203899510044,
+                41.28740000327089
+              ],
+              [
+                -74.38205606219253,
+                41.28749500304238
+              ],
+              [
+                -74.3820719947124,
+                41.28752593632593
+              ],
+              [
+                -74.38213506183524,
+                41.28756400300284
+              ],
+              [
+                -74.38219892756037,
+                41.28767600307683
+              ],
+              [
+                -74.38230299469109,
+                41.28773300271519
+              ],
+              [
+                -74.38236599533859,
+                41.28775806879734
+              ],
+              [
+                -74.38246999509568,
+                41.28783200271486
+              ],
+              [
+                -74.38250299470764,
+                41.28787000306343
+              ],
+              [
+                -74.38267399531016,
+                41.287971002869874
+              ],
+              [
+                -74.38270492789867,
+                41.28800606892931
+              ],
+              [
+                -74.38272799483853,
+                41.288144002896864
+              ],
+              [
+                -74.38273599523446,
+                41.28823600326282
+              ],
+              [
+                -74.38276999467132,
+                41.28834000284529
+              ],
+              [
+                -74.38279699533383,
+                41.28837700323442
+              ],
+              [
+                -74.38287799462636,
+                41.288415003265634
+              ],
+              [
+                -74.38290306211435,
+                41.28844000293657
+              ],
+              [
+                -74.38293199505303,
+                41.28844600293715
+              ],
+              [
+                -74.38296506203864,
+                41.28843800293623
+              ],
+              [
+                -74.38301292787024,
+                41.28841100326337
+              ],
+              [
+                -74.38307792816757,
+                41.288395003251935
+              ],
+              [
+                -74.38314806233674,
+                41.288395003251935
+              ],
+              [
+                -74.38327899538267,
+                41.288412002926435
+              ],
+              [
+                -74.38370599517994,
+                41.28843600293584
+              ],
+              [
+                -74.38380806176251,
+                41.28841700326662
+              ],
+              [
+                -74.38384206209768,
+                41.288394002913606
+              ],
+              [
+                -74.38390406202198,
+                41.2883010031057
+              ],
+              [
+                -74.3839889276635,
+                41.2882140031871
+              ],
+              [
+                -74.38453899485805,
+                41.28780793633343
+              ],
+              [
+                -74.38477606205817,
+                41.28765700318629
+              ],
+              [
+                -74.38502392790632,
+                41.2875340032638
+              ],
+              [
+                -74.38518199456539,
+                41.28744000322708
+              ],
+              [
+                -74.38525506173396,
+                41.287367003069235
+              ],
+              [
+                -74.38531199516004,
+                41.28732700306832
+              ],
+              [
+                -74.38538499495496,
+                41.28730006908601
+              ],
+              [
+                -74.38553406229154,
+                41.28728593586221
+              ],
+              [
+                -74.38566392813888,
+                41.28728900307846
+              ],
+              [
+                -74.38577706196578,
+                41.287303003326
+              ],
+              [
+                -74.38584506173784,
+                41.28729700322025
+              ],
+              [
+                -74.38587199502669,
+                41.28727300279192
+              ],
+              [
+                -74.38589706161638,
+                41.28721600275166
+              ],
+              [
+                -74.38593199530115,
+                41.28719700272723
+              ],
+              [
+                -74.38618292799767,
+                41.28718900324814
+              ],
+              [
+                -74.38625392814276,
+                41.28715700329706
+              ],
+              [
+                -74.38639992773265,
+                41.287061936207884
+              ],
+              [
+                -74.3864760617496,
+                41.28703200306358
+              ],
+              [
+                -74.38667899476555,
+                41.28700006918613
+              ],
+              [
+                -74.38686299488857,
+                41.28699400290191
+              ],
+              [
+                -74.38695406160049,
+                41.28696293571481
+              ]
+            ]
+          ]
+        }
+      }
+    ]
+  }
+}

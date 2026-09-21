@@ -1,0 +1,382 @@
+{
+ "currentVersion": 10.91,
+ "id": 9,
+ "name": "DEC Stream Classification and Trout Status",
+ "type": "Feature Layer",
+ "description": "",
+ "geometryType": "esriGeometryPolyline",
+ "sourceSpatialReference": {
+  "wkid": 26918,
+  "latestWkid": 26918
+ },
+ "copyrightText": "",
+ "parentLayer": null,
+ "subLayers": [],
+ "minScale": 144449,
+ "maxScale": 0,
+ "drawingInfo": {
+  "renderer": {
+   "type": "uniqueValue",
+   "field1": "STANDARD",
+   "field2": null,
+   "field3": null,
+   "defaultSymbol": {
+    "type": "esriSLS",
+    "style": "esriSLSSolid",
+    "color": [
+     223,
+     115,
+     255,
+     255
+    ],
+    "width": 1.5
+   },
+   "defaultLabel": "Other Stream",
+   "uniqueValueInfos": [
+    {
+     "symbol": {
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "color": [
+       169,
+       0,
+       230,
+       255
+      ],
+      "width": 1.5
+     },
+     "value": "A(T)",
+     "label": "Known Trout Stream",
+     "description": ""
+    },
+    {
+     "symbol": {
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "color": [
+       169,
+       0,
+       230,
+       255
+      ],
+      "width": 1.5
+     },
+     "value": "A(TS)",
+     "label": "Known Trout Stream",
+     "description": ""
+    },
+    {
+     "symbol": {
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "color": [
+       169,
+       0,
+       230,
+       255
+      ],
+      "width": 1.5
+     },
+     "value": "AA(T)",
+     "label": "Known Trout Stream",
+     "description": ""
+    },
+    {
+     "symbol": {
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "color": [
+       169,
+       0,
+       230,
+       255
+      ],
+      "width": 1.5
+     },
+     "value": "AA(TS)",
+     "label": "Known Trout Stream",
+     "description": ""
+    },
+    {
+     "symbol": {
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "color": [
+       169,
+       0,
+       230,
+       255
+      ],
+      "width": 1.5
+     },
+     "value": "B(T)",
+     "label": "Known Trout Stream",
+     "description": ""
+    },
+    {
+     "symbol": {
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "color": [
+       169,
+       0,
+       230,
+       255
+      ],
+      "width": 1.5
+     },
+     "value": "B(TS)",
+     "label": "Known Trout Stream",
+     "description": ""
+    },
+    {
+     "symbol": {
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "color": [
+       169,
+       0,
+       230,
+       255
+      ],
+      "width": 1.5
+     },
+     "value": "C(CT)",
+     "label": "Known Trout Stream",
+     "description": ""
+    },
+    {
+     "symbol": {
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "color": [
+       169,
+       0,
+       230,
+       255
+      ],
+      "width": 1.5
+     },
+     "value": "C(T)",
+     "label": "Known Trout Stream",
+     "description": ""
+    },
+    {
+     "symbol": {
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "color": [
+       169,
+       0,
+       230,
+       255
+      ],
+      "width": 1.5
+     },
+     "value": "C(T8)",
+     "label": "Known Trout Stream",
+     "description": ""
+    },
+    {
+     "symbol": {
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "color": [
+       169,
+       0,
+       230,
+       255
+      ],
+      "width": 1.5
+     },
+     "value": "C(TS)",
+     "label": "Known Trout Stream",
+     "description": ""
+    },
+    {
+     "symbol": {
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "color": [
+       169,
+       0,
+       230,
+       255
+      ],
+      "width": 1.5
+     },
+     "value": "SC / C(TS)",
+     "label": "Known Trout Stream",
+     "description": ""
+    },
+    {
+     "symbol": {
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "color": [
+       169,
+       0,
+       230,
+       255
+      ],
+      "width": 1.5
+     },
+     "value": "T",
+     "label": "Known Trout Stream",
+     "description": ""
+    }
+   ],
+   "fieldDelimiter": ","
+  },
+  "transparency": 0,
+  "labelingInfo": null
+ },
+ "defaultVisibility": true,
+ "extent": {
+  "xmin": 106056.8152,
+  "ymin": 4483730.1919,
+  "xmax": 763468.761,
+  "ymax": 4985460.6181,
+  "spatialReference": {
+   "wkid": 26918,
+   "latestWkid": 26918
+  }
+ },
+ "hasAttachments": false,
+ "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+ "displayField": "PARTITEM",
+ "typeIdField": null,
+ "subtypeFieldName": null,
+ "subtypeField": null,
+ "defaultSubtypeCode": null,
+ "fields": [
+  {
+   "name": "OBJECTID",
+   "type": "esriFieldTypeOID",
+   "alias": "OBJECTID",
+   "domain": null
+  },
+  {
+   "name": "PARTITEM",
+   "type": "esriFieldTypeString",
+   "alias": "PARTITEM",
+   "length": 12,
+   "domain": null
+  },
+  {
+   "name": "CLASSIFICA",
+   "type": "esriFieldTypeString",
+   "alias": "CLASSIFICA",
+   "length": 10,
+   "domain": null
+  },
+  {
+   "name": "STANDARD",
+   "type": "esriFieldTypeString",
+   "alias": "STANDARD",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "PROTECTED",
+   "type": "esriFieldTypeInteger",
+   "alias": "PROTECTED",
+   "domain": null
+  },
+  {
+   "name": "BASIN",
+   "type": "esriFieldTypeString",
+   "alias": "BASIN",
+   "length": 254,
+   "domain": null
+  },
+  {
+   "name": "SUBBASIN_N",
+   "type": "esriFieldTypeString",
+   "alias": "SUBBASIN_N",
+   "length": 254,
+   "domain": null
+  },
+  {
+   "name": "SUBBASIN",
+   "type": "esriFieldTypeString",
+   "alias": "SUBBASIN",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "SHAPE_LENG",
+   "type": "esriFieldTypeDouble",
+   "alias": "SHAPE_LENG",
+   "domain": null
+  },
+  {
+   "name": "SHAPE",
+   "type": "esriFieldTypeGeometry",
+   "alias": "SHAPE",
+   "domain": null
+  },
+  {
+   "name": "SHAPE.LEN",
+   "type": "esriFieldTypeDouble",
+   "alias": "SHAPE.LEN",
+   "domain": null
+  }
+ ],
+ "geometryField": {
+  "name": "SHAPE",
+  "type": "esriFieldTypeGeometry",
+  "alias": "SHAPE"
+ },
+ "indexes": [
+  {
+   "name": "R1170169_SDE_ROWID_UK",
+   "fields": "OBJECTID",
+   "isAscending": true,
+   "isUnique": true,
+   "description": ""
+  },
+  {
+   "name": "A53920_IX1",
+   "fields": "SHAPE",
+   "isAscending": true,
+   "isUnique": true,
+   "description": ""
+  }
+ ],
+ "subtypes": [],
+ "relationships": [],
+ "canModifyLayer": true,
+ "canScaleSymbols": false,
+ "hasLabels": false,
+ "capabilities": "Map,Query,Data",
+ "maxRecordCount": 1000,
+ "supportsStatistics": true,
+ "supportsAdvancedQueries": true,
+ "hasM": true,
+ "supportedQueryFormats": "JSON, geoJSON",
+ "isDataVersioned": false,
+ "ownershipBasedAccessControlForFeatures": {"allowOthersToQuery": true},
+ "useStandardizedQueries": true,
+ "advancedQueryCapabilities": {
+  "useStandardizedQueries": true,
+  "supportsStatistics": true,
+  "supportsHavingClause": true,
+  "supportsCountDistinct": true,
+  "supportsOrderBy": true,
+  "supportsDistinct": true,
+  "supportsPagination": true,
+  "supportsTrueCurve": true,
+  "supportsReturningQueryExtent": true,
+  "supportsQueryWithDistance": true,
+  "supportsSqlExpression": true
+ },
+ "supportsDatumTransformation": true,
+ "hasGeometryProperties": true,
+ "geometryProperties": {
+  "shapeLengthFieldName": "SHAPE.LEN",
+  "units": "esriMeters"
+ },
+ "dateFieldsTimeReference": null,
+ "supportsCoordinatesQuantization": true
+}

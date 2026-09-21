@@ -1,0 +1,1716 @@
+{
+  "url": "https://hydro.nationalmap.gov/arcgis/rest/services/3DHP_all/MapServer/50/query?f=json&where=1%3D1&geometry=-74.37341192419308%2C41.27848913295005%2C-74.35787123844142%2C41.28971802263744&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&returnGeometry=true&outSR=4326",
+  "retrievedAt": "2026-09-21T01:38:39.604262+00:00",
+  "response": {
+    "displayFieldName": "id3dhp",
+    "fieldAliases": {
+      "OBJECTID": "OBJECTID",
+      "id3dhp": "id3dhp",
+      "featuredate": "featuredate",
+      "mainstemid": "mainstemid",
+      "gnisid": "gnisid",
+      "gnisidlabel": "gnisidlabel",
+      "featuretype": "featuretype",
+      "featuretypelabel": "featuretypelabel",
+      "lengthkm": "lengthkm",
+      "waterbodyid3dhp": "waterbodyid3dhp",
+      "flowdirection": "flowdirection",
+      "flowdirectionlabel": "flowdirectionlabel",
+      "onsurface": "onsurface",
+      "onsurfacelabel": "onsurfacelabel",
+      "catchmentid3dhp": "catchmentid3dhp",
+      "flowpathid3dhp": "flowpathid3dhp",
+      "streamlevel": "streamlevel",
+      "startflag": "startflag",
+      "terminalflag": "terminalflag",
+      "streamorder": "streamorder",
+      "streamcalculator": "streamcalculator",
+      "hydrosequence": "hydrosequence",
+      "dnhydrosequence": "dnhydrosequence",
+      "uphydrosequence": "uphydrosequence",
+      "dnlevelpath": "dnlevelpath",
+      "uplevelpath": "uplevelpath",
+      "pathlength": "pathlength",
+      "arbolatesum": "arbolatesum",
+      "divergence": "divergence",
+      "divergencelabel": "divergencelabel",
+      "rtrndivergence": "rtrndivergence",
+      "levelpath": "levelpath",
+      "terminalpath": "terminalpath",
+      "workunitid": "workunitid",
+      "shape_Length": "shape_Length"
+    },
+    "geometryType": "esriGeometryPolyline",
+    "spatialReference": {
+      "wkid": 4326,
+      "latestWkid": 4326
+    },
+    "fields": [
+      {
+        "name": "OBJECTID",
+        "type": "esriFieldTypeOID",
+        "alias": "OBJECTID"
+      },
+      {
+        "name": "id3dhp",
+        "type": "esriFieldTypeString",
+        "alias": "id3dhp",
+        "length": 7
+      },
+      {
+        "name": "featuredate",
+        "type": "esriFieldTypeDate",
+        "alias": "featuredate",
+        "length": 8
+      },
+      {
+        "name": "mainstemid",
+        "type": "esriFieldTypeString",
+        "alias": "mainstemid",
+        "length": 200
+      },
+      {
+        "name": "gnisid",
+        "type": "esriFieldTypeInteger",
+        "alias": "gnisid"
+      },
+      {
+        "name": "gnisidlabel",
+        "type": "esriFieldTypeString",
+        "alias": "gnisidlabel",
+        "length": 120
+      },
+      {
+        "name": "featuretype",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "featuretype"
+      },
+      {
+        "name": "featuretypelabel",
+        "type": "esriFieldTypeString",
+        "alias": "featuretypelabel",
+        "length": 50
+      },
+      {
+        "name": "lengthkm",
+        "type": "esriFieldTypeDouble",
+        "alias": "lengthkm"
+      },
+      {
+        "name": "waterbodyid3dhp",
+        "type": "esriFieldTypeString",
+        "alias": "waterbodyid3dhp",
+        "length": 7
+      },
+      {
+        "name": "flowdirection",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "flowdirection"
+      },
+      {
+        "name": "flowdirectionlabel",
+        "type": "esriFieldTypeString",
+        "alias": "flowdirectionlabel",
+        "length": 200
+      },
+      {
+        "name": "onsurface",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "onsurface"
+      },
+      {
+        "name": "onsurfacelabel",
+        "type": "esriFieldTypeString",
+        "alias": "onsurfacelabel",
+        "length": 200
+      },
+      {
+        "name": "catchmentid3dhp",
+        "type": "esriFieldTypeString",
+        "alias": "catchmentid3dhp",
+        "length": 7
+      },
+      {
+        "name": "flowpathid3dhp",
+        "type": "esriFieldTypeString",
+        "alias": "flowpathid3dhp",
+        "length": 7
+      },
+      {
+        "name": "streamlevel",
+        "type": "esriFieldTypeInteger",
+        "alias": "streamlevel"
+      },
+      {
+        "name": "startflag",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "startflag"
+      },
+      {
+        "name": "terminalflag",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "terminalflag"
+      },
+      {
+        "name": "streamorder",
+        "type": "esriFieldTypeInteger",
+        "alias": "streamorder"
+      },
+      {
+        "name": "streamcalculator",
+        "type": "esriFieldTypeInteger",
+        "alias": "streamcalculator"
+      },
+      {
+        "name": "hydrosequence",
+        "type": "esriFieldTypeDouble",
+        "alias": "hydrosequence"
+      },
+      {
+        "name": "dnhydrosequence",
+        "type": "esriFieldTypeDouble",
+        "alias": "dnhydrosequence"
+      },
+      {
+        "name": "uphydrosequence",
+        "type": "esriFieldTypeDouble",
+        "alias": "uphydrosequence"
+      },
+      {
+        "name": "dnlevelpath",
+        "type": "esriFieldTypeDouble",
+        "alias": "dnlevelpath"
+      },
+      {
+        "name": "uplevelpath",
+        "type": "esriFieldTypeDouble",
+        "alias": "uplevelpath"
+      },
+      {
+        "name": "pathlength",
+        "type": "esriFieldTypeDouble",
+        "alias": "pathlength"
+      },
+      {
+        "name": "arbolatesum",
+        "type": "esriFieldTypeDouble",
+        "alias": "arbolatesum"
+      },
+      {
+        "name": "divergence",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "divergence"
+      },
+      {
+        "name": "divergencelabel",
+        "type": "esriFieldTypeString",
+        "alias": "divergencelabel",
+        "length": 200
+      },
+      {
+        "name": "rtrndivergence",
+        "type": "esriFieldTypeSmallInteger",
+        "alias": "rtrndivergence"
+      },
+      {
+        "name": "levelpath",
+        "type": "esriFieldTypeInteger",
+        "alias": "levelpath"
+      },
+      {
+        "name": "terminalpath",
+        "type": "esriFieldTypeDouble",
+        "alias": "terminalpath"
+      },
+      {
+        "name": "workunitid",
+        "type": "esriFieldTypeString",
+        "alias": "workunitid",
+        "length": 100
+      },
+      {
+        "name": "shape_Length",
+        "type": "esriFieldTypeDouble",
+        "alias": "shape_Length"
+      }
+    ],
+    "features": [
+      {
+        "attributes": {
+          "OBJECTID": 13682152,
+          "id3dhp": "8XUXH",
+          "featuredate": 1694649600000,
+          "mainstemid": "https://geoconnex.us/usgs/mainstems/10055837",
+          "gnisid": null,
+          "gnisidlabel": null,
+          "featuretype": 5,
+          "featuretypelabel": "Waterbody Connector",
+          "lengthkm": 0.019,
+          "waterbodyid3dhp": "J7HLI",
+          "flowdirection": 1,
+          "flowdirectionlabel": "Flow direction is in digitized direction, and z-values on vertices flow downslope",
+          "onsurface": 1,
+          "onsurfacelabel": "Feature is on the land surface",
+          "catchmentid3dhp": "",
+          "flowpathid3dhp": null,
+          "streamlevel": 6,
+          "startflag": 0,
+          "terminalflag": 0,
+          "streamorder": 1,
+          "streamcalculator": 1,
+          "hydrosequence": 9006589,
+          "dnhydrosequence": 8991267,
+          "uphydrosequence": 9021881,
+          "dnlevelpath": 8945370,
+          "uplevelpath": 9006589,
+          "pathlength": 322.92325308,
+          "arbolatesum": 0.42800000000000005,
+          "divergence": 0,
+          "divergencelabel": "No divergence",
+          "rtrndivergence": 0,
+          "levelpath": 9006589,
+          "terminalpath": 44,
+          "workunitid": "NHD",
+          "shape_Length": 25.415103333398445
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.36746359515531,
+                41.282149357245224
+              ],
+              [
+                -74.36754646204533,
+                41.28230922331078
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 17776226,
+          "id3dhp": "BDE38",
+          "featuredate": 1694649600000,
+          "mainstemid": "https://geoconnex.us/usgs/mainstems/8240892",
+          "gnisid": 966557,
+          "gnisidlabel": "Stony Creek",
+          "featuretype": 5,
+          "featuretypelabel": "Waterbody Connector",
+          "lengthkm": 0.052000000000000005,
+          "waterbodyid3dhp": "J7HLI",
+          "flowdirection": 1,
+          "flowdirectionlabel": "Flow direction is in digitized direction, and z-values on vertices flow downslope",
+          "onsurface": 1,
+          "onsurfacelabel": "Feature is on the land surface",
+          "catchmentid3dhp": "",
+          "flowpathid3dhp": null,
+          "streamlevel": 5,
+          "startflag": 0,
+          "terminalflag": 0,
+          "streamorder": 2,
+          "streamcalculator": 2,
+          "hydrosequence": 8991267,
+          "dnhydrosequence": 8975906,
+          "uphydrosequence": 9006590,
+          "dnlevelpath": 8945370,
+          "uplevelpath": 8945370,
+          "pathlength": 322.87125308,
+          "arbolatesum": 1.592,
+          "divergence": 0,
+          "divergencelabel": "No divergence",
+          "rtrndivergence": 0,
+          "levelpath": 8945370,
+          "terminalpath": 44,
+          "workunitid": "NHD",
+          "shape_Length": 69.35336982793005
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.36754646204533,
+                41.28230922331078
+              ],
+              [
+                -74.36777366215036,
+                41.281873290183526
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 19368869,
+          "id3dhp": "CBFVG",
+          "featuredate": 1694649600000,
+          "mainstemid": "https://geoconnex.us/usgs/mainstems/8240892",
+          "gnisid": 966557,
+          "gnisidlabel": "Stony Creek",
+          "featuretype": 5,
+          "featuretypelabel": "Waterbody Connector",
+          "lengthkm": 0.191,
+          "waterbodyid3dhp": "J08P0",
+          "flowdirection": 1,
+          "flowdirectionlabel": "Flow direction is in digitized direction, and z-values on vertices flow downslope",
+          "onsurface": 1,
+          "onsurfacelabel": "Feature is on the land surface",
+          "catchmentid3dhp": "",
+          "flowpathid3dhp": null,
+          "streamlevel": 5,
+          "startflag": 1,
+          "terminalflag": 0,
+          "streamorder": 1,
+          "streamcalculator": 1,
+          "hydrosequence": 9037165,
+          "dnhydrosequence": 9021882,
+          "uphydrosequence": 0,
+          "dnlevelpath": 8945370,
+          "uplevelpath": 0,
+          "pathlength": 323.84425308,
+          "arbolatesum": 0.191,
+          "divergence": 0,
+          "divergencelabel": "No divergence",
+          "rtrndivergence": 0,
+          "levelpath": 8945370,
+          "terminalpath": 44,
+          "workunitid": "NHD",
+          "shape_Length": 254.2770958158687
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.35739459203634,
+                41.28652735835634
+              ],
+              [
+                -74.35827892504307,
+                41.28562715822957
+              ],
+              [
+                -74.35904765924577,
+                41.28547435832619
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 21415810,
+          "id3dhp": "DJ7RR",
+          "featuredate": 1694649600000,
+          "mainstemid": "https://geoconnex.us/usgs/mainstems/10055837",
+          "gnisid": null,
+          "gnisidlabel": null,
+          "featuretype": 5,
+          "featuretypelabel": "Waterbody Connector",
+          "lengthkm": 0.043000000000000003,
+          "waterbodyid3dhp": "JS9WS",
+          "flowdirection": 1,
+          "flowdirectionlabel": "Flow direction is in digitized direction, and z-values on vertices flow downslope",
+          "onsurface": 1,
+          "onsurfacelabel": "Feature is on the land surface",
+          "catchmentid3dhp": "",
+          "flowpathid3dhp": null,
+          "streamlevel": 6,
+          "startflag": 1,
+          "terminalflag": 0,
+          "streamorder": 1,
+          "streamcalculator": 1,
+          "hydrosequence": 9037164,
+          "dnhydrosequence": 9021881,
+          "uphydrosequence": 0,
+          "dnlevelpath": 9006589,
+          "uplevelpath": 0,
+          "pathlength": 323.30825308,
+          "arbolatesum": 0.043000000000000003,
+          "divergence": 0,
+          "divergencelabel": "No divergence",
+          "rtrndivergence": 0,
+          "levelpath": 9006589,
+          "terminalpath": 44,
+          "workunitid": "NHD",
+          "shape_Length": 57.07608502227297
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.36391159363984,
+                41.28043235687525
+              ],
+              [
+                -74.36433159376442,
+                41.280653356989525
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 23006247,
+          "id3dhp": "EH86B",
+          "featuredate": 1694649600000,
+          "mainstemid": "https://geoconnex.us/usgs/mainstems/8240892",
+          "gnisid": 966557,
+          "gnisidlabel": "Stony Creek",
+          "featuretype": 1,
+          "featuretypelabel": "Channel Line",
+          "lengthkm": 0.882,
+          "waterbodyid3dhp": null,
+          "flowdirection": 1,
+          "flowdirectionlabel": "Flow direction is in digitized direction, and z-values on vertices flow downslope",
+          "onsurface": 1,
+          "onsurfacelabel": "Feature is on the land surface",
+          "catchmentid3dhp": "",
+          "flowpathid3dhp": null,
+          "streamlevel": 5,
+          "startflag": 0,
+          "terminalflag": 0,
+          "streamorder": 1,
+          "streamcalculator": 1,
+          "hydrosequence": 9021882,
+          "dnhydrosequence": 9006590,
+          "uphydrosequence": 9037165,
+          "dnlevelpath": 8945370,
+          "uplevelpath": 8945370,
+          "pathlength": 322.96225308,
+          "arbolatesum": 1.073,
+          "divergence": 0,
+          "divergencelabel": "No divergence",
+          "rtrndivergence": 0,
+          "levelpath": 8945370,
+          "terminalpath": 44,
+          "workunitid": "NHD",
+          "shape_Length": 1176.859700463595
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.35904765924577,
+                41.28547435832619
+              ],
+              [
+                -74.36143852627278,
+                41.28578142391677
+              ],
+              [
+                -74.36149259317477,
+                41.285774423967645
+              ],
+              [
+                -74.36159852610633,
+                41.28574435792885
+              ],
+              [
+                -74.36202866012562,
+                41.2856683581087
+              ],
+              [
+                -74.36311259339858,
+                41.28545835826971
+              ],
+              [
+                -74.36328359400113,
+                41.28543735831612
+              ],
+              [
+                -74.36387852665423,
+                41.28541135778564
+              ],
+              [
+                -74.3644605271605,
+                41.28541635768075
+              ],
+              [
+                -74.36451266088801,
+                41.285400357610044
+              ],
+              [
+                -74.36457452696332,
+                41.285359358043664
+              ],
+              [
+                -74.36461652679611,
+                41.285312358163374
+              ],
+              [
+                -74.3648025939426,
+                41.285043357837935
+              ],
+              [
+                -74.36491652727008,
+                41.284955357909816
+              ],
+              [
+                -74.36500452713362,
+                41.28491935799702
+              ],
+              [
+                -74.36510266089189,
+                41.28490335780445
+              ],
+              [
+                -74.36517052681498,
+                41.28485742414105
+              ],
+              [
+                -74.3652535940293,
+                41.284712357607006
+              ],
+              [
+                -74.36527952749324,
+                41.284613357599234
+              ],
+              [
+                -74.36527966134223,
+                41.284235357906276
+              ],
+              [
+                -74.36524759418153,
+                41.28409135789732
+              ],
+              [
+                -74.36524759418153,
+                41.28394635783907
+              ],
+              [
+                -74.36527966134223,
+                41.28385235735916
+              ],
+              [
+                -74.36531552747826,
+                41.283806357477104
+              ],
+              [
+                -74.36539859379425,
+                41.2837544232851
+              ],
+              [
+                -74.36557466089499,
+                41.28368735733835
+              ],
+              [
+                -74.36582266149044,
+                41.28341829023511
+              ],
+              [
+                -74.36592159474931,
+                41.283350290356616
+              ],
+              [
+                -74.36612859443854,
+                41.2831473575443
+              ],
+              [
+                -74.36628559479739,
+                41.28302629055793
+              ],
+              [
+                -74.36648552744029,
+                41.282910357093805
+              ],
+              [
+                -74.36683566199193,
+                41.28271435703655
+              ],
+              [
+                -74.3672045273156,
+                41.28255035726645
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 25965460,
+          "id3dhp": "G8ITL",
+          "featuredate": 1694649600000,
+          "mainstemid": "https://geoconnex.us/usgs/mainstems/8240892",
+          "gnisid": 966557,
+          "gnisidlabel": "Stony Creek",
+          "featuretype": 1,
+          "featuretypelabel": "Channel Line",
+          "lengthkm": 2.313,
+          "waterbodyid3dhp": null,
+          "flowdirection": 1,
+          "flowdirectionlabel": "Flow direction is in digitized direction, and z-values on vertices flow downslope",
+          "onsurface": 1,
+          "onsurfacelabel": "Feature is on the land surface",
+          "catchmentid3dhp": "",
+          "flowpathid3dhp": null,
+          "streamlevel": 5,
+          "startflag": 0,
+          "terminalflag": 0,
+          "streamorder": 2,
+          "streamcalculator": 2,
+          "hydrosequence": 8975906,
+          "dnhydrosequence": 8960613,
+          "uphydrosequence": 8991267,
+          "dnlevelpath": 8945370,
+          "uplevelpath": 8945370,
+          "pathlength": 320.55825308,
+          "arbolatesum": 3.9050000000000002,
+          "divergence": 0,
+          "divergencelabel": "No divergence",
+          "rtrndivergence": 0,
+          "levelpath": 8945370,
+          "terminalpath": 44,
+          "workunitid": "NHD",
+          "shape_Length": 3084.595398307044
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.36777366215036,
+                41.281873290183526
+              ],
+              [
+                -74.3678935944273,
+                41.28173435737096
+              ],
+              [
+                -74.3679345944352,
+                41.281705289911606
+              ],
+              [
+                -74.3680325952428,
+                41.28166935706217
+              ],
+              [
+                -74.36808759459608,
+                41.28165829009969
+              ],
+              [
+                -74.3681216623049,
+                41.281662357347
+              ],
+              [
+                -74.36820059457398,
+                41.2816833571653
+              ],
+              [
+                -74.36823266173467,
+                41.2817274231437
+              ],
+              [
+                -74.36830259468123,
+                41.28191642310195
+              ],
+              [
+                -74.36835652773426,
+                41.281993356847295
+              ],
+              [
+                -74.36838252767352,
+                41.28199635748159
+              ],
+              [
+                -74.36843759529876,
+                41.281920357346536
+              ],
+              [
+                -74.3685205277658,
+                41.28190235689299
+              ],
+              [
+                -74.36867766197359,
+                41.28183235725721
+              ],
+              [
+                -74.36891852814904,
+                41.28178935727013
+              ],
+              [
+                -74.3692065954028,
+                41.281778290328006
+              ],
+              [
+                -74.36956359577815,
+                41.28181428994845
+              ],
+              [
+                -74.36966959518506,
+                41.28183635698769
+              ],
+              [
+                -74.36973859568035,
+                41.28187235725117
+              ],
+              [
+                -74.37009566253106,
+                41.28213535724201
+              ],
+              [
+                -74.37020859603362,
+                41.282194357186825
+              ],
+              [
+                -74.37040759532694,
+                41.2822802904435
+              ],
+              [
+                -74.37069966277863,
+                41.282320356993324
+              ],
+              [
+                -74.37076859590027,
+                41.282353357047086
+              ],
+              [
+                -74.37084559589316,
+                41.282415357409846
+              ],
+              [
+                -74.37096559554377,
+                41.2825542901227
+              ],
+              [
+                -74.37114559636713,
+                41.282801357537544
+              ],
+              [
+                -74.37129159595702,
+                41.28294035693352
+              ],
+              [
+                -74.37139059569121,
+                41.28300529049671
+              ],
+              [
+                -74.37143066324782,
+                41.28304535727647
+              ],
+              [
+                -74.3714555286149,
+                41.2830893575307
+              ],
+              [
+                -74.37149966284478,
+                41.28322435734305
+              ],
+              [
+                -74.37153959655244,
+                41.283293357094315
+              ],
+              [
+                -74.37169652953763,
+                41.28346135732823
+              ],
+              [
+                -74.37189166338028,
+                41.28358835712556
+              ],
+              [
+                -74.37208466372412,
+                41.283661357460616
+              ],
+              [
+                -74.37278059665957,
+                41.28389835720879
+              ],
+              [
+                -74.37281759646949,
+                41.283934290180994
+              ],
+              [
+                -74.37283266391175,
+                41.28396329049379
+              ],
+              [
+                -74.3728105967968,
+                41.284011357229986
+              ],
+              [
+                -74.37267859655232,
+                41.28409842350553
+              ],
+              [
+                -74.37255452933012,
+                41.284157357547095
+              ],
+              [
+                -74.3724636638408,
+                41.28418629025719
+              ],
+              [
+                -74.37238766367282,
+                41.28424435747439
+              ],
+              [
+                -74.37236559655787,
+                41.28428835759521
+              ],
+              [
+                -74.3723395966186,
+                41.28438635769624
+              ],
+              [
+                -74.37230759683156,
+                41.28443335756851
+              ],
+              [
+                -74.37226159680081,
+                41.28446335738311
+              ],
+              [
+                -74.37222859629051,
+                41.28451729045643
+              ],
+              [
+                -74.37223259648847,
+                41.28456835730058
+              ],
+              [
+                -74.37226166327613,
+                41.28463035758402
+              ],
+              [
+                -74.37243259650502,
+                41.284838423429775
+              ],
+              [
+                -74.37257152994687,
+                41.284965357769536
+              ],
+              [
+                -74.37262959614851,
+                41.28498935769665
+              ],
+              [
+                -74.37268059620214,
+                41.28499935755116
+              ],
+              [
+                -74.37300659661537,
+                41.28499135780269
+              ],
+              [
+                -74.37312759698919,
+                41.28500235737225
+              ],
+              [
+                -74.3733605966177,
+                41.28506935784001
+              ],
+              [
+                -74.37348159699152,
+                41.28513535785064
+              ],
+              [
+                -74.37355459678645,
+                41.285193357395826
+              ],
+              [
+                -74.37372359684088,
+                41.28542829073524
+              ],
+              [
+                -74.37380759740478,
+                41.28549435788508
+              ],
+              [
+                -74.37386966380438,
+                41.28552742383592
+              ],
+              [
+                -74.37402359731485,
+                41.28556335793616
+              ],
+              [
+                -74.37413759711764,
+                41.28556335793616
+              ],
+              [
+                -74.37433853048377,
+                41.28553035748059
+              ],
+              [
+                -74.37458053033312,
+                41.28545035790242
+              ],
+              [
+                -74.3747495303875,
+                41.28531135777774
+              ],
+              [
+                -74.37481553050975,
+                41.28527835786976
+              ],
+              [
+                -74.37486666441235,
+                41.285267357671735
+              ],
+              [
+                -74.37491059741963,
+                41.28526729084429
+              ],
+              [
+                -74.3750046645046,
+                41.28528442363848
+              ],
+              [
+                -74.37517566420884,
+                41.28539735780725
+              ],
+              [
+                -74.3752565305507,
+                41.28542935727128
+              ],
+              [
+                -74.37532059749846,
+                41.285435357548714
+              ],
+              [
+                -74.37554659745427,
+                41.28538235744137
+              ],
+              [
+                -74.37561366477507,
+                41.28540335741265
+              ],
+              [
+                -74.37574353062243,
+                41.28547835783345
+              ],
+              [
+                -74.3758366643578,
+                41.28551029043055
+              ],
+              [
+                -74.37592066492174,
+                41.28551935732506
+              ],
+              [
+                -74.37601659780755,
+                41.28551335773033
+              ],
+              [
+                -74.37613359798343,
+                41.28548735723013
+              ],
+              [
+                -74.376206665152,
+                41.28545542327178
+              ],
+              [
+                -74.3763305976269,
+                41.285347357474215
+              ],
+              [
+                -74.37638366470401,
+                41.285316357680514
+              ],
+              [
+                -74.37666659808589,
+                41.28523429023903
+              ],
+              [
+                -74.37670759809377,
+                41.2852343577415
+              ],
+              [
+                -74.37678353088812,
+                41.2852554232378
+              ],
+              [
+                -74.3768995977144,
+                41.28530735758526
+              ],
+              [
+                -74.37710866532541,
+                41.28535335775924
+              ],
+              [
+                -74.37726759796043,
+                41.28536235717317
+              ],
+              [
+                -74.37737759846358,
+                41.28535929054132
+              ],
+              [
+                -74.37832553129412,
+                41.2851743574574
+              ],
+              [
+                -74.37857466556345,
+                41.28513735727717
+              ],
+              [
+                -74.37863259881442,
+                41.285151357311335
+              ],
+              [
+                -74.37877266593016,
+                41.28527629027008
+              ],
+              [
+                -74.37880159886883,
+                41.285334290365036
+              ],
+              [
+                -74.37880959836644,
+                41.28542135757548
+              ],
+              [
+                -74.37883359865586,
+                41.28548735723013
+              ],
+              [
+                -74.37893453156457,
+                41.28564435775629
+              ],
+              [
+                -74.37897566542142,
+                41.28566735772852
+              ],
+              [
+                -74.37904766539145,
+                41.285670357518896
+              ],
+              [
+                -74.37913459895475,
+                41.285655357215724
+              ],
+              [
+                -74.3792105317491,
+                41.28565542336774
+              ],
+              [
+                -74.37927653187133,
+                41.285671357223954
+              ],
+              [
+                -74.37931453150615,
+                41.28567935756409
+              ],
+              [
+                -74.37942159900993,
+                41.285760423392134
+              ],
+              [
+                -74.37950853167493,
+                41.2857893574165
+              ],
+              [
+                -74.37965059844048,
+                41.28591229042601
+              ],
+              [
+                -74.3797635993167,
+                41.285930290448505
+              ],
+              [
+                -74.37988853161653,
+                41.285926423272386
+              ],
+              [
+                -74.37994659871649,
+                41.285949290166826
+              ],
+              [
+                -74.37997559902881,
+                41.285978357760825
+              ],
+              [
+                -74.38000266616663,
+                41.28604735730011
+              ],
+              [
+                -74.38003053190675,
+                41.2861913577177
+              ],
+              [
+                -74.38006159924254,
+                41.286245357539286
+              ],
+              [
+                -74.38009459885448,
+                41.2862783576332
+              ],
+              [
+                -74.38047159932137,
+                41.28642535729667
+              ],
+              [
+                -74.38052359919989,
+                41.28645842345082
+              ],
+              [
+                -74.38054459911629,
+                41.28650035789282
+              ],
+              [
+                -74.38053766591894,
+                41.286554423609736
+              ],
+              [
+                -74.38050659948145,
+                41.286587357396314
+              ],
+              [
+                -74.38050659948145,
+                41.286627357850705
+              ],
+              [
+                -74.38052559884972,
+                41.286665423701834
+              ],
+              [
+                -74.3805875996723,
+                41.28671535754894
+              ],
+              [
+                -74.38068566605695,
+                41.28673929068148
+              ],
+              [
+                -74.38076059902636,
+                41.286731357297256
+              ],
+              [
+                -74.38079859955951,
+                41.28670435759318
+              ],
+              [
+                -74.38083553199577,
+                41.28664735773117
+              ],
+              [
+                -74.38087266655299,
+                41.286615357514464
+              ],
+              [
+                -74.38091659956028,
+                41.286603357851035
+              ],
+              [
+                -74.381002599774,
+                41.286609290519465
+              ],
+              [
+                -74.38110153213456,
+                41.286653357896604
+              ],
+              [
+                -74.38113759949321,
+                41.28667835756756
+              ],
+              [
+                -74.38115566641022,
+                41.286718290465174
+              ],
+              [
+                -74.38115359938675,
+                41.28677235735155
+              ],
+              [
+                -74.38113159964543,
+                41.28680335780352
+              ],
+              [
+                -74.38113059982054,
+                41.28683229069045
+              ],
+              [
+                -74.38114759953896,
+                41.28686135789109
+              ],
+              [
+                -74.38132459909097,
+                41.28697235746104
+              ],
+              [
+                -74.3813815998907,
+                41.28699635732499
+              ],
+              [
+                -74.38163459961068,
+                41.287052357873215
+              ],
+              [
+                -74.38179059924629,
+                41.28714035767327
+              ],
+              [
+                -74.38181366708447,
+                41.287175290528204
+              ],
+              [
+                -74.38181153268735,
+                41.28722135756077
+              ],
+              [
+                -74.3817946668179,
+                41.287252290974045
+              ],
+              [
+                -74.38168259929127,
+                41.28727935795178
+              ],
+              [
+                -74.38165359987724,
+                41.287302358022714
+              ],
+              [
+                -74.38164753265582,
+                41.287325357410566
+              ],
+              [
+                -74.38165559952706,
+                41.28734829063996
+              ],
+              [
+                -74.38169059968718,
+                41.287367357445696
+              ],
+              [
+                -74.38178866697011,
+                41.287381357676374
+              ],
+              [
+                -74.38199859965876,
+                41.28737935764364
+              ],
+              [
+                -74.3820235997731,
+                41.28738935780689
+              ],
+              [
+                -74.38204059949155,
+                41.28740835777531
+              ],
+              [
+                -74.38205766658363,
+                41.287503357534646
+              ],
+              [
+                -74.38207360000182,
+                41.28753429081423
+              ],
+              [
+                -74.38213666712466,
+                41.287572357486276
+              ],
+              [
+                -74.3822005328498,
+                41.28768435754592
+              ],
+              [
+                -74.3823045999805,
+                41.28774135785199
+              ],
+              [
+                -74.38236759972969,
+                41.28776642393092
+              ],
+              [
+                -74.38247159948678,
+                41.287840357838924
+              ],
+              [
+                -74.38250459999705,
+                41.28787835750767
+              ],
+              [
+                -74.38267559970126,
+                41.28797935797619
+              ],
+              [
+                -74.38270653318807,
+                41.28801442403115
+              ],
+              [
+                -74.38272960012796,
+                41.28815235798103
+              ],
+              [
+                -74.38273759962556,
+                41.28824435766019
+              ],
+              [
+                -74.38277159996075,
+                41.28834835790436
+              ],
+              [
+                -74.38279859972492,
+                41.28838535761375
+              ],
+              [
+                -74.38287959991577,
+                41.28842335764004
+              ],
+              [
+                -74.38290466740378,
+                41.28844835798278
+              ],
+              [
+                -74.38293360034244,
+                41.28845435798264
+              ],
+              [
+                -74.38296666732805,
+                41.28844635798275
+              ],
+              [
+                -74.38301453315965,
+                41.28841935763835
+              ],
+              [
+                -74.38307953345698,
+                41.28840335762896
+              ],
+              [
+                -74.38314966672783,
+                41.28840335762896
+              ],
+              [
+                -74.38328059977377,
+                41.288420357976285
+              ],
+              [
+                -74.38370760046935,
+                41.28844435798261
+              ],
+              [
+                -74.38380966705193,
+                41.288425357640826
+              ],
+              [
+                -74.38384366738711,
+                41.28840235796576
+              ],
+              [
+                -74.38390566731138,
+                41.28830935749476
+              ],
+              [
+                -74.38399053385123,
+                41.28822235758729
+              ],
+              [
+                -74.38454060014746,
+                41.28781629078563
+              ],
+              [
+                -74.38477766734756,
+                41.28766535765782
+              ],
+              [
+                -74.38502553409404,
+                41.28754235775106
+              ],
+              [
+                -74.38518360075311,
+                41.28744835772639
+              ],
+              [
+                -74.38525666792168,
+                41.287375357577886
+              ],
+              [
+                -74.38531360044945,
+                41.2873353575821
+              ],
+              [
+                -74.3853866011427,
+                41.287308423603235
+              ],
+              [
+                -74.38553566758094,
+                41.28729429038118
+              ],
+              [
+                -74.38566553432663,
+                41.287297357597105
+              ],
+              [
+                -74.38577866815349,
+                41.28731135784284
+              ],
+              [
+                -74.38584666792556,
+                41.28730535773787
+              ],
+              [
+                -74.38587360121441,
+                41.287281357312615
+              ],
+              [
+                -74.38589866780411,
+                41.28722435727965
+              ],
+              [
+                -74.38593360059056,
+                41.28720535725764
+              ],
+              [
+                -74.38618453418539,
+                41.287197357779576
+              ],
+              [
+                -74.3862555343305,
+                41.287165357832606
+              ],
+              [
+                -74.38640153392038,
+                41.287070290755594
+              ],
+              [
+                -74.38647766793733,
+                41.28704035761513
+              ],
+              [
+                -74.38668060095328,
+                41.28700842374175
+              ],
+              [
+                -74.3868646010763,
+                41.28700235745833
+              ],
+              [
+                -74.38695566868653,
+                41.286971290275204
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 26420360,
+          "id3dhp": "GI8UI",
+          "featuredate": 1694649600000,
+          "mainstemid": "https://geoconnex.us/usgs/mainstems/10055837",
+          "gnisid": null,
+          "gnisidlabel": null,
+          "featuretype": 1,
+          "featuretypelabel": "Channel Line",
+          "lengthkm": 0.366,
+          "waterbodyid3dhp": null,
+          "flowdirection": 1,
+          "flowdirectionlabel": "Flow direction is in digitized direction, and z-values on vertices flow downslope",
+          "onsurface": 1,
+          "onsurfacelabel": "Feature is on the land surface",
+          "catchmentid3dhp": "",
+          "flowpathid3dhp": null,
+          "streamlevel": 6,
+          "startflag": 0,
+          "terminalflag": 0,
+          "streamorder": 1,
+          "streamcalculator": 1,
+          "hydrosequence": 9021881,
+          "dnhydrosequence": 9006589,
+          "uphydrosequence": 9037164,
+          "dnlevelpath": 9006589,
+          "uplevelpath": 9006589,
+          "pathlength": 322.94225308,
+          "arbolatesum": 0.40900000000000003,
+          "divergence": 0,
+          "divergencelabel": "No divergence",
+          "rtrndivergence": 0,
+          "levelpath": 9006589,
+          "terminalpath": 44,
+          "workunitid": "NHD",
+          "shape_Length": 488.0981556357896
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.36433159376442,
+                41.280653356989525
+              ],
+              [
+                -74.36457459343866,
+                41.28057929004965
+              ],
+              [
+                -74.36466359402543,
+                41.28057329000073
+              ],
+              [
+                -74.36479666057015,
+                41.280609357118095
+              ],
+              [
+                -74.36494859353247,
+                41.28069935706887
+              ],
+              [
+                -74.36501659420284,
+                41.28072235675889
+              ],
+              [
+                -74.36504752679134,
+                41.28071628989107
+              ],
+              [
+                -74.36515466077043,
+                41.280644423083274
+              ],
+              [
+                -74.36517959351116,
+                41.28063635731885
+              ],
+              [
+                -74.36521259402143,
+                41.28063835688323
+              ],
+              [
+                -74.3653155939536,
+                41.28072235675889
+              ],
+              [
+                -74.36542959375642,
+                41.28076028969039
+              ],
+              [
+                -74.36555766117657,
+                41.280868357008714
+              ],
+              [
+                -74.36564459384157,
+                41.28097935732227
+              ],
+              [
+                -74.365762527367,
+                41.281054356752215
+              ],
+              [
+                -74.36591259452848,
+                41.28111929016683
+              ],
+              [
+                -74.36594459431554,
+                41.28112042292987
+              ],
+              [
+                -74.3660596613169,
+                41.28109235699749
+              ],
+              [
+                -74.36609259445355,
+                41.281103357224275
+              ],
+              [
+                -74.36625452746159,
+                41.281224356896054
+              ],
+              [
+                -74.36629152727153,
+                41.281237357321686
+              ],
+              [
+                -74.36640959464594,
+                41.28124435708243
+              ],
+              [
+                -74.36660059444166,
+                41.281215356911446
+              ],
+              [
+                -74.3666996615495,
+                41.28123135733327
+              ],
+              [
+                -74.36675159405438,
+                41.281258357276734
+              ],
+              [
+                -74.36691152741263,
+                41.281435289798154
+              ],
+              [
+                -74.3669415949235,
+                41.28150228987799
+              ],
+              [
+                -74.36700259412456,
+                41.28155235728826
+              ],
+              [
+                -74.36718459459775,
+                41.281585357055306
+              ],
+              [
+                -74.36734872757995,
+                41.281751757066694
+              ],
+              [
+                -74.36744872803736,
+                41.28191355747579
+              ],
+              [
+                -74.36746359515531,
+                41.282149357245224
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "attributes": {
+          "OBJECTID": 26875268,
+          "id3dhp": "GRZ0X",
+          "featuredate": 1694649600000,
+          "mainstemid": "https://geoconnex.us/usgs/mainstems/8240892",
+          "gnisid": 966557,
+          "gnisidlabel": "Stony Creek",
+          "featuretype": 5,
+          "featuretypelabel": "Waterbody Connector",
+          "lengthkm": 0.039,
+          "waterbodyid3dhp": "J7HLI",
+          "flowdirection": 1,
+          "flowdirectionlabel": "Flow direction is in digitized direction, and z-values on vertices flow downslope",
+          "onsurface": 1,
+          "onsurfacelabel": "Feature is on the land surface",
+          "catchmentid3dhp": "",
+          "flowpathid3dhp": null,
+          "streamlevel": 5,
+          "startflag": 0,
+          "terminalflag": 0,
+          "streamorder": 1,
+          "streamcalculator": 1,
+          "hydrosequence": 9006590,
+          "dnhydrosequence": 8991267,
+          "uphydrosequence": 9021882,
+          "dnlevelpath": 8945370,
+          "uplevelpath": 8945370,
+          "pathlength": 322.92325308,
+          "arbolatesum": 1.112,
+          "divergence": 0,
+          "divergencelabel": "No divergence",
+          "rtrndivergence": 0,
+          "levelpath": 8945370,
+          "terminalpath": 44,
+          "workunitid": "NHD",
+          "shape_Length": 52.19996651978727
+        },
+        "geometry": {
+          "paths": [
+            [
+              [
+                -74.3672045273156,
+                41.28255035726645
+              ],
+              [
+                -74.36754646204533,
+                41.28230922331078
+              ]
+            ]
+          ]
+        }
+      }
+    ]
+  }
+}

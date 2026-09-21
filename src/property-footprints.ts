@@ -59,6 +59,27 @@ export function createPropertyClearance(map: MapData) {
     ...(survey?.drivewaySurfaces ?? []),
     ...(survey?.propertyFeatures ?? []),
     ...homePolygons,
+    // The stream remains unpaved. This exclusion only keeps terrestrial roots,
+    // shrubs and grass out of its water and immediate bank.
+    ...(map.backyard?.stream?.stations ?? [])
+      .slice(1)
+      .map((b: { point: GroundPoint; width: number }, i: number) => {
+        const a = map.backyard.stream.stations[i],
+          dx = b.point[0] - a.point[0],
+          dz = b.point[1] - a.point[1],
+          length = Math.hypot(dx, dz) || 1;
+        const n = [dz / length, -dx / length],
+          ra = a.width / 2 + 0.3,
+          rb = b.width / 2 + 0.3;
+        return {
+          points: [
+            [a.point[0] - n[0] * ra, a.point[1] - n[1] * ra],
+            [a.point[0] + n[0] * ra, a.point[1] + n[1] * ra],
+            [b.point[0] + n[0] * rb, b.point[1] + n[1] * rb],
+            [b.point[0] - n[0] * rb, b.point[1] - n[1] * rb],
+          ] as GroundPoint[],
+        };
+      }),
   ]
     .filter(
       (feature: { points?: GroundPoint[] }) =>

@@ -23,6 +23,19 @@ export interface BeverlyVegetationSurvey {
   driveways?: { points: [number, number][]; widthMeters: number }[];
   landcover?: { kind: string; points: [number, number][] }[];
 }
+interface BackyardVegetationSurvey {
+  bounds: BeverlyVegetationSurvey["bounds"];
+  woodlands?: {
+    points: [number, number][];
+    spacing?: number;
+    type?: "broadleaf" | "conifer" | "mixed";
+    confidence?: string | number;
+  }[];
+  canopies?: BeverlyVegetationSurvey["canopies"];
+  stream?: {
+    stations?: { point: [number, number]; width: number }[];
+  };
+}
 type HeightQuery = (map: MapData, x: number, z: number) => number;
 type RoadQuery = (
   map: MapData,
@@ -926,6 +939,7 @@ export class Vegetation {
     referenceTreeCount: 0,
     referenceWoodlandTreeCount: 0,
     referenceOmittedTreeCount: 0,
+    backyardTreeCount: 0,
   };
   private chunks: Chunk[] = [];
   private geometries: T.BufferGeometry[] = [];
@@ -961,13 +975,43 @@ export class Vegetation {
       candidate.bounds.minZ < candidate.bounds.maxZ
         ? candidate
         : undefined;
-    const inSurvey = (x: number, z: number) =>
+    const backyardCandidate = map.backyard as
+      BackyardVegetationSurvey | undefined;
+    const backyard =
+      backyardCandidate?.bounds &&
+      [
+        backyardCandidate.bounds.minX,
+        backyardCandidate.bounds.maxX,
+        backyardCandidate.bounds.minZ,
+        backyardCandidate.bounds.maxZ,
+      ].every(Number.isFinite) &&
+      backyardCandidate.bounds.minX < backyardCandidate.bounds.maxX &&
+      backyardCandidate.bounds.minZ < backyardCandidate.bounds.maxZ
+        ? backyardCandidate
+        : undefined;
+    const inBeverlySurvey = (x: number, z: number) =>
       !!survey &&
       x >= survey.bounds.minX &&
       x <= survey.bounds.maxX &&
       z >= survey.bounds.minZ &&
       z <= survey.bounds.maxZ;
+    const inBackyard = (x: number, z: number) =>
+      !!backyard &&
+      x >= backyard.bounds.minX &&
+      x <= backyard.bounds.maxX &&
+      z >= backyard.bounds.minZ &&
+      z <= backyard.bounds.maxZ;
+    const inSurvey = (x: number, z: number) =>
+      inBeverlySurvey(x, z) || inBackyard(x, z);
+    const inBackyardWoodland = (x: number, z: number) =>
+      inBackyard(x, z) &&
+      (backyard?.woodlands ?? []).some(
+        (woodland) =>
+          woodland.points.length >= 3 && insidePolygon(x, z, woodland.points),
+      );
     const referenceCanopies: Record<string, unknown>[] = [];
+    const backyardTrees: [number, number, number][] = [];
+    const backyardCanopies: Record<string, unknown>[] = [];
     const ponds = (survey?.landcover ?? []).filter(
       (cover) => cover.kind === "pond" && cover.points.length >= 3,
     );
@@ -989,9 +1033,54 @@ export class Vegetation {
       return true;
     };
     const surveyRandom = seeded((options.seed ?? 442) ^ 0x5e7e9);
+    const backyardRandom = seeded((options.seed ?? 442) ^ 0x57c0a9);
     const propertyClear = createPropertyClearance(map);
+    // Stream banks are reserved before every tree/grass/shrub placement. The
+    // varying channel width is conservatively bounded per station segment.
+    const streamSegments: {
+      a: [number, number];
+      b: [number, number];
+      halfWidth: number;
+      minX: number;
+      maxX: number;
+      minZ: number;
+      maxZ: number;
+    }[] = [];
+    const stations = backyard?.stream?.stations ?? [];
+    for (let i = 1; i < stations.length; i++) {
+      const a = stations[i - 1],
+        b = stations[i];
+      if (
+        !a.point?.every(Number.isFinite) ||
+        !b.point?.every(Number.isFinite) ||
+        !Number.isFinite(a.width) ||
+        !Number.isFinite(b.width)
+      )
+        continue;
+      const halfWidth = Math.max(0, a.width, b.width) / 2 + 0.9;
+      streamSegments.push({
+        a: a.point,
+        b: b.point,
+        halfWidth,
+        minX: Math.min(a.point[0], b.point[0]) - halfWidth,
+        maxX: Math.max(a.point[0], b.point[0]) + halfWidth,
+        minZ: Math.min(a.point[1], b.point[1]) - halfWidth,
+        maxZ: Math.max(a.point[1], b.point[1]) + halfWidth,
+      });
+    }
+    const streamClear = (x: number, z: number, radius: number) =>
+      streamSegments.every(
+        (segment) =>
+          x < segment.minX - radius ||
+          x > segment.maxX + radius ||
+          z < segment.minZ - radius ||
+          z > segment.maxZ + radius ||
+          segmentDistanceSquared(x, z, segment.a, segment.b) >=
+            (segment.halfWidth + radius) ** 2,
+      );
     const drivewayClear = (x: number, z: number, radius: number) => {
-      if (!propertyClear(x, z, radius)) return false;
+      if (!streamClear(x, z, radius) || !propertyClear(x, z, radius))
+        return false;
       for (const driveway of survey?.driveways ?? []) {
         const clearance =
           Math.max(0, driveway.widthMeters || 0) / 2 + radius + 0.25;
@@ -1026,11 +1115,13 @@ export class Vegetation {
     const addTree = (x: number, z: number, roadside = false) => {
       const species: Species = random() < 0.2 ? 2 : random() < 0.47 ? 1 : 0,
         scale = 0.78 + random() * 0.45,
-        crown = (species === 0 ? 5.7 : species === 1 ? 4.45 : 3.8) * scale;
+        crown = (species === 0 ? 5.7 : species === 1 ? 4.45 : 3.8) * scale,
+        trunkRadius = Math.max(0.15, scale * (species === 2 ? 0.29 : 0.47));
       if (
         !inBounds(x, z) ||
         inSurvey(x, z) ||
         !index.clear(x, z, crown, roadside ? 4 : 2, 4.8) ||
+        !drivewayClear(x, z, trunkRadius) ||
         !index.spaced(x, z, crown * 0.64)
       )
         return;
@@ -1053,6 +1144,7 @@ export class Vegetation {
       type: "broadleaf" | "conifer" | "mixed",
       woodland = false,
       confidence?: string | number,
+      backyardTree = false,
     ) => {
       const species: Species =
         type === "conifer"
@@ -1075,15 +1167,17 @@ export class Vegetation {
         radiusMeters > 0;
       const blocked = !valid
         ? "invalid geometry"
-        : !pondClear(x, z, trunkRadius)
-          ? "pond trunk obstruction"
-          : !index.trunkClear(x, z, trunkRadius)
-            ? "road or building trunk obstruction"
-            : !drivewayClear(x, z, trunkRadius)
-              ? "driveway trunk obstruction"
-              : null;
+        : !streamClear(x, z, trunkRadius)
+          ? "stream channel or bank obstruction"
+          : !pondClear(x, z, trunkRadius)
+            ? "pond trunk obstruction"
+            : !index.trunkClear(x, z, trunkRadius)
+              ? "road or building trunk obstruction"
+              : !drivewayClear(x, z, trunkRadius)
+                ? "driveway trunk obstruction"
+                : null;
       if (blocked) {
-        if (!woodland) {
+        if (!woodland && !backyardTree) {
           this.stats.referenceOmittedTreeCount++;
           referenceCanopies.push({
             center: [x, z],
@@ -1109,7 +1203,18 @@ export class Vegetation {
         species,
       });
       this.stats.trees++;
-      if (woodland) this.stats.referenceWoodlandTreeCount++;
+      if (backyardTree) {
+        this.stats.backyardTreeCount++;
+        backyardTrees.push([x, z, trunkRadius]);
+        backyardCanopies.push({
+          center: [x, z],
+          radiusMeters,
+          trunkRadiusMeters: trunkRadius,
+          type,
+          confidence,
+          observedCenter: !woodland,
+        });
+      } else if (woodland) this.stats.referenceWoodlandTreeCount++;
       else {
         this.stats.referenceTreeCount++;
         referenceCanopies.push({
@@ -1124,7 +1229,15 @@ export class Vegetation {
     if (survey) {
       this.root.name =
         "Surveyed Beverly vegetation and surrounding procedural woodland";
-      for (const canopy of survey.canopies ?? [])
+      for (const canopy of survey.canopies ?? []) {
+        if (inBackyardWoodland(...canopy.center)) {
+          this.stats.referenceOmittedTreeCount++;
+          referenceCanopies.push({
+            ...canopy,
+            omitted: "superseded by backyard woodland reference",
+          });
+          continue;
+        }
         addReferenceTree(
           canopy.center[0],
           canopy.center[1],
@@ -1133,6 +1246,7 @@ export class Vegetation {
           false,
           canopy.confidence,
         );
+      }
       for (const woodland of survey.woodlands ?? []) {
         if (
           woodland.points.length < 3 ||
@@ -1165,7 +1279,11 @@ export class Vegetation {
           for (let x = minX + spacing / 2; x < maxX; x += spacing) {
             const px = x + (surveyRandom() - 0.5) * spacing * 0.65,
               pz = z + (surveyRandom() - 0.5) * spacing * 0.65;
-            if (inSurvey(px, pz) && insidePolygon(px, pz, woodland.points))
+            if (
+              inBeverlySurvey(px, pz) &&
+              !inBackyard(px, pz) &&
+              insidePolygon(px, pz, woodland.points)
+            )
               addReferenceTree(
                 px,
                 pz,
@@ -1179,6 +1297,75 @@ export class Vegetation {
       this.root.userData.referenceCanopies = referenceCanopies;
       this.root.userData.surveyProvenance =
         "Observed canopy centers/radii and explicit woodland extent; broad vegetation type only. Height, branch shape and woodland interior stems are approximations. Blocked observed trunks are omitted, never relocated.";
+    }
+    if (backyard) {
+      for (const canopy of backyard.canopies ?? [])
+        if (inBackyard(...canopy.center))
+          addReferenceTree(
+            canopy.center[0],
+            canopy.center[1],
+            canopy.radiusMeters,
+            canopy.type,
+            false,
+            canopy.confidence,
+            true,
+          );
+      // This independent extent extends beyond the old Beverly survey's eastern
+      // limit. Its rectangle suppresses generic planting; only the observed
+      // ground-cover polygon receives representative mature woodland stems.
+      for (const woodland of backyard.woodlands ?? []) {
+        if (
+          woodland.points.length < 3 ||
+          !woodland.points.every((p) => p.every(Number.isFinite))
+        )
+          continue;
+        const minX = Math.max(
+            backyard.bounds.minX,
+            Math.min(...woodland.points.map((p) => p[0])),
+          ),
+          maxX = Math.min(
+            backyard.bounds.maxX,
+            Math.max(...woodland.points.map((p) => p[0])),
+          ),
+          minZ = Math.max(
+            backyard.bounds.minZ,
+            Math.min(...woodland.points.map((p) => p[1])),
+          ),
+          maxZ = Math.min(
+            backyard.bounds.maxZ,
+            Math.max(...woodland.points.map((p) => p[1])),
+          ),
+          spacing = Math.max(
+            6,
+            Number.isFinite(woodland.spacing) && woodland.spacing! > 0
+              ? woodland.spacing!
+              : 8.5,
+          );
+        for (let z = minZ + spacing / 2; z < maxZ; z += spacing)
+          for (let x = minX + spacing / 2; x < maxX; x += spacing) {
+            const px = x + (backyardRandom() - 0.5) * spacing * 0.6,
+              pz = z + (backyardRandom() - 0.5) * spacing * 0.6;
+            if (
+              inBounds(px, pz) &&
+              inBackyard(px, pz) &&
+              insidePolygon(px, pz, woodland.points)
+            )
+              addReferenceTree(
+                px,
+                pz,
+                4.5 + backyardRandom() * 1.5,
+                woodland.type ?? "broadleaf",
+                true,
+                woodland.confidence,
+                true,
+              );
+          }
+      }
+      this.root.userData.backyardBounds = { ...backyard.bounds };
+      this.root.userData.backyardTrees = backyardTrees;
+      this.root.userData.backyardCanopies = backyardCanopies;
+      this.root.userData.backyardProvenance =
+        "Aerial-observed woodland ground boundary with representative interior stems and crown sizes; source canopy observations are not relocated. Channel and bank clearances follow the compiled stream stations.";
     }
     // Recognizable streets get continuous but irregular vegetation, including the Home approach.
     // Setback and species are scenic approximations; road coordinates are never altered.
@@ -1225,6 +1412,7 @@ export class Vegetation {
             if (
               inBounds(gx, gz) &&
               !inSurvey(gx, gz) &&
+              drivewayClear(gx, gz, 0.3) &&
               index.clear(gx, gz, 0.3, 1, 1.1)
             ) {
               chunk(gx, gz).grass.push({
@@ -1289,6 +1477,7 @@ export class Vegetation {
           if (
             inBounds(px, pz) &&
             !inSurvey(px, pz) &&
+            drivewayClear(px, pz, 0.8) &&
             index.clear(px, pz, 0.8, 0.2, 2)
           ) {
             chunk(px, pz).shrubs.push({

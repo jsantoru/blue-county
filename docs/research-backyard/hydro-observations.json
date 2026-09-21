@@ -1,0 +1,328 @@
+{
+  "schemaVersion": 1,
+  "coordinateSystem": {
+    "originLonLat": [
+      -74.3662393,
+      41.283879
+    ],
+    "x": "east meters",
+    "z": "south meters",
+    "metersPerLatitudeDegree": 111320,
+    "metersPerLongitudeDegree": 83651.39227278839,
+    "heightSource": "Not supplied by this horizontal flowline; do not treat 3DHP migration as surveyed local streambed heights"
+  },
+  "retrievedAt": "2026-09-21T01:38:39.604262+00:00",
+  "stream": {
+    "id": "usgs-3dhp-EH86B",
+    "name": "Stony Creek",
+    "pointsXZ": [
+      [
+        601.5908,
+        -177.5953
+      ],
+      [
+        401.5914,
+        -211.7778
+      ],
+      [
+        397.0686,
+        -210.9986
+      ],
+      [
+        388.2072,
+        -207.6516
+      ],
+      [
+        352.2259,
+        -199.1913
+      ],
+      [
+        261.5534,
+        -175.8142
+      ],
+      [
+        247.2489,
+        -173.4764
+      ],
+      [
+        197.482,
+        -170.5821
+      ],
+      [
+        148.7968,
+        -171.1387
+      ],
+      [
+        144.4358,
+        -169.3575
+      ],
+      [
+        139.2606,
+        -164.7935
+      ],
+      [
+        135.7472,
+        -159.5614
+      ],
+      [
+        120.1825,
+        -129.6163
+      ],
+      [
+        110.6518,
+        -119.8202
+      ],
+      [
+        103.2905,
+        -115.8127
+      ],
+      [
+        95.0814,
+        -114.0315
+      ],
+      [
+        89.4044,
+        -108.9182
+      ],
+      [
+        82.4557,
+        -92.7694
+      ],
+      [
+        80.2863,
+        -81.7487
+      ],
+      [
+        80.2751,
+        -39.6698
+      ],
+      [
+        82.9576,
+        -23.6397
+      ],
+      [
+        82.9576,
+        -7.4983
+      ],
+      [
+        80.2751,
+        2.9659
+      ],
+      [
+        77.2749,
+        8.0866
+      ],
+      [
+        70.3262,
+        13.8679
+      ],
+      [
+        55.598,
+        21.3337
+      ],
+      [
+        34.8524,
+        51.2862
+      ],
+      [
+        26.5765,
+        58.856
+      ],
+      [
+        9.2607,
+        81.4464
+      ],
+      [
+        -3.8726,
+        94.9236
+      ],
+      [
+        -20.5973,
+        107.8293
+      ],
+      [
+        -49.8865,
+        129.6481
+      ],
+      [
+        -80.7426,
+        147.9045
+      ]
+    ],
+    "originalPointsLonLat": [
+      [
+        -74.35904765924577,
+        41.28547435832619
+      ],
+      [
+        -74.36143852627278,
+        41.28578142391677
+      ],
+      [
+        -74.36149259317477,
+        41.285774423967645
+      ],
+      [
+        -74.36159852610633,
+        41.28574435792885
+      ],
+      [
+        -74.36202866012562,
+        41.2856683581087
+      ],
+      [
+        -74.36311259339858,
+        41.28545835826971
+      ],
+      [
+        -74.36328359400113,
+        41.28543735831612
+      ],
+      [
+        -74.36387852665423,
+        41.28541135778564
+      ],
+      [
+        -74.3644605271605,
+        41.28541635768075
+      ],
+      [
+        -74.36451266088801,
+        41.285400357610044
+      ],
+      [
+        -74.36457452696332,
+        41.285359358043664
+      ],
+      [
+        -74.36461652679611,
+        41.285312358163374
+      ],
+      [
+        -74.3648025939426,
+        41.285043357837935
+      ],
+      [
+        -74.36491652727008,
+        41.284955357909816
+      ],
+      [
+        -74.36500452713362,
+        41.28491935799702
+      ],
+      [
+        -74.36510266089189,
+        41.28490335780445
+      ],
+      [
+        -74.36517052681498,
+        41.28485742414105
+      ],
+      [
+        -74.3652535940293,
+        41.284712357607006
+      ],
+      [
+        -74.36527952749324,
+        41.284613357599234
+      ],
+      [
+        -74.36527966134223,
+        41.284235357906276
+      ],
+      [
+        -74.36524759418153,
+        41.28409135789732
+      ],
+      [
+        -74.36524759418153,
+        41.28394635783907
+      ],
+      [
+        -74.36527966134223,
+        41.28385235735916
+      ],
+      [
+        -74.36531552747826,
+        41.283806357477104
+      ],
+      [
+        -74.36539859379425,
+        41.2837544232851
+      ],
+      [
+        -74.36557466089499,
+        41.28368735733835
+      ],
+      [
+        -74.36582266149044,
+        41.28341829023511
+      ],
+      [
+        -74.36592159474931,
+        41.283350290356616
+      ],
+      [
+        -74.36612859443854,
+        41.2831473575443
+      ],
+      [
+        -74.36628559479739,
+        41.28302629055793
+      ],
+      [
+        -74.36648552744029,
+        41.282910357093805
+      ],
+      [
+        -74.36683566199193,
+        41.28271435703655
+      ],
+      [
+        -74.3672045273156,
+        41.28255035726645
+      ]
+    ],
+    "geometryType": "polyline",
+    "source": "USGS 3D Hydrography Program / NHD-derived channel line",
+    "sourceUrl": "https://hydro.nationalmap.gov/arcgis/rest/services/3DHP_all/MapServer/50",
+    "sourceQueryUrl": "https://hydro.nationalmap.gov/arcgis/rest/services/3DHP_all/MapServer/50/query?f=json&where=1%3D1&geometry=-74.37341192419308%2C41.27848913295005%2C-74.35787123844142%2C41.28971802263744&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&returnGeometry=true&outSR=4326",
+    "sourceFeatureId": "EH86B",
+    "sourceObjectId": 23006247,
+    "gnisId": 966557,
+    "featureType": "Channel Line",
+    "mainstemId": "https://geoconnex.us/usgs/mainstems/8240892",
+    "flowDirection": "Source vertices are ordered downstream",
+    "sourceFeatureDate": "2023-09-14",
+    "sourceWorkUnit": "NHD",
+    "legacyNhdPermanentId": "61784457",
+    "legacyNhdReachCode": "02020007000878",
+    "legacyNhdFeatureDate": "2012-03-08T07:44:06+00:00",
+    "legacyNhdResolution": 2,
+    "legacyNhdFCode": 46006,
+    "horizontalConfidence": "Mapped stream corridor corroborated by independent OSM and 2013/2025 aerial canopy/ravine pattern; fine bank and meander positions are approximate",
+    "crossSourceNote": "At local z=0, USGS/NHD lies near x=81m and OSM near x=78m. NYS DEC classification line lies near x=49m and is too generalized for property reconstruction. Aerial reviewer confirms ravine near x=80m.",
+    "visualWidthDepth": "Not measured; game width, water level, cross section and depth must be labeled visual approximations",
+    "renderRecommendation": "Clip to reviewed northern extent z=-105m and relevant woodland bounds; stop at least12m from West Ridge road pavement. Preserve original33vertices here and interpolate/clipping only in derived runtime output."
+  },
+  "comparisonSources": [
+    {
+      "name": "NYS DEC Stream Classification and Trout Status",
+      "featureId": 6860,
+      "partItem": "855.5-204",
+      "url": "https://gisservices.dec.ny.gov/arcgis/rest/services/hvnrm/hvnrm_streams_and_watersheds_07302025/MapServer/9",
+      "purpose": "Confirms drainage corridor at regional classification scale; not selected as property-scale geometry"
+    },
+    {
+      "name": "OpenStreetMap",
+      "wayId": 1231197326,
+      "url": "https://www.openstreetmap.org/way/1231197326",
+      "purpose": "Independently corroborates behind-house corridor and adds small meanders; unlabeledstreamsegment connected to namedStonyCreek"
+    }
+  ],
+  "limits": [
+    "This is a cartographic centerline, not surveyed bank geometry.",
+    "The 2023 3DHP feature date does not make it new2023fieldmapping: workunit NHD and matching2012NHDgeometry show inheritedlinework.",
+    "No creekwidth, bankheight, waterdepth or presentseasonflow was established by these sources."
+  ]
+}

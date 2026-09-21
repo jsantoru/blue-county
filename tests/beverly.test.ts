@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { heightAt, nearestRoad } from "../src/roads";
 import { buildNeighborhood, type NeighborhoodHouse } from "../src/neighborhood";
 import { Vegetation, type BeverlyVegetationSurvey } from "../src/vegetation";
+import { polygonDistance } from "../src/property-footprints";
 import type { MapData, Point, Road } from "../src/types";
 
 type XZ = [number, number];
@@ -588,7 +589,7 @@ describe("reference rendering boundaries", () => {
     }
   });
 
-  it("fills the survey only from observed crowns/woodlands and keeps unsurveyed interior empty", () => {
+  it("fills only observed crowns/woodlands, including the explicitly mapped backyard extent", () => {
     const cropped = { ...map, bounds: survey.bounds };
     const vegetation = new Vegetation(cropped, heightAt, nearestRoad);
     try {
@@ -601,8 +602,30 @@ describe("reference rendering boundaries", () => {
       expect(vegetation.stats.referenceTreeCount).toBeGreaterThan(0);
       expect(vegetation.stats.trees).toBe(
         vegetation.stats.referenceTreeCount +
-          vegetation.stats.referenceWoodlandTreeCount,
+          vegetation.stats.referenceWoodlandTreeCount +
+          vegetation.stats.backyardTreeCount,
       );
+      const backyard = vegetation.root.userData.backyardCanopies as {
+        center: XZ;
+        observedCenter: boolean;
+      }[];
+      expect(backyard).toHaveLength(vegetation.stats.backyardTreeCount);
+      expect(backyard.length).toBeGreaterThan(0);
+      for (const tree of backyard) {
+        // The new source polygon extends beyond the earlier survey. It permits
+        // representative interior stems, not random planting across its whole rectangle.
+        expect(
+          tree.observedCenter
+            ? map.backyard.canopies.some(
+                (canopy: { center: XZ }) =>
+                  distance(canopy.center, tree.center) < 0.0001,
+              )
+            : map.backyard.woodlands.some(
+                (woodland: { points: XZ[] }) =>
+                  polygonDistance(...tree.center, woodland.points) === 0,
+              ),
+        ).toBe(true);
+      }
       expect(vegetation.stats.shrubs).toBe(0);
       expect(vegetation.stats.grassTufts).toBe(0);
       expect(audit.filter((item) => !item.omitted)).toHaveLength(
@@ -623,7 +646,11 @@ describe("reference rendering boundaries", () => {
       vegetation.dispose();
     }
     const empty = new Vegetation(
-      { ...cropped, beverlySurvey: { ...survey, canopies: [], woodlands: [] } },
+      {
+        ...cropped,
+        backyard: undefined,
+        beverlySurvey: { ...survey, canopies: [], woodlands: [] },
+      },
       heightAt,
       nearestRoad,
     );
