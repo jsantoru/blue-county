@@ -1,10 +1,31 @@
 # Blue County — Warwick / 442
 
-A locally playable arcade driving slice starring your actual dark blue 1968 Oldsmobile 442 convertible with the wheel and controls on the US driver's left. Free Drive starts on the visible parking apron at 2 Beverly Drive, facing its curved driveway exit. Official 2010/2013 aerials resolve the approach hidden by trees in the 2025 reference; current edges beneath those trees remain approximate.
+A locally playable arcade driving and exploration game starring your actual dark blue 1968 Oldsmobile 442 convertible. Drive the Warwick roads, race the Ridge & Hollow circuit, or park, step out and explore Beverly Drive's yards, woods and Stony Creek on foot. The visible driver sits behind the wheel on the US driver's left.
 
-![Home's photo-referenced front facade and yard](docs/home-front-details.png)
+**`main` is the current playable version.** The latest update adds a simple articulated driver, walking, running and jumping, a collision-aware third-person camera, and prompts that guide you back into your parked car. The character is ready to be replaced with a Blender model later.
 
-Home now has its own house and yard reconstruction from the three supplied street photographs: the offset red entrance, burgundy shutters, distinct window groups, front garden ornaments and open lawn. The owner's description places the upper deck on the driveway/right side, with a patio and red door below, sliders above, and a roofed screened area around the back. Read [the Home detail notes](docs/home-detail-pass.md) for reference observations, game views and remaining approximations.
+![The driver standing beside the parked 442 at Home](docs/exploration-second-first-exit.png)
+
+Stop in Free Drive and press **F / Xbox Y** to get out. Move with **WASD / left stick**, run with **Shift / A**, jump with **Space / X**, and look with the mouse or right stick. Approach either door and press **F / Y** to get back in. See [full controls](#first-drive) or [launch instructions](#launch-on-windows).
+
+## Recent screenshots — September 21, 2026
+
+Actual screenshots from the local production build. The seated-driver close-up was captured for this README; the exploration views come from the final second review of the feature.
+
+| Behind the wheel | From the yard into the woods |
+| --- | --- |
+| ![Close-up of the placeholder driver seated behind the 442's left-hand steering wheel](docs/readme-driver-seat.png) | ![The character running from the backyard toward the woods](docs/exploration-second-running-to-woods.png) |
+| The replaceable driver in the US-left seat. | Run through the lawn and into the surrounding woodland. |
+
+![Exploring the mapped Stony Creek channel and woodland plants on foot](docs/exploration-second-creek-exploration.png)
+
+Walking through the shallow Stony Creek channel. [More gameplay views and verification notes](docs/exploration-pass.md).
+
+## The starting neighborhood
+
+Free Drive starts on the visible parking apron at 2 Beverly Drive, facing its curved driveway exit. Official 2010/2013 aerials resolve the approach hidden by trees in the 2025 reference; current edges beneath those trees remain approximate.
+
+Home has its own house and yard reconstruction from the three supplied street photographs: the offset red entrance, burgundy shutters, distinct window groups, front garden ornaments and open lawn. The owner's description places the upper deck on the driveway/right side, with a patio and red door below, sliders above, and a roofed screened area around the back. See the [front facade and yard view](docs/home-front-details.png) or read [the Home detail notes](docs/home-detail-pass.md) for reference observations, game views and remaining approximations.
 
 Behind Home, **Stony Creek** follows its mapped course through woods traced from official 2013/2025 aerials, with an open rear lawn, mature trees and layered woodland ground cover. The approximately 212m creek reach uses an explicitly inferred channel and bank profile; it is not a new elevation survey. See [the backyard notes and game views](docs/backyard-pass.md).
 
@@ -61,6 +82,8 @@ The offline map build also applies the cached Beverly research through `scripts/
 The active source folder `../oldsmobile_442` was **not modified**. Export uses the included `asset-source/1968_oldsmobile_442.snapshot.blend`, preserving the detailed source. See `docs/vehicle.md` and `public/assets/vehicle-manifest.json` for axes, dimensions, pivots, scale and export settings. The source snapshot is tracked so a fresh clone can rebuild the vehicle; intermediate Blender exports remain ignored. To use a future model revision, copy its saved `.blend` into the snapshot path yourself, then export.
 
 ## Checks and evidence
+
+The September 21 exploration update passed **118 tests across 18 files** and the production build. Two complete browser reviews passed 11 initial checks and 19 second-pass checks, followed by the full three-lap race, restart and Return Home. Both exploration reviews and the final race reported zero runtime, resource or WebGL errors. See [the verification record](docs/verification.md) and [exploration review](docs/exploration-pass.md) for the measured environment, screenshots and limits. Controller automation uses synthetic Gamepad API input; physical controller feel and rumble remain unverified.
 
 ```powershell
 npm test               # input, rules, surfaces, physics and complete AI route tests
