@@ -1132,6 +1132,19 @@ async function init() {
 if (new URLSearchParams(location.search).has("test")) {
   let testDriver: Driver | null = null;
   (window as any).__game = {
+    backyardDetails: () => ({
+      data: map.backyard
+        ? {
+            bounds: map.backyard.bounds,
+            woodlands: map.backyard.woodlands,
+            stream: map.backyard.stream,
+            limits: map.backyard.limits,
+            terrain: { ...map.backyard.terrain, heights: undefined },
+          }
+        : null,
+      render: environment.backyard?.root.userData.backyard ?? null,
+      trees: environment.vegetation?.root.userData.backyardTrees ?? [],
+    }),
     homeDetails: () => {
       const result: Record<string, unknown> = {
         frame: environment.root.userData.homeFrame ?? null,

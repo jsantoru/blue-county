@@ -20,6 +20,7 @@
     "test:detail": "node scripts/beverly-check.mjs --detail-pass",
     "test:property": "node scripts/property-check.mjs",
     "test:home": "node scripts/home-check.mjs",
+    "test:backyard": "node scripts/backyard-check.mjs",
     "format": "prettier --write src tests index.html scripts/browser-check.mjs"
   },
   "keywords": [],

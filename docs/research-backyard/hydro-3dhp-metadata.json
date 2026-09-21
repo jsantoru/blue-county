@@ -1,0 +1,253 @@
+{
+ "currentVersion": 11.3,
+ "cimVersion": "3.3.0",
+ "serviceDescription": "The USGS 3D Hydrography Program (3DHP) ArcGIS REST service (3DHP_all) from The National Map is the first of several data services that will be delivered by the 3D Hydrography Program.  The 3DHP_all comprises a national network of flowlines, hydrolocations, and water bodies, and will include catchments, drainage areas, and flow network derivatives as they are populated in the future.  The 3DHP_all service will provide access to a 3D-enabled geospatial hydrography vector dataset built from 3DHP data and intended to provide the most comprehensive but general rendering of 3DHP data.  3DHP data is derived from elevation-derived hydrography (EDH) Elevation-Derived Hydrography Specifications | U.S. Geological Survey (usgs.gov) where available. Where EDH has not been collected, 3DHP data will be supplemented by data from the National Hydrography Dataset (NHD) National Hydrography Dataset | U.S. Geological Survey (usgs.gov).   As further EDH data is collected, the EDH data will replace the NHD data in that data collection area. 3DHP data ingested from EDH sources will include catchments, drainage areas derived from catchments, and flowline network attribute derivatives.Use Constraints: __ None. All data are open and non-proprietary. However, users should be aware that temporal changes may have occurred since this dataset was collected and that some parts of this data may no longer represent actual conditions. Users should not use this data for critical applications without a full awareness of its limitations. This dataset is not intended to be used for site-specific regulatory determinations. Acknowledgment of the U.S. Geological Survey would be appreciated for products derived from these data.For additional information on the 3DHP, go to https://www.usgs.gov/3dhp.See https://apps.nationalmap.gov/help/ for assistance with The National Map viewer, download client, services, or metadata.",
+ "mapName": "3DHP_all",
+ "description": "The USGS 3D Hydrography Program (3DHP) ArcGIS REST service (3DHP_all) from The National Map is the first of several data services that will be delivered by the 3D Hydrography Program.  The 3DHP_all comprises a national network of flowlines, hydrolocations, and water bodies, and will include catchments, drainage areas, and flow network derivatives as they are populated in the future.  The 3DHP_all service will provide access to a 3D-enabled geospatial hydrography vector dataset built from 3DHP data and intended to provide the most comprehensive but general rendering of 3DHP data.  3DHP data is derived from elevation-derived hydrography (EDH) Elevation-Derived Hydrography Specifications | U.S. Geological Survey (usgs.gov) where available. Where EDH has not been collected, 3DHP data will be supplemented by data from the National Hydrography Dataset (NHD) National Hydrography Dataset | U.S. Geological Survey (usgs.gov).   As further EDH data is collected, the EDH data will replace the NHD data in that data collection area. 3DHP data ingested from EDH sources will include catchments, drainage areas derived from catchments, and flowline network attribute derivatives.Use Constraints: __ None. All data are open and non-proprietary. However, users should be aware that temporal changes may have occurred since this dataset was collected and that some parts of this data may no longer represent actual conditions. Users should not use this data for critical applications without a full awareness of its limitations. This dataset is not intended to be used for site-specific regulatory determinations. Acknowledgment of the U.S. Geological Survey would be appreciated for products derived from these data.For additional information on the 3DHP, go to https://www.usgs.gov/3dhp.See https://apps.nationalmap.gov/help/ for assistance with The National Map viewer, download client, services, or metadata.",
+ "copyrightText": "Credits: USGS TNM / NGTOC \u2013 3D National Hydrographic Program (3DHP.) Data refreshed August 5, 2026.",
+ "supportsDynamicLayers": true,
+ "layers": [
+  {
+   "id": 20,
+   "name": "HydroLocation - Sink, Spring, Waterbody Outlet",
+   "parentLayerId": -1,
+   "defaultVisibility": true,
+   "subLayerIds": null,
+   "minScale": 300000,
+   "maxScale": 0,
+   "type": "Feature Layer",
+   "geometryType": "esriGeometryPoint",
+   "supportsDynamicLegends": true
+  },
+  {
+   "id": 30,
+   "name": "HydroLocation - Headwater, Terminus, Divergence, Confluence, Catchment Outlet",
+   "parentLayerId": -1,
+   "defaultVisibility": true,
+   "subLayerIds": null,
+   "minScale": 72000,
+   "maxScale": 0,
+   "type": "Feature Layer",
+   "geometryType": "esriGeometryPoint",
+   "supportsDynamicLegends": true
+  },
+  {
+   "id": 40,
+   "name": "HydroLocation - Reach Code, External Connection",
+   "parentLayerId": -1,
+   "defaultVisibility": true,
+   "subLayerIds": null,
+   "minScale": 72000,
+   "maxScale": 0,
+   "type": "Feature Layer",
+   "geometryType": "esriGeometryPoint",
+   "supportsDynamicLegends": true
+  },
+  {
+   "id": 50,
+   "name": "Flowline",
+   "parentLayerId": -1,
+   "defaultVisibility": true,
+   "subLayerIds": null,
+   "minScale": 300000,
+   "maxScale": 0,
+   "type": "Feature Layer",
+   "geometryType": "esriGeometryPolyline",
+   "supportsDynamicLegends": true
+  },
+  {
+   "id": 60,
+   "name": "Waterbody",
+   "parentLayerId": -1,
+   "defaultVisibility": true,
+   "subLayerIds": null,
+   "minScale": 300000,
+   "maxScale": 0,
+   "type": "Feature Layer",
+   "geometryType": "esriGeometryPolygon",
+   "supportsDynamicLegends": true
+  },
+  {
+   "id": 80,
+   "name": "Catchment",
+   "parentLayerId": -1,
+   "defaultVisibility": false,
+   "subLayerIds": null,
+   "minScale": 300000,
+   "maxScale": 0,
+   "type": "Feature Layer",
+   "geometryType": "esriGeometryPolygon",
+   "supportsDynamicLegends": true
+  }
+ ],
+ "tables": [],
+ "spatialReference": {
+  "wkid": 102100,
+  "latestWkid": 3857,
+  "xyTolerance": 0.001,
+  "zTolerance": 0.001,
+  "mTolerance": 0.001,
+  "falseX": -20037700,
+  "falseY": -30241100,
+  "xyUnits": 10000,
+  "falseZ": -100000,
+  "zUnits": 10000,
+  "falseM": -100000,
+  "mUnits": 10000
+ },
+ "singleFusedMapCache": false,
+ "initialExtent": {
+  "xmin": -1.3298893102191634E7,
+  "ymin": 6224480.4603592465,
+  "xmax": -1.3293292390990213E7,
+  "ymax": 6227675.786749898,
+  "spatialReference": {
+   "wkid": 102100,
+   "latestWkid": 3857,
+   "xyTolerance": 0.001,
+   "zTolerance": 0.001,
+   "mTolerance": 0.001,
+   "falseX": -20037700,
+   "falseY": -30241100,
+   "xyUnits": 10000,
+   "falseZ": -100000,
+   "zUnits": 10000,
+   "falseM": -100000,
+   "mUnits": 10000
+  }
+ },
+ "fullExtent": {
+  "xmin": -1.99517556817E7,
+  "ymin": -1622985.3665999994,
+  "xmax": 2.0021551747199997E7,
+  "ymax": 1.1575301958199998E7,
+  "spatialReference": {
+   "wkid": 102100,
+   "latestWkid": 3857,
+   "xyTolerance": 0.001,
+   "zTolerance": 0.001,
+   "mTolerance": 0.001,
+   "falseX": -20037700,
+   "falseY": -30241100,
+   "xyUnits": 10000,
+   "falseZ": -100000,
+   "zUnits": 10000,
+   "falseM": -100000,
+   "mUnits": 10000
+  }
+ },
+ "datesInUnknownTimezone": false,
+ "minScale": 300000,
+ "maxScale": 0,
+ "units": "esriMeters",
+ "supportedImageFormatTypes": "PNG32,PNG24,PNG,JPG,DIB,TIFF,EMF,PS,PDF,GIF,SVG,SVGZ,BMP",
+ "documentInfo": {
+  "Title": "usgs_3dhp_all",
+  "Author": "",
+  "Comments": "The USGS 3D Hydrography Program (3DHP) ArcGIS REST service (3DHP_all) from The National Map is the first of several data services that will be delivered by the 3D Hydrography Program.  The 3DHP_all comprises a national network of flowlines, hydrolocations, and water bodies, and will include catchments, drainage areas, and flow network derivatives as they are populated in the future.  The 3DHP_all service will provide access to a 3D-enabled geospatial hydrography vector dataset built from 3DHP data and intended to provide the most comprehensive but general rendering of 3DHP data.  3DHP data is derived from elevation-derived hydrography (EDH) Elevation-Derived Hydrography Specifications | U.S. Geological Survey (usgs.gov) where available. Where EDH has not been collected, 3DHP data will be supplemented by data from the National Hydrography Dataset (NHD) National Hydrography Dataset | U.S. Geological Survey (usgs.gov).   As further EDH data is collected, the EDH data will replace the NHD data in that data collection area. 3DHP data ingested from EDH sources will include catchments, drainage areas derived from catchments, and flowline network attribute derivatives.Use Constraints: __ None. All data are open and non-proprietary. However, users should be aware that temporal changes may have occurred since this dataset was collected and that some parts of this data may no longer represent actual conditions. Users should not use this data for critical applications without a full awareness of its limitations. This dataset is not intended to be used for site-specific regulatory determinations. Acknowledgment of the U.S. Geological Survey would be appreciated for products derived from these data.For additional information on the 3DHP, go to https://www.usgs.gov/3dhp.See https://apps.nationalmap.gov/help/ for assistance with The National Map viewer, download client, services, or metadata.",
+  "Subject": "USGS 3D National Hydrographic Program",
+  "Category": "",
+  "Version": "3.3.0",
+  "AntialiasingMode": "Fast",
+  "TextAntialiasingMode": "Force",
+  "Keywords": "a-16,NGDA,water \u2013 inland,hydrography,surface-water,3DHP,EDH,water,drainage,river,stream,canal,ditch,lake,pond,spring,waterbody,water body,hydrolocation,hydrolocations,3DTNM,3DEP,elevation derived hydrography,elev-hydro,region,subregion,basin,catchment,drainage area,watershed,United States,US,NGP-TNM,REST,WMS"
+ },
+ "supportsQueryDomains": true,
+ "capabilities": "Map,Query,Data",
+ "supportedQueryFormats": "JSON, geoJSON, PBF",
+ "exportTilesAllowed": false,
+ "referenceScale": 0.0,
+ "datumTransformations": [
+  {
+   "geoTransforms": [
+    {
+     "wkid": 108190,
+     "latestWkid": 108190,
+     "transformForward": true,
+     "name": "WGS_1984_(ITRF00)_To_NAD_1983"
+    }
+   ]
+  },
+  {
+   "geoTransforms": [
+    {
+     "wkid": 108190,
+     "latestWkid": 108190,
+     "transformForward": false,
+     "name": "WGS_1984_(ITRF00)_To_NAD_1983"
+    }
+   ]
+  },
+  {
+   "geoTransforms": [
+    {
+     "wkid": 108190,
+     "latestWkid": 108190,
+     "transformForward": true,
+     "name": "WGS_1984_(ITRF00)_To_NAD_1983"
+    }
+   ]
+  },
+  {
+   "geoTransforms": [
+    {
+     "wkid": 108190,
+     "latestWkid": 108190,
+     "transformForward": false,
+     "name": "WGS_1984_(ITRF00)_To_NAD_1983"
+    }
+   ]
+  },
+  {
+   "geoTransforms": [
+    {
+     "wkid": 108190,
+     "latestWkid": 108190,
+     "transformForward": true,
+     "name": "WGS_1984_(ITRF00)_To_NAD_1983"
+    }
+   ]
+  },
+  {
+   "geoTransforms": [
+    {
+     "wkid": 108190,
+     "latestWkid": 108190,
+     "transformForward": false,
+     "name": "WGS_1984_(ITRF00)_To_NAD_1983"
+    }
+   ]
+  },
+  {
+   "geoTransforms": [
+    {
+     "wkid": 108190,
+     "latestWkid": 108190,
+     "transformForward": true,
+     "name": "WGS_1984_(ITRF00)_To_NAD_1983"
+    }
+   ]
+  },
+  {
+   "geoTransforms": [
+    {
+     "wkid": 108190,
+     "latestWkid": 108190,
+     "transformForward": false,
+     "name": "WGS_1984_(ITRF00)_To_NAD_1983"
+    }
+   ]
+  }
+ ],
+ "supportsDatumTransformation": true,
+ "archivingInfo": {"supportsHistoricMoment": false},
+ "supportsClipping": true,
+ "supportsSpatialFilter": true,
+ "supportsTimeRelation": true,
+ "supportsQueryDataElements": true,
+ "mapUnits": {"uwkid": 9001},
+ "maxRecordCount": 2500,
+ "maxImageHeight": 4096,
+ "maxImageWidth": 4096,
+ "supportedExtensions": "FeatureServer, WMSServer"
+}

@@ -6,6 +6,8 @@ A locally playable arcade driving slice starring your actual dark blue 1968 Olds
 
 Home now has its own house and yard reconstruction from the three supplied street photographs: the offset red entrance, burgundy shutters, distinct window groups, front garden ornaments and open lawn. The owner's description places the upper deck on the driveway/right side, with a patio and red door below, sliders above, and a roofed screened area around the back. Read [the Home detail notes](docs/home-detail-pass.md) for reference observations, game views and remaining approximations.
 
+Behind Home, **Stony Creek** follows its mapped course through woods traced from official 2013/2025 aerials, with an open rear lawn, mature trees and layered woodland ground cover. The approximately 212m creek reach uses an explicitly inferred channel and bank profile; it is not a new elevation survey. See [the backyard notes and game views](docs/backyard-pass.md).
+
 The property pass adds individually traced driveway outlines, parking courts, observed decks and pools, and junction signs. [Inspect the aerial overlay](docs/research-beverly/property-review.html) or read [the property notes](docs/property-pass.md). The earlier visual pass added tree crowns, recessed windows, siding, roof detail and revised lighting; its [before/after comparison](docs/detail-comparison.html) remains available.
 
 ## Launch on Windows
@@ -68,6 +70,7 @@ npm run test:beverly     # surveyed neighborhood loop, reference views and movin
 npm run test:detail      # latest detail pass, all presets, resize and environment rebuild checks
 npm run test:property    # Home driveway departure, property details, loop and graphics checks
 npm run test:home        # photo-specific facade, yard, deck/patio relationships and reference views
+npm run test:backyard    # woodland/creek views, stream clearances, presets and environment rebuild
 ```
 
 Tests compare acceleration, proportional throttle, braking, turning and boosted wall collision at simulated 30/60/120 fps rendering with fixed 60Hz physics. Tolerances are 0.15m position and 0.2m/s speed, not a cross-machine determinism promise. Ordered gates reject reverse travel, out-of-order crossings, teleport progress and duplicate rewards. Full mapped-route physics tests complete all 777 crossings over three laps, including all four racers with traffic and no racer recoveries. See `docs/verification.md`, the JSON reports and browser screenshots for measured environment and results.

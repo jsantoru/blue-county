@@ -1,0 +1,29 @@
+{
+  "href": "http://orthos.its.ny.gov/arcgis/rest/directories/arcgisoutput/wms/2025_MapServer/_ags_mapbc9bfa3307a9479ba0b2ef9abf3e0275.jpg",
+  "width": 1448,
+  "height": 1600,
+  "extent": {
+    "xmin": -8278427.893413071,
+    "ymin": 5054164.626587051,
+    "xmax": -8278174.983465575,
+    "ymax": 5054444.085092572,
+    "spatialReference": {
+      "wkid": 102100,
+      "latestWkid": 3857
+    }
+  },
+  "scale": 660.1368817401467,
+  "source": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer/export?f=json&bbox=-8278427.860144185%2C5054164.626587052%2C-8278175.0167344585%2C5054444.0850925725&bboxSR=3857&imageSR=3857&size=1448%2C1600&format=jpg&transparent=false&dpi=96",
+  "service": "https://orthos.its.ny.gov/arcgis/rest/services/wms/2025/MapServer",
+  "vintage": "Spring 2025",
+  "requestedLocalBounds": {
+    "minX": -12,
+    "maxX": 178,
+    "minZ": -105,
+    "maxZ": 105
+  },
+  "retrievedAt": "2026-09-21T01:38:40.431469+00:00",
+  "sha256": "7d8ed42e6fc020fbbadfa23b2043b04baa1172d3aeb9b79fe41dfc1d8d078bfd",
+  "credit": "NYS ITS Geospatial Services / NYSDOP",
+  "note": "Returned EPSG:3857 extent is authoritative. Oversampling does not increase native detail. Research reference, not a game texture."
+}

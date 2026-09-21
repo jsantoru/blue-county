@@ -15,28 +15,9 @@ import { getHomeFrame, HOME_BUILDING_ID, HOME_DETAIL } from "./home-reference";
 import { buildHomeHouse } from "./home-house";
 import { buildHomeYard } from "./home-yard";
 import { buildHomeTrees } from "./home-trees";
-/** Matches the terrain mesh's diagonal exactly, including its outermost vertices. */
-export function heightAt(map: MapData, x: number, z: number) {
-  const g = map.terrain;
-  if (!g) return 0;
-  const u = clamp(
-      ((x - g.minX) / (g.maxX - g.minX)) * (g.cols - 1),
-      0,
-      g.cols - 1,
-    ),
-    v = clamp(((z - g.minZ) / (g.maxZ - g.minZ)) * (g.rows - 1), 0, g.rows - 1),
-    a = Math.min(g.cols - 2, Math.floor(u)),
-    b = Math.min(g.rows - 2, Math.floor(v)),
-    fx = u - a,
-    fz = v - b,
-    h00 = g.heights[b * g.cols + a],
-    h10 = g.heights[b * g.cols + a + 1],
-    h01 = g.heights[(b + 1) * g.cols + a],
-    h11 = g.heights[(b + 1) * g.cols + a + 1];
-  return fx + fz <= 1
-    ? h00 + (h10 - h00) * fx + (h01 - h00) * fz
-    : h11 + (h01 - h11) * (1 - fx) + (h10 - h11) * (1 - fz);
-}
+import { terrainHeightAt as heightAt, terrainGeometry } from "./terrain";
+import { Backyard } from "./backyard";
+export { heightAt };
 export function nearestRoad(map: MapData, x: number, z: number) {
   let best = {
     distance: Infinity,
@@ -307,6 +288,7 @@ export class Environment {
   materials = createSurfaceMaterials();
   vegetation?: Vegetation;
   microdetail?: BeverlyMicrodetail;
+  backyard?: Backyard;
   private houses: NeighborhoodHouse[] = [];
   constructor(
     public map: MapData,
@@ -502,26 +484,8 @@ export class Environment {
   build() {
     const map = this.map,
       b = map.bounds,
-      grid = map.terrain ?? b,
       sample = terrainSampler(map);
-    const cols = map.terrain?.cols || 30,
-      rows = map.terrain?.rows || 30;
-    const verts: number[] = [],
-      idx: number[] = [];
-    for (let j = 0; j < rows; j++)
-      for (let i = 0; i < cols; i++) {
-        const x = grid.minX + ((grid.maxX - grid.minX) * i) / (cols - 1),
-          z = grid.minZ + ((grid.maxZ - grid.minZ) * j) / (rows - 1);
-        verts.push(x, heightAt(map, x, z) - 0.03, z);
-        if (i < cols - 1 && j < rows - 1) {
-          const a = j * cols + i;
-          idx.push(a, a + cols, a + 1, a + 1, a + cols, a + cols + 1);
-        }
-      }
-    const terrain = new T.BufferGeometry();
-    terrain.setAttribute("position", new T.Float32BufferAttribute(verts, 3));
-    terrain.setIndex(idx);
-    terrain.computeVertexNormals();
+    const terrain = terrainGeometry(map);
     worldUV(terrain);
     const ground = new T.Mesh(terrain, this.materials.grass);
     ground.receiveShadow = true;
@@ -762,6 +726,28 @@ export class Environment {
       });
       this.root.userData.homeFrame = homeFrame;
     }
+    if (map.backyard) {
+      const backyardSample: HeightSampler = Object.assign(
+        (x: number, z: number) => heightAt(map, x, z),
+        { terrain: map.backyard.terrain },
+      );
+      this.backyard = new Backyard(
+        map,
+        backyardSample,
+        (ring, offset) => {
+          const mesh = groundPolygonMesh(
+            ring,
+            0xffffff,
+            offset,
+            backyardSample,
+          );
+          mesh.material.dispose();
+          return mesh.geometry;
+        },
+        this.materials,
+      );
+      this.root.add(this.backyard.root);
+    }
     this.vegetation = new Vegetation(map, heightAt, nearestRoad, {
       test: this.test,
       barkMaterial: this.materials.bark,
@@ -957,14 +943,17 @@ export class Environment {
   update(time: number, camera: T.Camera) {
     this.vegetation?.update(time, camera);
     this.microdetail?.update(time, camera);
+    this.backyard?.update(time, camera);
   }
   setQuality(quality: "low" | "medium" | "high") {
     this.vegetation?.setQuality(quality);
     this.microdetail?.setQuality(quality);
+    this.backyard?.setQuality(quality);
   }
   dispose() {
     this.vegetation?.dispose();
     this.microdetail?.dispose();
+    this.backyard?.dispose();
     this.materials.dispose();
     for (const c of this.colliders) this.world.removeCollider(c, true);
     this.colliders = [];
