@@ -1,0 +1,1869 @@
+{
+  "date": "2026-09-21T22:21:32.184Z",
+  "errors": [],
+  "warnings": [
+    "THREE.WebGLProgram: Program Info Log: (210,81-129): warning X4122: sum of 0.996094 and -2.98545e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision"
+  ],
+  "shots": [
+    {
+      "file": "docs/hero-dad-driving.png",
+      "state": {
+        "ready": true,
+        "screen": "pause",
+        "mode": "neighborhood",
+        "race": false,
+        "exploration": {
+          "mode": "driving",
+          "phase": "driving",
+          "transferProgress": null,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "grounded": false,
+          "yaw": 0,
+          "cameraYaw": 0,
+          "driver": {
+            "visible": true,
+            "seated": true,
+            "asset": "/assets/dad-driver.glb",
+            "seatWorld": [
+              0.6547951675410999,
+              -0.9945687819408692,
+              19.37489009416135
+            ]
+          },
+          "interaction": {
+            "available": true,
+            "reason": "Exit vehicle"
+          },
+          "doors": {
+            "left": {
+              "progress": 0,
+              "angle": 0
+            },
+            "right": {
+              "progress": 0,
+              "angle": 0
+            }
+          },
+          "obstacles": {
+            "trees": 19030,
+            "homeTrees": 3,
+            "solidMeshes": 33,
+            "triangles": 41355,
+            "colliders": 19063
+          }
+        },
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20623095333576202,
+          -0.31040939688682556,
+          19.600156784057617
+        ],
+        "rotation": [
+          0.009296475909650326,
+          -0.12019811570644379,
+          -0.010810024105012417,
+          0.9926475286483765
+        ],
+        "camera": {
+          "position": [
+            3.2346876107503837,
+            1.2895906031131745,
+            21.941299725904837
+          ],
+          "target": [
+            0.6570900455349116,
+            -0.10023421605408311,
+            19.377903568060365
+          ],
+          "mode": 0,
+          "inspection": true
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.56286881736999,
+        "ai": [
+          {
+            "id": 1,
+            "life": 0,
+            "stuck": 0.09999999999999999,
+            "target": 6,
+            "speed": 0.5896923715619704,
+            "position": [
+              888.8531494140625,
+              33.534549713134766,
+              -363.764404296875
+            ]
+          },
+          {
+            "id": 2,
+            "life": 0,
+            "stuck": 0.09999999999999999,
+            "target": 11,
+            "speed": 0.4859189377336665,
+            "position": [
+              869.9378051757812,
+              35.33502960205078,
+              -416.6006774902344
+            ]
+          },
+          {
+            "id": 3,
+            "life": 0,
+            "stuck": 0.09999999999999999,
+            "target": 16,
+            "speed": 0.43817104838556514,
+            "position": [
+              918.4210205078125,
+              41.05666732788086,
+              -434.4097595214844
+            ]
+          },
+          {
+            "id": 4,
+            "life": 0,
+            "stuck": 0.09999999999999999,
+            "target": 136,
+            "speed": 0.6692574703694603,
+            "position": [
+              1397.472412109375,
+              16.166162490844727,
+              -193.90762329101562
+            ]
+          },
+          {
+            "id": 5,
+            "life": 0,
+            "stuck": 0.09999999999999999,
+            "target": 170,
+            "speed": 0.6693655581348238,
+            "position": [
+              1232.647216796875,
+              -2.972933530807495,
+              133.59483337402344
+            ]
+          },
+          {
+            "id": 6,
+            "life": 0,
+            "stuck": 0.09999999999999999,
+            "target": 203,
+            "speed": 0.4343820462861344,
+            "position": [
+              1103.709228515625,
+              5.505548000335693,
+              229.7425079345703
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 1,
+          "p50": 100,
+          "p95": 100,
+          "physicsMs": 0.8999999761581421,
+          "width": 1920,
+          "height": 1080,
+          "draws": 689,
+          "triangles": 6002032,
+          "vegetation": {
+            "trees": 19027,
+            "shrubs": 1089,
+            "grassTufts": 6002,
+            "chunks": 285,
+            "visibleChunks": 90,
+            "visibleBatches": 544,
+            "totalBatches": 3508,
+            "referenceTreeCount": 91,
+            "referenceWoodlandTreeCount": 281,
+            "referenceOmittedTreeCount": 31,
+            "backyardTreeCount": 226
+          },
+          "scenery": [
+            {
+              "houses": 452,
+              "batches": 615,
+              "triangles": 1338577,
+              "detailFeatures": 9693,
+              "referenceFacades": 64
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 11,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 20,
+              "triangles": 20971
+            },
+            {
+              "grassBlades": 30996,
+              "pebbles": 3192,
+              "soilFragments": 2453,
+              "leaves": 5867,
+              "rootRibs": 364,
+              "grassTriangles": 92988,
+              "groundTriangles": 39948,
+              "totalTriangles": 132936,
+              "batches": 112,
+              "visibleDrawCalls": 24,
+              "visibleTriangles": 32544,
+              "treeContacts": 91,
+              "rejected": 6366,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "detail": {
+        "bones": {
+          "head": [
+            0.6878630847744496,
+            0.1984960286956839,
+            19.358810125226828
+          ],
+          "hips": [
+            0.6672922318446998,
+            -0.34483295202751263,
+            19.388575805259563
+          ],
+          "left_hand": [
+            0.7283434201487641,
+            -0.0660471583285307,
+            19.775834286799064
+          ],
+          "right_hand": [
+            0.4467909578615315,
+            -0.059175357461423383,
+            19.70669029104216
+          ],
+          "left_foot": [
+            0.5808820833122611,
+            -0.6355645232075371,
+            20.147732646203007
+          ],
+          "right_foot": [
+            0.37894086048644454,
+            -0.6306357290017244,
+            20.098139759656462
+          ]
+        },
+        "model": {
+          "source": "/assets/dad-driver.glb",
+          "authoring": "Blender",
+          "likeness": "Photo-referenced stylized character",
+          "units": "meters",
+          "origin": "feet",
+          "forward": "+Z",
+          "up": "+Y",
+          "pose": "seated",
+          "seatedBlend": 1
+        },
+        "doors": {
+          "left": {
+            "progress": 0,
+            "angle": 0
+          },
+          "right": {
+            "progress": 0,
+            "angle": 0
+          }
+        }
+      }
+    },
+    {
+      "file": "docs/hero-dad-seated-portrait.png",
+      "state": {
+        "ready": true,
+        "screen": "pause",
+        "mode": "neighborhood",
+        "race": false,
+        "exploration": {
+          "mode": "driving",
+          "phase": "driving",
+          "transferProgress": null,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "grounded": false,
+          "yaw": 0,
+          "cameraYaw": 0,
+          "driver": {
+            "visible": true,
+            "seated": true,
+            "asset": "/assets/dad-driver.glb",
+            "seatWorld": [
+              0.6547951675410999,
+              -0.9945687819408692,
+              19.37489009416135
+            ]
+          },
+          "interaction": {
+            "available": true,
+            "reason": "Exit vehicle"
+          },
+          "doors": {
+            "left": {
+              "progress": 0,
+              "angle": 0
+            },
+            "right": {
+              "progress": 0,
+              "angle": 0
+            }
+          },
+          "obstacles": {
+            "trees": 19030,
+            "homeTrees": 3,
+            "solidMeshes": 33,
+            "triangles": 41355,
+            "colliders": 19063
+          }
+        },
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20623095333576202,
+          -0.31040939688682556,
+          19.600156784057617
+        ],
+        "rotation": [
+          0.009296475909650326,
+          -0.12019811570644379,
+          -0.010810024105012417,
+          0.9926475286483765
+        ],
+        "camera": {
+          "position": [
+            1.6859261524247766,
+            0.5484960286956839,
+            20.325179678240797
+          ],
+          "target": [
+            0.6878630847744496,
+            0.048496028695683896,
+            19.358810125226828
+          ],
+          "mode": 0,
+          "inspection": true
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.56286881736999,
+        "ai": [
+          {
+            "id": 1,
+            "life": 0,
+            "stuck": 0.09999999999999999,
+            "target": 6,
+            "speed": 0.5896923715619704,
+            "position": [
+              888.8531494140625,
+              33.534549713134766,
+              -363.764404296875
+            ]
+          },
+          {
+            "id": 2,
+            "life": 0,
+            "stuck": 0.09999999999999999,
+            "target": 11,
+            "speed": 0.4859189377336665,
+            "position": [
+              869.9378051757812,
+              35.33502960205078,
+              -416.6006774902344
+            ]
+          },
+          {
+            "id": 3,
+            "life": 0,
+            "stuck": 0.09999999999999999,
+            "target": 16,
+            "speed": 0.43817104838556514,
+            "position": [
+              918.4210205078125,
+              41.05666732788086,
+              -434.4097595214844
+            ]
+          },
+          {
+            "id": 4,
+            "life": 0,
+            "stuck": 0.09999999999999999,
+            "target": 136,
+            "speed": 0.6692574703694603,
+            "position": [
+              1397.472412109375,
+              16.166162490844727,
+              -193.90762329101562
+            ]
+          },
+          {
+            "id": 5,
+            "life": 0,
+            "stuck": 0.09999999999999999,
+            "target": 170,
+            "speed": 0.6693655581348238,
+            "position": [
+              1232.647216796875,
+              -2.972933530807495,
+              133.59483337402344
+            ]
+          },
+          {
+            "id": 6,
+            "life": 0,
+            "stuck": 0.09999999999999999,
+            "target": 203,
+            "speed": 0.4343820462861344,
+            "position": [
+              1103.709228515625,
+              5.505548000335693,
+              229.7425079345703
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 1,
+          "p50": 100,
+          "p95": 100,
+          "physicsMs": 0.8999999761581421,
+          "width": 1920,
+          "height": 1080,
+          "draws": 673,
+          "triangles": 5959642,
+          "vegetation": {
+            "trees": 19027,
+            "shrubs": 1089,
+            "grassTufts": 6002,
+            "chunks": 285,
+            "visibleChunks": 90,
+            "visibleBatches": 544,
+            "totalBatches": 3508,
+            "referenceTreeCount": 91,
+            "referenceWoodlandTreeCount": 281,
+            "referenceOmittedTreeCount": 31,
+            "backyardTreeCount": 226
+          },
+          "scenery": [
+            {
+              "houses": 452,
+              "batches": 615,
+              "triangles": 1338577,
+              "detailFeatures": 9693,
+              "referenceFacades": 64
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 11,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 20,
+              "triangles": 20971
+            },
+            {
+              "grassBlades": 30996,
+              "pebbles": 3192,
+              "soilFragments": 2453,
+              "leaves": 5867,
+              "rootRibs": 364,
+              "grassTriangles": 92988,
+              "groundTriangles": 39948,
+              "totalTriangles": 132936,
+              "batches": 112,
+              "visibleDrawCalls": 24,
+              "visibleTriangles": 32544,
+              "treeContacts": 91,
+              "rejected": 6366,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "detail": {
+        "bones": {
+          "head": [
+            0.6878630847744496,
+            0.1984960286956839,
+            19.358810125226828
+          ],
+          "hips": [
+            0.6672922318446998,
+            -0.34483295202751263,
+            19.388575805259563
+          ],
+          "left_hand": [
+            0.7283434201525422,
+            -0.06604715833136714,
+            19.775834286803423
+          ],
+          "right_hand": [
+            0.4467909578570132,
+            -0.05917535746403629,
+            19.706690291044
+          ],
+          "left_foot": [
+            0.5808820833122611,
+            -0.6355645232075371,
+            20.147732646203007
+          ],
+          "right_foot": [
+            0.37894086048644454,
+            -0.6306357290017244,
+            20.098139759656462
+          ]
+        },
+        "model": {
+          "source": "/assets/dad-driver.glb",
+          "authoring": "Blender",
+          "likeness": "Photo-referenced stylized character",
+          "units": "meters",
+          "origin": "feet",
+          "forward": "+Z",
+          "up": "+Y",
+          "pose": "seated",
+          "seatedBlend": 1
+        },
+        "doors": {
+          "left": {
+            "progress": 0,
+            "angle": 0
+          },
+          "right": {
+            "progress": 0,
+            "angle": 0
+          }
+        }
+      }
+    },
+    {
+      "file": "docs/hero-dad-exiting.png",
+      "state": {
+        "ready": true,
+        "screen": "pause",
+        "mode": "neighborhood",
+        "race": false,
+        "exploration": {
+          "mode": "foot",
+          "phase": "exiting",
+          "transferProgress": 0.40404040404040265,
+          "position": [
+            1.8101687426266255,
+            -1.1199379070319126,
+            19.999444089290865
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "grounded": true,
+          "yaw": -0.24196159864060085,
+          "cameraYaw": -0.24196159864060085,
+          "driver": {
+            "visible": true,
+            "seated": false,
+            "asset": "/assets/dad-driver.glb",
+            "seatWorld": [
+              0.6470872588486486,
+              -0.9670370456152154,
+              19.362863933900094
+            ]
+          },
+          "interaction": {
+            "available": false,
+            "reason": ""
+          },
+          "doors": {
+            "left": {
+              "progress": 1,
+              "angle": -1.1868238913561442
+            },
+            "right": {
+              "progress": 0,
+              "angle": 0
+            }
+          },
+          "obstacles": {
+            "trees": 19030,
+            "homeTrees": 3,
+            "solidMeshes": 33,
+            "triangles": 41355,
+            "colliders": 19063
+          }
+        },
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20580066740512848,
+          -0.28197768330574036,
+          19.599483489990234
+        ],
+        "rotation": [
+          0.01702267676591873,
+          -0.12036941945552826,
+          -0.01717068813741207,
+          0.9924347400665283
+        ],
+        "camera": {
+          "position": [
+            3.2324533777925666,
+            1.3180223166942597,
+            21.942958126231126
+          ],
+          "target": [
+            0.6470872588486486,
+            -0.0670370456152154,
+            19.362863933900094
+          ],
+          "mode": 0,
+          "inspection": true
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.562308426733907,
+        "ai": [
+          {
+            "id": 1,
+            "life": 0,
+            "stuck": 0,
+            "target": 6,
+            "speed": 5.844157352489276,
+            "position": [
+              887.8397827148438,
+              33.70746994018555,
+              -366.0657653808594
+            ]
+          },
+          {
+            "id": 2,
+            "life": 0,
+            "stuck": 0,
+            "target": 11,
+            "speed": 5.449694200688415,
+            "position": [
+              872.133544921875,
+              35.62310028076172,
+              -417.3771667480469
+            ]
+          },
+          {
+            "id": 3,
+            "life": 0,
+            "stuck": 0,
+            "target": 16,
+            "speed": 5.349523795172351,
+            "position": [
+              920.5789794921875,
+              41.34630584716797,
+              -435.166259765625
+            ]
+          },
+          {
+            "id": 4,
+            "life": 0,
+            "stuck": 0,
+            "target": 136,
+            "speed": 6.724419517234844,
+            "position": [
+              1395.844482421875,
+              16.013635635375977,
+              -191.53997802734375
+            ]
+          },
+          {
+            "id": 5,
+            "life": 0,
+            "stuck": 0,
+            "target": 170,
+            "speed": 5.205221531471193,
+            "position": [
+              1231.37939453125,
+              -2.7247140407562256,
+              135.21713256835938
+            ]
+          },
+          {
+            "id": 6,
+            "life": 0,
+            "stuck": 0,
+            "target": 203,
+            "speed": 6.190016075772187,
+            "position": [
+              1104.350830078125,
+              5.404940605163574,
+              227.23353576660156
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 42,
+          "p50": 18,
+          "p95": 18.100000000000364,
+          "physicsMs": 1,
+          "width": 1920,
+          "height": 1080,
+          "draws": 670,
+          "triangles": 5085938,
+          "vegetation": {
+            "trees": 19027,
+            "shrubs": 1089,
+            "grassTufts": 6002,
+            "chunks": 285,
+            "visibleChunks": 90,
+            "visibleBatches": 544,
+            "totalBatches": 3508,
+            "referenceTreeCount": 91,
+            "referenceWoodlandTreeCount": 281,
+            "referenceOmittedTreeCount": 31,
+            "backyardTreeCount": 226
+          },
+          "scenery": [
+            {
+              "houses": 452,
+              "batches": 615,
+              "triangles": 1338577,
+              "detailFeatures": 9693,
+              "referenceFacades": 64
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 11,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 20,
+              "triangles": 20971
+            },
+            {
+              "grassBlades": 30996,
+              "pebbles": 3192,
+              "soilFragments": 2453,
+              "leaves": 5867,
+              "rootRibs": 364,
+              "grassTriangles": 92988,
+              "groundTriangles": 39948,
+              "totalTriangles": 132936,
+              "batches": 112,
+              "visibleDrawCalls": 24,
+              "visibleTriangles": 32544,
+              "treeContacts": 91,
+              "rejected": 6366,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "detail": {
+        "bones": {
+          "head": [
+            1.0157645680820124,
+            0.3643516026158328,
+            19.55765984707044
+          ],
+          "hips": [
+            1.0084573484706372,
+            -0.18019926863316182,
+            19.571781951451253
+          ],
+          "left_hand": [
+            1.2258978453289633,
+            -0.0734654364707025,
+            19.877993198725136
+          ],
+          "right_hand": [
+            0.8911112986949887,
+            -0.06770816128796427,
+            19.926765703092666
+          ],
+          "left_foot": [
+            1.1903186632171883,
+            -0.743360884503922,
+            20.16507818524854
+          ],
+          "right_foot": [
+            0.9845211609413779,
+            -0.7398218089841759,
+            20.19505932611888
+          ]
+        },
+        "model": {
+          "source": "/assets/dad-driver.glb",
+          "authoring": "Blender",
+          "likeness": "Photo-referenced stylized character",
+          "units": "meters",
+          "origin": "feet",
+          "forward": "+Z",
+          "up": "+Y",
+          "pose": "idle",
+          "seatedBlend": 0.7026366316914908
+        },
+        "doors": {
+          "left": {
+            "progress": 1,
+            "angle": -1.1868238913561442
+          },
+          "right": {
+            "progress": 0,
+            "angle": 0
+          }
+        }
+      }
+    },
+    {
+      "file": "docs/hero-dad-standing.png",
+      "state": {
+        "ready": true,
+        "screen": "pause",
+        "mode": "neighborhood",
+        "race": false,
+        "exploration": {
+          "mode": "foot",
+          "phase": "foot",
+          "transferProgress": null,
+          "position": [
+            1.3035238703274774,
+            -1.2370465872796055,
+            22.24535325442348
+          ],
+          "velocity": [
+            -7.702551606953554e-08,
+            0,
+            3.121009825228313e-07
+          ],
+          "grounded": true,
+          "yaw": -0.24196159864060085,
+          "cameraYaw": -0.24196159864060085,
+          "driver": {
+            "visible": true,
+            "seated": false,
+            "asset": "/assets/dad-driver.glb",
+            "seatWorld": [
+              0.6470872588486486,
+              -0.9670370456152154,
+              19.362863933900094
+            ]
+          },
+          "interaction": {
+            "available": false,
+            "reason": ""
+          },
+          "doors": {
+            "left": {
+              "progress": 0,
+              "angle": 0
+            },
+            "right": {
+              "progress": 0,
+              "angle": 0
+            }
+          },
+          "obstacles": {
+            "trees": 19030,
+            "homeTrees": 3,
+            "solidMeshes": 33,
+            "triangles": 41355,
+            "colliders": 19063
+          }
+        },
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20580066740512848,
+          -0.28197768330574036,
+          19.599483489990234
+        ],
+        "rotation": [
+          0.01702267676591873,
+          -0.12036941945552826,
+          -0.01717068813741207,
+          0.9924347400665283
+        ],
+        "camera": {
+          "position": [
+            1.0222146469108881,
+            -0.18704658727960544,
+            25.471940479468042
+          ],
+          "target": [
+            1.3035238703274774,
+            -0.30704658727960543,
+            22.24535325442348
+          ],
+          "mode": 0,
+          "inspection": true
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.562308426733907,
+        "ai": [
+          {
+            "id": 1,
+            "life": 0,
+            "stuck": 0,
+            "target": 9,
+            "speed": 6.495805337003438,
+            "position": [
+              877.2969360351562,
+              34.92112350463867,
+              -395.4023132324219
+            ]
+          },
+          {
+            "id": 2,
+            "life": 0,
+            "stuck": 0,
+            "target": 15,
+            "speed": 22.39004167147883,
+            "position": [
+              910.2894897460938,
+              40.12575149536133,
+              -431.4442443847656
+            ]
+          },
+          {
+            "id": 3,
+            "life": 0,
+            "stuck": 0,
+            "target": 20,
+            "speed": 20.79120256177202,
+            "position": [
+              957.4000854492188,
+              46.22853469848633,
+              -448.5182189941406
+            ]
+          },
+          {
+            "id": 4,
+            "life": 0,
+            "stuck": 0,
+            "target": 139,
+            "speed": 12.904582490746954,
+            "position": [
+              1379.9105224609375,
+              13.261887550354004,
+              -163.18685913085938
+            ]
+          },
+          {
+            "id": 5,
+            "life": 0,
+            "stuck": 0,
+            "target": 173,
+            "speed": 13.361438156519347,
+            "position": [
+              1213.0521240234375,
+              -2.050856351852417,
+              161.4777069091797
+            ]
+          },
+          {
+            "id": 6,
+            "life": 0,
+            "stuck": 0,
+            "target": 206,
+            "speed": 11.404097752401686,
+            "position": [
+              1104.513671875,
+              6.023351192474365,
+              197.8970947265625
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 201,
+          "p50": 18,
+          "p95": 18.100000000000364,
+          "physicsMs": 0.8999999761581421,
+          "width": 1920,
+          "height": 1080,
+          "draws": 702,
+          "triangles": 5482931,
+          "vegetation": {
+            "trees": 19027,
+            "shrubs": 1089,
+            "grassTufts": 6002,
+            "chunks": 285,
+            "visibleChunks": 90,
+            "visibleBatches": 544,
+            "totalBatches": 3508,
+            "referenceTreeCount": 91,
+            "referenceWoodlandTreeCount": 281,
+            "referenceOmittedTreeCount": 31,
+            "backyardTreeCount": 226
+          },
+          "scenery": [
+            {
+              "houses": 452,
+              "batches": 615,
+              "triangles": 1338577,
+              "detailFeatures": 9693,
+              "referenceFacades": 64
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 11,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 20,
+              "triangles": 20971
+            },
+            {
+              "grassBlades": 30996,
+              "pebbles": 3192,
+              "soilFragments": 2453,
+              "leaves": 5867,
+              "rootRibs": 364,
+              "grassTriangles": 92988,
+              "groundTriangles": 39948,
+              "totalTriangles": 132936,
+              "batches": 112,
+              "visibleDrawCalls": 20,
+              "visibleTriangles": 25125,
+              "treeContacts": 91,
+              "rejected": 6366,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "detail": {
+        "bones": {
+          "head": [
+            1.3043277668958544,
+            0.24794014160059097,
+            22.24209592871754
+          ],
+          "hips": [
+            1.3035238703274774,
+            -0.2970467784256655,
+            22.24535325442348
+          ],
+          "left_hand": [
+            1.5827216570643947,
+            -0.39503988906467424,
+            22.316032263309218
+          ],
+          "right_hand": [
+            1.0235011823171631,
+            -0.3950399028144223,
+            22.178016239738174
+          ],
+          "left_foot": [
+            1.4044950269650798,
+            -1.1490466363225431,
+            22.27026966530966
+          ],
+          "right_foot": [
+            1.2025529737913627,
+            -1.1490466363263439,
+            22.220435789627718
+          ]
+        },
+        "model": {
+          "source": "/assets/dad-driver.glb",
+          "authoring": "Blender",
+          "likeness": "Photo-referenced stylized character",
+          "units": "meters",
+          "origin": "feet",
+          "forward": "+Z",
+          "up": "+Y",
+          "pose": "idle",
+          "seatedBlend": 0
+        },
+        "doors": {
+          "left": {
+            "progress": 0,
+            "angle": 0
+          },
+          "right": {
+            "progress": 0,
+            "angle": 0
+          }
+        }
+      }
+    },
+    {
+      "file": "docs/hero-dad-portrait.png",
+      "state": {
+        "ready": true,
+        "screen": "pause",
+        "mode": "neighborhood",
+        "race": false,
+        "exploration": {
+          "mode": "foot",
+          "phase": "foot",
+          "transferProgress": null,
+          "position": [
+            1.3035238703274774,
+            -1.2370465872796055,
+            22.24535325442348
+          ],
+          "velocity": [
+            -7.702551606953554e-08,
+            0,
+            3.121009825228313e-07
+          ],
+          "grounded": true,
+          "yaw": -0.24196159864060085,
+          "cameraYaw": -0.24196159864060085,
+          "driver": {
+            "visible": true,
+            "seated": false,
+            "asset": "/assets/dad-driver.glb",
+            "seatWorld": [
+              0.6470872588486486,
+              -0.9670370456152154,
+              19.362863933900094
+            ]
+          },
+          "interaction": {
+            "available": false,
+            "reason": ""
+          },
+          "doors": {
+            "left": {
+              "progress": 0,
+              "angle": 0
+            },
+            "right": {
+              "progress": 0,
+              "angle": 0
+            }
+          },
+          "obstacles": {
+            "trees": 19030,
+            "homeTrees": 3,
+            "solidMeshes": 33,
+            "triangles": 41355,
+            "colliders": 19063
+          }
+        },
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20580066740512848,
+          -0.28197768330574036,
+          19.599483489990234
+        ],
+        "rotation": [
+          0.01702267676591873,
+          -0.12036941945552826,
+          -0.01717068813741207,
+          0.9924347400665283
+        ],
+        "camera": {
+          "position": [
+            1.3176439656262706,
+            0.282940141600591,
+            23.440187193543128
+          ],
+          "target": [
+            1.3043277668958544,
+            0.18794014160059097,
+            22.24209592871754
+          ],
+          "mode": 0,
+          "inspection": true
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.562308426733907,
+        "ai": [
+          {
+            "id": 1,
+            "life": 0,
+            "stuck": 0,
+            "target": 9,
+            "speed": 6.495805337003438,
+            "position": [
+              877.2969360351562,
+              34.92112350463867,
+              -395.4023132324219
+            ]
+          },
+          {
+            "id": 2,
+            "life": 0,
+            "stuck": 0,
+            "target": 15,
+            "speed": 22.39004167147883,
+            "position": [
+              910.2894897460938,
+              40.12575149536133,
+              -431.4442443847656
+            ]
+          },
+          {
+            "id": 3,
+            "life": 0,
+            "stuck": 0,
+            "target": 20,
+            "speed": 20.79120256177202,
+            "position": [
+              957.4000854492188,
+              46.22853469848633,
+              -448.5182189941406
+            ]
+          },
+          {
+            "id": 4,
+            "life": 0,
+            "stuck": 0,
+            "target": 139,
+            "speed": 12.904582490746954,
+            "position": [
+              1379.9105224609375,
+              13.261887550354004,
+              -163.18685913085938
+            ]
+          },
+          {
+            "id": 5,
+            "life": 0,
+            "stuck": 0,
+            "target": 173,
+            "speed": 13.361438156519347,
+            "position": [
+              1213.0521240234375,
+              -2.050856351852417,
+              161.4777069091797
+            ]
+          },
+          {
+            "id": 6,
+            "life": 0,
+            "stuck": 0,
+            "target": 206,
+            "speed": 11.404097752401686,
+            "position": [
+              1104.513671875,
+              6.023351192474365,
+              197.8970947265625
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 201,
+          "p50": 18,
+          "p95": 18.100000000000364,
+          "physicsMs": 0.8999999761581421,
+          "width": 1920,
+          "height": 1080,
+          "draws": 661,
+          "triangles": 5281240,
+          "vegetation": {
+            "trees": 19027,
+            "shrubs": 1089,
+            "grassTufts": 6002,
+            "chunks": 285,
+            "visibleChunks": 90,
+            "visibleBatches": 544,
+            "totalBatches": 3508,
+            "referenceTreeCount": 91,
+            "referenceWoodlandTreeCount": 281,
+            "referenceOmittedTreeCount": 31,
+            "backyardTreeCount": 226
+          },
+          "scenery": [
+            {
+              "houses": 452,
+              "batches": 615,
+              "triangles": 1338577,
+              "detailFeatures": 9693,
+              "referenceFacades": 64
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 11,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 20,
+              "triangles": 20971
+            },
+            {
+              "grassBlades": 30996,
+              "pebbles": 3192,
+              "soilFragments": 2453,
+              "leaves": 5867,
+              "rootRibs": 364,
+              "grassTriangles": 92988,
+              "groundTriangles": 39948,
+              "totalTriangles": 132936,
+              "batches": 112,
+              "visibleDrawCalls": 24,
+              "visibleTriangles": 32544,
+              "treeContacts": 91,
+              "rejected": 6366,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "detail": {
+        "bones": {
+          "head": [
+            1.3043277668958544,
+            0.24794014160059097,
+            22.24209592871754
+          ],
+          "hips": [
+            1.3035238703274774,
+            -0.2970467784256655,
+            22.24535325442348
+          ],
+          "left_hand": [
+            1.5827216570643947,
+            -0.39503988906467424,
+            22.316032263309218
+          ],
+          "right_hand": [
+            1.0235011823171631,
+            -0.3950399028144223,
+            22.178016239738174
+          ],
+          "left_foot": [
+            1.4044950269650798,
+            -1.1490466363225431,
+            22.27026966530966
+          ],
+          "right_foot": [
+            1.2025529737913627,
+            -1.1490466363263439,
+            22.220435789627718
+          ]
+        },
+        "model": {
+          "source": "/assets/dad-driver.glb",
+          "authoring": "Blender",
+          "likeness": "Photo-referenced stylized character",
+          "units": "meters",
+          "origin": "feet",
+          "forward": "+Z",
+          "up": "+Y",
+          "pose": "idle",
+          "seatedBlend": 0
+        },
+        "doors": {
+          "left": {
+            "progress": 0,
+            "angle": 0
+          },
+          "right": {
+            "progress": 0,
+            "angle": 0
+          }
+        }
+      }
+    },
+    {
+      "file": "docs/hero-dad-running.png",
+      "state": {
+        "ready": true,
+        "screen": "pause",
+        "mode": "neighborhood",
+        "race": false,
+        "exploration": {
+          "mode": "foot",
+          "phase": "foot",
+          "transferProgress": null,
+          "position": [
+            1.0753362181391242,
+            -1.2914020262979633,
+            23.268872583888243
+          ],
+          "velocity": [
+            -1.3399002941411,
+            0,
+            5.429164510972542
+          ],
+          "grounded": true,
+          "yaw": -0.24196159864060085,
+          "cameraYaw": -0.24196159864060085,
+          "driver": {
+            "visible": true,
+            "seated": false,
+            "asset": "/assets/dad-driver.glb",
+            "seatWorld": [
+              0.6470872588486486,
+              -0.9670370456152154,
+              19.362863933900094
+            ]
+          },
+          "interaction": {
+            "available": false,
+            "reason": ""
+          },
+          "doors": {
+            "left": {
+              "progress": 0,
+              "angle": 0
+            },
+            "right": {
+              "progress": 0,
+              "angle": 0
+            }
+          },
+          "obstacles": {
+            "trees": 19030,
+            "homeTrees": 3,
+            "solidMeshes": 33,
+            "triangles": 41355,
+            "colliders": 19063
+          }
+        },
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20580066740512848,
+          -0.28197768330574036,
+          19.599483489990234
+        ],
+        "rotation": [
+          0.01702267676591873,
+          -0.12036941945552826,
+          -0.01717068813741207,
+          0.9924347400665283
+        ],
+        "camera": {
+          "position": [
+            0.7940269947225349,
+            -0.24140202629796326,
+            26.495459808932804
+          ],
+          "target": [
+            1.0753362181391242,
+            -0.36140202629796325,
+            23.268872583888243
+          ],
+          "mode": 0,
+          "inspection": true
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.562308426733907,
+        "ai": [
+          {
+            "id": 1,
+            "life": 0,
+            "stuck": 0,
+            "target": 9,
+            "speed": 6.318515254252385,
+            "position": [
+              876.6097412109375,
+              34.94737243652344,
+              -397.3024597167969
+            ]
+          },
+          {
+            "id": 2,
+            "life": 0,
+            "stuck": 0,
+            "target": 15,
+            "speed": 23.07091813120615,
+            "position": [
+              917.0781860351562,
+              40.924537658691406,
+              -433.936767578125
+            ]
+          },
+          {
+            "id": 3,
+            "life": 0,
+            "stuck": 0,
+            "target": 20,
+            "speed": 21.189618039896676,
+            "position": [
+              963.685302734375,
+              46.84210968017578,
+              -450.7408447265625
+            ]
+          },
+          {
+            "id": 4,
+            "life": 0,
+            "stuck": 0,
+            "target": 139,
+            "speed": 12.955170361028882,
+            "position": [
+              1378.1363525390625,
+              12.885790824890137,
+              -159.49432373046875
+            ]
+          },
+          {
+            "id": 5,
+            "life": 0,
+            "stuck": 0,
+            "target": 173,
+            "speed": 13.371701977283564,
+            "position": [
+              1210.89501953125,
+              -1.9914380311965942,
+              165.12193298339844
+            ]
+          },
+          {
+            "id": 6,
+            "life": 0,
+            "stuck": 0,
+            "target": 206,
+            "speed": 11.614567922236057,
+            "position": [
+              1104.2724609375,
+              6.097603797912598,
+              194.25015258789062
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 219,
+          "p50": 18,
+          "p95": 18.100000000000364,
+          "physicsMs": 1,
+          "width": 1920,
+          "height": 1080,
+          "draws": 703,
+          "triangles": 5482933,
+          "vegetation": {
+            "trees": 19027,
+            "shrubs": 1089,
+            "grassTufts": 6002,
+            "chunks": 285,
+            "visibleChunks": 90,
+            "visibleBatches": 544,
+            "totalBatches": 3508,
+            "referenceTreeCount": 91,
+            "referenceWoodlandTreeCount": 281,
+            "referenceOmittedTreeCount": 31,
+            "backyardTreeCount": 226
+          },
+          "scenery": [
+            {
+              "houses": 452,
+              "batches": 615,
+              "triangles": 1338577,
+              "detailFeatures": 9693,
+              "referenceFacades": 64
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 11,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 20,
+              "triangles": 20971
+            },
+            {
+              "grassBlades": 30996,
+              "pebbles": 3192,
+              "soilFragments": 2453,
+              "leaves": 5867,
+              "rootRibs": 364,
+              "grassTriangles": 92988,
+              "groundTriangles": 39948,
+              "totalTriangles": 132936,
+              "batches": 112,
+              "visibleDrawCalls": 20,
+              "visibleTriangles": 25125,
+              "treeContacts": 91,
+              "rejected": 6366,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "detail": {
+        "bones": {
+          "head": [
+            1.0624184716525924,
+            0.01512965339614819,
+            23.3070377603884
+          ],
+          "hips": [
+            1.0753362181391242,
+            -0.5279562296280772,
+            23.268872583888243
+          ],
+          "left_hand": [
+            1.1804035851136354,
+            -0.3681455788070992,
+            23.76206619485133
+          ],
+          "right_hand": [
+            0.8280496372115667,
+            -0.553905050516118,
+            23.07436915219407
+          ],
+          "left_foot": [
+            1.3403613320937655,
+            -0.7873886075069513,
+            22.629055894752124
+          ],
+          "right_foot": [
+            0.8472763213828518,
+            -1.1933024583512286,
+            23.75890936924379
+          ]
+        },
+        "model": {
+          "source": "/assets/dad-driver.glb",
+          "authoring": "Blender",
+          "likeness": "Photo-referenced stylized character",
+          "units": "meters",
+          "origin": "feet",
+          "forward": "+Z",
+          "up": "+Y",
+          "pose": "run",
+          "seatedBlend": 0
+        },
+        "doors": {
+          "left": {
+            "progress": 0,
+            "angle": 0
+          },
+          "right": {
+            "progress": 0,
+            "angle": 0
+          }
+        }
+      }
+    }
+  ],
+  "checks": [
+    "Actual F exit opens an exported door during the animated transfer",
+    "The Blender character remains visible and animated in seated, walking and running modes"
+  ],
+  "passed": true,
+  "dadAssetSha256": "55f55761b5f55f609fb621c73963c9739334923b633e317c5fe3d670ca35840e",
+  "visualReview": {
+    "reviewed": true,
+    "views": [
+      "US-left driving",
+      "clear seated portrait",
+      "open-door transfer",
+      "idle stance",
+      "face and coppola",
+      "active running gait"
+    ],
+    "notes": "Final Blender material export, continuous neck and lower-fitting coppola reviewed in the production game."
+  }
+}

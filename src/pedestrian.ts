@@ -193,7 +193,7 @@ export function findVehicleExit(
 ) {
   for (const side of [1, -1])
     for (const distance of [1.65, 2.05])
-      for (const fore of [0, -0.65, 0.65]) {
+      for (const fore of [0, -0.3, 0.2]) {
         const x =
           car.position.x +
           Math.cos(heading) * side * distance +

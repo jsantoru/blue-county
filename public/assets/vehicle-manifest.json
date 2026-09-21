@@ -1,9 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "name": "1968 Oldsmobile 442 convertible",
   "asset": "/assets/oldsmobile-442.glb",
   "sourceSnapshot": "asset-source/1968_oldsmobile_442.snapshot.blend",
   "sourceSha256": "907219b6d86f22e749f8aa611bb11185fbb54dd890f655122664f6803c88c0fb",
+  "editableGameSource": "asset-source/oldsmobile-442.game.blend",
   "exportedWith": "5.2.2 LTS",
   "units": "meters",
   "metersPerUnit": 1,
@@ -213,13 +214,67 @@
       "forwardSpinSign": 1
     }
   ],
+  "doors": [
+    {
+      "id": "L",
+      "side": 1,
+      "hingeNode": "DoorHinge_L",
+      "meshNode": "DoorMesh_L",
+      "hinge": [
+        0.866,
+        0.72,
+        0.59
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "openSign": -1,
+      "maxAngleRadians": 1.1868238913561442,
+      "closedProgress": 0,
+      "openProgress": 1,
+      "entryOpening": {
+        "zMin": -0.72,
+        "zMax": 0.59,
+        "sillHeight": 0.375
+      },
+      "parts": "Original partitioned body skin, cabin shoulder and belt trim; original door card, armrest, handles, crank, mirror and vent window; modeled inner pressing, folded edges and latch"
+    },
+    {
+      "id": "R",
+      "side": -1,
+      "hingeNode": "DoorHinge_R",
+      "meshNode": "DoorMesh_R",
+      "hinge": [
+        -0.866,
+        0.72,
+        0.59
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "openSign": 1,
+      "maxAngleRadians": 1.1868238913561442,
+      "closedProgress": 0,
+      "openProgress": 1,
+      "entryOpening": {
+        "zMin": -0.72,
+        "zMax": 0.59,
+        "sillHeight": 0.375
+      },
+      "parts": "Original partitioned body skin, cabin shoulder and belt trim; original door card, armrest, handles, crank, mirror and vent window; modeled inner pressing, folded edges and latch"
+    }
+  ],
   "statistics": {
     "sourceCarObjects": 883,
     "trianglesBeforeReduction": 564778,
-    "trianglesAfterReduction": 276663,
-    "glbBytes": 5623856,
-    "nodes": 14,
-    "meshPrimitives": 53,
+    "trianglesAfterReduction": 310089,
+    "glbBytes": 6250584,
+    "nodes": 18,
+    "meshPrimitives": 67,
     "materials": 21
   },
   "appearance": {
@@ -239,27 +294,45 @@
     "Studio, floor, cameras, lights and hood animation excluded"
   ],
   "sourceObjectGroups": {
-    "Driver continuous sculpted body side": "Body",
+    "Driver continuous sculpted body side": [
+      "Body",
+      "DoorR"
+    ],
     "Driver front arch chrome": "Body",
     "Driver front wheel housing lip": "Body",
     "Driver rear arch chrome": "Body",
     "Driver rear wheel housing lip": "Body",
-    "Driver door panel gap": "Body",
+    "Driver door panel gap": "DoorR",
     "Driver rocker chrome": "Body",
-    "Driver belt molding": "Body",
-    "Passenger continuous sculpted body side": "Body",
+    "Driver belt molding": [
+      "Body",
+      "DoorR"
+    ],
+    "Passenger continuous sculpted body side": [
+      "Body",
+      "DoorL"
+    ],
     "Passenger front arch chrome": "Body",
     "Passenger front wheel housing lip": "Body",
     "Passenger rear arch chrome": "Body",
     "Passenger rear wheel housing lip": "Body",
-    "Passenger door panel gap": "Body",
+    "Passenger door panel gap": "DoorL",
     "Passenger rocker chrome": "Body",
-    "Passenger belt molding": "Body",
+    "Passenger belt molding": [
+      "Body",
+      "DoorL"
+    ],
     "Driver front fender crown": "Body",
-    "Driver cabin shoulder": "Body",
+    "Driver cabin shoulder": [
+      "Body",
+      "DoorR"
+    ],
     "Driver rear fender crown": "Body",
     "Passenger front fender crown": "Body",
-    "Passenger cabin shoulder": "Body",
+    "Passenger cabin shoulder": [
+      "Body",
+      "DoorL"
+    ],
     "Passenger rear fender crown": "Body",
     "Hood | animated opening": "Body",
     "Hood underside black insulation": "Body",
@@ -478,26 +551,26 @@
     "Side marker lens": "Body",
     "Side marker chrome.001": "Body",
     "Side marker lens.001": "Body",
-    "Door handle shadow": "Body",
-    "Chrome door handle": "Body",
-    "Door key barrel": "Body",
+    "Door handle shadow": "DoorR",
+    "Chrome door handle": "DoorR",
+    "Door key barrel": "DoorR",
     "Fender 442 badge": "Body",
-    "Mirror stalk": "Body",
-    "Round exterior mirror housing": "Body",
-    "Mirror glass": "Body",
+    "Mirror stalk": "DoorR",
+    "Round exterior mirror housing": "DoorR",
+    "Mirror glass": "DoorR",
     "Chrome exhaust trumpet.001": "Body",
     "Dark exhaust opening.001": "Body",
     "Side marker chrome.002": "Body",
     "Side marker lens.002": "Body",
     "Side marker chrome.003": "Body",
     "Side marker lens.003": "Body",
-    "Door handle shadow.001": "Body",
-    "Chrome door handle.001": "Body",
-    "Door key barrel.001": "Body",
+    "Door handle shadow.001": "DoorL",
+    "Chrome door handle.001": "DoorL",
+    "Door key barrel.001": "DoorL",
     "Fender 442 badge.001": "Body",
-    "Mirror stalk.001": "Body",
-    "Round exterior mirror housing.001": "Body",
-    "Mirror glass.001": "Body",
+    "Mirror stalk.001": "DoorL",
+    "Round exterior mirror housing.001": "DoorL",
+    "Mirror glass.001": "DoorL",
     "Trunk rocket oval": "Body",
     "Trunk rocket spear": "Body",
     "Curved clear windshield": "Body",
@@ -507,12 +580,12 @@
     "Windshield upper stainless": "Body",
     "Windshield A pillar paint": "Body",
     "Windshield A pillar chrome": "Body",
-    "Triangular quarter vent window": "Body",
-    "Vent window chrome frame": "Body",
+    "Triangular quarter vent window": "DoorR",
+    "Vent window chrome frame": "DoorR",
     "Windshield A pillar paint.001": "Body",
     "Windshield A pillar chrome.001": "Body",
-    "Triangular quarter vent window.001": "Body",
-    "Vent window chrome frame.001": "Body",
+    "Triangular quarter vent window.001": "DoorL",
+    "Vent window chrome frame.001": "DoorL",
     "Windshield wiper arm": "Body",
     "Wiper black blade": "Body",
     "Windshield wiper arm.001": "Body",
@@ -759,7 +832,7 @@
     "Interior | Dash vent slat.006": "Body",
     "Interior | Dash vent slat.007": "Body",
     "Interior | Dashboard vertical face": "Body",
-    "Interior | Driver armrest chrome plinth": "Body",
+    "Interior | Driver armrest chrome plinth": "DoorL",
     "Interior | Driver back insert lower seam": "Body",
     "Interior | Driver back inset": "Body",
     "Interior | Driver back pleats": "Body",
@@ -769,16 +842,16 @@
     "Interior | Driver cushion center insert": "Body",
     "Interior | Driver cushion piping": "Body",
     "Interior | Driver cushion pleats": "Body",
-    "Interior | Driver door release pivot": "Body",
-    "Interior | Driver door top roll": "Body",
+    "Interior | Driver door release pivot": "DoorL",
+    "Interior | Driver door top roll": "DoorL",
     "Interior | Driver headrest stem": "Body",
     "Interior | Driver headrest stem.001": "Body",
-    "Interior | Driver horizontal door trim": "Body",
-    "Interior | Driver inner door black lower panel": "Body",
-    "Interior | Driver interior door release": "Body",
-    "Interior | Driver padded door armrest": "Body",
+    "Interior | Driver horizontal door trim": "DoorL",
+    "Interior | Driver inner door black lower panel": "DoorL",
+    "Interior | Driver interior door release": "DoorL",
+    "Interior | Driver padded door armrest": "DoorL",
     "Interior | Driver padded headrest": "Body",
-    "Interior | Driver parchment door upper card": "Body",
+    "Interior | Driver parchment door upper card": "DoorL",
     "Interior | Driver rear crank knob": "Body",
     "Interior | Driver rear quarter armrest": "Body",
     "Interior | Driver rear quarter upholstery": "Body",
@@ -787,10 +860,10 @@
     "Interior | Driver seat back release": "Body",
     "Interior | Driver seat slide rail": "Body",
     "Interior | Driver seat slide rail.001": "Body",
-    "Interior | Driver vertical door pleats": "Body",
-    "Interior | Driver window crank": "Body",
-    "Interior | Driver window crank knob": "Body",
-    "Interior | Driver window winder pivot": "Body",
+    "Interior | Driver vertical door pleats": "DoorL",
+    "Interior | Driver window crank": "DoorL",
+    "Interior | Driver window crank knob": "DoorL",
+    "Interior | Driver window winder pivot": "DoorL",
     "Interior | End dash vent dark recess": "Body",
     "Interior | End dash vent dark recess.001": "Body",
     "Interior | End dash vent rim": "Body",
@@ -881,7 +954,7 @@
     "Interior | Instrument needle.002": "Body",
     "Interior | Ivory gear knob": "Body",
     "Interior | Oldsmobile horn medallion": "Body",
-    "Interior | Passenger armrest chrome plinth": "Body",
+    "Interior | Passenger armrest chrome plinth": "DoorR",
     "Interior | Passenger back insert lower seam": "Body",
     "Interior | Passenger back inset": "Body",
     "Interior | Passenger back pleats": "Body",
@@ -891,17 +964,17 @@
     "Interior | Passenger cushion center insert": "Body",
     "Interior | Passenger cushion piping": "Body",
     "Interior | Passenger cushion pleats": "Body",
-    "Interior | Passenger door release pivot": "Body",
-    "Interior | Passenger door top roll": "Body",
+    "Interior | Passenger door release pivot": "DoorR",
+    "Interior | Passenger door top roll": "DoorR",
     "Interior | Passenger glovebox": "Body",
     "Interior | Passenger headrest stem": "Body",
     "Interior | Passenger headrest stem.001": "Body",
-    "Interior | Passenger horizontal door trim": "Body",
-    "Interior | Passenger inner door black lower panel": "Body",
-    "Interior | Passenger interior door release": "Body",
-    "Interior | Passenger padded door armrest": "Body",
+    "Interior | Passenger horizontal door trim": "DoorR",
+    "Interior | Passenger inner door black lower panel": "DoorR",
+    "Interior | Passenger interior door release": "DoorR",
+    "Interior | Passenger padded door armrest": "DoorR",
     "Interior | Passenger padded headrest": "Body",
-    "Interior | Passenger parchment door upper card": "Body",
+    "Interior | Passenger parchment door upper card": "DoorR",
     "Interior | Passenger rear crank knob": "Body",
     "Interior | Passenger rear quarter armrest": "Body",
     "Interior | Passenger rear quarter upholstery": "Body",
@@ -910,10 +983,10 @@
     "Interior | Passenger seat back release": "Body",
     "Interior | Passenger seat slide rail": "Body",
     "Interior | Passenger seat slide rail.001": "Body",
-    "Interior | Passenger vertical door pleats": "Body",
-    "Interior | Passenger window crank": "Body",
-    "Interior | Passenger window crank knob": "Body",
-    "Interior | Passenger window winder pivot": "Body",
+    "Interior | Passenger vertical door pleats": "DoorR",
+    "Interior | Passenger window crank": "DoorR",
+    "Interior | Passenger window crank knob": "DoorR",
+    "Interior | Passenger window winder pivot": "DoorR",
     "Interior | Radio black face": "Body",
     "Interior | Radio chrome surround": "Body",
     "Interior | Radio knob black center": "Body",
@@ -1123,10 +1196,39 @@
     "Engine | Oil dipstick tube": "Body",
     "Engine | Oil dipstick handle": "Body"
   },
+  "doorPartitionFaces": {
+    "Driver continuous sculpted body side": {
+      "Body": 8052,
+      "Door": 2248
+    },
+    "Driver belt molding": {
+      "Body": 156,
+      "Door": 336
+    },
+    "Passenger continuous sculpted body side": {
+      "Body": 8052,
+      "Door": 2248
+    },
+    "Passenger belt molding": {
+      "Body": 156,
+      "Door": 336
+    },
+    "Driver cabin shoulder": {
+      "Body": 728,
+      "Door": 1456
+    },
+    "Passenger cabin shoulder": {
+      "Body": 728,
+      "Door": 1456
+    }
+  },
   "validation": {
     "namedWheelNodesVerified": true,
     "leftHandDriveVerified": true,
     "physicalWheelSidesVerified": true,
+    "namedDoorNodesVerified": true,
+    "doorHingesVerified": true,
+    "originalSkinPartitioned": true,
     "noCameras": true,
     "noAnimations": true,
     "noStudioNodes": true

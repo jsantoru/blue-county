@@ -2,6 +2,9 @@ node_modules/
 dist/
 asset-source/*
 !asset-source/1968_oldsmobile_442.snapshot.blend
+!asset-source/dad-driver.blend
+!asset-source/oldsmobile-442.game.blend
+!asset-source/beverly-home-props.blend
 *.log
 .server-pid
 __pycache__/

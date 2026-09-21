@@ -1,0 +1,292 @@
+{
+  "version": 1,
+  "name": "Dad with Italian Coppola",
+  "asset": "/assets/dad-driver.glb",
+  "source": "asset-source/dad-driver.blend",
+  "generator": "scripts/build-dad-driver.py",
+  "units": "meters",
+  "heightMeters": 1.7842294927686453,
+  "bounds": {
+    "min": [
+      -0.3439999520778656,
+      0.001999998465180397,
+      -0.15609711408615112
+    ],
+    "max": [
+      0.343999981880188,
+      1.7862294912338257,
+      0.20655742287635803
+    ]
+  },
+  "axes": {
+    "left": "+X",
+    "up": "+Y",
+    "forward": "+Z",
+    "sourceUp": "+Z",
+    "sourceForward": "-Y"
+  },
+  "origin": "feet",
+  "seatAnchorGame": [
+    0.398,
+    0.1,
+    -0.315
+  ],
+  "rig": {
+    "object": "DadDriverRig",
+    "bones": {
+      "hips": {
+        "headSource": [
+          0,
+          0,
+          0.94
+        ],
+        "tailSource": [
+          0,
+          0,
+          1.06
+        ],
+        "parent": null
+      },
+      "torso": {
+        "headSource": [
+          0,
+          0,
+          1.06
+        ],
+        "tailSource": [
+          0,
+          0,
+          1.485
+        ],
+        "parent": "hips"
+      },
+      "head": {
+        "headSource": [
+          0,
+          0,
+          1.485
+        ],
+        "tailSource": [
+          0,
+          0,
+          1.78
+        ],
+        "parent": "torso"
+      },
+      "left_arm": {
+        "headSource": [
+          0.265,
+          0,
+          1.392
+        ],
+        "tailSource": [
+          0.28,
+          0,
+          1.107
+        ],
+        "parent": "torso"
+      },
+      "left_forearm": {
+        "headSource": [
+          0.28,
+          0,
+          1.107
+        ],
+        "tailSource": [
+          0.288,
+          0,
+          0.842
+        ],
+        "parent": "left_arm"
+      },
+      "left_hand": {
+        "headSource": [
+          0.288,
+          0,
+          0.842
+        ],
+        "tailSource": [
+          0.293,
+          -0.01,
+          0.743
+        ],
+        "parent": "left_forearm"
+      },
+      "left_thigh": {
+        "headSource": [
+          0.104,
+          0,
+          0.935
+        ],
+        "tailSource": [
+          0.104,
+          0,
+          0.513
+        ],
+        "parent": "hips"
+      },
+      "left_shin": {
+        "headSource": [
+          0.104,
+          0,
+          0.513
+        ],
+        "tailSource": [
+          0.104,
+          0,
+          0.088
+        ],
+        "parent": "left_thigh"
+      },
+      "left_foot": {
+        "headSource": [
+          0.104,
+          0,
+          0.088
+        ],
+        "tailSource": [
+          0.104,
+          -0.12,
+          0.06
+        ],
+        "parent": "left_shin"
+      },
+      "right_arm": {
+        "headSource": [
+          -0.265,
+          0,
+          1.392
+        ],
+        "tailSource": [
+          -0.28,
+          0,
+          1.107
+        ],
+        "parent": "torso"
+      },
+      "right_forearm": {
+        "headSource": [
+          -0.28,
+          0,
+          1.107
+        ],
+        "tailSource": [
+          -0.288,
+          0,
+          0.842
+        ],
+        "parent": "right_arm"
+      },
+      "right_hand": {
+        "headSource": [
+          -0.288,
+          0,
+          0.842
+        ],
+        "tailSource": [
+          -0.293,
+          -0.01,
+          0.743
+        ],
+        "parent": "right_forearm"
+      },
+      "right_thigh": {
+        "headSource": [
+          -0.104,
+          0,
+          0.935
+        ],
+        "tailSource": [
+          -0.104,
+          0,
+          0.513
+        ],
+        "parent": "hips"
+      },
+      "right_shin": {
+        "headSource": [
+          -0.104,
+          0,
+          0.513
+        ],
+        "tailSource": [
+          -0.104,
+          0,
+          0.088
+        ],
+        "parent": "right_thigh"
+      },
+      "right_foot": {
+        "headSource": [
+          -0.104,
+          0,
+          0.088
+        ],
+        "tailSource": [
+          -0.104,
+          -0.12,
+          0.06
+        ],
+        "parent": "right_shin"
+      }
+    },
+    "conventions": "Blender bone local Y points head-to-tail; preserve exported bind rotation. All limb bend axes approximately local X; game transforms belong on an outer root."
+  },
+  "animations": {
+    "Idle": {
+      "durationSeconds": 2.0,
+      "rootMotion": false,
+      "speedMetersPerSecond": 0
+    },
+    "Walk": {
+      "durationSeconds": 0.6666666666666666,
+      "rootMotion": false,
+      "speedMetersPerSecond": 2.5
+    },
+    "Run": {
+      "durationSeconds": 0.5,
+      "rootMotion": false,
+      "speedMetersPerSecond": 5.7
+    },
+    "Airborne": {
+      "durationSeconds": 1.0,
+      "rootMotion": false,
+      "speedMetersPerSecond": 0
+    },
+    "Seated": {
+      "durationSeconds": 1.0,
+      "rootMotion": false,
+      "speedMetersPerSecond": 0
+    }
+  },
+  "exportedClips": [
+    "Idle",
+    "Walk",
+    "Run",
+    "Airborne",
+    "Seated"
+  ],
+  "statistics": {
+    "triangles": 75300,
+    "meshes": 21,
+    "materials": 21,
+    "glbBytes": 3833212,
+    "joints": 15
+  },
+  "appearance": [
+    "rounded full face",
+    "prominent nose",
+    "silver white mustache without beard",
+    "thin rounded tinted wire glasses",
+    "salt and pepper side hair",
+    "low charcoal Italian Coppola",
+    "light blue checked open shirt",
+    "charcoal V-neck shirt",
+    "dark trousers and shoes"
+  ],
+  "limits": [
+    "Stylized interpretation from one photograph; side/back proportions and hidden body details are inferred.",
+    "Hands have modeled fingers but no individual finger animation bones.",
+    "Procedural materials and mesh shapes are original; supplied photograph is not embedded."
+  ]
+}

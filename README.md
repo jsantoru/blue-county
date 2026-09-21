@@ -2,20 +2,20 @@
 
 A locally playable arcade driving and exploration game starring your actual dark blue 1968 Oldsmobile 442 convertible. Drive the Warwick roads, race the Ridge & Hollow circuit, or park, step out and explore Beverly Drive's yards, woods and Stony Creek on foot. The visible driver sits behind the wheel on the US driver's left.
 
-**`main` is the current playable version.** The latest update adds a simple articulated driver, walking, running and jumping, a collision-aware third-person camera, and prompts that guide you back into your parked car. The character is ready to be replaced with a Blender model later.
+**The Blender asset update is on `codex/home-driver-coppola`.** Dad now has an editable Blender character with a charcoal Italian coppola, white mustache, tinted glasses and blue checked shirt. The 442's actual doors open during entry and exit, and four Blender-built props add detail to Home's yard. See [the assets, source files and modeling limits](docs/hero-assets.md).
 
-![The driver standing beside the parked 442 at Home](docs/exploration-second-first-exit.png)
+![Dad standing beside the parked 442 at Home](docs/hero-dad-standing.png)
 
 Stop in Free Drive and press **F / Xbox Y** to get out. Move with **WASD / left stick**, run with **Shift / A**, jump with **Space / X**, and look with the mouse or right stick. Approach either door and press **F / Y** to get back in. See [full controls](#first-drive) or [launch instructions](#launch-on-windows).
 
 ## Recent screenshots — September 21, 2026
 
-Actual screenshots from the local production build. The seated-driver close-up was captured for this README; the exploration views come from the final second review of the feature.
+Actual screenshots from the local production build with the Blender character and opening doors. The character is a stylized interpretation of one supplied photograph.
 
-| Behind the wheel | From the yard into the woods |
+| Behind the wheel | Opening the driver's door |
 | --- | --- |
-| ![Close-up of the placeholder driver seated behind the 442's left-hand steering wheel](docs/readme-driver-seat.png) | ![The character running from the backyard toward the woods](docs/exploration-second-running-to-woods.png) |
-| The replaceable driver in the US-left seat. | Run through the lawn and into the surrounding woodland. |
+| ![Dad seated behind the 442's left-hand steering wheel](docs/hero-dad-driving.png) | ![Dad stepping through the open driver's doorway](docs/hero-dad-exiting.png) |
+| Dad in the US-left seat, with his hands at the wheel. | Original body panels, mirror and interior card move with the door. |
 
 ![Exploring the mapped Stony Creek channel and woodland plants on foot](docs/exploration-second-creek-exploration.png)
 
@@ -52,14 +52,14 @@ Click once to focus/unlock audio, connect the wired Xbox controller, and press a
 
 Keyboard: WASD/arrows drive, Shift boost, Space handbrake, B look back, C camera, R hold reset, Escape pause, Enter confirm. Menu arrows/WASD navigate; left/right adjusts settings. F3 shows telemetry.
 
-**Explore on foot:** stop and press **F / Y** to get out. WASD/arrows or the left stick move relative to the camera; Shift / A runs; Space / X jumps. Look with the right stick, right mouse drag, or click the game to capture the mouse (Escape releases and pauses). C / R3 recenters the walking camera. Approach either door and press F / Y to re-enter the 442. The map marks the parked car in blue. Walking follows terrain, steps over curbs and collides with houses, tree trunks, decks and rails. The temporary articulated driver can be replaced with a Blender character later; see [exploration notes](docs/exploration-pass.md).
+**Explore on foot:** stop and press **F / Y** to get out. WASD/arrows or the left stick move relative to the camera; Shift / A runs; Space / X jumps. Look with the right stick, right mouse drag, or click the game to capture the mouse (Escape releases and pauses). C / R3 recenters the walking camera. Approach either door and press F / Y to re-enter the 442. The map marks the parked car in blue. Walking follows terrain, steps over curbs and collides with houses, tree trunks, decks and rails. Dad uses Blender-authored idle, walk, run, airborne and seated animations; see [asset notes](docs/hero-assets.md) and [exploration controls](docs/exploration-pass.md).
 
 Start with **Balanced** handling, 0.12 stick deadzone, 1.35 response curve, and sensitivity 1.0. Increase deadzone only for stick drift. Try **Planted** if high-speed steering feels too lively. Physics tuning lives together in `src/vehicle.ts`: `steerLow`, `steerFalloff`, `grip`, `driftGrip`, `engineForce`, and `stability` are the useful first adjustments. Settings and the chosen handling preset persist locally. Diagnostics shows selected device, raw and processed analog inputs, mapping, buttons, and haptic availability; every binding can be remapped.
 
 ## Included slice
 
 - Free Drive across approximately 3.8 × 3.9km of mapped roads, with Home and safe recovery.
-- A visible US-left seated driver and third-person exterior exploration, with walking/running/jumping, collision-aware orbit camera, parked-car return prompts and footsteps.
+- A rigged Blender driver in the US-left seat, opening vehicle doors and third-person exterior exploration, with walking/running/jumping, collision-aware orbit camera, parked-car return prompts and footsteps.
 - **Ridge & Hollow**: a verified connected 2.645km clockwise circuit, three laps, countdown, three physical AI rivals, three civilian cars, ordered directional progress, position, results, restart.
 - Real route: Old Ridge Road → High Hill Avenue → Claire Ann Drive → Seward Highway → existing mapped connector → Old Ridge Road. Beverly Drive retains both real connections to West Ridge Road.
 - Separate handling grounds: straight, slalom, constant-radius loop, ramp and collision barriers.
@@ -69,21 +69,23 @@ Start with **Balanced** handling, 0.12 stick deadzone, 1.35 response curve, and 
 - A targeted Beverly Drive reference pass: 64 state building footprints, including garages and sheds; 37 observed driveway approaches; 122 aerial crown observations before blocked-trunk omissions and Home-specific tree replacement; and nine facades informed by exterior photographs, including the supplied Home views. The real Beverly/West Ridge neighborhood loop is 1.21889km. See [the reconstruction notes](docs/beverly-reconstruction.md), [Home detail notes](docs/home-detail-pass.md) and [interactive source overlay](docs/research-beverly/review-overlay.html).
 - Scanned PBR road, lawn, bark, roof, brick, siding and gravel surfaces; procedural trees with branching trunks, leaf/needle sprays, wind and distant detail levels; grass and shrubs; detailed houses; poles, wires, mailboxes, porches and fences. Afternoon sky/clouds, outdoor HDR reflections, and contact shading on High. Scenery beyond the Beverly reference area remains a generic geographic interpretation. See `docs/visual-upgrade.md` for the rendering design, licenses and limits.
 
-## Rebuild the data and car
+## Rebuild the data and Blender assets
 
 ```powershell
 npm run map            # offline, Python 3 stdlib; uses cached sources
 npm run export-car     # Blender background export from the saved snapshot
+npm run export-driver  # character, rig, clips, editable .blend and GLB
+npm run export-home-props # bench, wagon wheel, birdbath and mailbox
 python scripts/fetch-textures.py --verify-only  # local checksums/dimensions
 ```
 
 The offline map build also applies the cached Beverly research through `scripts/beverly_build.py` and writes `public/map/beverly-survey.json`. Optional geographic refresh: `python scripts/map-fetch.py` (requires Pillow). This refresh uses OSM and USGS endpoints, preserves cached provenance, and rejects a mismatched house anchor; it does not refresh the separate NYS reference cache. See [geography and attribution](docs/geography.md) and [Beverly reproduction details](docs/beverly-reconstruction.md). Source data and the ODbL notice are in `public/map/source` and `public/map/LICENSE.txt`; the map manifest records bounds, origin, meter convention, road graph, Home, checkpoints, sources, dates and adjustments.
 
-The active source folder `../oldsmobile_442` was **not modified**. Export uses the included `asset-source/1968_oldsmobile_442.snapshot.blend`, preserving the detailed source. See `docs/vehicle.md` and `public/assets/vehicle-manifest.json` for axes, dimensions, pivots, scale and export settings. The source snapshot is tracked so a fresh clone can rebuild the vehicle; intermediate Blender exports remain ignored. To use a future model revision, copy its saved `.blend` into the snapshot path yourself, then export.
+The active source folder `../oldsmobile_442` was **not modified**. The car exporter reads `asset-source/1968_oldsmobile_442.snapshot.blend` and writes the separate, editable `asset-source/oldsmobile-442.game.blend` with hinged doors. Dad and the Home kit also have tracked editable sources. See [the asset guide](docs/hero-assets.md) for rebuild commands, export contracts and source ownership. Generators recreate their derived assets; preserve manual Blender edits before regenerating them.
 
 ## Checks and evidence
 
-The September 21 exploration update passed **118 tests across 18 files** and the production build. Two complete browser reviews passed 11 initial checks and 19 second-pass checks, followed by the full three-lap race, restart and Return Home. Both exploration reviews and the final race reported zero runtime, resource or WebGL errors. See [the verification record](docs/verification.md) and [exploration review](docs/exploration-pass.md) for the measured environment, screenshots and limits. Controller automation uses synthetic Gamepad API input; physical controller feel and rumble remain unverified.
+The September 21 Blender asset update passed **127 tests across 20 files** and the production build. Tests load the delivered character and car assets to check skinning, animations, seated hand placement, pause behavior, fabric export and real doorway clearance. The [hero review](docs/hero-verification.json) captures the character seated, standing, running and stepping through an open door. The [verification record](docs/verification.md) records the repeated exploration checks and separates them from the preceding build's full three-lap race, restart and Return Home. Controller automation uses synthetic Gamepad API input; physical controller feel and rumble remain unverified.
 
 ```powershell
 npm test               # input, rules, surfaces, physics and complete AI route tests
@@ -99,6 +101,7 @@ npm run test:home        # photo-specific facade, yard, deck/patio relationships
 npm run test:backyard    # woodland/creek views, stream clearances, presets and environment rebuild
 npm run test:exploration # actual keyboard/mouse exit, walking, collisions and return
 npm run test:exploration:second # separate synthetic-controller and lifecycle review
+npm run test:hero        # actual Blender character, opening doors and inspection captures
 ```
 
 Tests compare acceleration, proportional throttle, braking, turning and boosted wall collision at simulated 30/60/120 fps rendering with fixed 60Hz physics. Tolerances are 0.15m position and 0.2m/s speed, not a cross-machine determinism promise. Ordered gates reject reverse travel, out-of-order crossings, teleport progress and duplicate rewards. Full mapped-route physics tests complete all 777 crossings over three laps, including all four racers with traffic and no racer recoveries. See `docs/verification.md`, the JSON reports and browser screenshots for measured environment and results.

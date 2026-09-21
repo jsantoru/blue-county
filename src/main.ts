@@ -1,6 +1,6 @@
 import "./style.css";
 import * as T from "three";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { GLTFLoader, type GLTF } from "three/addons/loaders/GLTFLoader.js";
 import { Atmosphere } from "./atmosphere";
 import { Presentation } from "./presentation";
 import { createTrafficVisual } from "./traffic-visual";
@@ -24,7 +24,10 @@ import { Driver } from "./ai";
 import { Sound } from "./audio";
 import { Effects } from "./effects";
 import { Pedestrian, findVehicleExit, footCameraPosition } from "./pedestrian";
-import { CharacterVisual, CHARACTER_SEAT_ANCHOR } from "./character-visual";
+import { CHARACTER_SEAT_ANCHOR } from "./character-visual";
+import { DadCharacterVisual as CharacterVisual } from "./dad-character";
+import { VehicleDoors } from "./vehicle-doors";
+import { preloadHomeProps } from "./home-props";
 import { buildExplorationObstacles } from "./exploration-obstacles";
 import {
   angleDiff,
@@ -110,11 +113,14 @@ let inspectionView: { position: T.Vector3; target: T.Vector3 } | null = null;
 let homeBrakeHold = false;
 let pedestrian: Pedestrian;
 let seatedDriver: CharacterVisual, walkingDriver: CharacterVisual;
+let characterSource: GLTF;
+let vehicleDoors: VehicleDoors;
 let explorationObstacles:
   ReturnType<typeof buildExplorationObstacles> | undefined;
 let footPhase: "driving" | "exiting" | "foot" | "entering" = "driving";
 let transitionTime = 0,
   transitionSide = 1;
+const VEHICLE_TRANSFER_SECONDS = 1.65;
 let footYaw = 0,
   footPitch = 0.22;
 let draggingLook = false,
@@ -291,11 +297,12 @@ function buildScene(test: boolean) {
   real.position.y = vehicleGeometry.visualOffsetY;
   visual.add(real);
   visual.userData.car = real;
-  seatedDriver = new CharacterVisual();
+  vehicleDoors = new VehicleDoors(real);
+  seatedDriver = new CharacterVisual(characterSource);
   seatedDriver.root.position.set(...CHARACTER_SEAT_ANCHOR);
   real.add(seatedDriver.root);
   seatedDriver.update({ pose: "seated", speed: 0, time: 0 });
-  walkingDriver = new CharacterVisual();
+  walkingDriver = new CharacterVisual(characterSource);
   walkingDriver.root.visible = false;
   scene.add(walkingDriver.root);
   pedestrian = new Pedestrian(world);
@@ -392,6 +399,7 @@ function carHeading() {
 function releaseWalking() {
   footPhase = "driving";
   transitionTime = 0;
+  vehicleDoors?.closeAll();
   pedestrian?.setEnabled(false);
   if (walkingDriver) walkingDriver.root.visible = false;
   if (seatedDriver) seatedDriver.root.visible = true;
@@ -421,7 +429,8 @@ function interaction() {
     .sub(player.position)
     .applyQuaternion(player.rotation.clone().invert());
   if (
-    Math.abs(local.z + 0.3) > 1.35 ||
+    // Match the real cut doorway; entry beside a quarter panel would cross metal.
+    Math.abs(local.z + 0.15) > 0.35 ||
     Math.abs(local.x) < 0.9 ||
     Math.abs(local.x) > 2.5 ||
     Math.abs(local.y + 0.8) > 1.35
@@ -483,9 +492,10 @@ function interactVehicle() {
     seatedDriver.root.visible = false;
     walkingDriver.root.visible = true;
     benchmarkDriver = null;
-    toast("ON FOOT · explore the neighborhood", 2.3);
+    toast("Getting out of the 442", 1.3);
   } else {
     footPhase = "entering";
+    toast("Getting back in the 442", 1.3);
     pedestrian.velocity.set(0, 0, 0);
     transitionSide = Math.sign(
       pedestrian.position
@@ -494,7 +504,7 @@ function interactVehicle() {
         .applyQuaternion(player.rotation.clone().invert()).x,
     );
   }
-  transitionTime = 0.42;
+  transitionTime = VEHICLE_TRANSFER_SECONDS;
   input.consume();
   frame = emptyInput();
   clock.reset();
@@ -883,7 +893,10 @@ function simulate(dt: number) {
           input.consume();
           frame = emptyInput();
           toast("BACK IN THE 442", 1.2);
-        } else footPhase = "foot";
+        } else {
+          footPhase = "foot";
+          toast("ON FOOT · explore the neighborhood", 2);
+        }
       }
     }
     if (onFoot())
@@ -1080,37 +1093,69 @@ function renderVehicles(alpha: number, renderDt = 0) {
   });
   seatedDriver.root.visible = !onFoot();
   walkingDriver.root.visible = onFoot();
+  vehicleDoors.closeAll();
   if (onFoot()) {
     walkingDriver.root.position.lerpVectors(
       pedestrian.previous,
       pedestrian.position,
       alpha,
     );
-    if (footPhase === "exiting" || footPhase === "entering") {
-      const t =
-        footPhase === "exiting"
-          ? transitionTime / 0.42
-          : 1 - transitionTime / 0.42;
-      walkingDriver.root.position.add(
-        new T.Vector3(-transitionSide * 0.42 * t, -0.12 * t, 0).applyQuaternion(
-          player.rotation,
-        ),
-      );
-    }
     walkingDriver.root.rotation.y = pedestrian.yaw;
     const speed = pedestrian.speed();
+    const transferring = footPhase === "exiting" || footPhase === "entering";
+    let seatedBlend: number | undefined;
+    if (transferring) {
+      const t = 1 - transitionTime / VEHICLE_TRANSFER_SECONDS;
+      const smooth = (value: number) => {
+        const x = clamp(value, 0, 1);
+        return x * x * (3 - 2 * x);
+      };
+      const door = t < 0.2 ? smooth(t / 0.2) : 1 - smooth((t - 0.8) / 0.2);
+      vehicleDoors.setOpen(transitionSide > 0 ? 1 : -1, door);
+      const progress = smooth((t - 0.18) / 0.62);
+      const outside = footPhase === "exiting" ? progress : 1 - progress;
+      seatedBlend = 1 - outside;
+      const seat = seatedDriver.root.getWorldPosition(new T.Vector3());
+      const feet = pedestrian.position.clone();
+      walkingDriver.root.position.lerpVectors(seat, feet, outside);
+      // Lift over the sill while the body unfolds from the authored seat pose.
+      walkingDriver.root.position.y += Math.sin(outside * Math.PI) * 0.12;
+      const seatRotation = seatedDriver.root.getWorldQuaternion(
+        new T.Quaternion(),
+      );
+      const standingRotation = new T.Quaternion().setFromAxisAngle(
+        new T.Vector3(0, 1, 0),
+        pedestrian.yaw,
+      );
+      walkingDriver.root.quaternion.slerpQuaternions(
+        seatRotation,
+        standingRotation,
+        outside,
+      );
+      walkingDriver.root.quaternion.multiply(
+        new T.Quaternion().setFromAxisAngle(
+          new T.Vector3(0, 1, 0),
+          transitionSide * Math.sin(outside * Math.PI) * 0.48,
+        ),
+      );
+      seatedDriver.root.visible = false;
+      walkingDriver.root.visible = true;
+    }
     walkingDriver.update({
-      pose: !pedestrian.grounded
-        ? "airborne"
-        : speed > 3.4
-          ? "run"
-          : speed > 0.15
-            ? "walk"
-            : "idle",
+      pose: transferring
+        ? "idle"
+        : !pedestrian.grounded
+          ? "airborne"
+          : speed > 3.4
+            ? "run"
+            : speed > 0.15
+              ? "walk"
+              : "idle",
       speed,
       time: simTime,
       verticalSpeed: pedestrian.velocity.y,
       dt: screen ? 0 : renderDt,
+      seatedBlend,
     });
   }
 }
@@ -1485,16 +1530,19 @@ async function init() {
   world.timestep = 1 / 60;
   world.integrationParameters.maxCcdSubsteps = 4;
   events = new RAPIER.EventQueue(true);
-  const [m, v, gltf] = await Promise.all([
+  const [m, v, gltf, dad] = await Promise.all([
     fetch("/map/warwick.json").then((r) => {
       if (!r.ok) throw new Error("Warwick map is missing. Run npm run map.");
       return r.json();
     }),
     fetch("/assets/vehicle-manifest.json").then((r) => r.json()),
     new GLTFLoader().loadAsync("/assets/oldsmobile-442.glb"),
+    new GLTFLoader().loadAsync("/assets/dad-driver.glb"),
+    preloadHomeProps(),
   ]);
   neighborhood = m;
   manifest = v;
+  characterSource = dad;
   configureVehicleGeometry(manifest);
   template = gltf.scene;
   template.traverse((o) => {
@@ -1579,6 +1627,10 @@ if (new URLSearchParams(location.search).has("test")) {
       exploration: pedestrian && {
         mode: onFoot() ? "foot" : "driving",
         phase: footPhase,
+        transferProgress:
+          transitionTime > 0
+            ? 1 - transitionTime / VEHICLE_TRANSFER_SECONDS
+            : null,
         position: pedestrian.position.toArray(),
         velocity: pedestrian.velocity.toArray(),
         grounded: pedestrian.grounded,
@@ -1587,11 +1639,13 @@ if (new URLSearchParams(location.search).has("test")) {
         driver: {
           visible: walkingDriver.root.visible || seatedDriver.root.visible,
           seated: seatedDriver.root.visible,
+          asset: "/assets/dad-driver.glb",
           seatWorld: seatedDriver.root
             .getWorldPosition(new T.Vector3())
             .toArray(),
         },
         interaction: interaction(),
+        doors: vehicleDoors.getState(),
         obstacles: explorationObstacles?.stats,
       },
       countdown,
@@ -1650,10 +1704,34 @@ if (new URLSearchParams(location.search).has("test")) {
         .getParameter(renderer.getContext().RENDERER),
     }),
     startFree,
+    heroDetails: () => {
+      const active = onFoot() ? walkingDriver : seatedDriver;
+      const bones: Record<string, number[]> = {};
+      for (const name of [
+        "head",
+        "hips",
+        "left_hand",
+        "right_hand",
+        "left_foot",
+        "right_foot",
+      ])
+        bones[name] = active.root
+          .getObjectByName(name)!
+          .getWorldPosition(new T.Vector3())
+          .toArray();
+      return {
+        bones,
+        model: active.root.userData.character,
+        doors: vehicleDoors.getState(),
+      };
+    },
     characterPose: () => {
       const joints: number[][] = [];
       walkingDriver.root.traverse((object) => {
-        if (object instanceof T.Group && object !== walkingDriver.root)
+        if (
+          (object instanceof T.Group || object instanceof T.Bone) &&
+          object !== walkingDriver.root
+        )
           joints.push([
             ...object.position.toArray(),
             object.rotation.x,

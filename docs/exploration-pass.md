@@ -1,5 +1,7 @@
 # Driver and on-foot exploration
 
+The [Blender asset pass](hero-assets.md) now supplies Dad's character and real opening doors. This page preserves the original exploration feature's design and historical measurements; the latest repeated browser checks are recorded in [verification.md](verification.md). The second-pass JSON report and screenshots are refreshed by subsequent asset passes, while measurements quoted below describe the original exploration build.
+
 This pass adds a replaceable driver visual and the ability to leave the Oldsmobile, explore the neighborhood on foot, and return to the car. Character presentation is separate from movement and collision so a future Blender model can replace the placeholder without rebuilding the controls.
 
 ## Controls
@@ -54,6 +56,6 @@ The final [driver-seat inspection](exploration-second-driver-seat-detail.png) sh
 
 ![Exploring Stony Creek on foot](exploration-second-creek-exploration.png)
 
-## Current scope
+## Scope of the original pass
 
-The driver is a simple articulated placeholder intended for replacement with a Blender character. The car's existing asset has no separately hinged doors, so entry and exit use a short character/camera transition without opening a modeled door. Exploration covers the neighborhood exteriors and handling grounds, including the shallow creek bed; it does not add building interiors or swimming. The player returns to their own Oldsmobile, and the Ridge race remains a driving event.
+The original pass used a simple articulated placeholder and a short character/camera transition without opening doors. The subsequent [Blender asset pass](hero-assets.md) replaces both of those visual limitations. Exploration covers the neighborhood exteriors and handling grounds, including the shallow creek bed; it does not add building interiors or swimming. The player returns to their own Oldsmobile, and the Ridge race remains a driving event.

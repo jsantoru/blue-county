@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "name": "Beverly Home reference prop kit",
+  "authoring": "Blender 5.2.2 LTS",
+  "source": "asset-source/beverly-home-props.blend",
+  "buildScript": "scripts/build-home-props.py",
+  "asset": "public/assets/beverly-home-props.glb",
+  "units": "meters",
+  "runtimeAxes": "X right, Y up, Z toward house",
+  "props": {
+    "Home_Bench": {
+      "triangles": 6864,
+      "materials": 3,
+      "editableParts": 40,
+      "pivot": "ground centre"
+    },
+    "Home_WagonWheel": {
+      "triangles": 4360,
+      "materials": 3,
+      "editableParts": 37,
+      "pivot": "hub centre"
+    },
+    "Home_Birdbath": {
+      "triangles": 2528,
+      "materials": 2,
+      "editableParts": 3,
+      "pivot": "ground centre"
+    },
+    "Home_Mailbox": {
+      "triangles": 4506,
+      "materials": 6,
+      "editableParts": 20,
+      "pivot": "ground centre"
+    }
+  },
+  "triangles": 18258,
+  "primitiveBatches": 14,
+  "reference": "Four objects already visible in the user supplied Home street views; anchors and game dimensions retained.",
+  "limits": "Fine joinery, fasteners, material wear and bowl profile are representative close-up details, not measured from photographs.",
+  "textures": "Original generated grain/mineral textures packed into editable blend and embedded in GLB; no source photographs.",
+  "sha256": "dbcf6c39d20d8dae7e244be23e6c9a0eccfee55f6ef3707e26361c7ac11f1110",
+  "sourceSha256": "5148168bbbb9c8950f6bf31133d2f7babd5bcc1d0f7414ba79e76d86dc71039f"
+}

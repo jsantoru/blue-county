@@ -1,5 +1,6 @@
 import * as T from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
+import { buildHomeProps, homePropsReady } from "./home-props";
 import {
   HOME_DETAIL,
   homeDeckOutline,
@@ -697,115 +698,123 @@ export function buildHomeYard(
       0x95988d,
     );
 
+  const useHeroProps = homePropsReady();
+  // Procedural fallback stays available for direct construction without preload.
+  // Loaded Blender props use these same reference anchors, without duplicates.
   // Small green slatted bench below the front-right window.
   const benchU = right * 0.61,
     benchV = front - 0.56,
     benchY = ground(benchU, benchV);
-  for (const u of [benchU - 0.48, benchU + 0.48]) {
-    for (const v of [benchV - 0.18, benchV + 0.18])
+  if (!useHeroProps) {
+    for (const u of [benchU - 0.48, benchU + 0.48]) {
+      for (const v of [benchV - 0.18, benchV + 0.18])
+        beam(
+          [u, benchY + 0.025, v],
+          [u, benchY + 0.42, v],
+          0.045,
+          0.045,
+          "metal",
+          0x363d32,
+        );
       beam(
-        [u, benchY + 0.025, v],
-        [u, benchY + 0.42, v],
-        0.045,
-        0.045,
+        [u, benchY + 0.35, benchV + 0.17],
+        [u, benchY + 0.89, benchV + 0.22],
+        0.04,
+        0.04,
         "metal",
         0x363d32,
       );
-    beam(
-      [u, benchY + 0.35, benchV + 0.17],
-      [u, benchY + 0.89, benchV + 0.22],
-      0.04,
-      0.04,
-      "metal",
-      0x363d32,
-    );
-  }
-  for (let i = 0; i < 4; i++) {
-    box(
-      [benchU, benchY + 0.43, benchV - 0.16 + i * 0.106],
-      [1.29, 0.035, 0.078],
-      "wood",
-      0x596249,
-      0.12,
-    );
-    box(
-      [benchU, benchY + 0.58 + i * 0.092, benchV + 0.22],
-      [1.29, 0.063, 0.03],
-      "wood",
-      0x596249,
-      0.12,
-    );
+    }
+    for (let i = 0; i < 4; i++) {
+      box(
+        [benchU, benchY + 0.43, benchV - 0.16 + i * 0.106],
+        [1.29, 0.035, 0.078],
+        "wood",
+        0x596249,
+        0.12,
+      );
+      box(
+        [benchU, benchY + 0.58 + i * 0.092, benchV + 0.22],
+        [1.29, 0.063, 0.03],
+        "wood",
+        0x596249,
+        0.12,
+      );
+    }
   }
   // Wagon wheel resting against the lower front, slightly left of the entrance.
   const wheelU = -right * 0.34,
     wheelV = front - 0.18,
     wheelY = ground(wheelU, wheelV) + 0.45;
-  const wheel = new T.TorusGeometry(0.44, 0.032, 6, 28);
-  wheel.translate(wheelU, wheelY, wheelV);
-  add(wheel, "wood", 0x71674f);
-  const rim = new T.TorusGeometry(0.46, 0.014, 5, 28);
-  rim.translate(wheelU, wheelY, wheelV);
-  add(rim, "metal", 0x595a50);
-  for (let i = 0; i < 12; i++) {
-    const angle = (i / 12) * Math.PI * 2;
-    beam(
-      [wheelU, wheelY, wheelV],
-      [
-        wheelU + Math.sin(angle) * 0.425,
-        wheelY + Math.cos(angle) * 0.425,
-        wheelV,
-      ],
-      0.024,
-      0.024,
-      "wood",
-      0x71674f,
-    );
+  if (!useHeroProps) {
+    const wheel = new T.TorusGeometry(0.44, 0.032, 6, 28);
+    wheel.translate(wheelU, wheelY, wheelV);
+    add(wheel, "wood", 0x71674f);
+    const rim = new T.TorusGeometry(0.46, 0.014, 5, 28);
+    rim.translate(wheelU, wheelY, wheelV);
+    add(rim, "metal", 0x595a50);
+    for (let i = 0; i < 12; i++) {
+      const angle = (i / 12) * Math.PI * 2;
+      beam(
+        [wheelU, wheelY, wheelV],
+        [
+          wheelU + Math.sin(angle) * 0.425,
+          wheelY + Math.cos(angle) * 0.425,
+          wheelV,
+        ],
+        0.024,
+        0.024,
+        "wood",
+        0x71674f,
+      );
+    }
+    const hub = new T.SphereGeometry(0.061, 8, 5);
+    hub.scale(1, 1, 0.65);
+    hub.translate(wheelU, wheelY, wheelV - 0.017);
+    add(hub, "wood", 0x665d46);
   }
-  const hub = new T.SphereGeometry(0.061, 8, 5);
-  hub.scale(1, 1, 0.65);
-  hub.translate(wheelU, wheelY, wheelV - 0.017);
-  add(hub, "wood", 0x665d46);
   // White tapered ornament/birdbath visible at the left foundation bed.
   const bathU = -right * 0.77,
     bathV = front - 1.15,
     bathY = ground(bathU, bathV);
-  cylinder(
-    [bathU, bathY + 0.065, bathV],
-    0.2,
-    0.15,
-    0.13,
-    "concrete",
-    0xd3d1be,
-    10,
-  );
-  cylinder(
-    [bathU, bathY + 0.32, bathV],
-    0.105,
-    0.075,
-    0.45,
-    "concrete",
-    0xd7d7c7,
-    10,
-  );
-  cylinder(
-    [bathU, bathY + 0.585, bathV],
-    0.09,
-    0.22,
-    0.12,
-    "concrete",
-    0xd3d3c1,
-    12,
-  );
-  cylinder(
-    [bathU, bathY + 0.649, bathV],
-    0.215,
-    0.215,
-    0.018,
-    "concrete",
-    0x9c9e8f,
-    12,
-  );
-
+  if (!useHeroProps) {
+    cylinder(
+      [bathU, bathY + 0.065, bathV],
+      0.2,
+      0.15,
+      0.13,
+      "concrete",
+      0xd3d1be,
+      10,
+    );
+    cylinder(
+      [bathU, bathY + 0.32, bathV],
+      0.105,
+      0.075,
+      0.45,
+      "concrete",
+      0xd7d7c7,
+      10,
+    );
+    cylinder(
+      [bathU, bathY + 0.585, bathV],
+      0.09,
+      0.22,
+      0.12,
+      "concrete",
+      0xd3d3c1,
+      12,
+    );
+    cylinder(
+      [bathU, bathY + 0.649, bathV],
+      0.215,
+      0.215,
+      0.018,
+      "concrete",
+      0x9c9e8f,
+      12,
+    );
+  }
   // Match the mailbox and timber edge seen at the real driveway mouth.
   const route = [
     [-27.086, 33.351],
@@ -832,89 +841,103 @@ export function buildHomeYard(
   ];
   const [mailU, mailV] = local(...mailboxWorld),
     mailY = heightAt(...mailboxWorld);
-  box(
-    [mailU, mailY + 0.65, mailV],
-    [0.105, 1.3, 0.105],
-    "wood",
-    0x91816a,
-    0.16,
-  );
-  box([mailU, mailY + 1.19, mailV - 0.11], [0.1, 0.11, 0.56], "wood", 0x85745c);
-  box(
-    [mailU, mailY + 0.15, mailV - 0.057],
-    [0.12, 0.15, 0.021],
-    "metal",
-    0x8b4f39,
-  );
-  box(
-    [mailU, mailY + 1.34, mailV - 0.1],
-    [0.3, 0.235, 0.57],
-    "metal",
-    0x4f5548,
-  );
-  // Half cylinder roof gives the familiar rural U.S. mailbox silhouette.
-  const rounded = new T.CylinderGeometry(
-    0.15,
-    0.15,
-    0.57,
-    14,
-    1,
-    false,
-    -Math.PI / 2,
-    Math.PI,
-  );
-  rounded.rotateX(-Math.PI / 2);
-  rounded.translate(mailU, mailY + 1.458, mailV - 0.1);
-  add(rounded, "metal", 0x53594d);
-  box(
-    [mailU, mailY + 1.365, mailV - 0.391],
-    [0.26, 0.19, 0.012],
-    "metal",
-    0x5c6254,
-  );
-  box(
-    [mailU, mailY + 1.45, mailV - 0.401],
-    [0.052, 0.018, 0.02],
-    "metal",
-    0xabae9c,
-  );
-  box(
-    [mailU + 0.161, mailY + 1.4, mailV - 0.05],
-    [0.018, 0.028, 0.23],
-    "metal",
-    0xaf4436,
-  );
-  box(
-    [mailU + 0.164, mailY + 1.447, mailV + 0.037],
-    [0.02, 0.085, 0.071],
-    "metal",
-    0xb64e3e,
-  );
-  // White numeral 2 on both long sides, geometry rather than a blurred label.
-  for (const side of [-1, 1]) {
-    const x = mailU + side * 0.157,
-      y = mailY + 1.365,
-      z = mailV - 0.04;
-    for (const [a, b] of [
-      [
-        [x, y + 0.052, z - 0.035],
-        [x, y + 0.052, z + 0.03],
-      ],
-      [
-        [x, y + 0.052, z + 0.03],
-        [x, y + 0.01, z + 0.033],
-      ],
-      [
-        [x, y + 0.01, z + 0.033],
-        [x, y - 0.057, z - 0.034],
-      ],
-      [
-        [x, y - 0.057, z - 0.034],
-        [x, y - 0.057, z + 0.039],
-      ],
-    ] as [P, P][])
-      beam(a, b, 0.012, 0.012, "metal", 0xd5d8cd);
+  if (!useHeroProps) {
+    box(
+      [mailU, mailY + 0.65, mailV],
+      [0.105, 1.3, 0.105],
+      "wood",
+      0x91816a,
+      0.16,
+    );
+    box(
+      [mailU, mailY + 1.19, mailV - 0.11],
+      [0.1, 0.11, 0.56],
+      "wood",
+      0x85745c,
+    );
+    box(
+      [mailU, mailY + 0.15, mailV - 0.057],
+      [0.12, 0.15, 0.021],
+      "metal",
+      0x8b4f39,
+    );
+    box(
+      [mailU, mailY + 1.34, mailV - 0.1],
+      [0.3, 0.235, 0.57],
+      "metal",
+      0x4f5548,
+    );
+    // Half cylinder roof gives the familiar rural U.S. mailbox silhouette.
+    const rounded = new T.CylinderGeometry(
+      0.15,
+      0.15,
+      0.57,
+      14,
+      1,
+      false,
+      -Math.PI / 2,
+      Math.PI,
+    );
+    rounded.rotateX(-Math.PI / 2);
+    rounded.translate(mailU, mailY + 1.458, mailV - 0.1);
+    add(rounded, "metal", 0x53594d);
+    box(
+      [mailU, mailY + 1.365, mailV - 0.391],
+      [0.26, 0.19, 0.012],
+      "metal",
+      0x5c6254,
+    );
+    box(
+      [mailU, mailY + 1.45, mailV - 0.401],
+      [0.052, 0.018, 0.02],
+      "metal",
+      0xabae9c,
+    );
+    box(
+      [mailU + 0.161, mailY + 1.4, mailV - 0.05],
+      [0.018, 0.028, 0.23],
+      "metal",
+      0xaf4436,
+    );
+    box(
+      [mailU + 0.164, mailY + 1.447, mailV + 0.037],
+      [0.02, 0.085, 0.071],
+      "metal",
+      0xb64e3e,
+    );
+    // White numeral 2 on both long sides, geometry rather than a blurred label.
+    for (const side of [-1, 1]) {
+      const x = mailU + side * 0.157,
+        y = mailY + 1.365,
+        z = mailV - 0.04;
+      for (const [a, b] of [
+        [
+          [x, y + 0.052, z - 0.035],
+          [x, y + 0.052, z + 0.03],
+        ],
+        [
+          [x, y + 0.052, z + 0.03],
+          [x, y + 0.01, z + 0.033],
+        ],
+        [
+          [x, y + 0.01, z + 0.033],
+          [x, y - 0.057, z - 0.034],
+        ],
+        [
+          [x, y - 0.057, z - 0.034],
+          [x, y - 0.057, z + 0.039],
+        ],
+      ] as [P, P][])
+        beam(a, b, 0.012, 0.012, "metal", 0xd5d8cd);
+    }
   }
+  const heroProps = buildHomeProps({
+    bench: [benchU, benchY, benchV],
+    wagonWheel: [wheelU, wheelY, wheelV],
+    birdbath: [bathU, bathY, bathV],
+    mailbox: [mailU, mailY, mailV],
+  });
+  if (heroProps) group.add(heroProps);
   for (let i = 0; i < route.length - 1; i++) {
     const a = route[i],
       b = route[i + 1];
@@ -976,6 +999,7 @@ export function buildHomeYard(
       number: "2",
       redFlag: true,
     },
+    heroProps: heroProps?.userData.homeProps ?? null,
     ornaments: {
       bench: frame.point(benchU, benchY, benchV).toArray(),
       wagonWheel: frame.point(wheelU, wheelY, wheelV).toArray(),

@@ -49,6 +49,26 @@ function cast(world: RAPIER.World, x: number, z: number, groups = 0x0008ffff) {
 }
 
 describe("pedestrian scenery collisions", () => {
+  it("keeps imported Home furniture solid under the reflected house transform", () => {
+    const { world, root } = fixture();
+    root.scale.x = -1;
+    root.position.set(8, 1, 3);
+    const bench = new T.Mesh(
+      new T.BoxGeometry(1.5, 0.15, 0.5),
+      new T.MeshStandardMaterial(),
+    );
+    bench.position.set(2, 0.5, 0);
+    bench.userData.homeHeroProp = "bench";
+    root.add(bench);
+    const obstacles = buildExplorationObstacles(world, root, map, () => 0);
+    resources.push(() => obstacles.dispose());
+    world.step();
+    const hit = cast(world, 6, 3)!;
+    expect(hit).not.toBe(null);
+    expect(15 - hit.timeOfImpact).toBeCloseTo(1.575, 4);
+    expect(hit.normal.y).toBeGreaterThan(0.99);
+    expect(cast(world, 6, 3, 0x00020003)).toBe(null);
+  });
   it("protects a high orbit camera from upper stems without blocking the surrounding crown", () => {
     const { world, root } = fixture();
     const trees = new T.Group();

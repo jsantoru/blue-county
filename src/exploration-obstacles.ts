@@ -166,6 +166,10 @@ export function buildExplorationObstacles(
     }
     if (!(object instanceof T.Mesh) || object instanceof T.InstancedMesh)
       return;
+    if (object.userData.homeHeroProp) {
+      solid(object);
+      return;
+    }
     const homeSurface = object.name.startsWith("Home yard · ")
       ? object.name.slice("Home yard · ".length)
       : "";

@@ -736,9 +736,15 @@ try {
       g.simulateFoot(idle, 0.5, 0);
       const traffic = g.getState().ai.find((car) => car.id === 4),
         route = g.route();
-      const next = route[Math.min(traffic.target, route.length - 1)];
-      const dx = next[0] - traffic.position[0],
-        dz = next[2] - traffic.position[2],
+      const target = Math.min(traffic.target, route.length - 1),
+        previous = route[Math.max(0, target - 1)],
+        next = route[target];
+      // Traffic is offset into the right lane. A vector from the car to a
+      // nearby centerline gate points sideways as it reaches that gate; using
+      // it as "forward" could put the explorer well off the car's path.
+      // Preserve the current lane by advancing along the road's tangent.
+      const dx = next[0] - previous[0],
+        dz = next[2] - previous[2],
         length = Math.hypot(dx, dz) || 1;
       const distance =
         Math.max(11, (traffic.speed * traffic.speed) / 16 + 6) - 1.5;
@@ -770,8 +776,29 @@ try {
       }
       const after = g.getState().ai.find((car) => car.id === 4);
       g.resume();
-      return { before: traffic, after, samples, maxStep, minDistance };
+      return {
+        before: traffic,
+        after,
+        fixture: {
+          target,
+          forward: [dx / length, dz / length],
+          pedestrian: [x, z],
+          distance,
+        },
+        samples,
+        maxStep,
+        minDistance,
+      };
     });
+    const fixture = report.traffic.fixture,
+      offsetX = fixture.pedestrian[0] - report.traffic.before.position[0],
+      offsetZ = fixture.pedestrian[1] - report.traffic.before.position[2];
+    assert(
+      offsetX * fixture.forward[0] + offsetZ * fixture.forward[1] > 8 &&
+        Math.abs(offsetX * fixture.forward[1] - offsetZ * fixture.forward[0]) <
+          0.05,
+      "The stationary explorer must start ahead in the traffic lane",
+    );
     assert.equal(
       report.traffic.after.life,
       report.traffic.before.life,
@@ -780,6 +807,12 @@ try {
     assert(
       report.traffic.after.speed < 0.5 && report.traffic.maxStep < 2,
       "Nearby traffic must stop smoothly and remain stopped",
+    );
+    assert(
+      report.traffic.samples
+        .slice(-10)
+        .every((sample) => sample.car.speed < 0.5),
+      "Traffic must remain stopped throughout the final two simulated seconds",
     );
     assert(
       report.traffic.minDistance > 2,
