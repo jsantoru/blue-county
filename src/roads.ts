@@ -11,6 +11,10 @@ import { buildBeverlyDetails } from "./beverly-details";
 import { BeverlyMicrodetail } from "./beverly-microdetail";
 import { buildPropertyDetails } from "./property-details";
 import { createDrivewayQuery } from "./property-footprints";
+import { getHomeFrame, HOME_BUILDING_ID, HOME_DETAIL } from "./home-reference";
+import { buildHomeHouse } from "./home-house";
+import { buildHomeYard } from "./home-yard";
+import { buildHomeTrees } from "./home-trees";
 /** Matches the terrain mesh's diagonal exactly, including its outermost vertices. */
 export function heightAt(map: MapData, x: number, z: number) {
   const g = map.terrain;
@@ -298,6 +302,8 @@ export class Environment {
   isDriveway: (x: number, z: number) => boolean;
   colliders: RAPIER.Collider[] = [];
   cameraObstacles: T.Object3D[] = [];
+  private homeCameraFrame?: T.Matrix4;
+  private homeCameraVolumes: T.Box3[] = [];
   materials = createSurfaceMaterials();
   vegetation?: Vegetation;
   microdetail?: BeverlyMicrodetail;
@@ -309,6 +315,24 @@ export class Environment {
   ) {
     this.isDriveway = createDrivewayQuery(map);
     this.build();
+  }
+  /** Continuous camera envelopes avoid slipping between the deck's balusters. */
+  cameraDistance(origin: T.Vector3, direction: T.Vector3, maximum: number) {
+    if (!this.homeCameraFrame) return;
+    const ray = new T.Ray(origin.clone(), direction.clone()).applyMatrix4(
+      this.homeCameraFrame,
+    );
+    let nearest: number | undefined;
+    for (const volume of this.homeCameraVolumes) {
+      const hit = ray.intersectBox(volume, new T.Vector3());
+      if (!hit) continue;
+      const distance = volume.containsPoint(ray.origin)
+        ? 0
+        : ray.origin.distanceTo(hit);
+      if (distance <= maximum && (nearest === undefined || distance < nearest))
+        nearest = distance;
+    }
+    return nearest;
   }
   collider(mesh: T.Mesh) {
     const p = mesh.geometry.getAttribute("position");
@@ -439,7 +463,10 @@ export class Environment {
       base = building.baseHeight ?? Math.max(...corners),
       wallHeight =
         building.wallHeight ?? Math.max(2.8, (building.height || 5) * 0.72),
-      wallTop = base + wallHeight;
+      wallTop =
+        building.id === HOME_BUILDING_ID
+          ? getHomeFrame(this.map, (x, z) => heightAt(this.map, x, z))!.eaveY
+          : base + wallHeight;
     // Detailed facades share the original, road-clear collision envelope.
     this.colliders.push(
       this.world.createCollider(
@@ -628,15 +655,113 @@ export class Environment {
       this.house(building, index),
     );
     this.root.add(
-      buildNeighborhood(this.houses, {
-        heightAt: (x, z) => heightAt(map, x, z),
-        roadClearance: (x, z) => {
-          const near = nearestRoad(map, x, z);
-          return near.distance - (near.road?.width ?? 8) / 2;
+      buildNeighborhood(
+        this.houses.filter((house) => house.id !== HOME_BUILDING_ID),
+        {
+          heightAt: (x, z) => heightAt(map, x, z),
+          roadClearance: (x, z) => {
+            const near = nearestRoad(map, x, z);
+            return near.distance - (near.road?.width ?? 8) / 2;
+          },
+          materials: this.materials,
         },
-        materials: this.materials,
-      }),
+      ),
     );
+    const homeFrame = getHomeFrame(map, (x, z) => heightAt(map, x, z));
+    if (homeFrame) {
+      const house = buildHomeHouse(homeFrame);
+      const right = homeFrame.width / 2,
+        back = homeFrame.depth / 2;
+      this.homeCameraFrame = new T.Matrix4()
+        .set(
+          homeFrame.right[0],
+          0,
+          homeFrame.back[0],
+          homeFrame.center[0],
+          0,
+          1,
+          0,
+          0,
+          homeFrame.right[1],
+          0,
+          homeFrame.back[1],
+          homeFrame.center[1],
+          0,
+          0,
+          0,
+          1,
+        )
+        .invert();
+      this.homeCameraVolumes = [
+        new T.Box3(
+          new T.Vector3(
+            right,
+            homeFrame.upperFloorY - 0.3,
+            HOME_DETAIL.sideDeckFront,
+          ),
+          new T.Vector3(
+            right + HOME_DETAIL.sideDeckWidth,
+            homeFrame.upperFloorY + 1.2,
+            back + HOME_DETAIL.rearDeckDepth,
+          ),
+        ),
+        new T.Box3(
+          new T.Vector3(
+            HOME_DETAIL.rearDeckLeft,
+            homeFrame.upperFloorY - 0.3,
+            back,
+          ),
+          new T.Vector3(
+            HOME_DETAIL.screenRoomRight,
+            homeFrame.eaveY + 0.15,
+            back + HOME_DETAIL.rearDeckDepth,
+          ),
+        ),
+      ];
+      const yard = buildHomeYard(homeFrame, sample, (ring, offset) => {
+        const points = ring.map(([u, v]): [number, number] => {
+          const p = homeFrame.point(u, 0, v);
+          return [p.x, p.z];
+        });
+        const mesh = groundPolygonMesh(points, 0xffffff, offset, sample);
+        mesh.material.dispose();
+        const geometry = mesh.geometry;
+        // Convert the terrain-clipped world mesh into the yard's reflected
+        // photo-facing frame. Reverse winding so its local top still faces up.
+        const position = geometry.getAttribute("position");
+        for (let i = 0; i < position.count; i++) {
+          const x = position.getX(i) - homeFrame.center[0],
+            z = position.getZ(i) - homeFrame.center[1];
+          position.setXYZ(
+            i,
+            x * homeFrame.right[0] + z * homeFrame.right[1],
+            position.getY(i),
+            x * homeFrame.back[0] + z * homeFrame.back[1],
+          );
+        }
+        for (let i = 0; i < position.count; i += 3) {
+          const b = new T.Vector3().fromBufferAttribute(position, i + 1);
+          position.setXYZ(
+            i + 1,
+            position.getX(i + 2),
+            position.getY(i + 2),
+            position.getZ(i + 2),
+          );
+          position.setXYZ(i + 2, b.x, b.y, b.z);
+        }
+        geometry.computeVertexNormals();
+        return geometry;
+      });
+      this.root.add(
+        house,
+        yard,
+        buildHomeTrees(homeFrame, (x, z) => heightAt(map, x, z)),
+      );
+      house.traverse((object) => {
+        if (object instanceof T.Mesh) this.cameraObstacles.push(object);
+      });
+      this.root.userData.homeFrame = homeFrame;
+    }
     this.vegetation = new Vegetation(map, heightAt, nearestRoad, {
       test: this.test,
       barkMaterial: this.materials.bark,
@@ -761,7 +886,9 @@ export class Environment {
       >(),
       obstacles = new Set(this.cameraObstacles),
       disposedMaterials = new Set<T.Material>();
-    this.cameraObstacles = [];
+    this.cameraObstacles = this.cameraObstacles.filter(
+      (object) => object.parent !== this.root,
+    );
     for (const mesh of [...this.root.children]) {
       if (
         !(mesh instanceof T.Mesh) ||

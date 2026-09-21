@@ -10,6 +10,8 @@ interface Evidence {
   confidence?: string;
 }
 interface FootprintFeature extends Evidence {
+  /** A dedicated, better-supported property renderer owns this source feature. */
+  renderedBy?: string;
   /** Ordered perimeter in world X/Z meters; a repeated closing point is optional. */
   points: PropertyPoint[];
   /** Rendered height above the highest sampled ground under the footprint. */
@@ -425,6 +427,8 @@ export function buildPropertyDetails(
     .filter((p: PropertyPoint[]) => p.length > 2);
 
   for (const feature of survey?.propertyFeatures ?? []) {
+    // User photographs and description supersede the small aerial-only Home deck.
+    if (feature.renderedBy === "home-yard") continue;
     const points = polygon(feature.points);
     if (!points.length) {
       omitted.push({
