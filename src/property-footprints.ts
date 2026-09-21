@@ -1,4 +1,11 @@
 import type { MapData } from "./types";
+import {
+  getHomeFrame,
+  homeDeckOutline,
+  homePatioOutline,
+  homeFrontWalk,
+  homeWorldOutline,
+} from "./home-reference";
 
 export type GroundPoint = [number, number];
 
@@ -34,9 +41,24 @@ export function polygonDistance(x: number, z: number, points: GroundPoint[]) {
 /** Shared clearance prevents grass, roots and tree trunks growing through traced hardscape. */
 export function createPropertyClearance(map: MapData) {
   const survey = map.beverlySurvey;
+  const home = getHomeFrame(map, () => 0);
+  const homePolygons = home
+    ? [
+        homeDeckOutline(home),
+        homePatioOutline(home),
+        homeFrontWalk(home),
+        [
+          [-home.width / 2 - 0.3, -home.depth / 2],
+          [home.width / 2 + 0.3, -home.depth / 2],
+          [home.width / 2 + 0.3, -home.depth / 2 - 1.8],
+          [-home.width / 2 - 0.3, -home.depth / 2 - 1.8],
+        ] as [number, number][],
+      ].map((outline) => ({ points: homeWorldOutline(home, outline) }))
+    : [];
   const polygons = [
     ...(survey?.drivewaySurfaces ?? []),
     ...(survey?.propertyFeatures ?? []),
+    ...homePolygons,
   ]
     .filter(
       (feature: { points?: GroundPoint[] }) =>

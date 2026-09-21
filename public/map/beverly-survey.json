@@ -7922,8 +7922,8 @@
       "style": "Raised ranch",
       "sourceDate": "2013",
       "roadCenterDistanceMeters": 24.7,
-      "photographedFacade": false,
-      "appearanceConfidence": "Footprint and parcel style supported; paint and facade details unverified"
+      "photographedFacade": true,
+      "appearanceConfidence": "Photo-observed front facade from user-supplied views; side/rear relationships confirmed by user, dimensions approximate"
     },
     {
       "id": "nys-7206297",
@@ -8426,10 +8426,14 @@
     {
       "name": "Follow-up exterior photographs",
       "url": "../../docs/research-streetview/property-followup.md"
+    },
+    {
+      "name": "Home user-supplied street views and direct description",
+      "url": "../../docs/research-streetview/home-photo-observations.md"
     }
   ],
   "limits": [
-    "Ground photographs verified only for numbers12,20,22,26,29,34,35,41. Listing dates are historical context, not image capture dates; current paint conditions remain unverified.",
+    "Ground photographs verified only for numbers2,12,20,22,26,29,34,35,41. Listing dates are historical context, not image capture dates; current paint conditions remain unverified.",
     "Footprints have mixed source dates, chiefly2013; manually crosschecked against2025orthophoto.",
     "Canopy centers approximate trunks. Woodland stems and exact species/heights remain representative.",
     "OSM centerlines retained,9.2m pavement reflects observed local cross-sections; ground grade remains USGS30m DEM.",
@@ -9445,7 +9449,10 @@
       ],
       "supportingSourceIds": [
         "home-2016"
-      ]
+      ],
+      "renderedBy": "home-yard",
+      "supersededBy": "home-user-photos-2026-09-20",
+      "renderNote": "Retained aerial trace is evidence for part of the rear deck. The dedicated Home renderer supplies the complete user-confirmed elevated side/rear deck and patio."
     },
     {
       "id": "east-deck-4",
@@ -11099,7 +11106,8 @@
   "propertySourceSha256": {
     "property-east-observations.json": "01748884b87d9ccfb26b7aff79698b6e632905fd995c269c6c5f7359d615945f",
     "property-west-observations.json": "4ca76e1e22f9590dfbf79f26058e4847eaad1eb0e5425b1eba3d08f70da77628",
-    "alternative-28-subdivision.json": "b29e3aaacf684c5f5dec68b48378c73d98df5fbb269ae989ba894f8429d9289e"
+    "alternative-28-subdivision.json": "b29e3aaacf684c5f5dec68b48378c73d98df5fbb269ae989ba894f8429d9289e",
+    "../research-streetview/home-photo-reference.json": "c948966d41630841d8ca48631af6d98619b35bfb4b51ced5bbd14df5f0e4221d"
   },
   "drivewaySurfaces": [
     {
@@ -18491,5 +18499,33 @@
         }
       ]
     }
-  ]
+  ],
+  "homeReference": {
+    "schemaVersion": 1,
+    "address": "2 Beverly Dr",
+    "buildingId": "nys-7159466",
+    "referenceId": "home-user-photos-2026-09-20",
+    "providedDate": "2026-09-20",
+    "captureDate": null,
+    "source": "Three street-level screenshots supplied by the user, plus the user's direct description of the side and rear layout",
+    "attachments": [
+      "codex-clipboard-4cbaa5d0-54fd-4f90-8baf-254774f303af.png",
+      "codex-clipboard-8d66f726-aaf6-4392-9dd0-37a533740a51.png",
+      "codex-clipboard-334cf217-28cc-434f-82ba-36772f0dadd1.png"
+    ],
+    "observedFront": [
+      "Pale horizontal siding, burgundy louvered shutters, low brown shingle roof",
+      "Three asymmetric upper window groups, larger picture window on viewer-right",
+      "Muted red entry offset to about 62 percent of facade width, lamp and eagle above",
+      "Short lower windows, narrow front planting beds, bench, wheel ornament, pale pedestal",
+      "Concrete path turns toward the driveway, open lawn and exposed mature deciduous trunks",
+      "Dark rounded mailbox with red flag and number 2 on weathered wood post"
+    ],
+    "userConfirmed": [
+      "Elevated deck on viewer-right, the driveway side",
+      "Patio underneath, red lower door and sliders directly above",
+      "Deck wraps around the back to a roofed screened enclosure"
+    ],
+    "limits": "Exact dimensions, grades, trunk coordinates and hidden rear construction are approximations. Source screenshots are references, not bundled images or photographic game textures. The original state footprint and existing driveway geometry remain authoritative for placement."
+  }
 }

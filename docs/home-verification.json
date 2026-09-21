@@ -1,0 +1,6130 @@
+{
+  "date": "2026-09-21T01:22:44.588Z",
+  "browser": "153.0.4234.48",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "errors": [],
+  "warnings": [
+    "THREE.WebGLProgram: Program Info Log: (210,81-129): warning X4122: sum of 0.996094 and -2.98545e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision"
+  ],
+  "screenshots": [
+    "docs/home-start.png",
+    "docs/home-front.png",
+    "docs/home-front-details.png",
+    "docs/home-driveway-deck.png",
+    "docs/home-screened-porch.png"
+  ],
+  "views": [
+    {
+      "label": "front",
+      "state": {
+        "ready": true,
+        "screen": "pause",
+        "mode": "neighborhood",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20539984107017517,
+          -0.2689357399940491,
+          19.598726272583008
+        ],
+        "rotation": [
+          0.02580794133245945,
+          -0.12079507857561111,
+          -0.02330438233911991,
+          0.9920682311058044
+        ],
+        "camera": {
+          "position": [
+            -31.3,
+            5.312888960323904,
+            -4.89
+          ],
+          "target": [
+            1.97,
+            2.412535235627519,
+            2.13
+          ],
+          "mode": 0,
+          "inspection": true
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.561759477377738,
+        "ai": [
+          {
+            "id": 1,
+            "target": 6,
+            "speed": 9.039292398600635,
+            "position": [
+              886.6143188476562,
+              33.940711975097656,
+              -369.3836364746094
+            ]
+          },
+          {
+            "id": 2,
+            "target": 11,
+            "speed": 8.458878831924492,
+            "position": [
+              875.2342529296875,
+              35.97708511352539,
+              -418.5233459472656
+            ]
+          },
+          {
+            "id": 3,
+            "target": 16,
+            "speed": 8.245806052310797,
+            "position": [
+              923.6106567382812,
+              41.760528564453125,
+              -436.29461669921875
+            ]
+          },
+          {
+            "id": 4,
+            "target": 136,
+            "speed": 10.187039740736632,
+            "position": [
+              1393.3023681640625,
+              15.750493049621582,
+              -188.368896484375
+            ]
+          },
+          {
+            "id": 5,
+            "target": 170,
+            "speed": 8.579610040335798,
+            "position": [
+              1229.0936279296875,
+              -2.619119644165039,
+              137.57589721679688
+            ]
+          },
+          {
+            "id": 6,
+            "target": 203,
+            "speed": 9.414942439142767,
+            "position": [
+              1104.985107421875,
+              5.397805690765381,
+              223.5319061279297
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 67,
+          "p50": 16.69999999999891,
+          "p95": 16.80000000000109,
+          "physicsMs": 1.5,
+          "width": 1920,
+          "height": 1080,
+          "draws": 774,
+          "triangles": 4485990,
+          "vegetation": {
+            "trees": 18925,
+            "shrubs": 1099,
+            "grassTufts": 6084,
+            "chunks": 283,
+            "visibleChunks": 90,
+            "visibleBatches": 546,
+            "totalBatches": 3504,
+            "referenceTreeCount": 93,
+            "referenceWoodlandTreeCount": 280,
+            "referenceOmittedTreeCount": 29
+          },
+          "scenery": [
+            {
+              "houses": 452,
+              "batches": 615,
+              "triangles": 1338577,
+              "detailFeatures": 9693,
+              "referenceFacades": 64
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 11,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 20,
+              "triangles": 20971
+            },
+            {
+              "grassBlades": 30996,
+              "pebbles": 3192,
+              "soilFragments": 2473,
+              "leaves": 5997,
+              "rootRibs": 372,
+              "grassTriangles": 92988,
+              "groundTriangles": 40344,
+              "totalTriangles": 133332,
+              "batches": 112,
+              "visibleDrawCalls": 22,
+              "visibleTriangles": 31437,
+              "treeContacts": 93,
+              "rejected": 6362,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "details": {
+        "frame": {
+          "center": [
+            1.9676009833524748,
+            2.128521302902241
+          ],
+          "right": [
+            -0.20641173533373336,
+            0.978465224479908
+          ],
+          "back": [
+            0.978465224479908,
+            0.20641173533373336
+          ],
+          "width": 14.964375027627607,
+          "depth": 9.97483031604948,
+          "groundY": 0.1499821544504056,
+          "foundationY": -0.9053788262348219,
+          "lowerFloorY": 0.029982154450405613,
+          "upperFloorY": 2.2799821544504058,
+          "entryFloorY": 0.6099821544504056,
+          "eaveY": 4.529982154450406,
+          "ridgeY": 6.029982154450406
+        },
+        "house": {
+          "reference": "User-supplied three street-level views and direct description",
+          "frontFacing": "Beverly Drive",
+          "frontDoorOffsetFraction": 0.62,
+          "frontDoorCenter": [
+            -3.283070022935186,
+            0.6099821544504056,
+            2.85611475377769
+          ],
+          "sideDoorCenterV": 1.2,
+          "sideDoorAlignedWithSliders": true,
+          "roof": {
+            "type": "low gable",
+            "ridgeParallelToFront": true,
+            "eaveY": 4.529982154450406,
+            "ridgeY": 6.029982154450406
+          },
+          "observedFront": true,
+          "hiddenSideRearWindowSpacing": "approximate",
+          "openings": [
+            {
+              "id": "front-upper-left",
+              "face": "front",
+              "center": -5.4919256351393315,
+              "width": 2.0800481288402377,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7788134081457736,
+                3.684982154450406,
+                -4.274597964108979
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-middle",
+              "face": "front",
+              "center": -0.8380050015471461,
+              "width": 1.9453687535915891,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.7394372422310043,
+                3.684982154450406,
+                0.2791015333504747
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-picture",
+              "face": "front",
+              "center": 5.057958759338131,
+              "width": 2.7085518800005968,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "picture",
+              "shutters": true,
+              "centerWorld": [
+                -3.956433353580139,
+                3.684982154450406,
+                6.04809703817049
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-left",
+              "face": "front",
+              "center": -5.506890010166959,
+              "width": 2.12494125392312,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7757245855281356,
+                1.0149821544504056,
+                -4.289240084679588
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-middle",
+              "face": "front",
+              "center": -1.1223281270720704,
+              "width": 1.720903128177175,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.6807496124958936,
+                1.0149821544504056,
+                0.0009012425089003351
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-right",
+              "face": "front",
+              "center": 5.042994384310504,
+              "width": 1.8555825034258233,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -3.953344530962502,
+                1.0149821544504056,
+                6.033454917599881
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-entry",
+              "face": "front",
+              "center": 1.7957250033153127,
+              "width": 1.03,
+              "bottom": 0.6099821544504056,
+              "top": 2.689982154450406,
+              "kind": "door",
+              "centerWorld": [
+                -3.283070022935186,
+                1.6499821544504059,
+                2.85611475377769
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-patio-red-door",
+              "face": "right",
+              "center": 1.2,
+              "width": 0.99,
+              "bottom": 0.07998215445040562,
+              "top": 2.1399821544504056,
+              "kind": "door",
+              "centerWorld": [
+                1.5973479439096652,
+                1.1099821544504056,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-deck-sliders",
+              "face": "right",
+              "center": 1.2,
+              "width": 2.26,
+              "bottom": 2.319982154450406,
+              "top": 4.409982154450406,
+              "kind": "slider",
+              "centerWorld": [
+                1.5973479439096652,
+                3.3649821544504057,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "left-upper-window",
+              "face": "left",
+              "center": -1.2967279410864325,
+              "width": 1.05,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "single",
+              "centerWorld": [
+                2.2432090962066686,
+                3.684982154450406,
+                -5.460198846977737
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-left",
+              "face": "back",
+              "center": -4.190025007735731,
+              "width": 1.4,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                7.7124836084621196,
+                3.684982154450406,
+                -0.9418114392706762
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-middle",
+              "face": "back",
+              "center": 0.29928750055255215,
+              "width": 1.45,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                6.7858368231709,
+                3.684982154450406,
+                3.4508247319120775
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            }
+          ],
+          "sidingCourseMeters": 0.175,
+          "lampAndEagle": true,
+          "shutters": "burgundy louvered",
+          "windowStyle": "paired double-hung and right picture window with vertical blinds",
+          "batches": 14,
+          "triangles": 11798
+        },
+        "yard": {
+          "source": "Owner supplied street photographs and explicit deck/patio/rear screen room description",
+          "rearDimensions": "Inferred; rear is hidden in the supplied photographs",
+          "deck": {
+            "points": [
+              [
+                -0.3595825050501509,
+                9.284452199939842
+              ],
+              [
+                -0.937535363984604,
+                12.024154828483583
+              ],
+              [
+                7.1714121689702655,
+                13.734774572682557
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ],
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 2.2799821544504058,
+            "side": "right from road",
+            "wraparound": true
+          },
+          "patio": {
+            "points": [
+              [
+                -0.21281272137816465,
+                9.315413960239903
+              ],
+              [
+                -0.7701244067792449,
+                11.957270066335656
+              ],
+              [
+                4.745890281303868,
+                13.120898711900235
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 0.029982154450405613,
+            "belowDeck": true
+          },
+          "screenRoom": {
+            "points": [
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                6.145813375388954,
+                6.484764083731581
+              ],
+              [
+                8.591976436588725,
+                7.0007934220659145
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ]
+            ],
+            "roofed": true,
+            "doorTowardSideDeck": true
+          },
+          "path": {
+            "points": [
+              [
+                -3.0972994611348263,
+                1.9754960517457723
+              ],
+              [
+                -3.4688405847355464,
+                3.736733455809607
+              ],
+              [
+                -5.230077988799381,
+                3.365192332208887
+              ],
+              [
+                -6.593937558329458,
+                9.830372995031526
+              ],
+              [
+                0.13584816116869602,
+                14.967284163657181
+              ],
+              [
+                -0.5922513667300556,
+                15.921155788915854
+              ],
+              [
+                -7.924552389917324,
+                10.324338804296506
+              ],
+              [
+                -6.032695134574551,
+                1.3562608457445722
+              ]
+            ],
+            "turnsTowardDriveway": true
+          },
+          "frontBeds": [
+            [
+              [
+                -1.365856261912449,
+                -6.425949514309331
+              ],
+              [
+                -3.188041003947456,
+                2.2118558884523996
+              ],
+              [
+                -4.341022165268085,
+                1.8153279050265962
+              ],
+              [
+                -2.6170820493521343,
+                -5.8722943609458484
+              ],
+              [
+                -1.9703609630024417,
+                -6.757874304525577
+              ]
+            ],
+            [
+              [
+                -3.466696846647996,
+                3.532783941500276
+              ],
+              [
+                -4.547564160450028,
+                8.656480407315804
+              ],
+              [
+                -5.668750554629461,
+                8.593702469256945
+              ],
+              [
+                -4.60386024513224,
+                3.497295842822476
+              ]
+            ]
+          ],
+          "mailbox": {
+            "position": [
+              -26.69693152776886,
+              -0.2061564814368604,
+              30.243167037320745
+            ],
+            "number": "2",
+            "redFlag": true
+          },
+          "ornaments": {
+            "bench": [
+              -4.402442732906854,
+              -0.058437132566707684,
+              5.449316487553497
+            ],
+            "wagonWheel": [
+              -2.5634352042267246,
+              0.8004450123262687,
+              -1.4272543240590436
+            ],
+            "birdbath": [
+              -2.848449609180195,
+              0.6818598334459939,
+              -4.775529630013738
+            ]
+          },
+          "details": [
+            "open lawn",
+            "sparse dormant foundation shrubs",
+            "front right bench",
+            "wagon wheel",
+            "white birdbath",
+            "right turning concrete entry path",
+            "driveway timber edging"
+          ],
+          "triangles": 14301,
+          "drawCalls": 7
+        },
+        "trees": {
+          "source": "Owner supplied street photographs",
+          "coordinateConfidence": "Photo perspective estimates, not measured trunk coordinates",
+          "trees": [
+            {
+              "id": "home-front-deciduous-1",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -12.519625785335133,
+                2.1320260774425477,
+                -11.55651653236227
+              ],
+              "localPosition": [
+                -10.4,
+                -17
+              ],
+              "radiusMeters": 0.48,
+              "heightMeters": 15.32,
+              "bareTrunkHeightMeters": 5.6,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-2",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.616695417327854,
+                0.9776231862681128,
+                3.2290270477220933
+              ],
+              "localPosition": [
+                4.5,
+                -16
+              ],
+              "radiusMeters": 0.42,
+              "heightMeters": 15.74,
+              "bareTrunkHeightMeters": 6.5,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-3",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.670288869516613,
+                0.5488839807578179,
+                8.327764905455368
+              ],
+              "localPosition": [
+                9.5,
+                -15
+              ],
+              "radiusMeters": 0.37,
+              "heightMeters": 15.82,
+              "bareTrunkHeightMeters": 5.9,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            }
+          ],
+          "triangles": 16536,
+          "drawCalls": 2,
+          "drivewayPositionsShifted": false
+        }
+      },
+      "glError": 0
+    },
+    {
+      "label": "front-details",
+      "state": {
+        "ready": true,
+        "screen": "pause",
+        "mode": "neighborhood",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20539984107017517,
+          -0.2689357399940491,
+          19.598726272583008
+        ],
+        "rotation": [
+          0.02580794133245945,
+          -0.12079507857561111,
+          -0.02330438233911991,
+          0.9920682311058044
+        ],
+        "camera": {
+          "position": [
+            -18.58,
+            4.094176442105244,
+            -2.21
+          ],
+          "target": [
+            1.97,
+            2.412535235627519,
+            2.13
+          ],
+          "mode": 0,
+          "inspection": true
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.561759477377738,
+        "ai": [
+          {
+            "id": 1,
+            "target": 6,
+            "speed": 9.039292398600635,
+            "position": [
+              886.6143188476562,
+              33.940711975097656,
+              -369.3836364746094
+            ]
+          },
+          {
+            "id": 2,
+            "target": 11,
+            "speed": 8.458878831924492,
+            "position": [
+              875.2342529296875,
+              35.97708511352539,
+              -418.5233459472656
+            ]
+          },
+          {
+            "id": 3,
+            "target": 16,
+            "speed": 8.245806052310797,
+            "position": [
+              923.6106567382812,
+              41.760528564453125,
+              -436.29461669921875
+            ]
+          },
+          {
+            "id": 4,
+            "target": 136,
+            "speed": 10.187039740736632,
+            "position": [
+              1393.3023681640625,
+              15.750493049621582,
+              -188.368896484375
+            ]
+          },
+          {
+            "id": 5,
+            "target": 170,
+            "speed": 8.579610040335798,
+            "position": [
+              1229.0936279296875,
+              -2.619119644165039,
+              137.57589721679688
+            ]
+          },
+          {
+            "id": 6,
+            "target": 203,
+            "speed": 9.414942439142767,
+            "position": [
+              1104.985107421875,
+              5.397805690765381,
+              223.5319061279297
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 67,
+          "p50": 16.69999999999891,
+          "p95": 16.80000000000109,
+          "physicsMs": 1.5,
+          "width": 1920,
+          "height": 1080,
+          "draws": 759,
+          "triangles": 4382885,
+          "vegetation": {
+            "trees": 18925,
+            "shrubs": 1099,
+            "grassTufts": 6084,
+            "chunks": 283,
+            "visibleChunks": 90,
+            "visibleBatches": 546,
+            "totalBatches": 3504,
+            "referenceTreeCount": 93,
+            "referenceWoodlandTreeCount": 280,
+            "referenceOmittedTreeCount": 29
+          },
+          "scenery": [
+            {
+              "houses": 452,
+              "batches": 615,
+              "triangles": 1338577,
+              "detailFeatures": 9693,
+              "referenceFacades": 64
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 11,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 20,
+              "triangles": 20971
+            },
+            {
+              "grassBlades": 30996,
+              "pebbles": 3192,
+              "soilFragments": 2473,
+              "leaves": 5997,
+              "rootRibs": 372,
+              "grassTriangles": 92988,
+              "groundTriangles": 40344,
+              "totalTriangles": 133332,
+              "batches": 112,
+              "visibleDrawCalls": 24,
+              "visibleTriangles": 32061,
+              "treeContacts": 93,
+              "rejected": 6362,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "details": {
+        "frame": {
+          "center": [
+            1.9676009833524748,
+            2.128521302902241
+          ],
+          "right": [
+            -0.20641173533373336,
+            0.978465224479908
+          ],
+          "back": [
+            0.978465224479908,
+            0.20641173533373336
+          ],
+          "width": 14.964375027627607,
+          "depth": 9.97483031604948,
+          "groundY": 0.1499821544504056,
+          "foundationY": -0.9053788262348219,
+          "lowerFloorY": 0.029982154450405613,
+          "upperFloorY": 2.2799821544504058,
+          "entryFloorY": 0.6099821544504056,
+          "eaveY": 4.529982154450406,
+          "ridgeY": 6.029982154450406
+        },
+        "house": {
+          "reference": "User-supplied three street-level views and direct description",
+          "frontFacing": "Beverly Drive",
+          "frontDoorOffsetFraction": 0.62,
+          "frontDoorCenter": [
+            -3.283070022935186,
+            0.6099821544504056,
+            2.85611475377769
+          ],
+          "sideDoorCenterV": 1.2,
+          "sideDoorAlignedWithSliders": true,
+          "roof": {
+            "type": "low gable",
+            "ridgeParallelToFront": true,
+            "eaveY": 4.529982154450406,
+            "ridgeY": 6.029982154450406
+          },
+          "observedFront": true,
+          "hiddenSideRearWindowSpacing": "approximate",
+          "openings": [
+            {
+              "id": "front-upper-left",
+              "face": "front",
+              "center": -5.4919256351393315,
+              "width": 2.0800481288402377,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7788134081457736,
+                3.684982154450406,
+                -4.274597964108979
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-middle",
+              "face": "front",
+              "center": -0.8380050015471461,
+              "width": 1.9453687535915891,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.7394372422310043,
+                3.684982154450406,
+                0.2791015333504747
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-picture",
+              "face": "front",
+              "center": 5.057958759338131,
+              "width": 2.7085518800005968,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "picture",
+              "shutters": true,
+              "centerWorld": [
+                -3.956433353580139,
+                3.684982154450406,
+                6.04809703817049
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-left",
+              "face": "front",
+              "center": -5.506890010166959,
+              "width": 2.12494125392312,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7757245855281356,
+                1.0149821544504056,
+                -4.289240084679588
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-middle",
+              "face": "front",
+              "center": -1.1223281270720704,
+              "width": 1.720903128177175,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.6807496124958936,
+                1.0149821544504056,
+                0.0009012425089003351
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-right",
+              "face": "front",
+              "center": 5.042994384310504,
+              "width": 1.8555825034258233,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -3.953344530962502,
+                1.0149821544504056,
+                6.033454917599881
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-entry",
+              "face": "front",
+              "center": 1.7957250033153127,
+              "width": 1.03,
+              "bottom": 0.6099821544504056,
+              "top": 2.689982154450406,
+              "kind": "door",
+              "centerWorld": [
+                -3.283070022935186,
+                1.6499821544504059,
+                2.85611475377769
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-patio-red-door",
+              "face": "right",
+              "center": 1.2,
+              "width": 0.99,
+              "bottom": 0.07998215445040562,
+              "top": 2.1399821544504056,
+              "kind": "door",
+              "centerWorld": [
+                1.5973479439096652,
+                1.1099821544504056,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-deck-sliders",
+              "face": "right",
+              "center": 1.2,
+              "width": 2.26,
+              "bottom": 2.319982154450406,
+              "top": 4.409982154450406,
+              "kind": "slider",
+              "centerWorld": [
+                1.5973479439096652,
+                3.3649821544504057,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "left-upper-window",
+              "face": "left",
+              "center": -1.2967279410864325,
+              "width": 1.05,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "single",
+              "centerWorld": [
+                2.2432090962066686,
+                3.684982154450406,
+                -5.460198846977737
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-left",
+              "face": "back",
+              "center": -4.190025007735731,
+              "width": 1.4,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                7.7124836084621196,
+                3.684982154450406,
+                -0.9418114392706762
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-middle",
+              "face": "back",
+              "center": 0.29928750055255215,
+              "width": 1.45,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                6.7858368231709,
+                3.684982154450406,
+                3.4508247319120775
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            }
+          ],
+          "sidingCourseMeters": 0.175,
+          "lampAndEagle": true,
+          "shutters": "burgundy louvered",
+          "windowStyle": "paired double-hung and right picture window with vertical blinds",
+          "batches": 14,
+          "triangles": 11798
+        },
+        "yard": {
+          "source": "Owner supplied street photographs and explicit deck/patio/rear screen room description",
+          "rearDimensions": "Inferred; rear is hidden in the supplied photographs",
+          "deck": {
+            "points": [
+              [
+                -0.3595825050501509,
+                9.284452199939842
+              ],
+              [
+                -0.937535363984604,
+                12.024154828483583
+              ],
+              [
+                7.1714121689702655,
+                13.734774572682557
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ],
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 2.2799821544504058,
+            "side": "right from road",
+            "wraparound": true
+          },
+          "patio": {
+            "points": [
+              [
+                -0.21281272137816465,
+                9.315413960239903
+              ],
+              [
+                -0.7701244067792449,
+                11.957270066335656
+              ],
+              [
+                4.745890281303868,
+                13.120898711900235
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 0.029982154450405613,
+            "belowDeck": true
+          },
+          "screenRoom": {
+            "points": [
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                6.145813375388954,
+                6.484764083731581
+              ],
+              [
+                8.591976436588725,
+                7.0007934220659145
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ]
+            ],
+            "roofed": true,
+            "doorTowardSideDeck": true
+          },
+          "path": {
+            "points": [
+              [
+                -3.0972994611348263,
+                1.9754960517457723
+              ],
+              [
+                -3.4688405847355464,
+                3.736733455809607
+              ],
+              [
+                -5.230077988799381,
+                3.365192332208887
+              ],
+              [
+                -6.593937558329458,
+                9.830372995031526
+              ],
+              [
+                0.13584816116869602,
+                14.967284163657181
+              ],
+              [
+                -0.5922513667300556,
+                15.921155788915854
+              ],
+              [
+                -7.924552389917324,
+                10.324338804296506
+              ],
+              [
+                -6.032695134574551,
+                1.3562608457445722
+              ]
+            ],
+            "turnsTowardDriveway": true
+          },
+          "frontBeds": [
+            [
+              [
+                -1.365856261912449,
+                -6.425949514309331
+              ],
+              [
+                -3.188041003947456,
+                2.2118558884523996
+              ],
+              [
+                -4.341022165268085,
+                1.8153279050265962
+              ],
+              [
+                -2.6170820493521343,
+                -5.8722943609458484
+              ],
+              [
+                -1.9703609630024417,
+                -6.757874304525577
+              ]
+            ],
+            [
+              [
+                -3.466696846647996,
+                3.532783941500276
+              ],
+              [
+                -4.547564160450028,
+                8.656480407315804
+              ],
+              [
+                -5.668750554629461,
+                8.593702469256945
+              ],
+              [
+                -4.60386024513224,
+                3.497295842822476
+              ]
+            ]
+          ],
+          "mailbox": {
+            "position": [
+              -26.69693152776886,
+              -0.2061564814368604,
+              30.243167037320745
+            ],
+            "number": "2",
+            "redFlag": true
+          },
+          "ornaments": {
+            "bench": [
+              -4.402442732906854,
+              -0.058437132566707684,
+              5.449316487553497
+            ],
+            "wagonWheel": [
+              -2.5634352042267246,
+              0.8004450123262687,
+              -1.4272543240590436
+            ],
+            "birdbath": [
+              -2.848449609180195,
+              0.6818598334459939,
+              -4.775529630013738
+            ]
+          },
+          "details": [
+            "open lawn",
+            "sparse dormant foundation shrubs",
+            "front right bench",
+            "wagon wheel",
+            "white birdbath",
+            "right turning concrete entry path",
+            "driveway timber edging"
+          ],
+          "triangles": 14301,
+          "drawCalls": 7
+        },
+        "trees": {
+          "source": "Owner supplied street photographs",
+          "coordinateConfidence": "Photo perspective estimates, not measured trunk coordinates",
+          "trees": [
+            {
+              "id": "home-front-deciduous-1",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -12.519625785335133,
+                2.1320260774425477,
+                -11.55651653236227
+              ],
+              "localPosition": [
+                -10.4,
+                -17
+              ],
+              "radiusMeters": 0.48,
+              "heightMeters": 15.32,
+              "bareTrunkHeightMeters": 5.6,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-2",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.616695417327854,
+                0.9776231862681128,
+                3.2290270477220933
+              ],
+              "localPosition": [
+                4.5,
+                -16
+              ],
+              "radiusMeters": 0.42,
+              "heightMeters": 15.74,
+              "bareTrunkHeightMeters": 6.5,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-3",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.670288869516613,
+                0.5488839807578179,
+                8.327764905455368
+              ],
+              "localPosition": [
+                9.5,
+                -15
+              ],
+              "radiusMeters": 0.37,
+              "heightMeters": 15.82,
+              "bareTrunkHeightMeters": 5.9,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            }
+          ],
+          "triangles": 16536,
+          "drawCalls": 2,
+          "drivewayPositionsShifted": false
+        }
+      },
+      "glError": 0
+    },
+    {
+      "label": "driveway-deck",
+      "state": {
+        "ready": true,
+        "screen": "pause",
+        "mode": "neighborhood",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20539984107017517,
+          -0.2689357399940491,
+          19.598726272583008
+        ],
+        "rotation": [
+          0.02580794133245945,
+          -0.12079507857561111,
+          -0.02330438233911991,
+          0.9920682311058044
+        ],
+        "camera": {
+          "position": [
+            -5,
+            2.3798756275303554,
+            24
+          ],
+          "target": [
+            1,
+            1.6771776518218753,
+            10
+          ],
+          "mode": 0,
+          "inspection": true
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.561759477377738,
+        "ai": [
+          {
+            "id": 1,
+            "target": 6,
+            "speed": 9.039292398600635,
+            "position": [
+              886.6143188476562,
+              33.940711975097656,
+              -369.3836364746094
+            ]
+          },
+          {
+            "id": 2,
+            "target": 11,
+            "speed": 8.458878831924492,
+            "position": [
+              875.2342529296875,
+              35.97708511352539,
+              -418.5233459472656
+            ]
+          },
+          {
+            "id": 3,
+            "target": 16,
+            "speed": 8.245806052310797,
+            "position": [
+              923.6106567382812,
+              41.760528564453125,
+              -436.29461669921875
+            ]
+          },
+          {
+            "id": 4,
+            "target": 136,
+            "speed": 10.187039740736632,
+            "position": [
+              1393.3023681640625,
+              15.750493049621582,
+              -188.368896484375
+            ]
+          },
+          {
+            "id": 5,
+            "target": 170,
+            "speed": 8.579610040335798,
+            "position": [
+              1229.0936279296875,
+              -2.619119644165039,
+              137.57589721679688
+            ]
+          },
+          {
+            "id": 6,
+            "target": 203,
+            "speed": 9.414942439142767,
+            "position": [
+              1104.985107421875,
+              5.397805690765381,
+              223.5319061279297
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 67,
+          "p50": 16.69999999999891,
+          "p95": 16.80000000000109,
+          "physicsMs": 1.5,
+          "width": 1920,
+          "height": 1080,
+          "draws": 630,
+          "triangles": 3678117,
+          "vegetation": {
+            "trees": 18925,
+            "shrubs": 1099,
+            "grassTufts": 6084,
+            "chunks": 283,
+            "visibleChunks": 90,
+            "visibleBatches": 544,
+            "totalBatches": 3504,
+            "referenceTreeCount": 93,
+            "referenceWoodlandTreeCount": 280,
+            "referenceOmittedTreeCount": 29
+          },
+          "scenery": [
+            {
+              "houses": 452,
+              "batches": 615,
+              "triangles": 1338577,
+              "detailFeatures": 9693,
+              "referenceFacades": 64
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 11,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 20,
+              "triangles": 20971
+            },
+            {
+              "grassBlades": 30996,
+              "pebbles": 3192,
+              "soilFragments": 2473,
+              "leaves": 5997,
+              "rootRibs": 372,
+              "grassTriangles": 92988,
+              "groundTriangles": 40344,
+              "totalTriangles": 133332,
+              "batches": 112,
+              "visibleDrawCalls": 20,
+              "visibleTriangles": 25335,
+              "treeContacts": 93,
+              "rejected": 6362,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "details": {
+        "frame": {
+          "center": [
+            1.9676009833524748,
+            2.128521302902241
+          ],
+          "right": [
+            -0.20641173533373336,
+            0.978465224479908
+          ],
+          "back": [
+            0.978465224479908,
+            0.20641173533373336
+          ],
+          "width": 14.964375027627607,
+          "depth": 9.97483031604948,
+          "groundY": 0.1499821544504056,
+          "foundationY": -0.9053788262348219,
+          "lowerFloorY": 0.029982154450405613,
+          "upperFloorY": 2.2799821544504058,
+          "entryFloorY": 0.6099821544504056,
+          "eaveY": 4.529982154450406,
+          "ridgeY": 6.029982154450406
+        },
+        "house": {
+          "reference": "User-supplied three street-level views and direct description",
+          "frontFacing": "Beverly Drive",
+          "frontDoorOffsetFraction": 0.62,
+          "frontDoorCenter": [
+            -3.283070022935186,
+            0.6099821544504056,
+            2.85611475377769
+          ],
+          "sideDoorCenterV": 1.2,
+          "sideDoorAlignedWithSliders": true,
+          "roof": {
+            "type": "low gable",
+            "ridgeParallelToFront": true,
+            "eaveY": 4.529982154450406,
+            "ridgeY": 6.029982154450406
+          },
+          "observedFront": true,
+          "hiddenSideRearWindowSpacing": "approximate",
+          "openings": [
+            {
+              "id": "front-upper-left",
+              "face": "front",
+              "center": -5.4919256351393315,
+              "width": 2.0800481288402377,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7788134081457736,
+                3.684982154450406,
+                -4.274597964108979
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-middle",
+              "face": "front",
+              "center": -0.8380050015471461,
+              "width": 1.9453687535915891,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.7394372422310043,
+                3.684982154450406,
+                0.2791015333504747
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-picture",
+              "face": "front",
+              "center": 5.057958759338131,
+              "width": 2.7085518800005968,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "picture",
+              "shutters": true,
+              "centerWorld": [
+                -3.956433353580139,
+                3.684982154450406,
+                6.04809703817049
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-left",
+              "face": "front",
+              "center": -5.506890010166959,
+              "width": 2.12494125392312,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7757245855281356,
+                1.0149821544504056,
+                -4.289240084679588
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-middle",
+              "face": "front",
+              "center": -1.1223281270720704,
+              "width": 1.720903128177175,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.6807496124958936,
+                1.0149821544504056,
+                0.0009012425089003351
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-right",
+              "face": "front",
+              "center": 5.042994384310504,
+              "width": 1.8555825034258233,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -3.953344530962502,
+                1.0149821544504056,
+                6.033454917599881
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-entry",
+              "face": "front",
+              "center": 1.7957250033153127,
+              "width": 1.03,
+              "bottom": 0.6099821544504056,
+              "top": 2.689982154450406,
+              "kind": "door",
+              "centerWorld": [
+                -3.283070022935186,
+                1.6499821544504059,
+                2.85611475377769
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-patio-red-door",
+              "face": "right",
+              "center": 1.2,
+              "width": 0.99,
+              "bottom": 0.07998215445040562,
+              "top": 2.1399821544504056,
+              "kind": "door",
+              "centerWorld": [
+                1.5973479439096652,
+                1.1099821544504056,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-deck-sliders",
+              "face": "right",
+              "center": 1.2,
+              "width": 2.26,
+              "bottom": 2.319982154450406,
+              "top": 4.409982154450406,
+              "kind": "slider",
+              "centerWorld": [
+                1.5973479439096652,
+                3.3649821544504057,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "left-upper-window",
+              "face": "left",
+              "center": -1.2967279410864325,
+              "width": 1.05,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "single",
+              "centerWorld": [
+                2.2432090962066686,
+                3.684982154450406,
+                -5.460198846977737
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-left",
+              "face": "back",
+              "center": -4.190025007735731,
+              "width": 1.4,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                7.7124836084621196,
+                3.684982154450406,
+                -0.9418114392706762
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-middle",
+              "face": "back",
+              "center": 0.29928750055255215,
+              "width": 1.45,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                6.7858368231709,
+                3.684982154450406,
+                3.4508247319120775
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            }
+          ],
+          "sidingCourseMeters": 0.175,
+          "lampAndEagle": true,
+          "shutters": "burgundy louvered",
+          "windowStyle": "paired double-hung and right picture window with vertical blinds",
+          "batches": 14,
+          "triangles": 11798
+        },
+        "yard": {
+          "source": "Owner supplied street photographs and explicit deck/patio/rear screen room description",
+          "rearDimensions": "Inferred; rear is hidden in the supplied photographs",
+          "deck": {
+            "points": [
+              [
+                -0.3595825050501509,
+                9.284452199939842
+              ],
+              [
+                -0.937535363984604,
+                12.024154828483583
+              ],
+              [
+                7.1714121689702655,
+                13.734774572682557
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ],
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 2.2799821544504058,
+            "side": "right from road",
+            "wraparound": true
+          },
+          "patio": {
+            "points": [
+              [
+                -0.21281272137816465,
+                9.315413960239903
+              ],
+              [
+                -0.7701244067792449,
+                11.957270066335656
+              ],
+              [
+                4.745890281303868,
+                13.120898711900235
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 0.029982154450405613,
+            "belowDeck": true
+          },
+          "screenRoom": {
+            "points": [
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                6.145813375388954,
+                6.484764083731581
+              ],
+              [
+                8.591976436588725,
+                7.0007934220659145
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ]
+            ],
+            "roofed": true,
+            "doorTowardSideDeck": true
+          },
+          "path": {
+            "points": [
+              [
+                -3.0972994611348263,
+                1.9754960517457723
+              ],
+              [
+                -3.4688405847355464,
+                3.736733455809607
+              ],
+              [
+                -5.230077988799381,
+                3.365192332208887
+              ],
+              [
+                -6.593937558329458,
+                9.830372995031526
+              ],
+              [
+                0.13584816116869602,
+                14.967284163657181
+              ],
+              [
+                -0.5922513667300556,
+                15.921155788915854
+              ],
+              [
+                -7.924552389917324,
+                10.324338804296506
+              ],
+              [
+                -6.032695134574551,
+                1.3562608457445722
+              ]
+            ],
+            "turnsTowardDriveway": true
+          },
+          "frontBeds": [
+            [
+              [
+                -1.365856261912449,
+                -6.425949514309331
+              ],
+              [
+                -3.188041003947456,
+                2.2118558884523996
+              ],
+              [
+                -4.341022165268085,
+                1.8153279050265962
+              ],
+              [
+                -2.6170820493521343,
+                -5.8722943609458484
+              ],
+              [
+                -1.9703609630024417,
+                -6.757874304525577
+              ]
+            ],
+            [
+              [
+                -3.466696846647996,
+                3.532783941500276
+              ],
+              [
+                -4.547564160450028,
+                8.656480407315804
+              ],
+              [
+                -5.668750554629461,
+                8.593702469256945
+              ],
+              [
+                -4.60386024513224,
+                3.497295842822476
+              ]
+            ]
+          ],
+          "mailbox": {
+            "position": [
+              -26.69693152776886,
+              -0.2061564814368604,
+              30.243167037320745
+            ],
+            "number": "2",
+            "redFlag": true
+          },
+          "ornaments": {
+            "bench": [
+              -4.402442732906854,
+              -0.058437132566707684,
+              5.449316487553497
+            ],
+            "wagonWheel": [
+              -2.5634352042267246,
+              0.8004450123262687,
+              -1.4272543240590436
+            ],
+            "birdbath": [
+              -2.848449609180195,
+              0.6818598334459939,
+              -4.775529630013738
+            ]
+          },
+          "details": [
+            "open lawn",
+            "sparse dormant foundation shrubs",
+            "front right bench",
+            "wagon wheel",
+            "white birdbath",
+            "right turning concrete entry path",
+            "driveway timber edging"
+          ],
+          "triangles": 14301,
+          "drawCalls": 7
+        },
+        "trees": {
+          "source": "Owner supplied street photographs",
+          "coordinateConfidence": "Photo perspective estimates, not measured trunk coordinates",
+          "trees": [
+            {
+              "id": "home-front-deciduous-1",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -12.519625785335133,
+                2.1320260774425477,
+                -11.55651653236227
+              ],
+              "localPosition": [
+                -10.4,
+                -17
+              ],
+              "radiusMeters": 0.48,
+              "heightMeters": 15.32,
+              "bareTrunkHeightMeters": 5.6,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-2",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.616695417327854,
+                0.9776231862681128,
+                3.2290270477220933
+              ],
+              "localPosition": [
+                4.5,
+                -16
+              ],
+              "radiusMeters": 0.42,
+              "heightMeters": 15.74,
+              "bareTrunkHeightMeters": 6.5,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-3",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.670288869516613,
+                0.5488839807578179,
+                8.327764905455368
+              ],
+              "localPosition": [
+                9.5,
+                -15
+              ],
+              "radiusMeters": 0.37,
+              "heightMeters": 15.82,
+              "bareTrunkHeightMeters": 5.9,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            }
+          ],
+          "triangles": 16536,
+          "drawCalls": 2,
+          "drivewayPositionsShifted": false
+        }
+      },
+      "glError": 0
+    },
+    {
+      "label": "screened-porch",
+      "state": {
+        "ready": true,
+        "screen": "pause",
+        "mode": "neighborhood",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20539984107017517,
+          -0.2689357399940491,
+          19.598726272583008
+        ],
+        "rotation": [
+          0.02580794133245945,
+          -0.12079507857561111,
+          -0.02330438233911991,
+          0.9920682311058044
+        ],
+        "camera": {
+          "position": [
+            20,
+            5.0578422672064685,
+            2
+          ],
+          "target": [
+            8,
+            2.454651983805677,
+            5
+          ],
+          "mode": 0,
+          "inspection": true
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.561759477377738,
+        "ai": [
+          {
+            "id": 1,
+            "target": 6,
+            "speed": 9.039292398600635,
+            "position": [
+              886.6143188476562,
+              33.940711975097656,
+              -369.3836364746094
+            ]
+          },
+          {
+            "id": 2,
+            "target": 11,
+            "speed": 8.458878831924492,
+            "position": [
+              875.2342529296875,
+              35.97708511352539,
+              -418.5233459472656
+            ]
+          },
+          {
+            "id": 3,
+            "target": 16,
+            "speed": 8.245806052310797,
+            "position": [
+              923.6106567382812,
+              41.760528564453125,
+              -436.29461669921875
+            ]
+          },
+          {
+            "id": 4,
+            "target": 136,
+            "speed": 10.187039740736632,
+            "position": [
+              1393.3023681640625,
+              15.750493049621582,
+              -188.368896484375
+            ]
+          },
+          {
+            "id": 5,
+            "target": 170,
+            "speed": 8.579610040335798,
+            "position": [
+              1229.0936279296875,
+              -2.619119644165039,
+              137.57589721679688
+            ]
+          },
+          {
+            "id": 6,
+            "target": 203,
+            "speed": 9.414942439142767,
+            "position": [
+              1104.985107421875,
+              5.397805690765381,
+              223.5319061279297
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 67,
+          "p50": 16.69999999999891,
+          "p95": 16.80000000000109,
+          "physicsMs": 1.5,
+          "width": 1920,
+          "height": 1080,
+          "draws": 630,
+          "triangles": 3786703,
+          "vegetation": {
+            "trees": 18925,
+            "shrubs": 1099,
+            "grassTufts": 6084,
+            "chunks": 283,
+            "visibleChunks": 90,
+            "visibleBatches": 546,
+            "totalBatches": 3504,
+            "referenceTreeCount": 93,
+            "referenceWoodlandTreeCount": 280,
+            "referenceOmittedTreeCount": 29
+          },
+          "scenery": [
+            {
+              "houses": 452,
+              "batches": 615,
+              "triangles": 1338577,
+              "detailFeatures": 9693,
+              "referenceFacades": 64
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 11,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 20,
+              "triangles": 20971
+            },
+            {
+              "grassBlades": 30996,
+              "pebbles": 3192,
+              "soilFragments": 2473,
+              "leaves": 5997,
+              "rootRibs": 372,
+              "grassTriangles": 92988,
+              "groundTriangles": 40344,
+              "totalTriangles": 133332,
+              "batches": 112,
+              "visibleDrawCalls": 22,
+              "visibleTriangles": 31639,
+              "treeContacts": 93,
+              "rejected": 6362,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "details": {
+        "frame": {
+          "center": [
+            1.9676009833524748,
+            2.128521302902241
+          ],
+          "right": [
+            -0.20641173533373336,
+            0.978465224479908
+          ],
+          "back": [
+            0.978465224479908,
+            0.20641173533373336
+          ],
+          "width": 14.964375027627607,
+          "depth": 9.97483031604948,
+          "groundY": 0.1499821544504056,
+          "foundationY": -0.9053788262348219,
+          "lowerFloorY": 0.029982154450405613,
+          "upperFloorY": 2.2799821544504058,
+          "entryFloorY": 0.6099821544504056,
+          "eaveY": 4.529982154450406,
+          "ridgeY": 6.029982154450406
+        },
+        "house": {
+          "reference": "User-supplied three street-level views and direct description",
+          "frontFacing": "Beverly Drive",
+          "frontDoorOffsetFraction": 0.62,
+          "frontDoorCenter": [
+            -3.283070022935186,
+            0.6099821544504056,
+            2.85611475377769
+          ],
+          "sideDoorCenterV": 1.2,
+          "sideDoorAlignedWithSliders": true,
+          "roof": {
+            "type": "low gable",
+            "ridgeParallelToFront": true,
+            "eaveY": 4.529982154450406,
+            "ridgeY": 6.029982154450406
+          },
+          "observedFront": true,
+          "hiddenSideRearWindowSpacing": "approximate",
+          "openings": [
+            {
+              "id": "front-upper-left",
+              "face": "front",
+              "center": -5.4919256351393315,
+              "width": 2.0800481288402377,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7788134081457736,
+                3.684982154450406,
+                -4.274597964108979
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-middle",
+              "face": "front",
+              "center": -0.8380050015471461,
+              "width": 1.9453687535915891,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.7394372422310043,
+                3.684982154450406,
+                0.2791015333504747
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-picture",
+              "face": "front",
+              "center": 5.057958759338131,
+              "width": 2.7085518800005968,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "picture",
+              "shutters": true,
+              "centerWorld": [
+                -3.956433353580139,
+                3.684982154450406,
+                6.04809703817049
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-left",
+              "face": "front",
+              "center": -5.506890010166959,
+              "width": 2.12494125392312,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7757245855281356,
+                1.0149821544504056,
+                -4.289240084679588
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-middle",
+              "face": "front",
+              "center": -1.1223281270720704,
+              "width": 1.720903128177175,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.6807496124958936,
+                1.0149821544504056,
+                0.0009012425089003351
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-right",
+              "face": "front",
+              "center": 5.042994384310504,
+              "width": 1.8555825034258233,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -3.953344530962502,
+                1.0149821544504056,
+                6.033454917599881
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-entry",
+              "face": "front",
+              "center": 1.7957250033153127,
+              "width": 1.03,
+              "bottom": 0.6099821544504056,
+              "top": 2.689982154450406,
+              "kind": "door",
+              "centerWorld": [
+                -3.283070022935186,
+                1.6499821544504059,
+                2.85611475377769
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-patio-red-door",
+              "face": "right",
+              "center": 1.2,
+              "width": 0.99,
+              "bottom": 0.07998215445040562,
+              "top": 2.1399821544504056,
+              "kind": "door",
+              "centerWorld": [
+                1.5973479439096652,
+                1.1099821544504056,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-deck-sliders",
+              "face": "right",
+              "center": 1.2,
+              "width": 2.26,
+              "bottom": 2.319982154450406,
+              "top": 4.409982154450406,
+              "kind": "slider",
+              "centerWorld": [
+                1.5973479439096652,
+                3.3649821544504057,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "left-upper-window",
+              "face": "left",
+              "center": -1.2967279410864325,
+              "width": 1.05,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "single",
+              "centerWorld": [
+                2.2432090962066686,
+                3.684982154450406,
+                -5.460198846977737
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-left",
+              "face": "back",
+              "center": -4.190025007735731,
+              "width": 1.4,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                7.7124836084621196,
+                3.684982154450406,
+                -0.9418114392706762
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-middle",
+              "face": "back",
+              "center": 0.29928750055255215,
+              "width": 1.45,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                6.7858368231709,
+                3.684982154450406,
+                3.4508247319120775
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            }
+          ],
+          "sidingCourseMeters": 0.175,
+          "lampAndEagle": true,
+          "shutters": "burgundy louvered",
+          "windowStyle": "paired double-hung and right picture window with vertical blinds",
+          "batches": 14,
+          "triangles": 11798
+        },
+        "yard": {
+          "source": "Owner supplied street photographs and explicit deck/patio/rear screen room description",
+          "rearDimensions": "Inferred; rear is hidden in the supplied photographs",
+          "deck": {
+            "points": [
+              [
+                -0.3595825050501509,
+                9.284452199939842
+              ],
+              [
+                -0.937535363984604,
+                12.024154828483583
+              ],
+              [
+                7.1714121689702655,
+                13.734774572682557
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ],
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 2.2799821544504058,
+            "side": "right from road",
+            "wraparound": true
+          },
+          "patio": {
+            "points": [
+              [
+                -0.21281272137816465,
+                9.315413960239903
+              ],
+              [
+                -0.7701244067792449,
+                11.957270066335656
+              ],
+              [
+                4.745890281303868,
+                13.120898711900235
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 0.029982154450405613,
+            "belowDeck": true
+          },
+          "screenRoom": {
+            "points": [
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                6.145813375388954,
+                6.484764083731581
+              ],
+              [
+                8.591976436588725,
+                7.0007934220659145
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ]
+            ],
+            "roofed": true,
+            "doorTowardSideDeck": true
+          },
+          "path": {
+            "points": [
+              [
+                -3.0972994611348263,
+                1.9754960517457723
+              ],
+              [
+                -3.4688405847355464,
+                3.736733455809607
+              ],
+              [
+                -5.230077988799381,
+                3.365192332208887
+              ],
+              [
+                -6.593937558329458,
+                9.830372995031526
+              ],
+              [
+                0.13584816116869602,
+                14.967284163657181
+              ],
+              [
+                -0.5922513667300556,
+                15.921155788915854
+              ],
+              [
+                -7.924552389917324,
+                10.324338804296506
+              ],
+              [
+                -6.032695134574551,
+                1.3562608457445722
+              ]
+            ],
+            "turnsTowardDriveway": true
+          },
+          "frontBeds": [
+            [
+              [
+                -1.365856261912449,
+                -6.425949514309331
+              ],
+              [
+                -3.188041003947456,
+                2.2118558884523996
+              ],
+              [
+                -4.341022165268085,
+                1.8153279050265962
+              ],
+              [
+                -2.6170820493521343,
+                -5.8722943609458484
+              ],
+              [
+                -1.9703609630024417,
+                -6.757874304525577
+              ]
+            ],
+            [
+              [
+                -3.466696846647996,
+                3.532783941500276
+              ],
+              [
+                -4.547564160450028,
+                8.656480407315804
+              ],
+              [
+                -5.668750554629461,
+                8.593702469256945
+              ],
+              [
+                -4.60386024513224,
+                3.497295842822476
+              ]
+            ]
+          ],
+          "mailbox": {
+            "position": [
+              -26.69693152776886,
+              -0.2061564814368604,
+              30.243167037320745
+            ],
+            "number": "2",
+            "redFlag": true
+          },
+          "ornaments": {
+            "bench": [
+              -4.402442732906854,
+              -0.058437132566707684,
+              5.449316487553497
+            ],
+            "wagonWheel": [
+              -2.5634352042267246,
+              0.8004450123262687,
+              -1.4272543240590436
+            ],
+            "birdbath": [
+              -2.848449609180195,
+              0.6818598334459939,
+              -4.775529630013738
+            ]
+          },
+          "details": [
+            "open lawn",
+            "sparse dormant foundation shrubs",
+            "front right bench",
+            "wagon wheel",
+            "white birdbath",
+            "right turning concrete entry path",
+            "driveway timber edging"
+          ],
+          "triangles": 14301,
+          "drawCalls": 7
+        },
+        "trees": {
+          "source": "Owner supplied street photographs",
+          "coordinateConfidence": "Photo perspective estimates, not measured trunk coordinates",
+          "trees": [
+            {
+              "id": "home-front-deciduous-1",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -12.519625785335133,
+                2.1320260774425477,
+                -11.55651653236227
+              ],
+              "localPosition": [
+                -10.4,
+                -17
+              ],
+              "radiusMeters": 0.48,
+              "heightMeters": 15.32,
+              "bareTrunkHeightMeters": 5.6,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-2",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.616695417327854,
+                0.9776231862681128,
+                3.2290270477220933
+              ],
+              "localPosition": [
+                4.5,
+                -16
+              ],
+              "radiusMeters": 0.42,
+              "heightMeters": 15.74,
+              "bareTrunkHeightMeters": 6.5,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-3",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.670288869516613,
+                0.5488839807578179,
+                8.327764905455368
+              ],
+              "localPosition": [
+                9.5,
+                -15
+              ],
+              "radiusMeters": 0.37,
+              "heightMeters": 15.82,
+              "bareTrunkHeightMeters": 5.9,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            }
+          ],
+          "triangles": 16536,
+          "drawCalls": 2,
+          "drivewayPositionsShifted": false
+        }
+      },
+      "glError": 0
+    }
+  ],
+  "transitions": [
+    {
+      "label": "low quality",
+      "state": {
+        "ready": true,
+        "screen": null,
+        "mode": "neighborhood",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20548507571220398,
+          -0.2616821825504303,
+          19.598880767822266
+        ],
+        "rotation": [
+          0.024026965722441673,
+          -0.12056204676628113,
+          -0.02200576663017273,
+          0.992171049118042
+        ],
+        "camera": {
+          "position": [
+            1.6387684474164121,
+            2.9236748594854087,
+            13.127018976168133
+          ],
+          "target": [
+            -1.5202250826893413,
+            0.9364399154849354,
+            26.42782835196773
+          ],
+          "mode": 0,
+          "inspection": false
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.56187485871816,
+        "ai": [
+          {
+            "id": 1,
+            "target": 16,
+            "speed": 21.974358838522004,
+            "position": [
+              921.3502807617188,
+              41.45073318481445,
+              -435.59735107421875
+            ]
+          },
+          {
+            "id": 2,
+            "target": 30,
+            "speed": 24.018941993100697,
+            "position": [
+              1058.8873291015625,
+              50.72724533081055,
+              -496.1258850097656
+            ]
+          },
+          {
+            "id": 3,
+            "target": 35,
+            "speed": 24.71579755800866,
+            "position": [
+              1114.9600830078125,
+              53.49271011352539,
+              -525.2674560546875
+            ]
+          },
+          {
+            "id": 4,
+            "target": 147,
+            "speed": 12.918823106675838,
+            "position": [
+              1338.3858642578125,
+              5.411200046539307,
+              -78.24910736083984
+            ]
+          },
+          {
+            "id": 5,
+            "target": 181,
+            "speed": 12.362526237682498,
+            "position": [
+              1166.9910888671875,
+              -0.6217951774597168,
+              240.28463745117188
+            ]
+          },
+          {
+            "id": 6,
+            "target": 212,
+            "speed": 10.341819999226258,
+            "position": [
+              1098.8880615234375,
+              10.570001602172852,
+              117.24777221679688
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "low",
+          "frames": 74,
+          "p50": 17.600000000002183,
+          "p95": 100,
+          "physicsMs": 0.6999999284744263,
+          "width": 1440,
+          "height": 810,
+          "draws": 396,
+          "triangles": 1673185,
+          "vegetation": {
+            "trees": 18925,
+            "shrubs": 1099,
+            "grassTufts": 6084,
+            "chunks": 283,
+            "visibleChunks": 32,
+            "visibleBatches": 194,
+            "totalBatches": 3504,
+            "referenceTreeCount": 93,
+            "referenceWoodlandTreeCount": 280,
+            "referenceOmittedTreeCount": 29
+          },
+          "scenery": [
+            {
+              "houses": 452,
+              "batches": 615,
+              "triangles": 1338577,
+              "detailFeatures": 9693,
+              "referenceFacades": 64
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 11,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 20,
+              "triangles": 20971
+            },
+            {
+              "grassBlades": 30996,
+              "pebbles": 3192,
+              "soilFragments": 2473,
+              "leaves": 5997,
+              "rootRibs": 372,
+              "grassTriangles": 92988,
+              "groundTriangles": 40344,
+              "totalTriangles": 133332,
+              "batches": 112,
+              "visibleDrawCalls": 8,
+              "visibleTriangles": 2780,
+              "treeContacts": 93,
+              "rejected": 6362,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "details": {
+        "frame": {
+          "center": [
+            1.9676009833524748,
+            2.128521302902241
+          ],
+          "right": [
+            -0.20641173533373336,
+            0.978465224479908
+          ],
+          "back": [
+            0.978465224479908,
+            0.20641173533373336
+          ],
+          "width": 14.964375027627607,
+          "depth": 9.97483031604948,
+          "groundY": 0.1499821544504056,
+          "foundationY": -0.9053788262348219,
+          "lowerFloorY": 0.029982154450405613,
+          "upperFloorY": 2.2799821544504058,
+          "entryFloorY": 0.6099821544504056,
+          "eaveY": 4.529982154450406,
+          "ridgeY": 6.029982154450406
+        },
+        "house": {
+          "reference": "User-supplied three street-level views and direct description",
+          "frontFacing": "Beverly Drive",
+          "frontDoorOffsetFraction": 0.62,
+          "frontDoorCenter": [
+            -3.283070022935186,
+            0.6099821544504056,
+            2.85611475377769
+          ],
+          "sideDoorCenterV": 1.2,
+          "sideDoorAlignedWithSliders": true,
+          "roof": {
+            "type": "low gable",
+            "ridgeParallelToFront": true,
+            "eaveY": 4.529982154450406,
+            "ridgeY": 6.029982154450406
+          },
+          "observedFront": true,
+          "hiddenSideRearWindowSpacing": "approximate",
+          "openings": [
+            {
+              "id": "front-upper-left",
+              "face": "front",
+              "center": -5.4919256351393315,
+              "width": 2.0800481288402377,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7788134081457736,
+                3.684982154450406,
+                -4.274597964108979
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-middle",
+              "face": "front",
+              "center": -0.8380050015471461,
+              "width": 1.9453687535915891,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.7394372422310043,
+                3.684982154450406,
+                0.2791015333504747
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-picture",
+              "face": "front",
+              "center": 5.057958759338131,
+              "width": 2.7085518800005968,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "picture",
+              "shutters": true,
+              "centerWorld": [
+                -3.956433353580139,
+                3.684982154450406,
+                6.04809703817049
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-left",
+              "face": "front",
+              "center": -5.506890010166959,
+              "width": 2.12494125392312,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7757245855281356,
+                1.0149821544504056,
+                -4.289240084679588
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-middle",
+              "face": "front",
+              "center": -1.1223281270720704,
+              "width": 1.720903128177175,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.6807496124958936,
+                1.0149821544504056,
+                0.0009012425089003351
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-right",
+              "face": "front",
+              "center": 5.042994384310504,
+              "width": 1.8555825034258233,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -3.953344530962502,
+                1.0149821544504056,
+                6.033454917599881
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-entry",
+              "face": "front",
+              "center": 1.7957250033153127,
+              "width": 1.03,
+              "bottom": 0.6099821544504056,
+              "top": 2.689982154450406,
+              "kind": "door",
+              "centerWorld": [
+                -3.283070022935186,
+                1.6499821544504059,
+                2.85611475377769
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-patio-red-door",
+              "face": "right",
+              "center": 1.2,
+              "width": 0.99,
+              "bottom": 0.07998215445040562,
+              "top": 2.1399821544504056,
+              "kind": "door",
+              "centerWorld": [
+                1.5973479439096652,
+                1.1099821544504056,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-deck-sliders",
+              "face": "right",
+              "center": 1.2,
+              "width": 2.26,
+              "bottom": 2.319982154450406,
+              "top": 4.409982154450406,
+              "kind": "slider",
+              "centerWorld": [
+                1.5973479439096652,
+                3.3649821544504057,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "left-upper-window",
+              "face": "left",
+              "center": -1.2967279410864325,
+              "width": 1.05,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "single",
+              "centerWorld": [
+                2.2432090962066686,
+                3.684982154450406,
+                -5.460198846977737
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-left",
+              "face": "back",
+              "center": -4.190025007735731,
+              "width": 1.4,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                7.7124836084621196,
+                3.684982154450406,
+                -0.9418114392706762
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-middle",
+              "face": "back",
+              "center": 0.29928750055255215,
+              "width": 1.45,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                6.7858368231709,
+                3.684982154450406,
+                3.4508247319120775
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            }
+          ],
+          "sidingCourseMeters": 0.175,
+          "lampAndEagle": true,
+          "shutters": "burgundy louvered",
+          "windowStyle": "paired double-hung and right picture window with vertical blinds",
+          "batches": 14,
+          "triangles": 11798
+        },
+        "yard": {
+          "source": "Owner supplied street photographs and explicit deck/patio/rear screen room description",
+          "rearDimensions": "Inferred; rear is hidden in the supplied photographs",
+          "deck": {
+            "points": [
+              [
+                -0.3595825050501509,
+                9.284452199939842
+              ],
+              [
+                -0.937535363984604,
+                12.024154828483583
+              ],
+              [
+                7.1714121689702655,
+                13.734774572682557
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ],
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 2.2799821544504058,
+            "side": "right from road",
+            "wraparound": true
+          },
+          "patio": {
+            "points": [
+              [
+                -0.21281272137816465,
+                9.315413960239903
+              ],
+              [
+                -0.7701244067792449,
+                11.957270066335656
+              ],
+              [
+                4.745890281303868,
+                13.120898711900235
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 0.029982154450405613,
+            "belowDeck": true
+          },
+          "screenRoom": {
+            "points": [
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                6.145813375388954,
+                6.484764083731581
+              ],
+              [
+                8.591976436588725,
+                7.0007934220659145
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ]
+            ],
+            "roofed": true,
+            "doorTowardSideDeck": true
+          },
+          "path": {
+            "points": [
+              [
+                -3.0972994611348263,
+                1.9754960517457723
+              ],
+              [
+                -3.4688405847355464,
+                3.736733455809607
+              ],
+              [
+                -5.230077988799381,
+                3.365192332208887
+              ],
+              [
+                -6.593937558329458,
+                9.830372995031526
+              ],
+              [
+                0.13584816116869602,
+                14.967284163657181
+              ],
+              [
+                -0.5922513667300556,
+                15.921155788915854
+              ],
+              [
+                -7.924552389917324,
+                10.324338804296506
+              ],
+              [
+                -6.032695134574551,
+                1.3562608457445722
+              ]
+            ],
+            "turnsTowardDriveway": true
+          },
+          "frontBeds": [
+            [
+              [
+                -1.365856261912449,
+                -6.425949514309331
+              ],
+              [
+                -3.188041003947456,
+                2.2118558884523996
+              ],
+              [
+                -4.341022165268085,
+                1.8153279050265962
+              ],
+              [
+                -2.6170820493521343,
+                -5.8722943609458484
+              ],
+              [
+                -1.9703609630024417,
+                -6.757874304525577
+              ]
+            ],
+            [
+              [
+                -3.466696846647996,
+                3.532783941500276
+              ],
+              [
+                -4.547564160450028,
+                8.656480407315804
+              ],
+              [
+                -5.668750554629461,
+                8.593702469256945
+              ],
+              [
+                -4.60386024513224,
+                3.497295842822476
+              ]
+            ]
+          ],
+          "mailbox": {
+            "position": [
+              -26.69693152776886,
+              -0.2061564814368604,
+              30.243167037320745
+            ],
+            "number": "2",
+            "redFlag": true
+          },
+          "ornaments": {
+            "bench": [
+              -4.402442732906854,
+              -0.058437132566707684,
+              5.449316487553497
+            ],
+            "wagonWheel": [
+              -2.5634352042267246,
+              0.8004450123262687,
+              -1.4272543240590436
+            ],
+            "birdbath": [
+              -2.848449609180195,
+              0.6818598334459939,
+              -4.775529630013738
+            ]
+          },
+          "details": [
+            "open lawn",
+            "sparse dormant foundation shrubs",
+            "front right bench",
+            "wagon wheel",
+            "white birdbath",
+            "right turning concrete entry path",
+            "driveway timber edging"
+          ],
+          "triangles": 14301,
+          "drawCalls": 7
+        },
+        "trees": {
+          "source": "Owner supplied street photographs",
+          "coordinateConfidence": "Photo perspective estimates, not measured trunk coordinates",
+          "trees": [
+            {
+              "id": "home-front-deciduous-1",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -12.519625785335133,
+                2.1320260774425477,
+                -11.55651653236227
+              ],
+              "localPosition": [
+                -10.4,
+                -17
+              ],
+              "radiusMeters": 0.48,
+              "heightMeters": 15.32,
+              "bareTrunkHeightMeters": 5.6,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-2",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.616695417327854,
+                0.9776231862681128,
+                3.2290270477220933
+              ],
+              "localPosition": [
+                4.5,
+                -16
+              ],
+              "radiusMeters": 0.42,
+              "heightMeters": 15.74,
+              "bareTrunkHeightMeters": 6.5,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-3",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.670288869516613,
+                0.5488839807578179,
+                8.327764905455368
+              ],
+              "localPosition": [
+                9.5,
+                -15
+              ],
+              "radiusMeters": 0.37,
+              "heightMeters": 15.82,
+              "bareTrunkHeightMeters": 5.9,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            }
+          ],
+          "triangles": 16536,
+          "drawCalls": 2,
+          "drivewayPositionsShifted": false
+        }
+      },
+      "glError": 0
+    },
+    {
+      "label": "high quality",
+      "state": {
+        "ready": true,
+        "screen": null,
+        "mode": "neighborhood",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.20543694496154785,
+          -0.2647233307361603,
+          19.59878921508789
+        ],
+        "rotation": [
+          0.02509201690554619,
+          -0.12061220407485962,
+          -0.02274392358958721,
+          0.9921219348907471
+        ],
+        "camera": {
+          "position": [
+            1.79094862037014,
+            2.9227197910178546,
+            13.031194343014404
+          ],
+          "target": [
+            -1.4858649947412943,
+            0.9367787644165924,
+            26.398960545247323
+          ],
+          "mode": 0,
+          "inspection": false
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.56180881169234,
+        "ai": [
+          {
+            "id": 1,
+            "target": 16,
+            "speed": 21.985376511133577,
+            "position": [
+              923.4120483398438,
+              41.73236846923828,
+              -436.36431884765625
+            ]
+          },
+          {
+            "id": 2,
+            "target": 30,
+            "speed": 24.03704671789869,
+            "position": [
+              1061.0201416015625,
+              50.755489349365234,
+              -497.2352600097656
+            ]
+          },
+          {
+            "id": 3,
+            "target": 35,
+            "speed": 24.64254888287179,
+            "position": [
+              1117.150146484375,
+              53.68976974487305,
+              -526.4031982421875
+            ]
+          },
+          {
+            "id": 4,
+            "target": 147,
+            "speed": 12.920143162857595,
+            "position": [
+              1337.8175048828125,
+              5.3466620445251465,
+              -77.08834075927734
+            ]
+          },
+          {
+            "id": 5,
+            "target": 181,
+            "speed": 12.396991580791854,
+            "position": [
+              1166.476318359375,
+              -0.6088385581970215,
+              241.41163635253906
+            ]
+          },
+          {
+            "id": 6,
+            "target": 212,
+            "speed": 10.338228458464371,
+            "position": [
+              1098.8023681640625,
+              10.663568496704102,
+              116.21705627441406
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 80,
+          "p50": 16.700000000000728,
+          "p95": 100,
+          "physicsMs": 1.2999999523162842,
+          "width": 1920,
+          "height": 1080,
+          "draws": 642,
+          "triangles": 3910900,
+          "vegetation": {
+            "trees": 18925,
+            "shrubs": 1099,
+            "grassTufts": 6084,
+            "chunks": 283,
+            "visibleChunks": 88,
+            "visibleBatches": 532,
+            "totalBatches": 3504,
+            "referenceTreeCount": 93,
+            "referenceWoodlandTreeCount": 280,
+            "referenceOmittedTreeCount": 29
+          },
+          "scenery": [
+            {
+              "houses": 452,
+              "batches": 615,
+              "triangles": 1338577,
+              "detailFeatures": 9693,
+              "referenceFacades": 64
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 11,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 20,
+              "triangles": 20971
+            },
+            {
+              "grassBlades": 30996,
+              "pebbles": 3192,
+              "soilFragments": 2473,
+              "leaves": 5997,
+              "rootRibs": 372,
+              "grassTriangles": 92988,
+              "groundTriangles": 40344,
+              "totalTriangles": 133332,
+              "batches": 112,
+              "visibleDrawCalls": 24,
+              "visibleTriangles": 32952,
+              "treeContacts": 93,
+              "rejected": 6362,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "details": {
+        "frame": {
+          "center": [
+            1.9676009833524748,
+            2.128521302902241
+          ],
+          "right": [
+            -0.20641173533373336,
+            0.978465224479908
+          ],
+          "back": [
+            0.978465224479908,
+            0.20641173533373336
+          ],
+          "width": 14.964375027627607,
+          "depth": 9.97483031604948,
+          "groundY": 0.1499821544504056,
+          "foundationY": -0.9053788262348219,
+          "lowerFloorY": 0.029982154450405613,
+          "upperFloorY": 2.2799821544504058,
+          "entryFloorY": 0.6099821544504056,
+          "eaveY": 4.529982154450406,
+          "ridgeY": 6.029982154450406
+        },
+        "house": {
+          "reference": "User-supplied three street-level views and direct description",
+          "frontFacing": "Beverly Drive",
+          "frontDoorOffsetFraction": 0.62,
+          "frontDoorCenter": [
+            -3.283070022935186,
+            0.6099821544504056,
+            2.85611475377769
+          ],
+          "sideDoorCenterV": 1.2,
+          "sideDoorAlignedWithSliders": true,
+          "roof": {
+            "type": "low gable",
+            "ridgeParallelToFront": true,
+            "eaveY": 4.529982154450406,
+            "ridgeY": 6.029982154450406
+          },
+          "observedFront": true,
+          "hiddenSideRearWindowSpacing": "approximate",
+          "openings": [
+            {
+              "id": "front-upper-left",
+              "face": "front",
+              "center": -5.4919256351393315,
+              "width": 2.0800481288402377,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7788134081457736,
+                3.684982154450406,
+                -4.274597964108979
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-middle",
+              "face": "front",
+              "center": -0.8380050015471461,
+              "width": 1.9453687535915891,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.7394372422310043,
+                3.684982154450406,
+                0.2791015333504747
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-picture",
+              "face": "front",
+              "center": 5.057958759338131,
+              "width": 2.7085518800005968,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "picture",
+              "shutters": true,
+              "centerWorld": [
+                -3.956433353580139,
+                3.684982154450406,
+                6.04809703817049
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-left",
+              "face": "front",
+              "center": -5.506890010166959,
+              "width": 2.12494125392312,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7757245855281356,
+                1.0149821544504056,
+                -4.289240084679588
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-middle",
+              "face": "front",
+              "center": -1.1223281270720704,
+              "width": 1.720903128177175,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.6807496124958936,
+                1.0149821544504056,
+                0.0009012425089003351
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-right",
+              "face": "front",
+              "center": 5.042994384310504,
+              "width": 1.8555825034258233,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -3.953344530962502,
+                1.0149821544504056,
+                6.033454917599881
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-entry",
+              "face": "front",
+              "center": 1.7957250033153127,
+              "width": 1.03,
+              "bottom": 0.6099821544504056,
+              "top": 2.689982154450406,
+              "kind": "door",
+              "centerWorld": [
+                -3.283070022935186,
+                1.6499821544504059,
+                2.85611475377769
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-patio-red-door",
+              "face": "right",
+              "center": 1.2,
+              "width": 0.99,
+              "bottom": 0.07998215445040562,
+              "top": 2.1399821544504056,
+              "kind": "door",
+              "centerWorld": [
+                1.5973479439096652,
+                1.1099821544504056,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-deck-sliders",
+              "face": "right",
+              "center": 1.2,
+              "width": 2.26,
+              "bottom": 2.319982154450406,
+              "top": 4.409982154450406,
+              "kind": "slider",
+              "centerWorld": [
+                1.5973479439096652,
+                3.3649821544504057,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "left-upper-window",
+              "face": "left",
+              "center": -1.2967279410864325,
+              "width": 1.05,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "single",
+              "centerWorld": [
+                2.2432090962066686,
+                3.684982154450406,
+                -5.460198846977737
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-left",
+              "face": "back",
+              "center": -4.190025007735731,
+              "width": 1.4,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                7.7124836084621196,
+                3.684982154450406,
+                -0.9418114392706762
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-middle",
+              "face": "back",
+              "center": 0.29928750055255215,
+              "width": 1.45,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                6.7858368231709,
+                3.684982154450406,
+                3.4508247319120775
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            }
+          ],
+          "sidingCourseMeters": 0.175,
+          "lampAndEagle": true,
+          "shutters": "burgundy louvered",
+          "windowStyle": "paired double-hung and right picture window with vertical blinds",
+          "batches": 14,
+          "triangles": 11798
+        },
+        "yard": {
+          "source": "Owner supplied street photographs and explicit deck/patio/rear screen room description",
+          "rearDimensions": "Inferred; rear is hidden in the supplied photographs",
+          "deck": {
+            "points": [
+              [
+                -0.3595825050501509,
+                9.284452199939842
+              ],
+              [
+                -0.937535363984604,
+                12.024154828483583
+              ],
+              [
+                7.1714121689702655,
+                13.734774572682557
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ],
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 2.2799821544504058,
+            "side": "right from road",
+            "wraparound": true
+          },
+          "patio": {
+            "points": [
+              [
+                -0.21281272137816465,
+                9.315413960239903
+              ],
+              [
+                -0.7701244067792449,
+                11.957270066335656
+              ],
+              [
+                4.745890281303868,
+                13.120898711900235
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 0.029982154450405613,
+            "belowDeck": true
+          },
+          "screenRoom": {
+            "points": [
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                6.145813375388954,
+                6.484764083731581
+              ],
+              [
+                8.591976436588725,
+                7.0007934220659145
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ]
+            ],
+            "roofed": true,
+            "doorTowardSideDeck": true
+          },
+          "path": {
+            "points": [
+              [
+                -3.0972994611348263,
+                1.9754960517457723
+              ],
+              [
+                -3.4688405847355464,
+                3.736733455809607
+              ],
+              [
+                -5.230077988799381,
+                3.365192332208887
+              ],
+              [
+                -6.593937558329458,
+                9.830372995031526
+              ],
+              [
+                0.13584816116869602,
+                14.967284163657181
+              ],
+              [
+                -0.5922513667300556,
+                15.921155788915854
+              ],
+              [
+                -7.924552389917324,
+                10.324338804296506
+              ],
+              [
+                -6.032695134574551,
+                1.3562608457445722
+              ]
+            ],
+            "turnsTowardDriveway": true
+          },
+          "frontBeds": [
+            [
+              [
+                -1.365856261912449,
+                -6.425949514309331
+              ],
+              [
+                -3.188041003947456,
+                2.2118558884523996
+              ],
+              [
+                -4.341022165268085,
+                1.8153279050265962
+              ],
+              [
+                -2.6170820493521343,
+                -5.8722943609458484
+              ],
+              [
+                -1.9703609630024417,
+                -6.757874304525577
+              ]
+            ],
+            [
+              [
+                -3.466696846647996,
+                3.532783941500276
+              ],
+              [
+                -4.547564160450028,
+                8.656480407315804
+              ],
+              [
+                -5.668750554629461,
+                8.593702469256945
+              ],
+              [
+                -4.60386024513224,
+                3.497295842822476
+              ]
+            ]
+          ],
+          "mailbox": {
+            "position": [
+              -26.69693152776886,
+              -0.2061564814368604,
+              30.243167037320745
+            ],
+            "number": "2",
+            "redFlag": true
+          },
+          "ornaments": {
+            "bench": [
+              -4.402442732906854,
+              -0.058437132566707684,
+              5.449316487553497
+            ],
+            "wagonWheel": [
+              -2.5634352042267246,
+              0.8004450123262687,
+              -1.4272543240590436
+            ],
+            "birdbath": [
+              -2.848449609180195,
+              0.6818598334459939,
+              -4.775529630013738
+            ]
+          },
+          "details": [
+            "open lawn",
+            "sparse dormant foundation shrubs",
+            "front right bench",
+            "wagon wheel",
+            "white birdbath",
+            "right turning concrete entry path",
+            "driveway timber edging"
+          ],
+          "triangles": 14301,
+          "drawCalls": 7
+        },
+        "trees": {
+          "source": "Owner supplied street photographs",
+          "coordinateConfidence": "Photo perspective estimates, not measured trunk coordinates",
+          "trees": [
+            {
+              "id": "home-front-deciduous-1",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -12.519625785335133,
+                2.1320260774425477,
+                -11.55651653236227
+              ],
+              "localPosition": [
+                -10.4,
+                -17
+              ],
+              "radiusMeters": 0.48,
+              "heightMeters": 15.32,
+              "bareTrunkHeightMeters": 5.6,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-2",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.616695417327854,
+                0.9776231862681128,
+                3.2290270477220933
+              ],
+              "localPosition": [
+                4.5,
+                -16
+              ],
+              "radiusMeters": 0.42,
+              "heightMeters": 15.74,
+              "bareTrunkHeightMeters": 6.5,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-3",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.670288869516613,
+                0.5488839807578179,
+                8.327764905455368
+              ],
+              "localPosition": [
+                9.5,
+                -15
+              ],
+              "radiusMeters": 0.37,
+              "heightMeters": 15.82,
+              "bareTrunkHeightMeters": 5.9,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            }
+          ],
+          "triangles": 16536,
+          "drawCalls": 2,
+          "drivewayPositionsShifted": false
+        }
+      },
+      "glError": 0
+    },
+    {
+      "label": "handling grounds",
+      "state": {
+        "ready": true,
+        "screen": null,
+        "mode": "test",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          -150,
+          0.869835376739502,
+          -139.99998474121094
+        ],
+        "rotation": [
+          -0.0001733323442749679,
+          0,
+          0,
+          1
+        ],
+        "camera": {
+          "position": [
+            -150,
+            4.564670631790147,
+            -148.39998660974777
+          ],
+          "target": [
+            -150,
+            2.0658891389317104,
+            -132.99998576668568
+          ],
+          "mode": 0,
+          "inspection": false
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 101,
+        "near": 0,
+        "ai": [],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 87,
+          "p50": 16.700000000000728,
+          "p95": 100,
+          "physicsMs": 0.3999999761581421,
+          "width": 1920,
+          "height": 1080,
+          "draws": 164,
+          "triangles": 686309,
+          "vegetation": {
+            "trees": 50,
+            "shrubs": 0,
+            "grassTufts": 0,
+            "chunks": 4,
+            "visibleChunks": 4,
+            "visibleBatches": 24,
+            "totalBatches": 48,
+            "referenceTreeCount": 0,
+            "referenceWoodlandTreeCount": 0,
+            "referenceOmittedTreeCount": 0
+          },
+          "scenery": [
+            {
+              "houses": 0,
+              "batches": 0,
+              "triangles": 0,
+              "detailFeatures": 0,
+              "referenceFacades": 0
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "details": {
+        "frame": null,
+        "house": null,
+        "yard": null,
+        "trees": null
+      },
+      "glError": 0
+    },
+    {
+      "label": "Home recreated",
+      "state": {
+        "ready": true,
+        "screen": null,
+        "mode": "neighborhood",
+        "race": false,
+        "countdown": 0,
+        "modelLoaded": true,
+        "position": [
+          0.2054559290409088,
+          -0.2628708779811859,
+          19.59882354736328
+        ],
+        "rotation": [
+          0.024677440524101257,
+          -0.1206132099032402,
+          -0.02245381288230419,
+          0.9921387434005737
+        ],
+        "camera": {
+          "position": [
+            1.8409574824203818,
+            2.9211899083681696,
+            12.999244754350869
+          ],
+          "target": [
+            -1.4786605485477138,
+            0.9365711320650671,
+            26.393252380643563
+          ],
+          "mode": 0,
+          "inspection": false
+        },
+        "chassisHalfExtents": {
+          "x": 0.8999999761581421,
+          "y": 0.3100000023841858,
+          "z": 2.299999952316284
+        },
+        "speed": 0,
+        "grounded": 4,
+        "slip": 0,
+        "boost": 65,
+        "finished": false,
+        "routePoints": 260,
+        "near": 26.56183449410482,
+        "ai": [
+          {
+            "id": 1,
+            "target": 6,
+            "speed": 2.821125547073515,
+            "position": [
+              888.5611572265625,
+              33.591346740722656,
+              -364.2695617675781
+            ]
+          },
+          {
+            "id": 2,
+            "target": 11,
+            "speed": 2.598953025167867,
+            "position": [
+              870.4414672851562,
+              35.438358306884766,
+              -416.763427734375
+            ]
+          },
+          {
+            "id": 3,
+            "target": 16,
+            "speed": 2.559156970202197,
+            "position": [
+              918.9157104492188,
+              41.138607025146484,
+              -434.5621337890625
+            ]
+          },
+          {
+            "id": 4,
+            "target": 136,
+            "speed": 3.206430557017809,
+            "position": [
+              1397.1593017578125,
+              16.139638900756836,
+              -193.32630920410156
+            ]
+          },
+          {
+            "id": 5,
+            "target": 170,
+            "speed": 2.0200896160271067,
+            "position": [
+              1232.44189453125,
+              -2.7316372394561768,
+              133.98764038085938
+            ]
+          },
+          {
+            "id": 6,
+            "target": 203,
+            "speed": 2.8674178244308015,
+            "position": [
+              1103.9283447265625,
+              5.421779155731201,
+              229.21463012695312
+            ]
+          }
+        ],
+        "testDriver": null,
+        "metrics": {
+          "quality": "high",
+          "frames": 95,
+          "p50": 16.700000000000728,
+          "p95": 100,
+          "physicsMs": 0.6000000238418579,
+          "width": 1920,
+          "height": 1080,
+          "draws": 645,
+          "triangles": 3949456,
+          "vegetation": {
+            "trees": 18925,
+            "shrubs": 1099,
+            "grassTufts": 6084,
+            "chunks": 283,
+            "visibleChunks": 88,
+            "visibleBatches": 532,
+            "totalBatches": 3504,
+            "referenceTreeCount": 93,
+            "referenceWoodlandTreeCount": 280,
+            "referenceOmittedTreeCount": 29
+          },
+          "scenery": [
+            {
+              "houses": 452,
+              "batches": 615,
+              "triangles": 1338577,
+              "detailFeatures": 9693,
+              "referenceFacades": 64
+            },
+            {
+              "patches": 8,
+              "ponds": 2,
+              "surfaceTriangles": 22155,
+              "detailTriangles": 4963,
+              "shoreTriangles": 340,
+              "meadowTufts": 192,
+              "reedTufts": 87,
+              "leafClusters": 1076,
+              "drawCalls": 5,
+              "maxGridSpacingMeters": 3
+            },
+            {
+              "decks": 11,
+              "pools": 9,
+              "patios": 3,
+              "stopSigns": 2,
+              "streetSigns": 2,
+              "stairs": 1,
+              "drawCalls": 20,
+              "triangles": 20971
+            },
+            {
+              "grassBlades": 30996,
+              "pebbles": 3192,
+              "soilFragments": 2473,
+              "leaves": 5997,
+              "rootRibs": 372,
+              "grassTriangles": 92988,
+              "groundTriangles": 40344,
+              "totalTriangles": 133332,
+              "batches": 112,
+              "visibleDrawCalls": 24,
+              "visibleTriangles": 32952,
+              "treeContacts": 93,
+              "rejected": 6362,
+              "maxPrimitiveRadiusMeters": 0.645
+            },
+            {
+              "poles": 96,
+              "wireSpans": 87,
+              "fenceSections": 11,
+              "stoneClusters": 6,
+              "surveyPlacementsSuppressed": 17,
+              "drawCalls": 12
+            }
+          ]
+        },
+        "renderer": "WebKit WebGL"
+      },
+      "details": {
+        "frame": {
+          "center": [
+            1.9676009833524748,
+            2.128521302902241
+          ],
+          "right": [
+            -0.20641173533373336,
+            0.978465224479908
+          ],
+          "back": [
+            0.978465224479908,
+            0.20641173533373336
+          ],
+          "width": 14.964375027627607,
+          "depth": 9.97483031604948,
+          "groundY": 0.1499821544504056,
+          "foundationY": -0.9053788262348219,
+          "lowerFloorY": 0.029982154450405613,
+          "upperFloorY": 2.2799821544504058,
+          "entryFloorY": 0.6099821544504056,
+          "eaveY": 4.529982154450406,
+          "ridgeY": 6.029982154450406
+        },
+        "house": {
+          "reference": "User-supplied three street-level views and direct description",
+          "frontFacing": "Beverly Drive",
+          "frontDoorOffsetFraction": 0.62,
+          "frontDoorCenter": [
+            -3.283070022935186,
+            0.6099821544504056,
+            2.85611475377769
+          ],
+          "sideDoorCenterV": 1.2,
+          "sideDoorAlignedWithSliders": true,
+          "roof": {
+            "type": "low gable",
+            "ridgeParallelToFront": true,
+            "eaveY": 4.529982154450406,
+            "ridgeY": 6.029982154450406
+          },
+          "observedFront": true,
+          "hiddenSideRearWindowSpacing": "approximate",
+          "openings": [
+            {
+              "id": "front-upper-left",
+              "face": "front",
+              "center": -5.4919256351393315,
+              "width": 2.0800481288402377,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7788134081457736,
+                3.684982154450406,
+                -4.274597964108979
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-middle",
+              "face": "front",
+              "center": -0.8380050015471461,
+              "width": 1.9453687535915891,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.7394372422310043,
+                3.684982154450406,
+                0.2791015333504747
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-upper-picture",
+              "face": "front",
+              "center": 5.057958759338131,
+              "width": 2.7085518800005968,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "picture",
+              "shutters": true,
+              "centerWorld": [
+                -3.956433353580139,
+                3.684982154450406,
+                6.04809703817049
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-left",
+              "face": "front",
+              "center": -5.506890010166959,
+              "width": 2.12494125392312,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -1.7757245855281356,
+                1.0149821544504056,
+                -4.289240084679588
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-middle",
+              "face": "front",
+              "center": -1.1223281270720704,
+              "width": 1.720903128177175,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -2.6807496124958936,
+                1.0149821544504056,
+                0.0009012425089003351
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-lower-right",
+              "face": "front",
+              "center": 5.042994384310504,
+              "width": 1.8555825034258233,
+              "bottom": 0.4999821544504056,
+              "top": 1.5299821544504058,
+              "kind": "paired",
+              "shutters": true,
+              "centerWorld": [
+                -3.953344530962502,
+                1.0149821544504056,
+                6.033454917599881
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "front-entry",
+              "face": "front",
+              "center": 1.7957250033153127,
+              "width": 1.03,
+              "bottom": 0.6099821544504056,
+              "top": 2.689982154450406,
+              "kind": "door",
+              "centerWorld": [
+                -3.283070022935186,
+                1.6499821544504059,
+                2.85611475377769
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-patio-red-door",
+              "face": "right",
+              "center": 1.2,
+              "width": 0.99,
+              "bottom": 0.07998215445040562,
+              "top": 2.1399821544504056,
+              "kind": "door",
+              "centerWorld": [
+                1.5973479439096652,
+                1.1099821544504056,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "right-deck-sliders",
+              "face": "right",
+              "center": 1.2,
+              "width": 2.26,
+              "bottom": 2.319982154450406,
+              "top": 4.409982154450406,
+              "kind": "slider",
+              "centerWorld": [
+                1.5973479439096652,
+                3.3649821544504057,
+                9.69727567060731
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "left-upper-window",
+              "face": "left",
+              "center": -1.2967279410864325,
+              "width": 1.05,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "single",
+              "centerWorld": [
+                2.2432090962066686,
+                3.684982154450406,
+                -5.460198846977737
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-left",
+              "face": "back",
+              "center": -4.190025007735731,
+              "width": 1.4,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                7.7124836084621196,
+                3.684982154450406,
+                -0.9418114392706762
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            },
+            {
+              "id": "rear-upper-middle",
+              "face": "back",
+              "center": 0.29928750055255215,
+              "width": 1.45,
+              "bottom": 3.089982154450406,
+              "top": 4.279982154450406,
+              "kind": "paired",
+              "centerWorld": [
+                6.7858368231709,
+                3.684982154450406,
+                3.4508247319120775
+              ],
+              "glassRecessMeters": 0.073,
+              "structuralOpening": true
+            }
+          ],
+          "sidingCourseMeters": 0.175,
+          "lampAndEagle": true,
+          "shutters": "burgundy louvered",
+          "windowStyle": "paired double-hung and right picture window with vertical blinds",
+          "batches": 14,
+          "triangles": 11798
+        },
+        "yard": {
+          "source": "Owner supplied street photographs and explicit deck/patio/rear screen room description",
+          "rearDimensions": "Inferred; rear is hidden in the supplied photographs",
+          "deck": {
+            "points": [
+              [
+                -0.3595825050501509,
+                9.284452199939842
+              ],
+              [
+                -0.937535363984604,
+                12.024154828483583
+              ],
+              [
+                7.1714121689702655,
+                13.734774572682557
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ],
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 2.2799821544504058,
+            "side": "right from road",
+            "wraparound": true
+          },
+          "patio": {
+            "points": [
+              [
+                -0.21281272137816465,
+                9.315413960239903
+              ],
+              [
+                -0.7701244067792449,
+                11.957270066335656
+              ],
+              [
+                4.745890281303868,
+                13.120898711900235
+              ],
+              [
+                5.303201966704949,
+                10.479042605804482
+              ]
+            ],
+            "y": 0.029982154450405613,
+            "belowDeck": true
+          },
+          "screenRoom": {
+            "points": [
+              [
+                7.219154399124369,
+                1.3967449164360592
+              ],
+              [
+                6.145813375388954,
+                6.484764083731581
+              ],
+              [
+                8.591976436588725,
+                7.0007934220659145
+              ],
+              [
+                9.665317460324138,
+                1.9127742547703928
+              ]
+            ],
+            "roofed": true,
+            "doorTowardSideDeck": true
+          },
+          "path": {
+            "points": [
+              [
+                -3.0972994611348263,
+                1.9754960517457723
+              ],
+              [
+                -3.4688405847355464,
+                3.736733455809607
+              ],
+              [
+                -5.230077988799381,
+                3.365192332208887
+              ],
+              [
+                -6.593937558329458,
+                9.830372995031526
+              ],
+              [
+                0.13584816116869602,
+                14.967284163657181
+              ],
+              [
+                -0.5922513667300556,
+                15.921155788915854
+              ],
+              [
+                -7.924552389917324,
+                10.324338804296506
+              ],
+              [
+                -6.032695134574551,
+                1.3562608457445722
+              ]
+            ],
+            "turnsTowardDriveway": true
+          },
+          "frontBeds": [
+            [
+              [
+                -1.365856261912449,
+                -6.425949514309331
+              ],
+              [
+                -3.188041003947456,
+                2.2118558884523996
+              ],
+              [
+                -4.341022165268085,
+                1.8153279050265962
+              ],
+              [
+                -2.6170820493521343,
+                -5.8722943609458484
+              ],
+              [
+                -1.9703609630024417,
+                -6.757874304525577
+              ]
+            ],
+            [
+              [
+                -3.466696846647996,
+                3.532783941500276
+              ],
+              [
+                -4.547564160450028,
+                8.656480407315804
+              ],
+              [
+                -5.668750554629461,
+                8.593702469256945
+              ],
+              [
+                -4.60386024513224,
+                3.497295842822476
+              ]
+            ]
+          ],
+          "mailbox": {
+            "position": [
+              -26.69693152776886,
+              -0.2061564814368604,
+              30.243167037320745
+            ],
+            "number": "2",
+            "redFlag": true
+          },
+          "ornaments": {
+            "bench": [
+              -4.402442732906854,
+              -0.058437132566707684,
+              5.449316487553497
+            ],
+            "wagonWheel": [
+              -2.5634352042267246,
+              0.8004450123262687,
+              -1.4272543240590436
+            ],
+            "birdbath": [
+              -2.848449609180195,
+              0.6818598334459939,
+              -4.775529630013738
+            ]
+          },
+          "details": [
+            "open lawn",
+            "sparse dormant foundation shrubs",
+            "front right bench",
+            "wagon wheel",
+            "white birdbath",
+            "right turning concrete entry path",
+            "driveway timber edging"
+          ],
+          "triangles": 14301,
+          "drawCalls": 7
+        },
+        "trees": {
+          "source": "Owner supplied street photographs",
+          "coordinateConfidence": "Photo perspective estimates, not measured trunk coordinates",
+          "trees": [
+            {
+              "id": "home-front-deciduous-1",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -12.519625785335133,
+                2.1320260774425477,
+                -11.55651653236227
+              ],
+              "localPosition": [
+                -10.4,
+                -17
+              ],
+              "radiusMeters": 0.48,
+              "heightMeters": 15.32,
+              "bareTrunkHeightMeters": 5.6,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-2",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.616695417327854,
+                0.9776231862681128,
+                3.2290270477220933
+              ],
+              "localPosition": [
+                4.5,
+                -16
+              ],
+              "radiusMeters": 0.42,
+              "heightMeters": 15.74,
+              "bareTrunkHeightMeters": 6.5,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            },
+            {
+              "id": "home-front-deciduous-3",
+              "type": "deciduous",
+              "seasonalState": "mostly leafless",
+              "position": [
+                -14.670288869516613,
+                0.5488839807578179,
+                8.327764905455368
+              ],
+              "localPosition": [
+                9.5,
+                -15
+              ],
+              "radiusMeters": 0.37,
+              "heightMeters": 15.82,
+              "bareTrunkHeightMeters": 5.9,
+              "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+            }
+          ],
+          "triangles": 16536,
+          "drawCalls": 2,
+          "drivewayPositionsShifted": false
+        }
+      },
+      "glError": 0
+    }
+  ],
+  "measurement": "Home facade and yard metadata comes from actual scene groups. Scripted departure uses the actual fixed-step vehicle simulation. Screenshots use inspection cameras and require human comparison with supplied photos; their capture alone does not establish visual fidelity. No physical-controller claim.",
+  "initial": {
+    "label": "initial Home",
+    "state": {
+      "ready": true,
+      "screen": null,
+      "mode": "neighborhood",
+      "race": false,
+      "countdown": 0,
+      "modelLoaded": true,
+      "position": [
+        0.20562610030174255,
+        -0.2679693102836609,
+        19.599157333374023
+      ],
+      "rotation": [
+        0.02079816162586212,
+        -0.12047360837459564,
+        -0.019832178950309753,
+        0.9923004508018494
+      ],
+      "camera": {
+        "position": [
+          1.8350575175072428,
+          2.9031529256723636,
+          12.998012966823683
+        ],
+        "target": [
+          -1.472078278762192,
+          0.9204673626083542,
+          26.39537650815383
+        ],
+        "mode": 0,
+        "inspection": false
+      },
+      "chassisHalfExtents": {
+        "x": 0.8999999761581421,
+        "y": 0.3100000023841858,
+        "z": 2.299999952316284
+      },
+      "speed": 0,
+      "grounded": 4,
+      "slip": 0,
+      "boost": 65,
+      "finished": false,
+      "routePoints": 260,
+      "near": 26.562070100130654,
+      "ai": [
+        {
+          "id": 1,
+          "target": 6,
+          "speed": 1.6544661640958642,
+          "position": [
+            888.7413940429688,
+            33.569427490234375,
+            -363.91796875
+          ]
+        },
+        {
+          "id": 2,
+          "target": 11,
+          "speed": 1.4710462487594287,
+          "position": [
+            870.0997314453125,
+            35.39500427246094,
+            -416.64801025390625
+          ]
+        },
+        {
+          "id": 3,
+          "target": 16,
+          "speed": 1.4421173968941132,
+          "position": [
+            918.5778198242188,
+            41.09785079956055,
+            -434.45172119140625
+          ]
+        },
+        {
+          "id": 4,
+          "target": 136,
+          "speed": 1.8801155819841522,
+          "position": [
+            1397.3887939453125,
+            16.166624069213867,
+            -193.71102905273438
+          ]
+        },
+        {
+          "id": 5,
+          "target": 170,
+          "speed": 1.2980379825350472,
+          "position": [
+            1232.58154296875,
+            -2.7656447887420654,
+            133.75648498535156
+          ]
+        },
+        {
+          "id": 6,
+          "target": 203,
+          "speed": 1.6211496814288724,
+          "position": [
+            1103.798095703125,
+            5.447451114654541,
+            229.58914184570312
+          ]
+        }
+      ],
+      "testDriver": null,
+      "metrics": {
+        "quality": "high",
+        "frames": 6,
+        "p50": 16.700000000000728,
+        "p95": 83.5,
+        "physicsMs": 1.3000000715255737,
+        "width": 1920,
+        "height": 1080,
+        "draws": 646,
+        "triangles": 3949812,
+        "vegetation": {
+          "trees": 18925,
+          "shrubs": 1099,
+          "grassTufts": 6084,
+          "chunks": 283,
+          "visibleChunks": 88,
+          "visibleBatches": 532,
+          "totalBatches": 3504,
+          "referenceTreeCount": 93,
+          "referenceWoodlandTreeCount": 280,
+          "referenceOmittedTreeCount": 29
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2473,
+            "leaves": 5997,
+            "rootRibs": 372,
+            "grassTriangles": 92988,
+            "groundTriangles": 40344,
+            "totalTriangles": 133332,
+            "batches": 112,
+            "visibleDrawCalls": 24,
+            "visibleTriangles": 32952,
+            "treeContacts": 93,
+            "rejected": 6362,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "renderer": "WebKit WebGL"
+    },
+    "details": {
+      "frame": {
+        "center": [
+          1.9676009833524748,
+          2.128521302902241
+        ],
+        "right": [
+          -0.20641173533373336,
+          0.978465224479908
+        ],
+        "back": [
+          0.978465224479908,
+          0.20641173533373336
+        ],
+        "width": 14.964375027627607,
+        "depth": 9.97483031604948,
+        "groundY": 0.1499821544504056,
+        "foundationY": -0.9053788262348219,
+        "lowerFloorY": 0.029982154450405613,
+        "upperFloorY": 2.2799821544504058,
+        "entryFloorY": 0.6099821544504056,
+        "eaveY": 4.529982154450406,
+        "ridgeY": 6.029982154450406
+      },
+      "house": {
+        "reference": "User-supplied three street-level views and direct description",
+        "frontFacing": "Beverly Drive",
+        "frontDoorOffsetFraction": 0.62,
+        "frontDoorCenter": [
+          -3.283070022935186,
+          0.6099821544504056,
+          2.85611475377769
+        ],
+        "sideDoorCenterV": 1.2,
+        "sideDoorAlignedWithSliders": true,
+        "roof": {
+          "type": "low gable",
+          "ridgeParallelToFront": true,
+          "eaveY": 4.529982154450406,
+          "ridgeY": 6.029982154450406
+        },
+        "observedFront": true,
+        "hiddenSideRearWindowSpacing": "approximate",
+        "openings": [
+          {
+            "id": "front-upper-left",
+            "face": "front",
+            "center": -5.4919256351393315,
+            "width": 2.0800481288402377,
+            "bottom": 3.089982154450406,
+            "top": 4.279982154450406,
+            "kind": "paired",
+            "shutters": true,
+            "centerWorld": [
+              -1.7788134081457736,
+              3.684982154450406,
+              -4.274597964108979
+            ],
+            "glassRecessMeters": 0.073,
+            "structuralOpening": true
+          },
+          {
+            "id": "front-upper-middle",
+            "face": "front",
+            "center": -0.8380050015471461,
+            "width": 1.9453687535915891,
+            "bottom": 3.089982154450406,
+            "top": 4.279982154450406,
+            "kind": "paired",
+            "shutters": true,
+            "centerWorld": [
+              -2.7394372422310043,
+              3.684982154450406,
+              0.2791015333504747
+            ],
+            "glassRecessMeters": 0.073,
+            "structuralOpening": true
+          },
+          {
+            "id": "front-upper-picture",
+            "face": "front",
+            "center": 5.057958759338131,
+            "width": 2.7085518800005968,
+            "bottom": 3.089982154450406,
+            "top": 4.279982154450406,
+            "kind": "picture",
+            "shutters": true,
+            "centerWorld": [
+              -3.956433353580139,
+              3.684982154450406,
+              6.04809703817049
+            ],
+            "glassRecessMeters": 0.073,
+            "structuralOpening": true
+          },
+          {
+            "id": "front-lower-left",
+            "face": "front",
+            "center": -5.506890010166959,
+            "width": 2.12494125392312,
+            "bottom": 0.4999821544504056,
+            "top": 1.5299821544504058,
+            "kind": "paired",
+            "shutters": true,
+            "centerWorld": [
+              -1.7757245855281356,
+              1.0149821544504056,
+              -4.289240084679588
+            ],
+            "glassRecessMeters": 0.073,
+            "structuralOpening": true
+          },
+          {
+            "id": "front-lower-middle",
+            "face": "front",
+            "center": -1.1223281270720704,
+            "width": 1.720903128177175,
+            "bottom": 0.4999821544504056,
+            "top": 1.5299821544504058,
+            "kind": "paired",
+            "shutters": true,
+            "centerWorld": [
+              -2.6807496124958936,
+              1.0149821544504056,
+              0.0009012425089003351
+            ],
+            "glassRecessMeters": 0.073,
+            "structuralOpening": true
+          },
+          {
+            "id": "front-lower-right",
+            "face": "front",
+            "center": 5.042994384310504,
+            "width": 1.8555825034258233,
+            "bottom": 0.4999821544504056,
+            "top": 1.5299821544504058,
+            "kind": "paired",
+            "shutters": true,
+            "centerWorld": [
+              -3.953344530962502,
+              1.0149821544504056,
+              6.033454917599881
+            ],
+            "glassRecessMeters": 0.073,
+            "structuralOpening": true
+          },
+          {
+            "id": "front-entry",
+            "face": "front",
+            "center": 1.7957250033153127,
+            "width": 1.03,
+            "bottom": 0.6099821544504056,
+            "top": 2.689982154450406,
+            "kind": "door",
+            "centerWorld": [
+              -3.283070022935186,
+              1.6499821544504059,
+              2.85611475377769
+            ],
+            "glassRecessMeters": 0.073,
+            "structuralOpening": true
+          },
+          {
+            "id": "right-patio-red-door",
+            "face": "right",
+            "center": 1.2,
+            "width": 0.99,
+            "bottom": 0.07998215445040562,
+            "top": 2.1399821544504056,
+            "kind": "door",
+            "centerWorld": [
+              1.5973479439096652,
+              1.1099821544504056,
+              9.69727567060731
+            ],
+            "glassRecessMeters": 0.073,
+            "structuralOpening": true
+          },
+          {
+            "id": "right-deck-sliders",
+            "face": "right",
+            "center": 1.2,
+            "width": 2.26,
+            "bottom": 2.319982154450406,
+            "top": 4.409982154450406,
+            "kind": "slider",
+            "centerWorld": [
+              1.5973479439096652,
+              3.3649821544504057,
+              9.69727567060731
+            ],
+            "glassRecessMeters": 0.073,
+            "structuralOpening": true
+          },
+          {
+            "id": "left-upper-window",
+            "face": "left",
+            "center": -1.2967279410864325,
+            "width": 1.05,
+            "bottom": 3.089982154450406,
+            "top": 4.279982154450406,
+            "kind": "single",
+            "centerWorld": [
+              2.2432090962066686,
+              3.684982154450406,
+              -5.460198846977737
+            ],
+            "glassRecessMeters": 0.073,
+            "structuralOpening": true
+          },
+          {
+            "id": "rear-upper-left",
+            "face": "back",
+            "center": -4.190025007735731,
+            "width": 1.4,
+            "bottom": 3.089982154450406,
+            "top": 4.279982154450406,
+            "kind": "paired",
+            "centerWorld": [
+              7.7124836084621196,
+              3.684982154450406,
+              -0.9418114392706762
+            ],
+            "glassRecessMeters": 0.073,
+            "structuralOpening": true
+          },
+          {
+            "id": "rear-upper-middle",
+            "face": "back",
+            "center": 0.29928750055255215,
+            "width": 1.45,
+            "bottom": 3.089982154450406,
+            "top": 4.279982154450406,
+            "kind": "paired",
+            "centerWorld": [
+              6.7858368231709,
+              3.684982154450406,
+              3.4508247319120775
+            ],
+            "glassRecessMeters": 0.073,
+            "structuralOpening": true
+          }
+        ],
+        "sidingCourseMeters": 0.175,
+        "lampAndEagle": true,
+        "shutters": "burgundy louvered",
+        "windowStyle": "paired double-hung and right picture window with vertical blinds",
+        "batches": 14,
+        "triangles": 11798
+      },
+      "yard": {
+        "source": "Owner supplied street photographs and explicit deck/patio/rear screen room description",
+        "rearDimensions": "Inferred; rear is hidden in the supplied photographs",
+        "deck": {
+          "points": [
+            [
+              -0.3595825050501509,
+              9.284452199939842
+            ],
+            [
+              -0.937535363984604,
+              12.024154828483583
+            ],
+            [
+              7.1714121689702655,
+              13.734774572682557
+            ],
+            [
+              9.665317460324138,
+              1.9127742547703928
+            ],
+            [
+              7.219154399124369,
+              1.3967449164360592
+            ],
+            [
+              5.303201966704949,
+              10.479042605804482
+            ]
+          ],
+          "y": 2.2799821544504058,
+          "side": "right from road",
+          "wraparound": true
+        },
+        "patio": {
+          "points": [
+            [
+              -0.21281272137816465,
+              9.315413960239903
+            ],
+            [
+              -0.7701244067792449,
+              11.957270066335656
+            ],
+            [
+              4.745890281303868,
+              13.120898711900235
+            ],
+            [
+              5.303201966704949,
+              10.479042605804482
+            ]
+          ],
+          "y": 0.029982154450405613,
+          "belowDeck": true
+        },
+        "screenRoom": {
+          "points": [
+            [
+              7.219154399124369,
+              1.3967449164360592
+            ],
+            [
+              6.145813375388954,
+              6.484764083731581
+            ],
+            [
+              8.591976436588725,
+              7.0007934220659145
+            ],
+            [
+              9.665317460324138,
+              1.9127742547703928
+            ]
+          ],
+          "roofed": true,
+          "doorTowardSideDeck": true
+        },
+        "path": {
+          "points": [
+            [
+              -3.0972994611348263,
+              1.9754960517457723
+            ],
+            [
+              -3.4688405847355464,
+              3.736733455809607
+            ],
+            [
+              -5.230077988799381,
+              3.365192332208887
+            ],
+            [
+              -6.593937558329458,
+              9.830372995031526
+            ],
+            [
+              0.13584816116869602,
+              14.967284163657181
+            ],
+            [
+              -0.5922513667300556,
+              15.921155788915854
+            ],
+            [
+              -7.924552389917324,
+              10.324338804296506
+            ],
+            [
+              -6.032695134574551,
+              1.3562608457445722
+            ]
+          ],
+          "turnsTowardDriveway": true
+        },
+        "frontBeds": [
+          [
+            [
+              -1.365856261912449,
+              -6.425949514309331
+            ],
+            [
+              -3.188041003947456,
+              2.2118558884523996
+            ],
+            [
+              -4.341022165268085,
+              1.8153279050265962
+            ],
+            [
+              -2.6170820493521343,
+              -5.8722943609458484
+            ],
+            [
+              -1.9703609630024417,
+              -6.757874304525577
+            ]
+          ],
+          [
+            [
+              -3.466696846647996,
+              3.532783941500276
+            ],
+            [
+              -4.547564160450028,
+              8.656480407315804
+            ],
+            [
+              -5.668750554629461,
+              8.593702469256945
+            ],
+            [
+              -4.60386024513224,
+              3.497295842822476
+            ]
+          ]
+        ],
+        "mailbox": {
+          "position": [
+            -26.69693152776886,
+            -0.2061564814368604,
+            30.243167037320745
+          ],
+          "number": "2",
+          "redFlag": true
+        },
+        "ornaments": {
+          "bench": [
+            -4.402442732906854,
+            -0.058437132566707684,
+            5.449316487553497
+          ],
+          "wagonWheel": [
+            -2.5634352042267246,
+            0.8004450123262687,
+            -1.4272543240590436
+          ],
+          "birdbath": [
+            -2.848449609180195,
+            0.6818598334459939,
+            -4.775529630013738
+          ]
+        },
+        "details": [
+          "open lawn",
+          "sparse dormant foundation shrubs",
+          "front right bench",
+          "wagon wheel",
+          "white birdbath",
+          "right turning concrete entry path",
+          "driveway timber edging"
+        ],
+        "triangles": 14301,
+        "drawCalls": 7
+      },
+      "trees": {
+        "source": "Owner supplied street photographs",
+        "coordinateConfidence": "Photo perspective estimates, not measured trunk coordinates",
+        "trees": [
+          {
+            "id": "home-front-deciduous-1",
+            "type": "deciduous",
+            "seasonalState": "mostly leafless",
+            "position": [
+              -12.519625785335133,
+              2.1320260774425477,
+              -11.55651653236227
+            ],
+            "localPosition": [
+              -10.4,
+              -17
+            ],
+            "radiusMeters": 0.48,
+            "heightMeters": 15.32,
+            "bareTrunkHeightMeters": 5.6,
+            "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+          },
+          {
+            "id": "home-front-deciduous-2",
+            "type": "deciduous",
+            "seasonalState": "mostly leafless",
+            "position": [
+              -14.616695417327854,
+              0.9776231862681128,
+              3.2290270477220933
+            ],
+            "localPosition": [
+              4.5,
+              -16
+            ],
+            "radiusMeters": 0.42,
+            "heightMeters": 15.74,
+            "bareTrunkHeightMeters": 6.5,
+            "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+          },
+          {
+            "id": "home-front-deciduous-3",
+            "type": "deciduous",
+            "seasonalState": "mostly leafless",
+            "position": [
+              -14.670288869516613,
+              0.5488839807578179,
+              8.327764905455368
+            ],
+            "localPosition": [
+              9.5,
+              -15
+            ],
+            "radiusMeters": 0.37,
+            "heightMeters": 15.82,
+            "bareTrunkHeightMeters": 5.9,
+            "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+          }
+        ],
+        "triangles": 16536,
+        "drawCalls": 2,
+        "drivewayPositionsShifted": false
+      }
+    },
+    "glError": 0
+  },
+  "initialCamera": {
+    "position": [
+      1.8350575175072428,
+      2.9031529256723636,
+      12.998012966823683
+    ],
+    "insideDeckFootprint": false,
+    "deckY": 2.2799821544504058
+  },
+  "gpu": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER (0x000021C4) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "departure": {
+    "routePoints": 181,
+    "departurePoints": 8,
+    "checkedSteps": 556,
+    "airborneSteps": 0,
+    "samples": [
+      {
+        "step": 0,
+        "position": [
+          0.20674347877502441,
+          -0.3348768949508667,
+          19.60245704650879
+        ],
+        "speed": 0,
+        "grounded": 4,
+        "target": 1
+      },
+      {
+        "step": 30,
+        "position": [
+          -0.04938429966568947,
+          -0.31503593921661377,
+          20.64752960205078
+        ],
+        "speed": 3.715047101337498,
+        "grounded": 4,
+        "target": 1
+      },
+      {
+        "step": 60,
+        "position": [
+          -0.9135919809341431,
+          -0.39522403478622437,
+          22.674182891845703
+        ],
+        "speed": 4.741139935293423,
+        "grounded": 4,
+        "target": 1
+      },
+      {
+        "step": 90,
+        "position": [
+          -2.245255708694458,
+          -0.4404950439929962,
+          24.724077224731445
+        ],
+        "speed": 4.989047784077601,
+        "grounded": 4,
+        "target": 2
+      },
+      {
+        "step": 120,
+        "position": [
+          -4.001654148101807,
+          -0.44076400995254517,
+          26.51318359375
+        ],
+        "speed": 5.029931166049912,
+        "grounded": 4,
+        "target": 2
+      },
+      {
+        "step": 150,
+        "position": [
+          -6.012973785400391,
+          -0.4040142893791199,
+          27.93328094482422
+        ],
+        "speed": 4.858711254297991,
+        "grounded": 4,
+        "target": 3
+      },
+      {
+        "step": 180,
+        "position": [
+          -8.174508094787598,
+          -0.34236645698547363,
+          29.010141372680664
+        ],
+        "speed": 4.8170873099176355,
+        "grounded": 4,
+        "target": 3
+      },
+      {
+        "step": 210,
+        "position": [
+          -10.425092697143555,
+          -0.26541879773139954,
+          29.85662841796875
+        ],
+        "speed": 4.80474012527649,
+        "grounded": 4,
+        "target": 4
+      },
+      {
+        "step": 240,
+        "position": [
+          -12.723958969116211,
+          -0.18153147399425507,
+          30.548248291015625
+        ],
+        "speed": 4.796366414178313,
+        "grounded": 4,
+        "target": 4
+      },
+      {
+        "step": 270,
+        "position": [
+          -15.048205375671387,
+          -0.09149545431137085,
+          31.138723373413086
+        ],
+        "speed": 4.793201452283197,
+        "grounded": 4,
+        "target": 5
+      },
+      {
+        "step": 300,
+        "position": [
+          -17.3843936920166,
+          0.0036940574645996094,
+          31.67230224609375
+        ],
+        "speed": 4.788605157219839,
+        "grounded": 4,
+        "target": 5
+      },
+      {
+        "step": 330,
+        "position": [
+          -19.72832489013672,
+          0.10335122793912888,
+          32.156982421875
+        ],
+        "speed": 4.782816983344765,
+        "grounded": 4,
+        "target": 5
+      },
+      {
+        "step": 360,
+        "position": [
+          -22.0779972076416,
+          0.20689955353736877,
+          32.600181579589844
+        ],
+        "speed": 4.778783613150539,
+        "grounded": 4,
+        "target": 6
+      },
+      {
+        "step": 390,
+        "position": [
+          -24.434396743774414,
+          0.31856223940849304,
+          32.9427375793457
+        ],
+        "speed": 4.740450356190244,
+        "grounded": 4,
+        "target": 6
+      },
+      {
+        "step": 420,
+        "position": [
+          -26.779088973999023,
+          0.43208348751068115,
+          33.199947357177734
+        ],
+        "speed": 4.661469356692834,
+        "grounded": 4,
+        "target": 6
+      },
+      {
+        "step": 450,
+        "position": [
+          -28.926490783691406,
+          0.47049951553344727,
+          34.10999298095703
+        ],
+        "speed": 4.754381131311848,
+        "grounded": 4,
+        "target": 7
+      },
+      {
+        "step": 480,
+        "position": [
+          -30.76059341430664,
+          0.39921998977661133,
+          35.6993522644043
+        ],
+        "speed": 5.131122897530292,
+        "grounded": 4,
+        "target": 8
+      },
+      {
+        "step": 510,
+        "position": [
+          -32.19174575805664,
+          0.21945598721504211,
+          38.111724853515625
+        ],
+        "speed": 6.129946179677597,
+        "grounded": 4,
+        "target": 8
+      },
+      {
+        "step": 540,
+        "position": [
+          -33.03794479370117,
+          -0.055862296372652054,
+          41.52342224121094
+        ],
+        "speed": 7.974747242518273,
+        "grounded": 4,
+        "target": 8
+      }
+    ],
+    "reachedRoad": true,
+    "endState": {
+      "ready": true,
+      "screen": "pause",
+      "mode": "neighborhood",
+      "race": false,
+      "countdown": 0,
+      "modelLoaded": true,
+      "position": [
+        -33.28232955932617,
+        -0.23376977443695068,
+        43.67518997192383
+      ],
+      "rotation": [
+        0.03879011794924736,
+        -0.04203326255083084,
+        -0.004492632579058409,
+        0.9983528852462769
+      ],
+      "camera": {
+        "position": [
+          20,
+          5.0578422672064685,
+          2
+        ],
+        "target": [
+          8,
+          2.454651983805677,
+          5
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "chassisHalfExtents": {
+        "x": 0.8999999761581421,
+        "y": 0.3100000023841858,
+        "z": 2.299999952316284
+      },
+      "speed": 9.180347069817678,
+      "grounded": 4,
+      "slip": -0.00425160879056669,
+      "boost": 65,
+      "finished": false,
+      "routePoints": 260,
+      "near": 1.2160268073524885,
+      "ai": [
+        {
+          "id": 1,
+          "target": 15,
+          "speed": 21.771159671964465,
+          "position": [
+            913.8558959960938,
+            40.54507827758789,
+            -432.7107849121094
+          ]
+        },
+        {
+          "id": 2,
+          "target": 29,
+          "speed": 23.97470735274318,
+          "position": [
+            1051.0897216796875,
+            50.6217155456543,
+            -492.04315185546875
+          ]
+        },
+        {
+          "id": 3,
+          "target": 34,
+          "speed": 25.195799213222934,
+          "position": [
+            1106.8466796875,
+            52.75823211669922,
+            -521.0511474609375
+          ]
+        },
+        {
+          "id": 4,
+          "target": 147,
+          "speed": 12.935252236209713,
+          "position": [
+            1340.4754638671875,
+            5.648857116699219,
+            -82.5036392211914
+          ]
+        },
+        {
+          "id": 5,
+          "target": 181,
+          "speed": 12.078221988386163,
+          "position": [
+            1168.920654296875,
+            -0.6795825362205505,
+            236.22247314453125
+          ]
+        },
+        {
+          "id": 6,
+          "target": 212,
+          "speed": 10.354650533695429,
+          "position": [
+            1099.1656494140625,
+            10.240644454956055,
+            121.03411102294922
+          ]
+        }
+      ],
+      "testDriver": null,
+      "metrics": {
+        "quality": "high",
+        "frames": 67,
+        "p50": 0,
+        "p95": 0,
+        "physicsMs": 0.5,
+        "width": 1920,
+        "height": 1080,
+        "draws": 630,
+        "triangles": 3786703,
+        "vegetation": {
+          "trees": 18925,
+          "shrubs": 1099,
+          "grassTufts": 6084,
+          "chunks": 283,
+          "visibleChunks": 90,
+          "visibleBatches": 546,
+          "totalBatches": 3504,
+          "referenceTreeCount": 93,
+          "referenceWoodlandTreeCount": 280,
+          "referenceOmittedTreeCount": 29
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2473,
+            "leaves": 5997,
+            "rootRibs": 372,
+            "grassTriangles": 92988,
+            "groundTriangles": 40344,
+            "totalTriangles": 133332,
+            "batches": 112,
+            "visibleDrawCalls": 22,
+            "visibleTriangles": 31639,
+            "treeContacts": 93,
+            "rejected": 6362,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "renderer": "WebKit WebGL"
+    }
+  },
+  "passed": true
+}

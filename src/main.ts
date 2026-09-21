@@ -893,23 +893,33 @@ function updateCamera(dt: number) {
       ),
     );
   desired.y = Math.max(desired.y, heightAt(map, desired.x, desired.z) + 1.2);
-  const origin = p.clone().add(new T.Vector3(0, 1, 0)),
-    delta = desired.clone().sub(origin),
-    length = delta.length();
-  const hit = world.castRay(
-    new RAPIER.Ray(origin, delta.normalize()),
-    length,
-    true,
-    undefined,
-    undefined,
-    player.collider,
-    player.body,
-    (c) => !c.parent() || c.parent()!.isFixed(),
-  );
-  if (hit)
-    desired
-      .copy(origin)
-      .addScaledVector(delta, Math.max(1.5, hit.timeOfImpact - 0.4));
+  const origin = p.clone().add(new T.Vector3(0, 1, 0));
+  const clearCameraPosition = (position: T.Vector3) => {
+    const direction = position.clone().sub(origin),
+      length = direction.length();
+    if (length < 0.0001) return;
+    direction.multiplyScalar(1 / length);
+    const physicalHit = world.castRay(
+      new RAPIER.Ray(origin, direction),
+      length,
+      true,
+      undefined,
+      undefined,
+      player.collider,
+      player.body,
+      (c) => !c.parent() || c.parent()!.isFixed(),
+    );
+    const sceneryHit = environment.cameraDistance(origin, direction, length);
+    const distance = Math.min(
+      physicalHit?.timeOfImpact ?? Infinity,
+      sceneryHit ?? Infinity,
+    );
+    if (distance <= length)
+      position
+        .copy(origin)
+        .addScaledVector(direction, Math.max(0, distance - 0.4));
+  };
+  clearCameraPosition(desired);
   if (!cameraInitialized) {
     camPos.copy(desired);
     camTarget.copy(target);
@@ -918,6 +928,9 @@ function updateCamera(dt: number) {
     camPos.lerp(desired, 1 - Math.exp(-dt * 14));
     camTarget.lerp(target, 1 - Math.exp(-dt * 18));
   }
+  // Retain smooth follow, but retract immediately if the interpolated position
+  // would leave the camera behind a house or one of Home's elevated deck rails.
+  clearCameraPosition(camPos);
   camera.position.copy(camPos);
   const shake = player.boosting ? input.settings.shake * 0.012 : 0;
   camera.position.y += Math.sin(simTime * 38) * shake;
@@ -1119,6 +1132,23 @@ async function init() {
 if (new URLSearchParams(location.search).has("test")) {
   let testDriver: Driver | null = null;
   (window as any).__game = {
+    homeDetails: () => {
+      const result: Record<string, unknown> = {
+        frame: environment.root.userData.homeFrame ?? null,
+        house: null,
+        yard: null,
+        trees: null,
+      };
+      environment.root.traverse((object) => {
+        if (typeof object.userData.homeHouse === "object")
+          result.house = object.userData.homeHouse;
+        if (typeof object.userData.homeYard === "object")
+          result.yard = object.userData.homeYard;
+        if (typeof object.userData.homeTrees === "object")
+          result.trees = object.userData.homeTrees;
+      });
+      return result;
+    },
     referenceFacades: () => {
       const facades: unknown[] = [];
       environment.root.traverse((object) => {
@@ -1136,6 +1166,12 @@ if (new URLSearchParams(location.search).has("test")) {
       modelLoaded,
       position: player?.position.toArray(),
       rotation: player?.rotation.toArray(),
+      camera: {
+        position: camera.position.toArray(),
+        target: (inspectionView?.target ?? camTarget).toArray(),
+        mode: cameraMode,
+        inspection: !!inspectionView,
+      },
       chassisHalfExtents: player && player.collider.halfExtents(),
       speed: player?.speed,
       grounded: player?.grounded,

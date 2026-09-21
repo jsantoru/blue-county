@@ -80,6 +80,27 @@ def apply_properties(data, survey, manifest, nearest, point):
         'Property pavement, decks and pools are manually traced from dated imagery. Canopy-obscured segments remain explicitly inferred; vertical construction details are approximate.',
         'Stop and street signs at both Beverly/West Ridge junctions are representative US signs placed from verified road geometry; exact real sign locations and stop control were not established by the overhead imagery.']
     manifest['adjustments'].append('Reviewed property outlines replace driveway strips. Small mouth bridges join imagery to the retained OSM pavement; exact property grades remain unresolved by the coarse DEM.')
+    apply_home_photographs(data, survey, manifest)
+
+def apply_home_photographs(data, survey, manifest):
+    source_path = RESEARCH.parent / 'research-streetview/home-photo-reference.json'
+    source = json.loads(source_path.read_text(encoding='utf-8'))
+    building = next(b for b in data['buildings'] if b['id'] == source['buildingId'])
+    building['appearanceConfidence'] = 'Photo-observed front facade from user-supplied views; side/rear relationships confirmed by user, dimensions approximate'
+    building['reference'].update(homePhoto=True, wallColor=0xe6e4d9, shutterColor=0x743a33, doorColor=0x70403d, roofColor=0x806b5b)
+    building['appearanceSource'] = source['referenceId']
+    observation = next(o for o in survey['buildingObservations'] if o['id'] == building['id'])
+    observation.update(photographedFacade=True, appearanceConfidence=building['appearanceConfidence'])
+    survey['homeReference'] = source
+    survey['propertySourceSha256']['../research-streetview/home-photo-reference.json'] = hashlib.sha256(source_path.read_bytes()).hexdigest()
+    for feature in survey['propertyFeatures']:
+        if feature['id'] == 'east-deck-2':
+            feature['renderedBy'] = 'home-yard'
+            feature['supersededBy'] = source['referenceId']
+            feature['renderNote'] = 'Retained aerial trace is evidence for part of the rear deck. The dedicated Home renderer supplies the complete user-confirmed elevated side/rear deck and patio.'
+    survey['sources'].append({'name': 'Home user-supplied street views and direct description', 'url': '../../docs/research-streetview/home-photo-observations.md'})
+    survey['limits'] = [s.replace('numbers12,20', 'numbers2,12,20') for s in survey['limits']]
+    manifest['adjustments'].append('Home now uses its user-photographed front facade and user-confirmed right-side deck, lower patio and rear screened porch. Fine dimensions and exact yard grades remain approximate; no source photograph is used as a game texture.')
 
 def junction_signs(data):
     """Two mapped junctions; roadside placement is representative, not image-measured."""

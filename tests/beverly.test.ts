@@ -216,12 +216,23 @@ describe("Beverly reference data", () => {
 
   it("keeps photo observations separate from unverified facade placeholders", () => {
     expect(
-      [...new Set(survey.buildingObservations
-        .filter((item) => item.photographedFacade)
-        .map((item) => item.address))].sort(),
+      [
+        ...new Set(
+          survey.buildingObservations
+            .filter((item) => item.photographedFacade)
+            .map((item) => item.address),
+        ),
+      ].sort(),
     ).toEqual([
-      "12 Beverly Dr", "20 Beverly Dr", "22 Beverly Dr", "26 Beverly Dr",
-      "29 Beverly Dr", "34 Beverly Dr", "35 Beverly Dr", "41 Beverly Dr",
+      "12 Beverly Dr",
+      "2 Beverly Dr",
+      "20 Beverly Dr",
+      "22 Beverly Dr",
+      "26 Beverly Dr",
+      "29 Beverly Dr",
+      "34 Beverly Dr",
+      "35 Beverly Dr",
+      "41 Beverly Dr",
     ]);
     expect(
       survey.buildingObservations.some((item) => item.photographedFacade),
@@ -286,10 +297,13 @@ describe("Beverly reference data", () => {
       "../docs/research-streetview/facade-followup-overrides.json",
     );
     expect(followup.facades.map((item: any) => item.address)).toEqual([
-      "12 Beverly Dr", "20 Beverly Dr",
+      "12 Beverly Dr",
+      "20 Beverly Dr",
     ]);
     for (const source of followup.facades) {
-      expect(source.sourcePage).toMatch(/^https:\/\/www\.zillow\.com\/homedetails\//);
+      expect(source.sourcePage).toMatch(
+        /^https:\/\/www\.zillow\.com\/homedetails\//,
+      );
       expect(source.imageUrl).toMatch(/^https:\/\/photos\.zillowstatic\.com\//);
       expect(source.captureDate).toBeNull();
       expect(source.listingContext).toMatch(/MLS/);

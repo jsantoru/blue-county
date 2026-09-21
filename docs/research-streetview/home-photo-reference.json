@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "address": "2 Beverly Dr",
+  "buildingId": "nys-7159466",
+  "referenceId": "home-user-photos-2026-09-20",
+  "providedDate": "2026-09-20",
+  "captureDate": null,
+  "source": "Three street-level screenshots supplied by the user, plus the user's direct description of the side and rear layout",
+  "attachments": [
+    "codex-clipboard-4cbaa5d0-54fd-4f90-8baf-254774f303af.png",
+    "codex-clipboard-8d66f726-aaf6-4392-9dd0-37a533740a51.png",
+    "codex-clipboard-334cf217-28cc-434f-82ba-36772f0dadd1.png"
+  ],
+  "observedFront": [
+    "Pale horizontal siding, burgundy louvered shutters, low brown shingle roof",
+    "Three asymmetric upper window groups, larger picture window on viewer-right",
+    "Muted red entry offset to about 62 percent of facade width, lamp and eagle above",
+    "Short lower windows, narrow front planting beds, bench, wheel ornament, pale pedestal",
+    "Concrete path turns toward the driveway, open lawn and exposed mature deciduous trunks",
+    "Dark rounded mailbox with red flag and number 2 on weathered wood post"
+  ],
+  "userConfirmed": [
+    "Elevated deck on viewer-right, the driveway side",
+    "Patio underneath, red lower door and sliders directly above",
+    "Deck wraps around the back to a roofed screened enclosure"
+  ],
+  "limits": "Exact dimensions, grades, trunk coordinates and hidden rear construction are approximations. Source screenshots are references, not bundled images or photographic game textures. The original state footprint and existing driveway geometry remain authoritative for placement."
+}
