@@ -633,6 +633,8 @@ function settingsItems(): MenuItem[] {
     ["cameraSensitivity", "Camera sensitivity", 0.3, 2, 0.1],
     ["vibration", "Vibration strength", 0, 1, 0.1],
     ["shake", "Camera motion", 0, 1, 0.1],
+    ["walkingDeadzone", "Walking deadzone", 0, 0.45, 0.01],
+    ["cameraDeadzone", "Camera deadzone", 0, 0.45, 0.01],
   ];
   return [
     ...sliders.map(([key, label, min, max, step]) => ({

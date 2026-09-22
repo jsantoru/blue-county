@@ -1,6 +1,6 @@
 {
-  "date": "2026-09-22T00:15:56.902Z",
-  "methodology": "Synthetic Gamepad API input through the real render loop. Right stick stays at 0.22 throughout: it never reaches neutral. Walking and driving are actual physics; each return-to-door fixture restores the previously observed exit position. No physical controller or rumble verification is claimed.",
+  "date": "2026-09-22T00:44:18.046Z",
+  "methodology": "Synthetic Gamepad API input through the real render loop. Right stick stays at 0.30 throughout: it never reaches neutral. Walking and driving are actual physics; each return-to-door fixture restores the previously observed exit position. No physical controller or rumble verification is claimed.",
   "checks": [
     "Exposed controller detected without any button or right-stick gesture",
     "First fresh A starts Home despite persistent right-stick offset",
@@ -13,24 +13,24 @@
   "cycles": [
     {
       "cycle": 1,
-      "walked": 0.33814167517553606,
-      "driven": 1.743976656612352,
-      "rightStick": 0.22
+      "walked": 0.359199964339702,
+      "driven": 2.01240423787151,
+      "rightStick": 0.3
     },
     {
       "cycle": 2,
-      "walked": 0.3383814737656703,
-      "driven": 1.7457635219449226,
-      "rightStick": 0.22
+      "walked": 0.36011501719886896,
+      "driven": 2.014187630629801,
+      "rightStick": 0.3
     },
     {
       "cycle": 3,
-      "walked": 0.40278238788129594,
-      "driven": 1.7457635219449226,
-      "rightStick": 0.22
+      "walked": 0.36008583537379973,
+      "driven": 2.014187630629801,
+      "rightStick": 0.3
     }
   ],
   "errors": [],
-  "bundle": "/assets/index-MgantuzN.js",
+  "bundle": "/assets/index-BYt_r9BZ.js",
   "passed": true
 }

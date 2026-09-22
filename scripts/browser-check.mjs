@@ -111,11 +111,13 @@ try {
       b.pressed = false;
     });
   });
-  await press(0);
+  await page.waitForFunction(
+    () => window.__game.input.diagnostics().activeIndex === 2,
+  );
   assert.equal(
     (await state()).screen,
     "pause",
-    "device selection does not resume",
+    "automatic reconnection does not resume",
   );
   await press(0);
   assert.equal((await state()).screen, null);

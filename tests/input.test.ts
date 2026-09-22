@@ -152,7 +152,7 @@ describe("on-foot controls", () => {
     axis(pad, 1, -0.07);
     expect(input.sample(1 / 60)).toMatchObject({ moveX: 0, moveY: 0 });
     axis(pad, 0, 0);
-    axis(pad, 1, -0.56);
+    axis(pad, 1, -0.6);
     expect(input.sample(1 / 60).moveY).toBeCloseTo(0.5);
     axis(pad, 0, 1);
     axis(pad, 1, -1);
@@ -204,6 +204,44 @@ describe("on-foot controls", () => {
       jump: false,
     });
     keyboard.dispose();
+  });
+
+  it("stops idle walking and camera drift after both sticks have been used", () => {
+    const { input, pad, select } = harness();
+    select();
+    axis(pad, 0, 0.8);
+    axis(pad, 2, 0.8);
+    expect(input.sample(1 / 60).moveX).toBeCloseTo(0.75);
+    // Return to a noisy center after deliberate movement. No consume()/menu
+    // gate is involved: these values must be rejected by the radial deadzones.
+    axis(pad, 0, 0.14);
+    axis(pad, 1, 0.08);
+    axis(pad, 2, 0.18);
+    axis(pad, 3, -0.08);
+    for (let i = 0; i < 300; i++) {
+      const frame = input.sample(1 / 60);
+      expect(frame).toMatchObject({ moveX: 0, moveY: 0, lookX: 0, lookY: 0 });
+    }
+    // Driving has its own more sensitive deadzone; fixing drift must not dull it.
+    expect(input.sample(1 / 60).steer).toBeGreaterThan(0);
+    axis(pad, 1, 0);
+    axis(pad, 0, 0.25);
+    expect(input.sample(1 / 60).moveX).toBeCloseTo(0.0625);
+    input.addMouseLook(1, -1);
+    expect(input.sample(1 / 60)).toMatchObject({ mouseX: 1, mouseY: -1 });
+  });
+
+  it("tunes walking, camera and steering deadzones independently", () => {
+    const { input, pad, select } = harness();
+    select();
+    input.updateSettings({ walkingDeadzone: 0.3, cameraDeadzone: 0.1 });
+    axis(pad, 0, 0.25);
+    axis(pad, 2, 0.25);
+    const frame = input.sample(1 / 60);
+    expect(frame.moveX).toBe(0);
+    expect(frame.lookX).toBeCloseTo((0.25 - 0.1) / 0.9);
+    expect(frame.steer).toBeCloseTo(processSteering(0.25, DEFAULT_SETTINGS));
+    expect(input.settings.deadzone).toBe(DEFAULT_SETTINGS.deadzone);
   });
   it("allows walking before Y is released after exit while debouncing the interaction", () => {
     const { input, pad, select } = harness();
@@ -480,6 +518,34 @@ describe("on-foot controls", () => {
 });
 
 describe("analog processing", () => {
+  it("migrates shared deadzones without losing stronger old filtering or explicit new preferences", () => {
+    expect(normalizeSettings({ deadzone: 0.12 })).toMatchObject({
+      walkingDeadzone: 0.2,
+      cameraDeadzone: 0.22,
+    });
+    expect(normalizeSettings({ deadzone: 0.35 })).toMatchObject({
+      deadzone: 0.35,
+      walkingDeadzone: 0.35,
+      cameraDeadzone: 0.35,
+    });
+    expect(
+      normalizeSettings({
+        deadzone: 0.35,
+        walkingDeadzone: 0.15,
+        cameraDeadzone: 0.18,
+      }),
+    ).toMatchObject({
+      deadzone: 0.35,
+      walkingDeadzone: 0.15,
+      cameraDeadzone: 0.18,
+    });
+    expect(
+      normalizeSettings({ walkingDeadzone: -1, cameraDeadzone: 2 }),
+    ).toMatchObject({
+      walkingDeadzone: 0,
+      cameraDeadzone: 0.45,
+    });
+  });
   it("rescales outside the deadzone, preserving endpoints and symmetry", () => {
     expect(rescaleDeadzone(0.1, 0.12)).toBe(0);
     expect(rescaleDeadzone(0.56, 0.12)).toBeCloseTo(0.5);
@@ -605,7 +671,7 @@ describe("frame polling, selection and safety", () => {
     button(pad, 7, 0.65);
     for (let i = 0; i < 120; i++) {
       const frame = input.sample(1 / 60);
-      expect(frame.moveY).toBeCloseTo((0.8 - 0.12) / (1 - 0.12));
+      expect(frame.moveY).toBeCloseTo((0.8 - 0.2) / (1 - 0.2));
       expect(frame.throttle).toBeCloseTo(processTrigger(0.65, 0.04));
     }
     // Releasing the consumed camera axis re-arms just that axis.
@@ -710,10 +776,10 @@ describe("frame polling, selection and safety", () => {
       sprint: false,
     });
   });
-  it("applies the configured stick deadzone to camera drift and full travel", () => {
+  it("applies the separate camera deadzone to drift and retains full travel", () => {
     const { input, pad, select } = harness();
     select();
-    input.updateSettings({ deadzone: 0.3 });
+    input.updateSettings({ cameraDeadzone: 0.3 });
     axis(pad, 2, 0.2);
     axis(pad, 3, 0.1);
     expect(input.sample(1 / 60)).toMatchObject({ lookX: 0, lookY: 0 });

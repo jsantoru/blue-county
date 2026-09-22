@@ -90,6 +90,35 @@ describe("on-foot physics", () => {
     },
   );
 
+  it.each([
+    { moveX: 0, moveY: -0.075, sprint: false, cameraYaw: 0 },
+    { moveX: 0.05, moveY: 0, sprint: false, cameraYaw: 0 },
+    { moveX: 0, moveY: -0.035, sprint: true, cameraYaw: Math.PI / 2 },
+  ])(
+    "faces the travel direction even for gentle analog movement %j",
+    (command) => {
+      const { pedestrian, tick } = fixture();
+      tick(command, command.cameraYaw, 120);
+      const travel = pedestrian.position.clone().setY(0);
+      expect(travel.length()).toBeGreaterThan(0.2);
+      const facing = new Vector3(
+        Math.sin(pedestrian.yaw),
+        0,
+        Math.cos(pedestrian.yaw),
+      );
+      expect(facing.dot(travel.normalize())).toBeGreaterThan(0.999);
+    },
+  );
+
+  it("preserves facing with no movement intent or numerical noise", () => {
+    const { pedestrian, tick } = fixture();
+    pedestrian.yaw = 0.7;
+    tick({}, -Math.PI / 2, 120);
+    expect(pedestrian.yaw).toBe(0.7);
+    tick({ moveX: 1e-6, moveY: -1e-6 }, Math.PI / 2, 60);
+    expect(pedestrian.yaw).toBe(0.7);
+  });
+
   it("slides along a wall without penetration and handles obstacles reserved for pedestrians", () => {
     const { world, pedestrian, tick } = fixture();
     world.createCollider(

@@ -36,6 +36,8 @@ export type Binding =
 export type Bindings = Partial<Record<BindingName, Binding>>;
 export interface InputSettings {
   deadzone: number;
+  walkingDeadzone: number;
+  cameraDeadzone: number;
   sensitivity: number;
   curve: number;
   triggerDeadzone: number;
@@ -46,6 +48,8 @@ export interface InputSettings {
 }
 export const DEFAULT_SETTINGS: Readonly<InputSettings> = Object.freeze({
   deadzone: 0.12,
+  walkingDeadzone: 0.2,
+  cameraDeadzone: 0.22,
   sensitivity: 1,
   curve: 1.35,
   triggerDeadzone: 0.04,
@@ -258,12 +262,32 @@ export function processLook(
 export function normalizeSettings(
   candidate: Partial<InputSettings>,
 ): InputSettings {
-  const number = (key: keyof InputSettings, min: number, max: number) =>
+  const number = (
+    key: keyof InputSettings,
+    min: number,
+    max: number,
+    fallback = DEFAULT_SETTINGS[key] as number,
+  ) =>
     typeof candidate[key] === "number" && Number.isFinite(candidate[key])
       ? clamp(candidate[key] as number, min, max)
-      : (DEFAULT_SETTINGS[key] as number);
+      : fallback;
+  const deadzone = number("deadzone", 0, 0.45);
   return {
-    deadzone: number("deadzone", 0, 0.45),
+    deadzone,
+    // Older saves shared the steering deadzone. Keep stronger saved filtering,
+    // while giving untouched controllers useful walking/camera drift margins.
+    walkingDeadzone: number(
+      "walkingDeadzone",
+      0,
+      0.45,
+      Math.max(DEFAULT_SETTINGS.walkingDeadzone, deadzone),
+    ),
+    cameraDeadzone: number(
+      "cameraDeadzone",
+      0,
+      0.45,
+      Math.max(DEFAULT_SETTINGS.cameraDeadzone, deadzone),
+    ),
     sensitivity: number("sensitivity", 0.4, 1.8),
     curve: number("curve", 0.5, 2.5),
     triggerDeadzone: number("triggerDeadzone", 0, 0.3),
@@ -666,11 +690,12 @@ export class InputManager {
       return processTrigger(read(name), this.settings.triggerDeadzone) > 0;
     if (name === "steer") return Math.abs(read(name)) > this.settings.deadzone;
     if (name === "moveX" || name === "moveY")
-      return Math.hypot(read("moveX"), read("moveY")) > this.settings.deadzone;
+      return (
+        Math.hypot(read("moveX"), read("moveY")) > this.settings.walkingDeadzone
+      );
     if (name === "lookX" || name === "lookY")
       return (
-        Math.hypot(read("lookX"), read("lookY")) >
-        Math.max(0.15, this.settings.deadzone)
+        Math.hypot(read("lookX"), read("lookY")) > this.settings.cameraDeadzone
       );
     return read(name) > 0.5;
   }
@@ -825,12 +850,12 @@ export class InputManager {
       const look = processLook(
         value("lookX"),
         value("lookY"),
-        Math.max(0.15, this.settings.deadzone),
+        this.settings.cameraDeadzone,
       );
       const movement = processLook(
         value("moveX"),
         -value("moveY"),
-        this.settings.deadzone,
+        this.settings.walkingDeadzone,
       );
       const keyboardX =
         Number(key("KeyD", "ArrowRight")) - Number(key("KeyA", "ArrowLeft"));

@@ -9,7 +9,7 @@ page.setDefaultTimeout(30000);
 const report = {
   date: new Date().toISOString(),
   methodology:
-    "Synthetic Gamepad API input through the real render loop. Right stick stays at 0.22 throughout: it never reaches neutral. Walking and driving are actual physics; each return-to-door fixture restores the previously observed exit position. No physical controller or rumble verification is claimed.",
+    "Synthetic Gamepad API input through the real render loop. Right stick stays at 0.30 throughout: it never reaches neutral. Walking and driving are actual physics; each return-to-door fixture restores the previously observed exit position. No physical controller or rumble verification is claimed.",
   checks: [],
   cycles: [],
   errors: [],
@@ -58,7 +58,7 @@ try {
       index: 2,
       mapping: "standard",
       connected: true,
-      axes: [0, 0, 0.22, 0],
+      axes: [0, 0, 0.3, 0],
       buttons: Array.from({ length: 17 }, () => ({ value: 0, pressed: false })),
     };
     Object.defineProperty(navigator, "getGamepads", {
@@ -132,7 +132,7 @@ try {
     );
     assert.equal(driving.exploration.phase, "driving");
     const diag = await page.evaluate(() => window.__game.input.diagnostics());
-    assert.equal(diag.rawAxes[2], 0.22);
+    assert.equal(diag.rawAxes[2], 0.3);
     report.cycles.push({
       cycle: cycle + 1,
       walked: distance(exit.exploration.position, walking.exploration.position),

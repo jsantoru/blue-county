@@ -1,0 +1,100 @@
+{
+  "date": "2026-09-22T00:43:48.892Z",
+  "methodology": "Actual production render loop and pedestrian physics with a synthetic standard Gamepad API controller. Tests use a modest diagonal resting offset both at startup and after deliberate stick use, followed by gentle four-direction movement. Only placement fixtures are used; movement and camera look go through normal input polling. No physical hardware or rumble verification is claimed.",
+  "checks": [
+    "Startup resting offsets of LS (0.14, 0.08) and RS (0.18, -0.08) produce no walking or camera drift over 120 actual frames",
+    "After real movement and camera look, releasing directly to imperfect rest stays still for 120 frames without menu/transition input suppression",
+    "Gentle 0.25 raw left-stick movement works in all four camera-relative directions and turns the character to face actual travel below the former 0.08 facing threshold"
+  ],
+  "drift": [
+    {
+      "phase": "startup resting offsets",
+      "rawAxes": [
+        0.14,
+        0.08,
+        0.18,
+        -0.08
+      ],
+      "frames": 120,
+      "maxPlayerDrift": 0.0010867916461679713,
+      "maxCameraDrift": 0.0010878414520385238,
+      "maxYawChange": 0,
+      "minimumForwardAlignment": 1,
+      "processed": {
+        "moveX": 0,
+        "moveY": 0,
+        "lookX": 0,
+        "lookY": 0
+      }
+    },
+    {
+      "phase": "resting offsets after deliberate stick use",
+      "rawAxes": [
+        0.14,
+        0.08,
+        0.18,
+        -0.08
+      ],
+      "frames": 120,
+      "maxPlayerDrift": 0.00003031343186794038,
+      "maxCameraDrift": 0.000030449740146056778,
+      "maxYawChange": 0,
+      "minimumForwardAlignment": 1,
+      "processed": {
+        "moveX": 0,
+        "moveY": 0,
+        "lookX": 0,
+        "lookY": 0
+      }
+    }
+  ],
+  "gentleMovement": [
+    {
+      "direction": "forward",
+      "rawAxes": [
+        0,
+        -0.25
+      ],
+      "processedMagnitude": 0.062499999999999986,
+      "distance": 0.11869136052043623,
+      "velocityAlignmentToViewDirection": 1.0000000000000002,
+      "facingAlignmentToVelocity": 1
+    },
+    {
+      "direction": "right",
+      "rawAxes": [
+        0.25,
+        0
+      ],
+      "processedMagnitude": 0.062499999999999986,
+      "distance": 0.12487436439704079,
+      "velocityAlignmentToViewDirection": 1.0000000000000002,
+      "facingAlignmentToVelocity": 0.9999999999431146
+    },
+    {
+      "direction": "backward",
+      "rawAxes": [
+        0,
+        0.25
+      ],
+      "processedMagnitude": 0.062499999999999986,
+      "distance": 0.12125568964449415,
+      "velocityAlignmentToViewDirection": 1.0000000000000002,
+      "facingAlignmentToVelocity": 0.9999999997724582
+    },
+    {
+      "direction": "left",
+      "rawAxes": [
+        -0.25,
+        0
+      ],
+      "processedMagnitude": 0.062499999999999986,
+      "distance": 0.11983612020641342,
+      "velocityAlignmentToViewDirection": 1.0000000000000002,
+      "facingAlignmentToVelocity": 0.9999999999431145
+    }
+  ],
+  "errors": [],
+  "bundle": "/assets/index-BYt_r9BZ.js",
+  "passed": true
+}

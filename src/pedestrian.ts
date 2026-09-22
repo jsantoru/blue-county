@@ -94,7 +94,9 @@ export class Pedestrian {
     const response = 1 - Math.exp(-dt * (this.grounded ? 17 : 6));
     this.velocity.x += (vx - this.velocity.x) * response;
     this.velocity.z += (vz - this.velocity.z) * response;
-    if (magnitude > 0.08)
+    // Input already applies a stick deadzone. Any remaining movement intent
+    // must also turn the body; a second deadzone makes gentle walking go backward.
+    if (magnitude > 1e-4)
       this.yaw +=
         angleDiff(Math.atan2(vx, vz), this.yaw) * (1 - Math.exp(-dt * 14));
     if (this.jumpBuffer > 0 && this.coyote > 0) {
