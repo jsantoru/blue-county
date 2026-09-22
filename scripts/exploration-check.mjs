@@ -644,11 +644,13 @@ try {
 
   if (secondPass) {
     await installPad();
-    await padButton(0);
+    await page.waitForFunction(
+      () => window.__game.input.diagnostics().activeIndex === 2,
+    );
     assert.equal(
       (await state()).exploration.mode,
       "driving",
-      "First controller button is selection only",
+      "Automatic controller detection preserves the current driving mode",
     );
     await padButton(3, 70);
     await expectPhase("foot");
@@ -698,11 +700,13 @@ try {
     await page.evaluate(() => {
       window.__explorationPad.connected = true;
     });
-    await padButton(0);
+    await page.waitForFunction(
+      () => window.__game.input.diagnostics().activeIndex === 2,
+    );
     assert.equal(
       (await state()).screen,
       "pause",
-      "Reconnect selection does not resume",
+      "Automatic reconnect detection does not resume",
     );
     await padButton(0);
     assert.equal((await state()).screen, null);

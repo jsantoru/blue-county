@@ -24,9 +24,11 @@ import { Driver } from "./ai";
 import { Sound } from "./audio";
 import { Effects } from "./effects";
 import { Pedestrian, findVehicleExit, footCameraPosition } from "./pedestrian";
+import { FootCameraOrbit } from "./foot-camera";
 import { CHARACTER_SEAT_ANCHOR } from "./character-visual";
 import { DadCharacterVisual as CharacterVisual } from "./dad-character";
 import { VehicleDoors } from "./vehicle-doors";
+import { SteeringWheelVisual } from "./steering-wheel";
 import { preloadHomeProps } from "./home-props";
 import { buildExplorationObstacles } from "./exploration-obstacles";
 import {
@@ -115,14 +117,15 @@ let pedestrian: Pedestrian;
 let seatedDriver: CharacterVisual, walkingDriver: CharacterVisual;
 let characterSource: GLTF;
 let vehicleDoors: VehicleDoors;
+let steeringWheel: SteeringWheelVisual;
 let explorationObstacles:
   ReturnType<typeof buildExplorationObstacles> | undefined;
 let footPhase: "driving" | "exiting" | "foot" | "entering" = "driving";
 let transitionTime = 0,
   transitionSide = 1;
 const VEHICLE_TRANSFER_SECONDS = 1.65;
-let footYaw = 0,
-  footPitch = 0.22;
+const footCamera = new FootCameraOrbit();
+let footYaw = 0;
 let draggingLook = false,
   hadPointerLock = false;
 const onFoot = () => footPhase !== "driving";
@@ -195,8 +198,8 @@ const input = new InputManager({
     if (!ready) return;
     safetyMessage =
       reason === "disconnect"
-        ? "Controller disconnected. Reconnect, release controls, then choose Resume."
-        : "Paused for focus loss. Return to the game, release controls, then choose Resume.";
+        ? "Controller disconnected. Reconnect, then choose Resume."
+        : "Paused for focus loss. Return to the game, then choose Resume.";
     if (screen === null) setScreen("pause");
     else renderMenu();
     clock.reset();
@@ -298,11 +301,12 @@ function buildScene(test: boolean) {
   visual.add(real);
   visual.userData.car = real;
   vehicleDoors = new VehicleDoors(real);
-  seatedDriver = new CharacterVisual(characterSource);
+  steeringWheel = new SteeringWheelVisual(real, manifest.steeringWheel);
+  seatedDriver = new CharacterVisual(characterSource, manifest.steeringWheel);
   seatedDriver.root.position.set(...CHARACTER_SEAT_ANCHOR);
   real.add(seatedDriver.root);
   seatedDriver.update({ pose: "seated", speed: 0, time: 0 });
-  walkingDriver = new CharacterVisual(characterSource);
+  walkingDriver = new CharacterVisual(characterSource, manifest.steeringWheel);
   walkingDriver.root.visible = false;
   scene.add(walkingDriver.root);
   pedestrian = new Pedestrian(world);
@@ -485,8 +489,14 @@ function interactVehicle() {
     player.body.setEnabledRotations(false, false, false, true);
     pedestrian.setEnabled(true);
     pedestrian.place(exit.feet, carHeading());
-    footYaw = carHeading();
-    footPitch = 0.22;
+    footCamera.begin(
+      camera.position,
+      seatedDriver.root
+        .getWorldPosition(new T.Vector3())
+        .add(new T.Vector3(0, 1.2, 0)),
+      carHeading(),
+    );
+    footYaw = footCamera.yaw;
     transitionSide = exit.side;
     footPhase = "exiting";
     seatedDriver.root.visible = false;
@@ -505,7 +515,7 @@ function interactVehicle() {
     );
   }
   transitionTime = VEHICLE_TRANSFER_SECONDS;
-  input.consume();
+  input.consumeInteraction();
   frame = emptyInput();
   clock.reset();
   return true;
@@ -703,7 +713,7 @@ function renderMenu() {
   if (screen === "main") {
     title = "BLUE<br>COUNTY<small>WARWICK / 442</small>";
     intro =
-      "Your dad’s blue Oldsmobile. Familiar roads.<br>A little more room to open it up.<br><small>Click once for focus and audio. Press a controller button to select it, release, then use A to start.</small>";
+      "Your dad’s blue Oldsmobile. Familiar roads.<br>A little more room to open it up.<br><small>Click once for focus and audio. Connect your controller and use A to start.</small>";
     items = [
       {
         label: "Drive from Home",
@@ -876,7 +886,7 @@ function updateDiagnostics() {
   const el = $("diagnostic-data");
   if (!el) return;
   const d = input.diagnostics();
-  el.textContent = `${d.activeDevice}\nMapping: ${d.mapping || "none"} | index: ${d.activeIndex ?? "—"}\nHaptics: ${d.haptics} | neutral gate: ${d.awaitingNeutral}\nRaw axes: ${d.rawAxes.map((n) => n.toFixed(3)).join(" ")}\nLT / RT: ${d.rawTriggers ? `${d.rawTriggers.lt.toFixed(3)} / ${d.rawTriggers.rt.toFixed(3)}` : "—"}\nProcessed steer: ${d.processed.steer.toFixed(3)}\nThrottle / brake: ${d.processed.throttle.toFixed(3)} / ${d.processed.brake.toFixed(3)}\nButtons: ${d.pressedButtons.join(", ") || "none"}\nDevices: ${d.devices.length}${d.needsCalibration ? "\nUnknown mapping: use Calibrate / remap." : ""}`;
+  el.textContent = `${d.activeDevice}\nMapping: ${d.mapping || "none"} | index: ${d.activeIndex ?? "—"}\nHaptics: ${d.haptics} | held controls awaiting release: ${d.awaitingNeutral}\nRaw axes: ${d.rawAxes.map((n) => n.toFixed(3)).join(" ")}\nLT / RT: ${d.rawTriggers ? `${d.rawTriggers.lt.toFixed(3)} / ${d.rawTriggers.rt.toFixed(3)}` : "—"}\nProcessed steer: ${d.processed.steer.toFixed(3)}\nThrottle / brake: ${d.processed.throttle.toFixed(3)} / ${d.processed.brake.toFixed(3)}\nButtons: ${d.pressedButtons.join(", ") || "none"}\nDevices: ${d.devices.length}${d.needsCalibration ? "\nUnknown mapping: use Calibrate / remap." : ""}`;
 }
 function simulate(dt: number) {
   simTime += dt;
@@ -890,7 +900,7 @@ function simulate(dt: number) {
       if (transitionTime === 0) {
         if (footPhase === "entering") {
           releaseWalking();
-          input.consume();
+          input.consumeInteraction();
           frame = emptyInput();
           toast("BACK IN THE 442", 1.2);
         } else {
@@ -1084,6 +1094,7 @@ function renderVehicles(alpha: number, renderDt = 0) {
       root.visible = true;
     }
   });
+  steeringWheel.update(player.steering);
   seatedDriver.update({
     pose: "seated",
     speed: player.speed,
@@ -1171,16 +1182,6 @@ function updateCamera(dt: number) {
   if (onFoot()) {
     const p = walkingDriver.root.position;
     const target = p.clone().add(new T.Vector3(0, 1.2, 0));
-    const distance = 4.6;
-    const desired = target
-      .clone()
-      .add(
-        new T.Vector3(
-          -Math.sin(footYaw) * Math.cos(footPitch) * distance,
-          Math.sin(footPitch) * distance + 0.3,
-          -Math.cos(footYaw) * Math.cos(footPitch) * distance,
-        ),
-      );
     const clear = (position: T.Vector3) =>
       footCameraPosition(
         world,
@@ -1190,12 +1191,8 @@ function updateCamera(dt: number) {
         (origin, direction, length) =>
           environment.cameraDistance(origin, direction, length),
       );
-    const safe = clear(desired);
-    if (!cameraInitialized) {
-      camPos.copy(safe);
-      cameraInitialized = true;
-    } else camPos.lerp(safe, 1 - Math.exp(-dt * (transitionTime > 0 ? 6 : 15)));
-    camPos.copy(clear(camPos));
+    camPos.copy(footCamera.position(target, screen ? 0 : dt, clear));
+    cameraInitialized = true;
     camTarget.copy(target);
     camera.position.copy(camPos);
     camera.lookAt(camTarget);
@@ -1432,17 +1429,12 @@ function animate(now: number) {
     if (!screen && frame.interact) interactVehicle();
     if (frame.actions.camera) {
       if (onFoot()) {
-        footYaw = pedestrian.yaw;
-        footPitch = 0.22;
+        footCamera.recenter(pedestrian.yaw);
       } else cameraMode = (cameraMode + 1) % 2;
     }
     if (onFoot() && !screen) {
-      footYaw -= frame.lookX * dt * 2.5 + frame.mouseX * 0.0025;
-      footPitch = clamp(
-        footPitch + frame.lookY * dt * 1.8 + frame.mouseY * 0.002,
-        -0.38,
-        1.1,
-      );
+      footCamera.updateLook(frame, dt);
+      footYaw = footCamera.yaw;
       // Buffer render-frame edges independently of the number of fixed steps.
       if (frame.jump && footPhase === "foot") pedestrian.queueJump();
       frame.jump = false;
@@ -1660,6 +1652,7 @@ if (new URLSearchParams(location.search).has("test")) {
       },
       chassisHalfExtents: player && player.collider.halfExtents(),
       speed: player?.speed,
+      steering: player?.steering,
       grounded: player?.grounded,
       slip: player?.slip,
       boost: player?.bank.value,
@@ -1706,6 +1699,9 @@ if (new URLSearchParams(location.search).has("test")) {
     startFree,
     heroDetails: () => {
       const active = onFoot() ? walkingDriver : seatedDriver;
+      const car = visuals[0].userData.car as T.Group;
+      car.updateMatrixWorld(true);
+      const wheelNode = car.getObjectByName(manifest.steeringWheel.node)!;
       const bones: Record<string, number[]> = {};
       for (const name of [
         "head",
@@ -1723,6 +1719,23 @@ if (new URLSearchParams(location.search).has("test")) {
         bones,
         model: active.root.userData.character,
         doors: vehicleDoors.getState(),
+        steeringWheel: {
+          center: manifest.steeringWheel.center,
+          axis: manifest.steeringWheel.axis,
+          quaternion: wheelNode.quaternion.toArray(),
+          hands: Object.fromEntries(
+            ["left", "right"].map((side) => [
+              side,
+              car
+                .worldToLocal(
+                  seatedDriver.root
+                    .getObjectByName(`${side}_hand`)!
+                    .getWorldPosition(new T.Vector3()),
+                )
+                .toArray(),
+            ]),
+          ),
+        },
       };
     },
     characterPose: () => {
@@ -1746,6 +1759,7 @@ if (new URLSearchParams(location.search).has("test")) {
       if (!onFoot())
         throw new Error("Exit the car before placing the explorer");
       pedestrian.place(new T.Vector3(...point), yaw);
+      footCamera.reset(yaw);
       footYaw = yaw;
       footPhase = "foot";
       transitionTime = 0;
@@ -1763,6 +1777,7 @@ if (new URLSearchParams(location.search).has("test")) {
     ) => {
       if (!onFoot())
         throw new Error("Exit the car before simulating exploration");
+      footCamera.setAngles(cameraYaw);
       footYaw = cameraYaw;
       for (let i = 0; i < Math.round(seconds * 60); i++) {
         frame = {

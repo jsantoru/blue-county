@@ -30,6 +30,8 @@ Getting in and out uses a 1.65-second blended transfer: the selected door opens,
 
 The adjacent active car source and [1968_oldsmobile_442.snapshot.blend](../asset-source/1968_oldsmobile_442.snapshot.blend) remain read-only. The door exporter preserves the original closed bounds, US-left steering layout and wheel pivots. See [the vehicle contract and open-door views](vehicle.md) for details.
 
+The controller follow-up separates the original rim, spokes, hub and horn details into a `SteeringWheel` pivot. The manifest records its center, radius and tilted axis toward the driver. `src/steering-wheel.ts` drives the actual wheel and both wrist targets with the same rotation: steering right turns it clockwise from the seat, with the left hand rising and the right hand falling. The column and turn-signal stalk stay fixed. The character's authored Blender clips are unchanged; the runtime arm solver follows the moving rim.
+
 ## Four Home props at their existing anchors
 
 [beverly-home-props.blend](../asset-source/beverly-home-props.blend) contains an editable bench, wagon wheel, birdbath and number 2 mailbox. The [exported kit](../public/assets/beverly-home-props.glb) replaces the corresponding earlier props at the same house-local placements. It adds shaped joinery, slats, rims, fasteners, mailbox construction, flag and material wear while preserving their role in the supplied Home views.

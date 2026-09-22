@@ -17,6 +17,8 @@
     "export-driver": "powershell -ExecutionPolicy Bypass -File scripts/build-hero-assets.ps1 -Asset driver",
     "export-home-props": "powershell -ExecutionPolicy Bypass -File scripts/build-hero-assets.ps1 -Asset home",
     "test:hero": "node scripts/hero-check.mjs",
+    "test:controller-transitions": "node scripts/controller-transition-check.mjs",
+    "test:camera-controls": "node scripts/camera-controls-check.mjs",
     "test:browser": "node scripts/browser-check.mjs",
     "test:visual": "node scripts/visual-check.mjs",
     "test:beverly": "node scripts/beverly-check.mjs",

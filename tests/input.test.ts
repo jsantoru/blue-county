@@ -176,6 +176,8 @@ describe("on-foot controls", () => {
     button(pad, 3, 0);
     button(pad, 2, 0);
     input.sample(1 / 60);
+    // Completing a transfer with Y already released must not swallow a new press.
+    input.consumeInteraction();
     button(pad, 3, 1);
     button(pad, 11, 1);
     expect(input.sample(1 / 60)).toMatchObject({
@@ -203,34 +205,72 @@ describe("on-foot controls", () => {
     });
     keyboard.dispose();
   });
-  it("requires movement, jump and interact release after a mode transition", () => {
+  it("allows walking before Y is released after exit while debouncing the interaction", () => {
     const { input, pad, select } = harness();
     select();
+    axis(pad, 1, -1);
     button(pad, 3, 1);
     expect(input.sample(1 / 60).interact).toBe(true);
-    input.consume();
-    axis(pad, 1, -1);
-    button(pad, 2, 1);
-    button(pad, 3, 0);
-    expect(input.sample(1 / 60)).toMatchObject({
-      moveY: 0,
-      jump: false,
-      interact: false,
-    });
-    button(pad, 2, 0);
-    input.sample(1 / 60);
-    expect(input.diagnostics().awaitingNeutral).toBe(true);
-    axis(pad, 1, 0);
-    input.sample(1 / 60);
-    expect(input.diagnostics().awaitingNeutral).toBe(false);
-    axis(pad, 1, -1);
-    button(pad, 3, 1);
+    input.consumeInteraction();
+    for (let i = 0; i < 120; i++)
+      expect(input.sample(1 / 60)).toMatchObject({ moveY: 1, interact: false });
     button(pad, 2, 1);
     expect(input.sample(1 / 60)).toMatchObject({
       moveY: 1,
       jump: true,
+      interact: false,
+    });
+    button(pad, 3, 0);
+    button(pad, 2, 0);
+    input.sample(1 / 60);
+    button(pad, 3, 1);
+    expect(input.sample(1 / 60)).toMatchObject({
+      moveY: 1,
       interact: true,
     });
+  });
+  it("preserves an accelerator held during entry when the transfer completes", () => {
+    const { input, pad, select } = harness();
+    select();
+    button(pad, 3, 1);
+    expect(input.sample(1 / 60).interact).toBe(true);
+    input.consumeInteraction();
+    button(pad, 7, 0.75);
+    axis(pad, 0, 0.6);
+    button(pad, 3, 0);
+    for (let i = 0; i < 100; i++) input.sample(1 / 60);
+    // main debounces interaction again at the end of the seat transfer.
+    input.consumeInteraction();
+    const frame = input.sample(1 / 60);
+    expect(frame.throttle).toBeCloseTo(processTrigger(0.75, 0.04));
+    expect(frame.steer).toBeGreaterThan(0.3);
+    expect(frame.interact).toBe(false);
+  });
+  it("debounces keyboard interaction without stopping held movement or mouse look", () => {
+    const host = new EventTarget() as Window;
+    const input = new InputManager({
+      window: host,
+      document: null,
+      storage: null,
+      getGamepads: () => [],
+    });
+    keyEvent(host, "KeyW", true);
+    keyEvent(host, "KeyF", true);
+    expect(input.sample(1 / 60).interact).toBe(true);
+    input.consumeInteraction();
+    input.addMouseLook(12, -4);
+    expect(input.sample(1 / 60)).toMatchObject({
+      moveY: 1,
+      throttle: 1,
+      interact: false,
+      mouseX: 12,
+      mouseY: -4,
+    });
+    keyEvent(host, "KeyF", false);
+    input.sample(1 / 60);
+    keyEvent(host, "KeyF", true);
+    expect(input.sample(1 / 60).interact).toBe(true);
+    input.dispose();
   });
   it("silences foot actions in menus, on disconnect and until deliberate resume", () => {
     const { input, pad, select, setPads } = harness();
@@ -504,6 +544,202 @@ describe("analog processing", () => {
 });
 
 describe("frame polling, selection and safety", () => {
+  it("recognizes an exposed neutral controller without a right-stick gesture", () => {
+    const { input, pad } = harness();
+    expect(input.sample(1 / 60).source).toBe("none");
+    expect(input.diagnostics().activeIndex).toBe(2);
+    button(pad, 7, 0.65);
+    const frame = input.sample(1 / 60);
+    expect(frame.source).toBe("gamepad");
+    expect(frame.throttle).toBeCloseTo(processTrigger(0.65, 0.04));
+  });
+  it("prefers a fresh controller button over an idle device at initial selection", () => {
+    const { input, pad, setPads } = harness();
+    const other = makePad(5);
+    button(other, 0, 1);
+    setPads([null, null, pad, null, null, other]);
+    expect(input.sample(1 / 60).boost).toBe(false);
+    expect(input.diagnostics().activeIndex).toBe(5);
+    // The held selection press is consumed, but a new pedal input still works.
+    button(other, 7, 0.7);
+    const frame = input.sample(1 / 60);
+    expect(frame.boost).toBe(false);
+    expect(frame.throttle).toBeCloseTo(processTrigger(0.7, 0.04));
+  });
+  it("prefers a standard controller to an idle unknown device", () => {
+    const { input, pad, setPads } = harness();
+    const unknown = makePad(0, "");
+    setPads([unknown, null, pad]);
+    input.sample(1 / 60);
+    expect(input.diagnostics()).toMatchObject({
+      activeIndex: 2,
+      needsCalibration: false,
+    });
+  });
+  it("does not replace keyboard hints merely because an idle controller appears", () => {
+    const host = new EventTarget() as Window;
+    const pad = makePad();
+    let pads: PadState[] = [];
+    const input = new InputManager({
+      window: host,
+      document: null,
+      storage: null,
+      getGamepads: () => pads,
+    });
+    keyEvent(host, "KeyW", true);
+    expect(input.sample(1 / 60).source).toBe("keyboard");
+    keyEvent(host, "KeyW", false);
+    input.sample(1 / 60);
+    pads = [pad];
+    expect(input.sample(1 / 60).source).toBe("keyboard");
+    expect(input.diagnostics().activeIndex).toBe(2);
+    axis(pad, 1, -0.7);
+    expect(input.sample(1 / 60).source).toBe("gamepad");
+    input.dispose();
+  });
+  it("does not let a right-stick resting offset block fresh movement or throttle", () => {
+    const { input, pad, select } = harness();
+    axis(pad, 2, 0.22);
+    select();
+    axis(pad, 1, -0.8);
+    button(pad, 7, 0.65);
+    for (let i = 0; i < 120; i++) {
+      const frame = input.sample(1 / 60);
+      expect(frame.moveY).toBeCloseTo((0.8 - 0.12) / (1 - 0.12));
+      expect(frame.throttle).toBeCloseTo(processTrigger(0.65, 0.04));
+    }
+    // Releasing the consumed camera axis re-arms just that axis.
+    axis(pad, 2, 0);
+    input.sample(1 / 60);
+    axis(pad, 2, 0.7);
+    expect(input.sample(1 / 60).lookX).toBeGreaterThan(0.6);
+  });
+  it("keeps held keyboard movement active when a controller is automatically adopted", () => {
+    const host = new EventTarget() as Window;
+    const pad = makePad();
+    let pads: PadState[] = [];
+    const input = new InputManager({
+      window: host,
+      document: null,
+      storage: null,
+      getGamepads: () => pads,
+    });
+    keyEvent(host, "KeyW", true);
+    expect(input.sample(1 / 60).moveY).toBe(1);
+    // The new device may expose resting offsets or a stick already held.
+    axis(pad, 0, 0.6);
+    axis(pad, 2, 0.22);
+    pads = [pad];
+    const frame = input.sample(1 / 60);
+    expect(input.diagnostics().activeIndex).toBe(2);
+    expect(frame).toMatchObject({
+      source: "keyboard",
+      moveY: 1,
+      throttle: 1,
+      steer: 0,
+      lookX: 0,
+    });
+    expect(input.sample(1 / 60)).toMatchObject({ moveY: 1, throttle: 1 });
+    keyEvent(host, "KeyW", false);
+    axis(pad, 0, 0);
+    axis(pad, 2, 0);
+    input.sample(1 / 60);
+    axis(pad, 0, 0.6);
+    expect(input.sample(1 / 60).steer).toBeGreaterThan(0.3);
+    input.dispose();
+  });
+  it("preserves keyboard menu edges and repeat timing when an idle pad appears", () => {
+    const host = new EventTarget() as Window;
+    let pads: PadState[] = [];
+    const input = new InputManager({
+      window: host,
+      document: null,
+      storage: null,
+      getGamepads: () => pads,
+    });
+    keyEvent(host, "ArrowDown", true);
+    expect(input.sample(0.1, true).actions.down).toBe(true);
+    expect(input.sample(0.1, true).actions.down).toBe(false);
+    pads = [makePad()];
+    keyEvent(host, "Enter", true);
+    expect(input.sample(0.1, true).actions).toMatchObject({
+      down: false,
+      confirm: true,
+    });
+    expect(input.sample(0.1, true).actions.down).toBe(false);
+    expect(input.sample(0.05, true).actions.down).toBe(true);
+    input.dispose();
+  });
+  it("releases consumed controls independently while allowing other new inputs", () => {
+    const { input, pad, select } = harness();
+    select();
+    button(pad, 0, 1);
+    button(pad, 7, 1);
+    input.sample(1 / 60, true);
+    input.consume();
+    button(pad, 6, 0.5);
+    let frame = input.sample(1 / 60);
+    expect(frame).toMatchObject({ boost: false, sprint: false, throttle: 0 });
+    expect(frame.brake).toBeCloseTo(processTrigger(0.5, 0.04));
+    button(pad, 0, 0);
+    input.sample(1 / 60);
+    button(pad, 0, 1);
+    frame = input.sample(1 / 60);
+    expect(frame).toMatchObject({ boost: true, sprint: true, throttle: 0 });
+    // RT does not require another control to be released when it is re-armed.
+    button(pad, 7, 0);
+    input.sample(1 / 60);
+    button(pad, 7, 0.6);
+    expect(input.sample(1 / 60).throttle).toBeCloseTo(
+      processTrigger(0.6, 0.04),
+    );
+  });
+  it("discards pre-menu mouse deltas but accepts new look while a consumed button remains held", () => {
+    const { input, pad, select } = harness();
+    select();
+    button(pad, 0, 1);
+    input.sample(1 / 60, true);
+    input.addMouseLook(80, 40);
+    input.consume();
+    expect(input.sample(1 / 60)).toMatchObject({ mouseX: 0, mouseY: 0 });
+    input.addMouseLook(9, -3);
+    expect(input.sample(1 / 60)).toMatchObject({
+      mouseX: 9,
+      mouseY: -3,
+      boost: false,
+      sprint: false,
+    });
+  });
+  it("applies the configured stick deadzone to camera drift and full travel", () => {
+    const { input, pad, select } = harness();
+    select();
+    input.updateSettings({ deadzone: 0.3 });
+    axis(pad, 2, 0.2);
+    axis(pad, 3, 0.1);
+    expect(input.sample(1 / 60)).toMatchObject({ lookX: 0, lookY: 0 });
+    axis(pad, 2, 1);
+    axis(pad, 3, 0);
+    expect(input.sample(1 / 60)).toMatchObject({ lookX: 1, lookY: 0 });
+  });
+  it("does not let a held keyboard menu confirmation block fresh gameplay controls", () => {
+    const host = new EventTarget() as Window;
+    const input = new InputManager({
+      window: host,
+      document: null,
+      storage: null,
+      getGamepads: () => [],
+    });
+    keyEvent(host, "Enter", true);
+    expect(input.sample(1 / 60, true).actions.confirm).toBe(true);
+    input.consume();
+    keyEvent(host, "KeyW", true);
+    keyEvent(host, "Space", true);
+    const frame = input.sample(1 / 60);
+    expect(frame).toMatchObject({ moveY: 1, throttle: 1, jump: true });
+    expect(frame.actions.confirm).toBe(false);
+    expect(input.sample(1 / 60).jump).toBe(false);
+    input.dispose();
+  });
   it("selects an already connected device at index 2, consumes selection, polls fresh each frame", () => {
     const { input, pad, getGamepads, select } = harness();
     expect(input.sample(1 / 60).source).toBe("none");

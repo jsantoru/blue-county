@@ -1,0 +1,63 @@
+{
+  "sourceSha256": "907219b6d86f22e749f8aa611bb11185fbb54dd890f655122664f6803c88c0fb",
+  "sourceSnapshotUnchanged": true,
+  "boundsUnchanged": true,
+  "trianglesUnchanged": true,
+  "unchangedMeshGeometry": {
+    "DoorMesh_L": true,
+    "DoorMesh_R": true,
+    "WheelMesh_FL": true,
+    "WheelMesh_FR": true,
+    "WheelMesh_RL": true,
+    "WheelMesh_RR": true
+  },
+  "bodyAndSteeringTriangleCountUnchanged": true,
+  "steering": {
+    "node": "SteeringWheel",
+    "meshNode": "SteeringWheelMesh",
+    "center": [
+      0.39800000190734863,
+      1.0379999876022339,
+      0.06400000303983688
+    ],
+    "axis": [
+      1.9931974293285748e-8,
+      0.6380178928375244,
+      -0.7700215578079224
+    ],
+    "radius": 0.17600001319259673,
+    "neutralAngleRadians": 0,
+    "sourceParts": [
+      "Interior | Brushed steering wheel spoke",
+      "Interior | Brushed steering wheel spoke.001",
+      "Interior | Brushed steering wheel spoke.002",
+      "Interior | Oldsmobile horn medallion",
+      "Interior | Steering rim chrome inset",
+      "Interior | Steering spoke dark hole",
+      "Interior | Steering spoke dark hole.001",
+      "Interior | Steering spoke dark hole.002",
+      "Interior | Steering spoke dark hole.003",
+      "Interior | Steering spoke dark hole.004",
+      "Interior | Steering spoke dark hole.005",
+      "Interior | Steering wheel horn pad",
+      "Interior | Steering wheel hub",
+      "Interior | Walnut steering wheel rim"
+    ],
+    "note": "Identity pivot orientation; axis points toward driver in car-local game coordinates. Rotate only this pivot; column and turn-signal stalk stay fixed in Body."
+  },
+  "validation": {
+    "namedWheelNodesVerified": true,
+    "leftHandDriveVerified": true,
+    "physicalWheelSidesVerified": true,
+    "namedSteeringWheelNodeVerified": true,
+    "steeringWheelIdentityPivotVerified": true,
+    "steeringWheelAxisRotationVerified": true,
+    "steeringColumnRemainsFixed": true,
+    "namedDoorNodesVerified": true,
+    "doorHingesVerified": true,
+    "originalSkinPartitioned": true,
+    "noCameras": true,
+    "noAnimations": true,
+    "noStudioNodes": true
+  }
+}

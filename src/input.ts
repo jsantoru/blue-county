@@ -389,7 +389,11 @@ export class InputManager {
   private frame = emptyInput();
   private lastSource: InputFrame["source"] = "none";
   private diagnosticFrame = emptyInput();
-  private needsNeutral = false;
+  private blockedKeys = new Set<string>();
+  private blockedBindings = new Set<BindingName>();
+  private get needsNeutral() {
+    return this.blockedKeys.size > 0 || this.blockedBindings.size > 0;
+  }
   private focused = true;
   private safetySuspended = false;
   private resetHeld = 0;
@@ -464,6 +468,7 @@ export class InputManager {
     }) as EventListener);
     listen(this.hostWindow, "keyup", ((event: KeyboardEvent) => {
       this.keys.delete(event.code);
+      this.blockedKeys.delete(event.code);
     }) as EventListener);
     listen(this.hostWindow, "blur", () => this.safetyPause("blur"));
     listen(this.hostWindow, "focus", () => {
@@ -655,9 +660,35 @@ export class InputManager {
     this.safetySuspended = false;
     this.consume();
   }
-  /** Consume a menu confirmation: held A/RT cannot leak into gameplay. */
+  private bindingActive(name: BindingName, pad: PadState, bindings: Bindings) {
+    const read = (key: BindingName) => readBinding(pad, bindings[key]);
+    if (name === "throttle" || name === "brake")
+      return processTrigger(read(name), this.settings.triggerDeadzone) > 0;
+    if (name === "steer") return Math.abs(read(name)) > this.settings.deadzone;
+    if (name === "moveX" || name === "moveY")
+      return Math.hypot(read("moveX"), read("moveY")) > this.settings.deadzone;
+    if (name === "lookX" || name === "lookY")
+      return (
+        Math.hypot(read("lookX"), read("lookY")) >
+        Math.max(0.15, this.settings.deadzone)
+      );
+    return read(name) > 0.5;
+  }
+
+  private suppressHeldPadControls(): void {
+    this.blockedBindings.clear();
+    const pad = this.activePad(),
+      bindings = this.getBindings();
+    if (pad)
+      for (const name of BINDING_NAMES)
+        if (this.bindingActive(name, pad, bindings))
+          this.blockedBindings.add(name);
+  }
+
+  /** Suppress only controls already held; each becomes usable on its own release. */
   consume(): void {
-    this.needsNeutral = true;
+    this.blockedKeys = new Set(this.keys);
+    this.suppressHeldPadControls();
     this.repeater.clear();
     this.resetHeld = 0;
     this.resetFired = false;
@@ -665,6 +696,18 @@ export class InputManager {
     this.mouse = { x: 0, y: 0 };
     this.frame = emptyInput();
     this.diagnosticFrame = emptyInput();
+  }
+  /** Car transfers debounce F/Y without interrupting walking, look or pedals. */
+  consumeInteraction(): void {
+    const keyHeld = this.keys.has("KeyF");
+    if (keyHeld) this.blockedKeys.add("KeyF");
+    const pad = this.activePad();
+    const padHeld =
+      !!pad && this.bindingActive("interact", pad, this.getBindings());
+    if (padHeld) this.blockedBindings.add("interact");
+    this.footHeld.interact = keyHeld || padHeld;
+    this.mouse = { x: 0, y: 0 };
+    this.frame = emptyInput();
   }
   clear(): void {
     this.keys.clear();
@@ -675,13 +718,7 @@ export class InputManager {
 
   /** The game forwards mouse events only while its canvas owns pointer lock or a drag. */
   addMouseLook(dx: number, dy: number): void {
-    if (
-      !this.focused ||
-      this.safetySuspended ||
-      this.needsNeutral ||
-      this.capture
-    )
-      return;
+    if (!this.focused || this.safetySuspended || this.capture) return;
     this.mouse.x += clamp(dx, -800, 800);
     this.mouse.y += clamp(dy, -800, 800);
   }
@@ -705,6 +742,7 @@ export class InputManager {
       this.safetyPause("disconnect");
     }
     let selected = false;
+    let candidate: PadState | undefined;
     for (const pad of this.pads) {
       const key = padKey(pad),
         previous = this.previousPadButtons.get(key) ?? [];
@@ -716,15 +754,27 @@ export class InputManager {
         rising &&
         (!this.active || (menuMode && pad.index !== this.active.index))
       ) {
-        this.stopRumble();
-        this.active = { index: pad.index, id: pad.id };
-        this.lastSource = "gamepad";
-        this.hapticFailure = false;
-        this.capture = null;
-        this.consume();
-        selected = true;
+        candidate = pad;
         break;
       }
+    }
+    const explicitSelection = !!candidate;
+    // Browsers expose pads after a user gesture. Once exposed, an idle pad is
+    // already usable: don't require an extra button or right-stick gesture.
+    if (this.focused && !this.active && !candidate)
+      candidate =
+        this.pads.find((pad) => pad.mapping === "standard") ?? this.pads[0];
+    if (candidate) {
+      this.stopRumble();
+      this.active = { index: candidate.index, id: candidate.id };
+      if (candidate.buttons.some((button) => button.value > 0.5))
+        this.lastSource = "gamepad";
+      this.hapticFailure = false;
+      this.capture = null;
+      if (explicitSelection) {
+        this.consume();
+        selected = true;
+      } else this.suppressHeldPadControls();
     }
     // Save copies, never retain a Gamepad object as the source for the next frame.
     const currentKeys = new Set(this.pads.map(padKey));
@@ -748,114 +798,116 @@ export class InputManager {
       return this.frame;
     }
     const bindings = this.getBindings();
-    const value = (name: BindingName) =>
-      pad ? readBinding(pad, bindings[name]) : 0;
-    const held = (name: BindingName) => value(name) > 0.5;
-    const key = (...codes: string[]) =>
-      codes.some((code) => this.keys.has(code));
-    const steer = processSteering(value("steer"), this.settings);
-    const throttle = processTrigger(
-      value("throttle"),
-      this.settings.triggerDeadzone,
-    );
-    const brake = processTrigger(value("brake"), this.settings.triggerDeadzone);
-    const look = processLook(value("lookX"), value("lookY"));
-    const movement = processLook(
-      value("moveX"),
-      -value("moveY"),
-      this.settings.deadzone,
-    );
-    const keyboardX =
-      Number(key("KeyD", "ArrowRight")) - Number(key("KeyA", "ArrowLeft"));
-    const keyboardY =
-      Number(key("KeyW", "ArrowUp")) - Number(key("KeyS", "ArrowDown"));
-    const keyboardLength = Math.max(1, Math.hypot(keyboardX, keyboardY));
-    const current = emptyInput();
-    current.steer = key("KeyA", "KeyD", "ArrowLeft", "ArrowRight")
-      ? Number(key("KeyD", "ArrowRight")) - Number(key("KeyA", "ArrowLeft"))
-      : steer;
-    current.throttle = Math.max(throttle, Number(key("KeyW", "ArrowUp")));
-    current.brake = Math.max(brake, Number(key("KeyS", "ArrowDown")));
-    current.boost = held("boost") || key("ShiftLeft", "ShiftRight");
-    current.handbrake = held("handbrake") || key("Space");
-    current.lookBack = held("lookBack") || key("KeyB");
-    current.lookX = look[0] * this.settings.cameraSensitivity;
-    current.lookY = look[1] * this.settings.cameraSensitivity;
-    const keyboardMove = key(
-      "KeyW",
-      "KeyA",
-      "KeyS",
-      "KeyD",
-      "ArrowUp",
-      "ArrowDown",
-      "ArrowLeft",
-      "ArrowRight",
-    );
-    current.moveX = keyboardMove ? keyboardX / keyboardLength : movement[0];
-    current.moveY = keyboardMove ? keyboardY / keyboardLength : movement[1];
-    current.sprint = held("sprint") || key("ShiftLeft", "ShiftRight");
-    const jump = held("jump") || key("Space");
-    const interact = held("interact") || key("KeyF");
-    current.jump = jump && !this.footHeld.jump;
-    current.interact = interact && !this.footHeld.interact;
-    this.footHeld = { jump, interact };
-    current.mouseX = mouse.x * this.settings.cameraSensitivity;
-    current.mouseY = mouse.y * this.settings.cameraSensitivity;
-    const reset = held("reset") || key("KeyR");
-    const menuX = value("steer");
-    const menuY = value("moveY");
-    const menuHeld: Record<MenuAction, boolean> = {
-      up: held("menuUp") || menuY < -0.6 || key("ArrowUp", "KeyW"),
-      down: held("menuDown") || menuY > 0.6 || key("ArrowDown", "KeyS"),
-      left: held("menuLeft") || menuX < -0.6 || key("ArrowLeft", "KeyA"),
-      right: held("menuRight") || menuX > 0.6 || key("ArrowRight", "KeyD"),
-      confirm: held("confirm") || key("Enter"),
-      back: held("back") || key("Backspace", "Escape"),
-      pause: held("pause") || key("Escape", "KeyP"),
-      camera: held("camera") || key("KeyC"),
+    for (const code of this.blockedKeys)
+      if (!this.keys.has(code)) this.blockedKeys.delete(code);
+    for (const name of this.blockedBindings)
+      if (!pad || !this.bindingActive(name, pad, bindings))
+        this.blockedBindings.delete(name);
+    const readControls = (raw = false) => {
+      const value = (name: BindingName) =>
+        pad && (raw || !this.blockedBindings.has(name))
+          ? readBinding(pad, bindings[name])
+          : 0;
+      const held = (name: BindingName) => value(name) > 0.5;
+      const key = (...codes: string[]) =>
+        codes.some(
+          (code) => this.keys.has(code) && (raw || !this.blockedKeys.has(code)),
+        );
+      const steer = processSteering(value("steer"), this.settings);
+      const throttle = processTrigger(
+        value("throttle"),
+        this.settings.triggerDeadzone,
+      );
+      const brake = processTrigger(
+        value("brake"),
+        this.settings.triggerDeadzone,
+      );
+      const look = processLook(
+        value("lookX"),
+        value("lookY"),
+        Math.max(0.15, this.settings.deadzone),
+      );
+      const movement = processLook(
+        value("moveX"),
+        -value("moveY"),
+        this.settings.deadzone,
+      );
+      const keyboardX =
+        Number(key("KeyD", "ArrowRight")) - Number(key("KeyA", "ArrowLeft"));
+      const keyboardY =
+        Number(key("KeyW", "ArrowUp")) - Number(key("KeyS", "ArrowDown"));
+      const keyboardLength = Math.max(1, Math.hypot(keyboardX, keyboardY));
+      const current = emptyInput();
+      current.steer = key("KeyA", "KeyD", "ArrowLeft", "ArrowRight")
+        ? Number(key("KeyD", "ArrowRight")) - Number(key("KeyA", "ArrowLeft"))
+        : steer;
+      current.throttle = Math.max(throttle, Number(key("KeyW", "ArrowUp")));
+      current.brake = Math.max(brake, Number(key("KeyS", "ArrowDown")));
+      current.boost = held("boost") || key("ShiftLeft", "ShiftRight");
+      current.handbrake = held("handbrake") || key("Space");
+      current.lookBack = held("lookBack") || key("KeyB");
+      current.lookX = look[0] * this.settings.cameraSensitivity;
+      current.lookY = look[1] * this.settings.cameraSensitivity;
+      const keyboardMove = key(
+        "KeyW",
+        "KeyA",
+        "KeyS",
+        "KeyD",
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+      );
+      current.moveX = keyboardMove ? keyboardX / keyboardLength : movement[0];
+      current.moveY = keyboardMove ? keyboardY / keyboardLength : movement[1];
+      current.sprint = held("sprint") || key("ShiftLeft", "ShiftRight");
+      const jump = held("jump") || key("Space");
+      const interact = held("interact") || key("KeyF");
+      current.jump = jump && !this.footHeld.jump;
+      current.interact = interact && !this.footHeld.interact;
+      current.mouseX = mouse.x * this.settings.cameraSensitivity;
+      current.mouseY = mouse.y * this.settings.cameraSensitivity;
+      const reset = held("reset") || key("KeyR");
+      const menuX = value("steer");
+      const menuY = value("moveY");
+      const menuHeld: Record<MenuAction, boolean> = {
+        up: held("menuUp") || menuY < -0.6 || key("ArrowUp", "KeyW"),
+        down: held("menuDown") || menuY > 0.6 || key("ArrowDown", "KeyS"),
+        left: held("menuLeft") || menuX < -0.6 || key("ArrowLeft", "KeyA"),
+        right: held("menuRight") || menuX > 0.6 || key("ArrowRight", "KeyD"),
+        confirm: held("confirm") || key("Enter"),
+        back: held("back") || key("Backspace", "Escape"),
+        pause: held("pause") || key("Escape", "KeyP"),
+        camera: held("camera") || key("KeyC"),
+      };
+      return { current, menuHeld, jump, interact, reset };
     };
+    const { current, menuHeld, jump, interact, reset } = readControls();
+    const raw = readControls(true);
+    this.footHeld = { jump, interact };
     // Keep the most recently used device in the HUD after release. Merely having
     // an idle controller connected must not replace keyboard/mouse hints.
     if (this.keys.size || mouse.x || mouse.y) this.lastSource = "keyboard";
     else if (
       pad &&
-      (Math.abs(steer) > 0.02 ||
-        throttle > 0.01 ||
-        brake > 0.01 ||
-        Math.hypot(...look) > 0.02 ||
-        Math.hypot(...movement) > 0.02 ||
-        current.boost ||
-        current.handbrake ||
-        current.lookBack ||
-        current.sprint ||
-        jump ||
-        interact ||
-        reset ||
-        Object.values(menuHeld).some(Boolean))
+      (Math.abs(raw.current.steer) > 0.02 ||
+        raw.current.throttle > 0.01 ||
+        raw.current.brake > 0.01 ||
+        Math.hypot(raw.current.lookX, raw.current.lookY) > 0.02 ||
+        Math.hypot(raw.current.moveX, raw.current.moveY) > 0.02 ||
+        raw.current.boost ||
+        raw.current.handbrake ||
+        raw.current.lookBack ||
+        raw.current.sprint ||
+        raw.jump ||
+        raw.interact ||
+        raw.reset ||
+        Object.values(raw.menuHeld).some(Boolean))
     )
       this.lastSource = "gamepad";
     current.source = this.lastSource;
     // Diagnostics retain processed hardware values even when the menu or safety gate silences gameplay.
-    this.diagnosticFrame = current;
-    if (this.needsNeutral) {
-      const neutral =
-        Math.abs(current.steer) < 0.02 &&
-        current.throttle === 0 &&
-        current.brake === 0 &&
-        !current.boost &&
-        !current.handbrake &&
-        !current.lookBack &&
-        Math.hypot(current.moveX, current.moveY) < 0.02 &&
-        !current.sprint &&
-        !jump &&
-        !interact &&
-        !reset &&
-        Math.hypot(...look) < 0.02 &&
-        !Object.values(menuHeld).some(Boolean);
-      if (neutral) this.needsNeutral = false;
-      this.frame = { ...emptyInput(), source: this.lastSource };
-      return this.frame;
-    }
+    this.diagnosticFrame = { ...raw.current, source: current.source };
     current.actions = this.repeater.step(menuHeld, step);
     if (reset && !menuMode && !this.safetySuspended) {
       this.resetHeld += step;

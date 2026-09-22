@@ -61,11 +61,13 @@ try {
     }, values);
     await page.waitForTimeout(150);
   };
-  await press(0);
+  await page.waitForFunction(
+    () => window.__game.input.diagnostics().activeIndex === 2,
+  );
   assert.equal(
     (await state()).screen,
     "main",
-    "first button selects and is consumed",
+    "An exposed idle controller is detected without activating the menu",
   );
   for (let i = 0; i < 3; i++) await press(13);
   await press(0);

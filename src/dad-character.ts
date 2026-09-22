@@ -2,6 +2,8 @@ import * as T from "three";
 import { clone } from "three/addons/utils/SkeletonUtils.js";
 import type { GLTF } from "three/addons/loaders/GLTFLoader.js";
 import type { CharacterAnimation } from "./character-visual";
+import { CHARACTER_SEAT_ANCHOR } from "./character-visual";
+import { steeringWheelGrip, type SteeringWheelSpec } from "./steering-wheel";
 
 export type DadAnimation = CharacterAnimation & {
   /** Blend the standing body down into the authored driving pose during transfer. */
@@ -21,7 +23,10 @@ export class DadCharacterVisual {
   private disposed = false;
   private firstPose = true;
 
-  constructor(source: Pick<GLTF, "scene" | "animations">) {
+  constructor(
+    source: Pick<GLTF, "scene" | "animations">,
+    private readonly wheel: SteeringWheelSpec,
+  ) {
     this.root.name = "Dad · Blender character with coppola";
     this.root.userData.character = {
       source: "/assets/dad-driver.glb",
@@ -147,7 +152,6 @@ export class DadCharacterVisual {
 
   /** Solve the two arms in world space, independent of Blender bone roll. */
   private gripWheel(steering: number) {
-    const angle = T.MathUtils.clamp(steering, -0.55, 0.55) * 1.7;
     for (const [label, side] of [
       ["left", 1],
       ["right", -1],
@@ -162,10 +166,8 @@ export class DadCharacterVisual {
       const a = shoulder.distanceTo(elbow),
         b = elbow.distanceTo(wrist);
       const target = this.root.localToWorld(
-        new T.Vector3(
-          side * 0.145 * Math.cos(angle),
-          0.938 + side * 0.145 * Math.sin(angle),
-          0.357,
+        steeringWheelGrip(this.wheel, side, steering).sub(
+          new T.Vector3(...CHARACTER_SEAT_ANCHOR),
         ),
       );
       const direction = target.clone().sub(shoulder);

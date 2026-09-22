@@ -2,7 +2,7 @@
 
 A locally playable arcade driving and exploration game starring your actual dark blue 1968 Oldsmobile 442 convertible. Drive the Warwick roads, race the Ridge & Hollow circuit, or park, step out and explore Beverly Drive's yards, woods and Stony Creek on foot. The visible driver sits behind the wheel on the US driver's left.
 
-**The Blender asset update is on `codex/home-driver-coppola`.** Dad now has an editable Blender character with a charcoal Italian coppola, white mustache, tinted glasses and blue checked shirt. The 442's actual doors open during entry and exit, and four Blender-built props add detail to Home's yard. See [the assets, source files and modeling limits](docs/hero-assets.md).
+**The current controller, steering and walking-camera fixes are on `codex/controller-transition-fix`, including the Blender asset update.** Dad has an editable Blender character with a charcoal Italian coppola, white mustache, tinted glasses and blue checked shirt. The 442's doors open during entry and exit, and four Blender-built props add detail to Home's yard. See [the assets, source files and modeling limits](docs/hero-assets.md).
 
 ![Dad standing beside the parked 442 at Home](docs/hero-dad-standing.png)
 
@@ -48,11 +48,11 @@ Development: `npm run dev -- --port 5174 --strictPort`. The game loads all map, 
 
 ## First drive
 
-Click once to focus/unlock audio, connect the wired Xbox controller, and press a button to select it. Release that first press, then use the pad for all menus. RT is proportional throttle; LT is proportional brake. To reverse, come to a stop, release LT, then press it again. Hold A to boost, X for handbrake, B to look back, R3 to switch camera, right stick to look around, Menu to pause, and View for 0.7s to recover. Y exits the parked car in Free Drive. Return Home is in Pause and exits an active race.
+Click once to focus/unlock audio and connect the wired Xbox controller. The game detects it automatically; if the browser initially hides it, press and release any button once. Use A to start. RT is proportional throttle; LT is proportional brake. To reverse, come to a stop, release LT, then press it again. Hold A to boost, X for handbrake, B to look back, R3 to switch camera, right stick to look around, Menu to pause, and View for 0.7s to recover. Y exits the parked car in Free Drive. You can hold the left stick during exit to start walking, or RT during entry to start driving as soon as the animation finishes. Return Home is in Pause and exits an active race.
 
 Keyboard: WASD/arrows drive, Shift boost, Space handbrake, B look back, C camera, R hold reset, Escape pause, Enter confirm. Menu arrows/WASD navigate; left/right adjusts settings. F3 shows telemetry.
 
-**Explore on foot:** stop and press **F / Y** to get out. WASD/arrows or the left stick move relative to the camera; Shift / A runs; Space / X jumps. Look with the right stick, right mouse drag, or click the game to capture the mouse (Escape releases and pauses). C / R3 recenters the walking camera. Approach either door and press F / Y to re-enter the 442. The map marks the parked car in blue. Walking follows terrain, steps over curbs and collides with houses, tree trunks, decks and rails. Dad uses Blender-authored idle, walk, run, airborne and seated animations; see [asset notes](docs/hero-assets.md) and [exploration controls](docs/exploration-pass.md).
+**Explore on foot:** stop and press **F / Y** to get out. WASD/arrows or the left stick move relative to the displayed camera; Shift / A runs; Space / X jumps. Look with the right stick, right mouse drag, or click the game to capture the mouse (Escape releases and pauses). C / R3 smoothly orbits the camera behind the character; moving the mouse or right stick takes over immediately. Approach either door and press F / Y to re-enter the 442. The map marks the parked car in blue. Walking follows terrain, steps over curbs and collides with houses, tree trunks, decks and rails. Dad uses Blender-authored idle, walk, run, airborne and seated animations; see [asset notes](docs/hero-assets.md) and [exploration controls](docs/exploration-pass.md).
 
 Start with **Balanced** handling, 0.12 stick deadzone, 1.35 response curve, and sensitivity 1.0. Increase deadzone only for stick drift. Try **Planted** if high-speed steering feels too lively. Physics tuning lives together in `src/vehicle.ts`: `steerLow`, `steerFalloff`, `grip`, `driftGrip`, `engineForce`, and `stability` are the useful first adjustments. Settings and the chosen handling preset persist locally. Diagnostics shows selected device, raw and processed analog inputs, mapping, buttons, and haptic availability; every binding can be remapped.
 
@@ -85,7 +85,7 @@ The active source folder `../oldsmobile_442` was **not modified**. The car expor
 
 ## Checks and evidence
 
-The September 21 Blender asset update passed **127 tests across 20 files** and the production build. Tests load the delivered character and car assets to check skinning, animations, seated hand placement, pause behavior, fabric export and real doorway clearance. The [hero review](docs/hero-verification.json) captures the character seated, standing, running and stepping through an open door. The [verification record](docs/verification.md) records the repeated exploration checks and separates them from the preceding build's full three-lap race, restart and Return Home. Controller automation uses synthetic Gamepad API input; physical controller feel and rumble remain unverified.
+The September 21 controller, steering and camera update passes **158 tests across 22 files** and the production build. The [controller transition review](docs/controller-transition-verification.json) repeats entry/exit with held controls and persistent right-stick offset. The [camera and steering review](docs/camera-controls-verification.json) verifies actual movement against the displayed view, look directions, recentering, wall clearance and both steering directions. Both pass seven grouped checks with zero browser or WebGL errors. The earlier [hero review](docs/hero-verification.json) captures the Blender character and opening doors. The [verification record](docs/verification.md) separates the current checks from earlier full exploration and race reviews. Controller automation uses synthetic Gamepad API input; physical controller feel and rumble remain unverified.
 
 ```powershell
 npm test               # input, rules, surfaces, physics and complete AI route tests
@@ -102,6 +102,8 @@ npm run test:backyard    # woodland/creek views, stream clearances, presets and 
 npm run test:exploration # actual keyboard/mouse exit, walking, collisions and return
 npm run test:exploration:second # separate synthetic-controller and lifecycle review
 npm run test:hero        # actual Blender character, opening doors and inspection captures
+npm run test:controller-transitions # overlapping Y/stick/RT input and persistent stick offset
+npm run test:camera-controls # displayed camera/movement alignment and steering animation
 ```
 
 Tests compare acceleration, proportional throttle, braking, turning and boosted wall collision at simulated 30/60/120 fps rendering with fixed 60Hz physics. Tolerances are 0.15m position and 0.2m/s speed, not a cross-machine determinism promise. Ordered gates reject reverse travel, out-of-order crossings, teleport progress and duplicate rewards. Full mapped-route physics tests complete all 777 crossings over three laps, including all four racers with traffic and no racer recoveries. See `docs/verification.md`, the JSON reports and browser screenshots for measured environment and results.

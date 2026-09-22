@@ -25,7 +25,11 @@ The game export corrects the saved snapshot's interior to US left-hand drive. It
 
 Each wheel has a .345m radius. Animate front steering around local Y (negative angle turns right) and wheel spin around local +X; positive spin angle corresponds to +Z travel. Positive driver input means right; the physics controller performs the sign conversion. Suspension travel moves the steering pivot up/down relative to its manifest center. The nested pivots are intentional: steer the wrapper, then spin its child. Never rotate the combined body to create wheel motion. The root is `Oldsmobile442`, the static body mesh is `Body`.
 
-The door-enabled model has 310,089 triangles, 67 material primitives, 18 nodes, and 21 materials, occupying 5.96 MiB. The exporter evaluates 564,778 triangles before reduction. The hood is evaluated at authored frame 1 and its animation omitted. The modeled Rocket V8 is retained underneath. Studio floors, backdrop, cameras and lights are excluded.
+The cabin wheel has its own identity-oriented `SteeringWheel` pivot and `SteeringWheelMesh`. Its 14 original rim, inset, hub, horn, spoke and slot pieces rotate around the manifest's normalized `[0, .638, -.77]` axis, pointing toward the driver. The column and indicator stalk remain fixed. Runtime applies the road-wheel angle × 1.7 to this axis: a right turn rotates clockwise from the seat. Both wrist targets follow the same tilted plane and rotation. Tests load the actual GLB, exercise both directions, verify fixed center/body and unchanged rim radius, and check the articulated wrists at both steering extremes.
+
+Actual game close-ups: [steering right](controller-steering-right.png) and [steering left](controller-steering-left.png). Both were visually reviewed on the controller/camera fix build.
+
+The door- and steering-enabled model has 310,089 triangles, 70 material primitives, 20 nodes, and 21 materials, occupying 5.96 MiB. The exporter evaluates 564,778 triangles before reduction. The hood is evaluated at authored frame 1 and its animation omitted. The modeled Rocket V8 is retained underneath. Studio floors, backdrop, cameras and lights are excluded.
 
 ## Real opening doors
 

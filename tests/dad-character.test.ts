@@ -4,7 +4,11 @@ import * as T from "three";
 import { GLTFLoader, type GLTF } from "three/addons/loaders/GLTFLoader.js";
 import { DadCharacterVisual } from "../src/dad-character";
 import { CHARACTER_SEAT_ANCHOR } from "../src/character-visual";
+import { steeringWheelGrip } from "../src/steering-wheel";
 
+const wheel = JSON.parse(
+  await readFile("public/assets/vehicle-manifest.json", "utf8"),
+).steeringWheel;
 let source: GLTF;
 beforeAll(async () => {
   const data = await readFile("public/assets/dad-driver.glb");
@@ -89,7 +93,7 @@ describe("delivered Blender dad character", () => {
       "right_foot",
     ])
       expect(source.scene.getObjectByName(name)).toBeDefined();
-    const character = new DadCharacterVisual(source);
+    const character = new DadCharacterVisual(source, wheel);
     const box = bounds(character);
     expect(box.min.y).toBeGreaterThan(-0.06);
     expect(box.min.y).toBeLessThan(0.08);
@@ -99,7 +103,7 @@ describe("delivered Blender dad character", () => {
   });
 
   it("fits the actual US-left seat and puts both wrists at the steering rim", () => {
-    const character = new DadCharacterVisual(source);
+    const character = new DadCharacterVisual(source, wheel);
     character.root.position.set(...CHARACTER_SEAT_ANCHOR);
     character.update({ pose: "seated", speed: 0, time: 0, dt: 0 });
     const box = bounds(character);
@@ -107,20 +111,45 @@ describe("delivered Blender dad character", () => {
     expect(box.max.x).toBeLessThan(0.88);
     expect(box.max.y).toBeGreaterThan(1.4);
     expect(box.max.y).toBeLessThan(1.72);
-    const wheel = new T.Vector3(0.398, 1.038, 0.064);
+    const wheelCenter = new T.Vector3(...wheel.center);
     for (const side of ["left", "right"]) {
       const wrist = character.root
         .getObjectByName(`${side}_hand`)!
         .getWorldPosition(new T.Vector3());
-      expect(wrist.distanceTo(wheel)).toBeLessThan(0.18);
-      expect(Math.abs(wrist.y - wheel.y)).toBeLessThan(0.04);
+      expect(wrist.distanceTo(wheelCenter)).toBeLessThan(0.18);
+      expect(Math.abs(wrist.y - wheelCenter.y)).toBeLessThan(0.04);
     }
     character.dispose();
   });
 
+  it.each([-0.5, 0.5])(
+    "keeps both wrists on the tilted rim while steering %f",
+    (steering) => {
+      const character = new DadCharacterVisual(source, wheel);
+      character.root.position.set(...CHARACTER_SEAT_ANCHOR);
+      character.update({ pose: "seated", speed: 0, steering, time: 0, dt: 0 });
+      for (const [label, side] of [
+        ["left", 1],
+        ["right", -1],
+      ] as const) {
+        const wrist = character.root
+          .getObjectByName(`${label}_hand`)!
+          .getWorldPosition(new T.Vector3());
+        expect(
+          wrist.distanceTo(steeringWheelGrip(wheel, side, steering)),
+        ).toBeLessThan(0.015);
+        // Right turn: left hand rises and right hand falls, viewed from the seat.
+        expect(Math.sign(wrist.y - wheel.center[1])).toBe(
+          -Math.sign(steering) * side,
+        );
+      }
+      character.dispose();
+    },
+  );
+
   it("keeps instances independent, respects pause, and preserves gameplay root transforms", () => {
-    const walking = new DadCharacterVisual(source),
-      seated = new DadCharacterVisual(source);
+    const walking = new DadCharacterVisual(source, wheel),
+      seated = new DadCharacterVisual(source, wheel);
     walking.root.position.set(12, 4, -19);
     walking.root.rotation.y = 0.8;
     seated.update({ pose: "seated", speed: 0, time: 0, dt: 0 });

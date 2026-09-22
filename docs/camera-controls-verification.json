@@ -1,0 +1,300 @@
+{
+  "date": "2026-09-22T00:18:44.354Z",
+  "methodology": "Actual production render loop and physics with keyboard, right-drag mouse events, and synthetic standard Gamepad API snapshots. Movement is compared to the displayed camera vectors, not an assumed internal yaw. Placement hooks establish repeatable unobstructed and wall-adjacent handling-ground fixtures; no simulated movement hooks are used. This does not claim physical-controller or rumble verification.",
+  "checks": [
+    "Left/right steering moves the seated driver's hands in the correct direction while preserving road-wheel steering",
+    "W/D and left-stick forward/right follow the displayed camera at four different headings",
+    "Right-stick horizontal and vertical look signs match a standard uninverted third-person camera",
+    "Actual right-button mouse drag turns the view in the expected direction",
+    "Continuous movement plus right-stick orbit stays aligned with the displayed camera without cutting inward",
+    "R3 recenter during backpedaling makes a stable 180-degree orbit with a full unobstructed boom",
+    "An actual handling-ground wall retracts the camera; walking away restores the boom without changing control direction"
+  ],
+  "movement": [
+    {
+      "yaw": 0,
+      "control": "W",
+      "distance": 0.5405172432678654,
+      "alignment": 0.9999998334012874
+    },
+    {
+      "yaw": 0,
+      "control": "D",
+      "distance": 0.5409651727293527,
+      "alignment": 0.9999999581878274
+    },
+    {
+      "yaw": 0,
+      "control": "LS up",
+      "distance": 0.4177921360943495,
+      "alignment": 0.9999999080189006
+    },
+    {
+      "yaw": 0,
+      "control": "LS right",
+      "distance": 0.417868566099985,
+      "alignment": 0.999999961316867
+    },
+    {
+      "yaw": 0.9,
+      "control": "W",
+      "distance": 0.5408638423679423,
+      "alignment": 0.9999999840792209
+    },
+    {
+      "yaw": 0.9,
+      "control": "D",
+      "distance": 0.540667581063742,
+      "alignment": 0.9999999999558433
+    },
+    {
+      "yaw": 0.9,
+      "control": "LS up",
+      "distance": 0.4181673072013424,
+      "alignment": 0.9999998674793054
+    },
+    {
+      "yaw": 0.9,
+      "control": "LS right",
+      "distance": 0.38154720186774477,
+      "alignment": 0.9999906823835578
+    },
+    {
+      "yaw": 2.2,
+      "control": "W",
+      "distance": 0.5403872455266324,
+      "alignment": 0.9999999123810499
+    },
+    {
+      "yaw": 2.2,
+      "control": "D",
+      "distance": 0.5409940052900541,
+      "alignment": 0.9999999993285105
+    },
+    {
+      "yaw": 2.2,
+      "control": "LS up",
+      "distance": 0.41703368167838717,
+      "alignment": 0.9999986755980419
+    },
+    {
+      "yaw": 2.2,
+      "control": "LS right",
+      "distance": 0.41824483524129635,
+      "alignment": 0.9999999094288594
+    },
+    {
+      "yaw": -2.4,
+      "control": "W",
+      "distance": 0.5409786615754032,
+      "alignment": 0.9999999998242399
+    },
+    {
+      "yaw": -2.4,
+      "control": "D",
+      "distance": 0.5326251660253175,
+      "alignment": 0.9999963462009034
+    },
+    {
+      "yaw": -2.4,
+      "control": "LS up",
+      "distance": 0.40036137968756275,
+      "alignment": 0.9999999999846474
+    },
+    {
+      "yaw": -2.4,
+      "control": "LS right",
+      "distance": 0.41319465741559763,
+      "alignment": 0.9999940472046037
+    }
+  ],
+  "errors": [],
+  "bundle": "/assets/index-MgantuzN.js",
+  "steering": [
+    {
+      "direction": "right",
+      "roadWheelAngle": -0.39627766898293587,
+      "wheel": {
+        "center": [
+          0.39800000190734863,
+          1.0379999876022339,
+          0.06400000303983688
+        ],
+        "axis": [
+          1.9931974293285748e-8,
+          0.6380178928375244,
+          -0.7700215578079224
+        ],
+        "quaternion": [
+          -6.587568620655131e-9,
+          -0.21086654981733519,
+          0.25449409962123964,
+          0.9438050918627785
+        ],
+        "hands": {
+          "left": [
+            0.5113226989822977,
+            1.1236063825804332,
+            0.10246434333672028
+          ],
+          "right": [
+            0.2846773435056207,
+            0.9842945497766978,
+            -0.012965516254610066
+          ]
+        }
+      },
+      "screenshot": "docs/controller-steering-right.png"
+    },
+    {
+      "direction": "left",
+      "roadWheelAngle": 0.39627336256189066,
+      "wheel": {
+        "center": [
+          0.39800000190734863,
+          1.0379999876022339,
+          0.06400000303983688
+        ],
+        "axis": [
+          1.9931974293285748e-8,
+          0.6380178928375244,
+          -0.7700215578079224
+        ],
+        "quaternion": [
+          6.5874997604486016e-9,
+          0.21086434561803094,
+          -0.2544914393808278,
+          0.9438063016471939
+        ],
+        "hands": {
+          "left": [
+            0.5113233232585515,
+            0.9842951894636665,
+            -0.012964988118540077
+          ],
+          "right": [
+            0.2846766430535581,
+            1.123605742845482,
+            0.10246381530066628
+          ]
+        }
+      },
+      "screenshot": "docs/controller-steering-left.png"
+    }
+  ],
+  "look": {
+    "rightProjection": 0.3936267544111911,
+    "pitchBefore": 0.28267019512050295,
+    "pitchAfter": 0.5102320833470516
+  },
+  "orbit": {
+    "minimumMovementAlignment": 0.997208609260561,
+    "minimumBoom": 4.6746458432380935
+  },
+  "recenter": {
+    "beforeBoom": 4.674645843238094,
+    "minimumBoom": 4.674645843238093,
+    "maximumBoom": 4.674645843238094,
+    "initialForward": [
+      0,
+      1
+    ],
+    "finalForward": [
+      -0.01691901246856071,
+      -0.9998568632644819
+    ]
+  },
+  "collision": {
+    "blockedBoom": 2.1139217298446553,
+    "recoveredBoom": 4.674260997944733,
+    "samples": [
+      2.1147237429693373,
+      2.1172445221071134,
+      2.122347700144533,
+      2.1301577069440123,
+      2.1409225260402684,
+      2.1545427345627908,
+      2.17111788488315,
+      2.190412991515013,
+      2.21209589680206,
+      2.2362642568597506,
+      2.262805632665211,
+      2.2908671714702216,
+      2.320856463950768,
+      2.3523878665243334,
+      2.3851120224181894,
+      2.4193765564805485,
+      2.452444821157999,
+      2.4851014566168113,
+      2.5165710961275147,
+      2.547536124972296,
+      2.5802213594748866,
+      2.6142876763420806,
+      2.649537341216343,
+      2.6859694500192286,
+      2.723542541846794,
+      2.761924405217915,
+      2.801631438620083,
+      2.8425118052203957,
+      2.88445353413039,
+      2.927484692458379,
+      2.971778751344152,
+      3.0173352442059516,
+      3.063682600034149,
+      3.1132251690331945,
+      3.1652177089299713,
+      3.353986835775119,
+      3.519148490068251,
+      3.6636550230206955,
+      3.7900895647144557,
+      3.9000928042672265,
+      3.9969584300883594,
+      4.081710037897001,
+      4.155862607141891,
+      4.220741653897353,
+      4.277506925158488,
+      4.3271731299271465,
+      4.3703847661434425,
+      4.4084356653884145,
+      4.441727918055354,
+      4.470693544033141,
+      4.496199824566736,
+      4.51851628890707,
+      4.538041855561028,
+      4.555125554275288,
+      4.5699890731914,
+      4.5831506773487085,
+      4.5945289976383545,
+      4.6045484127040375,
+      4.613265714960868,
+      4.620984861568884,
+      4.6276581303755355,
+      4.633534415127275,
+      4.6386758115352675,
+      4.643199391983868,
+      4.647088028854252,
+      4.650553691364184,
+      4.65354978648925,
+      4.656188059966349,
+      4.658509305280319,
+      4.660516041870862,
+      4.6622831152451845,
+      4.663820541593234,
+      4.665174354135143,
+      4.666352226600692,
+      4.667395229353068,
+      4.668301991338674,
+      4.66909535364367,
+      4.66978561140491,
+      4.670393432140831,
+      4.670925238797632,
+      4.671390537698331,
+      4.67179536683561,
+      4.672151847498279,
+      4.6724637466788215,
+      4.67273511176474
+    ]
+  },
+  "screenshot": "docs/camera-controls-walking.png",
+  "passed": true
+}

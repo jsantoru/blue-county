@@ -1,0 +1,36 @@
+{
+  "date": "2026-09-22T00:15:56.902Z",
+  "methodology": "Synthetic Gamepad API input through the real render loop. Right stick stays at 0.22 throughout: it never reaches neutral. Walking and driving are actual physics; each return-to-door fixture restores the previously observed exit position. No physical controller or rumble verification is claimed.",
+  "checks": [
+    "Exposed controller detected without any button or right-stick gesture",
+    "First fresh A starts Home despite persistent right-stick offset",
+    "Three exits accept overlapping held Y/left stick without a neutral frame",
+    "Three entries accept RT held before completion without re-pressing",
+    "Held Y never reverses the transfer; right-stick offset never blocks locomotion",
+    "Focus loss still pauses until explicit Resume; drift does not block Resume",
+    "Reconnect is detected automatically and still requires deliberate Resume"
+  ],
+  "cycles": [
+    {
+      "cycle": 1,
+      "walked": 0.33814167517553606,
+      "driven": 1.743976656612352,
+      "rightStick": 0.22
+    },
+    {
+      "cycle": 2,
+      "walked": 0.3383814737656703,
+      "driven": 1.7457635219449226,
+      "rightStick": 0.22
+    },
+    {
+      "cycle": 3,
+      "walked": 0.40278238788129594,
+      "driven": 1.7457635219449226,
+      "rightStick": 0.22
+    }
+  ],
+  "errors": [],
+  "bundle": "/assets/index-MgantuzN.js",
+  "passed": true
+}

@@ -5,7 +5,7 @@ Blender --background --python scripts/export-car.py
 from pathlib import Path
 from collections import defaultdict
 import bpy, bmesh, json, hashlib, math, struct, re
-from mathutils import Vector, Matrix
+from mathutils import Vector, Matrix, Quaternion
 
 ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / 'asset-source' / '1968_oldsmobile_442.snapshot.blend'
@@ -50,6 +50,31 @@ drive_checks = {'Walnut steering wheel rim': .398, 'Steering column': .398,
 for label, expected_x in drive_checks.items():
     assert abs(interior_object(label).matrix_world.translation.x - expected_x) < .0001, 'US left-hand-drive check failed: ' + label
 steering_center = steering.matrix_world.translation.copy()
+# The torus's local Z is its authored plane normal. Derive the rotation axis
+# after the physical left-hand-drive reflection instead of assuming a flat
+# vertical wheel. In game coordinates this becomes approximately (0,.638,-.770).
+steering_axis = (steering.matrix_world.to_3x3() @ Vector((0,0,1))).normalized()
+if steering_axis.y < 0: steering_axis.negate()  # Point toward the seated driver.
+steering_game_axis = Vector((steering_axis.x,steering_axis.z,-steering_axis.y))
+assert steering_axis.dot(Vector((0,.77,.638)).normalized()) > .99999
+rim_radii = []
+for vertex in steering.data.vertices:
+    offset = steering.matrix_world @ vertex.co - steering_center
+    rim_radii.append((offset-steering_axis*offset.dot(steering_axis)).length)
+steering_radius = (min(rim_radii)+max(rim_radii))*.5
+assert abs(steering_radius-.176) < .0001
+STEERING_PARTS = {'Walnut steering wheel rim', 'Steering rim chrome inset',
+                  'Steering wheel hub', 'Steering wheel horn pad',
+                  'Brushed steering wheel spoke', 'Steering spoke dark hole',
+                  'Oldsmobile horn medallion'}
+
+def moving_steering_part(name):
+    if not name.startswith('Interior | '): return False
+    label = re.sub(r'\.\d+$', '', name.split(' | ',1)[1])
+    return label in STEERING_PARTS
+
+steering_source_names = [o.name for o in car if moving_steering_part(o.name)]
+assert len(steering_source_names) == 14, 'Expected rim, inset, hub, horn pad, three spokes, six slots and medallion'
 
 # Resolve actual physical wheel sides from the evaluated tire centers rather
 # than carrying the historical LEFT/RIGHT object labels into the manifest.
@@ -187,7 +212,9 @@ for o in car:
         bpy.data.meshes.remove(mesh)
         mapping[o.name] = ['Body', 'Door'+side]
     else:
-        if moving_door_part(o.name):
+        if moving_steering_part(o.name):
+            group = 'SteeringWheel'
+        elif moving_door_part(o.name):
             group = 'Door'+side
             if o.name.startswith('Interior | '):
                 # The static source card extended 9.5 cm through its rear seam.
@@ -312,7 +339,7 @@ for name,objects in groups.items():
     bpy.context.view_layer.objects.active = objects[0]
     bpy.ops.object.join()
     node = bpy.context.object
-    node.name = ('Body' if name=='Body' else 'DoorMesh_'+name[-1]
+    node.name = ('Body' if name=='Body' else 'SteeringWheelMesh' if name=='SteeringWheel' else 'DoorMesh_'+name[-1]
                  if name.startswith('Door') else 'WheelMesh_'+name)
     node.data.name = node.name + '_geometry'
     node.parent = root
@@ -336,6 +363,38 @@ for side, center in DOOR_HINGES.items():
     obj.data.transform(Matrix.Translation(-Vector(center)))
     obj.parent = hinge
     obj.location = (0,0,0)
+
+steering_pivot = empty('SteeringWheel',root,steering_center)
+steering_pivot['axis_game'] = list(steering_game_axis)
+steering_pivot['radius'] = steering_radius
+steering_pivot['neutral_angle_radians'] = 0.0
+steering_mesh = nodes['SteeringWheel']
+steering_mesh.data.transform(Matrix.Translation(-steering_center))
+steering_mesh.parent = steering_pivot
+steering_mesh.location = (0,0,0)
+bpy.context.view_layer.update()
+
+# Exercise the actual pivot and delivered vertices: rotation must preserve
+# their distance from the center/axis while visibly moving the rim and spokes.
+# The fixed column belongs to Body and never inherits this transform.
+neutral_steering_vertices = [steering_mesh.matrix_world @ v.co for v in steering_mesh.data.vertices]
+fixed_body_transform = nodes['Body'].matrix_world.copy()
+steering_pivot.rotation_mode = 'QUATERNION'
+steering_pivot.rotation_quaternion = Quaternion(steering_axis,.7)
+bpy.context.view_layer.update()
+turned_steering_vertices = [steering_mesh.matrix_world @ v.co for v in steering_mesh.data.vertices]
+assert max((a-b).length for a,b in zip(neutral_steering_vertices,turned_steering_vertices)) > .08
+for before,after in zip(neutral_steering_vertices,turned_steering_vertices):
+    before-=steering_center; after-=steering_center
+    assert abs(before.length-after.length) < .00001
+    assert abs(before.dot(steering_axis)-after.dot(steering_axis)) < .00001
+assert nodes['Body'].matrix_world == fixed_body_transform
+assert mapping['Interior | Steering column'] == 'Body'
+assert mapping['Interior | Turn signal stalk'] == 'Body'
+assert mapping['Interior | Turn signal stalk grip'] == 'Body'
+assert all(mapping[name] == 'SteeringWheel' for name in steering_source_names)
+steering_pivot.rotation_quaternion = Quaternion()
+bpy.context.view_layer.update()
 
 car_vertices = [o.matrix_world @ v.co for o in nodes.values() for v in o.data.vertices]
 bpy.context.view_layer.update()
@@ -371,13 +430,21 @@ for side in DOOR_HINGES:
     assert all(abs(a-b) < 1e-5 for a,b in zip(hinge['translation'],[expected[0],expected[2],-expected[1]]))
     assert hinge.get('extras',{}).get('open_progress') == 0
     assert len(hinge.get('children',[])) == 1
+assert 'SteeringWheel' in export_nodes and 'SteeringWheelMesh' in export_nodes
+exported_steering_pivot = export_nodes['SteeringWheel']
+steering_game_center = [steering_center.x,steering_center.z,-steering_center.y]
+assert all(abs(a-b) < .00001 for a,b in zip(exported_steering_pivot['translation'],steering_game_center))
+assert all(abs(a-b) < .00001 for a,b in zip(exported_steering_pivot.get('rotation',[0,0,0,1]),[0,0,0,1]))
+assert exported_steering_pivot.get('scale',[1,1,1]) == [1,1,1]
+assert len(exported_steering_pivot.get('children',[])) == 1
+assert gltf['nodes'][exported_steering_pivot['children'][0]]['name'] == 'SteeringWheelMesh'
 assert all(len(parts) == 2 for parts in door_partitions.values()) and len(door_partitions) == 6
 assert hashlib.sha256(SNAPSHOT.read_bytes()).hexdigest() == source_hash, 'Read-only source snapshot changed'
 assert not gltf.get('animations') and not gltf.get('cameras')
 assert not any('Studio' in str(n) for n in gltf['nodes'])
 
 manifest = {
-    'version':2,'name':'1968 Oldsmobile 442 convertible','asset':'/assets/oldsmobile-442.glb',
+    'version':3,'name':'1968 Oldsmobile 442 convertible','asset':'/assets/oldsmobile-442.glb',
     'sourceSnapshot':'asset-source/1968_oldsmobile_442.snapshot.blend','sourceSha256':source_hash,
     'editableGameSource':'asset-source/oldsmobile-442.game.blend',
     'exportedWith':bpy.app.version_string,'units':'meters','metersPerUnit':1,
@@ -389,6 +456,10 @@ manifest = {
                    'checkedComponents':list(drive_checks),
                    'note':'Viewed from behind facing forward, the wheel, instrument cluster and pedals are on the left. Source snapshot remains unchanged.'},
     'sourceToGame':'[source.x, source.z, -source.y]; glTF exporter export_yup=True; no extra runtime rotation',
+    'steeringWheel':{'node':'SteeringWheel','meshNode':'SteeringWheelMesh',
+                     'center':steering_game_center,'axis':list(steering_game_axis),'radius':steering_radius,
+                     'neutralAngleRadians':0,'sourceParts':steering_source_names,
+                     'note':'Identity pivot orientation; axis points toward driver in car-local game coordinates. Rotate only this pivot; column and turn-signal stalk stay fixed in Body.'},
     'bounds':{'min':gmin,'max':gmax,'dimensions':[gmax[i]-gmin[i] for i in range(3)]},
     'runtimeIntegration':{'visualOffsetFromChassis': [0, -0.78, 0], 'chassisColliderHalfExtents': [0.9, 0.31, 2.3], 'chassisColliderCenterOffset': [0, 0.04, 0], 'wheelRayMountY': 0.1, 'wheelRayLength': 1.05, 'springRestRayLength': 1.0, 'note': 'Final arcade suspension setup; runtime reads wheel X/Z centers and radius from wheels. Vehicle visual remains independent of dynamic chassis. Source chassis values above are exporter suggestions.'},
     'chassis':{'suggestedCenterOfMass':[0,.65,0],'visualOffsetFromChassis':[0,-.65,0],
@@ -421,6 +492,8 @@ manifest = {
     'sourceObjectGroups':mapping,
     'doorPartitionFaces':door_partitions,
     'validation':{'namedWheelNodesVerified':True,'leftHandDriveVerified':True,'physicalWheelSidesVerified':True,
+                  'namedSteeringWheelNodeVerified':True,'steeringWheelIdentityPivotVerified':True,
+                  'steeringWheelAxisRotationVerified':True,'steeringColumnRemainsFixed':True,
                   'namedDoorNodesVerified':True,'doorHingesVerified':True,'originalSkinPartitioned':True,
                   'noCameras':True,'noAnimations':True,'noStudioNodes':True}
 }
