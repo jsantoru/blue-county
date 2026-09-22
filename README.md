@@ -1,8 +1,22 @@
-# Blue County — Warwick / 442
+# Blue County — The Lug Nuts
 
-A locally playable arcade driving and exploration game starring your actual dark blue 1968 Oldsmobile 442 convertible. Drive the Warwick roads, race the Ridge & Hollow circuit, or park, step out and explore Beverly Drive's yards, woods and Stony Creek on foot. The visible driver sits behind the wheel on the US driver's left.
+A locally playable arcade driving and exploration game starring Joe and his car club, **the Lug Nuts**. Choose a member and get their associated car, drive the Warwick roads, race the Ridge & Hollow circuit, or park and explore Beverly Drive's yards, woods and Stony Creek on foot. Every driver sits on the US driver's left.
 
-**The current controller, steering and walking-camera fixes are on `codex/controller-transition-fix`, including the Blender asset update.** Dad has an editable Blender character with a charcoal Italian coppola, white mustache, tinted glasses and blue checked shirt. The 442's doors open during entry and exit, and four Blender-built props add detail to Home's yard. See [the assets, source files and modeling limits](docs/hero-assets.md).
+**The Lug Nuts selection update is on `codex/lug-nuts-garage`, including the previous controller and walking-camera fixes.** Open **The Lug Nuts · choose driver** on the main menu, or **The Lug Nuts · change driver** while paused. Choose a card, then **Drive as…**. Selection is saved in this browser; changing members starts a fresh Free Drive at Beverly Drive.
+
+| Member | Associated car |
+| --- | --- |
+| Joe | Midnight Sapphire 1968 Oldsmobile 442 convertible |
+| Lou | Carousel Red 1976 Pontiac Trans Am |
+| Chris | 1968 Chevrolet Camaro RS/SS — temporary graphite paint pending a reference |
+| Craig | Samoan Bronze 1965 Pontiac 2+2 convertible, white interior |
+| Ed | Blue 1953 Buick woody wagon |
+
+![The Lug Nuts character and car selection screen](docs/lug-nuts-garage.png)
+
+The four new cars are editable Blender-built, stylized game models with opening front doors, steering wheels and independent road wheels. Joe retains his photo-based Blender character and coppola. His friends currently use distinct **provisional characters**, pending their photographs. See [Lug Nuts assets and remaining modeling work](docs/lug-nuts.md).
+
+Dad has an editable Blender character with a charcoal Italian coppola, white mustache, tinted glasses and blue checked shirt. Four Blender-built props add detail to Home's yard. See [the original assets, source files and modeling limits](docs/hero-assets.md).
 
 ![Dad standing beside the parked 442 at Home](docs/hero-dad-standing.png)
 
@@ -50,7 +64,7 @@ Development: `npm run dev -- --port 5174 --strictPort`. The game loads all map, 
 
 Click once to focus/unlock audio and connect the wired Xbox controller. The game detects it automatically; if the browser initially hides it, press and release any button once. Use A to start. RT is proportional throttle; LT is proportional brake. To reverse, come to a stop, release LT, then press it again. Hold A to boost, X for handbrake, B to look back, R3 to switch camera, right stick to look around, Menu to pause, and View for 0.7s to recover. Y exits the parked car in Free Drive. You can hold the left stick during exit to start walking, or RT during entry to start driving as soon as the animation finishes. Return Home is in Pause and exits an active race.
 
-Keyboard: WASD/arrows drive, Shift boost, Space handbrake, B look back, C camera, R hold reset, Escape pause, Enter confirm. Menu arrows/WASD navigate; left/right adjusts settings. F3 shows telemetry.
+Keyboard: WASD/arrows drive, Shift boost, Space handbrake, B look back, C camera, R hold reset, Escape pause, Enter confirm. Menu arrows/WASD navigate; left/right adjusts settings. In the club garage, left/right previews members, Enter/A selects the card, and Enter/A again starts driving. Escape/B returns without changing your driver. F3 shows telemetry.
 
 **Explore on foot:** stop and press **F / Y** to get out. WASD/arrows or the left stick move relative to the displayed camera; Shift / A runs; Space / X jumps. Look with the right stick, right mouse drag, or click the game to capture the mouse (Escape releases and pauses). C / R3 smoothly orbits the camera behind the character; moving the mouse or right stick takes over immediately. Approach either door and press F / Y to re-enter the 442. The map marks the parked car in blue. Walking follows terrain, steps over curbs and collides with houses, tree trunks, decks and rails. Dad uses Blender-authored idle, walk, run, airborne and seated animations; see [asset notes](docs/hero-assets.md) and [exploration controls](docs/exploration-pass.md).
 
@@ -58,6 +72,7 @@ Start with **Balanced** handling, 0.12 steering deadzone, 1.35 response curve, a
 
 ## Included slice
 
+- Five paired club members and cars, with mouse/keyboard/controller selection, saved selection, per-car wheel and collision geometry, and the same Free Drive/race/exploration controls.
 - Free Drive across approximately 3.8 × 3.9km of mapped roads, with Home and safe recovery.
 - A rigged Blender driver in the US-left seat, opening vehicle doors and third-person exterior exploration, with walking/running/jumping, collision-aware orbit camera, parked-car return prompts and footsteps.
 - **Ridge & Hollow**: a verified connected 2.645km clockwise circuit, three laps, countdown, three physical AI rivals, three civilian cars, ordered directional progress, position, results, restart.
@@ -74,6 +89,7 @@ Start with **Balanced** handling, 0.12 steering deadzone, 1.35 response curve, a
 ```powershell
 npm run map            # offline, Python 3 stdlib; uses cached sources
 npm run export-car     # Blender background export from the saved snapshot
+npm run export-club-cars # four club cars, editable .blend and five garage previews
 npm run export-driver  # character, rig, clips, editable .blend and GLB
 npm run export-home-props # bench, wagon wheel, birdbath and mailbox
 python scripts/fetch-textures.py --verify-only  # local checksums/dimensions
@@ -85,6 +101,8 @@ The active source folder `../oldsmobile_442` was **not modified**. The car expor
 
 ## Checks and evidence
 
+The Lug Nuts update passes **206 tests across 26 files** and the production build. The [club browser review](docs/lug-nuts-verification.json) checks all five associated models and characters, US-left seating and wheel grips, real driving, walking out and back, entry, saved selection, menu cancellation, compact layouts and race setup. [Asset and workflow notes](docs/lug-nuts.md) describe the source files and provisional models. The standard browser suite also completed the full three-lap race with no runtime errors.
+
 The September 21 controller, steering and camera update passes **165 tests across 22 files** and the production build. The [drift review](docs/controller-drift-verification.json) checks imperfect stick rest and gentle four-direction walking. The [controller transition review](docs/controller-transition-verification.json) repeats entry/exit with held controls and persistent right-stick offset. The preceding [camera and steering review](docs/camera-controls-verification.json) verifies actual movement against the displayed view, look directions, recentering, wall clearance and both steering directions. The current drift and transition reviews pass three and seven grouped checks respectively, with zero browser or WebGL errors. The earlier [hero review](docs/hero-verification.json) captures the Blender character and opening doors. The [verification record](docs/verification.md) separates the current checks from earlier full exploration and race reviews. Controller automation uses synthetic Gamepad API input; physical controller feel and rumble remain unverified.
 
 ```powershell
@@ -93,6 +111,7 @@ npm run build           # TypeScript + production bundle
 # With the production server running on 5180:
 $env:GAME_URL='http://127.0.0.1:5180'
 npm run test:browser     # system Edge; synthetic pad, actual game/race physics
+npm run test:club        # all five pairings, garage navigation, driving and exploration
 npm run test:visual      # real rendered scenery, quality presets, independent RAF metrics
 npm run test:beverly     # surveyed neighborhood loop, reference views and moving frame sample
 npm run test:detail      # latest detail pass, all presets, resize and environment rebuild checks

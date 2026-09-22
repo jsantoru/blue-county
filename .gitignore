@@ -5,6 +5,8 @@ asset-source/*
 !asset-source/dad-driver.blend
 !asset-source/oldsmobile-442.game.blend
 !asset-source/beverly-home-props.blend
+!asset-source/lug-nuts-cars.blend
+output/playwright/
 *.log
 .server-pid
 __pycache__/

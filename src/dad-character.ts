@@ -26,6 +26,11 @@ export class DadCharacterVisual {
   constructor(
     source: Pick<GLTF, "scene" | "animations">,
     private readonly wheel: SteeringWheelSpec,
+    private readonly seatAnchor: readonly [
+      number,
+      number,
+      number,
+    ] = CHARACTER_SEAT_ANCHOR,
   ) {
     this.root.name = "Dad · Blender character with coppola";
     this.root.userData.character = {
@@ -36,6 +41,7 @@ export class DadCharacterVisual {
       origin: "feet",
       forward: "+Z",
       up: "+Y",
+      seatAnchor: [...seatAnchor],
     };
     this.model = clone(source.scene);
     this.root.add(this.model);
@@ -167,7 +173,7 @@ export class DadCharacterVisual {
         b = elbow.distanceTo(wrist);
       const target = this.root.localToWorld(
         steeringWheelGrip(this.wheel, side, steering).sub(
-          new T.Vector3(...CHARACTER_SEAT_ANCHOR),
+          new T.Vector3(...this.seatAnchor),
         ),
       );
       const direction = target.clone().sub(shoulder);

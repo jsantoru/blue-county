@@ -16,7 +16,7 @@ import {
   Vehicle,
   handling,
   configureVehicleGeometry,
-  vehicleGeometry,
+  createVehicleGeometry,
 } from "./vehicle";
 import { Environment, nearestRoad, heightAt, makeTestMap } from "./roads";
 import { FixedClock, RaceProgress, TakedownLedger } from "./rules";
@@ -26,7 +26,13 @@ import { Effects } from "./effects";
 import { Pedestrian, findVehicleExit, footCameraPosition } from "./pedestrian";
 import { FootCameraOrbit } from "./foot-camera";
 import { CHARACTER_SEAT_ANCHOR } from "./character-visual";
-import { DadCharacterVisual as CharacterVisual } from "./dad-character";
+import {
+  createClubCharacter,
+  type CharacterVisualLike,
+} from "./club-character";
+import { CLUB_MEMBERS, readClubMember, saveClubMember } from "./club-roster";
+import { ClubAssets, type ClubVehicleManifest } from "./club-assets";
+import { garageMarkup } from "./garage-ui";
 import { VehicleDoors } from "./vehicle-doors";
 import { SteeringWheelVisual } from "./steering-wheel";
 import { preloadHomeProps } from "./home-props";
@@ -48,6 +54,7 @@ type Screen =
   | "bindings"
   | "route"
   | "results"
+  | "garage"
   | null;
 type MenuItem = {
   label: string;
@@ -100,7 +107,39 @@ let world: RAPIER.World,
   neighborhood: MapData,
   races: RaceProgress[] = [],
   template: T.Group,
-  manifest: any;
+  manifest: ClubVehicleManifest;
+const clubAssets = new ClubAssets();
+const optionalStorage = {
+  getItem(key: string): string | null {
+    try {
+      return window.localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  },
+  setItem(key: string, value: string) {
+    try {
+      window.localStorage.setItem(key, value);
+    } catch {
+      /* Persistence is optional. */
+    }
+  },
+  removeItem(key: string) {
+    try {
+      window.localStorage.removeItem(key);
+    } catch {
+      /* Persistence is optional. */
+    }
+  },
+};
+let selectedMember = CLUB_MEMBERS[0];
+let garageChoice = 0,
+  garageBusy = false,
+  garageRequest = 0;
+let garageReturnScreen: Screen = "main",
+  garageError = "";
+const seatAnchor = (): readonly [number, number, number] =>
+  manifest.characterSeatAnchor ?? CHARACTER_SEAT_ANCHOR;
 const ledger = new TakedownLedger(),
   effects = new Effects();
 let modelLoaded = false;
@@ -114,7 +153,7 @@ let cameraInitialized = false;
 let inspectionView: { position: T.Vector3; target: T.Vector3 } | null = null;
 let homeBrakeHold = false;
 let pedestrian: Pedestrian;
-let seatedDriver: CharacterVisual, walkingDriver: CharacterVisual;
+let seatedDriver: CharacterVisualLike, walkingDriver: CharacterVisualLike;
 let characterSource: GLTF;
 let vehicleDoors: VehicleDoors;
 let steeringWheel: SteeringWheelVisual;
@@ -200,6 +239,13 @@ const input = new InputManager({
       reason === "disconnect"
         ? "Controller disconnected. Reconnect, then choose Resume."
         : "Paused for focus loss. Return to the game, then choose Resume.";
+    if (screen === "garage" && garageBusy) {
+      // A delayed load must not call Start/Resume after the player has left
+      // the window or lost their controller in the meantime.
+      garageRequest++;
+      garageBusy = false;
+      garageError = "Loading interrupted. Choose Drive when you’re ready.";
+    }
     if (screen === null) setScreen("pause");
     else renderMenu();
     clock.reset();
@@ -209,9 +255,9 @@ function toast(text: string, seconds = 2) {
   $("toast").textContent = text;
   toastUntil = performance.now() + seconds * 1000;
 }
-function setScreen(next: Screen) {
+function setScreen(next: Screen, initialFocus = 0) {
   screen = next;
-  focus = 0;
+  focus = initialFocus;
   input.consume();
   if (next) {
     input.stopRumble();
@@ -223,6 +269,101 @@ function setScreen(next: Screen) {
   }
   clock.reset();
   renderMenu();
+}
+
+function openGarage() {
+  garageReturnScreen = screen === "pause" ? "pause" : "main";
+  garageChoice = CLUB_MEMBERS.findIndex(
+    (member) => member.id === selectedMember.id,
+  );
+  garageError = "";
+  setScreen("garage", garageChoice);
+}
+
+function closeGarage() {
+  garageRequest++;
+  garageBusy = false;
+  garageError = "";
+  setScreen(garageReturnScreen);
+}
+
+async function driveClubMember() {
+  if (garageBusy) return;
+  const member = CLUB_MEMBERS[garageChoice];
+  const request = ++garageRequest;
+  garageBusy = true;
+  garageError = "";
+  renderMenu();
+  try {
+    const asset = await clubAssets.load(member);
+    // Validate the new geometry before releasing the current playable scene.
+    createVehicleGeometry(asset.manifest);
+    const preparedCharacter = createClubCharacter(
+      member.id,
+      characterSource,
+      asset.manifest.steeringWheel,
+      asset.manifest.characterSeatAnchor ?? CHARACTER_SEAT_ANCHOR,
+    );
+    preparedCharacter.update({ pose: "seated", speed: 0, time: 0 });
+    preparedCharacter.dispose();
+    if (request !== garageRequest || screen !== "garage") return;
+    releaseWalking();
+    selectedMember = member;
+    template = asset.scene;
+    manifest = asset.manifest;
+    buildScene(false);
+    saveClubMember(optionalStorage, member.id);
+    garageBusy = false;
+    startFree();
+    toast(
+      `${member.name.toUpperCase()} · ${member.year} ${member.shortCarName.toUpperCase()}`,
+      2.5,
+    );
+  } catch (error) {
+    if (request !== garageRequest) return;
+    garageBusy = false;
+    garageError = `Couldn’t get ${member.name}’s car ready. Your current selection is kept. Try again.`;
+    console.warn("Club car could not be selected", error);
+    renderMenu();
+  }
+}
+
+function renderGarage() {
+  items = CLUB_MEMBERS.map((member, i) => ({
+    label: member.name,
+    action: () => {
+      garageChoice = i;
+      focus = 5;
+      renderGarage();
+    },
+  }));
+  items.push(
+    { label: "Drive", action: () => void driveClubMember() },
+    { label: "Back", action: closeGarage },
+  );
+  const el = $("menu");
+  el.innerHTML = garageMarkup(
+    garageChoice,
+    selectedMember.id,
+    garageBusy,
+    garageError,
+    focus,
+  );
+  el.querySelectorAll<HTMLButtonElement>("button").forEach((button) => {
+    button.onclick = () => {
+      sound.start();
+      focus = Number(button.dataset.index);
+      items[focus]?.action?.();
+    };
+    // Replacing a highlighted card can emit mouseenter beneath a stationary
+    // cursor. Only real pointer motion may override keyboard/controller focus.
+    button.onpointermove = () => {
+      if (garageBusy || focus === Number(button.dataset.index)) return;
+      focus = Number(button.dataset.index);
+      updateFocus();
+    };
+  });
+  updateFocus();
 }
 function resume() {
   sound.start();
@@ -293,20 +434,31 @@ function buildScene(test: boolean) {
     0,
     [home.position[0], home.position[1] + 0.85, home.position[2]],
     home.heading,
+    createVehicleGeometry(manifest),
   );
   vehicles.push(player);
   const visual = new T.Group();
   const real = template.clone(true);
-  real.position.y = vehicleGeometry.visualOffsetY;
+  real.position.y = player.geometry.visualOffsetY;
   visual.add(real);
   visual.userData.car = real;
   vehicleDoors = new VehicleDoors(real);
   steeringWheel = new SteeringWheelVisual(real, manifest.steeringWheel);
-  seatedDriver = new CharacterVisual(characterSource, manifest.steeringWheel);
-  seatedDriver.root.position.set(...CHARACTER_SEAT_ANCHOR);
+  seatedDriver = createClubCharacter(
+    selectedMember.id,
+    characterSource,
+    manifest.steeringWheel,
+    seatAnchor(),
+  );
+  seatedDriver.root.position.set(...seatAnchor());
   real.add(seatedDriver.root);
   seatedDriver.update({ pose: "seated", speed: 0, time: 0 });
-  walkingDriver = new CharacterVisual(characterSource, manifest.steeringWheel);
+  walkingDriver = createClubCharacter(
+    selectedMember.id,
+    characterSource,
+    manifest.steeringWheel,
+    seatAnchor(),
+  );
   walkingDriver.root.visible = false;
   scene.add(walkingDriver.root);
   pedestrian = new Pedestrian(world);
@@ -467,7 +619,9 @@ function interaction() {
   );
   return {
     available: !obstruction,
-    reason: obstruction ? "Approach the door" : "Enter 442",
+    reason: obstruction
+      ? "Approach the door"
+      : `Enter ${selectedMember.shortCarName}`,
   };
 }
 function interactVehicle() {
@@ -502,10 +656,10 @@ function interactVehicle() {
     seatedDriver.root.visible = false;
     walkingDriver.root.visible = true;
     benchmarkDriver = null;
-    toast("Getting out of the 442", 1.3);
+    toast(`Getting out of the ${selectedMember.shortCarName}`, 1.3);
   } else {
     footPhase = "entering";
-    toast("Getting back in the 442", 1.3);
+    toast(`Getting back in the ${selectedMember.shortCarName}`, 1.3);
     pedestrian.velocity.set(0, 0, 0);
     transitionSide = Math.sign(
       pedestrian.position
@@ -666,7 +820,7 @@ function settingsItems(): MenuItem[] {
         const planted = handling.grip <= 1.7;
         handling.grip = planted ? 1.9 : 1.65;
         handling.steerLow = planted ? 0.46 : 0.51;
-        localStorage.setItem(
+        optionalStorage.setItem(
           "blue-county-handling",
           planted ? "planted" : "balanced",
         );
@@ -687,7 +841,7 @@ function settingsItems(): MenuItem[] {
         input.resetDefaults();
         handling.grip = 1.65;
         handling.steerLow = 0.51;
-        localStorage.removeItem("blue-county-handling");
+        optionalStorage.removeItem("blue-county-handling");
         setQuality();
         renderMenu();
       },
@@ -697,6 +851,11 @@ function settingsItems(): MenuItem[] {
 }
 function renderMenu() {
   const el = $("menu");
+  el.classList.toggle("garage-open", screen === "garage");
+  if (screen === "garage") {
+    renderGarage();
+    return;
+  }
   if (!screen) {
     el.innerHTML = "";
     return;
@@ -713,14 +872,18 @@ function renderMenu() {
       setScreen("diagnostics");
     };
   if (screen === "main") {
-    title = "BLUE<br>COUNTY<small>WARWICK / 442</small>";
-    intro =
-      "Your dad’s blue Oldsmobile. Familiar roads.<br>A little more room to open it up.<br><small>Click once for focus and audio. Connect your controller and use A to start.</small>";
+    title = "BLUE<br>COUNTY<small>THE LUG NUTS</small>";
+    intro = `${escape(selectedMember.name)}’s ${escape(selectedMember.shortCarName)}. Familiar roads.<br>Pick a friend, take their car, explore the county.<br><small>Click once for focus and audio. Connect your controller and use A to start.</small>`;
     items = [
       {
         label: "Drive from Home",
         detail: "Beverly Drive · drive & explore on foot",
         action: startFree,
+      },
+      {
+        label: "The Lug Nuts · choose driver",
+        detail: `${selectedMember.name} · ${selectedMember.year} ${selectedMember.carName}`,
+        action: openGarage,
       },
       {
         label: "Race the Ridge",
@@ -753,6 +916,11 @@ function renderMenu() {
       },
       { label: "Controller & diagnostics", action: diagnostics },
       { label: "Settings & handling", action: settings },
+      {
+        label: "The Lug Nuts · change driver",
+        detail: "Choose a member and start from Home",
+        action: openGarage,
+      },
       { label: "Main menu", action: () => setScreen("main") },
     ];
   } else if (screen === "settings") {
@@ -812,7 +980,7 @@ function renderMenu() {
       { label: "Main menu", action: () => setScreen("main") },
     ];
   }
-  el.innerHTML = `<section class="panel"><div class="eyebrow">1968 Oldsmobile 442 · Warwick, New York</div><${screen === "main" ? "h1" : "h2"}>${title}</${screen === "main" ? "h1" : "h2"}><p class="intro">${intro}</p>${safetyMessage ? `<div class="safety">${escape(safetyMessage)}</div>` : ""}${extra}<nav class="menu-items">${items.map((item, i) => `<button class="menu-item ${i === focus ? "focus" : ""}" data-index="${i}"><span>${escape(item.label)}${item.detail ? `<small>${escape(item.detail)}</small>` : ""}</span><span class="value">${item.value ? escape(item.value) : "↗"}</span></button>`).join("")}</nav><div class="foot"><span class="key green">A</span> Select <span class="key">B</span> Back · D-pad to navigate<br>Keyboard: arrows / Enter / Esc · Drive: WASD · Shift boost · F / Y exit & enter<br>Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors · ODbL</a> · USGS elevation</div></section>`;
+  el.innerHTML = `<section class="panel"><div class="eyebrow">${escape(selectedMember.name)} · ${selectedMember.year} ${escape(selectedMember.carName)}</div><${screen === "main" ? "h1" : "h2"}>${title}</${screen === "main" ? "h1" : "h2"}><p class="intro">${intro}</p>${safetyMessage ? `<div class="safety">${escape(safetyMessage)}</div>` : ""}${extra}<nav class="menu-items">${items.map((item, i) => `<button class="menu-item ${i === focus ? "focus" : ""}" data-index="${i}"><span>${escape(item.label)}${item.detail ? `<small>${escape(item.detail)}</small>` : ""}</span><span class="value">${item.value ? escape(item.value) : "↗"}</span></button>`).join("")}</nav><div class="foot"><span class="key green">A</span> Select <span class="key">B</span> Back · D-pad to navigate<br>Keyboard: arrows / Enter / Esc · Drive: WASD · Shift boost · F / Y exit & enter<br>Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors · ODbL</a> · USGS elevation</div></section>`;
   el.querySelectorAll<HTMLButtonElement>("button").forEach((button) => {
     button.onclick = () => {
       sound.start();
@@ -830,11 +998,28 @@ function renderMenu() {
 }
 function updateFocus() {
   const buttons = $("menu").querySelectorAll("button");
-  buttons.forEach((b, i) => b.classList.toggle("focus", i === focus));
-  buttons[focus]?.scrollIntoView({ block: "nearest" });
+  if (
+    screen === "garage" &&
+    focus < CLUB_MEMBERS.length &&
+    garageChoice !== focus
+  ) {
+    garageChoice = focus;
+    renderGarage();
+    return;
+  }
+  buttons.forEach((b) =>
+    b.classList.toggle("focus", Number(b.dataset.index) === focus),
+  );
+  $("menu")
+    .querySelector(`[data-index="${focus}"]`)
+    ?.scrollIntoView({ block: "nearest" });
 }
 let wasCalibrating = false;
 function menuInput(f: InputFrame) {
+  if (screen === "garage" && garageBusy) {
+    if (f.actions.back) closeGarage();
+    return;
+  }
   if (input.calibration) {
     wasCalibrating = true;
     const el = $("calibration");
@@ -853,14 +1038,23 @@ function menuInput(f: InputFrame) {
     focus = (focus + 1) % items.length;
     updateFocus();
   }
-  if (f.actions.left) items[focus]?.adjust?.(-1);
-  if (f.actions.right) items[focus]?.adjust?.(1);
+  if (screen === "garage" && (f.actions.left || f.actions.right)) {
+    garageChoice =
+      (garageChoice + (f.actions.right ? 1 : -1) + CLUB_MEMBERS.length) %
+      CLUB_MEMBERS.length;
+    focus = garageChoice;
+    renderGarage();
+  } else {
+    if (f.actions.left) items[focus]?.adjust?.(-1);
+    if (f.actions.right) items[focus]?.adjust?.(1);
+  }
   if (f.actions.confirm) {
     sound.start();
     items[focus]?.action?.();
   }
   if (f.actions.back) {
-    if (screen === "pause") resume();
+    if (screen === "garage") closeGarage();
+    else if (screen === "pause") resume();
     else if (screen === "settings" || screen === "diagnostics")
       setScreen(returnScreen);
     else if (screen === "bindings") setScreen("diagnostics");
@@ -904,7 +1098,10 @@ function simulate(dt: number) {
           releaseWalking();
           input.consumeInteraction();
           frame = emptyInput();
-          toast("BACK IN THE 442", 1.2);
+          toast(
+            `BACK IN THE ${selectedMember.shortCarName.toUpperCase()}`,
+            1.2,
+          );
         } else {
           footPhase = "foot";
           toast("ON FOOT · explore the neighborhood", 2);
@@ -1127,7 +1324,11 @@ function renderVehicles(alpha: number, renderDt = 0) {
       vehicleDoors.setOpen(transitionSide > 0 ? 1 : -1, door);
       const progress = smooth((t - 0.18) / 0.62);
       const outside = footPhase === "exiting" ? progress : 1 - progress;
-      seatedBlend = 1 - outside;
+      seatedBlend =
+        1 -
+        (manifest.bodyStyle === "coupe" || manifest.bodyStyle === "wagon"
+          ? smooth((outside - 0.25) / 0.75)
+          : outside);
       const seat = seatedDriver.root.getWorldPosition(new T.Vector3());
       const feet = pedestrian.position.clone();
       walkingDriver.root.position.lerpVectors(seat, feet, outside);
@@ -1345,7 +1546,7 @@ function drawMinimap() {
     ctx.fillStyle = "#8ecae6";
     ctx.fillRect(car[0] - 4, car[1] - 6, 8, 12);
     ctx.font = "14px Arial";
-    ctx.fillText("442", car[0] + 8, car[1] + 4);
+    ctx.fillText(selectedMember.shortCarName, car[0] + 8, car[1] + 4);
   }
   const home = transform(map.home.position);
   ctx.fillStyle = "#b8e8ba";
@@ -1395,7 +1596,7 @@ function hud() {
       Math.atan2(player.position.x - actor.x, player.position.z - actor.z),
       footYaw,
     );
-    speedometer.innerHTML = `<div class="foot-status">${pedestrian.grounded ? (pedestrian.speed() > 3.4 ? "RUNNING" : pedestrian.speed() > 0.2 ? "WALKING" : "ON FOOT") : "IN THE AIR"}</div><div class="car-distance"><span class="car-bearing" aria-label="Direction to your car" style="transform:rotate(${-bearing}rad)">↑</span>${distance}<small> m to your 442</small></div><div class="foot-caption">Follow the arrow back to your car</div>`;
+    speedometer.innerHTML = `<div class="foot-status">${pedestrian.grounded ? (pedestrian.speed() > 3.4 ? "RUNNING" : pedestrian.speed() > 0.2 ? "WALKING" : "ON FOOT") : "IN THE AIR"}</div><div class="car-distance"><span class="car-bearing" aria-label="Direction to your car" style="transform:rotate(${-bearing}rad)">↑</span>${distance}<small> m to your ${escape(selectedMember.shortCarName)}</small></div><div class="foot-caption">Follow the arrow back to your car</div>`;
   }
   const controls = $("hud").querySelector(".controls-bar");
   if (controls)
@@ -1524,34 +1725,41 @@ async function init() {
   world.timestep = 1 / 60;
   world.integrationParameters.maxCcdSubsteps = 4;
   events = new RAPIER.EventQueue(true);
-  const [m, v, gltf, dad] = await Promise.all([
+  const [m, joe, dad] = await Promise.all([
     fetch("/map/warwick.json").then((r) => {
       if (!r.ok) throw new Error("Warwick map is missing. Run npm run map.");
       return r.json();
     }),
-    fetch("/assets/vehicle-manifest.json").then((r) => r.json()),
-    new GLTFLoader().loadAsync("/assets/oldsmobile-442.glb"),
+    clubAssets.load(CLUB_MEMBERS[0]),
     new GLTFLoader().loadAsync("/assets/dad-driver.glb"),
     preloadHomeProps(),
   ]);
   neighborhood = m;
-  manifest = v;
   characterSource = dad;
-  configureVehicleGeometry(manifest);
-  template = gltf.scene;
-  template.traverse((o) => {
-    if (o instanceof T.Mesh) {
-      o.castShadow = true;
-      o.receiveShadow = true;
+  // AI keeps the proven 442 chassis defaults; the selected player has its own geometry.
+  configureVehicleGeometry(joe.manifest);
+  manifest = joe.manifest;
+  template = joe.scene;
+  const saved = readClubMember(optionalStorage);
+  if (saved.id !== "joe") {
+    try {
+      const asset = await clubAssets.load(saved);
+      createVehicleGeometry(asset.manifest);
+      selectedMember = saved;
+      manifest = asset.manifest;
+      template = asset.scene;
+    } catch {
+      safetyMessage =
+        "Your saved club car couldn’t be loaded. Joe’s 442 is ready; choose a member to try again.";
     }
-  });
+  }
   modelLoaded = true;
   await atmosphere.loadReflections(
     scene,
     renderer,
     "/textures/greenwich-park-1k.hdr",
   );
-  if (localStorage.getItem("blue-county-handling") === "planted") {
+  if (optionalStorage.getItem("blue-county-handling") === "planted") {
     handling.grip = 1.9;
     handling.steerLow = 0.46;
   }
@@ -1615,6 +1823,18 @@ if (new URLSearchParams(location.search).has("test")) {
     },
     getState: () => ({
       ready,
+      club: {
+        member: selectedMember.id,
+        name: selectedMember.name,
+        car: selectedMember.carName,
+        year: selectedMember.year,
+        asset: selectedMember.asset,
+        avatar: selectedMember.avatar,
+        seatAnchor: manifest && [...seatAnchor()],
+        geometry: player?.geometry,
+        garageChoice: CLUB_MEMBERS[garageChoice].id,
+        busy: garageBusy,
+      },
       screen,
       mode,
       race,
@@ -1633,7 +1853,10 @@ if (new URLSearchParams(location.search).has("test")) {
         driver: {
           visible: walkingDriver.root.visible || seatedDriver.root.visible,
           seated: seatedDriver.root.visible,
-          asset: "/assets/dad-driver.glb",
+          asset:
+            selectedMember.avatar === "dad"
+              ? "/assets/dad-driver.glb"
+              : "provisional-club-character",
           seatWorld: seatedDriver.root
             .getWorldPosition(new T.Vector3())
             .toArray(),
@@ -1705,6 +1928,7 @@ if (new URLSearchParams(location.search).has("test")) {
       car.updateMatrixWorld(true);
       const wheelNode = car.getObjectByName(manifest.steeringWheel.node)!;
       const bones: Record<string, number[]> = {};
+      const bonesCarLocal: Record<string, number[]> = {};
       for (const name of [
         "head",
         "hips",
@@ -1712,13 +1936,26 @@ if (new URLSearchParams(location.search).has("test")) {
         "right_hand",
         "left_foot",
         "right_foot",
-      ])
+      ]) {
         bones[name] = active.root
           .getObjectByName(name)!
           .getWorldPosition(new T.Vector3())
           .toArray();
+        bonesCarLocal[name] = car
+          .worldToLocal(new T.Vector3().fromArray(bones[name]))
+          .toArray();
+      }
       return {
         bones,
+        bonesCarLocal,
+        vehicle: {
+          name: manifest.name,
+          bodyStyle: manifest.bodyStyle ?? "convertible",
+          bounds: new T.Box3()
+            .setFromObject(car)
+            .getSize(new T.Vector3())
+            .toArray(),
+        },
         model: active.root.userData.character,
         doors: vehicleDoors.getState(),
         steeringWheel: {

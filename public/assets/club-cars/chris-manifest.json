@@ -1,0 +1,262 @@
+{
+  "version": 1,
+  "id": "chris",
+  "bodyStyle": "coupe",
+  "seatAnchor": [
+    0.398,
+    -0.1,
+    -0.315
+  ],
+  "owner": "Chris",
+  "name": "1968 Chevrolet Camaro RS/SS",
+  "paintColor": "Graphite (temporary pending owner color)",
+  "asset": "/assets/club-cars/chris.glb",
+  "preview": "/assets/club-cars/chris-preview.png",
+  "source": "asset-source/lug-nuts-cars.blend",
+  "generator": "scripts/build-club-cars.py",
+  "units": "meters",
+  "metersPerUnit": 1,
+  "rootNode": "ClubCar_chris",
+  "bodyNode": "Body",
+  "axes": {
+    "left": "+X",
+    "right": "-X",
+    "up": "+Y",
+    "forward": "+Z"
+  },
+  "characterSeatAnchor": [
+    0.398,
+    -0.1,
+    -0.315
+  ],
+  "steeringWheel": {
+    "node": "SteeringWheel",
+    "center": [
+      0.398,
+      0.8380000000000001,
+      0.064
+    ],
+    "axis": [
+      0.0,
+      0.6380178928375244,
+      -0.7700215578079224
+    ],
+    "radius": 0.176
+  },
+  "wheels": [
+    {
+      "id": "FL",
+      "center": [
+        0.77,
+        0.338,
+        1.36
+      ],
+      "radius": 0.338,
+      "steerNode": "WheelSteer_FL",
+      "spinNode": "WheelSpin_FL",
+      "meshNode": "WheelMesh_FL",
+      "axle": "front",
+      "steering": true,
+      "drive": false,
+      "steeringAxis": [
+        0,
+        1,
+        0
+      ],
+      "spinAxis": [
+        1,
+        0,
+        0
+      ],
+      "forwardSpinSign": 1
+    },
+    {
+      "id": "FR",
+      "center": [
+        -0.77,
+        0.338,
+        1.36
+      ],
+      "radius": 0.338,
+      "steerNode": "WheelSteer_FR",
+      "spinNode": "WheelSpin_FR",
+      "meshNode": "WheelMesh_FR",
+      "axle": "front",
+      "steering": true,
+      "drive": false,
+      "steeringAxis": [
+        0,
+        1,
+        0
+      ],
+      "spinAxis": [
+        1,
+        0,
+        0
+      ],
+      "forwardSpinSign": 1
+    },
+    {
+      "id": "RL",
+      "center": [
+        0.77,
+        0.338,
+        -1.385
+      ],
+      "radius": 0.338,
+      "steerNode": "WheelSteer_RL",
+      "spinNode": "WheelSpin_RL",
+      "meshNode": "WheelMesh_RL",
+      "axle": "rear",
+      "steering": false,
+      "drive": true,
+      "steeringAxis": [
+        0,
+        1,
+        0
+      ],
+      "spinAxis": [
+        1,
+        0,
+        0
+      ],
+      "forwardSpinSign": 1
+    },
+    {
+      "id": "RR",
+      "center": [
+        -0.77,
+        0.338,
+        -1.385
+      ],
+      "radius": 0.338,
+      "steerNode": "WheelSteer_RR",
+      "spinNode": "WheelSpin_RR",
+      "meshNode": "WheelMesh_RR",
+      "axle": "rear",
+      "steering": false,
+      "drive": true,
+      "steeringAxis": [
+        0,
+        1,
+        0
+      ],
+      "spinAxis": [
+        1,
+        0,
+        0
+      ],
+      "forwardSpinSign": 1
+    }
+  ],
+  "doors": [
+    {
+      "id": "L",
+      "side": 1,
+      "hingeNode": "DoorHinge_L",
+      "meshNode": "DoorMesh_L",
+      "hinge": [
+        0.8460000000000001,
+        0.72,
+        0.64
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "openSign": -1,
+      "maxAngleRadians": 1.1868238913561442,
+      "closedProgress": 0,
+      "openProgress": 1,
+      "entryOpening": {
+        "zMin": -0.77,
+        "zMax": 0.64,
+        "sillHeight": 0.36
+      }
+    },
+    {
+      "id": "R",
+      "side": -1,
+      "hingeNode": "DoorHinge_R",
+      "meshNode": "DoorMesh_R",
+      "hinge": [
+        -0.8460000000000001,
+        0.72,
+        0.64
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "openSign": 1,
+      "maxAngleRadians": 1.1868238913561442,
+      "closedProgress": 0,
+      "openProgress": 1,
+      "entryOpening": {
+        "zMin": -0.77,
+        "zMax": 0.64,
+        "sillHeight": 0.36
+      }
+    }
+  ],
+  "bounds": {
+    "min": [
+      -1.1049998998641968,
+      -0.0040000081062316895,
+      -2.499500036239624
+    ],
+    "max": [
+      1.1050000190734863,
+      1.5099999904632568,
+      2.499000072479248
+    ],
+    "dimensions": [
+      2.209999918937683,
+      1.5139999985694885,
+      4.998500108718872
+    ]
+  },
+  "runtimeIntegration": {
+    "visualOffsetFromChassis": [
+      0,
+      -0.78,
+      0
+    ],
+    "chassisColliderHalfExtents": [
+      0.81,
+      0.31,
+      2.1299999999999994
+    ],
+    "chassisColliderCenterOffset": [
+      0,
+      0.04,
+      0.010000000000000009
+    ],
+    "wheelRayMountY": 0.1,
+    "wheelRayLength": 1.05,
+    "springRestRayLength": 1.0
+  },
+  "statistics": {
+    "triangles": 74096,
+    "glbBytes": 2043040,
+    "nodes": 20,
+    "materials": 12,
+    "meshPrimitives": 46
+  },
+  "validation": {
+    "namedWheelNodes": true,
+    "openingFrontDoors": true,
+    "fixedCabinOpening": true,
+    "leftHandDrive": true,
+    "steeringPivot": true
+  },
+  "references": [
+    "https://www.gm.com/content/dam/company/no_search/heritage-archive-docs/vehicle-information-kits/chevrolet/1968-Chevrolet-Camaro.pdf"
+  ],
+  "limits": [
+    "Original stylized game approximation; not a scanned vehicle or concours-accurate restoration model.",
+    "Shared arcade interior proportions preserve driver fit and gameplay."
+  ]
+}

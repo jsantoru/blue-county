@@ -24,24 +24,163 @@ export const WHEELS = [
   [0.75, 0.1, -1.415],
   [-0.75, 0.1, -1.415],
 ] as Point[];
-export const vehicleGeometry = { visualOffsetY: -0.78, wheelRadius: 0.345 };
-/** Import inspected axle locations without coupling the visible mesh to chassis physics. */
-export function configureVehicleGeometry(manifest: {
-  wheels: { center: number[]; radius: number }[];
-  runtimeIntegration?: { visualOffsetFromChassis?: number[] };
-}) {
-  if (manifest.wheels.length !== 4)
-    throw new Error("Vehicle manifest must describe four wheels.");
-  manifest.wheels.forEach((wheel, i) => {
-    WHEELS[i][0] = wheel.center[0];
-    WHEELS[i][2] = wheel.center[2];
+type GeometryPoint = readonly [number, number, number];
+export interface VehicleGeometry {
+  /** Chassis-local suspension mounts, ordered front left/right, rear left/right. */
+  readonly wheels: readonly GeometryPoint[];
+  readonly wheelRadii: readonly number[];
+  /** Front tire radius used by the shared visual wheel-spin phase. */
+  readonly wheelRadius: number;
+  readonly visualOffsetY: number;
+  readonly chassisHalfExtents: GeometryPoint;
+  readonly chassisCenter: GeometryPoint;
+  readonly wheelRayLength: number;
+  readonly springRestRayLength: number;
+  readonly resetHeight: number;
+}
+export interface VehicleGeometryManifest {
+  wheels: readonly { center: readonly number[]; radius: number }[];
+  runtimeIntegration?: {
+    visualOffsetFromChassis?: readonly number[];
+    chassisColliderHalfExtents?: readonly number[];
+    chassisColliderCenterOffset?: readonly number[];
+    wheelRayMountY?: number;
+    wheelRayLength?: number;
+    springRestRayLength?: number;
+  };
+}
+
+function finite(value: number, name: string, positive = false) {
+  if (!Number.isFinite(value) || (positive && value <= 0))
+    throw new Error(
+      `Vehicle geometry ${name} must be ${positive ? "positive and " : ""}finite.`,
+    );
+  return value;
+}
+function geometryPoint(
+  value: readonly number[],
+  name: string,
+  positive = false,
+): GeometryPoint {
+  if (!Array.isArray(value) || value.length !== 3)
+    throw new Error(`Vehicle geometry ${name} must have three coordinates.`);
+  return Object.freeze(
+    value.map((n) => finite(n, name, positive)),
+  ) as GeometryPoint;
+}
+
+/** Revalidate and deep-copy even a caller-owned configuration before using it. */
+function copyGeometry(source: VehicleGeometry): VehicleGeometry {
+  if (
+    !Array.isArray(source.wheels) ||
+    source.wheels.length !== 4 ||
+    !Array.isArray(source.wheelRadii) ||
+    source.wheelRadii.length !== 4
+  )
+    throw new Error("Vehicle geometry must describe four wheels and radii.");
+  const wheelRadii = Object.freeze(
+    source.wheelRadii.map((radius) => finite(radius, "wheel radius", true)),
+  );
+  return Object.freeze({
+    wheels: Object.freeze(
+      source.wheels.map((point) => geometryPoint(point, "wheel mount")),
+    ),
+    wheelRadii,
+    wheelRadius: wheelRadii[0],
+    visualOffsetY: finite(source.visualOffsetY, "visual offset"),
+    chassisHalfExtents: geometryPoint(
+      source.chassisHalfExtents,
+      "chassis half extents",
+      true,
+    ),
+    chassisCenter: geometryPoint(source.chassisCenter, "chassis center"),
+    wheelRayLength: finite(source.wheelRayLength, "ray length", true),
+    springRestRayLength: finite(
+      source.springRestRayLength,
+      "spring rest length",
+      true,
+    ),
+    resetHeight: finite(source.resetHeight, "reset height", true),
   });
-  vehicleGeometry.wheelRadius = manifest.wheels[0].radius;
-  vehicleGeometry.visualOffsetY =
-    manifest.runtimeIntegration?.visualOffsetFromChassis?.[1] ?? -0.78;
+}
+
+/** Parse each asset independently; no selected-car geometry leaks into other cars. */
+export function createVehicleGeometry(
+  manifest: VehicleGeometryManifest,
+): VehicleGeometry {
+  if (!Array.isArray(manifest.wheels) || manifest.wheels.length !== 4)
+    throw new Error("Vehicle manifest must describe four wheels.");
+  const runtime = manifest.runtimeIntegration;
+  const visual = geometryPoint(
+    runtime?.visualOffsetFromChassis ?? [0, -0.78, 0],
+    "visual offset",
+  );
+  const half = geometryPoint(
+    runtime?.chassisColliderHalfExtents ?? [0.9, 0.31, 2.3],
+    "chassis half extents",
+    true,
+  );
+  const center = geometryPoint(
+    runtime?.chassisColliderCenterOffset ?? [0, 0.04, 0],
+    "chassis center",
+  );
+  const mountY = finite(runtime?.wheelRayMountY ?? 0.1, "wheel mount height");
+  const rest = finite(
+    runtime?.springRestRayLength ?? 1,
+    "spring rest length",
+    true,
+  );
+  const wheelRadii = manifest.wheels.map((wheel) =>
+    finite(wheel.radius, "wheel radius", true),
+  );
+  return copyGeometry({
+    wheels: manifest.wheels.map((wheel) => {
+      const point = geometryPoint(wheel.center, "wheel center");
+      return [point[0] + visual[0], mountY, point[2] + visual[2]];
+    }),
+    wheelRadii,
+    wheelRadius: wheelRadii[0],
+    visualOffsetY: visual[1],
+    chassisHalfExtents: half,
+    chassisCenter: center,
+    wheelRayLength: runtime?.wheelRayLength ?? 1.05,
+    springRestRayLength: rest,
+    // Preserve the established 442 ride height, adjusted only for authored geometry.
+    resetHeight: Math.max(
+      0.83 + (rest - 1) - (mountY - 0.1),
+      half[1] - center[1] + 0.05,
+    ),
+  });
+}
+
+/** Compatibility defaults are captured by new vehicles, never read during a step. */
+export const vehicleGeometry = {
+  wheels: WHEELS,
+  wheelRadii: [0.345, 0.345, 0.345, 0.345],
+  visualOffsetY: -0.78,
+  wheelRadius: 0.345,
+  chassisHalfExtents: [0.9, 0.31, 2.3] as Point,
+  chassisCenter: [0, 0.04, 0] as Point,
+  wheelRayLength: 1.05,
+  springRestRayLength: 1,
+  resetHeight: 0.83,
+};
+/** Set legacy defaults for future vehicles only; explicit configurations are preferred. */
+export function configureVehicleGeometry(manifest: VehicleGeometryManifest) {
+  const geometry = createVehicleGeometry(manifest);
+  geometry.wheels.forEach((wheel, i) => WHEELS[i].splice(0, 3, ...wheel));
+  vehicleGeometry.wheelRadii = [...geometry.wheelRadii];
+  vehicleGeometry.wheelRadius = geometry.wheelRadius;
+  vehicleGeometry.visualOffsetY = geometry.visualOffsetY;
+  vehicleGeometry.chassisHalfExtents = [...geometry.chassisHalfExtents];
+  vehicleGeometry.chassisCenter = [...geometry.chassisCenter];
+  vehicleGeometry.wheelRayLength = geometry.wheelRayLength;
+  vehicleGeometry.springRestRayLength = geometry.springRestRayLength;
+  vehicleGeometry.resetHeight = geometry.resetHeight;
 }
 const up = new Vector3(0, 1, 0);
 export class Vehicle {
+  readonly geometry: VehicleGeometry;
   body: RAPIER.RigidBody;
   collider: RAPIER.Collider;
   position = new Vector3();
@@ -56,7 +195,7 @@ export class Vehicle {
   drift = 0;
   boosting = false;
   wheelSpin = 0;
-  wheelHeights = [0.345, 0.345, 0.345, 0.345];
+  wheelHeights: number[];
   bank = new BoostBank();
   reverse = new ReverseGate();
   lastBrake = 0;
@@ -71,7 +210,10 @@ export class Vehicle {
     public id: number,
     p: Point,
     heading = 0,
+    geometry: VehicleGeometry = vehicleGeometry,
   ) {
+    this.geometry = copyGeometry(geometry);
+    this.wheelHeights = [...this.geometry.wheelRadii];
     this.body = world.createRigidBody(
       RAPIER.RigidBodyDesc.dynamic()
         .setTranslation(...p)
@@ -87,8 +229,8 @@ export class Vehicle {
         .setCanSleep(false),
     );
     this.collider = world.createCollider(
-      RAPIER.ColliderDesc.cuboid(0.9, 0.31, 2.3)
-        .setTranslation(0, 0.04, 0)
+      RAPIER.ColliderDesc.cuboid(...this.geometry.chassisHalfExtents)
+        .setTranslation(...this.geometry.chassisCenter)
         .setMass(handling.mass)
         .setFriction(0.25)
         .setRestitution(0.05)
@@ -105,7 +247,10 @@ export class Vehicle {
     this.rotation.copy(this.body.rotation());
   }
   reset(p: Point, heading: number) {
-    this.body.setTranslation({ x: p[0], y: p[1] + 0.83, z: p[2] }, true);
+    this.body.setTranslation(
+      { x: p[0], y: p[1] + this.geometry.resetHeight, z: p[2] },
+      true,
+    );
     this.body.setRotation(
       { x: 0, y: Math.sin(heading / 2), z: 0, w: Math.cos(heading / 2) },
       true,
@@ -117,6 +262,7 @@ export class Vehicle {
     this.sync();
     this.previous.copy(this.position);
     this.previousRotation.copy(this.rotation);
+    this.wheelHeights = [...this.geometry.wheelRadii];
     this.reverse.reset();
     this.drift = 0;
     this.protection = 2;
@@ -184,11 +330,13 @@ export class Vehicle {
         (handling.engineForce + (boosting ? handling.boostForce : 0)) *
         clamp((maxSpeed - Math.max(0, this.forwardSpeed)) / 8, 0, 1);
     for (let i = 0; i < 4; i++) {
-      const mount = new Vector3(...WHEELS[i]).applyQuaternion(q).add(p);
+      const mount = new Vector3(...this.geometry.wheels[i])
+        .applyQuaternion(q)
+        .add(p);
       const ray = new RAPIER.Ray(mount, { x: 0, y: -1, z: 0 });
       const hit = this.world.castRayAndGetNormal(
         ray,
-        1.05,
+        this.geometry.wheelRayLength,
         true,
         undefined,
         0x0001ffff, // Suspension ignores scenery reserved for pedestrian collision layer 8.
@@ -205,7 +353,7 @@ export class Vehicle {
       const vel = new Vector3().copy(this.body.velocityAtPoint(contact));
       const normal = new Vector3().copy(hit.normal);
       if (normal.y < 0) normal.negate();
-      const compression = 1.0 - hit.timeOfImpact;
+      const compression = this.geometry.springRestRayLength - hit.timeOfImpact;
       const load = clamp(
         compression * handling.spring - vel.dot(normal) * handling.damper,
         0,
@@ -214,9 +362,9 @@ export class Vehicle {
       this.body.addForceAtPoint(normal.multiplyScalar(load), mount, true);
       this.wheelHeights[i] =
         contact.y +
-        vehicleGeometry.wheelRadius -
+        this.geometry.wheelRadii[i] -
         p.y -
-        vehicleGeometry.visualOffsetY;
+        this.geometry.visualOffsetY;
       const wheelForward = f
           .clone()
           .applyAxisAngle(up, i < 2 ? this.steering : 0),
@@ -269,7 +417,7 @@ export class Vehicle {
       if (this.drift > 0.1 && Math.abs(this.slip) > 0.09 && this.speed > 15)
         this.bank.earn("drift", 2.3, time, 0.3);
     }
-    this.wheelSpin += (this.forwardSpeed * dt) / vehicleGeometry.wheelRadius;
+    this.wheelSpin += (this.forwardSpeed * dt) / this.geometry.wheelRadius;
     this.gear = clamp(Math.floor(this.speed / 12) + 1, 1, 4);
     this.rpm = clamp(
       950 + (this.speed % 12) * 330 + input.throttle * 600,

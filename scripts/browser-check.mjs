@@ -69,7 +69,7 @@ try {
     "main",
     "An exposed idle controller is detected without activating the menu",
   );
-  for (let i = 0; i < 3; i++) await press(13);
+  for (let i = 0; i < 4; i++) await press(13);
   await press(0);
   assert.equal((await state()).screen, "diagnostics");
   await analog({ rt: 0.52, lt: 0.28, steer: 0.6 });
@@ -80,7 +80,7 @@ try {
   await analog({});
   await press(1);
   assert.equal((await state()).screen, "main");
-  for (let i = 0; i < 4; i++) await press(13);
+  for (let i = 0; i < 5; i++) await press(13);
   await press(0);
   assert.equal((await state()).screen, "settings");
   const deadzone = await page.evaluate(

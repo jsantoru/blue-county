@@ -421,6 +421,280 @@ h2 {
   line-height: 1.8;
   color: #c8d2c7;
 }
+
+#menu.garage-open {
+  justify-content: center;
+  background: #08121de8;
+}
+.panel.garage-panel {
+  width: min(1180px, 100%);
+  padding: 26px 30px 18px;
+  background: linear-gradient(145deg, #182b35fa, #0c1822fc);
+  border-color: #81999055;
+}
+.garage-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+.club-mark {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  color: #13232c;
+  background: #e5c58d;
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  flex-shrink: 0;
+}
+.garage-header h1 {
+  font-size: clamp(23px, 3vw, 35px);
+  letter-spacing: 0.04em;
+  margin: 7px 0 0;
+}
+.garage-count {
+  margin-left: auto;
+  text-align: right;
+  font-size: 10px;
+  line-height: 1.8;
+  color: #9cafba;
+  letter-spacing: 0.12em;
+}
+.garage-count b {
+  color: #e5c58d;
+  font-weight: 600;
+}
+.garage-hero {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  min-height: 230px;
+  border: 1px solid #afc9d026;
+  background: #08131b;
+}
+.garage-car-image {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  background: #12202a;
+  overflow: hidden;
+}
+.garage-car-image img {
+  width: 100%;
+  height: 246px;
+  object-fit: contain;
+}
+.garage-year {
+  position: absolute;
+  left: 20px;
+  top: 16px;
+  color: #d0dce3;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+}
+.garage-profile {
+  padding: 24px 28px;
+  align-self: center;
+}
+.garage-profile h2 {
+  font-size: 48px;
+  line-height: 1;
+  margin: 10px 0;
+}
+.garage-profile h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  color: #e2e7e8;
+}
+.garage-color {
+  font-size: 12px;
+  color: #bdcbd1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.garage-color i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background: var(--member-color);
+  border-radius: 50%;
+}
+.garage-note {
+  color: #96a9b5;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 16px 0 10px;
+}
+.garage-pairing {
+  font-size: 10px;
+  color: #e3c38b;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.garage-roster {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin: 16px 0 20px;
+}
+.garage-member {
+  min-width: 0;
+  padding: 0 0 12px;
+  border: 1px solid #536b7b55;
+  background: #15252f;
+  color: #f0eee6;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 100ms,
+    background 100ms;
+}
+.garage-member img {
+  display: block;
+  width: 100%;
+  height: 91px;
+  object-fit: contain;
+  background: #101d27;
+}
+.garage-member-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  margin: 10px 12px 5px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.garage-member-name small {
+  font-size: 8px;
+  color: #a6bcc8;
+  letter-spacing: 0.07em;
+  font-weight: 500;
+}
+.garage-member-car {
+  display: block;
+  margin: 0 12px;
+  color: #aabcc7;
+  font-size: 11px;
+}
+.garage-member.chosen {
+  border-color: var(--member-color);
+  background: #203643;
+  box-shadow: inset 0 -3px var(--member-color);
+}
+.garage-member.focus,
+.garage-drive.focus,
+.garage-back.focus {
+  outline: 2px solid #f0d9af;
+  outline-offset: 3px;
+}
+.garage-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.garage-help {
+  font-size: 11px;
+  color: #d4ddd9;
+  line-height: 1.7;
+}
+.garage-help span {
+  color: #8ba0ad;
+  font-size: 10px;
+}
+.garage-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.garage-actions button {
+  min-height: 44px;
+  padding: 10px 22px;
+  font-weight: 650;
+  font-size: 13px;
+  cursor: pointer;
+}
+.garage-back {
+  border: 1px solid #a0b3bd55;
+  color: #c9d6d9;
+  background: transparent;
+}
+.garage-drive {
+  border: 1px solid #ebd4a8;
+  color: #172128;
+  background: #e5c58d;
+  min-width: 168px;
+}
+.garage-drive span {
+  margin-left: 20px;
+}
+.garage-panel button:disabled {
+  cursor: progress;
+  opacity: 0.5;
+}
+.garage-disclosure {
+  font-size: 10px;
+  color: #859ba8;
+  margin: 17px 0 0;
+}
+@media (max-width: 850px) {
+  .garage-panel {
+    padding: 18px !important;
+  }
+  .garage-hero {
+    grid-template-columns: 1.1fr 1fr;
+  }
+  .garage-profile {
+    padding: 15px;
+  }
+  .garage-profile h2 {
+    font-size: 32px;
+  }
+  .garage-profile h3 {
+    font-size: 14px;
+  }
+  .garage-car-image img {
+    height: 220px;
+  }
+  .garage-member img {
+    height: 70px;
+  }
+  .garage-member-name small {
+    display: none;
+  }
+  .garage-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .garage-actions {
+    align-self: flex-end;
+  }
+}
+@media (max-width: 520px) {
+  .garage-hero {
+    grid-template-columns: 1fr;
+  }
+  .garage-roster {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .garage-car-image img {
+    height: 185px;
+  }
+  .garage-count {
+    display: none;
+  }
+  .garage-help {
+    font-size: 10px;
+  }
+}
 @media (max-height: 760px) {
   .panel {
     padding: 20px 26px;

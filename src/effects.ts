@@ -1,6 +1,5 @@
 import * as T from "three";
 import type { Vehicle } from "./vehicle";
-import { vehicleGeometry, WHEELS } from "./vehicle";
 
 interface Particle {
   p: T.Vector3;
@@ -138,14 +137,14 @@ export class Effects {
   /** The wheel-height convention encodes the actual ray contact, not the moving chassis floor. */
   private tireContact(vehicle: Vehicle, index: number, out: T.Vector3) {
     out
-      .set(...WHEELS[index])
+      .set(...vehicle.geometry.wheels[index])
       .applyQuaternion(vehicle.rotation)
       .add(vehicle.position);
     out.y =
       vehicle.position.y +
       vehicle.wheelHeights[index] -
-      vehicleGeometry.wheelRadius +
-      vehicleGeometry.visualOffsetY +
+      vehicle.geometry.wheelRadii[index] +
+      vehicle.geometry.visualOffsetY +
       0.025;
     return out;
   }

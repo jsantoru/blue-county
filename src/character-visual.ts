@@ -1,6 +1,7 @@
 import * as T from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+import { steeringWheelGrip, type SteeringWheelSpec } from "./steering-wheel";
 
 export type CharacterPose = "seated" | "idle" | "walk" | "run" | "airborne";
 export interface CharacterAnimation {
@@ -11,6 +12,8 @@ export interface CharacterAnimation {
   dt?: number;
   verticalSpeed?: number;
   steering?: number;
+  /** Transfer animation: zero is standing and one is fully seated. */
+  seatedBlend?: number;
 }
 
 export const CHARACTER_DIMENSIONS = {
@@ -36,7 +39,7 @@ type Piece = {
 };
 type Limb = { upper: T.Group; lower: T.Group; end: T.Group };
 const DOWN = new T.Vector3(0, -1, 0);
-const colors = {
+const DEFAULT_COLORS = {
   jacket: 0x384e59,
   seams: 0x2b3942,
   shirt: 0xc7b79a,
@@ -48,6 +51,14 @@ const colors = {
   hair: 0x312923,
   eyes: 0x262c2d,
 };
+export type CharacterPalette = typeof DEFAULT_COLORS;
+export interface CharacterVisualOptions {
+  name?: string;
+  palette?: Partial<CharacterPalette>;
+  hairStyle?: "short" | "swept" | "receding" | "curly";
+  wheel?: SteeringWheelSpec;
+  seatAnchor?: readonly [number, number, number];
+}
 
 /**
  * Replaceable presentation only: meters, feet at origin, +Y up, +Z forward.
@@ -72,15 +83,18 @@ export class CharacterVisual {
   private disposed = false;
   private lastPose: CharacterPose = "idle";
 
-  constructor() {
-    this.root.name = "Replaceable driver character";
+  constructor(private readonly options: CharacterVisualOptions = {}) {
+    const colors = { ...DEFAULT_COLORS, ...options.palette };
+    this.root.name = options.name ?? "Replaceable driver character";
     this.root.userData.character = {
       units: "meters",
       origin: "feet",
       forward: "+Z",
       up: "+Y",
       height: CHARACTER_DIMENSIONS.height,
-      seatAnchor: [...CHARACTER_SEAT_ANCHOR],
+      seatAnchor: [...(options.seatAnchor ?? CHARACTER_SEAT_ANCHOR)],
+      palette: { ...colors },
+      hairStyle: options.hairStyle ?? "short",
     };
     this.hips.name = "hips";
     this.root.add(this.hips);
@@ -120,12 +134,7 @@ export class CharacterVisual {
           scale: [0.103, 0.139, 0.104],
           color: colors.skin,
         },
-        {
-          geometry: new T.SphereGeometry(1, 10, 5, 0, Math.PI * 2, 0, 1.46),
-          scale: [0.108, 0.145, 0.11],
-          color: colors.hair,
-          at: [0, 0.003, -0.006],
-        },
+        ...this.hair(options.hairStyle ?? "short", colors.hair),
         this.box([0.03, 0.042, 0.036], colors.skin, [0, -0.012, 0.103]),
         this.box([0.02, 0.009, 0.01], colors.eyes, [-0.039, 0.024, 0.098]),
         this.box([0.02, 0.009, 0.01], colors.eyes, [0.039, 0.024, 0.098]),
@@ -176,6 +185,9 @@ export class CharacterVisual {
         ]),
       );
       this.arms.push(arm);
+      const wrist = new T.Group();
+      wrist.name = `${sideName}_hand`;
+      arm.end.add(wrist);
       const leg = this.limb(
         this.hips,
         `${sideName} leg`,
@@ -205,8 +217,56 @@ export class CharacterVisual {
         ]),
       );
       this.legs.push(leg);
+      const foot = new T.Group();
+      foot.name = `${sideName}_foot`;
+      leg.end.add(foot);
     }
     this.update({ pose: "idle", speed: 0, time: 0 });
+  }
+
+  private hair(
+    style: NonNullable<CharacterVisualOptions["hairStyle"]>,
+    color: number,
+  ): Piece[] {
+    if (style === "receding")
+      return [
+        ...([-1, 1] as const).map((side): Piece => ({
+          geometry: new T.SphereGeometry(1, 8, 5),
+          scale: [0.023, 0.087, 0.095],
+          at: [side * 0.09, 0.004, -0.025],
+          color,
+        })),
+        {
+          geometry: new T.SphereGeometry(1, 8, 5),
+          scale: [0.091, 0.074, 0.042],
+          at: [0, 0.034, -0.078],
+          color,
+        },
+      ];
+    if (style === "curly") {
+      const pieces: Piece[] = [];
+      for (let row = -1; row <= 1; row++)
+        for (let col = -1; col <= 1; col++)
+          pieces.push({
+            geometry: new T.SphereGeometry(1, 7, 5),
+            scale: [0.041, 0.039, 0.043],
+            at: [
+              col * 0.06,
+              0.109 - Math.abs(col) * 0.014,
+              row * 0.061 - 0.012,
+            ],
+            color,
+          });
+      return pieces;
+    }
+    return [
+      {
+        geometry: new T.SphereGeometry(1, 10, 5, 0, Math.PI * 2, 0, 1.46),
+        scale: style === "swept" ? [0.109, 0.151, 0.114] : [0.108, 0.145, 0.11],
+        color,
+        at: style === "swept" ? [0.012, 0.004, -0.012] : [0, 0.003, -0.006],
+      },
+    ];
   }
 
   private box(size: Point, color: number, at: Point): Piece {
@@ -293,6 +353,34 @@ export class CharacterVisual {
       .multiply(new T.Quaternion().setFromUnitVectors(DOWN, forearm));
   }
 
+  private poseSeated(steering: number) {
+    this.hips.position.set(0, 0.65, 0);
+    this.hips.rotation.set(0, 0, 0);
+    this.torso.rotation.set(-0.1, 0, 0);
+    this.head.rotation.set(0.07, 0, 0);
+    this.legs.forEach((leg, i) => {
+      leg.upper.rotation.set(-1.53, 0, (i ? 1 : -1) * 0.025);
+      leg.lower.rotation.x = 0.6;
+      leg.end.rotation.x = 0.92;
+    });
+    this.arms.forEach((arm, i) => {
+      const side = i ? 1 : -1;
+      const angle = -steering * 1.7;
+      const target = this.options.wheel
+        ? steeringWheelGrip(this.options.wheel, side, steering).sub(
+            new T.Vector3(
+              ...(this.options.seatAnchor ?? CHARACTER_SEAT_ANCHOR),
+            ),
+          )
+        : new T.Vector3(
+            side * 0.145 * Math.cos(angle),
+            0.938 + side * 0.145 * Math.sin(angle),
+            0.357,
+          );
+      this.reach(arm, target);
+    });
+  }
+
   update(animation: CharacterAnimation) {
     if (this.disposed) return;
     const speed = Number.isFinite(animation.speed)
@@ -307,7 +395,23 @@ export class CharacterVisual {
             0,
             0.1,
           );
-    const pose = animation.pose;
+    const seated =
+      animation.seatedBlend === undefined
+        ? animation.pose === "seated"
+          ? 1
+          : 0
+        : T.MathUtils.clamp(
+            Number.isFinite(animation.seatedBlend) ? animation.seatedBlend : 0,
+            0,
+            1,
+          );
+    const steering = T.MathUtils.clamp(
+      Number.isFinite(animation.steering) ? animation.steering! : 0,
+      -0.55,
+      0.55,
+    );
+    const pose =
+      animation.pose === "seated" && seated < 1 ? "idle" : animation.pose;
     const moving = pose === "walk" || pose === "run";
     if (moving)
       this.phase += dt * Math.min(18, speed * (pose === "run" ? 2.2 : 3.9));
@@ -324,31 +428,7 @@ export class CharacterVisual {
     }
 
     if (pose === "seated") {
-      this.hips.position.y = 0.65;
-      this.torso.rotation.x = -0.1;
-      this.head.rotation.x = 0.07;
-      this.legs.forEach((leg, i) => {
-        leg.upper.rotation.set(-1.53, 0, (i ? 1 : -1) * 0.025);
-        leg.lower.rotation.x = 0.6;
-        leg.end.rotation.x = 0.92;
-      });
-      const steering = T.MathUtils.clamp(
-        Number.isFinite(animation.steering) ? animation.steering! : 0,
-        -0.55,
-        0.55,
-      );
-      this.arms.forEach((arm, i) => {
-        const side = i ? 1 : -1;
-        const angle = steering * 1.7;
-        this.reach(
-          arm,
-          new T.Vector3(
-            side * 0.145 * Math.cos(angle),
-            0.938 + side * 0.145 * Math.sin(angle),
-            0.357,
-          ),
-        );
-      });
+      this.poseSeated(steering);
     } else if (moving) {
       const running = pose === "run";
       const strength = Math.min(1, speed / (running ? 4.2 : 1.8));
@@ -399,9 +479,39 @@ export class CharacterVisual {
         arm.lower.rotation.x = -0.075;
       });
     }
-    this.root.userData.character.pose = pose;
+    if (pose !== "seated" && seated > 0) {
+      const joints = [
+        this.hips,
+        this.torso,
+        this.head,
+        ...[...this.arms, ...this.legs].flatMap((limb) => [
+          limb.upper,
+          limb.lower,
+          limb.end,
+        ]),
+      ];
+      const standing = joints.map((joint) => ({
+        position: joint.position.clone(),
+        quaternion: joint.quaternion.clone(),
+      }));
+      this.poseSeated(steering);
+      joints.forEach((joint, i) => {
+        joint.position.lerpVectors(
+          standing[i].position,
+          joint.position,
+          seated,
+        );
+        joint.quaternion.slerpQuaternions(
+          standing[i].quaternion,
+          joint.quaternion,
+          seated,
+        );
+      });
+    }
+    this.root.userData.character.pose = animation.pose;
+    this.root.userData.character.seatedBlend = seated;
     this.root.updateMatrixWorld(true);
-    if (pose === "walk" || pose === "run") {
+    if (seated < 0.001 && (pose === "walk" || pose === "run")) {
       // Maintain a supporting sole at ground height as the leg joints bend.
       // Work in character space so camera-independent world yaw/translation
       // cannot change the gait or pull a walker down on elevated ground.

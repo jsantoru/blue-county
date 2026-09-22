@@ -147,6 +147,38 @@ describe("delivered Blender dad character", () => {
     },
   );
 
+  it("uses the selected car's seat anchor when fitting the Blender wrists", () => {
+    const anchor = [0.51, 0.17, -0.41] as const;
+    const movedWheel = {
+      ...wheel,
+      center: wheel.center.map(
+        (value: number, i: number) =>
+          value + anchor[i] - CHARACTER_SEAT_ANCHOR[i],
+      ),
+    };
+    const character = new DadCharacterVisual(source, movedWheel, anchor);
+    character.root.position.set(...anchor);
+    character.update({
+      pose: "seated",
+      speed: 0,
+      steering: -0.4,
+      time: 0,
+      dt: 0,
+    });
+    for (const [label, side] of [
+      ["left", 1],
+      ["right", -1],
+    ] as const) {
+      const wrist = character.root
+        .getObjectByName(`${label}_hand`)!
+        .getWorldPosition(new T.Vector3());
+      expect(
+        wrist.distanceTo(steeringWheelGrip(movedWheel, side, -0.4)),
+      ).toBeLessThan(0.015);
+    }
+    character.dispose();
+  });
+
   it("keeps instances independent, respects pause, and preserves gameplay root transforms", () => {
     const walking = new DadCharacterVisual(source, wheel),
       seated = new DadCharacterVisual(source, wheel);
