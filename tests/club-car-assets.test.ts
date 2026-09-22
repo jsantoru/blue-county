@@ -27,15 +27,16 @@ type Manifest = ClubVehicleManifest & {
 };
 const delivered = new Map<Member, { scene: T.Group; manifest: Manifest }>();
 
-/** Keep the delivered vertices, transforms and primitive partitions. Only remove
- * image/material decoding, which needs browser APIs and has separate visual QA. */
+/** Keep delivered vertices, transforms and material partitions. Strip image
+ * decoding (browser-only), retaining names so geometry tests can locate finishes. */
 async function parseGeometry(path: string) {
   const bytes = await readFile(path);
   const jsonLength = bytes.readUInt32LE(12);
   const document = JSON.parse(bytes.subarray(20, 20 + jsonLength).toString());
-  for (const mesh of document.meshes)
-    for (const primitive of mesh.primitives) delete primitive.material;
-  delete document.materials;
+  document.materials = document.materials.map((material: { name: string }) => ({
+    name: material.name,
+    doubleSided: true,
+  }));
   delete document.textures;
   delete document.images;
   delete document.samplers;
@@ -399,4 +400,99 @@ it("delivers four different wheelbases instead of four recolored copies of one c
     return wheelbase.toFixed(3);
   });
   expect(new Set(wheelbases).size).toBe(4);
+});
+
+describe("Ed's reference wagon woodwork", () => {
+  const isWood = (material: T.Material) =>
+    /^(Walnut wagon panel|Honey ash framing)/i.test(material.name);
+  function woodMeshes(root: T.Object3D) {
+    const meshes: T.Mesh[] = [];
+    root.traverse((object) => {
+      if (!(object instanceof T.Mesh)) return;
+      const materials = Array.isArray(object.material)
+        ? object.material
+        : [object.material];
+      if (materials.some(isWood)) meshes.push(object);
+    });
+    return meshes;
+  }
+  function hitMaterial(root: T.Object3D, side: number, y: number, z: number) {
+    const hit = new T.Raycaster(
+      new T.Vector3(side * 1.5, y, z),
+      new T.Vector3(-side, 0, 0),
+      0,
+      0.83,
+    ).intersectObject(root, true)[0];
+    expect(hit, `exterior must exist at ${side},${y},${z}`).toBeDefined();
+    const mesh = hit.object as T.Mesh;
+    return Array.isArray(mesh.material)
+      ? mesh.material[hit.face!.materialIndex]
+      : mesh.material;
+  }
+
+  it("keeps side wood at the window belt with painted lower doors and rear fenders", () => {
+    const { root } = fixture("ed");
+    const sideWood = woodMeshes(root)
+      .flatMap(worldVertices)
+      .filter(
+        (point) => Math.abs(point.x) > 0.7 && point.z > -2.3 && point.z < 0.62,
+      );
+    expect(sideWood.length).toBeGreaterThan(100);
+    // The reference's wood cabin sits above the broad painted metal body.
+    // This rejects the old panels extending down to the rocker/wheel opening.
+    expect(Math.min(...sideWood.map((point) => point.y))).toBeGreaterThan(0.95);
+    expect(Math.max(...sideWood.map((point) => point.y))).toBeGreaterThan(1.7);
+    for (const side of [1, -1]) {
+      for (const z of [-0.35, 0.12])
+        expect(hitMaterial(root, side, 0.7, z).name).toMatch(
+          /^Ed \| Deep blue/,
+        );
+      expect(isWood(hitMaterial(root, side, 1.08, -0.1))).toBe(true);
+      // Close the daylight slit found in the in-game review above the front
+      // and middle window frames; the wooden header must meet the roof.
+      for (const z of [-0.35, -1.12])
+        expect(isWood(hitMaterial(root, side, 1.802, z))).toBe(true);
+      // Raised rear haunch remains painted beneath the cargo-window wood.
+      expect(hitMaterial(root, side, 0.94, -1.65).name).toMatch(
+        /^Ed \| Deep blue/,
+      );
+    }
+  });
+
+  it("carries the front window wood and narrow infill with both opening doors", () => {
+    const { root } = fixture("ed");
+    const doors = new VehicleDoors(root);
+    for (const side of [1, -1] as const) {
+      const hinge = root.getObjectByName(
+        `DoorHinge_${side === 1 ? "L" : "R"}`,
+      )!;
+      const wood = woodMeshes(hinge);
+      expect(wood.length).toBeGreaterThan(0);
+      const closed = new T.Box3();
+      for (const mesh of wood) closed.union(new T.Box3().setFromObject(mesh));
+      expect(closed.min.y).toBeGreaterThan(0.95);
+      expect(closed.max.y).toBeGreaterThan(1.7);
+      doors.setOpen(side, 1);
+      root.updateMatrixWorld(true);
+      const open = new T.Box3();
+      for (const mesh of wood) open.union(new T.Box3().setFromObject(mesh));
+      expect(
+        side === 1 ? open.max.x - closed.max.x : closed.min.x - open.min.x,
+      ).toBeGreaterThan(0.7);
+      for (const y of [1.08, 1.38]) {
+        const ray = new T.Raycaster(
+          new T.Vector3(side * 1.5, y, -0.1),
+          new T.Vector3(-side, 0, 0),
+          0,
+          0.7,
+        );
+        expect(
+          ray.intersectObject(root, true),
+          "no fixed veneer or glazing may remain across the opened doorway",
+        ).toHaveLength(0);
+      }
+      doors.closeAll();
+      root.updateMatrixWorld(true);
+    }
+  });
 });

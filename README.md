@@ -2,7 +2,7 @@
 
 A locally playable arcade driving and exploration game starring Joe and his car club, **the Lug Nuts**. Choose a member and get their associated car, drive the Warwick roads, race the Ridge & Hollow circuit, or park and explore Beverly Drive's yards, woods and Stony Creek on foot. Every driver sits on the US driver's left.
 
-**The latest house and car visual pass is on `codex/beverly-car-visuals`, including the Lug Nuts selection and previous controller/walking-camera fixes.** Open **The Lug Nuts · choose driver** on the main menu, or **The Lug Nuts · change driver** while paused. Choose a card, then **Drive as…**. Selection is saved in this browser; changing members starts a fresh Free Drive at Beverly Drive.
+**The latest Buick reference correction is on `codex/buick-wood-paneling`, including the house/car visual pass, Lug Nuts selection and previous controller/walking-camera fixes.** Open **The Lug Nuts · choose driver** on the main menu, or **The Lug Nuts · change driver** while paused. Choose a card, then **Drive as…**. Selection is saved in this browser; changing members starts a fresh Free Drive at Beverly Drive.
 
 | Member | Associated car |
 | --- | --- |
@@ -22,7 +22,13 @@ Dad has an editable Blender character with a charcoal Italian coppola, white mus
 
 Stop in Free Drive and press **F / Xbox Y** to get out. Move with **WASD / left stick**, run with **Shift / A**, jump with **Space / X**, and look with the mouse or right stick. Approach either door and press **F / Y** to get back in. See [full controls](#first-drive) or [launch instructions](#launch-on-windows).
 
-## Latest house and car visuals — September 22, 2026
+## Buick photo correction — September 22, 2026
+
+Ed's wagon now follows the supplied reference's wood placement: honey-colored framing around the side windows, a shallow dark panel just below the glass, and painted blue lower doors and rear fenders. Its rounded roof, raised rear haunch, three portholes and curved chrome sweep were also refined. The front wood and glass move with each opening door. [Before/after game views and verification](docs/buick-reference-pass.md).
+
+![Ed's wagon with corrected upper wood framing in the actual game](docs/buick-reference-side.png)
+
+## House and car visuals — September 22, 2026
 
 2 Beverly has tapered siding, recessed window details, textured deck boards, concrete, mulch and bark, plus completed roof overhangs. The four club cars have smoother Blender bodywork, curved glass, deeper grilles and distinct wheels. All five cars use layered paint, clearer glazing and a static reflection of the actual Home surroundings. [Before/after screenshots, verification and remaining limits](docs/hero-visual-pass.md).
 
@@ -98,6 +104,7 @@ Start with **Balanced** handling, 0.12 steering deadzone, 1.35 response curve, a
 npm run map            # offline, Python 3 stdlib; uses cached sources
 npm run export-car     # Blender background export from the saved snapshot
 npm run export-club-cars # four club cars, editable .blend and five garage previews
+npm run export-club-cars -- -Member ed # rebuild just Ed; preserve other saved collections
 npm run export-driver  # character, rig, clips, editable .blend and GLB
 npm run export-home-props # bench, wagon wheel, birdbath and mailbox
 python scripts/fetch-textures.py --verify-only  # local checksums/dimensions
@@ -109,7 +116,7 @@ The active source folder `../oldsmobile_442` was **not modified**. The car expor
 
 ## Checks and evidence
 
-The current visual pass passes **214 tests across 28 files** and the production build. The [visual review](docs/hero-visual-verification.json) records fixed-camera comparisons, all five cars, graphics presets, resize and a moving frame sample. The [current club browser review](docs/hero-visual-club-verification.json) checks all five associated models and characters, US-left seating and wheel grips, real driving, walking out and back, entry, saved selection, menu cancellation, compact layouts and race setup. [Asset and workflow notes](docs/lug-nuts.md) describe the source files and provisional models. The earlier standard browser suite also completed the full three-lap race with no runtime errors.
+The current Buick correction passes **216 tests across 28 files** and the production build. Its [focused browser review](docs/buick-reference-verification.json) records the delivered model's checksum, matching-camera views and Ed's driving/exit/walking/re-entry flow. The preceding [visual review](docs/hero-visual-verification.json) records all five cars, graphics presets, resize and a moving frame sample. The preceding [five-car browser review](docs/hero-visual-club-verification.json) checks associated models and characters, US-left seating and wheel grips, driving and exploration, saved selection, menu cancellation, compact layouts and race setup. [Asset and workflow notes](docs/lug-nuts.md) describe the source files and provisional models. The earlier standard browser suite also completed the full three-lap race with no runtime errors.
 
 The September 21 controller, steering and camera update passes **165 tests across 22 files** and the production build. The [drift review](docs/controller-drift-verification.json) checks imperfect stick rest and gentle four-direction walking. The [controller transition review](docs/controller-transition-verification.json) repeats entry/exit with held controls and persistent right-stick offset. The preceding [camera and steering review](docs/camera-controls-verification.json) verifies actual movement against the displayed view, look directions, recentering, wall clearance and both steering directions. The current drift and transition reviews pass three and seven grouped checks respectively, with zero browser or WebGL errors. The earlier [hero review](docs/hero-verification.json) captures the Blender character and opening doors. The [verification record](docs/verification.md) separates the current checks from earlier full exploration and race reviews. Controller automation uses synthetic Gamepad API input; physical controller feel and rumble remain unverified.
 
@@ -120,6 +127,7 @@ npm run build           # TypeScript + production bundle
 $env:GAME_URL='http://127.0.0.1:5180'
 npm run test:browser     # system Edge; synthetic pad, actual game/race physics
 npm run test:club        # all five pairings, garage navigation, driving and exploration
+npm run test:buick-reference # reference views, served GLB checksum and Ed's transfer/driving flow
 npm run test:visual      # real rendered scenery, quality presets, independent RAF metrics
 npm run test:beverly     # surveyed neighborhood loop, reference views and moving frame sample
 npm run test:detail      # latest detail pass, all presets, resize and environment rebuild checks

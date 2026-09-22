@@ -1,0 +1,669 @@
+{
+  "date": "2026-09-22T12:48:38.011Z",
+  "stage": "before",
+  "methodology": "Actual production game in system Edge at High 1920×1080. Saved world-space cameras and unchanged Home spawn preserve before/after framing. No special lighting or movement simulation. Door is opened with keyboard F and paused mid-transfer. GLB served over HTTP is SHA-256 checked. After-only driving, walking and re-entry use the normal keyboard input and render loop.",
+  "shots": [
+    {
+      "name": "ed-side-profile",
+      "path": "output/playwright/buick-reference/before/ed-side-profile.png",
+      "camera": {
+        "position": [
+          6.319458395648466,
+          0.7841605424880982,
+          21.11840449982538
+        ],
+        "target": [
+          0.2054954171180725,
+          0.7841605424880982,
+          19.59871482849121
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "position": [
+        0.2054954171180725,
+        -0.26583945751190186,
+        19.59871482849121
+      ],
+      "rotation": [
+        0.02667318843305111,
+        -0.12081658840179443,
+        -0.023238269612193108,
+        0.9920443892478943
+      ],
+      "phase": "driving",
+      "progress": null,
+      "doors": {
+        "left": {
+          "progress": 0,
+          "angle": 0
+        },
+        "right": {
+          "progress": 0,
+          "angle": 0
+        }
+      }
+    },
+    {
+      "name": "ed-front-three-quarter",
+      "path": "output/playwright/buick-reference/before/ed-front-three-quarter.png",
+      "camera": {
+        "position": [
+          2.8823913561798915,
+          1.8341605424880982,
+          26.240569097551496
+        ],
+        "target": [
+          0.2054954171180725,
+          0.23416054248809814,
+          19.59871482849121
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "position": [
+        0.2054954171180725,
+        -0.26583945751190186,
+        19.59871482849121
+      ],
+      "rotation": [
+        0.02667318843305111,
+        -0.12081658840179443,
+        -0.023238269612193108,
+        0.9920443892478943
+      ],
+      "phase": "driving",
+      "progress": null,
+      "doors": {
+        "left": {
+          "progress": 0,
+          "angle": 0
+        },
+        "right": {
+          "progress": 0,
+          "angle": 0
+        }
+      }
+    },
+    {
+      "name": "ed-window-belt-detail",
+      "path": "output/playwright/buick-reference/before/ed-window-belt-detail.png",
+      "camera": {
+        "position": [
+          3.540718774004436,
+          0.9641605424880981,
+          19.860984078842172
+        ],
+        "target": [
+          0.33816673763137317,
+          0.9341605424880981,
+          19.064956155762367
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "position": [
+        0.2054954171180725,
+        -0.26583945751190186,
+        19.59871482849121
+      ],
+      "rotation": [
+        0.02667318843305111,
+        -0.12081658840179443,
+        -0.023238269612193108,
+        0.9920443892478943
+      ],
+      "phase": "driving",
+      "progress": null,
+      "doors": {
+        "left": {
+          "progress": 0,
+          "angle": 0
+        },
+        "right": {
+          "progress": 0,
+          "angle": 0
+        }
+      }
+    },
+    {
+      "name": "ed-door-open",
+      "path": "output/playwright/buick-reference/before/ed-door-open.png",
+      "camera": {
+        "position": [
+          3.776583907274264,
+          1.434160542488098,
+          23.886759487245826
+        ],
+        "target": [
+          0.4969159104861365,
+          0.7341605424880981,
+          19.87723609526471
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "position": [
+        0.2054862231016159,
+        -0.2678013741970062,
+        19.598697662353516
+      ],
+      "rotation": [
+        0.02688627876341343,
+        -0.1208399310708046,
+        -0.023404469713568687,
+        0.9920318722724915
+      ],
+      "phase": "exiting",
+      "progress": 0.4949494949494939,
+      "doors": {
+        "left": {
+          "progress": 1,
+          "angle": -1.1868238913561442
+        },
+        "right": {
+          "progress": 0,
+          "angle": 0
+        }
+      }
+    }
+  ],
+  "checks": [
+    "High side profile, unchanged front three-quarter, window-belt detail and keyboard-opened door captured from saved cameras",
+    "Live Ed geometry/manifest and HTTP-delivered GLB identity recorded"
+  ],
+  "errors": [],
+  "warnings": [
+    "THREE.WebGLProgram: Program Info Log: (210,81-129): warning X4122: sum of 0.996094 and -2.98545e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision"
+  ],
+  "bundle": "/assets/index-BwRhHvaO.js",
+  "club": {
+    "member": "ed",
+    "name": "Ed",
+    "car": "Buick Woody Wagon",
+    "year": 1953,
+    "asset": "/assets/club-cars/ed.glb",
+    "avatar": "stand-in",
+    "seatAnchor": [
+      0.398,
+      0.1,
+      -0.315
+    ],
+    "geometry": {
+      "wheels": [
+        [
+          0.85,
+          0.1,
+          1.53
+        ],
+        [
+          -0.85,
+          0.1,
+          1.53
+        ],
+        [
+          0.85,
+          0.1,
+          -1.57
+        ],
+        [
+          -0.85,
+          0.1,
+          -1.57
+        ]
+      ],
+      "wheelRadii": [
+        0.372,
+        0.372,
+        0.372,
+        0.372
+      ],
+      "wheelRadius": 0.372,
+      "visualOffsetY": -0.78,
+      "chassisHalfExtents": [
+        0.91,
+        0.31,
+        2.4499999999999997
+      ],
+      "chassisCenter": [
+        0,
+        0.04,
+        0.030000000000000027
+      ],
+      "wheelRayLength": 1.05,
+      "springRestRayLength": 1,
+      "resetHeight": 0.83
+    },
+    "garageChoice": "ed",
+    "busy": false,
+    "finish": {
+      "surfaces": {
+        "paint": 1,
+        "chrome": 2,
+        "glass": 1,
+        "rubber": 2,
+        "vinyl": 1,
+        "wood": 2,
+        "other": 6
+      },
+      "localReflectionReady": true
+    }
+  },
+  "hero": {
+    "bones": {
+      "head": [
+        0.7053887648620742,
+        0.3816749806800328,
+        19.377590370722018
+      ],
+      "hips": [
+        0.6661561817081498,
+        -0.30177837720545087,
+        19.38651432420683
+      ],
+      "left_hand": [
+        0.7321399263644401,
+        -0.023227335775797303,
+        19.787620310175555
+      ],
+      "right_hand": [
+        0.4509191904779321,
+        -0.007987282743401644,
+        19.718463687274923
+      ],
+      "left_foot": [
+        0.5853366177305648,
+        -0.6195853170982639,
+        20.137081981240524
+      ],
+      "right_foot": [
+        0.3578054226579452,
+        -0.6072548341824151,
+        20.08112846484649
+      ]
+    },
+    "bonesCarLocal": {
+      "head": [
+        0.3980000000000006,
+        1.4327763538819656,
+        -0.3654358554137893
+      ],
+      "hips": [
+        0.3980000000000006,
+        0.7500000000000002,
+        -0.3150000000000013
+      ],
+      "left_hand": [
+        0.5429999999999984,
+        1.0539504470731498,
+        0.044749461353855935
+      ],
+      "right_hand": [
+        0.2529999999999992,
+        1.0539504470731504,
+        0.04474946135385949
+      ],
+      "left_foot": [
+        0.5153171785555832,
+        0.47371913143871025,
+        0.4470960713934886
+      ],
+      "right_foot": [
+        0.2806828214444179,
+        0.47371913143871025,
+        0.4470960713934886
+      ]
+    },
+    "vehicle": {
+      "name": "1953 Buick Estate Woody Wagon",
+      "bodyStyle": "wagon",
+      "bounds": [
+        3.587414893210703,
+        2.30974085094798,
+        6.2022543756084225
+      ]
+    },
+    "model": {
+      "units": "meters",
+      "origin": "feet",
+      "forward": "+Z",
+      "up": "+Y",
+      "height": 1.78,
+      "seatAnchor": [
+        0.398,
+        0.1,
+        -0.315
+      ],
+      "palette": {
+        "jacket": 2900577,
+        "seams": 2043462,
+        "shirt": 12898001,
+        "jeans": 2635338,
+        "denimLight": 3359832,
+        "leather": 3616297,
+        "sole": 1776667,
+        "skin": 12158304,
+        "hair": 11907495,
+        "eyes": 2501677
+      },
+      "hairStyle": "receding",
+      "pose": "seated",
+      "seatedBlend": 1,
+      "memberId": "ed",
+      "name": "Ed",
+      "provisional": true,
+      "source": "procedural club stand-in",
+      "authoring": "Articulated provisional model",
+      "likeness": "Neutral placeholder; not based on a supplied photo"
+    },
+    "doors": {
+      "left": {
+        "progress": 0,
+        "angle": 0
+      },
+      "right": {
+        "progress": 0,
+        "angle": 0
+      }
+    },
+    "steeringWheel": {
+      "center": [
+        0.398,
+        1.038,
+        0.064
+      ],
+      "axis": [
+        0,
+        0.6380178928375244,
+        -0.7700215578079224
+      ],
+      "quaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "hands": {
+        "left": [
+          0.5429999999999984,
+          1.0539504470731498,
+          0.044749461353855935
+        ],
+        "right": [
+          0.2529999999999992,
+          1.0539504470731504,
+          0.04474946135385949
+        ]
+      }
+    }
+  },
+  "deliveredAsset": {
+    "url": "http://127.0.0.1:5180/assets/club-cars/ed.glb",
+    "status": 200,
+    "bytes": 3182452,
+    "sha256": "cc67cadce6f349720ffcc451370a53ba0093e245699d08d90dc74029710f481f"
+  },
+  "manifest": {
+    "version": 1,
+    "id": "ed",
+    "bodyStyle": "wagon",
+    "seatAnchor": [
+      0.398,
+      0.1,
+      -0.315
+    ],
+    "owner": "Ed",
+    "name": "1953 Buick Estate Woody Wagon",
+    "paintColor": "Deep blue with ash and walnut woodwork",
+    "asset": "/assets/club-cars/ed.glb",
+    "preview": "/assets/club-cars/ed-preview.png",
+    "source": "asset-source/lug-nuts-cars.blend",
+    "generator": "scripts/build-club-cars.py",
+    "units": "meters",
+    "metersPerUnit": 1,
+    "rootNode": "ClubCar_ed",
+    "bodyNode": "Body",
+    "axes": {
+      "left": "+X",
+      "right": "-X",
+      "up": "+Y",
+      "forward": "+Z"
+    },
+    "characterSeatAnchor": [
+      0.398,
+      0.1,
+      -0.315
+    ],
+    "steeringWheel": {
+      "node": "SteeringWheel",
+      "center": [
+        0.398,
+        1.038,
+        0.064
+      ],
+      "axis": [
+        0,
+        0.6380178928375244,
+        -0.7700215578079224
+      ],
+      "radius": 0.176
+    },
+    "wheels": [
+      {
+        "id": "FL",
+        "center": [
+          0.85,
+          0.372,
+          1.53
+        ],
+        "radius": 0.372,
+        "steerNode": "WheelSteer_FL",
+        "spinNode": "WheelSpin_FL",
+        "meshNode": "WheelMesh_FL",
+        "axle": "front",
+        "steering": true,
+        "drive": false,
+        "steeringAxis": [
+          0,
+          1,
+          0
+        ],
+        "spinAxis": [
+          1,
+          0,
+          0
+        ],
+        "forwardSpinSign": 1
+      },
+      {
+        "id": "FR",
+        "center": [
+          -0.85,
+          0.372,
+          1.53
+        ],
+        "radius": 0.372,
+        "steerNode": "WheelSteer_FR",
+        "spinNode": "WheelSpin_FR",
+        "meshNode": "WheelMesh_FR",
+        "axle": "front",
+        "steering": true,
+        "drive": false,
+        "steeringAxis": [
+          0,
+          1,
+          0
+        ],
+        "spinAxis": [
+          1,
+          0,
+          0
+        ],
+        "forwardSpinSign": 1
+      },
+      {
+        "id": "RL",
+        "center": [
+          0.85,
+          0.372,
+          -1.57
+        ],
+        "radius": 0.372,
+        "steerNode": "WheelSteer_RL",
+        "spinNode": "WheelSpin_RL",
+        "meshNode": "WheelMesh_RL",
+        "axle": "rear",
+        "steering": false,
+        "drive": true,
+        "steeringAxis": [
+          0,
+          1,
+          0
+        ],
+        "spinAxis": [
+          1,
+          0,
+          0
+        ],
+        "forwardSpinSign": 1
+      },
+      {
+        "id": "RR",
+        "center": [
+          -0.85,
+          0.372,
+          -1.57
+        ],
+        "radius": 0.372,
+        "steerNode": "WheelSteer_RR",
+        "spinNode": "WheelSpin_RR",
+        "meshNode": "WheelMesh_RR",
+        "axle": "rear",
+        "steering": false,
+        "drive": true,
+        "steeringAxis": [
+          0,
+          1,
+          0
+        ],
+        "spinAxis": [
+          1,
+          0,
+          0
+        ],
+        "forwardSpinSign": 1
+      }
+    ],
+    "doors": [
+      {
+        "id": "L",
+        "side": 1,
+        "hingeNode": "DoorHinge_L",
+        "meshNode": "DoorMesh_L",
+        "hinge": [
+          0.946,
+          0.72,
+          0.64
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "openSign": -1,
+        "maxAngleRadians": 1.1868238913561442,
+        "closedProgress": 0,
+        "openProgress": 1,
+        "entryOpening": {
+          "zMin": -0.77,
+          "zMax": 0.64,
+          "sillHeight": 0.36
+        }
+      },
+      {
+        "id": "R",
+        "side": -1,
+        "hingeNode": "DoorHinge_R",
+        "meshNode": "DoorMesh_R",
+        "hinge": [
+          -0.946,
+          0.72,
+          0.64
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "openSign": 1,
+        "maxAngleRadians": 1.1868238913561442,
+        "closedProgress": 0,
+        "openProgress": 1,
+        "entryOpening": {
+          "zMin": -0.77,
+          "zMax": 0.64,
+          "sillHeight": 0.36
+        }
+      }
+    ],
+    "bounds": {
+      "min": [
+        -1.2049999237060547,
+        -0.003999978303909302,
+        -2.825000047683716
+      ],
+      "max": [
+        1.2049999237060547,
+        1.8329999446868896,
+        2.934999465942383
+      ],
+      "dimensions": [
+        2.4099998474121094,
+        1.836999922990799,
+        5.759999513626099
+      ]
+    },
+    "runtimeIntegration": {
+      "visualOffsetFromChassis": [
+        0,
+        -0.78,
+        0
+      ],
+      "chassisColliderHalfExtents": [
+        0.91,
+        0.31,
+        2.4499999999999997
+      ],
+      "chassisColliderCenterOffset": [
+        0,
+        0.04,
+        0.030000000000000027
+      ],
+      "wheelRayMountY": 0.1,
+      "wheelRayLength": 1.05,
+      "springRestRayLength": 1
+    },
+    "statistics": {
+      "triangles": 119576,
+      "glbBytes": 3182452,
+      "nodes": 20,
+      "materials": 15,
+      "meshPrimitives": 57
+    },
+    "validation": {
+      "namedWheelNodes": true,
+      "openingFrontDoors": true,
+      "fixedCabinOpening": true,
+      "leftHandDrive": true,
+      "steeringPivot": true
+    },
+    "references": [
+      "https://www.buickheritagealliance.org/index.php/archives/browse/1953"
+    ],
+    "limits": [
+      "Original stylized game approximation; not a scanned vehicle or concours-accurate restoration model.",
+      "Shared arcade interior proportions preserve driver fit and gameplay."
+    ]
+  },
+  "passed": true
+}

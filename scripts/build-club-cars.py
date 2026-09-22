@@ -5,7 +5,7 @@ Photographs are visual reference only; no user photo pixels enter these assets.
 Geometry helpers take GAME coordinates (+X left, +Y up, +Z forward) and author
 Blender X/-Y/Z. glTF export_yup produces the game's coordinates without a wrapper.
 """
-import bpy, bmesh, math, json, struct, hashlib, random
+import bpy, bmesh, math, json, struct, hashlib, random, argparse, sys
 from pathlib import Path
 from mathutils import Vector, Matrix
 from math import sin, cos, pi, sqrt
@@ -14,6 +14,10 @@ from collections import defaultdict
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'public'/'assets'/'club-cars';OUT.mkdir(parents=True,exist_ok=True)
 SOURCE=ROOT/'asset-source';SOURCE.mkdir(exist_ok=True)
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--member',choices=('lou','chris','craig','ed'),help='Rebuild one member, preserving other delivered files and editable collections')
+args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
+unchanged_files={file:hashlib.sha256(file.read_bytes()).hexdigest() for file in list(OUT.glob('*'))+list((ROOT/'public'/'assets').glob('oldsmobile*')) if file.is_file() and args.member and not file.name.startswith(args.member+'.') and not file.name.startswith(args.member+'-')}
 bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
 scene=bpy.context.scene;scene.unit_settings.system='METRIC'
 scene.render.engine='BLENDER_EEVEE';scene.render.resolution_percentage=100
@@ -21,6 +25,30 @@ scene.eevee.taa_render_samples=128
 scene.view_settings.view_transform='AgX';scene.view_settings.look='AgX - Medium High Contrast'
 scene.render.image_settings.file_format='PNG'
 random.seed(442)
+
+def collection_signature(col):
+ """Content fingerprint of the preserved source, excluding viewport visibility."""
+ h=hashlib.sha256()
+ for obj in sorted(col.all_objects,key=lambda o:o.name):
+  h.update(repr((obj.name,obj.parent.name if obj.parent else None,[list(row) for row in obj.matrix_local])).encode())
+  if obj.type=='MESH':
+   for vertex in obj.data.vertices:h.update(struct.pack('<3f',*vertex.co))
+   for face in obj.data.polygons:h.update(struct.pack('<'+'I'*len(face.vertices),*face.vertices))
+   for mat in obj.data.materials:
+    h.update(repr((mat.name,list(mat.diffuse_color),mat.roughness,mat.metallic)).encode())
+ return h.hexdigest()
+
+preserved=[]
+if args.member:
+ source_path=SOURCE/'lug-nuts-cars.blend'
+ if not source_path.exists():raise RuntimeError('--member requires the existing shared Blender source')
+ owners={'lou':'Lou','chris':'Chris','craig':'Craig','ed':'Ed'}
+ with bpy.data.libraries.load(str(source_path),link=False) as (data_from,data_to):
+  data_to.collections=[name for name in data_from.collections if any(name.startswith(owner+' | ') for ident,owner in owners.items() if ident!=args.member)]
+ for col in data_to.collections:
+  scene.collection.children.link(col)
+  preserved.append((col,collection_signature(col),col.hide_render,col.hide_viewport))
+  col.hide_render=True;col.hide_viewport=True
 
 CARS=[
  dict(id='lou',name='1976 Pontiac Trans Am',owner='Lou',paint=(.75,.062,.018),color='Carousel Red',front=2.48,rear=2.42,width=.95,frontAxle=1.41,rearAxle=-1.34,radius=.345,track=.81,roof=1.49,seatY=-.10,kind='transam',interior=(.032,.035,.034)),
@@ -50,22 +78,24 @@ glass.node_tree.nodes['Principled BSDF'].inputs['Alpha'].default_value=.21
 glass.diffuse_color=(*glass.diffuse_color[:3],.21);glass.surface_render_method='DITHERED'
 gold=material('Muted Trans Am gold',(.65,.39,.075),.35,.63)
 birdInk=material('Trans Am hood graphic dark ink',(.035,.052,.065),.48)
-ash=material('Honey ash framing',(.47,.265,.105),.53)
+ash=material('Honey ash framing',(.42,.22,.060),.48)
 wood=material('Walnut wagon panel grain',(.18,.057,.018),.51)
 gauge=material('Warm instrument markings',(.72,.68,.52),.6)
 
 # Original baked grain, valid base color only; never export a height as normals.
-def woodgrain():
+def woodgrain(target=wood,base=(.23,.087,.028)):
  import numpy as np
  y,x=np.mgrid[:256,:512];rng=np.random.default_rng(1953)
  lines=np.sin(y*.19+np.sin(x*.027)*1.5+np.sin(x*.009)*2.3)
  fibers=np.sin(y*1.61+np.sin(x*.021))*0.013+rng.normal(0,.010,x.shape)
- rgb=np.array([.23,.087,.028])[None,None,:]+(lines*.025+fibers)[:,:,None]
+ rgb=np.array(base)[None,None,:]+(lines*.025+fibers)[:,:,None]
  pixels=np.ones((256,512,4),dtype=np.float32);pixels[:,:,:3]=np.clip(rgb,0,1)
- im=bpy.data.images.new('Original walnut grain',width=512,height=256);im.pixels.foreach_set(pixels.ravel());im.pack()
- tex=wood.node_tree.nodes.new('ShaderNodeTexImage');tex.image=im
- wood.node_tree.links.new(tex.outputs['Color'],wood.node_tree.nodes['Principled BSDF'].inputs['Base Color'])
+ im=bpy.data.images.new('Original walnut grain' if target is wood else 'Original Buick walnut grain',width=512,height=256);im.pixels.foreach_set(pixels.ravel());im.pack()
+ tex=target.node_tree.nodes.new('ShaderNodeTexImage');tex.image=im
+ target.node_tree.links.new(tex.outputs['Color'],target.node_tree.nodes['Principled BSDF'].inputs['Base Color'])
 woodgrain()
+buick_wood=material('Walnut wagon panel grain | Buick',(.33,.145,.051),.51)
+woodgrain(buick_wood,(.33,.145,.051))
 
 groups=None;car_collection=None
 def register(obj,mat,group='Body'):
@@ -111,8 +141,9 @@ def torus(name,center,major,minor,mat,normal=(1,0,0),group='Body',segments=48,tu
  bpy.ops.mesh.primitive_torus_add(major_segments=segments,minor_segments=tube,major_radius=major,minor_radius=minor,location=p(center))
  o=bpy.context.object;o.name=name;o.rotation_euler=p(normal).to_track_quat('Z','Y').to_euler();return register(o,mat,group)
 
-def path(name,points,radius,mat,group='Body',closed=False):
+def path(name,points,radius,mat,group='Body',closed=False,capped=False):
  data=bpy.data.curves.new(name,'CURVE');data.dimensions='3D';data.bevel_depth=radius;data.bevel_resolution=1
+ data.use_fill_caps=capped
  spline=data.splines.new('POLY');spline.points.add(len(points)-1)
  for q,v in zip(spline.points,points):q.co=(*p(v),1)
  spline.use_cyclic_u=closed
@@ -145,7 +176,7 @@ def dimensions(c,z):
   'pontiac':[(-rear,.94),(-rear+.28,1.00),(-1.65,1.025),(-.67,.975),(.58,.98),(1.51,1.02),(front-.20,.98),(front,.97)],
   'buick':[(-rear,.96),(-1.80,1.015),(-.72,.985),(.62,.99),(1.53,1.055),(front-.30,1.025),(front,.97)]}
  width=w*interp(z,profiles[kind])
- if kind=='buick':top=interp(z,[(-rear,.99),(-1.5,1.04),(.6,1.03),(1.6,1.17),(front,1.06)])
+ if kind=='buick':top=interp(z,[(-rear,1.15),(-1.70,1.19),(-1.20,1.18),(-.87,1.065),(.6,1.055),(1.6,1.17),(front,1.06)])
  elif kind=='pontiac':top=interp(z,[(-rear,.98),(-1.65,1.075),(-.8,1.00),(.65,1.005),(1.5,1.065),(front,1.015)])
  else:top=interp(z,[(-rear,.83),(-1.4,.97),(-.8,.91),(.6,.92),(1.5,.995),(front,.94 if kind=='transam' else .90)])
  return width,top
@@ -213,7 +244,7 @@ def body(c,paint,upholstery):
   box('Door bottom folded edge',(side*(c['width']-.145),.335,-.065),(.105,.035,1.4),paint,group,.008)
   box('Fixed doorway sill',(side*(c['width']-.17),.312,-.065),(.13,.047,1.48),steel)
   box('Chrome sill plate',(side*(c['width']-.17),.341,-.065),(.105,.013,1.32),chrome,bevel=.004)
-  box('Exterior chrome door handle',(side*(c['width']+.001),.835,-.54),(.035,.032,.15),chrome,group,.011)
+  box('Exterior chrome door handle',(side*(c['width']+.001),1.195 if c['kind']=='buick' else .835,-.54),(.035,.032,.15),chrome,group,.011)
   # Outside rear-view mirror follows the door.
   rod('Mirror stem',(side*(c['width']-.03),.975,.48),(side*(c['width']+.09),1.015,.42),.012,chrome,group)
   ellipsoid('Mirror housing',(side*(c['width']+.11),1.035,.40),(.085,.052,.045),paint if c['kind']=='transam' else chrome,group)
@@ -232,7 +263,7 @@ def body(c,paint,upholstery):
    for i in range(48):faces.append((i*2,i*2+1,i*2+3,i*2+2))
    mesh('Dark deep inner wheelhouse',verts,faces,black)
   # Continuous bright belt trim is partitioned at the door boundaries.
-  if c['kind'] in ('pontiac','buick'):
+  if c['kind']=='pontiac':
    for start,end,grp in [(-rear,back,'Body'),(back,dw,group),(dw,front,'Body')]:
     points=[]
     for i in range(20):
@@ -302,7 +333,7 @@ def interior(c,paint,upholstery):
    box('Padded seat headrest',(x,seat+.58,-.61),(.30,.16,.105),upholstery,bevel=.05)
  box('Rear bench cushion',(0,seat+.06,-1.01),(1.34,.17,.42),upholstery,bevel=.065)
  box('Rear upholstered backrest',(0,seat+.29,-1.25),(1.37,.45,.12),upholstery,bevel=.055)
- if c['kind']=='buick':box('Rear cargo floor',(0,.58,-1.94),(1.49,.065,.98),wood,bevel=.008)
+ if c['kind']=='buick':box('Rear cargo rubber floor',(0,.58,-1.94),(1.49,.065,.98),black,bevel=.008)
  dashboardY=.94+delta
  box('Dashboard upper padded brow',(0,dashboardY,.47),(1.54,.16,.34),upholstery if c['kind'] in ('pontiac','buick') else black,bevel=.05)
  box('Dashboard instrument face',(0,dashboardY-.06,.284),(1.47,.20,.055),steel,bevel=.014)
@@ -332,7 +363,114 @@ def interior(c,paint,upholstery):
  ellipsoid('Steering horn pad',tuple(Vector(center)+axis*.03),(.03,.02,.029),black,'SteeringWheel',24,14)
  return center,tuple(axis)
 
+def buick_greenhouse(c,paint):
+ """1953 reference: a timber window cage above blue steel doors/fenders."""
+ def sx(y,z):return .944-.165*max(0,min(1,(y-1.20)/.57))+.015*sin(pi*max(0,min(1,(-z+.6)/3)))
+ def round_yz(poly,amount=.14):
+  points=[]
+  for i,b in enumerate(poly):
+   b=Vector(b);a=b+(Vector(poly[i-1])-b)*amount;d=b+(Vector(poly[(i+1)%len(poly)])-b)*amount
+   for j in range(7):
+    t=j/6;q=(1-t)**2*a+2*(1-t)*t*b+t*t*d;points.append(tuple(q))
+  return points
+ def frame(side,name,outer,inner,group):
+  a=round_yz(outer);b=round_yz(inner);n=len(a);verts=[];faces=[]
+  for depth in (-.018,.024):
+   for ring in (a,b):
+    verts.extend([(side*(sx(y,z)+depth),y,z) for y,z in ring])
+  for i in range(n):
+   j=(i+1)%n;faces.extend([(i,j,n+j,n+i),(2*n+i,3*n+i,3*n+j,2*n+j),(i,2*n+i,2*n+j,j),(n+i,n+j,3*n+j,3*n+i)])
+  timber=mesh(name+' substantial honey ash surround',verts,faces,ash,group,smooth=False)
+  bevel=timber.modifiers.new('Small dressed timber edge radius','BEVEL');bevel.width=.004;bevel.segments=2
+  bpy.context.view_layer.objects.active=timber;bpy.ops.object.modifier_apply(modifier=bevel.name)
+  glassverts=[(side*(sx(y,z)-.010),y,z) for y,z in b]
+  center=tuple(sum(p[k] for p in glassverts)/n for k in range(3));glassverts.append(center)
+  mesh(name+' inset curved glazing',glassverts,[(i,(i+1)%n,n) for i in range(n)],glass,group)
+  path(name+' glazing black rubber',glassverts[:-1],.005,black,group,True)
+ for side in (-1,1):
+  group='DoorL' if side>0 else 'DoorR'
+  # The swept front timber upright, top rail, sill and veneer all open with
+  # the door. The seam remains exactly at z=-.77 / +.64.
+  frame(side,'Front door',[(1.205,.63),(1.704,.21),(1.79,.07),(1.79,-.735),(1.205,-.748)],[(1.267,.495),(1.680,.139),(1.721,.025),(1.721,-.665),(1.267,-.676)],group)
+  frame(side,'Rear door',[(1.218,-.797),(1.79,-.790),(1.765,-1.58),(1.245,-1.61)],[(1.283,-.865),(1.722,-.865),(1.697,-1.514),(1.300,-1.536)],'Body')
+  frame(side,'Rear quarter',[(1.245,-1.655),(1.764,-1.644),(1.682,-2.22),(1.265,-2.475)],[(1.302,-1.718),(1.697,-1.708),(1.621,-2.178),(1.318,-2.349)],'Body')
+  # Dark inset appears only in the shallow belt directly under the glazing.
+  def low(z):return interp(z,[(-2.47,1.225),(-1.35,1.218),(-1.06,1.035),(.64,1.060)])
+  for start,end,grp in [(-.748,.638,group),(-2.475,-.797,'Body')]:
+   verts=[];faces=[];lower=[];upper=[]
+   for j in range(65):
+    z=start+(end-start)*j/64;y0=low(z);y1=interp(z,[(-2.475,1.270),(-1.58,1.245),(-.797,1.218),(.64,1.205)])
+    x=side*(sx((y0+y1)/2,z)+.014)
+    verts.extend([(x,y0+.022,z),(x,y1-.017,z)])
+    lower.append((side*(sx(y0,z)+.030),y0,z));upper.append((side*(sx(y1,z)+.026),y1,z))
+   for j in range(64):faces.append((j*2,j*2+1,j*2+3,j*2+2))
+   veneer=mesh('Narrow upper walnut belt inset',verts,faces,buick_wood,grp)
+   solid=veneer.modifiers.new('Veneer panel thickness','SOLIDIFY');solid.thickness=.018;bpy.context.view_layer.objects.active=veneer;bpy.ops.object.modifier_apply(modifier=solid.name)
+   path('Honey ash lower belt following painted haunch',lower,.025,ash,grp,capped=True)
+   path('Honey ash broad window sill rail',upper,.026,ash,grp,capped=True)
+   for z in (start,end):
+    y0=low(z);y1=interp(z,[(-2.475,1.270),(-1.58,1.245),(-.797,1.218),(.64,1.205)])
+    path('Honey ash belt vertical joint',[(side*(sx(y,z)+.025),y,z) for y in (y0,y1)],.026,ash,grp,capped=True)
+  # The painted rear fender rises above the wheel into the lower wood belt.
+  verts=[];faces=[]
+  for j in range(65):
+   z=-2.59+1.75*j/64;w,top=dimensions(c,z)
+   for k in range(9):
+    t=k/8;x=(w-.23)*(1-t)+skinx(c,z,top)*t;verts.append((side*x,top+.030*sin(pi*t),z))
+  for j in range(64):
+   for k in range(8):a=j*9+k;faces.append((a,a+1,a+10,a+9))
+  mesh('Rounded blue rear haunch shoulder',verts,faces,paint)
+  path('Rear side door shut line',[(side*(skinx(c,-1.11,y)+.004),y,-1.11) for y in (.35,.60,.85,1.09)],.0025,black)
+  box('Rear door handle above painted haunch',(side*(sx(1.235,-1.53)+.04),1.235,-1.53),(.035,.025,.14),chrome,bevel=.01)
+ # Rounded steel roof: fuller transverse crown, tapered rear corners and a
+ # gently falling rear header instead of the previous tall rectangular box.
+ verts=[];faces=[];N=40;U=24
+ for j in range(N+1):
+  t=j/N;z=.17-2.42*t;h=interp(t,[(0,1.790),(.23,1.838),(.64,1.83),(1,1.698)])
+  w=interp(t,[(0,.80),(.22,.825),(.7,.825),(1,.752)])
+  for i in range(U+1):
+   u=-1+2*i/U;verts.append((u*w,h+.045*(1-u*u),z+.045*(1-u*u)*cos(pi*t)))
+ for j in range(N):
+  for i in range(U):a=j*(U+1)+i;faces.append((a,a+1,a+U+2,a+U+1))
+ roof=mesh('Buick rounded steel wagon roof',verts,faces,paint)
+ solid=roof.modifiers.new('Steel roof and headliner thickness','SOLIDIFY');solid.thickness=.025;bpy.context.view_layer.objects.active=roof;bpy.ops.object.modifier_apply(modifier=solid.name)
+ for side in (-1,1):
+  path('Buick roof drip edge',[(side*interp(j/N,[(0,.80),(.22,.825),(.7,.825),(1,.752)]),interp(j/N,[(0,1.790),(.23,1.838),(.64,1.83),(1,1.698)])+.004,.17-2.42*j/N) for j in range(N+1)],.009,chrome)
+  # A fixed structural header closes the daylight slit between the curved
+  # steel roof and timber window cage. Above the opening front door its lower
+  # edge remains higher than the complete moving wooden window frame.
+  verts=[];faces=[]
+  for j in range(81):
+   z=-.03-2.22*j/80;t=(.17-z)/2.42
+   high=interp(t,[(0,1.790),(.23,1.838),(.64,1.83),(1,1.698)])-.003
+   if z>=-.77:low=1.794
+   elif z>=-1.644:low=1.764+(z+1.644)/.854*.026-.006
+   else:low=1.682+(z+2.22)/.576*.082-.006
+   w=interp(t,[(0,.80),(.22,.825),(.7,.825),(1,.752)])
+   verts.extend([(side*(sx(low,z)+.024),low,z),(side*(w+.002),high,z),(side*(w-.060),high,z),(side*(sx(low,z)-.025),low,z)])
+  for j in range(80):
+   for k in range(4):a=j*4+k;b=j*4+(k+1)%4;faces.append((a,a+4,b+4,b))
+  faces.extend([(0,3,2,1),(320,321,322,323)])
+  mesh('Continuous fitted honey ash roof header',verts,faces,ash,smooth=False)
+  group='DoorL' if side>0 else 'DoorR'
+  path('Front door upper compression weatherstrip',[(side*(sx(1.793,z)+.013),1.793,z) for z in [.065-.8*j/24 for j in range(25)]],.004,black,group,capped=True)
+  path('Rear window sill corner connection',[(side*.86,1.275,-2.475),(side*.925,1.275,-2.478),(side*(sx(1.270,-2.475)+.026),1.270,-2.475)],.026,ash,capped=True)
+  path('Rear wood belt corner wrap',[(side*(sx(1.225,-2.475)+.030),1.225,-2.475),(side*.947,1.220,-2.535),(side*.897,1.210,-2.63)],.025,ash,capped=True)
+ windshield=[(-.827,1.08,.665),(.827,1.08,.665),(.77,1.79,.17),(-.77,1.79,.17)]
+ curved_panel('Buick bowed windshield',windshield,glass,bulge=(0,.008,.065),nu=24,nv=18)
+ path('Buick windshield bright surround',windshield,.018,chrome,closed=True)
+ rod('Buick divided windshield center bar',(0,1.08,.73),(0,1.81,.228),.013,chrome)
+ for x in (-.34,.34):rod('Buick windshield wiper',(x-.15,1.10,.68),(x+.14,1.105,.68),.006,black)
+ rear=[(-.73,1.69,-2.23),(.73,1.69,-2.23),(.86,1.275,-2.475),(-.86,1.275,-2.475)]
+ curved_panel('Buick sloping rear window',rear,glass,bulge=(0,.015,-.018))
+ path('Buick rear window honey frame',rear,.035,ash,closed=True)
+ box('Blue painted lower tailgate',(0,.825,-c['rear']+.05),(1.79,.63,.11),paint,bevel=.050)
+ box('Narrow rear tailgate walnut belt',(0,1.210,-c['rear']+.01),(1.75,.105,.025),buick_wood,bevel=.013)
+ for y in (1.150,1.272):box('Rear tailgate honey belt rail',(0,y,-c['rear']-.012),(1.81,.054,.045),ash,bevel=.016)
+
 def greenhouse(c,paint):
+ if c['kind']=='buick':
+  buick_greenhouse(c,paint);return
  belt=1.00 if c['kind'] in ('buick','pontiac') else .94
  height=1.60 if c['kind']=='pontiac' else c['roof'];top=height-.072
  frontTop=.15 if c['kind']=='transam' else .20 if c['kind']=='camaro' else .26
@@ -542,35 +680,31 @@ def trim(c,paint):
    headlight(side*.842,1.071,front+.045,.123)
    torus('Buick raised lamp eyebrow',(side*.842,1.071,front+.025),.151,.025,paint,(0,0,1),segments=48)
    ellipsoid('Buick front amber parking lamp',(side*.842,.755,front+.047),(.105,.055,.031),amber)
-   for z in (1.08,1.27,1.46,1.65):
-    x=side*(dimensions(c,z)[0]+.012)
-    torus('Four Buick chrome VentiPorts',(x,1.077,z),.038,.009,chrome,(side,0,0),segments=24,tube=8)
-    ellipsoid('Buick porthole black inset',(x-side*.003,1.077,z),(.008,.032,.032),black,segments=20,rings=10)
-   # Woodwork panels move with front doors and continue around the cargo body.
-   for za,zb,grp in [(-.72,.57,'DoorL' if side>0 else 'DoorR'),(-2.5,-.82,'Body')]:
-    x=side*(w-.006);mid=(za+zb)/2;length=zb-za
-    if grp=='Body':
-     outline=[]
-     for j in range(49):
-      z=za+(zb-za)*j/48;dz=z-c['rearAxle'];ar=c['radius']+.061
-      lower=max(.54,c['radius']+sqrt(max(0,ar*ar-dz*dz))) if abs(dz)<ar else .54
-      outline.append((side*(skinx(c,z,lower)+.040),lower,z))
-     verts=[];faces=[]
-     for xx,lower,z in outline:verts.extend([(side*(skinx(c,z,lower)+.018),lower,z),(side*(skinx(c,z,.905)+.018),.905,z)])
-     for j in range(48):faces.append((j*2,j*2+1,j*2+3,j*2+2))
-     mesh('Walnut rear panel with wheel opening',verts,faces,wood,grp)
-     path('Ash lower rail follows rear wheel arch',outline,.022,ash,grp)
-    else:
-     box('Walnut lower wagon side panel',(x,.723,mid),(.023,.367,length),wood,grp,.011)
-     box('Ash wagon lower horizontal rail',(x+side*.016,.54,mid),(.030,.042,length+.025),ash,grp,.010)
-    if grp=='Body':
-     path('Ash wagon upper horizontal rail',[(side*(skinx(c,z,.905)+.038),.905,z) for z in [za+(zb-za)*j/40 for j in range(41)]],.023,ash,grp)
-     for z in (za,zb):path('Ash wagon panel upright',[(side*(skinx(c,z,y)+.04),y,z) for y in [.54+.365*j/12 for j in range(13)]],.023,ash,grp)
-    else:
-     box('Ash wagon upper horizontal rail',(x+side*.016,.905,mid),(.030,.042,length+.025),ash,grp,.010)
-     for z in (za,zb):box('Ash wagon panel upright',(x+side*.017,.724,z),(.03,.40,.045),ash,grp,.010)
-   for section,grp in [([(2.4,.94),(1.70,.90),(.64,.57)],'Body'),([(.64,.57),(-.77,.54)],'DoorL' if side>0 else 'DoorR'),([(-.77,.54),(-1.5,.71),(-2.45,.73)],'Body')]:
-    path('Buick sweeping chrome side spear',[(side*(dimensions(c,z)[0]+.025),y,z) for z,y in section],.014,chrome,grp)
+   for z in (.82,1.04,1.26):
+    x=side*(skinx(c,z,1.015)+.013)
+    torus('Three Buick chrome VentiPorts',(x,1.015,z),.038,.009,chrome,(side,0,0),segments=24,tube=8)
+    ellipsoid('Buick porthole black inset',(x-side*.003,1.015,z),(.008,.032,.032),black,segments=20,rings=10)
+   # Wide stamped Sweepspear curves down ahead of the rear wheel. Its middle
+   # span belongs to the opening front door, not a fixed strip across it.
+   sections=[([(2.18,.885),(1.63,.915),(.64,.923)],'Body'),([(.64,.923),(-.35,.925),(-.77,.882)],'DoorL' if side>0 else 'DoorR'),([(-.77,.882),(-1.02,.781),(-1.13,.612),(-1.065,.476),(-.93,.414)],'Body')]
+   for controls,grp in sections:
+    points=[]
+    for j in range(len(controls)-1):
+     p0=Vector(controls[max(0,j-1)]);p1=Vector(controls[j]);p2=Vector(controls[j+1]);p3=Vector(controls[min(len(controls)-1,j+2)])
+     for k in range(12):
+      t=k/12;q=.5*((2*p1)+(-p0+p2)*t+(2*p0-5*p1+4*p2-p3)*t*t+(-p0+3*p1-3*p2+p3)*t*t*t);points.append(tuple(q))
+    points.append(controls[-1]);verts=[];faces=[]
+    for j,(z,y) in enumerate(points):
+     prev=Vector(points[max(0,j-1)]);nxt=Vector(points[min(len(points)-1,j+1)]);d=(nxt-prev).normalized();normal=Vector((-d.y,d.x))
+     half=interp(z,[(-1.13,.045),(-.93,.042),(-.4,.033),(1.0,.027),(2.18,.008)])
+     for q,out in [(-1,.008),(-.8,.020),(.8,.020),(1,.008)]:
+      zz=z+normal.x*half*q;yy=y+normal.y*half*q;verts.append((side*(skinx(c,zz,yy)+out),yy,zz))
+    for j in range(len(points)-1):
+     for k in range(3):a=j*4+k;faces.append((a,a+4,a+5,a+1))
+    mesh('Broad curved Buick chrome Sweepspear',verts,faces,chrome,grp)
+   for start,end,grp in [(1.02,.64,'Body'),(.64,-.77,'DoorL' if side>0 else 'DoorR'),(-.77,-.93,'Body')]:
+    path('Buick bright rocker edge',[(side*(skinx(c,z,.35)+.012),.35,z) for z in [start+(end-start)*j/20 for j in range(21)]],.014,chrome,grp)
+   path('Buick rear fender slim horizontal moulding',[(side*(skinx(c,z,.91)+.018),.91,z) for z in [-1.28-1.31*j/32 for j in range(33)]],.009,chrome)
    box('Buick rear lamp chrome plinth',(side*.87,.847,-rear-.053),(.12,.23,.071),chrome,bevel=.036)
    box('Buick rear ruby lamp',(side*.87,.865,-rear-.094),(.088,.145,.021),red,bevel=.032)
   path('Large bowed Buick front bumper',[(-1.01,.48,front+.015),(-.5,.445,front+.115),(0,.455,front+.17),(.5,.445,front+.115),(1.01,.48,front+.015)],.065,chrome)
@@ -604,6 +738,7 @@ scene.render.resolution_x=1200;scene.render.resolution_y=760
 
 all_collections=[];all_roots=[];summaries=[]
 for c in CARS:
+ if args.member and c['id']!=args.member:continue
  for col in all_collections:col.hide_render=True;col.hide_viewport=True
  car_collection=bpy.data.collections.new(c['owner']+' | '+c['name']);scene.collection.children.link(car_collection);all_collections.append(car_collection)
  groups=defaultdict(list)
@@ -640,6 +775,18 @@ for c in CARS:
  for name in ['Body','DoorHinge_L','DoorHinge_R','SteeringWheel']+[s[key] for s in specs for key in ('steerNode','spinNode','meshNode')]:assert name in names,name
  assert not doc.get('animations') and not doc.get('cameras')
  manifest=dict(version=1,id=c['id'],bodyStyle='convertible' if c['kind']=='pontiac' else 'wagon' if c['kind']=='buick' else 'coupe',seatAnchor=[.398,c['seatY'],-.315],owner=c['owner'],name=c['name'],paintColor=c['color'],asset='/assets/club-cars/'+c['id']+'.glb',preview='/assets/club-cars/'+c['id']+'-preview.png',source='asset-source/lug-nuts-cars.blend',generator='scripts/build-club-cars.py',units='meters',metersPerUnit=1,rootNode=root.name,bodyNode='Body',axes=dict(left='+X',right='-X',up='+Y',forward='+Z'),characterSeatAnchor=[.398,c['seatY'],-.315],steeringWheel=dict(node='SteeringWheel',center=list(steering_center),axis=list(steering_axis),radius=.176),wheels=specs,doors=doors,bounds=dict(min=mins,max=maxs,dimensions=[maxs[i]-mins[i] for i in range(3)]),runtimeIntegration=dict(visualOffsetFromChassis=[0,-.78,0],chassisColliderHalfExtents=[c['width']-.10,.31,(c['front']+c['rear'])/2-.22],chassisColliderCenterOffset=[0,.04,(c['front']-c['rear'])/2],wheelRayMountY=.1,wheelRayLength=1.05,springRestRayLength=1.0),statistics=dict(triangles=triangles,glbBytes=len(raw),nodes=len(doc['nodes']),materials=len(doc['materials']),meshPrimitives=sum(len(m['primitives']) for m in doc['meshes'])),validation=dict(namedWheelNodes=True,openingFrontDoors=True,fixedCabinOpening=True,leftHandDrive=True,steeringPivot=True),references=['User supplied exterior photograph; manually modeled forms, no photo textures'] if c['id'] in ('lou','craig') else ['https://www.gm.com/content/dam/company/no_search/heritage-archive-docs/vehicle-information-kits/chevrolet/1968-Chevrolet-Camaro.pdf'] if c['id']=='chris' else ['https://www.buickheritagealliance.org/index.php/archives/browse/1953'],limits=['Original stylized game approximation; not a scanned vehicle or concours-accurate restoration model.','Shared arcade interior proportions preserve driver fit and gameplay.'])
+ if c['id']=='ed':
+  manifest['references'].append('User supplied 1953 Buick construction photograph, 2026-09-22; blue paint retained per owner instruction; no photo pixels used')
+  manifest['referenceDetails']=dict(sideWood='Honey framing surrounds side windows and narrow dark inset below the sill; lower doors and rear fenders are painted blue',portholesPerSide=3,woodLowerEdgeMeters=1.01,windowSillMeters=1.205,upperFrontDoorWoodMovesWithDoor=True)
+  boundsByGroup={}
+  for grp,obj in nodes.items():
+   woodverts=[]
+   for face in obj.data.polygons:
+    mat=obj.data.materials[face.material_index]
+    if mat and ('Honey ash framing' in mat.name or 'Walnut wagon panel' in mat.name):
+     woodverts.extend([game(obj.matrix_world@obj.data.vertices[i].co) for i in face.vertices])
+   if woodverts:boundsByGroup[grp]=dict(min=[min(v[i] for v in woodverts) for i in range(3)],max=[max(v[i] for v in woodverts) for i in range(3)])
+  manifest['woodMaterialBounds']=boundsByGroup
  (OUT/(c['id']+'-manifest.json')).write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf8')
  scene.render.filepath=str(OUT/(c['id']+'-preview.png'));bpy.ops.render.render(write_still=True)
  summaries.append(dict(id=c['id'],statistics=manifest['statistics'],bounds=manifest['bounds']))
@@ -650,14 +797,27 @@ for c in CARS:
  for obj in car_collection.objects:obj.name=c['id']+' | '+obj.name
 
 # Joe's existing 442 is read only: import a temporary preview copy, then remove it.
-for col in all_collections:col.hide_render=True;col.hide_viewport=True
-existing=set(bpy.data.objects);joe_path=ROOT/'public'/'assets'/'oldsmobile-442.glb';joe_sha=hashlib.sha256(joe_path.read_bytes()).hexdigest()
-bpy.ops.import_scene.gltf(filepath=str(joe_path));joe_objects=set(bpy.data.objects)-existing
-scene.render.filepath=str(OUT/'joe-preview.png');bpy.ops.render.render(write_still=True)
-for obj in joe_objects:bpy.data.objects.remove(obj,do_unlink=True)
-assert hashlib.sha256(joe_path.read_bytes()).hexdigest()==joe_sha
+if not args.member:
+ for col in all_collections:col.hide_render=True;col.hide_viewport=True
+ existing=set(bpy.data.objects);joe_path=ROOT/'public'/'assets'/'oldsmobile-442.glb';joe_sha=hashlib.sha256(joe_path.read_bytes()).hexdigest()
+ bpy.ops.import_scene.gltf(filepath=str(joe_path));joe_objects=set(bpy.data.objects)-existing
+ scene.render.filepath=str(OUT/'joe-preview.png');bpy.ops.render.render(write_still=True)
+ for obj in joe_objects:bpy.data.objects.remove(obj,do_unlink=True)
+ assert hashlib.sha256(joe_path.read_bytes()).hexdigest()==joe_sha
 # Editable source presents all four original cars in a spaced lineup.
 for i,(col,root) in enumerate(zip(all_collections,all_roots)):
- col.hide_render=False;col.hide_viewport=False;root.location.x=(i-1.5)*3.5
-bpy.ops.wm.save_as_mainfile(filepath=str(SOURCE/'lug-nuts-cars.blend'),compress=True)
+ index=next(j for j,c in enumerate(CARS) if root.name.startswith(c['id']+' | '))
+ col.hide_render=False;col.hide_viewport=False;root.location.x=(index-1.5)*3.5
+for col,signature,render,viewport in preserved:
+ assert collection_signature(col)==signature,'Unrelated source collection changed: '+col.name
+ col.hide_render=render;col.hide_viewport=viewport
+for file,sha in unchanged_files.items():assert hashlib.sha256(file.read_bytes()).hexdigest()==sha,'Unrelated deliverable changed: '+str(file)
+if args.member:
+ # Blender refuses a direct save over an appended library's original path.
+ # Save the complete local scene separately, then replace that same source.
+ next_source=SOURCE/'lug-nuts-cars.rebuild.blend'
+ bpy.ops.wm.save_as_mainfile(filepath=str(next_source),compress=True)
+ next_source.replace(SOURCE/'lug-nuts-cars.blend')
+else:bpy.ops.wm.save_as_mainfile(filepath=str(SOURCE/'lug-nuts-cars.blend'),compress=True)
+if args.member:print('PRESERVED_OTHER_ASSETS',json.dumps({file.name:sha for file,sha in unchanged_files.items()}));print('PRESERVED_SOURCE_COLLECTIONS',json.dumps({col.name:sig for col,sig,_,_ in preserved}))
 print('LUG_NUTS_ASSETS_READY',json.dumps(summaries))
