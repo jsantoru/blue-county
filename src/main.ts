@@ -35,6 +35,7 @@ import { ClubAssets, type ClubVehicleManifest } from "./club-assets";
 import { garageMarkup } from "./garage-ui";
 import { VehicleDoors } from "./vehicle-doors";
 import { SteeringWheelVisual } from "./steering-wheel";
+import { VehicleFinish, HomeReflection } from "./vehicle-finish";
 import { preloadHomeProps } from "./home-props";
 import { buildExplorationObstacles } from "./exploration-obstacles";
 import {
@@ -157,6 +158,8 @@ let seatedDriver: CharacterVisualLike, walkingDriver: CharacterVisualLike;
 let characterSource: GLTF;
 let vehicleDoors: VehicleDoors;
 let steeringWheel: SteeringWheelVisual;
+let vehicleFinish: VehicleFinish;
+const homeReflection = new HomeReflection();
 let explorationObstacles:
   ReturnType<typeof buildExplorationObstacles> | undefined;
 let footPhase: "driving" | "exiting" | "foot" | "entering" = "driving";
@@ -184,9 +187,9 @@ renderer.shadowMap.type = T.PCFShadowMap;
 const scene = new T.Scene();
 scene.fog = new T.Fog(0xbdcbd0, 210, 1280);
 const camera = new T.PerspectiveCamera(62, innerWidth / innerHeight, 0.2, 2200);
-const hemi = new T.HemisphereLight(0xc7ddec, 0x52604a, 0.62);
+const hemi = new T.HemisphereLight(0xc7ddec, 0x69735f, 0.75);
 scene.add(hemi);
-const sun = new T.DirectionalLight(0xffedd5, 2.6);
+const sun = new T.DirectionalLight(0xfff0db, 2.35);
 sun.position.set(100, 140, -80);
 sun.castShadow = true;
 sun.shadow.mapSize.set(4096, 4096);
@@ -196,9 +199,9 @@ sun.shadow.camera.top = 65;
 sun.shadow.camera.bottom = -65;
 sun.shadow.camera.near = 1;
 sun.shadow.camera.far = 350;
-sun.shadow.bias = -0.00015;
-sun.shadow.normalBias = 0.025;
-sun.shadow.radius = 3;
+sun.shadow.bias = -0.00006;
+sun.shadow.normalBias = 0.018;
+sun.shadow.radius = 1.5;
 scene.add(sun, sun.target);
 const atmosphere = new Atmosphere(scene, renderer);
 const shadowRight = new T.Vector3()
@@ -208,7 +211,15 @@ const shadowUp = new T.Vector3()
   .crossVectors(atmosphere.sunDirection, shadowRight)
   .normalize();
 function placeSun(target: T.Vector3) {
-  const extent = onFoot() && !inspectionView ? 36 : 65;
+  const atHome =
+    mode === "neighborhood" &&
+    map &&
+    Math.hypot(
+      target.x - map.home.position[0],
+      target.z - map.home.position[2],
+    ) < 90;
+  const extent =
+    onFoot() && !inspectionView ? 36 : atHome && quality === "high" ? 42 : 65;
   if (sun.shadow.camera.right !== extent) {
     sun.shadow.camera.left = sun.shadow.camera.bottom = -extent;
     sun.shadow.camera.right = sun.shadow.camera.top = extent;
@@ -400,6 +411,7 @@ function setQuality() {
   sun.shadow.map = null;
 }
 function buildScene(test: boolean) {
+  vehicleFinish?.dispose();
   explorationObstacles?.dispose();
   pedestrian?.dispose();
   if (walkingDriver) {
@@ -439,6 +451,7 @@ function buildScene(test: boolean) {
   vehicles.push(player);
   const visual = new T.Group();
   const real = template.clone(true);
+  vehicleFinish = new VehicleFinish(real);
   real.position.y = player.geometry.visualOffsetY;
   visual.add(real);
   visual.userData.car = real;
@@ -1274,6 +1287,12 @@ function simulate(dt: number) {
   physicsMs = performance.now() - start;
 }
 function renderVehicles(alpha: number, renderDt = 0) {
+  vehicleFinish.useEnvironment(
+    homeReflection.forPosition(
+      player.position,
+      mode === "neighborhood" && quality !== "low",
+    ),
+  );
   routeMarkers.visible = race;
   vehicles.forEach((v, i) => {
     const root = visuals[i];
@@ -1773,6 +1792,16 @@ async function init() {
   await renderer.compileAsync(scene, camera);
   // Warm shadow programs, multisampling, and texture uploads under the loading screen.
   presentation.render(scene);
+  homeReflection.capture(
+    renderer,
+    scene,
+    player.position.clone().add(new T.Vector3(0, 0.65, 0)),
+    [...visuals, walkingDriver.root, effects.root, routeMarkers],
+  );
+  vehicleFinish.useEnvironment(
+    homeReflection.forPosition(player.position, quality !== "low"),
+  );
+  await renderer.compileAsync(scene, camera);
   await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
   ready = true;
   $("loading").remove();
@@ -1834,6 +1863,10 @@ if (new URLSearchParams(location.search).has("test")) {
         geometry: player?.geometry,
         garageChoice: CLUB_MEMBERS[garageChoice].id,
         busy: garageBusy,
+        finish: vehicleFinish && {
+          surfaces: vehicleFinish.statistics,
+          localReflectionReady: homeReflection.ready,
+        },
       },
       screen,
       mode,

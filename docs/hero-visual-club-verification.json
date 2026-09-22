@@ -1,0 +1,712 @@
+{
+  "date": "2026-09-22T04:20:17.158Z",
+  "methodology": "Production game in system Edge with actual menu clicks, keyboard events and synthetic standard Gamepad API snapshots. Every car drives, exits, walks away, walks back and re-enters through the actual render loop and physics. No movement simulation or placement hooks are used. Inspection views only frame screenshots. Distinct delivered GLBs are SHA-256 checked, with live geometry/character and steering-grip measurements. This does not claim physical controller or rumble verification.",
+  "checks": [
+    "Garage fits 1280×720 and 390×844 widths, and its Drive action stays reachable by scrolling",
+    "Keyboard arrows wrap the five-member roster; selecting a profile and cancelling preserves Joe",
+    "Controller D-pad/A navigates and selects; B cancels without replacing the active driver or car",
+    "All five drivers load distinct car GLBs and live geometry, fit US-left seats and steering rims, drive, exit, walk and re-enter",
+    "Lou can be committed with controller D-pad/A, Chris with keyboard arrows/Enter, and the remaining members with mouse selection",
+    "Cancelling a new profile preserves Ed; reload restores Ed, his Buick and his character and can start driving normally",
+    "The selected Buick survives race setup and drives after the countdown with rivals present",
+    "Cancelling Lou while his GLB is still loading keeps Joe active when the delayed request finishes",
+    "Focus loss interrupts a pending Lou load; its eventual completion keeps Joe in the garage, and an explicit Drive retry loads Lou successfully"
+  ],
+  "members": [
+    {
+      "member": "joe",
+      "name": "Joe",
+      "car": "Oldsmobile 442",
+      "asset": "/assets/oldsmobile-442.glb",
+      "sha256": "e4dffb6296943eaa5c9c0e7bcccc9a5ce2dd61bd26da3489668516dab575f14e",
+      "vehicle": {
+        "name": "1968 Oldsmobile 442 convertible",
+        "bodyStyle": "convertible",
+        "bounds": [
+          3.2065151677764367,
+          2.0252612955671676,
+          5.628302639584774
+        ]
+      },
+      "geometry": {
+        "wheels": [
+          [
+            0.75,
+            0.1,
+            1.43
+          ],
+          [
+            -0.75,
+            0.1,
+            1.43
+          ],
+          [
+            0.75,
+            0.1,
+            -1.415
+          ],
+          [
+            -0.75,
+            0.1,
+            -1.415
+          ]
+        ],
+        "wheelRadii": [
+          0.345,
+          0.345,
+          0.345,
+          0.345
+        ],
+        "wheelRadius": 0.345,
+        "visualOffsetY": -0.78,
+        "chassisHalfExtents": [
+          0.9,
+          0.31,
+          2.3
+        ],
+        "chassisCenter": [
+          0,
+          0.04,
+          0
+        ],
+        "wheelRayLength": 1.05,
+        "springRestRayLength": 1,
+        "resetHeight": 0.83
+      },
+      "character": {
+        "source": "/assets/dad-driver.glb",
+        "authoring": "Blender",
+        "likeness": "Photo-referenced stylized character",
+        "units": "meters",
+        "origin": "feet",
+        "forward": "+Z",
+        "up": "+Y",
+        "seatAnchor": [
+          0.398,
+          0.1,
+          -0.315
+        ],
+        "pose": "seated",
+        "seatedBlend": 1,
+        "memberId": "joe",
+        "name": "Joe",
+        "provisional": false
+      },
+      "seatAnchor": [
+        0.398,
+        0.1,
+        -0.315
+      ],
+      "headCarLocal": [
+        0.3980000000000006,
+        1.2928769649176852,
+        -0.35742925286985283
+      ],
+      "grips": [
+        {
+          "hand": "left",
+          "error": 1.1202918861149722e-7,
+          "position": [
+            0.5429999269479175,
+            1.053950468238205,
+            0.04474940468443478
+          ]
+        },
+        {
+          "hand": "right",
+          "error": 9.68331450511788e-8,
+          "position": [
+            0.25300007004769043,
+            1.0539504532294361,
+            0.04474941441203484
+          ]
+        }
+      ],
+      "screenshot": "output/playwright/lug-nuts/joe-car.png",
+      "drivenDistance": 1.0370013666594013,
+      "walkedDistance": 0.6195190089367575,
+      "onFootScreenshot": "output/playwright/lug-nuts/joe-on-foot.png",
+      "returnDistance": 0.029125007033972354
+    },
+    {
+      "member": "lou",
+      "name": "Lou",
+      "car": "Pontiac Trans Am",
+      "asset": "/assets/club-cars/lou.glb",
+      "sha256": "c903549e939e3bca7163d67c05fd5e874ce3c45b814647e3ff268a54eae5174f",
+      "vehicle": {
+        "name": "1976 Pontiac Trans Am",
+        "bodyStyle": "coupe",
+        "bounds": [
+          3.183452070935623,
+          1.9135546547438538,
+          5.547433982655615
+        ]
+      },
+      "geometry": {
+        "wheels": [
+          [
+            0.81,
+            0.1,
+            1.41
+          ],
+          [
+            -0.81,
+            0.1,
+            1.41
+          ],
+          [
+            0.81,
+            0.1,
+            -1.34
+          ],
+          [
+            -0.81,
+            0.1,
+            -1.34
+          ]
+        ],
+        "wheelRadii": [
+          0.345,
+          0.345,
+          0.345,
+          0.345
+        ],
+        "wheelRadius": 0.345,
+        "visualOffsetY": -0.78,
+        "chassisHalfExtents": [
+          0.85,
+          0.31,
+          2.23
+        ],
+        "chassisCenter": [
+          0,
+          0.04,
+          0.030000000000000027
+        ],
+        "wheelRayLength": 1.05,
+        "springRestRayLength": 1,
+        "resetHeight": 0.83
+      },
+      "character": {
+        "units": "meters",
+        "origin": "feet",
+        "forward": "+Z",
+        "up": "+Y",
+        "height": 1.78,
+        "seatAnchor": [
+          0.398,
+          -0.1,
+          -0.315
+        ],
+        "palette": {
+          "jacket": 7945283,
+          "seams": 5384752,
+          "shirt": 14340539,
+          "jeans": 2635338,
+          "denimLight": 3359832,
+          "leather": 3616297,
+          "sole": 1776667,
+          "skin": 12158304,
+          "hair": 7367268,
+          "eyes": 2501677
+        },
+        "hairStyle": "swept",
+        "pose": "seated",
+        "seatedBlend": 1,
+        "memberId": "lou",
+        "name": "Lou",
+        "provisional": true,
+        "source": "procedural club stand-in",
+        "authoring": "Articulated provisional model",
+        "likeness": "Neutral placeholder; not based on a supplied photo"
+      },
+      "seatAnchor": [
+        0.398,
+        -0.1,
+        -0.315
+      ],
+      "headCarLocal": [
+        0.39800000000000046,
+        1.2327763538819654,
+        -0.36543585541378926
+      ],
+      "grips": [
+        {
+          "hand": "left",
+          "error": 2.7517329662598922e-15,
+          "position": [
+            0.5430000000000009,
+            0.8539504470731499,
+            0.04474946135385948
+          ]
+        },
+        {
+          "hand": "right",
+          "error": 2.767922951785514e-15,
+          "position": [
+            0.25300000000000095,
+            0.8539504470731498,
+            0.04474946135385948
+          ]
+        }
+      ],
+      "screenshot": "output/playwright/lug-nuts/lou-car.png",
+      "drivenDistance": 1.1061659441490936,
+      "walkedDistance": 0.5957649000795427,
+      "onFootScreenshot": "output/playwright/lug-nuts/lou-on-foot.png",
+      "returnDistance": 0.026405133136864777
+    },
+    {
+      "member": "chris",
+      "name": "Chris",
+      "car": "Chevrolet Camaro RS/SS",
+      "asset": "/assets/club-cars/chris.glb",
+      "sha256": "cc5b5814fe87dd5e4f9bf0b5e2ea3a85f3e5a91ef3a1fb3b9ec3b60f49e159da",
+      "vehicle": {
+        "name": "1968 Chevrolet Camaro RS/SS",
+        "bodyStyle": "coupe",
+        "bounds": [
+          3.075410770264561,
+          1.9227997228885183,
+          5.360623807008611
+        ]
+      },
+      "geometry": {
+        "wheels": [
+          [
+            0.77,
+            0.1,
+            1.36
+          ],
+          [
+            -0.77,
+            0.1,
+            1.36
+          ],
+          [
+            0.77,
+            0.1,
+            -1.385
+          ],
+          [
+            -0.77,
+            0.1,
+            -1.385
+          ]
+        ],
+        "wheelRadii": [
+          0.338,
+          0.338,
+          0.338,
+          0.338
+        ],
+        "wheelRadius": 0.338,
+        "visualOffsetY": -0.78,
+        "chassisHalfExtents": [
+          0.81,
+          0.31,
+          2.1299999999999994
+        ],
+        "chassisCenter": [
+          0,
+          0.04,
+          0.010000000000000009
+        ],
+        "wheelRayLength": 1.05,
+        "springRestRayLength": 1,
+        "resetHeight": 0.83
+      },
+      "character": {
+        "units": "meters",
+        "origin": "feet",
+        "forward": "+Z",
+        "up": "+Y",
+        "height": 1.78,
+        "seatAnchor": [
+          0.398,
+          -0.1,
+          -0.315
+        ],
+        "palette": {
+          "jacket": 14011312,
+          "seams": 11050112,
+          "shirt": 3427683,
+          "jeans": 2635338,
+          "denimLight": 3359832,
+          "leather": 3616297,
+          "sole": 1776667,
+          "skin": 12158304,
+          "hair": 4734257,
+          "eyes": 2501677
+        },
+        "hairStyle": "short",
+        "pose": "seated",
+        "seatedBlend": 1,
+        "memberId": "chris",
+        "name": "Chris",
+        "provisional": true,
+        "source": "procedural club stand-in",
+        "authoring": "Articulated provisional model",
+        "likeness": "Neutral placeholder; not based on a supplied photo"
+      },
+      "seatAnchor": [
+        0.398,
+        -0.1,
+        -0.315
+      ],
+      "headCarLocal": [
+        0.3980000000000006,
+        1.2327763538819656,
+        -0.36543585541378576
+      ],
+      "grips": [
+        {
+          "hand": "left",
+          "error": 6.178717806278382e-15,
+          "position": [
+            0.5430000000000001,
+            0.8539504470731503,
+            0.04474946135386304
+          ]
+        },
+        {
+          "hand": "right",
+          "error": 6.226411439066431e-15,
+          "position": [
+            0.2529999999999992,
+            0.8539504470731503,
+            0.04474946135386304
+          ]
+        }
+      ],
+      "screenshot": "output/playwright/lug-nuts/chris-car.png",
+      "drivenDistance": 1.1069180997307417,
+      "walkedDistance": 0.6195239350224943,
+      "onFootScreenshot": "output/playwright/lug-nuts/chris-on-foot.png",
+      "returnDistance": 0.02898739006854776
+    },
+    {
+      "member": "craig",
+      "name": "Craig",
+      "car": "Pontiac 2+2 Convertible",
+      "asset": "/assets/club-cars/craig.glb",
+      "sha256": "3acfbc8727a0b5e22998cf2c7014e8a20615048a2950306173f7b066be6e35e8",
+      "vehicle": {
+        "name": "1965 Pontiac 2+2 Convertible",
+        "bodyStyle": "convertible",
+        "bounds": [
+          3.4773912354072616,
+          2.0454687544840637,
+          6.216301195830368
+        ]
+      },
+      "geometry": {
+        "wheels": [
+          [
+            0.86,
+            0.1,
+            1.51
+          ],
+          [
+            -0.86,
+            0.1,
+            1.51
+          ],
+          [
+            0.86,
+            0.1,
+            -1.54
+          ],
+          [
+            -0.86,
+            0.1,
+            -1.54
+          ]
+        ],
+        "wheelRadii": [
+          0.352,
+          0.352,
+          0.352,
+          0.352
+        ],
+        "wheelRadius": 0.352,
+        "visualOffsetY": -0.78,
+        "chassisHalfExtents": [
+          0.91,
+          0.31,
+          2.5
+        ],
+        "chassisCenter": [
+          0,
+          0.04,
+          0.020000000000000018
+        ],
+        "wheelRayLength": 1.05,
+        "springRestRayLength": 1,
+        "resetHeight": 0.83
+      },
+      "character": {
+        "units": "meters",
+        "origin": "feet",
+        "forward": "+Z",
+        "up": "+Y",
+        "height": 1.78,
+        "seatAnchor": [
+          0.398,
+          0.1,
+          -0.315
+        ],
+        "palette": {
+          "jacket": 6450243,
+          "seams": 4278832,
+          "shirt": 13879214,
+          "jeans": 2635338,
+          "denimLight": 3359832,
+          "leather": 3616297,
+          "sole": 1776667,
+          "skin": 12158304,
+          "hair": 4142128,
+          "eyes": 2501677
+        },
+        "hairStyle": "curly",
+        "pose": "seated",
+        "seatedBlend": 1,
+        "memberId": "craig",
+        "name": "Craig",
+        "provisional": true,
+        "source": "procedural club stand-in",
+        "authoring": "Articulated provisional model",
+        "likeness": "Neutral placeholder; not based on a supplied photo"
+      },
+      "seatAnchor": [
+        0.398,
+        0.1,
+        -0.315
+      ],
+      "headCarLocal": [
+        0.3979999999999997,
+        1.4327763538819653,
+        -0.3654358554137893
+      ],
+      "grips": [
+        {
+          "hand": "left",
+          "error": 1.3922125900994124e-15,
+          "position": [
+            0.5429999999999993,
+            1.053950447073149,
+            0.044749461353855935
+          ]
+        },
+        {
+          "hand": "right",
+          "error": 1.926964694222131e-15,
+          "position": [
+            0.25299999999999834,
+            1.05395044707315,
+            0.044749461353855935
+          ]
+        }
+      ],
+      "screenshot": "output/playwright/lug-nuts/craig-car.png",
+      "drivenDistance": 1.1050817324126785,
+      "walkedDistance": 0.6194262256315076,
+      "onFootScreenshot": "output/playwright/lug-nuts/craig-on-foot.png",
+      "returnDistance": 0.029128221404814924
+    },
+    {
+      "member": "ed",
+      "name": "Ed",
+      "car": "Buick Woody Wagon",
+      "asset": "/assets/club-cars/ed.glb",
+      "sha256": "cc67cadce6f349720ffcc451370a53ba0093e245699d08d90dc74029710f481f",
+      "vehicle": {
+        "name": "1953 Buick Estate Woody Wagon",
+        "bodyStyle": "wagon",
+        "bounds": [
+          3.5844591827288013,
+          2.3021837143009147,
+          6.1993292776547015
+        ]
+      },
+      "geometry": {
+        "wheels": [
+          [
+            0.85,
+            0.1,
+            1.53
+          ],
+          [
+            -0.85,
+            0.1,
+            1.53
+          ],
+          [
+            0.85,
+            0.1,
+            -1.57
+          ],
+          [
+            -0.85,
+            0.1,
+            -1.57
+          ]
+        ],
+        "wheelRadii": [
+          0.372,
+          0.372,
+          0.372,
+          0.372
+        ],
+        "wheelRadius": 0.372,
+        "visualOffsetY": -0.78,
+        "chassisHalfExtents": [
+          0.91,
+          0.31,
+          2.4499999999999997
+        ],
+        "chassisCenter": [
+          0,
+          0.04,
+          0.030000000000000027
+        ],
+        "wheelRayLength": 1.05,
+        "springRestRayLength": 1,
+        "resetHeight": 0.83
+      },
+      "character": {
+        "units": "meters",
+        "origin": "feet",
+        "forward": "+Z",
+        "up": "+Y",
+        "height": 1.78,
+        "seatAnchor": [
+          0.398,
+          0.1,
+          -0.315
+        ],
+        "palette": {
+          "jacket": 2900577,
+          "seams": 2043462,
+          "shirt": 12898001,
+          "jeans": 2635338,
+          "denimLight": 3359832,
+          "leather": 3616297,
+          "sole": 1776667,
+          "skin": 12158304,
+          "hair": 11907495,
+          "eyes": 2501677
+        },
+        "hairStyle": "receding",
+        "pose": "seated",
+        "seatedBlend": 1,
+        "memberId": "ed",
+        "name": "Ed",
+        "provisional": true,
+        "source": "procedural club stand-in",
+        "authoring": "Articulated provisional model",
+        "likeness": "Neutral placeholder; not based on a supplied photo"
+      },
+      "seatAnchor": [
+        0.398,
+        0.1,
+        -0.315
+      ],
+      "headCarLocal": [
+        0.3979999999999997,
+        1.4327763538819658,
+        -0.3654358554137893
+      ],
+      "grips": [
+        {
+          "hand": "left",
+          "error": 1.3922125900994124e-15,
+          "position": [
+            0.543000000000001,
+            1.0539504470731496,
+            0.044749461353855935
+          ]
+        },
+        {
+          "hand": "right",
+          "error": 1.3743915342634358e-15,
+          "position": [
+            0.253000000000001,
+            1.0539504470731498,
+            0.044749461353855935
+          ]
+        }
+      ],
+      "screenshot": "output/playwright/lug-nuts/ed-car.png",
+      "drivenDistance": 1.1077551404486956,
+      "walkedDistance": 0.5956575820654982,
+      "onFootScreenshot": "output/playwright/lug-nuts/ed-on-foot.png",
+      "returnDistance": 0.026361662963294757
+    }
+  ],
+  "screenshots": [
+    "output/playwright/lug-nuts/garage-joe-initial.png",
+    "output/playwright/lug-nuts/garage-1280x720.png",
+    "output/playwright/lug-nuts/garage-390x844.png",
+    "output/playwright/lug-nuts/joe-garage.png",
+    "output/playwright/lug-nuts/joe-car.png",
+    "output/playwright/lug-nuts/joe-on-foot.png",
+    "output/playwright/lug-nuts/lou-garage.png",
+    "output/playwright/lug-nuts/lou-car.png",
+    "output/playwright/lug-nuts/lou-on-foot.png",
+    "output/playwright/lug-nuts/chris-garage.png",
+    "output/playwright/lug-nuts/chris-car.png",
+    "output/playwright/lug-nuts/chris-on-foot.png",
+    "output/playwright/lug-nuts/craig-garage.png",
+    "output/playwright/lug-nuts/craig-car.png",
+    "output/playwright/lug-nuts/craig-on-foot.png",
+    "output/playwright/lug-nuts/ed-garage.png",
+    "output/playwright/lug-nuts/ed-car.png",
+    "output/playwright/lug-nuts/ed-on-foot.png",
+    "output/playwright/lug-nuts/persisted-ed-main-menu.png",
+    "output/playwright/lug-nuts/cancelled-pending-load.png",
+    "output/playwright/lug-nuts/focus-interrupted-pending-load.png"
+  ],
+  "errors": [],
+  "warnings": [
+    "THREE.WebGLProgram: Program Info Log: (210,81-129): warning X4122: sum of 0.996094 and -2.98545e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision"
+  ],
+  "bundle": "/assets/index-BwRhHvaO.js",
+  "layouts": [
+    {
+      "viewport": [
+        1280,
+        720
+      ],
+      "left": 50,
+      "right": 1230,
+      "contentWidth": 1178,
+      "visibleWidth": 1178,
+      "documentWidth": 1280
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "left": 12,
+      "right": 378,
+      "contentWidth": 364,
+      "visibleWidth": 364,
+      "documentWidth": 390
+    }
+  ],
+  "race": {
+    "member": "ed",
+    "drivenDistance": 1.0533064016190692,
+    "aiCount": 6
+  },
+  "focusInterruption": {
+    "date": "2026-09-22T04:22:37.467Z",
+    "bundle": "/assets/index-BwRhHvaO.js",
+    "retryMember": "lou",
+    "passed": true
+  },
+  "passed": true
+}

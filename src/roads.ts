@@ -966,11 +966,13 @@ export class Environment {
           : [o.material])
           materials.add(material);
     });
+    const textures = new Set<T.Texture>();
     for (const material of materials) {
-      const map = (material as T.MeshStandardMaterial | T.SpriteMaterial).map;
-      map?.dispose();
+      for (const value of Object.values(material))
+        if (value instanceof T.Texture) textures.add(value);
       material.dispose();
     }
+    for (const texture of textures) texture.dispose();
     this.root.clear();
   }
 }

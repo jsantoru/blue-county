@@ -81,8 +81,16 @@ export function buildHomeTrees(
   bark.generateMipmaps = true;
   bark.anisotropy = 4;
   bark.needsUpdate = true;
+  // Bump is linear height data. Keeping it separate avoids interpreting the
+  // sRGB colour texture as a height field, and retains fine lichen colour.
+  const barkHeight = bark.clone();
+  barkHeight.name = "Home bark linear fissure height";
+  barkHeight.colorSpace = T.NoColorSpace;
+  barkHeight.needsUpdate = true;
   const barkMaterial = new T.MeshStandardMaterial({
     map: bark,
+    bumpMap: barkHeight,
+    bumpScale: 0.045,
     color: 0xe2e4d9,
     vertexColors: true,
     roughness: 0.97,
@@ -111,15 +119,27 @@ export function buildHomeTrees(
     const length = a.distanceTo(b);
     if (length < 0.02) return;
     const sides =
-      radius > 0.3 ? 11 : radius > 0.09 ? 8 : radius > 0.027 ? 6 : 4;
+      radius > 0.3 ? 16 : radius > 0.09 ? 10 : radius > 0.027 ? 6 : 4;
     const geometry = new T.CylinderGeometry(
       endRadius,
       radius,
       length,
       sides,
-      1,
+      radius > 0.09 ? 3 : 1,
       false,
     );
+    if (radius > 0.09) {
+      const p = geometry.getAttribute("position");
+      for (let i = 0; i < p.count; i++) {
+        const angle = Math.atan2(p.getZ(i), p.getX(i));
+        const scale =
+          1 +
+          Math.sin(angle * 5 + p.getY(i) * 0.6) * 0.025 +
+          Math.sin(angle * 9 - p.getY(i) * 0.8) * 0.012;
+        p.setXYZ(i, p.getX(i) * scale, p.getY(i), p.getZ(i) * scale);
+      }
+      geometry.computeVertexNormals();
+    }
     const uv = geometry.getAttribute("uv");
     for (let i = 0; i < uv.count; i++)
       uv.setXY(

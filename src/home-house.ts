@@ -1,6 +1,7 @@
 import * as T from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import { HOME_DETAIL, type HomeFrame } from "./home-reference";
+import { createHomeSurface, homeSurfaceUV } from "./home-surface";
 
 type V = [number, number, number];
 type Face = "front" | "right" | "back" | "left";
@@ -31,7 +32,7 @@ type Key =
   | "concrete";
 
 /** Small repeatable material assets made here, rather than projecting reference photography. */
-function surfaceTexture(kind: "shingle" | "concrete") {
+function shingleTexture() {
   const size = 256;
   const pixels = new Uint8Array(size * size * 4);
   let state = 829741;
@@ -44,14 +45,12 @@ function surfaceTexture(kind: "shingle" | "concrete") {
     for (let x = 0; x < size; x++) {
       const at = (y * size + x) * 4;
       let intensity = 0.86 + random() * 0.22;
-      if (kind === "shingle") {
-        const seam = (x + (course % 2) * 32) % 64;
-        if (y % 32 < 2 || (seam < 1 && y % 32 > 8)) intensity *= 0.57;
-        intensity *=
-          0.93 +
-          ((course * 7 + Math.floor((x + (course % 2) * 32) / 64) * 3) % 9) *
-            0.014;
-      } else if (random() > 0.98) intensity *= 0.7;
+      const seam = (x + (course % 2) * 32) % 64;
+      if (y % 32 < 2 || (seam < 1 && y % 32 > 8)) intensity *= 0.76;
+      intensity *=
+        0.93 +
+        ((course * 7 + Math.floor((x + (course % 2) * 32) / 64) * 3) % 9) *
+          0.014;
       pixels[at] =
         pixels[at + 1] =
         pixels[at + 2] =
@@ -214,17 +213,37 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
     },
   ];
 
-  const roofMap = surfaceTexture("shingle");
-  const concreteMap = surfaceTexture("concrete");
+  const roofMap = shingleTexture();
+  const roofHeight = roofMap.clone();
+  roofHeight.colorSpace = T.NoColorSpace;
+  roofHeight.needsUpdate = true;
+  const concreteFinish = createHomeSurface("concrete");
+  const paintFinish = createHomeSurface("paint");
   const materials: Record<Key, T.MeshStandardMaterial> = {
-    siding: new T.MeshStandardMaterial({ color: 0xdcded6, roughness: 0.8 }),
+    siding: new T.MeshStandardMaterial({
+      color: 0xe1e1d9,
+      roughness: 0.92,
+      ...paintFinish,
+      normalScale: new T.Vector2(0.38, 0.38),
+    }),
     foundation: new T.MeshStandardMaterial({
       color: 0xb2b0a2,
       roughness: 1,
-      map: concreteMap,
+      ...concreteFinish,
+      normalScale: new T.Vector2(0.7, 0.7),
     }),
-    trim: new T.MeshStandardMaterial({ color: 0xf2f1df, roughness: 0.64 }),
-    shutters: new T.MeshStandardMaterial({ color: 0x69372d, roughness: 0.83 }),
+    trim: new T.MeshStandardMaterial({
+      color: 0xf2f1e6,
+      roughness: 0.72,
+      ...paintFinish,
+      normalScale: new T.Vector2(0.18, 0.18),
+    }),
+    shutters: new T.MeshStandardMaterial({
+      color: 0x69372d,
+      roughness: 0.83,
+      ...paintFinish,
+      normalScale: new T.Vector2(0.32, 0.32),
+    }),
     shutterShadow: new T.MeshStandardMaterial({
       color: 0x452c25,
       roughness: 0.93,
@@ -233,21 +252,29 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
       color: 0x695044,
       roughness: 0.94,
       map: roofMap,
-      bumpMap: roofMap,
+      bumpMap: roofHeight,
       bumpScale: 0.026,
     }),
     roofEdge: new T.MeshStandardMaterial({ color: 0x483e34, roughness: 0.96 }),
-    glass: new T.MeshStandardMaterial({
-      color: 0x728989,
-      roughness: 0.2,
-      metalness: 0.28,
+    glass: new T.MeshPhysicalMaterial({
+      color: 0xcbdcdf,
+      roughness: 0.09,
+      metalness: 0,
+      clearcoat: 1,
+      clearcoatRoughness: 0.035,
+      envMapIntensity: 1.05,
       transparent: true,
-      opacity: 0.58,
+      opacity: 0.32,
       depthWrite: false,
     }),
-    interior: new T.MeshStandardMaterial({ color: 0x182523, roughness: 1 }),
+    interior: new T.MeshStandardMaterial({ color: 0x151b19, roughness: 1 }),
     curtain: new T.MeshStandardMaterial({ color: 0xd7d4b7, roughness: 1 }),
-    door: new T.MeshStandardMaterial({ color: 0x743c39, roughness: 0.69 }),
+    door: new T.MeshStandardMaterial({
+      color: 0x743c39,
+      roughness: 0.69,
+      ...paintFinish,
+      normalScale: new T.Vector2(0.25, 0.25),
+    }),
     metal: new T.MeshStandardMaterial({
       color: 0x212923,
       roughness: 0.58,
@@ -261,7 +288,8 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
     concrete: new T.MeshStandardMaterial({
       color: 0xafa99c,
       roughness: 0.98,
-      map: concreteMap,
+      ...concreteFinish,
+      normalScale: new T.Vector2(0.65, 0.65),
     }),
   };
   const batches = new Map<
@@ -275,6 +303,12 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
     const source = geometry.index ? geometry.toNonIndexed() : geometry;
     if (source !== geometry) geometry.dispose();
     if (!source.getAttribute("normal")) source.computeVertexNormals();
+    if (
+      ["siding", "foundation", "trim", "shutters", "door", "concrete"].includes(
+        key,
+      )
+    )
+      homeSurfaceUV(source);
     if (!source.getAttribute("uv"))
       source.setAttribute(
         "uv",
@@ -397,6 +431,49 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
     }
     return spans;
   }
+  function clapboard(
+    face: Face,
+    left: number,
+    right: number,
+    bottom: number,
+    top: number,
+    courseBottom: number,
+    courseTop: number,
+    gable = false,
+  ) {
+    if (right - left <= 0.001 || top - bottom <= 0.001) return;
+    // A real lap profile: its broad face slopes outward toward the bottom.
+    // The former box plus thin projecting strip exposed an upward shelf that
+    // caught the sun as noisy bright dashes at normal gameplay distances.
+    const geometry = new T.BoxGeometry(right - left, top - bottom, 1);
+    const position = geometry.getAttribute("position");
+    for (let i = 0; i < position.count; i++) {
+      let s = position.getX(i) + (left + right) / 2;
+      const y = position.getY(i) + (bottom + top) / 2;
+      if (gable) {
+        const half = B * (1 - (y - eave) / Math.max(0.1, ridge - eave));
+        s = T.MathUtils.clamp(s, -half, half);
+      }
+      const profile =
+        0.031 - (0.025 * (y - courseBottom)) / (courseTop - courseBottom);
+      const p = facePoint(face, s, y, position.getZ(i) > 0 ? profile : -0.003);
+      position.setXYZ(i, ...p);
+    }
+    // facePoint reflects the box's local frame on the front and right faces.
+    if (face === "front" || face === "right") {
+      const indices = geometry.index!;
+      for (let i = 0; i < indices.count; i += 3) {
+        const a = indices.getX(i);
+        indices.setX(i, indices.getX(i + 2));
+        indices.setX(i + 2, a);
+      }
+    }
+    geometry.computeVertexNormals();
+    // The backing shell casts the building silhouette. Centimetre-scale lap
+    // profiles still receive tree/deck shadows, but cannot reliably cast into
+    // a neighbourhood-size shadow map without stippled self-shadow bands.
+    add(geometry, "siding", false);
+  }
 
   for (const face of ["front", "right", "back", "left"] as Face[]) {
     // Break at every opening elevation so the structural shell leaves genuine holes.
@@ -425,7 +502,7 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
           -0.085,
         );
     }
-    // Vinyl clapboards have an actual projecting lower lip and a narrow shadow joint.
+    // Tapered vinyl clapboards and a narrow shadow joint leave real wall openings.
     for (let bottom = lower + 0.06; bottom < eave; bottom += 0.175) {
       const top = Math.min(eave, bottom + 0.173);
       const cuts = [
@@ -440,32 +517,8 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
       ].sort((a, b) => a - b);
       for (let i = 1; i < cuts.length; i++) {
         for (const [left, right] of clearSpans(face, cuts[i - 1], cuts[i]))
-          wallPiece(
-            face,
-            left,
-            right,
-            cuts[i - 1],
-            cuts[i],
-            "siding",
-            0.018,
-            0.018,
-          );
+          clapboard(face, left, right, cuts[i - 1], cuts[i], bottom, top);
       }
-      for (const [left, right] of clearSpans(
-        face,
-        bottom,
-        Math.min(top, bottom + 0.012),
-      ))
-        wallPiece(
-          face,
-          left,
-          right,
-          bottom,
-          Math.min(top, bottom + 0.009),
-          "trim",
-          0.022,
-          0.026,
-        );
     }
     faceBox(
       face,
@@ -552,6 +605,23 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
         height,
         0.28,
         -0.12,
+      );
+    // Interior head/sill close the exposed wall thickness from oblique views.
+    // The glass remains at the original recessed plane and all opening sizes stay fixed.
+    for (const y of [o.bottom + 0.015, o.top - 0.015])
+      faceBox(o.face, "trim", o.center, y, o.width, 0.03, 0.28, -0.12);
+    // Slim dark seals separate glazing from its painted sash without flat black borders.
+    for (const sign of [-1, 1])
+      faceBox(
+        o.face,
+        "interior",
+        o.center + sign * (o.width / 2 - 0.035),
+        (o.bottom + o.top) / 2,
+        0.014,
+        height - 0.045,
+        0.012,
+        -0.067,
+        false,
       );
     renderedOpenings.push({
       ...o,
@@ -657,18 +727,19 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
         let s = o.center - centerWidth / 2 + 0.035;
         s < o.center + centerWidth / 2;
         s += 0.095
-      )
-        faceBox(
-          o.face,
+      ) {
+        // Turned slats have alternating highlights and a little visible depth.
+        const p = facePoint(o.face, s, cy + 0.012, -0.17);
+        box(
           "curtain",
-          s,
-          cy + 0.012,
-          0.074,
+          ...p,
+          0.082,
           h - 0.11,
-          0.018,
-          -0.15,
+          0.012,
+          o.face === "front" || o.face === "back" ? 0.24 : Math.PI / 2 + 0.24,
           false,
         );
+      }
     } else if (o.kind === "slider") {
       for (const sign of [-1, 1])
         glassPane(
@@ -1017,18 +1088,10 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
       [u, ridge, 0],
     ];
     triangles("siding", points, sign > 0 ? [0, 2, 1] : [0, 1, 2]);
-    for (let y = eave + 0.065; y < ridge - 0.045; y += 0.175) {
-      const half = B * (1 - (y - eave) / Math.max(0.1, ridge - eave));
-      faceBox(
-        face,
-        "trim",
-        0,
-        y,
-        Math.max(0.01, half * 2),
-        0.009,
-        0.025,
-        0.027,
-      );
+    for (let bottom = eave + 0.008; bottom < ridge - 0.018; bottom += 0.175) {
+      const top = Math.min(ridge - 0.008, bottom + 0.173);
+      const half = B * (1 - (bottom - eave) / Math.max(0.1, ridge - eave));
+      clapboard(face, -half, half, bottom, top, bottom, top, true);
     }
   }
   // Soffits, gutter trough, fascia, and downspouts keep the roof from floating above the wall.
@@ -1037,10 +1100,10 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
       "trim",
       0,
       eave - 0.053,
-      v + (v < 0 ? 0.13 : -0.13),
+      v + (v < 0 ? overhang / 2 : -overhang / 2),
       roofU * 2,
       0.075,
-      0.29,
+      overhang + 0.06,
     );
     box("trim", 0, eave - 0.024, v, roofU * 2 + 0.07, 0.18, 0.073);
     box(
@@ -1077,6 +1140,23 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
   }
   for (const sign of [-1, 1]) {
     const u = sign * roofU;
+    // Close the gable's projecting rake from below. Without these returns a
+    // person beside the deck could see daylight between the fascia and wall.
+    for (const [wallV, outerV] of [
+      [F, roofFront],
+      [B, roofBack],
+    ]) {
+      triangles(
+        "trim",
+        [
+          [sign * R, eave - 0.053, wallV],
+          [u, eave - 0.053, outerV],
+          [u, ridge - 0.053, 0],
+          [sign * R, ridge - 0.053, 0],
+        ],
+        [0, 1, 2, 0, 2, 3, 2, 1, 0, 3, 2, 0],
+      );
+    }
     beam("trim", [u, eave - 0.04, roofFront], [u, ridge - 0.04, 0], 0.11, 0.14);
     beam("trim", [u, ridge - 0.04, 0], [u, eave - 0.04, roofBack], 0.11, 0.14);
     const downU = sign * (R - 0.04);
@@ -1101,6 +1181,52 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
       [downU, lower + 0.025, F - 0.42],
       0.065,
     );
+    for (let y = lower + 0.6; y < eave - 0.45; y += 1.35)
+      box("trim", downU, y, F - 0.115, 0.092, 0.025, 0.08);
+  }
+  // Low ridge caps and continuous drip flashing give the shingle roof a finished edge.
+  // Kept shallow so the observed low roof profile is unchanged.
+  for (let u = -roofU; u < roofU; u += 0.32) {
+    const end = Math.min(roofU, u + 0.325);
+    const edgeY = ridge - (0.12 / roofBack) * (ridge - eave) + 0.014;
+    triangles(
+      "roof",
+      [
+        [u, edgeY, -0.12],
+        [end, edgeY, -0.12],
+        [end, ridge + 0.022, 0],
+        [u, ridge + 0.022, 0],
+      ],
+      [0, 2, 1, 0, 3, 2],
+      true,
+      1.65,
+    );
+    triangles(
+      "roof",
+      [
+        [u, ridge + 0.022, 0],
+        [end, ridge + 0.022, 0],
+        [end, edgeY, 0.12],
+        [u, edgeY, 0.12],
+      ],
+      [0, 2, 1, 0, 3, 2],
+      true,
+      1.65,
+    );
+  }
+  for (const v of [roofFront, roofBack]) {
+    box("trim", 0, eave + 0.006, v, roofU * 2, 0.018, 0.035);
+    // Recessed ventilation slots sit under the overhang and merge into one batch.
+    for (let u = -R + 0.3; u < R - 0.15; u += 0.34)
+      box(
+        "roofEdge",
+        u,
+        eave - 0.094,
+        v + (v < 0 ? 0.22 : -0.22),
+        0.075,
+        0.009,
+        0.105,
+      );
   }
   // Narrow capped flue behind the left roof slope, visible in both user-supplied front views.
   const flueU = -frame.width * 0.41;
@@ -1171,6 +1297,9 @@ export function buildHomeHouse(frame: HomeFrame): T.Group {
     hiddenSideRearWindowSpacing: "approximate",
     openings: renderedOpenings,
     sidingCourseMeters: 0.175,
+    clapboardProfile: "single tapered face, no exposed upward lip shelf",
+    physicallyScaledFinishes: true,
+    windowRevealDepthMeters: 0.28,
     lampAndEagle: true,
     shutters: "burgundy louvered",
     windowStyle:

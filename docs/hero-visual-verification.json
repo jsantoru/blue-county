@@ -1,0 +1,2315 @@
+{
+  "stage": "after",
+  "date": "2026-09-22T04:14:54.490Z",
+  "browser": "153.0.4234.48",
+  "methodology": "Actual production rendering in system Edge. Exact inspection-camera vectors and parked car positions are saved by --before and reused by --after. High captures are 1920×1080 at device scale 1; Medium is 1280×720. Unchanged Home spawn/brake hold preserves the parked car transforms. Lighting/exposure uses each production build's authored settings, with no test-only color grading. Pausing fixes car/character poses; wind/cloud wall-clock phase is not frozen. Chris and Ed are extra after-only views with no baseline comparison. RAF timings are independent wall-clock samples during ten seconds of normal animated driving and are local browser measurements, not a physical-hardware or universal performance claim.",
+  "shots": [
+    {
+      "name": "home-street-eye",
+      "path": "output/playwright/hero-visual-pass/after/home-street-eye.png",
+      "camera": {
+        "position": [
+          -31.3,
+          4.712888960323904,
+          -4.89
+        ],
+        "target": [
+          1.97,
+          2.412535235627544,
+          2.13
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "quality": "high",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "metrics": {
+        "quality": "high",
+        "frames": 24,
+        "p50": 18,
+        "p95": 18.100000000000364,
+        "physicsMs": 1.1999999284744263,
+        "width": 1920,
+        "height": 1080,
+        "draws": 880,
+        "triangles": 6756576,
+        "vegetation": {
+          "trees": 19027,
+          "shrubs": 1089,
+          "grassTufts": 6002,
+          "chunks": 285,
+          "visibleChunks": 90,
+          "visibleBatches": 546,
+          "totalBatches": 3508,
+          "referenceTreeCount": 91,
+          "referenceWoodlandTreeCount": 281,
+          "referenceOmittedTreeCount": 31,
+          "backyardTreeCount": 226
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2453,
+            "leaves": 5867,
+            "rootRibs": 364,
+            "grassTriangles": 92988,
+            "groundTriangles": 39948,
+            "totalTriangles": 132936,
+            "batches": 112,
+            "visibleDrawCalls": 22,
+            "visibleTriangles": 31029,
+            "treeContacts": 91,
+            "rejected": 6366,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "member": "joe",
+      "finish": {
+        "surfaces": {
+          "paint": 1,
+          "chrome": 2,
+          "glass": 1,
+          "rubber": 3,
+          "vinyl": 1,
+          "wood": 1,
+          "other": 12
+        },
+        "localReflectionReady": true
+      },
+      "position": [
+        0.2054210752248764,
+        -0.26707130670547485,
+        19.5987606048584
+      ],
+      "rotation": [
+        0.025419631972908974,
+        -0.12065689265727997,
+        -0.02298520691692829,
+        0.9921025633811951
+      ]
+    },
+    {
+      "name": "home-front-close",
+      "path": "output/playwright/hero-visual-pass/after/home-front-close.png",
+      "camera": {
+        "position": [
+          -18.58,
+          4.094176442105244,
+          -2.21
+        ],
+        "target": [
+          1.97,
+          2.412535235627544,
+          2.13
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "quality": "high",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "metrics": {
+        "quality": "high",
+        "frames": 24,
+        "p50": 18,
+        "p95": 18.100000000000364,
+        "physicsMs": 1.1999999284744263,
+        "width": 1920,
+        "height": 1080,
+        "draws": 860,
+        "triangles": 6657281,
+        "vegetation": {
+          "trees": 19027,
+          "shrubs": 1089,
+          "grassTufts": 6002,
+          "chunks": 285,
+          "visibleChunks": 90,
+          "visibleBatches": 546,
+          "totalBatches": 3508,
+          "referenceTreeCount": 91,
+          "referenceWoodlandTreeCount": 281,
+          "referenceOmittedTreeCount": 31,
+          "backyardTreeCount": 226
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2453,
+            "leaves": 5867,
+            "rootRibs": 364,
+            "grassTriangles": 92988,
+            "groundTriangles": 39948,
+            "totalTriangles": 132936,
+            "batches": 112,
+            "visibleDrawCalls": 24,
+            "visibleTriangles": 31653,
+            "treeContacts": 91,
+            "rejected": 6366,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "member": "joe",
+      "finish": {
+        "surfaces": {
+          "paint": 1,
+          "chrome": 2,
+          "glass": 1,
+          "rubber": 3,
+          "vinyl": 1,
+          "wood": 1,
+          "other": 12
+        },
+        "localReflectionReady": true
+      },
+      "position": [
+        0.2054210752248764,
+        -0.26707130670547485,
+        19.5987606048584
+      ],
+      "rotation": [
+        0.025419631972908974,
+        -0.12065689265727997,
+        -0.02298520691692829,
+        0.9921025633811951
+      ]
+    },
+    {
+      "name": "home-side-deck",
+      "path": "output/playwright/hero-visual-pass/after/home-side-deck.png",
+      "camera": {
+        "position": [
+          -5,
+          2.3798756275303554,
+          24
+        ],
+        "target": [
+          1,
+          1.6771776518218768,
+          10
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "quality": "high",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "metrics": {
+        "quality": "high",
+        "frames": 24,
+        "p50": 18,
+        "p95": 18.100000000000364,
+        "physicsMs": 1.1999999284744263,
+        "width": 1920,
+        "height": 1080,
+        "draws": 730,
+        "triangles": 6030887,
+        "vegetation": {
+          "trees": 19027,
+          "shrubs": 1089,
+          "grassTufts": 6002,
+          "chunks": 285,
+          "visibleChunks": 90,
+          "visibleBatches": 544,
+          "totalBatches": 3508,
+          "referenceTreeCount": 91,
+          "referenceWoodlandTreeCount": 281,
+          "referenceOmittedTreeCount": 31,
+          "backyardTreeCount": 226
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2453,
+            "leaves": 5867,
+            "rootRibs": 364,
+            "grassTriangles": 92988,
+            "groundTriangles": 39948,
+            "totalTriangles": 132936,
+            "batches": 112,
+            "visibleDrawCalls": 20,
+            "visibleTriangles": 25125,
+            "treeContacts": 91,
+            "rejected": 6366,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "member": "joe",
+      "finish": {
+        "surfaces": {
+          "paint": 1,
+          "chrome": 2,
+          "glass": 1,
+          "rubber": 3,
+          "vinyl": 1,
+          "wood": 1,
+          "other": 12
+        },
+        "localReflectionReady": true
+      },
+      "position": [
+        0.2054210752248764,
+        -0.26707130670547485,
+        19.5987606048584
+      ],
+      "rotation": [
+        0.025419631972908974,
+        -0.12065689265727997,
+        -0.02298520691692829,
+        0.9921025633811951
+      ]
+    },
+    {
+      "name": "home-entry-material-detail",
+      "path": "output/playwright/hero-visual-pass/after/home-entry-material-detail.png",
+      "camera": {
+        "position": [
+          -7.145726090692449,
+          2.057811859014649,
+          2.756675816645439
+        ],
+        "target": [
+          -3.283070022935186,
+          2.3099821544504056,
+          2.85611475377769
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "quality": "high",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "metrics": {
+        "quality": "high",
+        "frames": 24,
+        "p50": 18,
+        "p95": 18.100000000000364,
+        "physicsMs": 1.1999999284744263,
+        "width": 1920,
+        "height": 1080,
+        "draws": 746,
+        "triangles": 6125305,
+        "vegetation": {
+          "trees": 19027,
+          "shrubs": 1089,
+          "grassTufts": 6002,
+          "chunks": 285,
+          "visibleChunks": 88,
+          "visibleBatches": 532,
+          "totalBatches": 3508,
+          "referenceTreeCount": 91,
+          "referenceWoodlandTreeCount": 281,
+          "referenceOmittedTreeCount": 31,
+          "backyardTreeCount": 226
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2453,
+            "leaves": 5867,
+            "rootRibs": 364,
+            "grassTriangles": 92988,
+            "groundTriangles": 39948,
+            "totalTriangles": 132936,
+            "batches": 112,
+            "visibleDrawCalls": 24,
+            "visibleTriangles": 31653,
+            "treeContacts": 91,
+            "rejected": 6366,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "member": "joe",
+      "finish": {
+        "surfaces": {
+          "paint": 1,
+          "chrome": 2,
+          "glass": 1,
+          "rubber": 3,
+          "vinyl": 1,
+          "wood": 1,
+          "other": 12
+        },
+        "localReflectionReady": true
+      },
+      "position": [
+        0.2054210752248764,
+        -0.26707130670547485,
+        19.5987606048584
+      ],
+      "rotation": [
+        0.025419631972908974,
+        -0.12065689265727997,
+        -0.02298520691692829,
+        0.9921025633811951
+      ]
+    },
+    {
+      "name": "home-deck-material-detail",
+      "path": "output/playwright/hero-visual-pass/after/home-deck-material-detail.png",
+      "camera": {
+        "position": [
+          -3.4616999814411216,
+          1.0988363194546356,
+          13.331286414813205
+        ],
+        "target": [
+          -0.937535363984604,
+          2.9299821544504057,
+          12.024154828483583
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "quality": "high",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "metrics": {
+        "quality": "high",
+        "frames": 24,
+        "p50": 18,
+        "p95": 18.100000000000364,
+        "physicsMs": 1.1999999284744263,
+        "width": 1920,
+        "height": 1080,
+        "draws": 639,
+        "triangles": 5855455,
+        "vegetation": {
+          "trees": 19027,
+          "shrubs": 1089,
+          "grassTufts": 6002,
+          "chunks": 285,
+          "visibleChunks": 88,
+          "visibleBatches": 532,
+          "totalBatches": 3508,
+          "referenceTreeCount": 91,
+          "referenceWoodlandTreeCount": 281,
+          "referenceOmittedTreeCount": 31,
+          "backyardTreeCount": 226
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2453,
+            "leaves": 5867,
+            "rootRibs": 364,
+            "grassTriangles": 92988,
+            "groundTriangles": 39948,
+            "totalTriangles": 132936,
+            "batches": 112,
+            "visibleDrawCalls": 24,
+            "visibleTriangles": 32544,
+            "treeContacts": 91,
+            "rejected": 6366,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "member": "joe",
+      "finish": {
+        "surfaces": {
+          "paint": 1,
+          "chrome": 2,
+          "glass": 1,
+          "rubber": 3,
+          "vinyl": 1,
+          "wood": 1,
+          "other": 12
+        },
+        "localReflectionReady": true
+      },
+      "position": [
+        0.2054210752248764,
+        -0.26707130670547485,
+        19.5987606048584
+      ],
+      "rotation": [
+        0.025419631972908974,
+        -0.12065689265727997,
+        -0.02298520691692829,
+        0.9921025633811951
+      ]
+    },
+    {
+      "name": "joe-front-three-quarter",
+      "path": "output/playwright/hero-visual-pass/after/joe-front-three-quarter.png",
+      "camera": {
+        "position": [
+          2.8847091352894716,
+          1.831358051300049,
+          26.23963133991223
+        ],
+        "target": [
+          0.20541198551654816,
+          0.23135805130004883,
+          19.598745346069336
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "quality": "high",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "metrics": {
+        "quality": "high",
+        "frames": 49,
+        "p50": 18,
+        "p95": 54,
+        "physicsMs": 0.8000000715255737,
+        "width": 1920,
+        "height": 1080,
+        "draws": 667,
+        "triangles": 5777506,
+        "vegetation": {
+          "trees": 19027,
+          "shrubs": 1089,
+          "grassTufts": 6002,
+          "chunks": 285,
+          "visibleChunks": 90,
+          "visibleBatches": 544,
+          "totalBatches": 3508,
+          "referenceTreeCount": 91,
+          "referenceWoodlandTreeCount": 281,
+          "referenceOmittedTreeCount": 31,
+          "backyardTreeCount": 226
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2453,
+            "leaves": 5867,
+            "rootRibs": 364,
+            "grassTriangles": 92988,
+            "groundTriangles": 39948,
+            "totalTriangles": 132936,
+            "batches": 112,
+            "visibleDrawCalls": 20,
+            "visibleTriangles": 25125,
+            "treeContacts": 91,
+            "rejected": 6366,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "member": "joe",
+      "finish": {
+        "surfaces": {
+          "paint": 1,
+          "chrome": 2,
+          "glass": 1,
+          "rubber": 3,
+          "vinyl": 1,
+          "wood": 1,
+          "other": 12
+        },
+        "localReflectionReady": true
+      },
+      "position": [
+        0.20541198551654816,
+        -0.26864194869995117,
+        19.598745346069336
+      ],
+      "rotation": [
+        0.025597333908081055,
+        -0.12067404389381409,
+        -0.023122059181332588,
+        0.9920927286148071
+      ]
+    },
+    {
+      "name": "craig-front-three-quarter",
+      "path": "output/playwright/hero-visual-pass/after/craig-front-three-quarter.png",
+      "camera": {
+        "position": [
+          2.882615631823272,
+          1.8331103384494782,
+          26.240446211418192
+        ],
+        "target": [
+          0.20545266568660736,
+          0.23311033844947815,
+          19.59869956970215
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "quality": "high",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "metrics": {
+        "quality": "high",
+        "frames": 73,
+        "p50": 18,
+        "p95": 90.09999999999854,
+        "physicsMs": 0.7000000476837158,
+        "width": 1920,
+        "height": 1080,
+        "draws": 607,
+        "triangles": 5219928,
+        "vegetation": {
+          "trees": 19027,
+          "shrubs": 1089,
+          "grassTufts": 6002,
+          "chunks": 285,
+          "visibleChunks": 90,
+          "visibleBatches": 544,
+          "totalBatches": 3508,
+          "referenceTreeCount": 91,
+          "referenceWoodlandTreeCount": 281,
+          "referenceOmittedTreeCount": 31,
+          "backyardTreeCount": 226
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2453,
+            "leaves": 5867,
+            "rootRibs": 364,
+            "grassTriangles": 92988,
+            "groundTriangles": 39948,
+            "totalTriangles": 132936,
+            "batches": 112,
+            "visibleDrawCalls": 20,
+            "visibleTriangles": 25125,
+            "treeContacts": 91,
+            "rejected": 6366,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "member": "craig",
+      "finish": {
+        "surfaces": {
+          "paint": 1,
+          "chrome": 2,
+          "glass": 1,
+          "rubber": 2,
+          "vinyl": 1,
+          "wood": 1,
+          "other": 5
+        },
+        "localReflectionReady": true
+      },
+      "position": [
+        0.20545266568660736,
+        -0.26688966155052185,
+        19.59869956970215
+      ],
+      "rotation": [
+        0.02658146433532238,
+        -0.12079561501741409,
+        -0.023412084206938744,
+        0.9920452237129211
+      ]
+    },
+    {
+      "name": "lou-front-three-quarter",
+      "path": "output/playwright/hero-visual-pass/after/lou-front-three-quarter.png",
+      "camera": {
+        "position": [
+          2.8838150820564605,
+          1.8324555516242982,
+          26.24006327751105
+        ],
+        "target": [
+          0.20546580851078033,
+          0.2324555516242981,
+          19.59879493713379
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "quality": "high",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "metrics": {
+        "quality": "high",
+        "frames": 97,
+        "p50": 18,
+        "p95": 100,
+        "physicsMs": 0.7000000476837158,
+        "width": 1920,
+        "height": 1080,
+        "draws": 612,
+        "triangles": 5215484,
+        "vegetation": {
+          "trees": 19027,
+          "shrubs": 1089,
+          "grassTufts": 6002,
+          "chunks": 285,
+          "visibleChunks": 90,
+          "visibleBatches": 544,
+          "totalBatches": 3508,
+          "referenceTreeCount": 91,
+          "referenceWoodlandTreeCount": 281,
+          "referenceOmittedTreeCount": 31,
+          "backyardTreeCount": 226
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2453,
+            "leaves": 5867,
+            "rootRibs": 364,
+            "grassTriangles": 92988,
+            "groundTriangles": 39948,
+            "totalTriangles": 132936,
+            "batches": 112,
+            "visibleDrawCalls": 20,
+            "visibleTriangles": 25125,
+            "treeContacts": 91,
+            "rejected": 6366,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "member": "lou",
+      "finish": {
+        "surfaces": {
+          "paint": 1,
+          "chrome": 2,
+          "glass": 1,
+          "rubber": 2,
+          "vinyl": 1,
+          "wood": 0,
+          "other": 8
+        },
+        "localReflectionReady": true
+      },
+      "position": [
+        0.20546580851078033,
+        -0.2675444483757019,
+        19.59879493713379
+      ],
+      "rotation": [
+        0.025576183572411537,
+        -0.12073934078216553,
+        -0.023403996601700783,
+        0.9920787215232849
+      ]
+    },
+    {
+      "name": "chris-front-three-quarter",
+      "path": "output/playwright/hero-visual-pass/after/chris-front-three-quarter.png",
+      "camera": {
+        "position": [
+          2.8823012778878097,
+          1.831919825077057,
+          26.240595332670637
+        ],
+        "target": [
+          0.20545150339603424,
+          0.23191982507705688,
+          19.598722457885742
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "quality": "high",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "metrics": {
+        "quality": "high",
+        "frames": 121,
+        "p50": 18,
+        "p95": 100,
+        "physicsMs": 0.7999999523162842,
+        "width": 1920,
+        "height": 1080,
+        "draws": 607,
+        "triangles": 5212692,
+        "vegetation": {
+          "trees": 19027,
+          "shrubs": 1089,
+          "grassTufts": 6002,
+          "chunks": 285,
+          "visibleChunks": 90,
+          "visibleBatches": 544,
+          "totalBatches": 3508,
+          "referenceTreeCount": 91,
+          "referenceWoodlandTreeCount": 281,
+          "referenceOmittedTreeCount": 31,
+          "backyardTreeCount": 226
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2453,
+            "leaves": 5867,
+            "rootRibs": 364,
+            "grassTriangles": 92988,
+            "groundTriangles": 39948,
+            "totalTriangles": 132936,
+            "batches": 112,
+            "visibleDrawCalls": 20,
+            "visibleTriangles": 25125,
+            "treeContacts": 91,
+            "rejected": 6366,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "member": "chris",
+      "finish": {
+        "surfaces": {
+          "paint": 1,
+          "chrome": 2,
+          "glass": 1,
+          "rubber": 2,
+          "vinyl": 1,
+          "wood": 0,
+          "other": 5
+        },
+        "localReflectionReady": true
+      },
+      "position": [
+        0.20545150339603424,
+        -0.2680801749229431,
+        19.598722457885742
+      ],
+      "rotation": [
+        0.02610473334789276,
+        -0.12084271013736725,
+        -0.023037226870656013,
+        0.9920610189437866
+      ]
+    },
+    {
+      "name": "ed-front-three-quarter",
+      "path": "output/playwright/hero-visual-pass/after/ed-front-three-quarter.png",
+      "camera": {
+        "position": [
+          2.882208885249845,
+          1.833284115791321,
+          26.240633385903546
+        ],
+        "target": [
+          0.20549139380455017,
+          0.2332841157913208,
+          19.59870719909668
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "quality": "high",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "metrics": {
+        "quality": "high",
+        "frames": 144,
+        "p50": 18,
+        "p95": 100,
+        "physicsMs": 0.7999999523162842,
+        "width": 1920,
+        "height": 1080,
+        "draws": 629,
+        "triangles": 5256600,
+        "vegetation": {
+          "trees": 19027,
+          "shrubs": 1089,
+          "grassTufts": 6002,
+          "chunks": 285,
+          "visibleChunks": 90,
+          "visibleBatches": 544,
+          "totalBatches": 3508,
+          "referenceTreeCount": 91,
+          "referenceWoodlandTreeCount": 281,
+          "referenceOmittedTreeCount": 31,
+          "backyardTreeCount": 226
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2453,
+            "leaves": 5867,
+            "rootRibs": 364,
+            "grassTriangles": 92988,
+            "groundTriangles": 39948,
+            "totalTriangles": 132936,
+            "batches": 112,
+            "visibleDrawCalls": 20,
+            "visibleTriangles": 25125,
+            "treeContacts": 91,
+            "rejected": 6366,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "member": "ed",
+      "finish": {
+        "surfaces": {
+          "paint": 1,
+          "chrome": 2,
+          "glass": 1,
+          "rubber": 2,
+          "vinyl": 1,
+          "wood": 2,
+          "other": 6
+        },
+        "localReflectionReady": true
+      },
+      "position": [
+        0.20549139380455017,
+        -0.2667158842086792,
+        19.59870719909668
+      ],
+      "rotation": [
+        0.026767311617732048,
+        -0.12082525342702866,
+        -0.023309757933020592,
+        0.9920390844345093
+      ]
+    },
+    {
+      "name": "home-front-close-medium",
+      "path": "output/playwright/hero-visual-pass/after/home-front-close-medium.png",
+      "camera": {
+        "position": [
+          -18.58,
+          4.094176442105244,
+          -2.21
+        ],
+        "target": [
+          1.97,
+          2.412535235627544,
+          2.13
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "quality": "medium",
+      "viewport": [
+        1280,
+        720
+      ],
+      "metrics": {
+        "quality": "medium",
+        "frames": 170,
+        "p50": 18,
+        "p95": 100,
+        "physicsMs": 0.7999999523162842,
+        "width": 1280,
+        "height": 720,
+        "draws": 786,
+        "triangles": 5825665,
+        "vegetation": {
+          "trees": 19027,
+          "shrubs": 1089,
+          "grassTufts": 6002,
+          "chunks": 285,
+          "visibleChunks": 52,
+          "visibleBatches": 318,
+          "totalBatches": 3508,
+          "referenceTreeCount": 91,
+          "referenceWoodlandTreeCount": 281,
+          "referenceOmittedTreeCount": 31,
+          "backyardTreeCount": 226
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2453,
+            "leaves": 5867,
+            "rootRibs": 364,
+            "grassTriangles": 92988,
+            "groundTriangles": 39948,
+            "totalTriangles": 132936,
+            "batches": 112,
+            "visibleDrawCalls": 10,
+            "visibleTriangles": 7449,
+            "treeContacts": 91,
+            "rejected": 6366,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "member": "joe",
+      "finish": {
+        "surfaces": {
+          "paint": 1,
+          "chrome": 2,
+          "glass": 1,
+          "rubber": 3,
+          "vinyl": 1,
+          "wood": 1,
+          "other": 12
+        },
+        "localReflectionReady": true
+      },
+      "position": [
+        0.20541039109230042,
+        -0.26889684796333313,
+        19.59874153137207
+      ],
+      "rotation": [
+        0.025627190247178078,
+        -0.12067782878875732,
+        -0.023145873099565506,
+        0.9920909404754639
+      ]
+    },
+    {
+      "name": "joe-front-three-quarter-medium",
+      "path": "output/playwright/hero-visual-pass/after/joe-front-three-quarter-medium.png",
+      "camera": {
+        "position": [
+          2.8847091352894716,
+          1.831358051300049,
+          26.23963133991223
+        ],
+        "target": [
+          0.20541198551654816,
+          0.23135805130004883,
+          19.598745346069336
+        ],
+        "mode": 0,
+        "inspection": true
+      },
+      "quality": "medium",
+      "viewport": [
+        1280,
+        720
+      ],
+      "metrics": {
+        "quality": "medium",
+        "frames": 170,
+        "p50": 18,
+        "p95": 100,
+        "physicsMs": 0.7999999523162842,
+        "width": 1280,
+        "height": 720,
+        "draws": 609,
+        "triangles": 5064689,
+        "vegetation": {
+          "trees": 19027,
+          "shrubs": 1089,
+          "grassTufts": 6002,
+          "chunks": 285,
+          "visibleChunks": 52,
+          "visibleBatches": 316,
+          "totalBatches": 3508,
+          "referenceTreeCount": 91,
+          "referenceWoodlandTreeCount": 281,
+          "referenceOmittedTreeCount": 31,
+          "backyardTreeCount": 226
+        },
+        "scenery": [
+          {
+            "houses": 452,
+            "batches": 615,
+            "triangles": 1338577,
+            "detailFeatures": 9693,
+            "referenceFacades": 64
+          },
+          {
+            "patches": 8,
+            "ponds": 2,
+            "surfaceTriangles": 22155,
+            "detailTriangles": 4963,
+            "shoreTriangles": 340,
+            "meadowTufts": 192,
+            "reedTufts": 87,
+            "leafClusters": 1076,
+            "drawCalls": 5,
+            "maxGridSpacingMeters": 3
+          },
+          {
+            "decks": 11,
+            "pools": 9,
+            "patios": 3,
+            "stopSigns": 2,
+            "streetSigns": 2,
+            "stairs": 1,
+            "drawCalls": 20,
+            "triangles": 20971
+          },
+          {
+            "grassBlades": 30996,
+            "pebbles": 3192,
+            "soilFragments": 2453,
+            "leaves": 5867,
+            "rootRibs": 364,
+            "grassTriangles": 92988,
+            "groundTriangles": 39948,
+            "totalTriangles": 132936,
+            "batches": 112,
+            "visibleDrawCalls": 12,
+            "visibleTriangles": 12548,
+            "treeContacts": 91,
+            "rejected": 6366,
+            "maxPrimitiveRadiusMeters": 0.645
+          },
+          {
+            "poles": 96,
+            "wireSpans": 87,
+            "fenceSections": 11,
+            "stoneClusters": 6,
+            "surveyPlacementsSuppressed": 17,
+            "drawCalls": 12
+          }
+        ]
+      },
+      "member": "joe",
+      "finish": {
+        "surfaces": {
+          "paint": 1,
+          "chrome": 2,
+          "glass": 1,
+          "rubber": 3,
+          "vinyl": 1,
+          "wood": 1,
+          "other": 12
+        },
+        "localReflectionReady": true
+      },
+      "position": [
+        0.20541039109230042,
+        -0.26889684796333313,
+        19.59874153137207
+      ],
+      "rotation": [
+        0.025627190247178078,
+        -0.12067782878875732,
+        -0.023145873099565506,
+        0.9920909404754639
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "quality": "low",
+      "width": 960,
+      "height": 540,
+      "draws": 393,
+      "triangles": 2624618
+    },
+    {
+      "quality": "high",
+      "width": 1280,
+      "height": 720,
+      "draws": 667,
+      "triangles": 5777506
+    },
+    {
+      "quality": "medium",
+      "width": 1280,
+      "height": 720,
+      "draws": 609,
+      "triangles": 5064689
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "THREE.WebGLProgram: Program Info Log: (210,81-129): warning X4122: sum of 0.996094 and -2.98545e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision"
+  ],
+  "checks": [
+    "High-quality facade, close facade, deck, Joe, Craig and Lou captured from saved world-space camera fixtures",
+    "All five members have active Home reflections and matched paint, chrome, glass and rubber finishes; Chris and Ed also have after-only captures",
+    "Resize to 1280×720 and Medium-quality rendering retain valid shaders and the same camera framing",
+    "Low/High/Medium quality transitions produce no shader or WebGL errors",
+    "Measured independent RAF intervals during ten seconds of actual moving neighborhood gameplay at medium quality",
+    "Measured independent RAF intervals during ten seconds of actual moving neighborhood gameplay at high quality"
+  ],
+  "bundle": "/assets/index-BwRhHvaO.js",
+  "gpu": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER (0x000021C4) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "home": {
+    "frame": {
+      "center": [
+        1.9676009833524748,
+        2.128521302902241
+      ],
+      "right": [
+        -0.20641173533373336,
+        0.978465224479908
+      ],
+      "back": [
+        0.978465224479908,
+        0.20641173533373336
+      ],
+      "width": 14.964375027627607,
+      "depth": 9.97483031604948,
+      "groundY": 0.1499821544504056,
+      "foundationY": -0.9053788262348027,
+      "lowerFloorY": 0.029982154450405613,
+      "upperFloorY": 2.2799821544504058,
+      "entryFloorY": 0.6099821544504056,
+      "eaveY": 4.529982154450406,
+      "ridgeY": 6.029982154450406
+    },
+    "house": {
+      "reference": "User-supplied three street-level views and direct description",
+      "frontFacing": "Beverly Drive",
+      "frontDoorOffsetFraction": 0.62,
+      "frontDoorCenter": [
+        -3.283070022935186,
+        0.6099821544504056,
+        2.85611475377769
+      ],
+      "sideDoorCenterV": 1.2,
+      "sideDoorAlignedWithSliders": true,
+      "roof": {
+        "type": "low gable",
+        "ridgeParallelToFront": true,
+        "eaveY": 4.529982154450406,
+        "ridgeY": 6.029982154450406
+      },
+      "observedFront": true,
+      "hiddenSideRearWindowSpacing": "approximate",
+      "openings": [
+        {
+          "id": "front-upper-left",
+          "face": "front",
+          "center": -5.4919256351393315,
+          "width": 2.0800481288402377,
+          "bottom": 3.089982154450406,
+          "top": 4.279982154450406,
+          "kind": "paired",
+          "shutters": true,
+          "centerWorld": [
+            -1.7788134081457736,
+            3.684982154450406,
+            -4.274597964108979
+          ],
+          "glassRecessMeters": 0.073,
+          "structuralOpening": true
+        },
+        {
+          "id": "front-upper-middle",
+          "face": "front",
+          "center": -0.8380050015471461,
+          "width": 1.9453687535915891,
+          "bottom": 3.089982154450406,
+          "top": 4.279982154450406,
+          "kind": "paired",
+          "shutters": true,
+          "centerWorld": [
+            -2.7394372422310043,
+            3.684982154450406,
+            0.2791015333504747
+          ],
+          "glassRecessMeters": 0.073,
+          "structuralOpening": true
+        },
+        {
+          "id": "front-upper-picture",
+          "face": "front",
+          "center": 5.057958759338131,
+          "width": 2.7085518800005968,
+          "bottom": 3.089982154450406,
+          "top": 4.279982154450406,
+          "kind": "picture",
+          "shutters": true,
+          "centerWorld": [
+            -3.956433353580139,
+            3.684982154450406,
+            6.04809703817049
+          ],
+          "glassRecessMeters": 0.073,
+          "structuralOpening": true
+        },
+        {
+          "id": "front-lower-left",
+          "face": "front",
+          "center": -5.506890010166959,
+          "width": 2.12494125392312,
+          "bottom": 0.4999821544504056,
+          "top": 1.5299821544504058,
+          "kind": "paired",
+          "shutters": true,
+          "centerWorld": [
+            -1.7757245855281356,
+            1.0149821544504056,
+            -4.289240084679588
+          ],
+          "glassRecessMeters": 0.073,
+          "structuralOpening": true
+        },
+        {
+          "id": "front-lower-middle",
+          "face": "front",
+          "center": -1.1223281270720704,
+          "width": 1.720903128177175,
+          "bottom": 0.4999821544504056,
+          "top": 1.5299821544504058,
+          "kind": "paired",
+          "shutters": true,
+          "centerWorld": [
+            -2.6807496124958936,
+            1.0149821544504056,
+            0.0009012425089003351
+          ],
+          "glassRecessMeters": 0.073,
+          "structuralOpening": true
+        },
+        {
+          "id": "front-lower-right",
+          "face": "front",
+          "center": 5.042994384310504,
+          "width": 1.8555825034258233,
+          "bottom": 0.4999821544504056,
+          "top": 1.5299821544504058,
+          "kind": "paired",
+          "shutters": true,
+          "centerWorld": [
+            -3.953344530962502,
+            1.0149821544504056,
+            6.033454917599881
+          ],
+          "glassRecessMeters": 0.073,
+          "structuralOpening": true
+        },
+        {
+          "id": "front-entry",
+          "face": "front",
+          "center": 1.7957250033153127,
+          "width": 1.03,
+          "bottom": 0.6099821544504056,
+          "top": 2.689982154450406,
+          "kind": "door",
+          "centerWorld": [
+            -3.283070022935186,
+            1.6499821544504059,
+            2.85611475377769
+          ],
+          "glassRecessMeters": 0.073,
+          "structuralOpening": true
+        },
+        {
+          "id": "right-patio-red-door",
+          "face": "right",
+          "center": 1.2,
+          "width": 0.99,
+          "bottom": 0.07998215445040562,
+          "top": 2.1399821544504056,
+          "kind": "door",
+          "centerWorld": [
+            1.5973479439096652,
+            1.1099821544504056,
+            9.69727567060731
+          ],
+          "glassRecessMeters": 0.073,
+          "structuralOpening": true
+        },
+        {
+          "id": "right-deck-sliders",
+          "face": "right",
+          "center": 1.2,
+          "width": 2.26,
+          "bottom": 2.319982154450406,
+          "top": 4.409982154450406,
+          "kind": "slider",
+          "centerWorld": [
+            1.5973479439096652,
+            3.3649821544504057,
+            9.69727567060731
+          ],
+          "glassRecessMeters": 0.073,
+          "structuralOpening": true
+        },
+        {
+          "id": "left-upper-window",
+          "face": "left",
+          "center": -1.2967279410864325,
+          "width": 1.05,
+          "bottom": 3.089982154450406,
+          "top": 4.279982154450406,
+          "kind": "single",
+          "centerWorld": [
+            2.2432090962066686,
+            3.684982154450406,
+            -5.460198846977737
+          ],
+          "glassRecessMeters": 0.073,
+          "structuralOpening": true
+        },
+        {
+          "id": "rear-upper-left",
+          "face": "back",
+          "center": -4.190025007735731,
+          "width": 1.4,
+          "bottom": 3.089982154450406,
+          "top": 4.279982154450406,
+          "kind": "paired",
+          "centerWorld": [
+            7.7124836084621196,
+            3.684982154450406,
+            -0.9418114392706762
+          ],
+          "glassRecessMeters": 0.073,
+          "structuralOpening": true
+        },
+        {
+          "id": "rear-upper-middle",
+          "face": "back",
+          "center": 0.29928750055255215,
+          "width": 1.45,
+          "bottom": 3.089982154450406,
+          "top": 4.279982154450406,
+          "kind": "paired",
+          "centerWorld": [
+            6.7858368231709,
+            3.684982154450406,
+            3.4508247319120775
+          ],
+          "glassRecessMeters": 0.073,
+          "structuralOpening": true
+        }
+      ],
+      "sidingCourseMeters": 0.175,
+      "clapboardProfile": "single tapered face, no exposed upward lip shelf",
+      "physicallyScaledFinishes": true,
+      "windowRevealDepthMeters": 0.28,
+      "lampAndEagle": true,
+      "shutters": "burgundy louvered",
+      "windowStyle": "paired double-hung and right picture window with vertical blinds",
+      "batches": 15,
+      "triangles": 11414
+    },
+    "yard": {
+      "source": "Owner supplied street photographs and explicit deck/patio/rear screen room description",
+      "rearDimensions": "Inferred; rear is hidden in the supplied photographs",
+      "deck": {
+        "points": [
+          [
+            -0.3595825050501509,
+            9.284452199939842
+          ],
+          [
+            -0.937535363984604,
+            12.024154828483583
+          ],
+          [
+            7.1714121689702655,
+            13.734774572682557
+          ],
+          [
+            9.665317460324138,
+            1.9127742547703928
+          ],
+          [
+            7.219154399124369,
+            1.3967449164360592
+          ],
+          [
+            5.303201966704949,
+            10.479042605804482
+          ]
+        ],
+        "y": 2.2799821544504058,
+        "side": "right from road",
+        "wraparound": true
+      },
+      "patio": {
+        "points": [
+          [
+            -0.21281272137816465,
+            9.315413960239903
+          ],
+          [
+            -0.7701244067792449,
+            11.957270066335656
+          ],
+          [
+            4.745890281303868,
+            13.120898711900235
+          ],
+          [
+            5.303201966704949,
+            10.479042605804482
+          ]
+        ],
+        "y": 0.029982154450405613,
+        "belowDeck": true
+      },
+      "screenRoom": {
+        "points": [
+          [
+            7.219154399124369,
+            1.3967449164360592
+          ],
+          [
+            6.145813375388954,
+            6.484764083731581
+          ],
+          [
+            8.591976436588725,
+            7.0007934220659145
+          ],
+          [
+            9.665317460324138,
+            1.9127742547703928
+          ]
+        ],
+        "roofed": true,
+        "doorTowardSideDeck": true
+      },
+      "path": {
+        "points": [
+          [
+            -3.0972994611348263,
+            1.9754960517457723
+          ],
+          [
+            -3.4688405847355464,
+            3.736733455809607
+          ],
+          [
+            -5.230077988799381,
+            3.365192332208887
+          ],
+          [
+            -6.593937558329458,
+            9.830372995031526
+          ],
+          [
+            0.13584816116869602,
+            14.967284163657181
+          ],
+          [
+            -0.5922513667300556,
+            15.921155788915854
+          ],
+          [
+            -7.924552389917324,
+            10.324338804296506
+          ],
+          [
+            -6.032695134574551,
+            1.3562608457445722
+          ]
+        ],
+        "turnsTowardDriveway": true
+      },
+      "frontBeds": [
+        [
+          [
+            -1.365856261912449,
+            -6.425949514309331
+          ],
+          [
+            -3.188041003947456,
+            2.2118558884523996
+          ],
+          [
+            -4.341022165268085,
+            1.8153279050265962
+          ],
+          [
+            -2.6170820493521343,
+            -5.8722943609458484
+          ],
+          [
+            -1.9703609630024417,
+            -6.757874304525577
+          ]
+        ],
+        [
+          [
+            -3.466696846647996,
+            3.532783941500276
+          ],
+          [
+            -4.547564160450028,
+            8.656480407315804
+          ],
+          [
+            -5.668750554629461,
+            8.593702469256945
+          ],
+          [
+            -4.60386024513224,
+            3.497295842822476
+          ]
+        ]
+      ],
+      "mailbox": {
+        "position": [
+          -26.69693152776886,
+          -0.2061564814368604,
+          30.243167037320745
+        ],
+        "number": "2",
+        "redFlag": true
+      },
+      "heroProps": {
+        "source": "asset-source/beverly-home-props.blend",
+        "asset": "/assets/beverly-home-props.glb",
+        "authoredIn": "Blender",
+        "props": [
+          "bench",
+          "wagonWheel",
+          "birdbath",
+          "mailbox"
+        ],
+        "placements": {
+          "bench": [
+            4.5641343834264205,
+            -0.058437132566707684,
+            -5.547415158024741
+          ],
+          "wagonWheel": [
+            -2.543943754696693,
+            0.8004450123262687,
+            -5.16741515802474
+          ],
+          "birdbath": [
+            -5.761284385636629,
+            0.6818598334459939,
+            -6.137415158024741
+          ],
+          "mailbox": [
+            33.42589904785166,
+            -0.2061564814368604,
+            -22.244055423771492
+          ]
+        },
+        "triangles": 18258,
+        "batches": 14,
+        "resourcesOwnedByEnvironment": true,
+        "reference": "Existing reference-visible bench, wagon wheel, birdbath and number 2 mailbox; same anchors"
+      },
+      "ornaments": {
+        "bench": [
+          -4.402442732906854,
+          -0.058437132566707684,
+          5.449316487553497
+        ],
+        "wagonWheel": [
+          -2.5634352042267246,
+          0.8004450123262687,
+          -1.4272543240590436
+        ],
+        "birdbath": [
+          -2.848449609180195,
+          0.6818598334459939,
+          -4.775529630013738
+        ]
+      },
+      "details": [
+        "open lawn",
+        "sparse dormant foundation shrubs",
+        "front right bench",
+        "wagon wheel",
+        "white birdbath",
+        "right turning concrete entry path",
+        "driveway timber edging",
+        "metre-scaled deck grain and porous concrete",
+        "bark-chip mulch and short grass bed transition"
+      ],
+      "triangles": 19591,
+      "drawCalls": 8
+    },
+    "trees": {
+      "source": "Owner supplied street photographs",
+      "coordinateConfidence": "Photo perspective estimates, not measured trunk coordinates",
+      "trees": [
+        {
+          "id": "home-front-deciduous-1",
+          "type": "deciduous",
+          "seasonalState": "mostly leafless",
+          "position": [
+            -12.519625785335133,
+            2.1320260774425477,
+            -11.55651653236227
+          ],
+          "localPosition": [
+            -10.4,
+            -17
+          ],
+          "radiusMeters": 0.48,
+          "heightMeters": 15.32,
+          "bareTrunkHeightMeters": 5.6,
+          "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+        },
+        {
+          "id": "home-front-deciduous-2",
+          "type": "deciduous",
+          "seasonalState": "mostly leafless",
+          "position": [
+            -14.616695417327854,
+            0.9776231862681128,
+            3.2290270477220933
+          ],
+          "localPosition": [
+            4.5,
+            -16
+          ],
+          "radiusMeters": 0.42,
+          "heightMeters": 15.74,
+          "bareTrunkHeightMeters": 6.5,
+          "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+        },
+        {
+          "id": "home-front-deciduous-3",
+          "type": "deciduous",
+          "seasonalState": "mostly leafless",
+          "position": [
+            -14.670288869516613,
+            0.5488839807578179,
+            8.327764905455368
+          ],
+          "localPosition": [
+            9.5,
+            -15
+          ],
+          "radiusMeters": 0.37,
+          "heightMeters": 15.82,
+          "bareTrunkHeightMeters": 5.9,
+          "placement": "Approximate from owner supplied street photograph perspective; not survey measured"
+        }
+      ],
+      "triangles": 21276,
+      "drawCalls": 2,
+      "drivewayPositionsShifted": false
+    }
+  },
+  "performance": {
+    "durationMs": 10009.899999999994,
+    "frames": 563,
+    "medianFrameMs": 17.90000000000873,
+    "p95FrameMs": 18.10000000000582,
+    "meanFrameMs": 17.77957371225576,
+    "maximumFrameMs": 18.30000000000291,
+    "startPosition": [
+      -0.06946979463100433,
+      -0.3184153437614441,
+      20.708120346069336
+    ],
+    "endPosition": [
+      -34.7094841003418,
+      -1.3245370388031006,
+      56.791412353515625
+    ],
+    "quality": "medium",
+    "viewport": [
+      1280,
+      720
+    ],
+    "endMetrics": {
+      "quality": "medium",
+      "frames": 765,
+      "p50": 17.90000000000873,
+      "p95": 18.10000000000582,
+      "physicsMs": 0.7999999523162842,
+      "width": 1280,
+      "height": 720,
+      "draws": 665,
+      "triangles": 4362096,
+      "vegetation": {
+        "trees": 19027,
+        "shrubs": 1089,
+        "grassTufts": 6002,
+        "chunks": 285,
+        "visibleChunks": 54,
+        "visibleBatches": 329,
+        "totalBatches": 3508,
+        "referenceTreeCount": 91,
+        "referenceWoodlandTreeCount": 281,
+        "referenceOmittedTreeCount": 31,
+        "backyardTreeCount": 226
+      },
+      "scenery": [
+        {
+          "houses": 452,
+          "batches": 615,
+          "triangles": 1338577,
+          "detailFeatures": 9693,
+          "referenceFacades": 64
+        },
+        {
+          "patches": 8,
+          "ponds": 2,
+          "surfaceTriangles": 22155,
+          "detailTriangles": 4963,
+          "shoreTriangles": 340,
+          "meadowTufts": 192,
+          "reedTufts": 87,
+          "leafClusters": 1076,
+          "drawCalls": 5,
+          "maxGridSpacingMeters": 3
+        },
+        {
+          "decks": 11,
+          "pools": 9,
+          "patios": 3,
+          "stopSigns": 2,
+          "streetSigns": 2,
+          "stairs": 1,
+          "drawCalls": 20,
+          "triangles": 20971
+        },
+        {
+          "grassBlades": 30996,
+          "pebbles": 3192,
+          "soilFragments": 2453,
+          "leaves": 5867,
+          "rootRibs": 364,
+          "grassTriangles": 92988,
+          "groundTriangles": 39948,
+          "totalTriangles": 132936,
+          "batches": 112,
+          "visibleDrawCalls": 14,
+          "visibleTriangles": 12558,
+          "treeContacts": 91,
+          "rejected": 6366,
+          "maxPrimitiveRadiusMeters": 0.645
+        },
+        {
+          "poles": 96,
+          "wireSpans": 87,
+          "fenceSections": 11,
+          "stoneClusters": 6,
+          "surveyPlacementsSuppressed": 17,
+          "drawCalls": 12
+        }
+      ]
+    },
+    "comparison": "Medium 1280×720 sample using the baseline route and measurement method"
+  },
+  "performanceHigh": {
+    "durationMs": 10009.5,
+    "frames": 563,
+    "medianFrameMs": 18,
+    "p95FrameMs": 18.10000000000582,
+    "meanFrameMs": 17.77886323268206,
+    "maximumFrameMs": 18.20000000001164,
+    "startPosition": [
+      -0.07183780521154404,
+      -0.319009006023407,
+      20.711769104003906
+    ],
+    "endPosition": [
+      -34.67736053466797,
+      -1.3098082542419434,
+      56.611412048339844
+    ],
+    "quality": "high",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "endMetrics": {
+      "quality": "high",
+      "frames": 1359,
+      "p50": 18,
+      "p95": 18.10000000000582,
+      "physicsMs": 0.6999999284744263,
+      "width": 1920,
+      "height": 1080,
+      "draws": 711,
+      "triangles": 4236697,
+      "vegetation": {
+        "trees": 19027,
+        "shrubs": 1089,
+        "grassTufts": 6002,
+        "chunks": 285,
+        "visibleChunks": 92,
+        "visibleBatches": 557,
+        "totalBatches": 3508,
+        "referenceTreeCount": 91,
+        "referenceWoodlandTreeCount": 281,
+        "referenceOmittedTreeCount": 31,
+        "backyardTreeCount": 226
+      },
+      "scenery": [
+        {
+          "houses": 452,
+          "batches": 615,
+          "triangles": 1338577,
+          "detailFeatures": 9693,
+          "referenceFacades": 64
+        },
+        {
+          "patches": 8,
+          "ponds": 2,
+          "surfaceTriangles": 22155,
+          "detailTriangles": 4963,
+          "shoreTriangles": 340,
+          "meadowTufts": 192,
+          "reedTufts": 87,
+          "leafClusters": 1076,
+          "drawCalls": 5,
+          "maxGridSpacingMeters": 3
+        },
+        {
+          "decks": 11,
+          "pools": 9,
+          "patios": 3,
+          "stopSigns": 2,
+          "streetSigns": 2,
+          "stairs": 1,
+          "drawCalls": 20,
+          "triangles": 20971
+        },
+        {
+          "grassBlades": 30996,
+          "pebbles": 3192,
+          "soilFragments": 2453,
+          "leaves": 5867,
+          "rootRibs": 364,
+          "grassTriangles": 92988,
+          "groundTriangles": 39948,
+          "totalTriangles": 132936,
+          "batches": 112,
+          "visibleDrawCalls": 21,
+          "visibleTriangles": 26659,
+          "treeContacts": 91,
+          "rejected": 6366,
+          "maxPrimitiveRadiusMeters": 0.645
+        },
+        {
+          "poles": 96,
+          "wireSpans": 87,
+          "fenceSections": 11,
+          "stoneClusters": 6,
+          "surveyPlacementsSuppressed": 17,
+          "drawCalls": 12
+        }
+      ]
+    },
+    "comparison": "Standalone final High 1920×1080 sample; no baseline High moving sample exists"
+  },
+  "passed": true
+}

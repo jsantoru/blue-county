@@ -57,8 +57,18 @@ export class Presentation {
         vec3 positionAt(vec2 uv){float z=textureLod(depth,uv,0.).x;vec4 p=inverseProjection*vec4(uv*2.-1.,z*2.-1.,1.);return p.xyz/p.w;}
         void main(){
           vec3 p=positionAt(vUv);
-          vec3 normal=normalize(cross(dFdx(p),dFdy(p)));
           if(textureLod(depth,vUv,0.).x>=.99998){gl_FragColor=vec4(1.,2200.,0.,1.);return;}
+          // Derivatives across a siding joint or silhouette invent a steep
+          // surface normal and smear tiny details into long dark AO strokes.
+          // Choose the closest-depth neighbor on each axis to stay on the face.
+          vec2 texel=1./resolution;
+          vec3 left=positionAt(clamp(vUv-vec2(texel.x,0.),vec2(.001),vec2(.999)));
+          vec3 right=positionAt(clamp(vUv+vec2(texel.x,0.),vec2(.001),vec2(.999)));
+          vec3 down=positionAt(clamp(vUv-vec2(0.,texel.y),vec2(.001),vec2(.999)));
+          vec3 up=positionAt(clamp(vUv+vec2(0.,texel.y),vec2(.001),vec2(.999)));
+          vec3 dx=abs(left.z-p.z)<abs(right.z-p.z)?p-left:right-p;
+          vec3 dy=abs(down.z-p.z)<abs(up.z-p.z)?p-down:up-p;
+          vec3 normal=normalize(cross(dx,dy));
           float radius=1.15;
           float pixelRadius=clamp(radius*resolution.y*.5/(inverseProjection[1][1]*max(-p.z,1.)),1.,36.);
           // Scrambled interleaved gradient noise avoids the old directional streaks.
@@ -69,7 +79,9 @@ export class Presentation {
             vec2 offset=vec2(cos(phase),sin(phase))*sqrt((float(i)+.5)/16.)*pixelRadius/resolution;
             vec3 delta=positionAt(clamp(vUv+offset,vec2(.001),vec2(.999)))-p;
             float distance=length(delta);
-            float facing=max(dot(normal,delta)/max(distance,.001)-.14,0.);
+            // Ignore relief below the half-resolution pass's useful scale;
+            // retain contact around window reveals, feet, tires and deck posts.
+            float facing=max((dot(normal,delta)-.035)/max(distance,.001)-.14,0.);
             occlusion+=facing*(1.-smoothstep(0.,radius,distance))*smoothstep(.02,.09,distance);
           }
           gl_FragColor=vec4(1.-clamp(occlusion/16.*2.7,0.,.48),-p.z,0.,1.);

@@ -1,6 +1,7 @@
 import * as T from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import { buildHomeProps, homePropsReady } from "./home-props";
+import { createHomeSurface, homeSurfaceUV, homeWoodUV } from "./home-surface";
 import {
   HOME_DETAIL,
   homeDeckOutline,
@@ -44,21 +45,30 @@ export function buildHomeYard(
   );
   group.matrixAutoUpdate = false;
   const batches = new Map<Surface, T.BufferGeometry[]>();
+  const woodFinish = createHomeSurface("wood");
+  const concreteFinish = createHomeSurface("concrete");
+  const mulchFinish = createHomeSurface("mulch");
   const materials: Record<Surface, T.MeshStandardMaterial> = {
     wood: new T.MeshStandardMaterial({
       color: 0xffffff,
       vertexColors: true,
       roughness: 0.91,
+      ...woodFinish,
+      normalScale: new T.Vector2(0.65, 0.65),
     }),
     concrete: new T.MeshStandardMaterial({
       color: 0xffffff,
       vertexColors: true,
       roughness: 0.94,
+      ...concreteFinish,
+      normalScale: new T.Vector2(0.55, 0.55),
     }),
     mulch: new T.MeshStandardMaterial({
       color: 0xffffff,
       vertexColors: true,
       roughness: 1,
+      ...mulchFinish,
+      normalScale: new T.Vector2(0.85, 0.85),
     }),
     metal: new T.MeshStandardMaterial({
       color: 0xffffff,
@@ -100,9 +110,15 @@ export function buildHomeYard(
     const normalized = geometry.index ? geometry.toNonIndexed() : geometry;
     if (normalized !== geometry) geometry.dispose();
     for (const attribute of Object.keys(normalized.attributes))
-      if (attribute !== "position" && attribute !== "normal")
+      if (
+        attribute !== "position" &&
+        attribute !== "normal" &&
+        attribute !== "uv"
+      )
         normalized.deleteAttribute(attribute);
     if (!normalized.hasAttribute("normal")) normalized.computeVertexNormals();
+    if (surface !== "wood" || !normalized.hasAttribute("uv"))
+      homeSurfaceUV(normalized, surface === "mulch" ? 0.7 : 1);
     const shade = new T.Color(color).multiplyScalar(
       1 + (random() - 0.5) * variation,
     );
@@ -122,6 +138,7 @@ export function buildHomeYard(
     variation = 0,
   ) {
     const geometry = new T.BoxGeometry(...dimensions);
+    if (surface === "wood") homeWoodUV(geometry);
     geometry.translate(...p);
     add(geometry, surface, color, variation);
   }
@@ -137,6 +154,7 @@ export function buildHomeYard(
     const start = new T.Vector3(...a),
       end = new T.Vector3(...b);
     const geometry = new T.BoxGeometry(width, start.distanceTo(end), depth);
+    if (surface === "wood") homeWoodUV(geometry);
     geometry.applyQuaternion(
       new T.Quaternion().setFromUnitVectors(
         new T.Vector3(0, 1, 0),
@@ -623,6 +641,10 @@ export function buildHomeYard(
   groundPatch(rightBed, "mulch", 0x665344, 0.043);
   // A thin irregular stone edging, small enough to preserve the lawn silhouette.
   for (const bed of [leftBed, rightBed]) {
+    const centroid: UV = [
+      bed.reduce((sum, p) => sum + p[0], 0) / bed.length,
+      bed.reduce((sum, p) => sum + p[1], 0) / bed.length,
+    ];
     for (let i = 1; i < bed.length; i++) {
       const a = bed[i],
         b = bed[(i + 1) % bed.length];
@@ -635,7 +657,82 @@ export function buildHomeYard(
         rock.rotateY(random() * Math.PI);
         rock.translate(u, ground(u, v) + 0.035, v);
         add(rock, "concrete", 0x918b7c, 0.2);
+        // A few short grass blades soften the edge rather than filling the open lawn.
+        const away = new T.Vector2(
+          u - centroid[0],
+          v - centroid[1],
+        ).normalize();
+        const gu = u + away.x * (0.15 + random() * 0.09);
+        const gv = v + away.y * (0.15 + random() * 0.09);
+        const gy = ground(gu, gv) + 0.01;
+        for (let blade = 0; blade < 3; blade++) {
+          const angle = random() * Math.PI * 2;
+          const dx = Math.cos(angle) * 0.008,
+            dz = Math.sin(angle) * 0.008;
+          const h = 0.035 + random() * 0.045;
+          const g = new T.BufferGeometry();
+          g.setAttribute(
+            "position",
+            new T.Float32BufferAttribute(
+              [
+                gu - dx,
+                gy,
+                gv - dz,
+                gu + dx,
+                gy,
+                gv + dz,
+                gu + dz * 1.2,
+                gy + h,
+                gv - dx * 1.2,
+                gu + dx,
+                gy,
+                gv + dz,
+                gu - dx,
+                gy,
+                gv - dz,
+                gu + dz * 1.2,
+                gy + h,
+                gv - dx * 1.2,
+              ],
+              3,
+            ),
+          );
+          add(g, "plant", 0x657346, 0.22);
+        }
       }
+    }
+    const minU = Math.min(...bed.map((p) => p[0])),
+      maxU = Math.max(...bed.map((p) => p[0]));
+    const minV = Math.min(...bed.map((p) => p[1])),
+      maxV = Math.max(...bed.map((p) => p[1]));
+    const contains = (u: number, v: number) => {
+      let inside = false;
+      for (let i = 0, j = bed.length - 1; i < bed.length; j = i++) {
+        const a = bed[i],
+          b = bed[j];
+        if (
+          a[1] > v !== b[1] > v &&
+          u < ((b[0] - a[0]) * (v - a[1])) / (b[1] - a[1]) + a[0]
+        )
+          inside = !inside;
+      }
+      return inside;
+    };
+    // Sparse real bark chips sit on the fine textured bed, bringing its surface
+    // off the terrain plane. They share the existing mulch draw call.
+    for (let i = 0; i < (maxU - minU) * (maxV - minV) * 27; i++) {
+      const u = minU + random() * (maxU - minU),
+        v = minV + random() * (maxV - minV);
+      if (!contains(u, v)) continue;
+      const chip = new T.BoxGeometry(
+        0.028 + random() * 0.052,
+        0.007 + random() * 0.009,
+        0.012 + random() * 0.021,
+      );
+      chip.rotateY(random() * Math.PI);
+      chip.rotateZ((random() - 0.5) * 0.25);
+      chip.translate(u, ground(u, v) + 0.05, v);
+      add(chip, "mulch", random() > 0.5 ? 0x79624a : 0x4c4033, 0.22);
     }
   }
   function shrub(
@@ -672,6 +769,11 @@ export function buildHomeYard(
           leaves.scale(1.05, 0.85, 1.1);
           leaves.translate(...end);
           add(leaves, "plant", 0x52613b, 0.35);
+        } else if (random() < 0.32) {
+          const bud = new T.IcosahedronGeometry(0.023 + random() * 0.015, 0);
+          bud.scale(0.55, 1.45, 0.7);
+          bud.translate(...end);
+          add(bud, "plant", 0x81754e, 0.2);
         }
       }
     }
@@ -1013,6 +1115,8 @@ export function buildHomeYard(
       "white birdbath",
       "right turning concrete entry path",
       "driveway timber edging",
+      "metre-scaled deck grain and porous concrete",
+      "bark-chip mulch and short grass bed transition",
     ],
     triangles,
     drawCalls: group.children.length,

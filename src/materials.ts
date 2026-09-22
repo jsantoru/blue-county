@@ -41,7 +41,7 @@ export function createSurfaceMaterials() {
     });
     return material;
   };
-  const grass = pbr("lawn", 1.4, 0xdce9d8, 0.32);
+  const grass = pbr("lawn", 1.4, 0xe3e9da, 0.42);
   grass.envMapIntensity = 0.16;
   const asphalt = pbr("asphalt", 3, 0xaab0b2, 0.34);
   const gravel = pbr("gravel", 2.25, 0xabaea6, 0.65);
@@ -95,11 +95,11 @@ export function createSurfaceMaterials() {
         `#ifdef USE_MAP
           diffuseColor *= scenerySample(map,vMapUv);
         #endif
-        float surfacePatch = sceneryNoise(vSceneryPosition.xz * ${ground ? "0.018" : "0.18"});
+        float surfacePatch = sceneryNoise(vSceneryPosition.xz * ${ground ? "0.043" : "0.18"});
         float detail = sceneryNoise(vSceneryPosition.xz * ${ground ? "0.10" : "1.45"});
         diffuseColor.rgb *= ${
           ground
-            ? "mix(vec3(0.70,0.88,0.67),vec3(1.05,1.08,0.93),surfacePatch)*mix(0.91,1.06,detail)"
+            ? "mix(vec3(0.84,0.89,0.77),vec3(1.035,1.04,0.98),surfacePatch)*mix(0.94,1.05,detail)"
             : "mix(0.87,1.12,surfacePatch)*mix(0.96,1.04,detail)"
         };`,
       );

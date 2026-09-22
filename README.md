@@ -2,7 +2,7 @@
 
 A locally playable arcade driving and exploration game starring Joe and his car club, **the Lug Nuts**. Choose a member and get their associated car, drive the Warwick roads, race the Ridge & Hollow circuit, or park and explore Beverly Drive's yards, woods and Stony Creek on foot. Every driver sits on the US driver's left.
 
-**The Lug Nuts selection update is on `codex/lug-nuts-garage`, including the previous controller and walking-camera fixes.** Open **The Lug Nuts · choose driver** on the main menu, or **The Lug Nuts · change driver** while paused. Choose a card, then **Drive as…**. Selection is saved in this browser; changing members starts a fresh Free Drive at Beverly Drive.
+**The latest house and car visual pass is on `codex/beverly-car-visuals`, including the Lug Nuts selection and previous controller/walking-camera fixes.** Open **The Lug Nuts · choose driver** on the main menu, or **The Lug Nuts · change driver** while paused. Choose a card, then **Drive as…**. Selection is saved in this browser; changing members starts a fresh Free Drive at Beverly Drive.
 
 | Member | Associated car |
 | --- | --- |
@@ -22,7 +22,15 @@ Dad has an editable Blender character with a charcoal Italian coppola, white mus
 
 Stop in Free Drive and press **F / Xbox Y** to get out. Move with **WASD / left stick**, run with **Shift / A**, jump with **Space / X**, and look with the mouse or right stick. Approach either door and press **F / Y** to get back in. See [full controls](#first-drive) or [launch instructions](#launch-on-windows).
 
-## Recent screenshots — September 21, 2026
+## Latest house and car visuals — September 22, 2026
+
+2 Beverly has tapered siding, recessed window details, textured deck boards, concrete, mulch and bark, plus completed roof overhangs. The four club cars have smoother Blender bodywork, curved glass, deeper grilles and distinct wheels. All five cars use layered paint, clearer glazing and a static reflection of the actual Home surroundings. [Before/after screenshots, verification and remaining limits](docs/hero-visual-pass.md).
+
+![2 Beverly Drive in the current game](docs/visual-home-front.png)
+
+![Joe and the 442 with the updated finish at Home](docs/visual-joe.png)
+
+## Character and exploration screenshots — September 21, 2026
 
 Actual screenshots from the local production build with the Blender character and opening doors. The character is a stylized interpretation of one supplied photograph.
 
@@ -66,7 +74,7 @@ Click once to focus/unlock audio and connect the wired Xbox controller. The game
 
 Keyboard: WASD/arrows drive, Shift boost, Space handbrake, B look back, C camera, R hold reset, Escape pause, Enter confirm. Menu arrows/WASD navigate; left/right adjusts settings. In the club garage, left/right previews members, Enter/A selects the card, and Enter/A again starts driving. Escape/B returns without changing your driver. F3 shows telemetry.
 
-**Explore on foot:** stop and press **F / Y** to get out. WASD/arrows or the left stick move relative to the displayed camera; Shift / A runs; Space / X jumps. Look with the right stick, right mouse drag, or click the game to capture the mouse (Escape releases and pauses). C / R3 smoothly orbits the camera behind the character; moving the mouse or right stick takes over immediately. Approach either door and press F / Y to re-enter the 442. The map marks the parked car in blue. Walking follows terrain, steps over curbs and collides with houses, tree trunks, decks and rails. Dad uses Blender-authored idle, walk, run, airborne and seated animations; see [asset notes](docs/hero-assets.md) and [exploration controls](docs/exploration-pass.md).
+**Explore on foot:** stop and press **F / Y** to get out. WASD/arrows or the left stick move relative to the displayed camera; Shift / A runs; Space / X jumps. Look with the right stick, right mouse drag, or click the game to capture the mouse (Escape releases and pauses). C / R3 smoothly orbits the camera behind the character; moving the mouse or right stick takes over immediately. Approach either door and press F / Y to re-enter your car. The map marks the parked car in blue. Walking follows terrain, steps over curbs and collides with houses, tree trunks, decks and rails. Dad uses Blender-authored idle, walk, run, airborne and seated animations; see [asset notes](docs/hero-assets.md) and [exploration controls](docs/exploration-pass.md).
 
 Start with **Balanced** handling, 0.12 steering deadzone, 1.35 response curve, and sensitivity 1.0. Walking and camera controls have separate deadzones, defaulting to 0.20 and 0.22 to filter small resting stick offsets. Settings lets you adjust each independently; gentle walking beyond its deadzone still turns Dad toward his travel direction. Try **Planted** if high-speed steering feels too lively. Physics tuning lives together in `src/vehicle.ts`: `steerLow`, `steerFalloff`, `grip`, `driftGrip`, `engineForce`, and `stability` are the useful first adjustments. Settings and the chosen handling preset persist locally. Diagnostics shows selected device, raw and processed analog inputs, mapping, buttons, and haptic availability; every binding can be remapped.
 
@@ -101,7 +109,7 @@ The active source folder `../oldsmobile_442` was **not modified**. The car expor
 
 ## Checks and evidence
 
-The Lug Nuts update passes **206 tests across 26 files** and the production build. The [club browser review](docs/lug-nuts-verification.json) checks all five associated models and characters, US-left seating and wheel grips, real driving, walking out and back, entry, saved selection, menu cancellation, compact layouts and race setup. [Asset and workflow notes](docs/lug-nuts.md) describe the source files and provisional models. The standard browser suite also completed the full three-lap race with no runtime errors.
+The current visual pass passes **214 tests across 28 files** and the production build. The [visual review](docs/hero-visual-verification.json) records fixed-camera comparisons, all five cars, graphics presets, resize and a moving frame sample. The [current club browser review](docs/hero-visual-club-verification.json) checks all five associated models and characters, US-left seating and wheel grips, real driving, walking out and back, entry, saved selection, menu cancellation, compact layouts and race setup. [Asset and workflow notes](docs/lug-nuts.md) describe the source files and provisional models. The earlier standard browser suite also completed the full three-lap race with no runtime errors.
 
 The September 21 controller, steering and camera update passes **165 tests across 22 files** and the production build. The [drift review](docs/controller-drift-verification.json) checks imperfect stick rest and gentle four-direction walking. The [controller transition review](docs/controller-transition-verification.json) repeats entry/exit with held controls and persistent right-stick offset. The preceding [camera and steering review](docs/camera-controls-verification.json) verifies actual movement against the displayed view, look directions, recentering, wall clearance and both steering directions. The current drift and transition reviews pass three and seven grouped checks respectively, with zero browser or WebGL errors. The earlier [hero review](docs/hero-verification.json) captures the Blender character and opening doors. The [verification record](docs/verification.md) separates the current checks from earlier full exploration and race reviews. Controller automation uses synthetic Gamepad API input; physical controller feel and rumble remain unverified.
 
@@ -121,6 +129,7 @@ npm run test:backyard    # woodland/creek views, stream clearances, presets and 
 npm run test:exploration # actual keyboard/mouse exit, walking, collisions and return
 npm run test:exploration:second # separate synthetic-controller and lifecycle review
 npm run test:hero        # actual Blender character, opening doors and inspection captures
+npm run test:hero-visual # repeat saved before/after poses; initialize with the --before script mode
 npm run test:controller-transitions # overlapping Y/stick/RT input and persistent stick offset
 npm run test:camera-controls # displayed camera/movement alignment and steering animation
 npm run test:controller-drift # resting stick offsets and gentle four-direction walking

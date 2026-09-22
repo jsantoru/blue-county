@@ -1,4 +1,12 @@
-# Verification — September 21, 2026
+# Verification — September 22, 2026
+
+The **2 Beverly and car visual pass passes 214 tests across 28 files** and the production build (`index-BwRhHvaO.js`). The four regenerated club GLBs pass all 17 real-geometry regressions. New surface tests verify independent color/data maps, physical texture scale and material ownership; Home tests also check tapered siding normals, preserved openings and closed soffits. Joe's original vehicle geometry is unchanged.
+
+The [current visual review](hero-visual-verification.json) passes twelve actual game captures, all five cars' material matches, Low/Medium/High transitions, resize and moving frame sampling with zero runtime/resource/WebGL errors. Same-camera comparisons against the [baseline report](hero-visual-before-verification.json) are illustrated in the [visual notes](hero-visual-pass.md). The final Medium 1280×720 moving sample is 17.9ms median / 18.1ms p95, versus 18.0ms / 18.1ms before. A separate final High 1920×1080 sample is 18.0ms / 18.1ms; there is no corresponding High baseline. Each is a ten-second local sample in Edge 153 on the GTX 1660 SUPER, not a universal performance guarantee. The existing nonfatal ANGLE numeric-precision warning and Vite bundle-size advisory remain.
+
+The [current five-car gameplay review](hero-visual-club-verification.json) reruns actual driving, door exit, independent walking and re-entry for each club member, plus selection, persistence, US-left seating/steering grips, compact layouts, race setup and cancellation/focus interruption during lazy loading. The previous full three-lap race evidence below is historical; this graphics pass reran the complete unit/route suite and five-car browser flow. Synthetic controller checks do not establish physical controller feel or rumble.
+
+The following records describe earlier milestones and retain their original test counts and evidence.
 
 The **Lug Nuts garage update passes 206 tests across 26 files** and `npm run build`. The full [club browser review](lug-nuts-verification.json) passes all five driver/car pairings through real driving, exit, independent walking, return and re-entry, with the correct US-left seats and wheel grips. It also verifies mouse/keyboard/controller selection, current-member focus, saved selection after reload, compact layouts, a Buick race start and cancellation of an in-flight car load. No browser/runtime/resource errors were recorded. The complete five-car flow used `index-CZFg3_yE.js`; the final `index-DAHK1jEj.js` adds cancellation when focus/controller loss interrupts loading and has a separate focused review in that report.
 

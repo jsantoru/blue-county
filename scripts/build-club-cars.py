@@ -17,6 +17,7 @@ SOURCE=ROOT/'asset-source';SOURCE.mkdir(exist_ok=True)
 bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
 scene=bpy.context.scene;scene.unit_settings.system='METRIC'
 scene.render.engine='BLENDER_EEVEE';scene.render.resolution_percentage=100
+scene.eevee.taa_render_samples=128
 scene.view_settings.view_transform='AgX';scene.view_settings.look='AgX - Medium High Contrast'
 scene.render.image_settings.file_format='PNG'
 random.seed(442)
@@ -43,7 +44,7 @@ steel=material('Chassis dark steel',(.041,.050,.058),.64,.5)
 cream=material('Warm whitewall rubber',(.76,.74,.65),.84)
 red=material('Ruby tail lamp lens',(.43,.008,.009),.23,.10)
 amber=material('Amber marker lens',(.95,.28,.011),.25,.08)
-lamp=material('Headlamp patterned clear lens',(.57,.66,.69),.18,.34)
+lamp=material('Headlamp patterned clear lens',(.31,.39,.43),.13,.40)
 glass=material('Pale smoked automotive glass',(.09,.18,.22),.14,.1)
 glass.node_tree.nodes['Principled BSDF'].inputs['Alpha'].default_value=.21
 glass.diffuse_color=(*glass.diffuse_color[:3],.21);glass.surface_render_method='DITHERED'
@@ -137,32 +138,62 @@ def interp(t,anchors):
 
 def dimensions(c,z):
  w=c['width'];front=c['front'];rear=c['rear'];kind=c['kind']
- width=interp(z,[(-rear,w*.92),(-rear+.35,w*.99),(-1.35,w*1.02),(-.65,w*.945),(.55,w*.955),(1.45,w*1.015),(front-.28,w*.98),(front,w*.92)])
+ # Distinct stamped-body plan views, not a common rectangular extrusion.
+ profiles={
+  'transam':[(-rear,.89),(-rear+.36,.985),(-1.34,1.035),(-.62,.948),(.55,.95),(1.40,1.035),(front-.32,.98),(front,.88)],
+  'camaro':[(-rear,.91),(-rear+.25,.99),(-1.40,1.02),(-.65,.97),(.55,.98),(1.40,1.018),(front-.18,.97),(front,.92)],
+  'pontiac':[(-rear,.94),(-rear+.28,1.00),(-1.65,1.025),(-.67,.975),(.58,.98),(1.51,1.02),(front-.20,.98),(front,.97)],
+  'buick':[(-rear,.96),(-1.80,1.015),(-.72,.985),(.62,.99),(1.53,1.055),(front-.30,1.025),(front,.97)]}
+ width=w*interp(z,profiles[kind])
  if kind=='buick':top=interp(z,[(-rear,.99),(-1.5,1.04),(.6,1.03),(1.6,1.17),(front,1.06)])
- elif kind=='pontiac':top=interp(z,[(-rear,.95),(-1.6,1.01),(-.8,1.00),(.65,1.005),(1.5,1.06),(front,.99)])
- else:top=interp(z,[(-rear,.83),(-1.4,.97),(-.8,.91),(.6,.92),(1.5,.995),(front,.85 if kind=='transam' else .90)])
+ elif kind=='pontiac':top=interp(z,[(-rear,.98),(-1.65,1.075),(-.8,1.00),(.65,1.005),(1.5,1.065),(front,1.015)])
+ else:top=interp(z,[(-rear,.83),(-1.4,.97),(-.8,.91),(.6,.92),(1.5,.995),(front,.94 if kind=='transam' else .90)])
  return width,top
 
 def skinx(c,z,y):
  w,top=dimensions(c,z);t=max(0,min(1,(y-.27)/(top-.27)))
- return w-.085*(1-t)**2-.025*t**7+.018*sin(t*pi)
+ roundness=.075 if c['kind']=='transam' else .055 if c['kind']=='buick' else .042
+ return w-.11*(1-t)**2-roundness*t**9+.014*sin(t*pi)
+
+def crown(c,x,z):
+ w,top=dimensions(c,z);t=abs(x)/w
+ # The outer rolled shoulder and bonnet crown are one continuously curved
+ # sheet. A lower side tangent reads as stamped metal under broad reflections.
+ rise=.15 if c['kind']=='buick' and z>.63 else .053 if c['kind']=='transam' else .042
+ return top+rise*(1-t*t)-.021*t**10
+
+def curved_panel(name,corners,mat,group='Body',bulge=(0,0,0),nu=16,nv=12):
+ verts=[];faces=[]
+ for j in range(nv+1):
+  v=j/nv
+  for i in range(nu+1):
+   u=i/nu;q=Vector(corners[0])*(1-u)*(1-v)+Vector(corners[1])*u*(1-v)+Vector(corners[2])*u*v+Vector(corners[3])*(1-u)*v
+   q+=Vector(bulge)*sin(pi*u)*sin(pi*v);verts.append(q)
+ for j in range(nv):
+  for i in range(nu):
+   a=j*(nu+1)+i;faces.append((a,a+1,a+nu+2,a+nu+1))
+ return mesh(name,verts,faces,mat,group)
 
 def body(c,paint,upholstery):
  front=c['front'];rear=c['rear'];wheelZ=(c['frontAxle'],c['rearAxle']);r=c['radius'];dw=.64;back=-.77
  samples=sorted(set([round(-rear+(front+rear)*i/160,7) for i in range(161)]+[back,dw]))
  for side in (1,-1):
-  for j,(a,b) in enumerate(zip(samples,samples[1:])):
-   group=('DoorL' if side>0 else 'DoorR') if back<=((a+b)/2)<=dw else 'Body'
+  # Connected grids share normals along the complete rigid panel, avoiding
+  # the old 160 disconnected longitudinal strips and their stair-step shine.
+  for start,end,group in [(-rear,back,'Body'),(back,dw,'DoorL' if side>0 else 'DoorR'),(dw,front,'Body')]:
+   zs=[z for z in samples if start<=z<=end]
    verts=[];faces=[]
-   for z in (a,b):
+   for z in zs:
     w,top=dimensions(c,z)
     low=.30
     for axle in wheelZ:
      dz=z-axle;arch=r+.047
      if abs(dz)<arch:low=max(low,r+sqrt(arch*arch-dz*dz))
-    for k in range(9):
-     y=low+(top-low)*k/8;verts.append((side*skinx(c,z,y),y,z))
-   for k in range(8):faces.append((k,k+1,k+10,k+9))
+    for k in range(17):
+     y=low+(top-low)*k/16;verts.append((side*skinx(c,z,y),y,z))
+   for j in range(len(zs)-1):
+    for k in range(16):
+     a=j*17+k;faces.append((a,a+1,a+18,a+17))
    mesh('Sculpted side sheet',verts,faces,paint,group)
   # Inner door card and closed metal returns belong to the moving door. No
   # static exterior wall spans the passenger doorway behind them.
@@ -194,6 +225,12 @@ def body(c,paint,upholstery):
     angle=pi*i/36;z=axle+(r+.049)*cos(angle);y=r+(r+.049)*sin(angle)
     points.append((side*(skinx(c,z,y)+.004),y,z))
    path('Rolled fender wheel arch',points,.012,paint if c['kind']=='transam' else chrome)
+   verts=[];faces=[]
+   for i in range(49):
+    angle=pi*i/48;z=axle+(r+.055)*cos(angle);y=r+(r+.055)*sin(angle)
+    verts.extend([(side*(skinx(c,z,y)-.009),y,z),(side*(c['track']-.20),y+.055,z)])
+   for i in range(48):faces.append((i*2,i*2+1,i*2+3,i*2+2))
+   mesh('Dark deep inner wheelhouse',verts,faces,black)
   # Continuous bright belt trim is partitioned at the door boundaries.
   if c['kind'] in ('pontiac','buick'):
    for start,end,grp in [(-rear,back,'Body'),(back,dw,group),(dw,front,'Body')]:
@@ -202,26 +239,26 @@ def body(c,paint,upholstery):
      z=start+(end-start)*i/19;w,top=dimensions(c,z);points.append((side*(w-.006),top-.025,z))
     path('Fine shoulder brightwork',points,.009,chrome,grp)
  # Hood and rear deck preserve the cabin hole.
- for start,end,label in [(.64,front,'Long sculpted hood'),(-rear,-.88,'Rear deck')]:
+ rearEnd=-2.43 if c['kind']=='buick' else -1.46
+ for start,end,label in [(.64,front,'Long sculpted hood'),(-rear,rearEnd,'Rear deck')]:
   verts=[];faces=[];N=44;U=18
   for j in range(N+1):
    z=start+(end-start)*j/N;w,top=dimensions(c,z)
    for i in range(U+1):
-    x=-w+2*w*i/U;t=x/w
-    lift=(.15 if c['kind']=='buick' and start>0 else .045)*(1-t*t)
-    verts.append((x,top+lift,z))
+    edge=skinx(c,z,top);x=-edge+2*edge*i/U
+    verts.append((x,crown(c,x,z),z))
   for j in range(N):
    for i in range(U):
     a=j*(U+1)+i;faces.append((a,a+1,a+U+2,a+U+1))
   mesh(label,verts,faces,paint)
   for side in (-1,1):
-   path('Hood or deck shut line',[(side*dimensions(c,z)[0]*.82,dimensions(c,z)[1]+.018,z) for z in [start+(end-start)*i/32 for i in range(33)]],.0025,black)
+   path('Hood or deck shut line',[(side*dimensions(c,z)[0]*.82,crown(c,side*dimensions(c,z)[0]*.82,z)+.0015,z) for z in [start+(end-start)*i/32 for i in range(33)]],.002,black)
  box('Solid lower chassis',(0,.27,0),(c['width']*1.72,.13,front+rear-.28),steel,bevel=.03)
  box('Cabin footwell floor',(0,.345,-.12),(c['width']*1.60,.075,1.67),black,bevel=.025)
  box('Front lower valance',(0,.48,front-.055),(c['width']*1.85,.32,.16),paint,bevel=.065)
  box('Rear lower valance',(0,.52,-rear+.04),(c['width']*1.85,.35,.16),paint,bevel=.055)
  fasciaY,fasciaH=(.685,.395) if c['kind']=='transam' else (.745,.40) if c['kind']=='camaro' else (.80,.49) if c['kind']=='pontiac' else (.90,.58)
- box('Integrated formed nose surround',(0,fasciaY,front-.067),(c['width']*1.89,fasciaH,.14),paint,bevel=.063)
+ if c['kind']!='transam':box('Integrated formed nose surround',(0,fasciaY,front-.067),(c['width']*1.89,fasciaH,.14),paint,bevel=.063)
  # Close the exact curved hood-to-grille contour, including the higher Buick
  # hood crown. The lamps/grilles sit in front of this painted nose sheet.
  nose=[];faces=[];fw,top=dimensions(c,front);half=c['width']*.945
@@ -229,7 +266,24 @@ def body(c,paint,upholstery):
   x=-half+2*half*i/40;raise_y=(.15 if c['kind']=='buick' else .045)*max(0,1-(x/fw)**2)
   nose.extend([(x,.49,front+.004),(x,top+raise_y+.001,front+.004)])
  for i in range(40):faces.append((i*2,i*2+1,i*2+3,i*2+2))
- mesh('Continuous painted nose above grille',nose,faces,paint)
+ if c['kind']!='transam':mesh('Continuous painted nose above grille',nose,faces,paint)
+ else:
+  # A pierced body-colour Endura nose. Actual recessed apertures replace the
+  # former headlamp boxes stuck onto an unbroken vertical paint slab.
+  verts=[];faces=[];nx=96;ny=40
+  for j in range(ny+1):
+   t=j/ny
+   for i in range(nx+1):
+    x=-half+2*half*i/nx;y=.43+(crown(c,x,front)-.43)*t
+    zz=front+.018-.045*(abs(x)/half)**6-.014*t
+    verts.append((x,y,zz))
+  for j in range(ny):
+   for i in range(nx):
+    a=j*(nx+1)+i;v=(Vector(verts[a])+Vector(verts[a+nx+2]))/2;x=abs(v.x);y=v.y
+    grilleHole=.062<x<.625 and .673<y<.936
+    lampHole=((x-.757)/.121)**4+((y-.813)/.146)**4<1
+    if not (grilleHole or lampHole):faces.append((a,a+1,a+nx+2,a+nx+1))
+  mesh('Pierced sculpted Endura nose',verts,faces,paint)
 
 def interior(c,paint,upholstery):
  delta=c['seatY']-.10;seat=.55+delta
@@ -237,6 +291,9 @@ def interior(c,paint,upholstery):
   x=side*.40
   box('Front bucket cushion',(x,seat,-.29),(.57,.17,.53),upholstery,bevel=.07)
   back=box('Front contoured seat back',(x,seat+.25,-.565),(.56,.53,.16),upholstery,bevel=.065);back.rotation_euler.x=-.12
+  for s in (-1,1):
+   ellipsoid('Rounded seat side bolster',(x+s*.228,seat+.070,-.30),(.048,.055,.23),upholstery,segments=24,rings=12)
+   path('Seat back sewn piping',[(x+s*.222,seat+.025,-.458),(x+s*.231,seat+.34,-.495),(x+s*.188,seat+.46,-.510)],.003,upholstery)
   for i in range(8):
    xx=x-.225+i*.064
    path('Seat back pleat',[(xx,seat+.055,-.457),(xx,seat+.42,-.507)],.006,upholstery)
@@ -253,6 +310,9 @@ def interior(c,paint,upholstery):
   torus('Driver instrument chrome bezel',(x,dashboardY-.045,.249),.048,.006,chrome,(0,0,-1),segments=28,tube=8)
   ellipsoid('Instrument black dial',(x,dashboardY-.045,.250),(.045,.045,.004),black,segments=24,rings=10)
   rod('Instrument pale needle',(x,dashboardY-.045,.243),(x+.022,dashboardY-.025,.242),.0018,gauge,vertices=8)
+  for k in range(10):
+   a=(-.78+1.56*k/9)*pi
+   rod('Instrument radial engraved ticks',(x+sin(a)*.034,dashboardY-.045+cos(a)*.034,.242),(x+sin(a)*.040,dashboardY-.045+cos(a)*.040,.242),.0012,gauge,vertices=4)
  box('Period dashboard radio',(0,dashboardY-.075,.245),(.25,.058,.022),chrome,bevel=.008)
  box('Radio dark tuning window',(0,dashboardY-.068,.231),(.16,.029,.006),black,bevel=.004)
  for x in (-.1,.1):ellipsoid('Radio turning knob',(x,dashboardY-.07,.227),(.014,.014,.013),black,segments=16,rings=10)
@@ -274,54 +334,66 @@ def interior(c,paint,upholstery):
 
 def greenhouse(c,paint):
  belt=1.00 if c['kind'] in ('buick','pontiac') else .94
- top=1.55 if c['kind']=='pontiac' else c['roof']-.065
- frontTop=.18 if c['kind']!='buick' else .26
- width=.79 if c['kind'] in ('buick','pontiac') else .72
- windshield=[(-.80,belt,.65),(.80,belt,.65),(width,top,frontTop),(-width,top,frontTop)]
- mesh('Angled windshield clear glass',windshield,[(0,1,2,3)],glass,smooth=False)
- path('Windshield polished perimeter',windshield,.017,chrome if c['kind']!='transam' else paint,closed=True)
+ height=1.60 if c['kind']=='pontiac' else c['roof'];top=height-.072
+ frontTop=.15 if c['kind']=='transam' else .20 if c['kind']=='camaro' else .26
+ width=.79 if c['kind'] in ('buick','pontiac') else .748
+ def wind(u,v):
+  half=(.842*(1-v)+width*v)-.025*abs(2*v-1)**10
+  return (u*half,belt+(top-belt)*v+.030*(1-u*u)*v,.66+(frontTop-.66)*v+.058*(1-u*u)+.018*sin(pi*v))
+ verts=[wind(-1+2*i/24,j/16) for j in range(17) for i in range(25)]
+ faces=[(j*25+i,j*25+i+1,(j+1)*25+i+1,(j+1)*25+i) for j in range(16) for i in range(24)]
+ mesh('Compound curved windshield',verts,faces,glass)
+ perimeter=[wind(-1+2*i/24,0) for i in range(25)]+[wind(1,j/16) for j in range(1,17)]+[wind(1-2*i/24,1) for i in range(1,25)]+[wind(-1,1-j/16) for j in range(1,16)]
+ path('Windshield rubber glazing gasket',perimeter,.020,black,closed=True)
+ path('Windshield polished perimeter',perimeter,.009,chrome,closed=True)
+ for side in (-1,1):
+  edge=[wind(side,j/20) for j in range(21)]
+  path('Body formed A pillar',[(x+side*.025,y,z-.005) for x,y,z in edge],.032,paint if c['kind']!='pontiac' else chrome)
  for x in (-.36,.36):rod('Windshield wiper blade',(x-.16,belt+.012,.667),(x+.18,belt+.012,.667),.006,black)
  if c['roof'] is None:
-  box('Folded convertible top boot',(0,1.02,-1.39),(1.65,.13,.34),black,bevel=.06)
+  box('Folded convertible top boot',(0,1.045,-1.43),(1.65,.10,.28),black,bevel=.04)
+  path('Convertible rear cabin chrome surround',[(-.86,1.05,-.82),(-.87,1.08,-1.40),(-.70,1.095,-1.58),(.70,1.095,-1.58),(.87,1.08,-1.40),(.86,1.05,-.82)],.011,chrome)
   return
- roofStart=frontTop;roofEnd=-2.29 if c['kind']=='buick' else -1.00
+ roofStart=frontTop;roofEnd=-2.29 if c['kind']=='buick' else -.98 if c['kind']=='transam' else -.91
  verts=[];faces=[];N=24;U=20
  for j in range(N+1):
-  z=roofStart+(roofEnd-roofStart)*j/N
+  t=j/N;z=roofStart+(roofEnd-roofStart)*t
   for i in range(U+1):
-   x=-width+2*width*i/U
-   y=c['roof']-.065*(x/width)**2-.025*(2*j/N-1)**4
-   verts.append((x,y,z))
+   u=-1+2*i/U;half=width-.025+.023*sin(pi*t)
+   x=u*half;y=c['roof']-.042-.030*u*u+.035*sin(pi*t)
+   verts.append((x,y,z+.058*(1-u*u)*cos(pi*t)))
  for j in range(N):
   for i in range(U):
    a=j*(U+1)+i;faces.append((a,a+1,a+U+2,a+U+1))
- roof=mesh('Shaped steel roof',verts,faces,paint)
+ roof=mesh('Compound crowned steel roof',verts,faces,paint)
  solid=roof.modifiers.new('Roof skin thickness','SOLIDIFY');solid.thickness=.018
  bpy.context.view_layer.objects.active=roof;bpy.ops.object.modifier_apply(modifier=solid.name)
  for side in (-1,1):
   group='DoorL' if side>0 else 'DoorR'
   # Front side windows and upper trim move with the door, exposing the cabin.
-  window=[(side*.81,belt,.62),(side*width,top,frontTop),(side*width,top,-.72),(side*.82,belt,-.74)]
-  mesh('Front door side glass',window,[(0,1,2,3)],glass,group,smooth=False)
-  path('Moving door window perimeter',window,.010,ash if c['kind']=='buick' else chrome,group,True)
-  rod('Fixed roof A pillar',(side*.80,belt,.65),(side*width,top,frontTop),.024,paint)
+  window=[(side*.827,belt,.61),(side*(width-.021),top-.025,frontTop-.065),(side*(width-.006),top+.012,-.70),(side*.844,belt,-.74)]
+  curved_panel('Bowed front door glass',window,glass,group,(side*.026,0,0))
+  path('Moving door glass weatherseal',window,.011,black,group,closed=True)
+  path('Moving door window perimeter',window,.006,ash if c['kind']=='buick' else chrome,group,True)
+  path('Rounded body roof cant rail',[(side*(width-.025+.023*sin(pi*j/24)),c['roof']-.072+.035*sin(pi*j/24),roofStart+(roofEnd-roofStart)*j/24) for j in range(25)],.028,paint)
   if c['kind']=='buick':
    for z0,z1 in [(-.83,-1.48),(-1.56,-2.27)]:
     window=[(side*.89,1.015,z0),(side*width,top-.015,z0),(side*width,top-.015,z1),(side*.89,1.015,z1)]
     mesh('Wagon rear side window',window,[(0,1,2,3)],glass,smooth=False)
     path('Ash rear window framing',window,.035,ash,closed=True)
    for z in (-.79,-1.52,-2.32):rod('Wagon ash pillar',(side*.89,1.01,z),(side*width,top,z),.044,ash)
-   path('Long roof drip rail',[(side*width,c['roof']-.045,z) for z in [frontTop,roofEnd]],.015,chrome)
+   path('Long roof drip rail',[(side*(width-.020+.023*sin(pi*j/24)),top+.035*sin(pi*j/24)+.015,roofStart+(roofEnd-roofStart)*j/24) for j in range(25)],.009,chrome)
   else:
-   quarter=[(side*.82,belt,-.80),(side*width,top,-.80),(side*width*.92,top-.015,-1.04),(side*.86,1.0,-1.40)]
-   mesh('Rear quarter window',quarter,[(0,1,2,3)],glass,smooth=False)
+   quarter=[(side*.85,belt,-.79),(side*(width-.001),top+.013,-.76),(side*(width-.019),top-.023,roofEnd+.025),(side*.855,1.0,-1.30)]
+   curved_panel('Curved rear quarter window',quarter,glass,bulge=(side*.02,0,-.006))
+   path('Quarter window rubber seal',quarter,.009,black,closed=True)
    # Broad painted C pillars define each coupe's roof silhouette.
-   mesh('Sculpted rear sail pillar',[(side*width,top,-.98),(side*(width-.07),top+.01,-1.04),(side*.83,1.0,-1.55),(side*.90,.98,-1.43)],[(0,1,2,3)],paint)
-   rod('Coupe roof rain gutter',(side*width,top,frontTop),(side*width,top,-1.00),.010,chrome)
+   curved_panel('Broad formed rear sail pillar',[(side*(width-.025),top,roofEnd+.045),(side*(width-.15),top+.014,roofEnd-.062),(side*.75,1.015,-1.59),(side*.90,.992,-1.36)],paint,bulge=(side*.036,.016,0))
+   path('Roof fine drip moulding',[(side*(width-.020+.023*sin(pi*j/24)),top+.035*sin(pi*j/24)+.017,roofStart+(roofEnd-roofStart)*j/24) for j in range(25)],.007,chrome)
  rearBottom=-2.43 if c['kind']=='buick' else -1.51
  bottomY=1.01 if c['kind']=='buick' else 1.02
- rear=[(-width,top-.018,roofEnd),(width,top-.018,roofEnd),(.82,bottomY,rearBottom),(-.82,bottomY,rearBottom)]
- mesh('Rear backlight',rear,[(0,1,2,3)],glass,smooth=False);path('Rear window chrome surround',rear,.014,chrome,closed=True)
+ rear=[(-(width-.11),top+.012,roofEnd-.035),(width-.11,top+.012,roofEnd-.035),(.75,bottomY,rearBottom),(-.75,bottomY,rearBottom)]
+ curved_panel('Compound curved rear backlight',rear,glass,bulge=(0,.025,-.045));path('Rear window rubber seal',rear,.017,black,closed=True);path('Rear window chrome surround',rear,.008,chrome,closed=True)
  if c['kind']=='buick':
   box('Woody rear tailgate',(0,.76,-c['rear']+.07),(1.78,.46,.11),wood,bevel=.035)
   for x in (-.84,0,.84):box('Ash tailgate upright',(x,.79,-c['rear']+.003),(.065,.44,.045),ash,bevel=.014)
@@ -343,6 +415,26 @@ def wheels(c):
    if c['kind']=='buick':
     ellipsoid('Domed Buick full hubcap',(faceX+sign*.014,center[1],z),(.052,rr*.89,rr*.89),chrome,group,40,20)
     torus('Buick hubcap embossed ring',(faceX+sign*.058,center[1],z),rr*.62,.006,alloy,(1,0,0),group)
+   elif c['kind']=='pontiac':
+    # Period Pontiac eight-lug finned aluminum brake drums, not modern alloys.
+    rod('Eight lug finned drum face',(faceX-sign*.016,center[1],z),(faceX+sign*.012,center[1],z),rr*.77,alloy,group,64)
+    verts=[];faces=[]
+    for n in range(48):
+     a=2*pi*n/48;start=len(verts)
+     for xx in (faceX,faceX+sign*.025):
+      for rad,angle in [(rr*.39,a-.015),(rr*.79,a-.010),(rr*.79,a+.010),(rr*.39,a+.015)]:verts.append((xx,center[1]+cos(angle)*rad,z+sin(angle)*rad))
+     faces.extend([tuple(start+k for k in f) for f in [(0,1,2,3),(4,7,6,5),(0,4,5,1),(1,5,6,2),(2,6,7,3),(3,7,4,0)]])
+    mesh('Forty eight radial cooling fins',verts,faces,chrome,group)
+    ellipsoid('Pontiac small eight lug center cap',(faceX+sign*.037,center[1],z),(.026,.079,.079),chrome,group,32,16)
+    for n in range(8):
+     a=2*pi*n/8;ellipsoid('Eight rim mounting nuts',(faceX+sign*.031,center[1]+cos(a)*rr*.82,z+sin(a)*rr*.82),(.013,.011,.011),chrome,group,12,8)
+   elif c['kind']=='camaro':
+    rod('1968 Rally stamped steel wheel',(faceX-sign*.012,center[1],z),(faceX+sign*.003,center[1],z),rr*.88,alloy,group,48)
+    for n in range(5):
+     a=2*pi*n/5
+     ellipsoid('Rally wheel five cooling windows',(faceX+sign*.008,center[1]+cos(a)*rr*.64,z+sin(a)*rr*.64),(.007,.041,.029),black,group,20,10)
+    ellipsoid('Chevrolet Rally derby center cap',(faceX+sign*.034,center[1],z),(.044,.089,.089),chrome,group,32,16)
+    torus('Rally wheel bright trim ring',(faceX+sign*.014,center[1],z),rr*.91,.012,chrome,(1,0,0),group,64,8)
    else:
     for n in range(5):
      a=2*pi*n/5+.2
@@ -351,7 +443,7 @@ def wheels(c):
       for sidev in (-1,1):verts.append((faceX+sign*.006,center[1]+radius*v[0]+sidev*half*per[0],z+radius*v[1]+sidev*half*per[1]))
      spoke=mesh('Five cast alloy wheel spokes',verts,[(0,1,3,2)],alloy,group)
      mod=spoke.modifiers.new('Cast spoke depth','SOLIDIFY');mod.thickness=.028;bpy.context.view_layer.objects.active=spoke;bpy.ops.object.modifier_apply(modifier=mod.name)
-    ellipsoid('Polished hub cap',(faceX+sign*.022,center[1],z),(.037,.062,.062),chrome,group,28,16)
+    ellipsoid('Polished hub cap',(faceX+sign*.022,center[1],z),(.027,.050,.050),chrome,group,28,16)
     for n in range(5):
      a=2*pi*n/5;ellipsoid('Chrome lug nut',(faceX+sign*.028,center[1]+cos(a)*.045,z+sin(a)*.045),(.013,.010,.010),chrome,group,12,8)
    for n in range(40):
@@ -369,6 +461,7 @@ def headlight(x,y,z,r=.107):
  for i in range(-3,4):
   xx=x+i*r*.22;half=sqrt(max(0,(r*.82)**2-(xx-x)**2))
   rod('Sealed beam vertical lens flute',(xx,y-half,z+.025),(xx,y+half,z+.025),.0018,chrome,vertices=6)
+ torus('Lens etched concentric ridge',(x,y,z+.024),r*.73,.0015,alloy,(0,0,1),segments=40,tube=6)
 
 def grille(center,size,split=False,teeth=False,dark=False):
  x,y,z=center;w,h=size
@@ -384,26 +477,31 @@ def trim(c,paint):
  front=c['front'];rear=c['rear'];kind=c['kind'];w=c['width']
  if kind=='transam':
   for side in (-1,1):
-   box('1976 sculpted headlamp pocket',(side*.756,.75,front+.015),(.282,.344,.051),paint,bevel=.062)
-   headlight(side*.756,.765,front+.05,.108)
-   grille((side*.332,.747,front+.027),(.527,.238),dark=True)
+   box('Deep black headlamp cavity',(side*.757,.813,front-.045),(.258,.304,.027),black,bevel=.060)
+   rim=[]
+   for j in range(65):
+    a=2*pi*j/64;x=side*.757+.126*math.copysign(abs(cos(a))**.50,cos(a));y=.813+.151*math.copysign(abs(sin(a))**.50,sin(a));rim.append((x,y,front-.006))
+   path('Rolled body coloured headlamp surround',rim,.018,paint,closed=True)
+   headlight(side*.757,.825,front-.018,.103)
+   grille((side*.343,.804,front-.028),(.559,.264),dark=True)
+   path('Recessed grille thin bright edge',[(side*.062,.674,front+.010),(side*.624,.674,front+.003),(side*.624,.936,front-.005),(side*.062,.936,front+.007)],.005,chrome,closed=True)
    box('Lower twin air opening',(side*.395,.407,front+.049),(.41,.091,.016),black,bevel=.018)
    box('Amber front indicator',(side*.76,.421,front+.052),(.16,.05,.018),amber,bevel=.012)
    # Front side extractor behind the wheel, with three fine horizontal slots.
    for j in range(3):box('Fender air extractor',(side*(w-.024),.823-j*.025,.91),(.015,.011,.21),black,bevel=.004)
-  box('Shaker hood raised scoop',(0,1.056,.78),(.39,.106,.53),paint,bevel=.049)
+  box('Shaker hood raised scoop',(0,1.056,.78),(.39,.095,.53),paint,bevel=.047)
   box('Shaker rear-facing air mouth',(0,1.065,.513),(.30,.041,.008),black,bevel=.01)
   # Original stylized bird silhouette follows the actual photo's gold/dark motif.
-  h=lambda z:dimensions(c,z)[1]+.046
+  h=lambda z,x=0:crown(c,x,z)+.003
   for side in (-1,1):
-   outline=[(0,h(1.29)+.004,1.29),(side*.17,h(1.18)+.004,1.18),(side*.73,h(1.59)+.004,1.59),(side*.68,h(1.23)+.004,1.23),(side*.45,h(1.05)+.004,1.05),(side*.11,h(.96)+.004,.96)]
+   outline=[(0,h(1.29)+.004,1.29),(side*.17,h(1.18,.17)+.004,1.18),(side*.73,h(1.59,.73)+.004,1.59),(side*.68,h(1.23,.68)+.004,1.23),(side*.45,h(1.05,.45)+.004,1.05),(side*.11,h(.96,.11)+.004,.96)]
    mesh('Gold hood bird spread wing',outline,[tuple(range(len(outline)))],gold,smooth=False)
    for j in range(7):
     x=.22+j*.065;z=1.13+j*.038
-    path('Hood bird dark feather',[(side*x,h(z)+.010,z),(side*(x+.15),h(z+.20)+.010,z+.20)],.010,birdInk)
+    path('Hood bird dark feather',[(side*x,h(z,x)+.010,z),(side*(x+.15),h(z+.20,x+.15)+.010,z+.20)],.006,birdInk)
   mesh('Hood bird body',[(0,h(1.68)+.012,1.68),(.064,h(1.49)+.012,1.49),(.05,h(1.02)+.012,1.02),(0,h(.93)+.012,.93),(-.05,h(1.02)+.012,1.02),(-.064,h(1.49)+.012,1.49)],[(0,1,2,3,4,5)],birdInk,smooth=False)
-  box('Pontiac nose divider',(0,.76,front+.062),(.064,.32,.022),paint,bevel=.012)
-  text('Trans Am grille name','TRANS AM',(.32,.741,front+.054),.024,chrome)
+  box('Pontiac nose divider',(0,.82,front+.030),(.058,.31,.022),paint,bevel=.012)
+  text('Trans Am grille name','TRANS AM',(.32,.806,front+.006),.024,chrome)
   for x in (-.70,.70):box('Rear spoiler low mount',(x,.912,-rear+.28),(.16,.075,.20),paint,bevel=.025)
   box('Low integrated rear deck spoiler',(0,.972,-rear+.26),(1.91,.055,.32),paint,bevel=.035)
   for x in (-.46,.46):box('Wide red rear tail lamp',(x,.733,-rear-.035),(.76,.165,.023),red,bevel=.018)
@@ -428,7 +526,13 @@ def trim(c,paint):
    path('Stacked lamp bright surround',[(side*.732,.525,front+.039),(side*.988,.525,front+.039),(side*.988,1.063,front+.039),(side*.732,1.063,front+.039)],.018,chrome,closed=True)
    box('Rear Pontiac tail lens',(side*.66,.755,-rear-.055),(.43,.115,.023),red,bevel=.012)
   box('Pontiac vertical central nose',(0,.79,front+.048),(.080,.39,.09),paint,bevel=.014)
-  path('Peaked Pontiac chrome bumper',[(-1.01,.435,front+.075),(-.35,.424,front+.115),(0,.395,front+.17),(.35,.424,front+.115),(1.01,.435,front+.075)],.050,chrome)
+  verts=[];faces=[]
+  for j in range(49):
+   x=-1.01+2.02*j/48;z=front+.09+.11*(1-abs(x)/1.01)**1.3;y=.472-.033*(1-abs(x)/1.01)
+   for dy,dz in [(-.062,-.025),(-.050,.022),(.047,.028),(.065,-.02)]:verts.append((x,y+dy,z+dz))
+  for j in range(48):
+   for k in range(3):a=j*4+k;faces.append((a,a+4,a+5,a+1))
+  mesh('Broad peaked stamped Pontiac bumper',verts,faces,chrome)
   box('Broad Pontiac rear chrome bumper',(0,.447,-rear-.069),(1.97,.12,.145),chrome,bevel=.036)
   path('Pontiac hood center crease',[(0,dimensions(c,z)[1]+.053,z) for z in [.66,1.15,1.85,2.4,front]],.006,chrome)
   for side in (-1,1):text('Pontiac 2+2 fender emblem','2+2',(side*(w+.009),.81,1.00),.06,chrome,(side,0,0))
@@ -450,17 +554,21 @@ def trim(c,paint):
      for j in range(49):
       z=za+(zb-za)*j/48;dz=z-c['rearAxle'];ar=c['radius']+.061
       lower=max(.54,c['radius']+sqrt(max(0,ar*ar-dz*dz))) if abs(dz)<ar else .54
-      outline.append((x+side*.018,lower,z))
+      outline.append((side*(skinx(c,z,lower)+.040),lower,z))
      verts=[];faces=[]
-     for xx,lower,z in outline:verts.extend([(x,lower,z),(x,.905,z)])
+     for xx,lower,z in outline:verts.extend([(side*(skinx(c,z,lower)+.018),lower,z),(side*(skinx(c,z,.905)+.018),.905,z)])
      for j in range(48):faces.append((j*2,j*2+1,j*2+3,j*2+2))
      mesh('Walnut rear panel with wheel opening',verts,faces,wood,grp)
      path('Ash lower rail follows rear wheel arch',outline,.022,ash,grp)
     else:
      box('Walnut lower wagon side panel',(x,.723,mid),(.023,.367,length),wood,grp,.011)
      box('Ash wagon lower horizontal rail',(x+side*.016,.54,mid),(.030,.042,length+.025),ash,grp,.010)
-    box('Ash wagon upper horizontal rail',(x+side*.016,.905,mid),(.030,.042,length+.025),ash,grp,.010)
-    for z in (za,zb):box('Ash wagon panel upright',(x+side*.017,.724,z),(.03,.40,.045),ash,grp,.010)
+    if grp=='Body':
+     path('Ash wagon upper horizontal rail',[(side*(skinx(c,z,.905)+.038),.905,z) for z in [za+(zb-za)*j/40 for j in range(41)]],.023,ash,grp)
+     for z in (za,zb):path('Ash wagon panel upright',[(side*(skinx(c,z,y)+.04),y,z) for y in [.54+.365*j/12 for j in range(13)]],.023,ash,grp)
+    else:
+     box('Ash wagon upper horizontal rail',(x+side*.016,.905,mid),(.030,.042,length+.025),ash,grp,.010)
+     for z in (za,zb):box('Ash wagon panel upright',(x+side*.017,.724,z),(.03,.40,.045),ash,grp,.010)
    for section,grp in [([(2.4,.94),(1.70,.90),(.64,.57)],'Body'),([(.64,.57),(-.77,.54)],'DoorL' if side>0 else 'DoorR'),([(-.77,.54),(-1.5,.71),(-2.45,.73)],'Body')]:
     path('Buick sweeping chrome side spear',[(side*(dimensions(c,z)[0]+.025),y,z) for z,y in section],.014,chrome,grp)
    box('Buick rear lamp chrome plinth',(side*.87,.847,-rear-.053),(.12,.23,.071),chrome,bevel=.036)
@@ -468,9 +576,9 @@ def trim(c,paint):
   path('Large bowed Buick front bumper',[(-1.01,.48,front+.015),(-.5,.445,front+.115),(0,.455,front+.17),(.5,.445,front+.115),(1.01,.48,front+.015)],.065,chrome)
   for x in (-.64,.64):box('Buick bumper guard',(x,.58,front+.148),(.10,.30,.13),chrome,bevel=.025)
   box('Buick rear bumper',(0,.421,-rear-.10),(1.97,.15,.17),chrome,bevel=.036)
-  rod('Buick hood center bright spine',(0,1.273,.74),(0,1.216,2.40),.008,chrome)
-  rod('Buick hood ornament',(0,1.255,2.24),(0,1.33,2.39),.017,chrome)
-  ellipsoid('Buick hood ornament leading tip',(0,1.33,2.39),(.03,.014,.09),chrome)
+  path('Buick hood center bright spine',[(0,crown(c,0,z)+.008,z) for z in [.74+1.66*j/32 for j in range(33)]],.006,chrome)
+  rod('Buick hood ornament',(0,crown(c,0,2.24)+.01,2.24),(0,crown(c,0,2.39)+.09,2.39),.017,chrome)
+  ellipsoid('Buick hood ornament leading tip',(0,crown(c,0,2.39)+.09,2.39),(.03,.014,.09),chrome)
  for end in (front+.105,-rear-.15):
   normal=(0,0,1 if end>0 else -1)
   box('Club license plate',(0,.415,end),(.29,.135,.014),cream,bevel=.008)

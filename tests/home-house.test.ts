@@ -45,8 +45,8 @@ afterEach(() => {
       materials.add(mesh.material);
     }
   for (const material of materials) {
-    if (material.map) textures.add(material.map);
-    if (material.bumpMap) textures.add(material.bumpMap);
+    for (const value of Object.values(material))
+      if (value instanceof T.Texture) textures.add(value);
     material.dispose();
   }
   for (const texture of textures) texture.dispose();
@@ -81,6 +81,9 @@ describe("photo-specific Home facade", () => {
     expect(solid.some((h) => h.object.userData.homeMaterial === "siding")).toBe(
       true,
     );
+    // A clapboard's broad face slopes out toward its bottom; horizontal lip
+    // shelves previously produced bright subpixel dashes along every course.
+    expect(solid[0].face!.normal.y).toBeGreaterThan(0.1);
   });
 
   it("faces the roof upward after baking the photo frame and preserves the observed broad ridge", () => {
@@ -131,6 +134,19 @@ describe("photo-specific Home facade", () => {
     for (const mesh of group.children as T.Mesh[]) {
       const position = mesh.geometry.getAttribute("position");
       expect(Array.from(position.array).every(Number.isFinite)).toBe(true);
+    }
+  });
+
+  it("closes the roof overhang from below beside the deck and front wall", () => {
+    const group = build();
+    for (const position of [
+      frame.point(frame.width / 2 + 0.2, 4.8, 2.5),
+      frame.point(0, 4, -frame.depth / 2 - 0.2),
+    ]) {
+      const underside = cast(group, position, new T.Vector3(0, 1, 0));
+      expect(underside.length).toBeGreaterThan(0);
+      expect(underside[0].object.userData.homeMaterial).toBe("trim");
+      expect(underside[0].distance).toBeLessThan(0.6);
     }
   });
 });
