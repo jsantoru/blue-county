@@ -135,4 +135,75 @@ describe("replaceable driver visual", () => {
     other.update({ pose: "walk", speed: 2, time: 0 });
     expect(other.root.children.length).toBeGreaterThan(0);
   });
+
+  it("counter-swings each arm against its thigh and bends the recovering knee backward", () => {
+    const character = create();
+    for (const pose of ["walk", "run"] as const) {
+      let bentRecoveryFrames = 0;
+      const previous = new Map<string, number>();
+      for (let frame = 0; frame < 180; frame++) {
+        character.update({
+          pose,
+          speed: pose === "walk" ? 2.5 : 5.7,
+          time: frame / 120,
+          dt: 1 / 120,
+        });
+        for (const side of ["left", "right"]) {
+          const thigh = character.root.getObjectByName(`${side} leg`)!;
+          const shin = character.root.getObjectByName(`${side} leg lower`)!;
+          const arm = character.root.getObjectByName(`${side} arm`)!;
+          if (Math.abs(thigh.rotation.x) > 0.08)
+            expect(arm.rotation.x * thigh.rotation.x).toBeLessThan(0);
+          expect(shin.rotation.x).toBeGreaterThanOrEqual(0);
+          // A down-pointing thigh rotating toward negative X advances toward
+          // the model's +Z face. Its recovering knee should fold behind it.
+          const prior = previous.get(side);
+          if (
+            prior !== undefined &&
+            thigh.rotation.x < prior - 0.001 &&
+            Math.abs(thigh.rotation.x) < 0.12
+          ) {
+            expect(shin.rotation.x).toBeGreaterThan(0.35);
+            bentRecoveryFrames++;
+          }
+          previous.set(side, thigh.rotation.x);
+        }
+      }
+      expect(bentRecoveryFrames).toBeGreaterThan(12);
+    }
+  });
+
+  it("keeps a planted foot stationary as the body travels forward and clears the recovering sole", () => {
+    const character = create();
+    const dt = 1 / 120;
+    for (const pose of ["walk", "run"] as const) {
+      const speed = pose === "walk" ? 2.5 : 5.7;
+      const previous = new Map<string, T.Vector3>();
+      let plantedIntervals = 0;
+      let recoveryClearance = 0;
+      for (let frame = 0; frame < 240; frame++) {
+        character.root.position.z += speed * dt;
+        character.update({ pose, speed, time: frame * dt, dt });
+        for (const side of ["left", "right"]) {
+          const shin = character.root.getObjectByName(`${side} leg lower`)!;
+          const foot = character.root.getObjectByName(`${side} leg end`)!;
+          const sole = foot.localToWorld(new T.Vector3(0, -0.0825, 0.053));
+          const planted = shin.rotation.x < 0.00001;
+          const prior = previous.get(side);
+          if (planted && prior) {
+            expect(Math.abs(sole.z - prior.z)).toBeLessThan(0.003);
+            expect(Math.abs(sole.y - prior.y)).toBeLessThan(0.003);
+            plantedIntervals++;
+          }
+          if (planted) previous.set(side, sole);
+          else {
+            previous.delete(side);
+            recoveryClearance = Math.max(recoveryClearance, sole.y);
+          }
+        }
+      }
+      expect(plantedIntervals).toBeGreaterThan(200);
+      expect(recoveryClearance).toBeGreaterThan(pose === "walk" ? 0.07 : 0.2);
+    }
+  });
 });

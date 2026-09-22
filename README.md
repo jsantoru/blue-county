@@ -2,7 +2,7 @@
 
 A locally playable arcade driving and exploration game starring Joe and his car club, **the Lug Nuts**. Choose a member and get their associated car, drive the Warwick roads, race the Ridge & Hollow circuit, or park and explore Beverly Drive's yards, woods and Stony Creek on foot. Every driver sits on the US driver's left.
 
-**The latest Buick reference correction is on `codex/buick-wood-paneling`, including the house/car visual pass, Lug Nuts selection and previous controller/walking-camera fixes.** Open **The Lug Nuts · choose driver** on the main menu, or **The Lug Nuts · change driver** while paused. Choose a card, then **Drive as…**. Selection is saved in this browser; changing members starts a fresh Free Drive at Beverly Drive.
+**The latest walking-facing fix is on `codex/walking-facing-fix`, including the Buick correction, house/car visual pass and Lug Nuts selection.** Open **The Lug Nuts · choose driver** on the main menu, or **The Lug Nuts · change driver** while paused. Choose a card, then **Drive as…**. Selection is saved in this browser; changing members starts a fresh Free Drive at Beverly Drive.
 
 | Member | Associated car |
 | --- | --- |
@@ -21,6 +21,10 @@ Dad has an editable Blender character with a charcoal Italian coppola, white mus
 ![Dad standing beside the parked 442 at Home](docs/hero-dad-standing.png)
 
 Stop in Free Drive and press **F / Xbox Y** to get out. Move with **WASD / left stick**, run with **Shift / A**, jump with **Space / X**, and look with the mouse or right stick. Approach either door and press **F / Y** to get back in. See [full controls](#first-drive) or [launch instructions](#launch-on-windows).
+
+## Walking direction correction — September 22, 2026
+
+After exiting cars at some headings, the visible character could face backward while moving forward. Walking now clears the full rotation left by the vehicle transfer. The provisional buddies also counter-swing their arms and keep the supporting foot planted as their bodies advance. [Reproduction, before/after views and verification](docs/walking-facing-fix.md).
 
 ## Buick photo correction — September 22, 2026
 
@@ -116,7 +120,7 @@ The active source folder `../oldsmobile_442` was **not modified**. The car expor
 
 ## Checks and evidence
 
-The current Buick correction passes **216 tests across 28 files** and the production build. Its [focused browser review](docs/buick-reference-verification.json) records the delivered model's checksum, matching-camera views and Ed's driving/exit/walking/re-entry flow. The preceding [visual review](docs/hero-visual-verification.json) records all five cars, graphics presets, resize and a moving frame sample. The preceding [five-car browser review](docs/hero-visual-club-verification.json) checks associated models and characters, US-left seating and wheel grips, driving and exploration, saved selection, menu cancellation, compact layouts and race setup. [Asset and workflow notes](docs/lug-nuts.md) describe the source files and provisional models. The earlier standard browser suite also completed the full three-lap race with no runtime errors.
+The current walking correction passes **218 tests across 28 files** and the production build. The [walking review](docs/walking-facing-verification.json) compares the actual rendered character's facing with measured travel after real exits at four headings for every member, then checks gentle input, other directions, keyboard up and camera orbit. The preceding [Buick browser review](docs/buick-reference-verification.json) records the delivered model's checksum, matching-camera views and Ed's driving/exit/walking/re-entry flow. The preceding [visual review](docs/hero-visual-verification.json) records all five cars, graphics presets, resize and a moving frame sample. The preceding [five-car browser review](docs/hero-visual-club-verification.json) checks associated models and characters, US-left seating and wheel grips, driving and exploration, saved selection, menu cancellation, compact layouts and race setup. [Asset and workflow notes](docs/lug-nuts.md) describe the source files and provisional models. The earlier standard browser suite also completed the full three-lap race with no runtime errors.
 
 The September 21 controller, steering and camera update passes **165 tests across 22 files** and the production build. The [drift review](docs/controller-drift-verification.json) checks imperfect stick rest and gentle four-direction walking. The [controller transition review](docs/controller-transition-verification.json) repeats entry/exit with held controls and persistent right-stick offset. The preceding [camera and steering review](docs/camera-controls-verification.json) verifies actual movement against the displayed view, look directions, recentering, wall clearance and both steering directions. The current drift and transition reviews pass three and seven grouped checks respectively, with zero browser or WebGL errors. The earlier [hero review](docs/hero-verification.json) captures the Blender character and opening doors. The [verification record](docs/verification.md) separates the current checks from earlier full exploration and race reviews. Controller automation uses synthetic Gamepad API input; physical controller feel and rumble remain unverified.
 
@@ -128,6 +132,7 @@ $env:GAME_URL='http://127.0.0.1:5180'
 npm run test:browser     # system Edge; synthetic pad, actual game/race physics
 npm run test:club        # all five pairings, garage navigation, driving and exploration
 npm run test:buick-reference # reference views, served GLB checksum and Ed's transfer/driving flow
+npm run test:walking-facing # actual rendered facing after exits, all five drivers and camera-relative movement
 npm run test:visual      # real rendered scenery, quality presets, independent RAF metrics
 npm run test:beverly     # surveyed neighborhood loop, reference views and moving frame sample
 npm run test:detail      # latest detail pass, all presets, resize and environment rebuild checks

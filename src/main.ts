@@ -1329,7 +1329,10 @@ function renderVehicles(alpha: number, renderDt = 0) {
       pedestrian.position,
       alpha,
     );
-    walkingDriver.root.rotation.y = pedestrian.yaw;
+    // Transfer quaternions can decompose to XYZ Euler X/Z = PI at rearward
+    // headings. Setting only Y preserves that flip and makes the visible
+    // character face backward even when movement and physics yaw are correct.
+    walkingDriver.root.rotation.set(0, pedestrian.yaw, 0);
     const speed = pedestrian.speed();
     const transferring = footPhase === "exiting" || footPhase === "entering";
     let seatedBlend: number | undefined;
@@ -1886,6 +1889,17 @@ if (new URLSearchParams(location.search).has("test")) {
         driver: {
           visible: walkingDriver.root.visible || seatedDriver.root.visible,
           seated: seatedDriver.root.visible,
+          worldForward: walkingDriver.root
+            .getWorldDirection(new T.Vector3())
+            .toArray(),
+          worldUp: new T.Vector3(0, 1, 0)
+            .applyQuaternion(
+              walkingDriver.root.getWorldQuaternion(new T.Quaternion()),
+            )
+            .toArray(),
+          worldQuaternion: walkingDriver.root
+            .getWorldQuaternion(new T.Quaternion())
+            .toArray(),
           asset:
             selectedMember.avatar === "dad"
               ? "/assets/dad-driver.glb"

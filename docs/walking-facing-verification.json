@@ -1,0 +1,868 @@
+{
+  "date": "2026-09-22T16:44:04.048Z",
+  "before": false,
+  "methodology": "Production game in Edge. Cars are placed at repeatable headings on the handling grounds; exits use normal keyboard F and the complete transfer animation. Movement uses normal keyboard events or synthetic standard Gamepad API polling. Facing and up vectors come from the actual rendered character world transform, independently of physics yaw. Movement samples use real frame-to-frame positions. No simulated walking hooks are used. Physical controller feel is not measured.",
+  "exits": [
+    {
+      "member": "lou",
+      "heading": 0,
+      "minimumFacingAlignment": 0.9999855411756446,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999999,
+      "distance": 1.3982754404449425,
+      "travelDirection": [
+        0.0491168467049488,
+        0.998793039307825
+      ],
+      "viewForward": [
+        0.04916533006282881,
+        0.9987906539009129
+      ],
+      "samples": 36
+    },
+    {
+      "member": "lou",
+      "heading": 1.6907963267948967,
+      "minimumFacingAlignment": 0.9999969059225602,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4586920139294937,
+      "travelDirection": [
+        0.9857157615271951,
+        -0.16841745003669323
+      ],
+      "viewForward": [
+        0.9857222845523764,
+        -0.168379267538624
+      ],
+      "samples": 36
+    },
+    {
+      "member": "lou",
+      "heading": 3.141592653589793,
+      "minimumFacingAlignment": 0.9999831043782861,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4030568842373936,
+      "travelDirection": [
+        -0.049197964703655485,
+        -0.998789046930841
+      ],
+      "viewForward": [
+        -0.049165293089519474,
+        -0.9987906557209182
+      ],
+      "samples": 36
+    },
+    {
+      "member": "lou",
+      "heading": -1.6907963267948967,
+      "minimumFacingAlignment": 0.9999994517556184,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4578488431911896,
+      "travelDirection": [
+        -0.9974918581865306,
+        -0.07078130298025372
+      ],
+      "viewForward": [
+        -0.9974936777489642,
+        -0.07075565596364537
+      ],
+      "samples": 36
+    },
+    {
+      "member": "joe",
+      "heading": 0,
+      "minimumFacingAlignment": 0.9999969190520849,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999999,
+      "distance": 1.4273499620619907,
+      "travelDirection": [
+        0.04909559074620533,
+        0.9987940843683852
+      ],
+      "viewForward": [
+        0.049165237021063596,
+        0.9987906584808762
+      ],
+      "samples": 36
+    },
+    {
+      "member": "joe",
+      "heading": 1.6907963267948967,
+      "minimumFacingAlignment": 0.9999954412396025,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999997,
+      "distance": 1.4588023576912832,
+      "travelDirection": [
+        0.985728333017572,
+        -0.16834385491130605
+      ],
+      "viewForward": [
+        0.985722302322186,
+        -0.16837916351095447
+      ],
+      "samples": 36
+    },
+    {
+      "member": "joe",
+      "heading": 3.141592653589793,
+      "minimumFacingAlignment": 0.9999963775728306,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4582953247688797,
+      "travelDirection": [
+        -0.04935728327872909,
+        -0.9987811865405473
+      ],
+      "viewForward": [
+        -0.049165163093240295,
+        -0.9987906621199534
+      ],
+      "samples": 36
+    },
+    {
+      "member": "joe",
+      "heading": -1.6907963267948967,
+      "minimumFacingAlignment": 0.9999997557557634,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.3993529074997546,
+      "travelDirection": [
+        -0.9974930857519193,
+        -0.07076400127970343
+      ],
+      "viewForward": [
+        -0.9974936682484388,
+        -0.07075578989929693
+      ],
+      "samples": 36
+    },
+    {
+      "member": "chris",
+      "heading": 0,
+      "minimumFacingAlignment": 0.9999931871149791,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999999,
+      "distance": 1.4587281463749693,
+      "travelDirection": [
+        0.04924045897044412,
+        0.9987869528585063
+      ],
+      "viewForward": [
+        0.04917617550062165,
+        0.9987901199767308
+      ],
+      "samples": 36
+    },
+    {
+      "member": "chris",
+      "heading": 1.6907963267948967,
+      "minimumFacingAlignment": 0.9999960589257252,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4587359841333252,
+      "travelDirection": [
+        0.9856944590143759,
+        -0.16854208218826724
+      ],
+      "viewForward": [
+        0.9857204871817774,
+        -0.1683897893285666
+      ],
+      "samples": 36
+    },
+    {
+      "member": "chris",
+      "heading": 3.141592653589793,
+      "minimumFacingAlignment": 0.9999796601461202,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4582487722662165,
+      "travelDirection": [
+        -0.04922590059489566,
+        -0.998787670483883
+      ],
+      "viewForward": [
+        -0.04917677728784101,
+        -0.998790090347107
+      ],
+      "samples": 36
+    },
+    {
+      "member": "chris",
+      "heading": -1.6907963267948967,
+      "minimumFacingAlignment": 0.9999995027430126,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.428133186659895,
+      "travelDirection": [
+        -0.9974894832138004,
+        -0.07081476454713155
+      ],
+      "viewForward": [
+        -0.9974944721179739,
+        -0.07074445627810452
+      ],
+      "samples": 36
+    },
+    {
+      "member": "craig",
+      "heading": 0,
+      "minimumFacingAlignment": 0.9999959503114788,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999999,
+      "distance": 1.4269306865650468,
+      "travelDirection": [
+        0.048988177357569544,
+        0.9987993584695494
+      ],
+      "viewForward": [
+        0.049176448808253774,
+        0.9987901065201883
+      ],
+      "samples": 36
+    },
+    {
+      "member": "craig",
+      "heading": 1.6907963267948967,
+      "minimumFacingAlignment": 0.9999962418160165,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4316601157980209,
+      "travelDirection": [
+        0.9857298111770565,
+        -0.16833519939942732
+      ],
+      "viewForward": [
+        0.9857203929806759,
+        -0.16839034076223652
+      ],
+      "samples": 36
+    },
+    {
+      "member": "craig",
+      "heading": 3.141592653589793,
+      "minimumFacingAlignment": 0.9999956812011226,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999999,
+      "distance": 1.3953177487519093,
+      "travelDirection": [
+        -0.04948336593276185,
+        -0.9987749478716235
+      ],
+      "viewForward": [
+        -0.04917641989717913,
+        -0.9987901079436543
+      ],
+      "samples": 36
+    },
+    {
+      "member": "craig",
+      "heading": -1.6907963267948967,
+      "minimumFacingAlignment": 0.9999995699629795,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.458519153008201,
+      "travelDirection": [
+        -0.9974901938475524,
+        -0.07080475392211998
+      ],
+      "viewForward": [
+        -0.9974944677547769,
+        -0.07074451779901261
+      ],
+      "samples": 36
+    },
+    {
+      "member": "ed",
+      "heading": 0,
+      "minimumFacingAlignment": 0.9999933510522931,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999999,
+      "distance": 1.4582669985624763,
+      "travelDirection": [
+        0.04913472816817229,
+        0.9987921598049514
+      ],
+      "viewForward": [
+        0.04917996119895256,
+        0.9987899335778619
+      ],
+      "samples": 36
+    },
+    {
+      "member": "ed",
+      "heading": 1.6907963267948967,
+      "minimumFacingAlignment": 0.9999969890853416,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999997,
+      "distance": 1.458339881148767,
+      "travelDirection": [
+        0.985683168253858,
+        -0.16860810129123865
+      ],
+      "viewForward": [
+        0.9857197702977424,
+        -0.16839398577195572
+      ],
+      "samples": 36
+    },
+    {
+      "member": "ed",
+      "heading": 3.141592653589793,
+      "minimumFacingAlignment": 0.9999802537532936,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999999,
+      "distance": 1.4267195314837093,
+      "travelDirection": [
+        -0.04934863146495838,
+        -0.9987816140541114
+      ],
+      "viewForward": [
+        -0.04917934710626856,
+        -0.9987899638153165
+      ],
+      "samples": 36
+    },
+    {
+      "member": "ed",
+      "heading": -1.6907963267948967,
+      "minimumFacingAlignment": 0.9975058599727704,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.3676766065802375,
+      "travelDirection": [
+        -0.9976465823055272,
+        -0.06856600334058631
+      ],
+      "viewForward": [
+        -0.9974946266244425,
+        -0.07074227770834249
+      ],
+      "samples": 36
+    }
+  ],
+  "directions": [
+    {
+      "member": "lou",
+      "label": "gentle forward",
+      "minimumFacingAlignment": 0.9999997351103931,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 1,
+      "distance": 0.10625946739232833,
+      "travelDirection": [
+        0.6754773457873514,
+        -0.7373807397322465
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "lou",
+      "label": "right",
+      "minimumFacingAlignment": 0.9999859341407621,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4584317318542772,
+      "travelDirection": [
+        0.737269344562005,
+        0.6755989295204009
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412456
+      ],
+      "samples": 36
+    },
+    {
+      "member": "lou",
+      "label": "back",
+      "minimumFacingAlignment": 0.9999895649924051,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4585196862993945,
+      "travelDirection": [
+        -0.6754283540044161,
+        0.7374256156432898
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "lou",
+      "label": "left",
+      "minimumFacingAlignment": 0.9999878690679656,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4294441172262993,
+      "travelDirection": [
+        -0.7377182174224327,
+        -0.6751087554483859
+      ],
+      "viewForward": [
+        0.675463180551151,
+        -0.7373937155412453
+      ],
+      "samples": 36
+    },
+    {
+      "member": "lou",
+      "label": "keyboard up",
+      "minimumFacingAlignment": 0.999974167857947,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 1,
+      "distance": 1.4295036680741853,
+      "travelDirection": [
+        0.6752669268010125,
+        -0.7375734387630265
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "lou",
+      "label": "forward after live camera orbit",
+      "minimumFacingAlignment": 0.9999993077142222,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.386074200801314,
+      "travelDirection": [
+        0.9713879054991373,
+        -0.2374984990478871
+      ],
+      "viewForward": [
+        0.9714038040135259,
+        -0.23743346341249172
+      ],
+      "samples": 36
+    },
+    {
+      "member": "joe",
+      "label": "gentle forward",
+      "minimumFacingAlignment": 0.9999999087334481,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 1,
+      "distance": 0.10937366362218201,
+      "travelDirection": [
+        0.6754494285507402,
+        -0.7374063123343049
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "joe",
+      "label": "right",
+      "minimumFacingAlignment": 0.9999561678047084,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.426933280859305,
+      "travelDirection": [
+        0.7373518677584061,
+        0.675508862349851
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "joe",
+      "label": "back",
+      "minimumFacingAlignment": 0.999980370583772,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4585788369480959,
+      "travelDirection": [
+        -0.6755149248668393,
+        0.7373463136696004
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412456
+      ],
+      "samples": 36
+    },
+    {
+      "member": "joe",
+      "label": "left",
+      "minimumFacingAlignment": 0.9999922710035167,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4586656758366394,
+      "travelDirection": [
+        -0.7375707046434367,
+        -0.6752699131841907
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "joe",
+      "label": "keyboard up",
+      "minimumFacingAlignment": 0.9999895353514732,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 1,
+      "distance": 1.4590567719610545,
+      "travelDirection": [
+        0.675852067150505,
+        -0.7370373011784336
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412456
+      ],
+      "samples": 36
+    },
+    {
+      "member": "joe",
+      "label": "forward after live camera orbit",
+      "minimumFacingAlignment": 0.9999984216264188,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.426665892005272,
+      "travelDirection": [
+        0.9699547559722149,
+        -0.24328537022780727
+      ],
+      "viewForward": [
+        0.9699742000367498,
+        -0.24320783552975322
+      ],
+      "samples": 36
+    },
+    {
+      "member": "chris",
+      "label": "gentle forward",
+      "minimumFacingAlignment": 0.9999998284756493,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 1,
+      "distance": 0.10937382636214991,
+      "travelDirection": [
+        0.67544146035869,
+        -0.7374136109596298
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "chris",
+      "label": "right",
+      "minimumFacingAlignment": 0.9999834623674495,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4582889704961164,
+      "travelDirection": [
+        0.73745578749352,
+        0.6753954112165053
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "chris",
+      "label": "back",
+      "minimumFacingAlignment": 0.9999810912655474,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4585939317525043,
+      "travelDirection": [
+        -0.6755492709975369,
+        0.7373148462188298
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "chris",
+      "label": "left",
+      "minimumFacingAlignment": 0.9999891797941186,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.458420754123289,
+      "travelDirection": [
+        -0.7375575602608734,
+        -0.6752842699945171
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "chris",
+      "label": "keyboard up",
+      "minimumFacingAlignment": 0.9999949652028827,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 1,
+      "distance": 1.4584966913151225,
+      "travelDirection": [
+        0.6755787278421974,
+        -0.7372878559200049
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412456
+      ],
+      "samples": 36
+    },
+    {
+      "member": "chris",
+      "label": "forward after live camera orbit",
+      "minimumFacingAlignment": 0.9999997472331754,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999999,
+      "distance": 1.4277265736020657,
+      "travelDirection": [
+        0.970816628699605,
+        -0.2398230044018571
+      ],
+      "viewForward": [
+        0.970827170402823,
+        -0.23978032698211146
+      ],
+      "samples": 36
+    },
+    {
+      "member": "craig",
+      "label": "gentle forward",
+      "minimumFacingAlignment": 0.9999997642348122,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 1,
+      "distance": 0.1070218313667483,
+      "travelDirection": [
+        0.6754792203715596,
+        -0.7373790225157141
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "craig",
+      "label": "right",
+      "minimumFacingAlignment": 0.9999919616696198,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4046387245894159,
+      "travelDirection": [
+        0.7376454676846698,
+        0.6751882433842171
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412456
+      ],
+      "samples": 36
+    },
+    {
+      "member": "craig",
+      "label": "back",
+      "minimumFacingAlignment": 0.9999810912655474,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4585939317525043,
+      "travelDirection": [
+        -0.6755492709975369,
+        0.7373148462188298
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "craig",
+      "label": "left",
+      "minimumFacingAlignment": 0.9999960185040045,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4582766324099816,
+      "travelDirection": [
+        -0.7374100360128717,
+        -0.6754453632881755
+      ],
+      "viewForward": [
+        0.675463180551151,
+        -0.7373937155412453
+      ],
+      "samples": 36
+    },
+    {
+      "member": "craig",
+      "label": "keyboard up",
+      "minimumFacingAlignment": 0.999987119288951,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 1,
+      "distance": 1.4582970015837828,
+      "travelDirection": [
+        0.6755143904923491,
+        -0.737346803232882
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412456
+      ],
+      "samples": 36
+    },
+    {
+      "member": "craig",
+      "label": "forward after live camera orbit",
+      "minimumFacingAlignment": 0.9999997264186111,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.433439205369938,
+      "travelDirection": [
+        0.971087251256259,
+        -0.23872484254380197
+      ],
+      "viewForward": [
+        0.9710940137405032,
+        -0.2386973323633076
+      ],
+      "samples": 36
+    },
+    {
+      "member": "ed",
+      "label": "gentle forward",
+      "minimumFacingAlignment": 0.9999998999557262,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 1,
+      "distance": 0.10394580366008746,
+      "travelDirection": [
+        0.6754648149912439,
+        -0.7373922183674334
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "ed",
+      "label": "right",
+      "minimumFacingAlignment": 0.9999700767200889,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4581769655359862,
+      "travelDirection": [
+        0.7372625798332141,
+        0.6756063116769068
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "ed",
+      "label": "back",
+      "minimumFacingAlignment": 0.9999895679317757,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.3968106090626624,
+      "travelDirection": [
+        -0.6755057477015673,
+        0.7373547211635295
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "ed",
+      "label": "left",
+      "minimumFacingAlignment": 0.9999940815910997,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.3989469380835964,
+      "travelDirection": [
+        -0.7373329785222923,
+        -0.6755294803215066
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412454
+      ],
+      "samples": 36
+    },
+    {
+      "member": "ed",
+      "label": "keyboard up",
+      "minimumFacingAlignment": 0.9999984427817855,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 1,
+      "distance": 1.458289100816248,
+      "travelDirection": [
+        0.6754831792647346,
+        -0.7373753959350736
+      ],
+      "viewForward": [
+        0.6754631805511511,
+        -0.7373937155412456
+      ],
+      "samples": 36
+    },
+    {
+      "member": "ed",
+      "label": "forward after live camera orbit",
+      "minimumFacingAlignment": 0.9999952795797971,
+      "minimumUpright": 1,
+      "minimumYawAlignment": 0.9999999999999998,
+      "distance": 1.4303191296127642,
+      "travelDirection": [
+        0.9716956876366669,
+        -0.2362360908673887
+      ],
+      "viewForward": [
+        0.9716680293375458,
+        -0.23634982708538252
+      ],
+      "samples": 36
+    }
+  ],
+  "screenshots": [
+    "output/playwright/walking-facing/after/lou-forward-after-exit.png"
+  ],
+  "errors": [],
+  "warnings": [
+    "THREE.WebGLProgram: Program Info Log: (210,81-129): warning X4122: sum of 0.996094 and -2.98545e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision"
+  ],
+  "bundle": "/assets/index-fydwwySt.js",
+  "passed": true
+}

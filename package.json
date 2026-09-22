@@ -21,6 +21,7 @@
     "test:hero-visual": "node scripts/hero-visual-pass.mjs --after",
     "test:club": "node scripts/test-club-garage.mjs",
     "test:buick-reference": "node scripts/buick-reference-check.mjs --after",
+    "test:walking-facing": "node scripts/walking-facing-check.mjs",
     "test:controller-transitions": "node scripts/controller-transition-check.mjs",
     "test:camera-controls": "node scripts/camera-controls-check.mjs",
     "test:controller-drift": "node scripts/controller-drift-check.mjs",

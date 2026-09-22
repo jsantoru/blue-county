@@ -413,8 +413,17 @@ export class CharacterVisual {
     const pose =
       animation.pose === "seated" && seated < 1 ? "idle" : animation.pose;
     const moving = pose === "walk" || pose === "run";
-    if (moving)
-      this.phase += dt * Math.min(18, speed * (pose === "run" ? 2.2 : 3.9));
+    const running = pose === "run";
+    const strength = Math.min(1, speed / (running ? 4.2 : 1.8));
+    const strideAngle = (running ? 0.78 : 0.47) * strength;
+    const strideReach = (0.422 + 0.425) * Math.sin(strideAngle);
+    if (moving && strideReach > 0.00001) {
+      // One stance covers twice this reach in half a cycle. Advance by actual
+      // travel so the supporting boot stays put while the body moves over it.
+      this.phase =
+        (this.phase + (dt * Math.PI * speed) / (2 * strideReach)) %
+        (Math.PI * 2);
+    }
     if (this.lastPose === "seated" && pose !== "seated") this.phase = 0;
     this.lastPose = pose;
     this.hips.position.set(0, 0.94, 0);
@@ -430,29 +439,57 @@ export class CharacterVisual {
     if (pose === "seated") {
       this.poseSeated(steering);
     } else if (moving) {
-      const running = pose === "run";
-      const strength = Math.min(1, speed / (running ? 4.2 : 1.8));
-      const swing = Math.sin(this.phase) * (running ? 0.78 : 0.47) * strength;
-      this.hips.position.y -=
-        (running ? 0.035 : 0.014) * (1 - Math.cos(this.phase * 2)) * strength;
-      this.hips.rotation.y = -swing * 0.09;
+      const swing = Math.sin(this.phase) * strideAngle;
       this.torso.rotation.set(
-        running ? 0.1 : 0.025,
+        (running ? 0.1 : 0.025) * strength,
         swing * 0.16,
         -swing * 0.025,
       );
-      this.arms.forEach((arm, i) => {
-        arm.upper.rotation.x = (i ? -swing : swing) * (running ? 0.94 : 0.8);
-        arm.upper.rotation.z = (i ? 1 : -1) * 0.08;
-        arm.lower.rotation.x = running ? -0.94 : -0.16;
-      });
+      const supportCycle = (this.phase / (Math.PI * 2)) % 0.5;
+      const supportAngle = Math.asin(
+        (supportCycle * 4 - 1) * Math.sin(strideAngle),
+      );
+      // Place the pelvis over the supporting straight leg. The recovering
+      // ankle is then solved above that same ground plane, rather than letting
+      // whichever boot happens to be lower move the entire body vertically.
+      const ankleHeight = 0.0875;
+      this.hips.position.y =
+        ankleHeight + 0.005 + (0.422 + 0.425) * Math.cos(supportAngle);
       this.legs.forEach((leg, i) => {
-        const phase = this.phase + i * Math.PI;
-        leg.upper.rotation.x = i ? -swing : swing;
-        leg.lower.rotation.x =
-          Math.max(0, Math.sin(phase)) * (running ? 1.2 : 0.65) * strength;
-        leg.end.rotation.x =
-          -leg.upper.rotation.x * 0.35 - leg.lower.rotation.x * 0.2;
+        const cycle = (this.phase / (Math.PI * 2) + i * 0.5) % 1;
+        if (cycle < 0.5) {
+          // A straight supporting leg moves from ahead (+Z) to behind (-Z).
+          // arcsin turns a constant foot speed into the required hip angle.
+          leg.upper.rotation.x = Math.asin(
+            (cycle * 4 - 1) * Math.sin(strideAngle),
+          );
+        } else {
+          const recovery = (cycle - 0.5) * 2;
+          const targetZ = (recovery * 2 - 1) * strideReach;
+          const targetY =
+            ankleHeight +
+            Math.sin(recovery * Math.PI) * (running ? 0.25 : 0.11) * strength;
+          const down = this.hips.position.y - 0.005 - targetY;
+          const distance = Math.min(0.422 + 0.425, Math.hypot(down, targetZ));
+          const knee = Math.acos(
+            T.MathUtils.clamp(
+              (distance ** 2 - 0.422 ** 2 - 0.425 ** 2) / (2 * 0.422 * 0.425),
+              -1,
+              1,
+            ),
+          );
+          leg.upper.rotation.x =
+            Math.atan2(-targetZ, down) -
+            Math.atan2(0.425 * Math.sin(knee), 0.422 + 0.425 * Math.cos(knee));
+          leg.lower.rotation.x = knee;
+        }
+        // Positive knee X folds the shin backward for our down-pointing legs.
+        // Counter-rotate the ankle so a bent leg cannot tip its toe underground.
+        leg.end.rotation.x = -leg.upper.rotation.x - leg.lower.rotation.x;
+        const arm = this.arms[i];
+        arm.upper.rotation.x = -leg.upper.rotation.x * (running ? 0.94 : 0.8);
+        arm.upper.rotation.z = (i ? 1 : -1) * 0.08;
+        arm.lower.rotation.x = (running ? -0.94 : -0.16) * strength;
       });
     } else if (pose === "airborne") {
       const rising = (animation.verticalSpeed ?? 0) > 0;

@@ -1,0 +1,34 @@
+{
+  "date": "2026-09-22T16:42:18.690Z",
+  "before": true,
+  "methodology": "Production game in Edge. Cars are placed at repeatable headings on the handling grounds; exits use normal keyboard F and the complete transfer animation. Movement uses normal keyboard events or synthetic standard Gamepad API polling. Facing and up vectors come from the actual rendered character world transform, independently of physics yaw. Movement samples use real frame-to-frame positions. No simulated walking hooks are used. Physical controller feel is not measured.",
+  "exits": [
+    {
+      "member": "lou",
+      "heading": 3.141592653589793,
+      "minimumFacingAlignment": -0.995898637766666,
+      "minimumUpright": 1,
+      "minimumYawAlignment": -0.9951832648284217,
+      "distance": 1.458274839567292,
+      "travelDirection": [
+        -0.049074259459106824,
+        -0.9987951326766367
+      ],
+      "viewForward": [
+        -0.0491653317812395,
+        -0.9987906538163243
+      ],
+      "samples": 36
+    }
+  ],
+  "directions": [],
+  "screenshots": [
+    "output/playwright/walking-facing/before/lou-forward-after-exit.png"
+  ],
+  "errors": [],
+  "warnings": [
+    "THREE.WebGLProgram: Program Info Log: (210,81-129): warning X4122: sum of 0.996094 and -2.98545e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.49272e-017 cannot be represented accurately in double precision\n(209,37-61): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision\n(210,82-106): warning X4122: sum of 1 and -1.66644e-018 cannot be represented accurately in double precision"
+  ],
+  "bundle": "/assets/index-DdrjR0WD.js",
+  "passed": true
+}
